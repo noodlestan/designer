@@ -4,7 +4,10 @@
   "description": "A collection of JSON schemas to validate design decision inputs.",
   "author": "Noodlestan Collective",
   "license": "MIT",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/noodlestan/designer"
