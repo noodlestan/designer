@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { SchemaSource, SchemaSourcePackage, SchemaSourcePath } from '../../types';
+import type { SchemaSource, SchemaSourcePackage, SchemaSourcePath } from '../../types';
 
 export async function resolveSourcePath(
     source: SchemaSource,

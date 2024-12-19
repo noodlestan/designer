@@ -1,8 +1,8 @@
-import { DecisionValidator } from '../schemas';
-import { DecisionInput } from '../types';
-import { DecisionError } from '../types/decision-inputs/validation/types';
+import type { DecisionValidator } from '../schemas';
+import type { DecisionInput } from '../types';
+import type { DecisionError } from '../types/decision-inputs/validation/types';
 
-import { DecisionStoreStatic } from './types';
+import type { DecisionStoreStatic } from './types';
 
 export const createStaticStore = (
     initialData: DecisionInput[],

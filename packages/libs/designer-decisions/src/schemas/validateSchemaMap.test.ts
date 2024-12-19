@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { SchemaData, SchemaId, SchemaMap } from './types';
+import type { SchemaData, SchemaId, SchemaMap } from './types';
 import { validateSchemaMap } from './validateSchemaMap';
 
 const mockValidSchemaMap: SchemaMap = new Map<SchemaId, SchemaData>([

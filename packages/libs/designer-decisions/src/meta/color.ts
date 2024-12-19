@@ -6,7 +6,7 @@ import {
     createColorScaleDecision,
     createColorValueDecision,
 } from '../decisions';
-import { DecisionTypeMeta } from '../types';
+import type { DecisionTypeMeta } from '../types';
 
 export const ColorDecisionTypes: DecisionTypeMeta[] = [
     {

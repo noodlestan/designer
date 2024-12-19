@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import { SchemaData, SchemaMap } from '../types';
+import type { SchemaData, SchemaMap } from '../types';
 
 export const loadSchemaFromFile = async (schemas: SchemaMap, filePath: string): Promise<void> => {
     const errorPrefix = `Error loading schema from "${filePath}"`;

@@ -1,4 +1,4 @@
-import { ColorInput, ColorSpaceName } from '../decision-inputs';
+import type { ColorInput, ColorSpaceName } from '../decision-inputs';
 
 export type HueValue = {
     get(): number;

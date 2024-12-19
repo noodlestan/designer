@@ -1,4 +1,4 @@
-import { SpaceClampedValue, SpaceValue } from '../primitive-values';
+import type { SpaceClampedValue, SpaceValue } from '../primitive-values';
 
 export type SpaceValueDecision = {
     value: () => SpaceValue;

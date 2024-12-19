@@ -1,8 +1,8 @@
-import Ajv, { ErrorObject } from 'ajv';
+import Ajv, { type ErrorObject } from 'ajv';
 
-import { DecisionInput } from '../types';
+import type { DecisionInput } from '../types';
 
-import { DecisionValidator, SchemaMap } from './types';
+import type { DecisionValidator, SchemaMap } from './types';
 
 export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator => {
     const ajv = new Ajv({ allErrors: true });

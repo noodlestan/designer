@@ -1,4 +1,4 @@
-import { SchemaData, SchemaId } from '../../types';
+import type { SchemaData, SchemaId } from '../../types';
 
 export const extractSchemaReferences = (schemaData: SchemaData): SchemaId[] => {
     const references: SchemaId[] = [];

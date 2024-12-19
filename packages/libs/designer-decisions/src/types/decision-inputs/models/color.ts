@@ -1,4 +1,4 @@
-import {
+import type {
     ColorInput,
     DegreesInput,
     PercentageInput,
@@ -6,7 +6,7 @@ import {
     SignedPercentageInput,
 } from '../primitives';
 
-import { DecisionInput } from './base';
+import type { DecisionInput } from './base';
 
 export type ColorHueExplicitInput = DecisionInput & {
     type: 'color-hue/explicit';

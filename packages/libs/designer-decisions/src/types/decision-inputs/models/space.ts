@@ -1,6 +1,6 @@
-import { SignedSpaceInput, SpaceInput } from '../primitives';
+import type { SignedSpaceInput, SpaceInput } from '../primitives';
 
-import { DecisionInput } from './base';
+import type { DecisionInput } from './base';
 
 export type SpaceValueExplicitInput = DecisionInput & {
     type: 'space-value/explicit';

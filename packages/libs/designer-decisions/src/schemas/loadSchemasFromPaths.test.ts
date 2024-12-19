@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { loadSchemasFromPaths } from './loadSchemasFromPaths';
 import { loadSchemaFromFile } from './private/loadSchemaFromFile';
 import { loadSchemasFromDirectory } from './private/loadSchemasFromDirectory';
-import { SchemaData } from './types';
+import type { SchemaData } from './types';
 
 vi.mock('./private/loadSchemasFromDirectory', () => ({
     loadSchemasFromDirectory: vi.fn(),

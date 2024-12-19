@@ -1,6 +1,6 @@
 import { createDecisionValidator, loadSchemasFromPaths, validateSchemaMap } from '../schemas';
-import { DecisionStoreStatic, createStaticStore } from '../store';
-import { SchemaConfig } from '../types';
+import { type DecisionStoreStatic, createStaticStore } from '../store';
+import type { SchemaConfig } from '../types';
 
 import { loadDecisionsFromPaths, resolveSchemaPathsFromConfigs } from './functions';
 

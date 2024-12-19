@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-import { DecisionInput } from '../../types';
+import type { DecisionInput } from '../../types';
 
 export async function loadDecisionFile(filePath: string): Promise<DecisionInput[]> {
     const content = await fs.readFile(filePath, 'utf-8');

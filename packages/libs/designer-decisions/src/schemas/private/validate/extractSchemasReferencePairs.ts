@@ -1,4 +1,4 @@
-import { SchemaId, SchemaMap } from '../../types';
+import type { SchemaId, SchemaMap } from '../../types';
 
 import { extractSchemaReferences } from './extractSchemaReferences';
 

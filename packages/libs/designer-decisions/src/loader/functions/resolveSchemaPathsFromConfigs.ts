@@ -1,4 +1,4 @@
-import { SchemaConfig } from '../../types';
+import type { SchemaConfig } from '../../types';
 
 import { resolveSourcePath } from './resolveSourcePath';
 

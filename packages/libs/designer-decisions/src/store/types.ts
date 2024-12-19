@@ -1,5 +1,5 @@
-import { DecisionInput } from '../types';
-import { DecisionError } from '../types/decision-inputs/validation/types';
+import type { DecisionInput } from '../types';
+import type { DecisionError } from '../types/decision-inputs/validation/types';
 
 export type DecisionStoreStatic = {
     hasErrors: () => boolean;

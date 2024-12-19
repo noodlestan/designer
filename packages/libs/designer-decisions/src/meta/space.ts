@@ -1,5 +1,5 @@
 import { createSpaceScaleDecision, createSpaceValueDecision } from '../decisions';
-import { DecisionTypeMeta } from '../types';
+import type { DecisionTypeMeta } from '../types';
 
 export const SpaceDecisionTypes: DecisionTypeMeta[] = [
     {

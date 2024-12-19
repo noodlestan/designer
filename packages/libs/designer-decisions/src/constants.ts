@@ -1,9 +1,9 @@
-import { SchemaGeneratorConfig } from './types';
+import type { SchemaGeneratorConfig } from './types';
 
 const PATH_PRIMITIVES = './src/types/decision-inputs/primitives';
 const PATH_DECISION_TYPES = './src/types/decision-inputs/models';
 
-export const DESIGNER_DECISIONS_SCHEMA_CONFIG: SchemaGeneratorConfig = {
+const DESIGNER_DECISIONS_SCHEMA_CONFIG: SchemaGeneratorConfig = {
     urnBase: 'urn:designer',
     source: {
         type: 'package',
@@ -14,3 +14,5 @@ export const DESIGNER_DECISIONS_SCHEMA_CONFIG: SchemaGeneratorConfig = {
         decisionTypes: [PATH_DECISION_TYPES],
     },
 };
+
+export { DESIGNER_DECISIONS_SCHEMA_CONFIG };

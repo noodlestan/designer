@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { SchemaMap } from '../types';
+import type { SchemaMap } from '../types';
 
 import { loadSchemaFromFile } from './loadSchemaFromFile';
 

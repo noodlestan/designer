@@ -1,5 +1,5 @@
 import { validateSchemas } from './private';
-import { SchemaMap } from './types';
+import type { SchemaMap } from './types';
 
 export const validateSchemaMap = (schemas: SchemaMap): SchemaMap => {
     validateSchemas(schemas);

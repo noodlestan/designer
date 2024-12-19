@@ -1,4 +1,4 @@
-import { ColorDecisionInput } from './color';
-import { SpaceDecisionInput } from './space';
+import type { ColorDecisionInput } from './color';
+import type { SpaceDecisionInput } from './space';
 
 export type DecisionInput = ColorDecisionInput | SpaceDecisionInput;

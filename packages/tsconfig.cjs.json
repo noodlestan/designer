@@ -13,6 +13,8 @@
     // strict
     "strict": true,
     "noImplicitAny": true,
+    // "verbatimModuleSyntax": true,
+    "isolatedModules": true,
     // types
     "types": []
   }

@@ -1,4 +1,4 @@
-import { SchemaId } from '../../types';
+import type { SchemaId } from '../../types';
 
 export const formatMissingSchemaReferences = (
     missingReferences: [SchemaId, SchemaId[]][],

@@ -1,4 +1,4 @@
-import { DecisionInput } from '../../types';
+import type { DecisionInput } from '../../types';
 
 import { findJsonFiles } from './findJsonFiles';
 import { loadDecisionFile } from './loadDecisionFile';

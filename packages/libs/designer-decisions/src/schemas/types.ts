@@ -1,6 +1,6 @@
-import { ErrorObject } from 'ajv';
+import type { ErrorObject } from 'ajv';
 
-import { DecisionInput } from '../types';
+import type { DecisionInput } from '../types';
 
 export type SchemaId = string;
 

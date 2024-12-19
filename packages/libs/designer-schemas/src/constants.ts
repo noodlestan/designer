@@ -1,6 +1,6 @@
 import type { SchemaConfig } from '@noodlestan/designer-decisions';
 
-export const DECISION_SCHEMAS: SchemaConfig = {
+const DECISION_SCHEMAS: SchemaConfig = {
     urnBase: 'urn:designer',
     source: {
         type: 'package',
@@ -8,3 +8,5 @@ export const DECISION_SCHEMAS: SchemaConfig = {
         path: 'schemas/',
     },
 };
+
+export { DECISION_SCHEMAS };

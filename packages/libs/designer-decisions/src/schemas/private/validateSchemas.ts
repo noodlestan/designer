@@ -1,4 +1,4 @@
-import { SchemaMap } from '../types';
+import type { SchemaMap } from '../types';
 
 import {
     extractSchemasReferencePairs,

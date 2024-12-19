@@ -1,4 +1,4 @@
-import { DecisionContextsInput, DecisionUsageInput } from '../primitives';
+import type { DecisionContextsInput, DecisionUsageInput } from '../primitives';
 
 export type DecisionInput = {
     id?: string;

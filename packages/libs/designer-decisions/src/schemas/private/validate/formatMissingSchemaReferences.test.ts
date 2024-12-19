@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { SchemaId } from '../../types';
+import type { SchemaId } from '../../types';
 
 import { formatMissingSchemaReferences } from './formatMissingSchemaReferences';
 

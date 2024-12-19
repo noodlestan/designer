@@ -1,4 +1,9 @@
-import { ColorValue, HueValue, LightnessValue, SaturationValue } from '../primitive-values/color';
+import type {
+    ColorValue,
+    HueValue,
+    LightnessValue,
+    SaturationValue,
+} from '../primitive-values/color';
 
 export type HueDecision = {
     value: () => HueValue;

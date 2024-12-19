@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.esm.json",
   "compilerOptions": {
-    "types": ["solid-js", "astro/client"]
+    "types": ["solid-js", "astro/client"],
+    "jsx": "preserve"
   }
 }

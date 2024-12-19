@@ -5,6 +5,3 @@ export { default as ShowDecisionDescription } from './ShowDecisionDescription.as
 export { default as ShowDecisionModel } from './ShowDecisionModel.astro';
 export { default as ShowDecisionParams } from './ShowDecisionParams.astro';
 export { default as ShowDecisionUsage } from './ShowDecisionUsage.astro';
-// @endindex
-
-// @index(['./!(private|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
