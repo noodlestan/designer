@@ -1,0 +1,28 @@
+{
+    "trailingComma": "all",
+    "printWidth": 100,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "semi": true,
+    "arrowParens": "avoid",
+    "overrides": [
+        {
+            "files": "*.md",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.json",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

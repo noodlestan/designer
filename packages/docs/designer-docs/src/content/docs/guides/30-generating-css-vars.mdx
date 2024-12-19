@@ -1,0 +1,25 @@
+---
+title: Generating CSS Variables
+slug: guides/generating-css-variables-from-design-decisions-and-tokens
+description: How to generate CSS variables from design decisions and design tokens
+sidebar:
+    order: 30
+---
+
+## Declare tokens
+
+Inline tokens in decisions records by adding a `tokenize` property.
+
+```json
+[{}]
+```
+
+## Generating CSS
+
+```ts
+import { generateCSSVars } from '@noodlestan/design-generators';
+```
+
+## Consuming
+
+Consume in your CSS `import './generated/vars.css'`

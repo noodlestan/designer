@@ -1,0 +1,12 @@
+{
+  "$id": "urn:designer:decision-groups:color-decision-input",
+  "anyOf": [
+    {
+      "$ref": "urn:designer:decision-types:color-value/explicit"
+    },
+    {
+      "$ref": "urn:designer:decision-types:color-scale/explicit"
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

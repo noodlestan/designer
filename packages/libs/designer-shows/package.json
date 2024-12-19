@@ -1,0 +1,47 @@
+{
+  "name": "@noodlestan/designer-shows",
+  "version": "0.0.1",
+  "description": "Visualizing design decisions.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noodlestan/designer"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./astro": "./src/astro/index.ts",
+    "./solid": "./src/solid/index.ts"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "build:clean": "rm -rf dist",
+    "build:astro": "astro check",
+    "build:solidjs": "tsc --noEmit --project src/solidjs/tsconfig.json",
+    "build": "npm run build:solidjs && npm run build:astro",
+    "test": "echo nothing to test",
+    "test:watch": "echo nothing to test",
+    "lint": "prettier . -c && eslint .",
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "dev": "tsc --watch --noEmit --project src/solidjs/tsconfig.json",
+    "ci": "npm run build:clean && npm run build"
+  },
+  "dependencies": {
+    "@noodlestan/designer-decisions": "0.0.1"
+  },
+  "peerDependencies": {
+    "astro": "^4.16.18",
+    "solid-js": "^1.9.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.4",
+    "astro": "4.16.10",
+    "vite": "4.5.1",
+    "vite-plugin-solid": "2.11.0",
+    "vite-plugin-solid-svg": "0.6.1"
+  }
+}

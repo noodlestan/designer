@@ -1,0 +1,19 @@
+---
+import { type DecisionInput, createStaticStore } from '@noodlestan/designer-decisions';
+
+import { getCollection } from 'astro:content';
+import ShowColorValueDecision from '../decisions/color/ShowColorValueDecision.astro';
+
+interface Props {
+    d: string | DecisionInput;
+}
+
+const { d } = Astro.props;
+
+const decisions = await getCollection('decisions');
+const store = createStaticStore(decisions);
+
+const color = {};
+---
+
+<ShowColorValueDecision d={d} />

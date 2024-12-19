@@ -1,0 +1,67 @@
+---
+title: Designer Decisions
+description: Sandbox application to develop, showcase and document design decisions.
+template: splash
+hero:
+    tagline: Decisions, decisions, decisions...
+---
+
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+    <div>
+        Design decisions precede design tokens.
+
+        This suite enables you to capture, track, and visualize
+        decision decisions, and transform them into
+        - code,
+        - tokens,
+        - documentation,
+        - and more.
+
+        <LinkButton href="/guides/00-getting-started-with-designer-decisions">Getting Started</LinkButton>
+    </div>
+    <Card title="Capture Decisions" icon="puzzle">
+        <p>Define design decisions as data with relationships, context, and traceability.</p>
+
+        <a href="/guides/10-capturing-design-decisions-in-data" variant="minimal">
+            Learn more
+        </a>
+    </Card>
+    <Card title="Sub-Atomic Control" icon="puzzle">
+        More granular and abstract than tokens: capture the processes and parameters that generate
+        color components and palettes, typographies, and scales.
+
+        <a href="/decision-types">All decision types</a>
+    </Card>
+    <Card title="Context-Aware" icon="puzzle">
+        Support for context-based decisions (Color Schemes, Themes, Devices, Products, Experiments,
+        ...)
+    </Card>
+    <Card title="Document Everything" icon="puzzle">
+        Create interactive, visual documentation components for MDX-based sites.
+
+        <a href="/guides/documenting-design-decisions-with-mdx" variant="minimal">
+            Learn more
+        </a>
+    </Card>
+    <Card title="Export" icon="puzzle">
+        Export to CSS
+
+        <a href="/guides/generating-css-vars-from-decisions" variant="minimal">
+            Learn more
+        </a>
+    </Card>
+
+</CardGrid>
+
+💡 Ideas
+
+-   Load decisions from YAML, TypeScript
+-   Import from Figma, Specify, TokenStudio, ...
+-   Generate snapshots, and track version history.
+-   Studio App: web-based tool for interactive navigation, collaboration,
+    and navigation of design decisions.
+-   API-Driven: Interact with decisions programmatically for integration and automation.
+-   Version Control & Review: Built-in workflows for tracking changes,
+    reviewing, and reverting decisions.

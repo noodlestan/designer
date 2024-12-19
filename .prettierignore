@@ -1,0 +1,6 @@
+.astro/
+.coverage/
+env.d.ts
+**/schemas/urn/
+**/src/content/docs/api/
+

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2021",
+    // module
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    // emit
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // strict
+    "strict": true,
+    "noImplicitAny": true,
+    // types
+    "types": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@noodlestan/designer-decisions",
+  "version": "0.0.1",
+  "description": "Modeling design decisions.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noodlestan/designer"
+  },
+  "sideEffects": false,
+  "module": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "files": [
+    "dist",
+    "src",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "build:clean": "rm -rf dist",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build": "npm run build:cjs",
+    "test": "vitest --run --coverage",
+    "test:watch": "vitest",
+    "lint": "prettier . -c && eslint . && tsc --noEmit",
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "dev": "tsc --watch --project tsconfig.cjs.json",
+    "ci": "npm run build:clean && npm run build && npm run test"
+  },
+  "dependencies": {
+    "ajv": "8.17.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "11.1.1",
+    "@vitest/coverage-v8": "1.2.2",
+    "vite": "4.5.1",
+    "vitest": "1.6.0"
+  }
+}

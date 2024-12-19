@@ -1,0 +1,234 @@
+---
+title: Capturing Decisions
+slug: guides/capturing-design-decisions-in-data
+description: How to capture design decisions in data
+sidebar:
+    order: 10
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+## Express decisions in JSON
+
+At a minimum, a decision record requires
+
+-   a `type` - the decision model, the schema
+-   a `name` - to identify the decision
+-   and one or more `params` as defined by the chose decision model
+
+The following example defines a pair of decisions:
+
+-   [ColorValueDecisions](/decisions/color-value)
+-   [ColorScaleDecision`](/decisions/color-scalue)
+
+```json
+[
+    {
+        "type": "color-value/explicit",
+        "name": "Green Foreground",
+        "params": {
+            "value": "#090E0B"
+        }
+    },
+    {
+        "type": "color-scale/modifier",
+        "name": "Green Foregrounds",
+        "params": {
+            "start": { "ref": "Green Foreground" },
+            "modifier": { "hue": 0 },
+            "steps": 5
+        }
+    }
+]
+```
+
+If you are declaring decisions in JSON files you are encouraged to organize them in small groups
+using directories and files.
+
+<FileTree>
+
+-   space/
+-   typography/
+-   colors/
+    -   base.json
+    -   palettes.json
+    -   ratios.json
+-   contexts/
+
+</FileTree>
+
+See [Guides / Validating Decisions](/guides/20-validating-design-decisions-with-schemas)
+to learn how to quickly load decisions from the filesystem.
+
+### Schema
+
+#### ༶ `type`: `<decision-type / model>`
+
+The decision _shape_ is determined by both the input params and the output of the decision.
+
+-   All decisions of type `color-scale/*` produces a `ColorScaleDecision` which exposes
+    the resolved color values, individual color components, scale and color transformations,
+    and - when declared - tokens and token references.
+
+-   The specific `color-scale/modifier` decision model determines how the color scale is generated.
+    In this case, the color gradient starts at the `start` color and successively applies
+    the HSL `modifier` to the previous value, producing a total of 5 `steps`.
+
+See [Reference: Decision types](/decision-types) for a comprehensive list of decision models
+and the schema for their input parameters.
+
+#### ༶ `name: string` (non unique)
+
+Design decision name is mandatory.
+
+```json
+   "name": "Green Foreground"
+```
+
+**Note:** The same decision name can be declared more than once, as long as the decision is scoped
+to different `contexts` each time.
+
+The decision name can be used to create relationships between decisions.
+
+```json
+    "params": {
+        "start": { "ref": "Green Foreground" }
+    }
+
+```
+
+#### ༶ `id: string` (optional) (unique)
+
+When provided it can also be used to retrieve decision values and to create relationships
+between decisions.
+
+```json
+   "id": "green-foreground-base"
+```
+
+By referencing the record's unique `id`, instead of the decision `name`, you can link
+a decision to a specific record regardless of applicable context.
+
+```json
+    "params": {
+        "start": { "ref": "#green-foreground-base" }
+    }
+```
+
+#### ༶ `description: string` (optional)
+
+Provide a small description for the decision.
+
+```json
+    "decription": "Strongest shade of Green"
+```
+
+#### ༶ `usage: object` (optional)
+
+Otherwise know an _Application_, these guidelines inform the intent of these decisions,
+namely to _what_ they should be applied.
+
+```json
+    "usage": {
+      "intendedFor": ["Icons", "Backgrounds"],
+      "notFor": ["Typography"]
+    }
+```
+
+#### ༶ `context: string[] | {all: string[], some?: string[]} ` (optional)
+
+Contexts inform _where_, _when_ or _to whom_ a certain design decision is applicable.
+
+The decision value will exist only when at least one of these contexts is present.
+
+```json
+    "contexts": ["Email", "Support"]
+```
+
+Alternatively, a list of required contexts can be provided via an object:
+
+-   `all: string[]` - The decision will only be in effect when all these contexts are present.
+
+```json
+    "contexts": {
+      "all": ["Email", "Support"]
+    }
+```
+
+-   `some?: string[]` - When provided, at least one of these contexts must also be present.
+
+```json
+    "contexts": {
+      "all": ["Email", "Support"],
+      "some": ["Headers", "Footers"]
+    }
+```
+
+#### ༶ `params: object` (optional)
+
+The parameters of each each decision are driven by the decision model.
+
+As an example, the [color-scale/modifier](/decision-types/color-scale/modifier) decision model
+requires as input:
+
+-   a starting color (here provided as a reference to another decision)
+-   a modifier object with `SignedPercentage` values for
+    -   `h` - Hue
+    -   `s` - Saturation
+    -   `l` - Lightness
+-   a number that specifies the total number of steps of the scale
+
+```json
+    "type": "color-scale/modifier"
+    "params": {
+        "start": { "ref": "Green Foreground" },
+        "modifier": { "l": 5 },
+        "steps": 5
+    }
+```
+
+In turn, the [color-value/explicit](/decision-types/color-value/explicit) decision model,
+requires only a single color as input.
+
+```json
+    "type": "color-value/explicit",
+    "params": {
+        "value": "#090E0B"
+    }
+```
+
+The color value can be specified in a number of formats, according to the 🚧 schema.
+
+```json
+    "type": "color-value/explicit",
+    "params": {
+        "value": { "h": 144, "s": 0.22, "l": 0.05 }
+    }
+```
+
+As well as a decision/token reference.
+
+```json
+    "type": "color-value/explicit",
+    "params": {
+        "value": { "ref": "Green Foreground" }
+    }
+```
+
+See [Reference / Decision types](/decision-types) for details on each specific model.
+
+#### ༶ `tokenize: object` (optional)
+
+Declare tokens generated from this decision.
+
+🚧🚧🚧
+
+## See Also
+
+-   [Reference / Decision types](/decision-types)
+-   [Reference / Generator API](/generator-api) 🚧
+-   [Reference / Schemas](/schemas) 🚧
+
+```
+
+```

@@ -1,0 +1,77 @@
+---
+title: Validating Decisions
+slug: guides/validating-design-decisions-with-schemas
+description: How to validate design decisions with JSON schemas and validators
+sidebar:
+    order: 20
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+## Setup
+
+This guide assumes... 🚧
+
+### Dependencies
+
+Install the following packages.
+
+```bash
+npm install @noodlestan/designer-decisions @noodlestan/designer-schemas
+```
+
+-   [@noodlestan/designer-decisions]() - provides APIs to load and validate decisions
+-   [@noodlestan/designer-schemas]() - provides JSON schemas for decision models
+
+Declare decisions in one more JSON files. See [](./10-capturing-decisions.mdx)
+
+<FileTree>
+-   data
+-       color.json
+-       space.json
+
+</FileTree>
+
+## Script
+
+Add a script
+
+<FileTree>
+-   scripts
+    - **validate-decisions.js**
+-   data/
+
+</FileTree>
+
+```js
+import path from 'path';
+
+import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-decisions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const DECISION_DATA = path.resolve('./data/decisions');
+
+const decisionLoader = createDecisionLoader(
+    [DECISION_DATA],
+    [DECISION_SCHEMAS],
+    async moduleName => `../../../node_modules/${moduleName}`,
+);
+
+const loadDecisions = async () => {
+    const store = await decisionLoader();
+    if (store.hasErrors()) {
+        store.allErrors().forEach(error => console.error(formatValidationError(error)));
+    }
+    console.info(`🐘 ${store.records().length} decisions, ${store.allErrors().length} errors`);
+};
+
+loadDecisions();
+```
+
+Add in package.json
+
+```json
+    "scripts": {
+        "build:decisions": "node scripts/build-decisions.js",
+    }
+```

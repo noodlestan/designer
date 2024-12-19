@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "../../dist/astro",
+    "jsxImportSource": "solid-js",
+    "jsx": "preserve",
+    "types": ["solid-js", "vite/client"]
+  },
+  "include": ["./**/*.ts", "./**/*.tsx"],
+  "exclude": ["node_modules", "../../dist"]
+}

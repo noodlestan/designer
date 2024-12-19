@@ -1,0 +1,153 @@
+---
+title: Rendering in MDX
+slug: guides/documenting-design-decisions-with-mdx
+description: How to document design decisions and tokens with MDX components
+sidebar:
+    order: 40
+---
+
+import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+🚧🚧 This guide requires:
+
+-   a design decisions data source, as illustrated by
+    the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide.
+-   a working [Astro](https://docs.astro.build/en/getting-started/) V5 website
+-   a reasonable understanding of
+    Astro [Content Collections](https://docs.astro.build/en/guides/content-collections/).
+
+## Setup
+
+Create a collection configuration file, if you don't yet have one.
+
+<FileTree>
+
+-   src/
+    -   **content.config.ts**
+
+</FileTree>
+
+Define the `decisions` content collection.
+
+```ts
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+
+import { createDecisionLoader, DecisionZod } from '@noodlestan/designer-decisions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const resolveModule = async (name: string) => `./node_modules/${name}`;
+const decisionLoader = createDecisionLoader([DECISION_DATA], [DECISION_SCHEMAS], resolveModule);
+
+export const collections = {
+    decisions: defineCollection({
+        loader: async () => {
+            const data = await decisionLoader();
+            const values = data.records().map(decision => ({
+                id: decision.id || decision.name,
+                ...decision,
+            }));
+            return values;
+        },
+        schema: DecisionZod,
+    });,
+};
+```
+
+## Out of the box
+
+Use the `<ShowDecision>` component to visualize a decision by providing its `name` or `id`.
+
+This component resolves a value for the decision and selects the appropriate visualization.
+
+```mdx
+// foundations/color.mdx
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
+
+<CardGrid>
+    <ShowDecision d="Green Foreground" />
+    <ShowDecision d="Green Foregrounds" />
+</CardGrid>
+```
+
+<CardGrid>
+    <ShowDecision d="Green Foreground" />
+    <ShowDecision d="Green Foregrounds" />
+</CardGrid>
+
+Or use the `<ShowDecisionCard>` to also render decision details.
+
+```mdx
+// foundations/color.mdx
+import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+<CardGrid>
+    <ShowDecisionCard d="Green Foreground" name value description contexts />
+</CardGrid>
+```
+
+<ShowDecisionCard d="Green Foreground" name value description contexts />
+
+<LinkCard title="Component / Reference" href="" icon="open-book" />
+
+## Create custom components
+
+Create your own components by reusing a comprehensive set of primitives.
+
+```astro
+// MyColorSwatch.Astro
+---
+import { getCollection } from 'astro:content';
+import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+const decisions = await getCollection('decisions');
+const store = createDecisionStaticStore(decisions);
+
+const { d } = Astro.props
+const decision = store.getDecision(d)
+---
+
+<DecisionCard>
+    <ShowColorValue d={decision} value={['rgb', 'hsl']} slot="col1" />
+    <div slot="col2">
+        <h3>Usage</h3>
+        <ShowDecisionUsage d={decision} />
+        <h3>Usage</h3>
+        <ShowDecisionContexts d={decision} />
+    </div>
+</DecisionCard>
+```
+
+Use your in your MDX files
+
+```mdx
+// foundations/color.ts
+import MyColorSwatch from '../components/';
+
+<MyColorSwatch d="Green Foreground" />
+```
+
+## Resolve decision values
+
+```astro
+---
+import { getCollection } from 'astro:content';
+import { type ColorDecision } from '@noodlestan/designer-decisions';
+import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+const decisions = await getCollection('decisions');
+const store = createDecisionStaticStore(decisions);
+
+const { d } = Astro.props
+const decision = store.getDecision(d) as ColorDecision;
+
+const color = decision.value().toString('hsl')
+---
+
+<div class="my-color-swatch">{color.value}</div>
+
+<style define:vars={{ 'my-color': color }}>
+.my-color-swatch { background-color: var(--my-color) }
+</style>
+```

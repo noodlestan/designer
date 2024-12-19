@@ -1,0 +1,22 @@
+---
+import { type DecisionInput, createStaticStore } from '@noodlestan/designer-decisions';
+
+import { getCollection } from 'astro:content';
+import { ShowColorSwatch } from '../../primitives';
+
+interface Props {
+    d: string | DecisionInput;
+}
+
+const { d } = Astro.props;
+
+const decisions = await getCollection('decisions');
+const store = createStaticStore(decisions);
+
+// const decision = store.getDecision(d);
+// const color = isColorValueDecision(decision) ? decision.getValue() : undefined;
+
+const color = {};
+---
+
+<ShowColorSwatch color={color} />

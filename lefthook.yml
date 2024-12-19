@@ -1,0 +1,7 @@
+pre-commit:
+    parallel: false
+    commands:
+        '0-lint':
+            run: npm run lint:silent
+        '1-ci':
+            run: npm run ci

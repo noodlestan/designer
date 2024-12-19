@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ban.spellright",
+    "unifiedjs.vscode-mdx",
+    "astro-build.astro-vscode"
+  ]
+}

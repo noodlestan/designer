@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    // module
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true, // problems in vitest, @vitest/utils, svgo
+    // emit
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // strict
+    "strict": true,
+    "noImplicitAny": true,
+    // types
+    "types": []
+  }
+}

@@ -1,0 +1,21 @@
+---
+title: ShowColorScaleDecision
+slug: reference/components/decisions/color/show-color-scale
+description: Visualize a color scale decision
+---
+
+import { ShowColorScaleDecision } from '@noodlestan/designer-shows/astro';
+
+import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components';
+
+## Props
+
+#### `d: string | DecisionInput`
+
+Carries the `DecisionInput` data object, or identifies the decision by its `name` or `id`.
+
+<Code code={`<ShowColorScaleDecision d="Green Foregrounds" />`} title={'page.mdx'} lang="astro" />
+
+<CardGrid>
+    <ShowColorScaleDecision d="Green Foregrounds" />
+</CardGrid>
