@@ -54,7 +54,7 @@ if (samples.length) {
     {
         decisionType.data.models.map((m: DecisionModelMeta) => (
             <li>
-                <a href={`/decision-types/${decisionType.id}/${m.model}`}>{m.name}</a>
+                <a href={`/decision-models/${decisionType.id}/${m.model}`}>{m.name}</a>
                 {m.description}
             </li>
         ))
@@ -79,5 +79,5 @@ if (samples.length) {
 
     <Content />
 
-    <LinkCard href="/decision-types" title="Other decision types" />
+    <LinkCard href="/decision-models" title="Other decision models" />
 </StarlightPage>

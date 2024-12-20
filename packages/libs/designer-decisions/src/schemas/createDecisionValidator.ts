@@ -1,6 +1,6 @@
 import Ajv, { type ErrorObject } from 'ajv';
 
-import type { DecisionInput } from '../types';
+import type { DecisionInputBase } from '../types';
 
 import type { DecisionValidator, SchemaMap } from './types';
 
@@ -11,8 +11,8 @@ export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator
         ajv.addSchema(schema);
     });
 
-    const validate = (decision: DecisionInput): ErrorObject[] | null => {
-        const schemaId = `urn:designer:decision-types:${decision.type}`;
+    const validate = (decision: DecisionInputBase): ErrorObject[] | null => {
+        const schemaId = `urn:designer:decision-models:${decision.model}`;
         const validateFn = ajv.getSchema(schemaId);
         if (!validateFn) {
             // for (const key of schemaMap.keys()) {

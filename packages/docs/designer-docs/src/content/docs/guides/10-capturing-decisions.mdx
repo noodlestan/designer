@@ -19,7 +19,7 @@ At a minimum, a decision record requires
 The following example defines a pair of decisions:
 
 -   [ColorValueDecisions](/decisions/color-value)
--   [ColorScaleDecision`](/decisions/color-scalue)
+-   [ColorSetDecision`](/decisions/color-set)
 
 ```json
 [
@@ -31,7 +31,7 @@ The following example defines a pair of decisions:
         }
     },
     {
-        "type": "color-scale/modifier",
+        "type": "color-set/modifier",
         "name": "Green Foregrounds",
         "params": {
             "start": { "ref": "Green Foreground" },
@@ -57,24 +57,24 @@ using directories and files.
 
 </FileTree>
 
-See [Guides / Validating Decisions](/guides/20-validating-design-decisions-with-schemas)
+See [Guides / Validating Decisions](/guides/validating-design-decisions-with-schemas/)
 to learn how to quickly load decisions from the filesystem.
 
 ### Schema
 
-#### ༶ `type`: `<decision-type / model>`
+#### ༶ `model`: `<decision-type / model>`
 
 The decision _shape_ is determined by both the input params and the output of the decision.
 
--   All decisions of type `color-scale/*` produces a `ColorScaleDecision` which exposes
+-   All decisions of type `color-set/*` produces a `ColorSetDecision` which exposes
     the resolved color values, individual color components, scale and color transformations,
     and - when declared - tokens and token references.
 
--   The specific `color-scale/modifier` decision model determines how the color scale is generated.
+-   The specific `color-set/modifier` decision model determines how the color scale is generated.
     In this case, the color gradient starts at the `start` color and successively applies
     the HSL `modifier` to the previous value, producing a total of 5 `steps`.
 
-See [Reference: Decision types](/decision-types) for a comprehensive list of decision models
+See [Reference: Decision types](/decision-models) for a comprehensive list of decision models
 and the schema for their input parameters.
 
 #### ༶ `name: string` (non unique)
@@ -168,7 +168,7 @@ Alternatively, a list of required contexts can be provided via an object:
 
 The parameters of each each decision are driven by the decision model.
 
-As an example, the [color-scale/modifier](/decision-types/color-scale/modifier) decision model
+As an example, the [color-set/modifier](/decision-models/color-set/modifier) decision model
 requires as input:
 
 -   a starting color (here provided as a reference to another decision)
@@ -176,10 +176,10 @@ requires as input:
     -   `h` - Hue
     -   `s` - Saturation
     -   `l` - Lightness
--   a number that specifies the total number of steps of the scale
+-   a number that specifies the total number of steps of the set
 
 ```json
-    "type": "color-scale/modifier"
+    "type": "color-set/modifier"
     "params": {
         "start": { "ref": "Green Foreground" },
         "modifier": { "l": 5 },
@@ -187,7 +187,7 @@ requires as input:
     }
 ```
 
-In turn, the [color-value/explicit](/decision-types/color-value/explicit) decision model,
+In turn, the [color-value/explicit](/decision-models/color-value/explicit) decision model,
 requires only a single color as input.
 
 ```json
@@ -215,7 +215,7 @@ As well as a decision/token reference.
     }
 ```
 
-See [Reference / Decision types](/decision-types) for details on each specific model.
+See [Reference / Decision types](/decision-models) for details on each specific model.
 
 #### ༶ `tokenize: object` (optional)
 
@@ -225,7 +225,7 @@ Declare tokens generated from this decision.
 
 ## See Also
 
--   [Reference / Decision types](/decision-types)
+-   [Reference / Decision types](/decision-models)
 -   [Reference / Generator API](/generator-api) 🚧
 -   [Reference / Schemas](/schemas) 🚧
 

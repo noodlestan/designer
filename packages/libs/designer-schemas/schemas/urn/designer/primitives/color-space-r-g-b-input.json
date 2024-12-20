@@ -1,0 +1,22 @@
+{
+  "$id": "urn:designer:primitives:color-space-r-g-b-input",
+  "type": "object",
+  "properties": {
+    "r": {
+      "type": "number"
+    },
+    "g": {
+      "type": "number"
+    },
+    "b": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "b",
+    "g",
+    "r"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

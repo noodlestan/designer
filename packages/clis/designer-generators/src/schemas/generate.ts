@@ -4,12 +4,12 @@ import { type SchemaGeneratorConfig } from '@noodlestan/designer-decisions';
 import { rimraf } from 'rimraf';
 
 import {
-    findDecisionTypes,
+    findDecisionModels,
     findPrimitives,
-    normalizeDecisionTypes,
+    generateModelSchemas,
+    generatePrimitiveSchemas,
     writeSchemas,
 } from './functions';
-import { normalizePrimitives } from './functions/normalize/normalizePrimitives';
 import {
     SchemaGenerator,
     SchemaGeneratorEvent,
@@ -26,7 +26,7 @@ export function createSchemaGenerator(
 
     const cache = {
         primitiveInfos: [] as SymbolInfo[],
-        decisionTypeInfos: [] as SymbolInfo[],
+        modelsInfos: [] as SymbolInfo[],
     };
 
     const emit = (event: SchemaGeneratorEvent) => {
@@ -36,7 +36,7 @@ export function createSchemaGenerator(
     const discover = async () => {
         const promises = configs.map(async config => {
             cache.primitiveInfos = await findPrimitives(config, moduleResolver);
-            cache.decisionTypeInfos = await findDecisionTypes(config, moduleResolver);
+            cache.modelsInfos = await findDecisionModels(config, moduleResolver);
 
             const primitivesCount = cache.primitiveInfos.length;
             emit({ type: 'info', value: `🐘 Discovered ${primitivesCount} primitives` });
@@ -44,9 +44,9 @@ export function createSchemaGenerator(
                 emit({ type: 'info', value: ` - ${info.symbolName} ... ${info.schemaId}` }),
             );
 
-            const decisionTypeCount = cache.decisionTypeInfos.length;
-            emit({ type: 'info', value: `🐘 Discovered ${decisionTypeCount} decision types` });
-            cache.decisionTypeInfos.forEach(info =>
+            const modelsCount = cache.modelsInfos.length;
+            emit({ type: 'info', value: `🐘 Discovered ${modelsCount} decision types` });
+            cache.modelsInfos.forEach(info =>
                 emit({ type: 'info', value: ` - ${info.symbolName} ... ${info.schemaId}` }),
             );
         });
@@ -57,9 +57,9 @@ export function createSchemaGenerator(
     const generate = async () => {
         await rimraf(targetDir);
 
-        const primitives = normalizePrimitives(cache.primitiveInfos);
-        const decisionTypes = normalizeDecisionTypes(cache.decisionTypeInfos);
-        const allSchemas = [...primitives, ...decisionTypes];
+        const primitives = generatePrimitiveSchemas(cache.primitiveInfos);
+        const decisionModels = generateModelSchemas(cache.modelsInfos);
+        const allSchemas = [...primitives, ...decisionModels];
 
         const files = writeSchemas(targetDir, allSchemas);
         files.forEach(value => emit({ type: 'generated', value }));

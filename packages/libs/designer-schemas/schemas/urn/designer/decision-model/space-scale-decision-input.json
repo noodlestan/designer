@@ -1,0 +1,15 @@
+{
+  "$id": "urn:designer:decision-model:space-scale-decision-input",
+  "anyOf": [
+    {
+      "$ref": "urn:designer:decision-model:space-scale-explicit-input"
+    },
+    {
+      "$ref": "urn:designer:decision-model:space-scale-linear-range-input"
+    },
+    {
+      "$ref": "urn:designer:decision-model:space-scale-modifier-input"
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

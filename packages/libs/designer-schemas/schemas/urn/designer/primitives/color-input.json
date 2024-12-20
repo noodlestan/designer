@@ -2,16 +2,134 @@
   "$id": "urn:designer:primitives:color-input",
   "anyOf": [
     {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$name": {
+          "type": "string"
+        },
+        "contexts": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "any": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "all"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "const": "color-value"
+        }
+      },
+      "required": [
+        "$name",
+        "type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "color-value"
+        }
+      },
+      "required": [
+        "$id",
+        "type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$name": {
+          "type": "string"
+        },
+        "contexts": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "any": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "all"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "const": "color-set"
+        },
+        "index": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "$name",
+        "index",
+        "type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "color-set"
+        },
+        "index": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "$id",
+        "index",
+        "type"
+      ]
+    },
+    {
       "type": "object",
       "properties": {
         "h": {
-          "type": "number"
+          "$ref": "urn:designer:primitives:color-hue-input"
         },
         "s": {
-          "type": "number"
+          "$ref": "urn:designer:primitives:color-saturation-input"
         },
         "l": {
-          "type": "number"
+          "$ref": "urn:designer:primitives:color-lightness-input"
         }
       },
       "additionalProperties": false,
@@ -24,33 +142,21 @@
     {
       "type": "object",
       "properties": {
-        "h": {
+        "r": {
           "type": "number"
         },
-        "s": {
+        "g": {
           "type": "number"
         },
-        "v": {
+        "b": {
           "type": "number"
         }
       },
       "additionalProperties": false,
       "required": [
-        "h",
-        "s",
-        "v"
-      ]
-    },
-    {
-      "type": "object",
-      "properties": {
-        "ref": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "ref"
+        "b",
+        "g",
+        "r"
       ]
     },
     {

@@ -6,17 +6,17 @@ const decisionTypes = await getCollection('decisionTypes');
 
 const decisionTypesHeader = {
     label: 'All Types',
-    link: 'decision-types',
+    link: 'decision-models',
 };
 const decisionTypeItems = decisionTypes.map(d => ({
-    link: `decision-types/${d.id}`,
+    link: `decision-models/${d.id}`,
     label: d.data.name,
 }));
 
 export const sidebar = [
     ...staticSidebar,
     {
-        label: 'Decision Types',
+        label: 'Decision Models',
         items: [decisionTypesHeader, ...decisionTypeItems],
     },
 ];

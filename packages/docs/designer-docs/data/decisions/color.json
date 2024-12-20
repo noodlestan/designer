@@ -1,6 +1,6 @@
 [
   {
-    "type": "color-value/explicit",
+    "model": "color-value/explicit",
     "name": "Curcuma Foreground",
     "description": "Strongest shade of Curcuma",
     "usage": {
@@ -12,7 +12,7 @@
     }
   },
   {
-    "type": "color-value/explicit",
+    "model": "color-value/explicit",
     "name": "Green Foreground",
     "description": "Strongest shade of Green",
     "usage": {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "type": "color-scale/explicit",
+    "model": "color-set/explicit",
     "name": "Curcuma Palette",
     "description": "Wide range shades of Curcuma",
     "usage": {
@@ -46,16 +46,16 @@
     }
   },
   {
-    "type": "color-scale/modifier",
+    "model": "color-set/modifier",
     "name": "Green Foregrounds",
-    "description": "Strongest shade of Curcuma",
+    "description": "Curcuma shades for foregrounds",
     "usage": {
       "intendedFor": ["Typography", "Foregrounds"],
       "notFor": ["Icons"]
     },
     "params": {
       "start": {
-        "ref": "Green Foreground"
+        "name": "Green Foreground"
       },
       "modifier": {
         "hue": 0,

@@ -1,0 +1,10 @@
+{
+  "$id": "urn:designer:primitives:space-input-units",
+  "enum": [
+    "em",
+    "px",
+    "rem"
+  ],
+  "type": "string",
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

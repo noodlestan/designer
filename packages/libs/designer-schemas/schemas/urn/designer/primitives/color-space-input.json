@@ -1,0 +1,46 @@
+{
+  "$id": "urn:designer:primitives:color-space-input",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "h": {
+          "$ref": "urn:designer:primitives:color-hue-input"
+        },
+        "s": {
+          "$ref": "urn:designer:primitives:color-saturation-input"
+        },
+        "l": {
+          "$ref": "urn:designer:primitives:color-lightness-input"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "h",
+        "l",
+        "s"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "r": {
+          "type": "number"
+        },
+        "g": {
+          "type": "number"
+        },
+        "b": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "b",
+        "g",
+        "r"
+      ]
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

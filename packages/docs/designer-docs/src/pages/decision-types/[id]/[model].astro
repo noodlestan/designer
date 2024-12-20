@@ -61,7 +61,7 @@ if (samples.length) {
         {model.description}
     </blockquote>
     <blockquote>
-        <p>type: <a href={`/decision-types/${decisionType.id}`}>{decisionType.data.name}</a></p>
+        <p>type: <a href={`/decision-models/${decisionType.id}`}>{decisionType.data.name}</a></p>
         {decisionType.data.description}
     </blockquote>
 
@@ -87,10 +87,10 @@ if (samples.length) {
         decisionType.data.models.map((m: DecisionModelMeta) => (
             <li>
                 {(m.model === model.model) ? <>👉</> : ''}
-                <a href={`/decision-types/${decisionType.id}/${m.model}`}>{m.name}</a>
+                <a href={`/decision-models/${decisionType.id}/${m.model}`}>{m.name}</a>
                 {m.description}
             </li>
         ))
     }
-    <LinkCard href="/decision-types" title="Other decision types" />
+    <LinkCard href="/decision-models" title="Other decision models" />
 </StarlightPage>

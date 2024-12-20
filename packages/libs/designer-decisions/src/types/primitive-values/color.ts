@@ -1,23 +1,20 @@
 import type { ColorInput, ColorSpaceName } from '../decision-inputs';
 
-export type HueValue = {
-    get(): number;
-};
+import type { BaseValue } from './base';
 
-export type SaturationValue = {
-    get(): number;
-};
+export type HueValue = BaseValue<number>;
 
-export type LightnessValue = {
-    get(): number;
-};
+export type SaturationValue = BaseValue<number>;
 
-export type AlphaValue = {
-    get(): number;
-};
+export type LightnessValue = BaseValue<number>;
 
-export type ColorValue = {
-    get(): string;
+export type LightnessScale = BaseValue<LightnessValue[]>;
+
+export type AlphaValue = BaseValue<number>;
+
+export type ColorValue = BaseValue<string> & {
     getSpace(space: ColorSpaceName): ColorInput;
     getString(space: ColorSpaceName): string;
 };
+
+export type ColorSet = BaseValue<ColorValue[]>;

@@ -1,6 +1,6 @@
 import type { ErrorObject } from 'ajv';
 
-import type { DecisionInput } from '../types';
+import type { DecisionInputBase } from '../types';
 
 export type SchemaId = string;
 
@@ -10,5 +10,5 @@ export type SchemaMap = Map<SchemaId, SchemaData>;
 
 export type DecisionValidator = {
     schemas: () => SchemaData[];
-    validate: (decision: DecisionInput) => ErrorObject[] | null;
+    validate: (decision: DecisionInputBase) => ErrorObject[] | null;
 };

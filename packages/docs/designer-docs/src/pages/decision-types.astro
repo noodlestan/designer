@@ -12,7 +12,7 @@ const decisionTypes = await getCollection('decisionTypes');
         {
             decisionTypes.map(decisionType => (
                 <li>
-                    <a href={`/decision-types/${decisionType.id}`}>{decisionType.data.title}</a>
+                    <a href={`/decision-models/${decisionType.id}`}>{decisionType.data.title}</a>
                 </li>
             ))
         }

@@ -1,17 +1,23 @@
+import type { DecisionModelFactory } from './decision-values';
+
 export type DecisionTypeMeta = {
     category: string;
     domain: string;
     type: string;
     name: string;
     description: string;
-    factory: () => void;
-    models: DecisionModelMeta[];
+    models: DecisionTypeModelMeta[];
 };
 
-export type DecisionModelMeta = {
+export type DecisionTypeModelMeta = {
     model: string;
     name: string;
     description: string;
+    factory: DecisionModelFactory;
+};
+
+export type DecisionModelMeta = DecisionTypeModelMeta & {
+    type: string;
 };
 
 export type SchemaSourcePackage = { type: 'package'; package: string; path?: string };

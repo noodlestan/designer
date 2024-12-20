@@ -1,23 +1,23 @@
 import type { SignedSpaceInput, SpaceInput } from '../primitives';
 
-import type { DecisionInput } from './base';
+import type { DecisionInputBase } from './base';
 
-export type SpaceValueExplicitInput = DecisionInput & {
-    type: 'space-value/explicit';
+export type SpaceValueExplicitInput = DecisionInputBase & {
+    model: 'space-value/explicit';
     params: {
         value: SpaceInput;
     };
 };
 
-export type SpaceScaleExplicitInput = DecisionInput & {
-    type: 'space-scale/explicit';
+export type SpaceScaleExplicitInput = DecisionInputBase & {
+    model: 'space-scale/explicit';
     params: {
         values: SpaceInput[];
     };
 };
 
-export type spaceScaleLinearRangeInput = DecisionInput & {
-    type: 'space-scale/linear-range';
+export type SpaceScaleLinearRangeInput = DecisionInputBase & {
+    model: 'space-scale/linear-range';
     params: {
         from: SpaceInput;
         to: SpaceInput;
@@ -25,8 +25,8 @@ export type spaceScaleLinearRangeInput = DecisionInput & {
     };
 };
 
-export type spaceScaleModifierInput = DecisionInput & {
-    type: 'space-scale/modifier-range';
+export type SpaceScaleModifierInput = DecisionInputBase & {
+    model: 'space-scale/modifier-range';
     params: {
         start: SpaceInput;
         modifier: SignedSpaceInput;
@@ -34,4 +34,10 @@ export type spaceScaleModifierInput = DecisionInput & {
     };
 };
 
-export type SpaceDecisionInput = SpaceScaleExplicitInput | SpaceValueExplicitInput;
+export type SpaceValueDecisionInput = SpaceValueExplicitInput;
+export type SpaceScaleDecisionInput =
+    | SpaceScaleExplicitInput
+    | SpaceScaleLinearRangeInput
+    | SpaceScaleModifierInput;
+
+export type SpaceDecisionInput = SpaceValueDecisionInput | SpaceScaleDecisionInput;

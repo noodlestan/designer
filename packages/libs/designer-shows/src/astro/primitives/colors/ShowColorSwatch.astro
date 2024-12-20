@@ -1,1 +1,13 @@
-<p>Color here!</p>
+---
+import { type ColorValue } from '@noodlestan/designer-decisions';
+
+interface Props {
+    color: ColorValue;
+}
+
+const { color } = Astro.props;
+
+const value = color.getString('hsl');
+---
+
+<p>Color here! {value}</p>

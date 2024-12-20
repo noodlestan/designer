@@ -1,5 +1,6 @@
 import { createDecisionValidator, loadSchemasFromPaths, validateSchemaMap } from '../schemas';
-import { type DecisionStoreStatic, createStaticStore } from '../store';
+import { type StaticDecisionStore, createStaticDecisionStore } from '../store';
+import { createStaticInputMap } from '../store/createStaticInputMap';
 import type { SchemaConfig } from '../types';
 
 import { loadDecisionsFromPaths, resolveSchemaPathsFromConfigs } from './functions';
@@ -8,18 +9,19 @@ export const createDecisionLoader = (
     dataPaths: string[],
     schemaConfigs: SchemaConfig[],
     moduleResolver: (moduleName: string) => Promise<string>,
-): (() => Promise<DecisionStoreStatic>) => {
+): (() => Promise<StaticDecisionStore>) => {
     const loader = async () => {
         const paths = await resolveSchemaPathsFromConfigs(schemaConfigs, moduleResolver);
         const schemas = await loadSchemasFromPaths(paths);
         const schemaMap = validateSchemaMap(schemas);
         const validator = createDecisionValidator(schemaMap);
 
-        const decisionData = await loadDecisionsFromPaths(dataPaths);
-        return createStaticStore(decisionData, validator);
+        const inputData = await loadDecisionsFromPaths(dataPaths);
+        const inputMap = createStaticInputMap(inputData, validator);
+        return createStaticDecisionStore(inputMap);
     };
 
-    let promise: Promise<DecisionStoreStatic>;
+    let promise: Promise<StaticDecisionStore>;
     const load = () => {
         if (!promise) {
             promise = loader();

@@ -1,5 +1,12 @@
-import { createSpaceScaleDecision, createSpaceValueDecision } from '../decisions';
+import {
+    createSpaceScaleExplicit,
+    createSpaceScaleLinearRange,
+    createSpaceScaleModifier,
+} from '../decision/types/space/space-scale';
+import { createSpaceValueExplicit } from '../decision/types/space/space-value';
 import type { DecisionTypeMeta } from '../types';
+
+import { castFactory } from './functions';
 
 export const SpaceDecisionTypes: DecisionTypeMeta[] = [
     {
@@ -8,9 +15,9 @@ export const SpaceDecisionTypes: DecisionTypeMeta[] = [
         type: 'space-value',
         name: 'Space Value',
         description: 'A decision to define a space value.',
-        factory: createSpaceValueDecision,
         models: [
             {
+                factory: castFactory(createSpaceValueExplicit),
                 model: 'explicit',
                 name: 'Explicit value',
                 description: 'Defines a space value.',
@@ -23,20 +30,22 @@ export const SpaceDecisionTypes: DecisionTypeMeta[] = [
         type: 'space-scale',
         name: 'Space Scale',
         description: 'A decision to define a space scale.',
-        factory: createSpaceScaleDecision,
         models: [
             {
+                factory: castFactory(createSpaceScaleExplicit),
                 model: 'explicit',
                 name: 'Explicit value',
                 description: 'Defines a space scale with arbitrary space values.',
             },
             {
+                factory: castFactory(createSpaceScaleLinearRange),
                 model: 'linear-range',
                 name: 'Linear Range',
                 description:
                     'Defines a space scale interpolating linearly between two space values.',
             },
             {
+                factory: castFactory(createSpaceScaleModifier),
                 model: 'modifier',
                 name: 'Stepped Modifier',
                 description:

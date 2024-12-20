@@ -14,8 +14,8 @@ export default defineConfig({
             sidebar: [
                 ...sidebar,
                 {
-                    label: 'Decision Types',
-                    link: 'decision-types',
+                    label: 'Decision Models',
+                    link: 'decision-models',
                 },
             ],
         }),

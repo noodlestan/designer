@@ -1,22 +1,31 @@
 ---
-import { type DecisionInput, createStaticStore } from '@noodlestan/designer-decisions';
+import {
+    createStaticDecisionStore,
+    createStaticInputMap,
+    isColorValueDecision,
+} from '@noodlestan/designer-decisions';
 
 import { getCollection } from 'astro:content';
 import { ShowColorSwatch } from '../../primitives';
+import { undefined } from 'astro:schema';
+import type { ColorValue } from '@noodlestan/designer-decisions';
 
 interface Props {
-    d: string | DecisionInput;
+    d: string;
 }
 
 const { d } = Astro.props;
 
 const decisions = await getCollection('decisions');
-const store = createStaticStore(decisions);
+const inputStore = createStaticInputMap(decisions);
+const store = createStaticDecisionStore(inputStore);
 
-// const decision = store.getDecision(d);
-// const color = isColorValueDecision(decision) ? decision.getValue() : undefined;
-
-const color = {};
+const decision = store.decision({ $name: d });
+const color = decision
+    ? isColorValueDecision(decision)
+        ? (decision.produce().value() as ColorValue)
+        : null
+    : null;
 ---
 
-<ShowColorSwatch color={color} />
+{decision && color ? <ShowColorSwatch color={color} /> : <>N/A</>}

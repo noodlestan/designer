@@ -6,45 +6,45 @@ import type {
     SignedPercentageInput,
 } from '../primitives';
 
-import type { DecisionInput } from './base';
+import type { DecisionInputBase } from './base';
 
-export type ColorHueExplicitInput = DecisionInput & {
-    type: 'color-hue/explicit';
+export type ColorHueValueExplicitInput = DecisionInputBase & {
+    model: 'color-hue-value/explicit';
     params: {
         value: DegreesInput;
     };
 };
 
-export type ColorSaturationExplicitInput = DecisionInput & {
-    type: 'color-saturation/explicit';
+export type ColorSaturationValueExplicitInput = DecisionInputBase & {
+    model: 'color-saturation-value/explicit';
     params: {
         value: PercentageInput;
     };
 };
 
-export type ColorLightnessExplicitInput = DecisionInput & {
-    type: 'color-lightness/explicit';
+export type ColorLightnessValueExplicitInput = DecisionInputBase & {
+    model: 'color-lightness-value/explicit';
     params: {
         value: PercentageInput;
     };
 };
 
-export type ColorValueExplicitInput = DecisionInput & {
-    type: 'color-value/explicit';
+export type ColorValueExplicitInput = DecisionInputBase & {
+    model: 'color-value/explicit';
     params: {
         value: ColorInput;
     };
 };
 
-export type ColorLigthnessScaleExplicitInput = DecisionInput & {
-    type: 'color-lightness-scale/explicit';
+export type ColorLightnessScaleExplicitInput = DecisionInputBase & {
+    model: 'color-lightness-scale/explicit';
     params: {
         values: PercentageInput[];
     };
 };
 
-export type ColorLigthnessScaleLinearRangeInput = DecisionInput & {
-    type: 'color-lightness-scale/linear-range';
+export type ColorLightnessScaleLinearRangeInput = DecisionInputBase & {
+    model: 'color-lightness-scale/linear-range';
     params: {
         from: PercentageInput;
         to: PercentageInput;
@@ -52,8 +52,8 @@ export type ColorLigthnessScaleLinearRangeInput = DecisionInput & {
     };
 };
 
-export type ColorLigthnessScaleModifierInput = DecisionInput & {
-    type: 'color-lightness-scale/modifier';
+export type ColorLightnessScaleModifierInput = DecisionInputBase & {
+    model: 'color-lightness-scale/modifier';
     params: {
         start: PercentageInput;
         modifier: SignedPercentageInput;
@@ -61,15 +61,15 @@ export type ColorLigthnessScaleModifierInput = DecisionInput & {
     };
 };
 
-export type ColorScaleExplicitInput = DecisionInput & {
-    type: 'color-scale/explicit';
+export type ColorSetExplicitInput = DecisionInputBase & {
+    model: 'color-set/explicit';
     params: {
         values: ColorInput[];
     };
 };
 
-export type ColorScaleLinearRangeInput = DecisionInput & {
-    type: 'color-scale/linear-range';
+export type ColorSetLinearRangeInput = DecisionInputBase & {
+    model: 'color-set/linear-range';
     params: {
         from: ColorInput;
         to: ColorInput;
@@ -77,8 +77,8 @@ export type ColorScaleLinearRangeInput = DecisionInput & {
     };
 };
 
-export type ColorScaleModifierInput = DecisionInput & {
-    type: 'color-scale/modifier';
+export type ColorSetModifierInput = DecisionInputBase & {
+    model: 'color-set/modifier';
     params: {
         start: ColorInput;
         modifier: {
@@ -90,4 +90,26 @@ export type ColorScaleModifierInput = DecisionInput & {
     };
 };
 
-export type ColorDecisionInput = ColorScaleExplicitInput | ColorValueExplicitInput;
+export type ColorHueValueDecisionInput = ColorHueValueExplicitInput;
+export type ColorSaturationValueDecisionInput = ColorSaturationValueExplicitInput;
+export type ColorLightnessValueDecisionInput = ColorLightnessValueExplicitInput;
+
+export type ColorValueDecisionInput = ColorValueExplicitInput;
+
+export type ColorLightnessScaleDecisionInput =
+    | ColorLightnessScaleExplicitInput
+    | ColorLightnessScaleLinearRangeInput
+    | ColorLightnessScaleModifierInput;
+
+export type ColorSetDecisionInput =
+    | ColorSetExplicitInput
+    | ColorSetLinearRangeInput
+    | ColorSetModifierInput;
+
+export type ColorDecisionInput =
+    | ColorHueValueDecisionInput
+    | ColorLightnessValueDecisionInput
+    | ColorSaturationValueDecisionInput
+    | ColorValueDecisionInput
+    | ColorLightnessScaleDecisionInput
+    | ColorSetDecisionInput;

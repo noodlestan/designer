@@ -1,9 +1,9 @@
-import type { DecisionInput } from '../../types';
+import type { DecisionInputBase } from '../../types';
 
 import { findJsonFiles } from './findJsonFiles';
 import { loadDecisionFile } from './loadDecisionFile';
 
-export const loadDecisionsFromPaths = async (dataPaths: string[]): Promise<DecisionInput[]> => {
+export const loadDecisionsFromPaths = async (dataPaths: string[]): Promise<DecisionInputBase[]> => {
     const files = await Promise.all(dataPaths.map(findJsonFiles));
     const allFiles = files.flat();
 

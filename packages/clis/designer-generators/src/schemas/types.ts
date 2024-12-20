@@ -1,4 +1,4 @@
-export type SourceType = 'primitives' | 'decision-types';
+export type SourceType = 'primitives' | 'decision-models';
 
 export type SymbolInfo = {
     symbolName: string;
