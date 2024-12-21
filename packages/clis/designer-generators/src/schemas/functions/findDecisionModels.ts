@@ -14,7 +14,7 @@ export async function findDecisionModels(
     moduleResolver: (moduleName: string) => Promise<string>,
 ): Promise<SymbolInfo[]> {
     const { urnBase, source, types } = config;
-    const files = await findTypeFiles(source, types.decisionTypes, moduleResolver);
+    const files = await findTypeFiles(source, types.decisionModels, moduleResolver);
     const program = createProgramForTypes(files);
     return mapProgramSymbols(program, symbol => ({
         symbolName: symbol.getName(),

@@ -2,16 +2,16 @@
   "$id": "urn:designer:decision-model:space-decision-input",
   "anyOf": [
     {
-      "$ref": "urn:designer:decision-model:space-value-explicit-input"
+      "$ref": "urn:designer:decision-model:space-value-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:space-scale-explicit-input"
+      "$ref": "urn:designer:decision-model:space-scale-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:space-scale-linear-range-input"
+      "$ref": "urn:designer:decision-model:space-scale-linear-range"
     },
     {
-      "$ref": "urn:designer:decision-model:space-scale-modifier-input"
+      "$ref": "urn:designer:decision-model:space-scale-modifier-range"
     }
   ],
   "$schema": "http://json-schema.org/draft-07/schema#"

@@ -12,7 +12,7 @@ export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator
     });
 
     const validate = (decision: DecisionInputBase): ErrorObject[] | null => {
-        const schemaId = `urn:designer:decision-models:${decision.model}`;
+        const schemaId = `urn:designer:decision-model:${decision.model.replace('/', '-')}`;
         const validateFn = ajv.getSchema(schemaId);
         if (!validateFn) {
             // for (const key of schemaMap.keys()) {

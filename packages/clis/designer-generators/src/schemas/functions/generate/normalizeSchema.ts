@@ -17,7 +17,7 @@ function updateRefs(obj: TJS.Definition, symbolToSchemaIdMap?: Map<string, strin
                 resolvedSchemaId ||
                 (refName.includes('/')
                     ? `${refName}`
-                    : `urn:designer:primitives:${kebabCase(refName)}`);
+                    : `urn:designer:primitive:${kebabCase(refName)}`);
 
             obj[key] = schemaId;
         } else if (typeof value === 'object' && value !== null) {

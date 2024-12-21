@@ -1,0 +1,41 @@
+{
+  "$id": "urn:designer:primitive:lightness-ref-of-lightness-value",
+  "description": "lightness",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$name": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "lightness-value"
+        }
+      },
+      "required": [
+        "$name",
+        "$type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "lightness-value"
+        }
+      },
+      "required": [
+        "$id",
+        "$type"
+      ]
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

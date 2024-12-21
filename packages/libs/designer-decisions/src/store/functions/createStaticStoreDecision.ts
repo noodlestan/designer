@@ -1,4 +1,5 @@
-import { createValueContext, getDecisionModelFactory } from '../../decision';
+import { createValueContext } from '../../decision';
+import { getDecisionModelFactory } from '../../factories';
 import type { Decision, DecisionContext, DecisionInputBase } from '../../types';
 
 export const createStaticStoreDecision = <V = unknown>(

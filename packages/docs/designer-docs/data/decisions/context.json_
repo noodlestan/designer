@@ -1,0 +1,66 @@
+[
+  {
+    "model": "context-hierarchy/default",
+    "name": "Context Hierarchy",
+    "params": {
+      "hierarchy": ["Root Context", "Colour Scheme", "Theme", "Surface"]
+    }
+  },
+  {
+    "model": "context-group/root",
+    "name": "Root",
+    "params": {
+      "items": [
+        {
+          "name": "Published"
+        }
+      ],
+      "default": "Published"
+    }
+  },
+  {
+    "model": "context-group/colour-scheme",
+    "name": "Colour Scheme",
+    "params": {
+      "dark": "Dark Mode",
+      "light": "Light Mode",
+      "default": "dark"
+    }
+  },
+  {
+    "model": "context-group/theme",
+    "name": "Theme",
+    "params": {
+      "items": [
+        {
+          "name": "Designer"
+        },
+        {
+          "name": "Funky",
+          "extends": ["Designer"]
+        }
+      ],
+      "default": "Designer"
+    }
+  },
+  {
+    "model": "context-group/surface",
+    "name": "Surface",
+    "params": {
+      "items": [
+        {
+          "name": "Stage"
+        },
+        {
+          "name": "Page",
+          "extends": ["Stage"]
+        },
+        {
+          "name": "Card",
+          "extends": ["Stage"]
+        }
+      ],
+      "default": "Stage"
+    }
+  }
+]

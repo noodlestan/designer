@@ -17,7 +17,7 @@
       "type": "string"
     },
     "contexts": {
-      "$ref": "urn:designer:primitives:decision-contexts-input"
+      "$ref": "urn:designer:primitive:decision-contexts-input"
     },
     "usage": {
       "type": "object",
@@ -41,7 +41,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "$ref": "urn:designer:primitives:space-input"
+          "$ref": "urn:designer:primitive:space-input"
         }
       },
       "additionalProperties": false,

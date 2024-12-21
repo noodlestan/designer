@@ -12,14 +12,17 @@ import { FileTree } from '@astrojs/starlight/components';
 
 At a minimum, a decision record requires
 
--   a `type` - the decision model, the schema
--   a `name` - to identify the decision
--   and one or more `params` as defined by the chose decision model
+-   `model` - defines both the decision type and which model to use to produce it
+-   `name` - to identify the decision
+-   `params` - an object following the decision model schema
 
-The following example defines a pair of decisions:
+The following example defines two decisions:
 
--   [ColorValueDecisions](/decisions/color-value)
--   [ColorSetDecision`](/decisions/color-set)
+-   a [color-value](/decision-models/color-value) decision, via the
+    [color-value/explicit](/decision-models/color-value/explicit) model
+
+-   a [color-set](/decision-models/color-set) decision, via the
+    [color-set/modifier](/decision-models/color-set/modifier) model
 
 ```json
 [
@@ -34,7 +37,7 @@ The following example defines a pair of decisions:
         "type": "color-set/modifier",
         "name": "Green Foregrounds",
         "params": {
-            "start": { "ref": "Green Foreground" },
+            "start": { "$name": "Green Foreground" },
             "modifier": { "hue": 0 },
             "steps": 5
         }
@@ -57,44 +60,66 @@ using directories and files.
 
 </FileTree>
 
-See [Guides / Validating Decisions](/guides/validating-design-decisions-with-schemas/)
-to learn how to quickly load decisions from the filesystem.
+See [Validating Decisions](/guides/validating-design-decisions-with-schemas/) for a step by step
+guide on how to load all decision files at once.
 
 ### Schema
 
-#### ༶ `model`: `<decision-type / model>`
+#### ༶ `model`: string
 
-The decision _shape_ is determined by both the input params and the output of the decision.
+The decision model identifier determines both:
 
--   All decisions of type `color-set/*` produces a `ColorSetDecision` which exposes
-    the resolved color values, individual color components, scale and color transformations,
-    and - when declared - tokens and token references.
+-   the type of value produced by decision.
+-   the decision model used to produce it, and the required input parameters
 
--   The specific `color-set/modifier` decision model determines how the color scale is generated.
-    In this case, the color gradient starts at the `start` color and successively applies
-    the HSL `modifier` to the previous value, producing a total of 5 `steps`.
+```json
+   "model": "color-set/explicit"
+```
 
-See [Reference: Decision types](/decision-models) for a comprehensive list of decision models
-and the schema for their input parameters.
+All decision models named `color-set/*` produce a `Decision<ColorSet>` and expose the resolved
+`ColorSet` value, which contains a set of `ColorValue`s, their individual
+color components, and - when declared - tokens and token references.
+
+The specific `color-set/modifier` decision model determines how the color scale is generated.
+In this case, the color gradient starts at the `start` color and successively applies
+the HSL `modifier` to the previous value, producing a total of 5 `steps`.
+
+See [Reference: Decision Models](/decision-models) for a comprehensive list of decision types,
+their resulting values and available models, and respective parameters.
 
 #### ༶ `name: string` (non unique)
 
-Design decision name is mandatory.
+The decision name is mandatory.
 
 ```json
    "name": "Green Foreground"
 ```
 
-**Note:** The same decision name can be declared more than once, as long as the decision is scoped
-to different `contexts` each time.
-
 The decision name can be used to create relationships between decisions.
 
 ```json
     "params": {
-        "start": { "ref": "Green Foreground" }
+        "start": { "$name": "Green Foreground" }
     }
+```
 
+The same decision name can be declared more than once, as long as the decision is scoped
+to different `contexts` each time.
+
+```json
+[
+    {
+        "type": "color-value/explicit",
+        "name": "Green Foreground",
+        "params": { "value": "#090E0B" }
+    },
+    {
+        "type": "color-value/explicit",
+        "name": "Green Foreground",
+        "contexts": ["Colour Scheme: Light Mode"],
+        "params": { "value": "#F6FDF8" }
+    }
+]
 ```
 
 #### ༶ `id: string` (optional) (unique)
@@ -111,7 +136,7 @@ a decision to a specific record regardless of applicable context.
 
 ```json
     "params": {
-        "start": { "ref": "#green-foreground-base" }
+        "start": { "$id": "#green-foreground-base" }
     }
 ```
 
@@ -125,8 +150,7 @@ Provide a small description for the decision.
 
 #### ༶ `usage: object` (optional)
 
-Otherwise know an _Application_, these guidelines inform the intent of these decisions,
-namely to _what_ they should be applied.
+These guidelines inform the intent of the decision, namely to _what_ they should be applied.
 
 ```json
     "usage": {
@@ -135,7 +159,7 @@ namely to _what_ they should be applied.
     }
 ```
 
-#### ༶ `context: string[] | {all: string[], some?: string[]} ` (optional)
+#### ༶ `contexts: string[] | {all: string[], some?: string[]} ` (optional)
 
 Contexts inform _where_, _when_ or _to whom_ a certain design decision is applicable.
 
@@ -166,7 +190,7 @@ Alternatively, a list of required contexts can be provided via an object:
 
 #### ༶ `params: object` (optional)
 
-The parameters of each each decision are driven by the decision model.
+The shape of the parameters of each each decision is driven by the decision model.
 
 As an example, the [color-set/modifier](/decision-models/color-set/modifier) decision model
 requires as input:
@@ -181,21 +205,23 @@ requires as input:
 ```json
     "type": "color-set/modifier"
     "params": {
-        "start": { "ref": "Green Foreground" },
+        "start": { "$name": "Green Foreground" },
         "modifier": { "l": 5 },
         "steps": 5
     }
 ```
 
-In turn, the [color-value/explicit](/decision-models/color-value/explicit) decision model,
-requires only a single color as input.
+In turn, the [color-set/explicit](/decision-models/color-set/explicit) decision model,
+requires only a single parameter: the explicit list of colors (or references) in the set.
 
 ```json
-    "type": "color-value/explicit",
+    "type": "color-set/explicit",
     "params": {
-        "value": "#090E0B"
+        "values": ["#312506", "#564109", "#7D5E0A", "#A57B0A"]
     }
 ```
+
+As another example, the [color-value/explicit](/decision-models/color-value/explicit)
 
 The color value can be specified in a number of formats, according to the 🚧 schema.
 
@@ -206,26 +232,26 @@ The color value can be specified in a number of formats, according to the 🚧 s
     }
 ```
 
-As well as a decision/token reference.
+As well as a decision (or token) reference.
 
 ```json
     "type": "color-value/explicit",
     "params": {
-        "value": { "ref": "Green Foreground" }
+        "value": { "$name": "Green Foreground" }
     }
 ```
 
-See [Reference / Decision types](/decision-models) for details on each specific model.
+See [Reference / Decision models](/decision-models) for each model's input parameter.
+
+🚧🚧🚧
 
 #### ༶ `tokenize: object` (optional)
 
 Declare tokens generated from this decision.
 
-🚧🚧🚧
-
 ## See Also
 
--   [Reference / Decision types](/decision-models)
+-   [Reference / Decision models](/decision-models)
 -   [Reference / Generator API](/generator-api) 🚧
 -   [Reference / Schemas](/schemas) 🚧
 

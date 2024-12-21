@@ -2,34 +2,34 @@
   "$id": "urn:designer:decision-model:color-decision-input",
   "anyOf": [
     {
-      "$ref": "urn:designer:decision-model:color-hue-value-explicit-input"
+      "$ref": "urn:designer:decision-model:color-hue-value-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-lightness-value-explicit-input"
+      "$ref": "urn:designer:decision-model:color-lightness-value-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-saturation-value-explicit-input"
+      "$ref": "urn:designer:decision-model:color-saturation-value-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-value-explicit-input"
+      "$ref": "urn:designer:decision-model:color-value-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-lightness-scale-explicit-input"
+      "$ref": "urn:designer:decision-model:color-lightness-scale-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-lightness-scale-linear-range-input"
+      "$ref": "urn:designer:decision-model:color-lightness-scale-linear-range"
     },
     {
-      "$ref": "urn:designer:decision-model:color-lightness-scale-modifier-input"
+      "$ref": "urn:designer:decision-model:color-lightness-scale-modifier"
     },
     {
-      "$ref": "urn:designer:decision-model:color-set-explicit-input"
+      "$ref": "urn:designer:decision-model:color-set-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-set-linear-range-input"
+      "$ref": "urn:designer:decision-model:color-set-linear-range"
     },
     {
-      "$ref": "urn:designer:decision-model:color-set-modifier-input"
+      "$ref": "urn:designer:decision-model:color-set-modifier"
     }
   ],
   "$schema": "http://json-schema.org/draft-07/schema#"

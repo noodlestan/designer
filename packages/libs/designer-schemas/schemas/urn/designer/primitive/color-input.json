@@ -1,0 +1,128 @@
+{
+  "$id": "urn:designer:primitive:color-input",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$name": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "color-value"
+        }
+      },
+      "required": [
+        "$name",
+        "$type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "color-value"
+        }
+      },
+      "required": [
+        "$id",
+        "$type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$name": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "color-set"
+        },
+        "$index": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "$index",
+        "$name",
+        "$type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "color-set"
+        },
+        "$index": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "$id",
+        "$index",
+        "$type"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "h": {
+          "$ref": "urn:designer:primitive:color-hue-input"
+        },
+        "s": {
+          "$ref": "urn:designer:primitive:color-saturation-input"
+        },
+        "l": {
+          "$ref": "urn:designer:primitive:color-lightness-input"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "h",
+        "l",
+        "s"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "r": {
+          "type": "number"
+        },
+        "g": {
+          "type": "number"
+        },
+        "b": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "b",
+        "g",
+        "r"
+      ]
+    },
+    {
+      "type": [
+        "string",
+        "number"
+      ]
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

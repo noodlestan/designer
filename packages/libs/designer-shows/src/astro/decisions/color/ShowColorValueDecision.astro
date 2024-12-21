@@ -1,14 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import {
+    type ColorValue,
     createStaticDecisionStore,
     createStaticInputMap,
     isColorValueDecision,
 } from '@noodlestan/designer-decisions';
 
-import { getCollection } from 'astro:content';
 import { ShowColorSwatch } from '../../primitives';
-import { undefined } from 'astro:schema';
-import type { ColorValue } from '@noodlestan/designer-decisions';
 
 interface Props {
     d: string;
@@ -27,5 +26,8 @@ const color = decision
         : null
     : null;
 ---
+
+{decisions[0].data.name}
+y {decision} x
 
 {decision && color ? <ShowColorSwatch color={color} /> : <>N/A</>}

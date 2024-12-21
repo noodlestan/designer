@@ -2,7 +2,7 @@ import type { ErrorObject } from 'ajv';
 
 import type { Decision, DecisionContexts, DecisionInputBase, DecisionRef } from '../types';
 
-import { createDecisionFactory } from './parts/createDecisionFactory';
+import { createDecisionFactory } from './parts';
 import type { StaticDecisionStore, StaticInputMap } from './types';
 
 export type DecisionInputData = {

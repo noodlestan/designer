@@ -1,23 +1,37 @@
 import type { DecisionModelFactory } from './decision-values';
 
-export type DecisionTypeMeta = {
-    category: string;
-    domain: string;
+export type DecisionType = {
     type: string;
     name: string;
+    category: string;
+    domain: string;
     description: string;
-    models: DecisionTypeModelMeta[];
+    models: DecisionTypeModel[];
 };
 
-export type DecisionTypeModelMeta = {
+export type DecisionTypeModel = {
     model: string;
     name: string;
     description: string;
     factory: DecisionModelFactory;
 };
 
-export type DecisionModelMeta = DecisionTypeModelMeta & {
+export type DecisionTypeMeta = {
     type: string;
+    name: string;
+    category: string;
+    domain: string;
+    description: string;
+    models: DecisionModelMeta[];
+};
+
+export type DecisionModelMeta = {
+    model: string;
+    type: string;
+    name: string;
+    category: string;
+    domain: string;
+    description: string;
 };
 
 export type SchemaSourcePackage = { type: 'package'; package: string; path?: string };
@@ -31,7 +45,7 @@ export type SchemaGeneratorConfig = {
     source: SchemaSource;
     types: {
         primitives: string[];
-        decisionTypes: string[];
+        decisionModels: string[];
     };
 };
 

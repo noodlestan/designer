@@ -3,4 +3,3 @@ export * from './Decision';
 export * from './DecisionModel';
 export * from './DecisionType';
 export * from './Docs';
-export * from './types';

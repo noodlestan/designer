@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+import { sidebar } from '../navigation/sidebar';
+
+const decisionTypes = await getCollection('decisionTypes');
+
+const domains = decisionTypes
+    .reduce((acc, item) => {
+        acc.add(item.data.domain);
+        return acc;
+    }, new Set() as Set<string>)
+    .values();
+---
+
+<StarlightPage frontmatter={{ title: 'Decision Models' }} sidebar={sidebar}>
+    <ul>
+        {
+            Array.from(domains).map(domain => (
+                <li>
+                    <h3>{domain}</h3>
+                    <ul>
+                        {decisionTypes
+                            .filter(type => type.data.domain === domain)
+                            .map(decisionType => (
+                                <li>
+                                    <a href={`/decision-models/${decisionType.id}`}>
+                                        {decisionType.data.name}
+                                    </a>
+                                </li>
+                            ))}
+                    </ul>
+                </li>
+            ))
+        }
+    </ul>
+</StarlightPage>

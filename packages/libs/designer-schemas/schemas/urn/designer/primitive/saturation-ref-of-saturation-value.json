@@ -1,0 +1,41 @@
+{
+  "$id": "urn:designer:primitive:saturation-ref-of-saturation-value",
+  "description": "saturation",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$name": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "saturation-value"
+        }
+      },
+      "required": [
+        "$name",
+        "$type"
+      ]
+    },
+    {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "$id": {
+          "type": "string"
+        },
+        "$type": {
+          "type": "string",
+          "const": "saturation-value"
+        }
+      },
+      "required": [
+        "$id",
+        "$type"
+      ]
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

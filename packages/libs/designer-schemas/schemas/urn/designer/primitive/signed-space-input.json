@@ -1,0 +1,33 @@
+{
+  "$id": "urn:designer:primitive:signed-space-input",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "units": {
+          "enum": [
+            "em",
+            "px",
+            "rem"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "units",
+        "value"
+      ]
+    },
+    {
+      "type": [
+        "string",
+        "number"
+      ]
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

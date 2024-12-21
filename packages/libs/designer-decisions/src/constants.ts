@@ -11,7 +11,7 @@ const DESIGNER_DECISIONS_SCHEMA_CONFIG: SchemaGeneratorConfig = {
     },
     types: {
         primitives: [PATH_PRIMITIVES],
-        decisionTypes: [PATH_DECISION_TYPES],
+        decisionModels: [PATH_DECISION_TYPES],
     },
 };
 

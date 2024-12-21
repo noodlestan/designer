@@ -1,7 +1,6 @@
 import { z } from 'astro:content';
 
 export const DecisionTypeZod = z.object({
-    title: z.string(),
     category: z.string(),
     domain: z.string(),
     type: z.string(),
@@ -10,7 +9,10 @@ export const DecisionTypeZod = z.object({
     models: z.array(
         z.object({
             model: z.string(),
+            type: z.string(),
             name: z.string(),
+            category: z.string(),
+            domain: z.string(),
             description: z.string(),
         }),
     ),

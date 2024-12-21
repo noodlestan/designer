@@ -3,7 +3,7 @@
 import type { DecisionRef } from '../../decision-values';
 
 export type SpaceRefOfSpaceValue = DecisionRef & {
-    type: 'space-value';
+    $type: 'space-value';
 };
 
 export type SpaceRawInput = string | number;

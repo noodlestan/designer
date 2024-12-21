@@ -2,13 +2,13 @@
   "$id": "urn:designer:decision-model:color-lightness-scale-decision-input",
   "anyOf": [
     {
-      "$ref": "urn:designer:decision-model:color-lightness-scale-explicit-input"
+      "$ref": "urn:designer:decision-model:color-lightness-scale-explicit"
     },
     {
-      "$ref": "urn:designer:decision-model:color-lightness-scale-linear-range-input"
+      "$ref": "urn:designer:decision-model:color-lightness-scale-linear-range"
     },
     {
-      "$ref": "urn:designer:decision-model:color-lightness-scale-modifier-input"
+      "$ref": "urn:designer:decision-model:color-lightness-scale-modifier"
     }
   ],
   "$schema": "http://json-schema.org/draft-07/schema#"

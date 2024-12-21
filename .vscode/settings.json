@@ -54,5 +54,11 @@
   },
   "[mdx]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": [
+    "src/",
+    "dist/",
+    "...*/private/.+",
+    "./[^./]+/[^./]+"
+  ]
 }

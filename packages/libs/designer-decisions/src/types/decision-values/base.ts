@@ -53,7 +53,6 @@ export type DecisionFactory = <V = unknown>(
 export type DecisionRef =
     | {
           $name: DecisionName;
-          contexts?: DecisionContexts;
       }
     | {
           $id: DecisionId;

@@ -1,11 +1,11 @@
-import type { DecisionInputBase } from '../types';
-import type { DecisionError } from '../types/decision-inputs/validation/types';
 import type {
     Decision,
     DecisionContexts,
+    DecisionError,
+    DecisionInputBase,
     DecisionRef,
     DecisionRefResolver,
-} from '../types/decision-values/base';
+} from '../types';
 
 export type StaticInputMap = {
     hasErrors: () => boolean;

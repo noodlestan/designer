@@ -5,7 +5,7 @@ import type { DegreesInput, PercentageInput } from './numbers';
 /** hue */
 
 export type HueRefOfHueValue = DecisionRef & {
-    type: 'hue-value';
+    $type: 'hue-value';
 };
 
 export type ColorHueInput = DegreesInput | HueRefOfHueValue;
@@ -13,7 +13,7 @@ export type ColorHueInput = DegreesInput | HueRefOfHueValue;
 /** saturation */
 
 export type SaturationRefOfSaturationValue = DecisionRef & {
-    type: 'saturation-value';
+    $type: 'saturation-value';
 };
 
 export type ColorSaturationInput = PercentageInput | SaturationRefOfSaturationValue;
@@ -21,7 +21,7 @@ export type ColorSaturationInput = PercentageInput | SaturationRefOfSaturationVa
 /** lightness */
 
 export type LightnessRefOfLightnessValue = DecisionRef & {
-    type: 'lightness-value';
+    $type: 'lightness-value';
 };
 
 export type ColorLightnessInput = PercentageInput | LightnessRefOfLightnessValue;
@@ -29,12 +29,12 @@ export type ColorLightnessInput = PercentageInput | LightnessRefOfLightnessValue
 /** color */
 
 export type ColorRefOfColorValue = DecisionRef & {
-    type: 'color-value';
+    $type: 'color-value';
 };
 
 export type ColorRefOfColorSet = DecisionRef & {
-    type: 'color-set';
-    index: number;
+    $type: 'color-set';
+    $index: number;
 };
 
 export type ColorRef = ColorRefOfColorValue | ColorRefOfColorSet;

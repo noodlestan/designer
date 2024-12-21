@@ -15,11 +15,10 @@ export function makeDecisionModelSchemaId(baseUrn: string, symbol: ts.Symbol): s
     for (let i = 1; i < segments.length; i += 2) {
         const symbolName = segments[i];
         const typeBody = segments[i + 1];
-
         if (symbolName === symbol.getName()) {
-            const typeMatch = typeBody.match(/type:\s*'([^']+)'/);
+            const typeMatch = typeBody.match(/model:\s*'([^']+)'/);
             if (typeMatch && typeMatch[1]) {
-                return `${baseUrn}:decision-models:${typeMatch[1]}`;
+                return `${baseUrn}:decision-model:${typeMatch[1].replace('/', '-')}`;
             }
         }
     }

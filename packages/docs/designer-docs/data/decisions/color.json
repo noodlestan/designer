@@ -55,7 +55,8 @@
     },
     "params": {
       "start": {
-        "name": "Green Foreground"
+        "$name": "Green Foreground",
+        "$type": "color-value"
       },
       "modifier": {
         "hue": 0,
