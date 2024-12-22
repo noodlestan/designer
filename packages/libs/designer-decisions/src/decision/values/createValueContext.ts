@@ -21,7 +21,6 @@ export const createValueContext = (
         lookups.push({
             ref,
             decision,
-            lookups: [],
         });
         return decision;
     };

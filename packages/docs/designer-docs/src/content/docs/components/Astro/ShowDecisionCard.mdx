@@ -1,0 +1,117 @@
+---
+title: 'ShowDecisionCard'
+slug: components/cards/show-decision-card
+description: Astro component to visualize any decision in a card layout, along with its details.
+sidebar:
+    order: 1000
+---
+
+import { Card } from '@astrojs/starlight/components';
+import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../decisions';
+
+export const store = await decisionLoader();
+
+```ts
+import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+```
+
+Renders the appropriate visualization according to the decision type, along with any
+decision details you might want to display.
+
+<ShowDecisionCard store={store} d="Green Foreground" />
+
+## Props
+
+##### ༶ `store` and `d` (mandatory)
+
+This component requires the two mandatory [DecisionProps](/components/astro/props) - `store`
+and `d` - to identify and retrieve the decision.
+
+##### ༶ `value`, `viz` (optional)
+
+It also accepts [ValueProps](/components/astro/props#valueprops) - `value`
+and `viz` - to control how the visualization and value are displayed.
+
+In this example we are rendering a [ColorValueDecision](/decision-models/color-value)
+and both
+
+-   hiding the visualization ;
+-   displaying its value in `rgb` and `hsl` formats.
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+
+##### ༶ `name` (optional = true): boolean
+
+Provide this flag to hide the decision's name.
+
+```mdx
+<ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
+```
+
+<ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
+
+##### ༶ `description` (optional = true): boolean
+
+Provide this flag to hide the decision's description.
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" description={false} />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" description={false} />
+
+##### ༶ `usage` (optional = true): boolean
+
+Provide this flag to hide the decision usage guidelines.
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" usage />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" usage />
+
+##### ༶ `model` (optional): boolean
+
+Provide this flag to display the decision model at the bottom of the card
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" model />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" model />
+
+##### ༶ `params` (optional): boolean
+
+Provide this flag to display the decision model params at the bottom of the card
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" params />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" params />
+
+##### ༶ `contexts` (optional): boolean
+
+Provide this flag to display the decision's contexts at the bottom of the card
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" contexts />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" contexts />
+
+##### ༶ `data` (optional): boolean
+
+Provide this flag to display the decision's raw data at the bottom of the card
+
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" data />
+```
+
+<ShowDecisionCard store={store} d="Green Foreground" data />

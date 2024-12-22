@@ -1,11 +1,82 @@
 ---
-import ShowColorValueDecision from '../decisions/color/ShowColorValueDecision.astro';
+import { type ShowDecisionProps } from '../types';
+import { resolveDecisionProp } from '../helpers';
+import { ShowDecision } from '../decisions';
+import { DecisionCardLayout } from '../layouts';
+import {
+    ShowDecisionContexts,
+    ShowDecisionData,
+    ShowDecisionDescription,
+    ShowDecisionModel,
+    ShowDecisionParams,
+    ShowDecisionUsage,
+} from '../attributes';
 
-interface Props {
-    d: string;
-}
+type Props = ShowDecisionProps & {
+    name?: boolean;
+    description?: boolean;
+    usage?: boolean;
+    model?: boolean;
+    params?: boolean;
+    contexts?: boolean;
+    data?: boolean;
+};
 
-const { d } = Astro.props;
+const {
+    store,
+    d,
+    value: showValue = true,
+    viz: showViz = true,
+    name: showName = true,
+    description: showDescription = true,
+    usage: showUsage = true,
+    model: showModel,
+    params: showParams,
+    contexts: showContexts,
+    data: showData,
+} = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+
+const nameSlot = showName && 'header';
+
+const showValueOrViz = showValue || showViz;
+const vizSlot = showValueOrViz && 'viz';
+
+const showDetails = showDescription || showUsage;
+const detailsSlot = showDetails && 'details';
+
+const showMeta = showModel || showParams || showContexts || showData;
+const metaSlot = showMeta && 'meta';
 ---
 
-<ShowColorValueDecision d={d} />
+<DecisionCardLayout>
+    {decision && showName && <Fragment slot={nameSlot}>{decision.input().name}</Fragment>}
+    {
+        decision && showValueOrViz && (
+            <Fragment slot={vizSlot}>
+                <ShowDecision d={decision} store={store} value={showValue} viz={showViz} />
+            </Fragment>
+        )
+    }
+    {
+        decision && showDetails && (
+            <Fragment slot={detailsSlot}>
+                {showDescription !== false && (
+                    <ShowDecisionDescription d={decision} store={store} />
+                )}
+                {showUsage !== false && <ShowDecisionUsage d={decision} store={store} />}
+            </Fragment>
+        )
+    }
+    {
+        decision && showMeta && (
+            <Fragment slot={metaSlot}>
+                {showModel && <ShowDecisionModel d={decision} store={store} />}
+                {showParams && <ShowDecisionParams d={decision} store={store} />}
+                {showData && <ShowDecisionData d={decision} store={store} />}
+                {showContexts && <ShowDecisionContexts d={decision} store={store} />}
+            </Fragment>
+        )
+    }
+</DecisionCardLayout>

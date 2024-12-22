@@ -1,0 +1,18 @@
+---
+interface Props {}
+---
+
+<div class="dd-decision-value">
+    <slot />
+</div>
+
+<style>
+    .dd-decision-value {
+        display: flex;
+        flex-direction: column;
+        gap: var(--dd-space-gap);
+        min-width: min-content;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+</style>

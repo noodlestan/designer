@@ -1,0 +1,61 @@
+---
+title: createDecisionLoader()
+slug: api/designer-functions/Loader/createDecisionLoader
+sidebar:
+    label: createDecisionLoader
+---
+
+```ts
+type createDecisionLoader = (
+    dataPaths: string[],
+    schemaConfigs: SchemaConfig[],
+    moduleResolver: (moduleName: string) => Promise<string>,
+) => () => Promise<StaticDecisionStore>;
+```
+
+## Return value
+
+**() => Promise&lt;
+[StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)&gt;**
+
+A loader function that resolves with a populated decision store.
+
+This loader caches the promise on the first call. Any subsequent calls do not result
+in any schemas or input files being reloaded, yielding the same result as the first one.
+
+#### Loader implementation
+
+Given a list of paths and schemas configs:
+
+-   Loads schemas from paths and creates a schema map.
+-   Validates the schema map and creates a validator.
+-   Loads all decisions files and merges all data.
+-   Validates decision inputs and returns a
+    [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore).
+
+## Params
+
+##### ༶ `dataPaths`: string[]
+
+A list of directories where to look for JSON files.
+
+##### ༶ `schemaConfigs`: [SchemaConfig](/api/designer-decisions/Types/SchemaConfig)\[\]
+
+A list of schema configurations to load validation schemas from.
+
+##### ༶ `moduleResolver`: (moduleName: string) => Promise&lt;string&gt;
+
+A function to resolve the physical location of node modules containing the schemas.
+
+## Usage
+
+```ts
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+const DATA_PATH = path.resolve('./data/decisions');
+const loader = createDecisionLoader(
+    [DATA_PATH],
+    [DECISION_SCHEMAS],
+    async moduleName => `./node_modules/${moduleName}`,
+);
+const store = await loader();
+```

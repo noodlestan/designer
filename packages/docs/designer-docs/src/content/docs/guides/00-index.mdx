@@ -1,0 +1,55 @@
+---
+title: Welcome
+slug: guides/welcome
+description: Introduction and step by step guides per use case
+sidebar:
+    order: 1
+    label: Welcome
+---
+
+import { Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
+
+### Design Decisions?
+
+-   How are designer decisions different from design tokens?
+-   What are design contexts and how are they resolved and applied?
+-   What's the architecture of this system and how open and extensible is it?
+
+Learn more about the [key concepts](/guides/designer-decisions-concepts).
+
+## Setup guides
+
+<LinkCard
+    href="/guides/capturing-design-decisions-in-data"
+    title="Capturing design decisions in data"
+/>
+<LinkCard
+    href="/guides/validating-design-decisions-with-schemas"
+    title="Validate decisions using JSON schema and validators"
+/>
+<LinkCard
+    href="/guides/generating-css-variables-from-design-decisions-and-tokens"
+    title="Generate CSS variables from design decisions and design tokens"
+/>
+<LinkCard
+    href="/guides/documenting-design-decisions-with-mdx"
+    title="Document design decisions and tokens with MDX components"
+/>
+
+## Example repositories 🚧
+
+### Minimal example 🚧
+
+-   Contains example data.
+-   Command line script to load and validate decisions
+-   Static HTML
+
+Code available here:
+
+### Astro/Starlight docs 🚧
+
+-   Contains example data.
+-   Loads decisions as an Astro collection
+-   Visualizes decisions in MDX files
+
+Code available here:

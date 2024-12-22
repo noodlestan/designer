@@ -16,7 +16,6 @@ export async function getStaticPaths() {
         {} as Record<string, (typeof decisionTypes)[0]>,
     );
     const models = await getCollection('models');
-    console.log(models);
     return models.map(item => ({
         params: { type: item.data.type, model: item.data.model.split('/')[1] },
         props: { decisionType: decisionTypesById[item.data.type], model: item.data },

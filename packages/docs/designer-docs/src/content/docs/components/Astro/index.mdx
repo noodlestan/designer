@@ -1,0 +1,57 @@
+---
+title: Component Reference / Astro
+slug: components/astro
+description: Astro components for visualizing design decisions in MDX docs.
+sidebar:
+    order: 0
+    label: Astro Index
+---
+
+import Banner from '@astrojs/starlight/components/Banner.astro';
+import { LinkCard } from '@astrojs/starlight/components';
+
+🚧🚧 TODO Banner component
+This reference assumes you are using an Astro based build,
+such as the one powering these docs, and that you have followed
+the [Rendering in Astro MDX](/guides/documenting-design-decisions-with-astro-and-mdx) guide.
+
+## Cards
+
+<LinkCard href="/components/cards/show-decision-card" title="ShowDecisionCard" />
+
+## Decisions
+
+### Color
+
+<LinkCard
+    href="/components/decisions/color/show-color-value-decision"
+    title="ShowColorValueDecision"
+/>
+<LinkCard href="/components/decisions/color/show-color-set-decision" title="ShowColorSetDecision" />
+
+## Attributes
+
+<LinkCard href="/components/attributes/show-decision-model" title="ShowDecisionModel" />
+<LinkCard href="/components/attributes/show-decision-params" title="ShowDecisionParams" />
+<LinkCard href="/components/attributes/show-decision-description" title="ShowDecisionDescription" />
+<LinkCard href="/components/attributes/show-decision-contexts" title="ShowDecisionContexts" />
+<LinkCard href="/components/attributes/show-decision-usage" title="ShowDecisionUsage" />
+<LinkCard href="/components/attributes/show-decision-data" title="ShowDecisionData" />
+
+## Primitives
+
+These components render the decision visualizations.
+
+### Color
+
+<LinkCard href="/components/primitives/color/show-color-swatch" title="ShowColorSwatch" />
+<LinkCard href="/components/primitives/color/show-color-value" title="ShowColorValue" />
+<LinkCard href="/components/primitives/color/show-color-value-list" title="ShowColorValueList" />
+
+## Layouts
+
+<LinkCard href="/components/layouts/decision-card" title="DecisionCardLayout" />
+
+## Atoms
+
+<LinkCard href="/components/atoms/color-swatch" title="ColorSwatch" />

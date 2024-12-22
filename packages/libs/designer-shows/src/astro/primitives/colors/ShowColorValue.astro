@@ -1,1 +1,54 @@
-<div>ShowColorValue</div>
+---
+import { type ColorSpaceName, type ColorValue } from '@noodlestan/designer-decisions';
+
+import { DecisionValue, ColorSwatch } from '../../atoms';
+import type { ShowValueProps } from '../../types';
+import { ShowValueUnavailable } from '../unavailable';
+import { FlexStack } from '../../layouts';
+
+type Props = ShowValueProps & {
+    color?: ColorValue;
+};
+
+const { color, value = true, viz = true, size = 'auto' } = Astro.props;
+
+const spaces: ColorSpaceName[] | null =
+    typeof value === 'boolean' && value
+        ? ['rgb']
+        : typeof value === 'string'
+          ? [value as ColorSpaceName]
+          : Array.isArray(value)
+            ? (value as ColorSpaceName[])
+            : null;
+---
+
+<div class:list={['dd-show-color-value', { size }]}>
+    {viz && color && <ColorSwatch color={color} size={size} />}
+    {!color && <ShowValueUnavailable />}
+    {
+        value && color && (
+            <DecisionValue>
+                <FlexStack>
+                    {spaces?.map(space => (
+                        <p class="dd-value">{color.getString(space)}</p>
+                    ))}
+                </FlexStack>
+            </DecisionValue>
+        )
+    }
+</div>
+
+<style>
+    .dd-show-color-value {
+        display: flex;
+        gap: var(--dd-space-gap);
+    }
+
+    .dd-value {
+        font-size: var(--dd-value-size);
+        font-weight: var(--dd-value-weight);
+        line-height: var(--dd-value-line-height);
+        color: var(--dd-value-color);
+        margin: 0 !important;
+    }
+</style>

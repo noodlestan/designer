@@ -33,17 +33,18 @@ Run `npm run dev` in the docs directory: `packages/docs/designer-docs/`.
 
 Libraries:
 
-- [Designer Decisions](./packages/libs/designer-decisions/README.md) - library for modeling design decisions
-- [Designer Schemas](./packages/libs/designer-schemas/README.md) - collection of JSON schemas to validate design decision inputs
-- [Designer Shows](./packages/libs/designer-shows/README.md) - components to visualize design decisions, tokens, and values.
+- [Designer Decisions](./packages/libs/designer-decisions/README.md)
+- [Designer Functions](./packages/libs/designer-functions/README.md)
+- [Designer Schemas](./packages/libs/designer-schemas/README.md)
+- [Designer Shows](./packages/libs/designer-shows/README.md)
 
 Cli tools:
 
-- [Designer Generators](./packages/clis/designer-generators/README.md) - generates schemas for design decision, validators, and transformations.
+- [Designer Generators](./packages/clis/designer-generators/README.md)
 
 Docs:
 
-- [Designer Docs](./packages/docs/designer-docs/README.md) - Docs, deployed at [designer-docs.noodlestan.org](https://designer-docs.noodlestan.org/)
+- [Designer Docs](./packages/docs/designer-docs/README.md)
 
 ### Stack
 

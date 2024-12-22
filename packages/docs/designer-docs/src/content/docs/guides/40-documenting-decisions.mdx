@@ -1,7 +1,7 @@
 ---
-title: Rendering in MDX
-slug: guides/documenting-design-decisions-with-mdx
-description: How to document design decisions and tokens with MDX components
+title: Rendering in Astro MDX
+slug: guides/documenting-design-decisions-with-astro-and-mdx
+description: How to document design decisions and tokens with MDX in Astro/Starlight based docs
 sidebar:
     order: 40
 ---
@@ -9,123 +9,184 @@ sidebar:
 import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
 import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-🚧🚧 This guide requires:
+import { decisionLoader } from '../../../decisions';
 
--   a design decisions data source, as illustrated by
-    the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide.
--   a working [Astro](https://docs.astro.build/en/getting-started/) V5 website
--   a reasonable understanding of
-    Astro [Content Collections](https://docs.astro.build/en/guides/content-collections/).
+export const store = await decisionLoader();
 
 ## Setup
 
-Create a collection configuration file, if you don't yet have one.
+🚧 This guide is for `@noodlestan/designer-shows/astro` components and requires a working
+[Astro](https://docs.astro.build/en/getting-started/) website. You can create a website similar
+to this one using the [Starlight theme](https://starlight.astro.build/getting-started/) in
+a matter of minutes.
+
+### Dependencies
+
+The following packages are required:
+
+-   [@noodlestan/designer-decisions](/api/designer-decisions)
+-   [@noodlestan/designer-functions](/api/designer-functions)
+-   [@noodlestan/designer-schemas](/api/designer-schemas)
+-   [@noodlestan/designer-shows](/api/designer-shows)
+
+```bash
+npm install @noodlestan/designer-decisions @noodlestan/designer-functions \
+  @noodlestan/designer-schemas @noodlestan/designer-shows
+```
+
+### Decision data
+
+Populate your design decisions data source. 🚧
+
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data)
+guide, you can simply create one or more JSON files anywhere in your project.
 
 <FileTree>
 
--   src/
-    -   **content.config.ts**
+-   data/
+    -   decisions/
+        -   color.json
+        -   space.json
+        -   ...
 
 </FileTree>
 
-Define the `decisions` content collection.
+### Decision loader
+
+Create a file to declare the loader.
+
+We will use the _all-in-one_
+[createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader/),
+providing it with:
+
+-   A list of directories to look for JSON files.
+-   A list of `SchemaConfig` to load validation schemas from.
+-   A function to resolve the physical location of node modules containing the schemas.
 
 ```ts
-// src/content.config.ts
-import { defineCollection } from 'astro:content';
+// src/decisions/index.ts
+import path from 'node:path';
 
-import { createDecisionLoader, DecisionZod } from '@noodlestan/designer-decisions';
+import { createDecisionLoader } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const resolveModule = async (name: string) => `./node_modules/${name}`;
-const decisionLoader = createDecisionLoader([DECISION_DATA], [DECISION_SCHEMAS], resolveModule);
+const DATA_PATH = path.resolve('./data/decisions');
 
-export const collections = {
-    decisions: defineCollection({
-        loader: async () => {
-            const data = await decisionLoader();
-            const values = data.records().map(decision => ({
-                id: decision.id || decision.name,
-                ...decision,
-            }));
-            return values;
-        },
-        schema: DecisionZod,
-    });,
-};
+export const loader = createDecisionLoader(
+    [DATA_PATH],
+    [DECISION_SCHEMAS],
+    async (moduleName: string) => `./node_modules/${moduleName}`,
+);
 ```
 
-## Out of the box
+API 🚧🚧 Banner: Help appreciated: how to provide a package resolution default?
 
-Use the `<ShowDecision>` component to visualize a decision by providing its `name` or `id`.
+The loader is an async function that returns a decision store. We will pass this
+store directly to our Astro components for them to retrieve decision data and
+resolve decision values.
 
-This component resolves a value for the decision and selects the appropriate visualization.
+```ts
+const store = await loader();
+const decision = store.decision('Green Foreground');
+```
+
+## Rendering decisions in MDX
+
+Retrieve the decision `store` and pass it to the components along with the decision name.
+
+In this example we are using the [&lt;ShowDecision/&gt;](/components/decisions/show-decision/)
+component to render both a [ColorValueDecision](/decision-models/color-value) and a
+[ColorSetDecision](/decision-models/color-set). It selects
+the appropriate component according to the decision type and both visualizes
+and renders its value.
 
 ```mdx
-// foundations/color.mdx
+// src/content/page.mdx
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
+import { loader } from '../decisions';
 
-<CardGrid>
-    <ShowDecision d="Green Foreground" />
-    <ShowDecision d="Green Foregrounds" />
-</CardGrid>
+export const store = await loader();
+
+<ShowDecision store={store} d="Green Foreground" />
+<ShowDecision store={store} d="Curcuma Palette" />
 ```
 
 <CardGrid>
-    <ShowDecision d="Green Foreground" />
-    <ShowDecision d="Green Foregrounds" />
+    <ShowDecision store={store} d="Green Foreground" />
+    <ShowDecision store={store} d="Curcuma Palette" />
 </CardGrid>
 
-Or use the `<ShowDecisionCard>` to also render decision details.
+### Using built-in components
+
+In the [Components reference](/components) you will find a comprehensive set of components
+for rendering decisions in different scenarios and layouts.
+
+For instance, the [&lt;ShowDecisionCard/&gt;](/components/cards/show-decision-card/)
+can also render all, or some, of the decision details.
 
 ```mdx
-// foundations/color.mdx
+// src/content/page.mdx
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 <CardGrid>
-    <ShowDecisionCard d="Green Foreground" name value description contexts />
+    <ShowDecisionCard d="Green Foreground" loader={decisionLoader} />
 </CardGrid>
 ```
 
-<ShowDecisionCard d="Green Foreground" name value description contexts />
+<ShowDecisionCard store={store} d="Curcuma Palette" />
 
-<LinkCard title="Reference / Components" href="" icon="open-book" />
+### Creating custom components
 
-## Create custom components
+In the [Components reference](/components) you will find a comprehensive set of primitives
+that render specific decision types, decision values, layouts, and atoms
 
-Create your own components by reusing a comprehensive set of primitives.
+From these can compose your own components, reusing layouts and atoms, customizing styles, and
+adding additional logic.
+
+In this example, we compose the
+[&lt;ShowColorValue/&gt;](/components/values/show-color-value) and the
+[&lt;ShowDecisionUsage/&gt;](/components/decisions/show-decision-usage) atom
+within the standard
+[&lt;DecisionCard/&gt;](/components/layouts/decision-card) layout.
 
 ```astro
-// MyColorSwatch.Astro
+// MyColorDecision.Astro
 ---
-import { getCollection } from 'astro:content';
-import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { type Decision } from '@noodlestan/designer-decisions';
+import { type StaticDecisionStore } from '@noodlestan/designer-functions';
+import {
+    DecisionCardLayout,
+    ShowColorValue,
+    ShowDecisionUsage,
+    resolveDecisionProp
+} from '@noodlestan/designer-shows/astro';
 
-const decisions = await getCollection('decisions');
-const store = createDecisionStaticStore(decisions);
+type Props = {
+    d: string | Decision<unknown>;
+    store: StaticDecisionStore;
+};
 
-const { d } = Astro.props
-const decision = store.getDecision(d)
+const { d, store } = Astro.props;
+const decision = resolveDecisionProp(store, d);
 ---
 
-<DecisionCard>
-    <ShowColorValue d={decision} value={['rgb', 'hsl']} slot="col1" />
-    <div slot="col2">
+<DecisionCardLayout>
+    <h2 slot="header">{decision.name}</h2>
+    <ShowColorValue slot="viz" store={store} d={decision} value={['rgb', 'hsl']} />
+    <div slot="details">
         <h3>Usage</h3>
-        <ShowDecisionUsage d={decision} />
-        <h3>Usage</h3>
-        <ShowDecisionContexts d={decision} />
+        <ShowDecisionUsage store={store} d={decision} />
     </div>
-</DecisionCard>
+</DecisionCardLayout>
 ```
 
-Use your in your MDX files
+Use the new component directly in your MDX files.
 
 ```mdx
-// foundations/color.ts
-import MyColorSwatch from '../components/';
+// src/content/page.mdx
+import MyColorDecision from '../components/';
 
-<MyColorSwatch d="Green Foreground" />
+<MyColorDecision store={store} d="Green Foreground" />
 ```
 
 ## Resolve decision values
@@ -151,3 +212,8 @@ const color = decision.value().toString('hsl')
 .my-color-swatch { background-color: var(--my-color) }
 </style>
 ```
+
+## See Also
+
+-   [Examples](/examples)
+-   [Components Reference](/components)

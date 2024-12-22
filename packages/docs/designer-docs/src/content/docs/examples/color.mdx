@@ -5,44 +5,45 @@ sidebar:
 description: Examples of color decisions documented with designer components.
 ---
 
-import { ShowColorValueDecision } from '@noodlestan/designer-shows/astro';
+import { CardGrid } from '@astrojs/starlight/components';
+import {
+    ShowColorValueDecision,
+    ShowColorSetDecision,
+    ShowDecisionCard,
+} from '@noodlestan/designer-shows/astro';
 
-import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components';
-import Color from '../../../components/Color/Color.astro';
+import { decisionLoader } from '../../../decisions';
 
-The `<ShowColorValueDecision>` component visualizes a color decision.
+export const store = await decisionLoader();
 
-The only mandatory argument is `d`, the decision `name`, `id` or `token`.
+```mdx
+<ShowDecisionCard store={store} d="Green Foreground" model params>
+```
 
-<Code code={`<ShowColorValueDecision d="Green Foreground" />`} title={'page.mdx'} lang="astro" />
+<div>
+    <ShowDecisionCard store={store} d="Green Foreground" model params />
+</div>
+
+```mdx
+<ShowColorValueDecision store={store} d="Green Foreground" />
+```
 
 <CardGrid>
-    <ShowColorValueDecision d="Green Foreground" />
+    <ShowColorValueDecision store={store} d="Green Foreground" />
 </CardGrid>
 
-You may also want to display the decision value by adding the `value` flag.
-
-<Code code={`<Color d="Green Foreground" value/>`} title={'page.mdx'} lang="astro" />
+```mdx
+<ShowColorSetDecision store={store} d="Curcuma Palette" />
+```
 
 <CardGrid>
-    <Color d="Green Foreground" value />
+    <ShowColorSetDecision store={store} d="Curcuma Palette" />
 </CardGrid>
 
-In the case of color decisions, you may want to display the value in
-several color spaces at the same time
+```mdx
+<ShowColorValueDecision store={store} d="Green Foreground" size="s" value={['rgb', 'hsl']} />
+```
 
 <CardGrid>
-    <Color d="Green Foreground" value={['rgb', 'hsl']} />
-</CardGrid>
-
-You may also display additional information such as
-
--   the underlying decision model and params
--   application guidelines.
-
-<Code code={`<Color d="Green Foreground" name model params>`} title={'page.mdx'} lang="astro" />
-
-<CardGrid>
-    <Color d="Green Foreground" name model params />
-    <Color d="Green Foreground" contexts usage />
+    <ShowColorValueDecision store={store} d="Green Foreground" size="s" value={['rgb', 'hsl']} />
 </CardGrid>

@@ -48,7 +48,7 @@
   {
     "model": "color-set/modifier",
     "name": "Green Foregrounds",
-    "description": "Curcuma shades for foregrounds",
+    "description": "Green shades for foregrounds",
     "usage": {
       "intendedFor": ["Typography", "Foregrounds"],
       "notFor": ["Icons"]

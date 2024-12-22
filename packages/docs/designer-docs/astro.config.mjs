@@ -1,23 +1,27 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { sidebar } from './sidebar.static.mjs';
+import { staticSidebar } from './sidebar.static.mjs';
+
+const decisionModels = {
+    label: 'Decision Models',
+    items: [{ label: 'Index', link: 'decision-models' }],
+};
 
 export default defineConfig({
-    experimental: { contentLayer: true },
     integrations: [
         starlight({
             title: '🎨 Designer Decisions',
+            customCss: [
+                // Relative path to your custom CSS file
+                './src/styles/starlight.css',
+                './src/styles/decisions.css',
+                './src/styles/scrollbars.css',
+            ],
             social: {
                 github: 'https://github.com/noodlestan',
                 discord: 'https://discord.gg/b8DkbJSF9z',
             },
-            sidebar: [
-                ...sidebar,
-                {
-                    label: 'Decision Models',
-                    link: 'decision-models',
-                },
-            ],
+            sidebar: staticSidebar({ decisionModels }),
         }),
     ],
 });

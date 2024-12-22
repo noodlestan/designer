@@ -1,1 +1,73 @@
-<div>ShowDecisionParams</div>
+---
+import { type ShowDataProps } from '../types';
+import { resolveDecisionProp } from '../helpers';
+
+type Props = ShowDataProps;
+
+const { store, d } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const params = (decision && decision.input().params) || {};
+
+const entries = Object.entries(params);
+---
+
+<div class="dd-decision-params">
+    <h4 class="dd-header">Params:</h4>
+    <ul class="dd-list">
+        {
+            entries.map(([key, value]) => (
+                <li class="dd-item">
+                    <p class="dd-key">{key}</p>
+                    <p class="dd-value">{value}</p>
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .dd-decision-params {
+        display: flex;
+        align-items: start;
+        gap: 5px;
+    }
+
+    .dd-decision-params .dd-header {
+        font-size: var(--dd-text-size);
+        font-weight: var(--dd-label-weight);
+        line-height: var(--dd-text-line-height);
+        color: var(--dd-text-color);
+    }
+
+    .dd-decision-params .dd-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0;
+        list-style: none;
+    }
+
+    .dd-decision-params .dd-list .dd-item {
+        display: flex;
+        gap: 5px;
+        padding: 0;
+        font-size: var(--dd-text-size);
+        font-weight: var(--dd-text-weight);
+        line-height: var(--dd-text-line-height);
+        color: var(--dd-text-color);
+    }
+
+    .dd-decision-params .dd-item .dd-key,
+    .dd-decision-params .dd-item .dd-value {
+        margin: 0;
+        /* font-size: var(--dd-value-size); */
+        /* font-weight: var(--dd-value-weight); */
+        /* line-height: var(--dd-text-line-height); */
+        /* color: var(--dd-value-color); */
+    }
+
+    .dd-decision-params .dd-item .dd-key {
+        /* font-weight: var(--dd-label-weight); */
+    }
+</style>

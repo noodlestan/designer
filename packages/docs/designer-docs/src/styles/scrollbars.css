@@ -1,0 +1,39 @@
+:root {
+    --surface-scrollbar-rest-handle-color: var(--sl-color-gray-6);
+    --surface-scrollbar-rest-track-color: var(--sl-color-black);
+    --surface-scrollbar-hover-handle-color: var(--sl-color-gray-5);
+    --surface-scrollbar-hover-track-color: var(--sl-color-gray-6);
+}
+
+* {
+    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-scrollbar-rest-handle-color)
+        var(--surface-scrollbar-rest-track-color);
+}
+
+*:hover {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-scrollbar-hover-handle-color)
+        var(--surface-scrollbar-hover-track-color);
+}
+
+*::-webkit-scrollbar {
+    display: none;
+    display: initial;
+}
+
+*:hover::-webkit-scrollbar {
+    display: initial;
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--surface-scrollbar-rest-handle-color);
+    border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--surface-scrollbar-rest-track-color);
+}

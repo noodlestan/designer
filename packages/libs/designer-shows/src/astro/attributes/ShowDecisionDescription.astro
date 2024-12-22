@@ -1,1 +1,23 @@
-<div>ShowDecisionDescription</div>
+---
+import { type ShowDataProps } from '../types';
+import { resolveDecisionProp } from '../helpers';
+
+type Props = ShowDataProps;
+
+const { store, d } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+---
+
+<p class="dd-decision-description">
+    {decision?.input().description}
+</p>
+
+<style>
+    .dd-decision-description {
+        font-size: var(--dd-description-size);
+        font-weight: var(--dd-text-weight);
+        line-height: var(--dd-text-line-height);
+        color: var(--dd-text-color);
+    }
+</style>

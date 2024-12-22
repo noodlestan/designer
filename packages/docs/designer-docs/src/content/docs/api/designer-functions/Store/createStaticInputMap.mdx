@@ -1,0 +1,39 @@
+---
+title: createStaticInputMap()
+slug: api/designer-functions/Store/createStaticInputMap
+sidebar:
+    label: createStaticInputMap
+---
+
+```ts
+type createStaticInputMap = (
+    inputData: DecisionInputBase[],
+    validator?: DecisionValidator,
+) => StaticInputMap;
+```
+
+## Return value
+
+Returns a [StaticInputMap](/api/designer-functions/Types/StaticInputMap)
+that can be used to retrieve decision inputs and validation errors.
+
+## Params
+
+##### ༶ `inputData`: [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)[]
+
+An array of decision inputs.
+
+##### ༶ `validator`: [DecisionValidator](/api/designer-functions/Types/DecisionValidator)
+
+An optional validator.
+
+If no validator is provided, data is assumed to be valid. This is useful
+in scenarios where the data is guaranteed to have been validated in a different process.
+
+## Usage
+
+```ts
+const validator = createDecisionValidator(schemaMap);
+const inputData = await loadDecisionsFromPaths(dataPaths);
+const inputMap = createStaticInputMap(inputData, validator);
+```

@@ -1,6 +1,6 @@
 # Designer Shows
 
-> A library of components that visualize design decisions, tokens, and values.
+> Visualizing design decisions and tokens: Astro and SolidJS components.
 
 ## How to use
 

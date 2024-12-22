@@ -1,0 +1,23 @@
+---
+type Props = {
+    tag?: 'div' | 'ul' | 'li';
+    justify?: 'start' | 'center';
+};
+
+const { tag: Element = 'div', justify = 'start' } = Astro.props;
+---
+
+<Element class:list={['dd-flex-stack']}>
+    <slot />
+</Element>
+
+<style define:vars={{ '--dd-flex-stack-justify': justify }}>
+    .dd-flex-stack {
+        display: flex;
+        flex-direction: column;
+        justify-content: var(--dd-flex-stack-justify);
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: var(--dd-space-gap);
+    }
+</style>

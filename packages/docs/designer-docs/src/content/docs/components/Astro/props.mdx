@@ -1,0 +1,117 @@
+---
+title: Astro component props
+slug: components/astro/props
+description: Common props for Astro design decision components.
+sidebar:
+    order: 10
+    label: Common Props
+---
+
+import Banner from '@astrojs/starlight/components/Banner.astro';
+import { CardGrid } from '@astrojs/starlight/components';
+import { FlexRow, FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../decisions';
+
+export const store = await decisionLoader();
+
+## DecisionProps
+
+All components that render a decision, such as the
+[&lt;ShowDecisionCard/&gt;](/components/cards/show-decision-card/) component,
+**require** the following props.
+
+##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+
+The `store` prop provides access to all decision input data so that components can
+retrieve decision objects and resolve values.
+
+The simplest way to create a decision store is, as described in the
+[Rendering in Astro MDX](/guides/documenting-design-decisions-with-astro-and-mdx)
+guide, to create a decision loader and then retrieve the store in your pages.
+
+```mdx
+import { loader } from '../decisions';
+
+export const store = await loader();
+
+<ShowDecision store={store} ... />
+```
+
+##### ༶ `d`: string | [Decision](/api/designer-decisions/Types/Decision)
+
+A `string` with the name of the decision to visualize or a `Decision` object.
+
+```mdx
+<ShowDecision store={store} d="Green Foreground" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Green Foreground" />
+</CardGrid>
+
+## ValueProps
+
+All components that directly render a decision value, such as ...
+accept the `viz`, `value` and `size` props.
+
+Note that decision components, such as the
+[&lt;ShowDecisionCard/&gt;](/components/cards/show-decision-card/) component
+mentioned above, delegate to value components. For this reason, they also
+accept `viz`, `value` and `size` props.
+
+##### ༶ `viz` (optional = true): boolean
+
+Provide this flag to hide the decision visualization and display only the value.
+
+```mdx
+RGB: <ShowDecision store={store} d="Green Foreground" viz={false} />
+```
+
+<FlexRow align="center">
+    RGB: <ShowDecision store={store} d="Green Foreground" viz={false} />
+</FlexRow>
+
+##### ༶ `value` (optional = true): boolean | string | object
+
+Provide this flag to hide the decision value or customize its format.
+
+```mdx
+<ShowDecision store={store} d="Green Foreground" value={false} />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Green Foreground" value={false} />
+</CardGrid>
+
+With some decision types, you may want to display their value in specific formats. The `value`
+prop is passed to the specific decision component to control how the value is displayed.
+
+For instance, the [&lt;ShowColorValue/&gt;](/components/decisions/color/show-color-value-decision),
+component can display the color value in one or more color spaces.
+
+```mdx
+<ShowDecision store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+</CardGrid>
+
+##### ༶ `size` (optional = 'auto'): [ShowValueSize](/api/designer-shows/Types/ShowValueSize)
+
+Provide one of `'s'`, `'m'` or `'l'` to control the visualization size.
+
+```mdx
+<ShowDecision store={store} d="Green Foreground" />
+<ShowDecision store={store} d="Green Foreground" size={'l'} />
+<ShowDecision store={store} d="Green Foreground" size={'m'} />
+<ShowDecision store={store} d="Green Foreground" size={'s'} />
+```
+
+<FlexStack>
+    <ShowDecision store={store} d="Green Foreground" />
+    <ShowDecision store={store} d="Green Foreground" size={'l'} />
+    <ShowDecision store={store} d="Green Foreground" size={'m'} />
+    <ShowDecision store={store} d="Green Foreground" size={'s'} />
+</FlexStack>

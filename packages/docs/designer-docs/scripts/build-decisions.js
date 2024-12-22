@@ -1,18 +1,18 @@
 import path from 'path';
 
-import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-decisions';
+import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DECISION_DATA = path.resolve('./data/decisions');
+const DATA_PATH = path.resolve('./data/decisions');
 
-const decisionLoader = createDecisionLoader(
-    [DECISION_DATA],
+const loader = createDecisionLoader(
+    [DATA_PATH],
     [DECISION_SCHEMAS],
     async moduleName => `../../../node_modules/${moduleName}`,
 );
 
 const loadDecisions = async () => {
-    const store = await decisionLoader();
+    const store = await loader();
     if (store.hasErrors()) {
         store.allErrors().forEach(error => console.error(formatValidationError(error)));
     }

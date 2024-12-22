@@ -24,6 +24,26 @@
     {
       "type": "object",
       "properties": {
+        "h": {
+          "$ref": "urn:designer:primitive:color-hue-input"
+        },
+        "s": {
+          "$ref": "urn:designer:primitive:color-saturation-input"
+        },
+        "v": {
+          "$ref": "urn:designer:primitive:color-lightness-input"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "h",
+        "s",
+        "v"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
         "r": {
           "type": "number"
         },

@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-decisions';
+import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DECISION_DATA = path.resolve('./data/decisions');

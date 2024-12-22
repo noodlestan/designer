@@ -1,12 +1,13 @@
 ---
-title: Validating Decisions
+title: Loading and Validating Decisions
 slug: guides/validating-design-decisions-with-schemas
 description: How to validate design decisions with JSON schemas and validators
 sidebar:
     order: 20
+    label: Validating Decisions
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
 
 ## Setup
 
@@ -14,53 +15,81 @@ This guide assumes... 🚧
 
 ### Dependencies
 
-Install the following packages.
+The following packages are required:
+
+-   [@noodlestan/designer-functions](/api/designer-functions)
+-   [@noodlestan/designer-schemas](/api/designer-schemas)
 
 ```bash
-npm install @noodlestan/designer-decisions @noodlestan/designer-schemas
+npm install @noodlestan/designer-functions @noodlestan/designer-schemas
 ```
 
--   [@noodlestan/designer-decisions]() - provides APIs to load and validate decisions
--   [@noodlestan/designer-schemas]() - provides JSON schemas for decision models
+### Decision data
 
-Declare decisions in one more JSON files. See [](./10-capturing-decisions.mdx)
+Populate your design decisions data source.
+
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data)
+guide, you can simply create one or more JSON files anywhere in your project.
 
 <FileTree>
--   data
--       color.json
--       space.json
+
+-   data/
+    -   decisions/
+        -   color.json
+        -   space.json
+        -   ...
 
 </FileTree>
 
 ## Script
 
-Add a script
+Add a script to load decisions and print eventual validation errors.
 
 <FileTree>
+-   data/
 -   scripts
     - **validate-decisions.js**
--   data/
 
 </FileTree>
 
+We will use the _all-in-one_
+[createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader)
+providing it with:
+
+-   A list of directories to look for JSON files.
+-   A list of SchemaConfig to load validation schemas from.
+-   A function to resolve the physical location of node modules containing the schemas.
+
 ```js
+// src/scripts/validate-decisions.js
 import path from 'path';
 
-import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-decisions';
+import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DECISION_DATA = path.resolve('./data/decisions');
+const DATA_PATH = path.resolve('./data/decisions');
 
-const decisionLoader = createDecisionLoader(
-    [DECISION_DATA],
+const loader = createDecisionLoader(
+    [DATA_PATH],
     [DECISION_SCHEMAS],
-    async moduleName => `../../../node_modules/${moduleName}`,
+    async (moduleName: string) => `../../../node_modules/${moduleName}`,
 );
+```
 
+The loader returns a
+[populated decision store](/api/designer-functions/Types/StaticDecisionStore)
+asynchronously.
+
+We can use this store to inspect loaded decision records and errors.
+
+```js
+// src/scripts/validate-decisions.js
 const loadDecisions = async () => {
-    const store = await decisionLoader();
+    const store = await loader();
     if (store.hasErrors()) {
         store.allErrors().forEach(error => console.error(formatValidationError(error)));
+    } else {
+        store.records().forEach(record => console.info(record));
     }
     console.info(`🐘 ${store.records().length} decisions, ${store.allErrors().length} errors`);
 };
@@ -68,10 +97,57 @@ const loadDecisions = async () => {
 loadDecisions();
 ```
 
-Add in package.json
+You can run this directly from the command line:
 
-```json
-    "scripts": {
-        "build:decisions": "node scripts/build-decisions.js",
-    }
+```bash
+node scripts/build-decisions.js
 ```
+
+The output should look something like:
+
+```
+...
+{
+  model: 'color-set/modifier',
+  name: 'Green Foregrounds',
+  description: 'Green shades for foregrounds',
+  usage: { intendedFor: [ 'Typography', 'Foregrounds' ], notFor: [ 'Icons' ] },
+  params: {
+    start: { '$name': 'Green Foreground', '$type': 'color-value' },
+    modifier: { hue: 0, lightness: 5, saturation: -5 },
+    steps: 5
+  }
+}
+🐘 4 decisions, 0 errors
+```
+
+In case of validation errors these will be printed using the `formatValidationError()` formatter.
+
+For instance, if we delete the `param` attribute from a couple of decision input records:
+
+```
+🟨 Decision Curcuma Foreground (required) must have required property 'params'
+🟨 Decision Green Foreground (required) must have required property 'params'
+🐘 4 decisions, 2 errors
+```
+
+## Next steps
+
+The next guides provide step by step instructions on practical uses cases for your decision data:
+
+<CardGrid>
+    <LinkCard
+        href="/guides/generating-css-variables-from-design-decisions-and-tokens"
+        title="Generating CSS Variables"
+    />
+    <LinkCard
+        href="/guides/documenting-design-decisions-with-astro-and-mdx"
+        title="Rendering in Astro MDX"
+    />
+
+</CardGrid>
+
+## See Also
+
+-   [Decision Models Reference](/decision-models)
+-   [Schemas Reference](/schemas)

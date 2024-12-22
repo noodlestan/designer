@@ -8,7 +8,7 @@ export const DecisionCollection = defineCollection({
     loader: async () => {
         const data = await decisionLoader();
         const values = data.records().map(decision => ({
-            id: decision.id || decision.name,
+            id: decision.uuid || decision.name,
             ...decision,
         }));
         return values;

@@ -1,0 +1,42 @@
+---
+title: ShowColorSetDecision
+slug: components/decisions/color/show-color-set-decision
+description: Visualize a color set decision
+sidebar:
+    order: 2020
+---
+
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+import { ShowColorSetDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../decisions';
+
+export const store = await decisionLoader();
+
+```ts
+import { ShowColorSetDecision } from '@noodlestan/designer-shows/astro';
+```
+
+<CardGrid>
+    <ShowColorSetDecision store={store} d="Curcuma Palette" />
+</CardGrid>
+
+## Props
+
+##### ༶ `store` and `d` (mandatory)
+
+This component requires the two mandatory [DecisionProps](/components/astro/props) - `store`
+and `d` - to identify and retrieve the decision.
+
+##### ༶ `value`, `viz`, and `size` (optional)
+
+It also accepts [ValueProps](/components/astro/props#valueprops) - `value`,
+`viz` and `size` - to control how the visualization and value are displayed.
+
+```mdx
+<ShowColorSetDecision store={store} d="Curcuma Palette" size="l" value={['rgb', 'hsl']} />
+```
+
+<CardGrid>
+    <ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'hsl']} />
+</CardGrid>

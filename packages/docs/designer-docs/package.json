@@ -1,7 +1,7 @@
 {
   "name": "@noodlestan/designer-docs",
   "version": "0.0.1",
-  "description": "Sandbox application to develop, showcase and document UI System features.",
+  "description": "Designer Docs website",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": true,
@@ -19,10 +19,12 @@
     "ci": "npm run build:clean && astro check && npm run build"
   },
   "dependencies": {
-    "@astrojs/starlight": "0.29.3",
-    "@noodlestan/designer-decisions": "0.0.1",
-    "@noodlestan/designer-schemas": "0.0.1",
-    "astro": "4.16.18",
+    "@astrojs/starlight": "0.30.3",
+    "@noodlestan/designer-decisions": "^0.0.1",
+    "@noodlestan/designer-functions": "^0.0.1",
+    "@noodlestan/designer-schemas": "^0.0.1",
+    "@noodlestan/designer-shows": "^0.0.1",
+    "astro": "5.1.1",
     "sharp": "0.32.5"
   }
 }

@@ -26,7 +26,7 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "$id": {
+        "$uuid": {
           "type": "string"
         },
         "$type": {
@@ -38,9 +38,9 @@
         }
       },
       "required": [
-        "$id",
         "$index",
-        "$type"
+        "$type",
+        "$uuid"
       ]
     }
   ],

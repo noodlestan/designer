@@ -13,9 +13,9 @@ export const createColorSetLinearRange: DecisionModelFactory<
                 const to = createColorValue(valueContext, params.to);
 
                 const values = Array(params.steps);
-                values[0] = from;
+                values[0] = from.getString('rgb');
                 // WIP
-                values[params.steps - 1] = to;
+                values[params.steps - 1] = to.get();
 
                 return createColorSet(valueContext, values);
             };

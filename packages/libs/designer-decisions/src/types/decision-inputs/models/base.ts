@@ -5,7 +5,7 @@ export type DecisionName = string;
 export type DecisionModelName = string;
 
 export type DecisionInputBase = {
-    id?: DecisionId;
+    uuid?: DecisionId;
     model: DecisionModelName;
     name: DecisionName;
     description?: string;

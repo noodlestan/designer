@@ -1,25 +1,22 @@
 ---
 title: Designer Decisions
-description: Sandbox application to develop, showcase and document design decisions.
+description: Modeling design decisions. Schemas, transformations, visualizations, the works.
 template: splash
 hero:
-    tagline: Decisions, decisions, decisions...
+    tagline: Modeling and visualizing design decisions as data and code.
 ---
 
-import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
     <div>
-        Design decisions precede design tokens.
+        This suite provides a collection of tools to enhance design system automation
+        workflows.
 
-        This suite enables you to capture, track, and visualize
-        decision decisions, and transform them into
-        - code,
-        - tokens,
-        - documentation,
-        - and more.
+        You can use it to capture, track, and visualize context-aware decision decisions,
+        integrate data from other systems, and generate code artifacts and beautiful documentation.
 
-        <LinkButton href="/guides/getting-started-with-designer-decisions">Getting Started</LinkButton>
+        <LinkButton href="/guides/welcome">Get Started</LinkButton>
     </div>
     <Card title="Capture Decisions" icon="puzzle">
         <p>Define design decisions as data with relationships, context, and traceability.</p>
@@ -45,8 +42,8 @@ import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
             Learn more
         </a>
     </Card>
-    <Card title="Export" icon="puzzle">
-        Export to CSS
+    <Card title="Generate code" icon="puzzle">
+        Generate tokens as data, CSS, or type safe objects.
 
         <a href="/guides/generating-css-variables-from-design-decisions-and-tokens" variant="minimal">
             Learn more

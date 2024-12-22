@@ -16,7 +16,6 @@ export type DecisionContext = {
 export type DecisionLookup = {
     ref: DecisionRef;
     decision: Decision<unknown>;
-    lookups: DecisionLookup[];
 };
 
 export type DecisionValueRefResolver = <V = unknown>(ref: DecisionRef) => Decision<V> | undefined;
@@ -55,7 +54,7 @@ export type DecisionRef =
           $name: DecisionName;
       }
     | {
-          $id: DecisionId;
+          $uuid: DecisionId;
       };
 
 export type DecisionRefResolver = <V = unknown>(

@@ -1,1 +1,56 @@
-<div>ShowDecisionUsage</div>
+---
+import { type ShowDataProps } from '../types';
+import { resolveDecisionProp } from '../helpers';
+import { FlexRow } from '../layouts';
+
+type Props = ShowDataProps;
+
+const { store, d } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const { intendedFor = [], notFor = [] } = decision?.input().usage || {};
+---
+
+<div class="dd-decision-usage">
+    {
+        intendedFor.length && (
+            <FlexRow>
+                <h4 class="dd-group-header">Intended For:</h4>
+                <FlexRow tag="ul">
+                    {intendedFor.map(item => (
+                        <li class="dd-item">{item}</li>
+                    ))}
+                </FlexRow>
+            </FlexRow>
+        )
+    }
+    {
+        notFor.length && (
+            <FlexRow>
+                <h4 class="dd-group-header">Not For:</h4>
+                <FlexRow tag="ul">
+                    {notFor.map(item => (
+                        <li class="dd-item">{item}</li>
+                    ))}
+                </FlexRow>
+            </FlexRow>
+        )
+    }
+</div>
+
+<style>
+    .dd-decision-usage .dd-group-header {
+        font-size: 1rem;
+        line-height: 2rem;
+        font-weight: 600;
+        color: var(--dd-color-text);
+    }
+
+    .dd-decision-usage .dd-item {
+        padding: 0;
+        font-size: 1rem;
+        line-height: 2rem;
+        font-weight: 300;
+        color: var(--dd-color-text);
+    }
+</style>

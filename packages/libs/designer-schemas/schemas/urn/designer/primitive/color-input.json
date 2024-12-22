@@ -22,7 +22,7 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "$id": {
+        "$uuid": {
           "type": "string"
         },
         "$type": {
@@ -31,8 +31,8 @@
         }
       },
       "required": [
-        "$id",
-        "$type"
+        "$type",
+        "$uuid"
       ]
     },
     {
@@ -60,7 +60,7 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "$id": {
+        "$uuid": {
           "type": "string"
         },
         "$type": {
@@ -72,9 +72,9 @@
         }
       },
       "required": [
-        "$id",
         "$index",
-        "$type"
+        "$type",
+        "$uuid"
       ]
     },
     {
@@ -95,6 +95,26 @@
         "h",
         "l",
         "s"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "h": {
+          "$ref": "urn:designer:primitive:color-hue-input"
+        },
+        "s": {
+          "$ref": "urn:designer:primitive:color-saturation-input"
+        },
+        "v": {
+          "$ref": "urn:designer:primitive:color-lightness-input"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "h",
+        "s",
+        "v"
       ]
     },
     {

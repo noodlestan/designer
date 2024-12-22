@@ -1,1 +1,22 @@
-<div>ShowDecisionData</div>
+---
+import { type ShowDataProps } from '../types';
+import { resolveDecisionProp } from '../helpers';
+
+type Props = ShowDataProps;
+
+const { store, d } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const json = JSON.stringify(decision?.input(), null, 2);
+---
+
+<div class="dd-decision-data">
+    <pre><code>{json}</code></pre>
+</div>
+
+<style>
+    .dd-decision-data pre {
+        max-height: var(--dd-data-max-height);
+        overflow: auto;
+    }
+</style>

@@ -47,9 +47,19 @@ export type ColorSpaceHSLInput = {
     l: ColorLightnessInput;
 };
 
-export type ColorSpaceRGBInput = { r: number; g: number; b: number };
+export type ColorSpaceHSVInput = {
+    h: ColorHueInput;
+    s: ColorSaturationInput;
+    v: ColorLightnessInput;
+};
 
-export type ColorSpaceInput = ColorSpaceHSLInput | ColorSpaceRGBInput;
+export type ColorSpaceRGBInput = {
+    r: number;
+    g: number;
+    b: number;
+};
+
+export type ColorSpaceInput = ColorSpaceHSLInput | ColorSpaceHSVInput | ColorSpaceRGBInput;
 
 export type ColorInput = ColorRef | ColorRawInput | ColorSpaceInput;
 

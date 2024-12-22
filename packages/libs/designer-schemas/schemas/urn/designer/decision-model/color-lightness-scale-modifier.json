@@ -3,7 +3,7 @@
   "additionalProperties": false,
   "type": "object",
   "properties": {
-    "id": {
+    "uuid": {
       "type": "string"
     },
     "model": {

@@ -1,4 +1,6 @@
-import type { ColorInput, ColorSpaceName } from '../decision-inputs';
+import type { Color } from 'chroma-js';
+
+import type { ColorSpaceInput, ColorSpaceName } from '../decision-inputs';
 
 import type { BaseValue } from './base';
 
@@ -12,8 +14,8 @@ export type LightnessScale = BaseValue<LightnessValue[]>;
 
 export type AlphaValue = BaseValue<number>;
 
-export type ColorValue = BaseValue<string> & {
-    getSpace(space: ColorSpaceName): ColorInput;
+export type ColorValue = BaseValue<Color> & {
+    getSpace(space: ColorSpaceName): ColorSpaceInput;
     getString(space: ColorSpaceName): string;
 };
 

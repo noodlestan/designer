@@ -1,1 +1,20 @@
-<div>ShowDecision</div>
+---
+import { type ShowDecisionProps } from '../../types';
+import { resolveDecisionProp } from '../../helpers';
+import { getDecisionComponent } from '../../meta';
+
+type Props = ShowDecisionProps;
+
+const { store, d, ...rest } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const Comp = decision && getDecisionComponent(decision);
+---
+
+{
+    Comp && decision && (
+        <>
+            <Comp d={decision} store={store} {...rest} />
+        </>
+    )
+}

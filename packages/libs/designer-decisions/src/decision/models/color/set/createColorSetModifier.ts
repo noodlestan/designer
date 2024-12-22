@@ -9,7 +9,7 @@ export const createColorSetModifier: DecisionModelFactory<ColorSet, ColorSetModi
                 const start = createColorValue(valueContext, params.start);
 
                 const values = Array(params.steps);
-                values[0] = start;
+                values[0] = start.getString('rgb');
                 // WIP
 
                 return createColorSet(valueContext, values);

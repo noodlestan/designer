@@ -1,0 +1,30 @@
+---
+title: createStaticDecisionStore()
+slug: api/designer-functions/Store/createStaticDecisionStore
+sidebar:
+    label: createStaticDecisionStore
+---
+
+```ts
+type createStaticDecisionStore = (
+    inputStore: StaticInputMap, //
+) => StaticDecisionStore;
+```
+
+## Return value
+
+Returns a [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+that can be used to retrieve decision and resolve decision values.
+
+## Params
+
+##### ༶ `inputStore`: [StaticInputMap](/api/designer-functions/Types/StaticInputMap)
+
+An input
+
+## Usage
+
+```ts
+const inputMap = createStaticInputMap(inputData, validator);
+const store = createStaticDecisionStore(inputMap);
+```

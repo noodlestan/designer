@@ -1,0 +1,85 @@
+---
+const hasHeader = Astro.slots.has('header');
+const hasMain = Astro.slots.has('viz') || Astro.slots.has('desc') || Astro.slots.has('details');
+const hasContents = hasHeader || hasMain;
+const hasMeta = Astro.slots.has('meta');
+---
+
+<div class="dd-decision-card">
+    {
+        hasContents && (
+            <div class="dd-contents">
+                {hasHeader && (
+                    <div class="dd-header">
+                        <slot name="header" />
+                    </div>
+                )}
+                {hasMain && (
+                    <div class="dd-main">
+                        {Astro.slots.has('viz') && <slot name="viz" />}
+                        {Astro.slots.has('details') && (
+                            <div class="dd-details">
+                                <slot name="details" />
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        )
+    }
+    {
+        hasMeta && (
+            <div class="dd-meta">
+                <slot name="meta" />
+            </div>
+        )
+    }
+</div>
+
+<style>
+    .dd-decision-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--dd-card-border-radius);
+        border: var(--dd-card-border);
+    }
+
+    .dd-decision-card .dd-contents {
+        display: flex;
+        flex-direction: column;
+        padding-top: var(--dd-card-v-space);
+        padding-bottom: var(--dd-card-v-space);
+        gap: var(--dd-card-v-gap);
+        background-color: var(--dd-card-contents-bg-color);
+        border-radius: var(--dd-card-border-radius);
+    }
+
+    .dd-decision-card .dd-header {
+        padding: 0 var(--dd-card-h-space);
+        font-size: var(--dd-heading-size);
+        font-weight: var(--dd-heading-weight);
+        line-height: var(--dd-heading-line-height);
+        color: var(--dd-heading-color);
+    }
+
+    .dd-decision-card .dd-main {
+        display: flex;
+        gap: var(--dd-card-h-gutter);
+        padding: 0 var(--dd-card-h-space);
+    }
+
+    .dd-decision-card .dd-details {
+        display: flex;
+        flex-direction: column;
+        gap: var(--dd-card-v-gap);
+    }
+
+    .dd-decision-card .dd-meta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--dd-card-v-gap);
+        padding: var(--dd-card-v-space) var(--dd-card-h-space);
+        background-color: var(--dd-card-meta-bg-color);
+        border-radius: var(--dd-card-border-radius);
+    }
+</style>

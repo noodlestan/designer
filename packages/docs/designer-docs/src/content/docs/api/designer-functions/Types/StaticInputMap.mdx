@@ -1,0 +1,39 @@
+---
+title: StaticInputMap
+slug: api/designer-functions/Types/StaticInputMap
+---
+
+Holds all decision input data and provides an API to retrieve decision records
+and validation errors.
+
+## Methods
+
+##### ༶ `record(ref, contexts)`
+
+**Return Value:** [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)
+or `undefined` if not matched.
+
+**Parameters:**
+
+-   `ref`: [DecisionRef](/api/designer-decisions/Types/DecisionRef)
+-   `contexts`: [DecisionContexts](/api/designer-decisions/Types/DecisionContexts) -
+    When a decision `ref` matches more than one decision input and no `contexts`
+    were provided, it resolves to the decision with less (or higher) context.
+
+##### ༶ `records(filter?)`
+
+**Return Value:** [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)[]
+
+**Parameters:**
+
+-   `filter` (optional): A filter function `(item: DecisionInputBase) => boolean`
+
+##### ༶ `hasErrors()`
+
+**Return Value:** `boolean` indicating if there were validation errors.
+
+##### ༶ `allErrors()`
+
+**Return Value:**
+[DecisionError](/api/designer-decisions/Types/DecisionError)[]
+or `null` if there were validation errors.

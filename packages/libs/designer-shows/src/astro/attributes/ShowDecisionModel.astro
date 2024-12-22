@@ -1,1 +1,39 @@
-<div>ShowDecisionModel</div>
+---
+import { type ShowDataProps } from '../types';
+import { resolveDecisionProp } from '../helpers';
+
+type Props = ShowDataProps;
+
+const { store, d } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const model = decision && decision.input().model;
+---
+
+<div class="dd-decision-model">
+    <h4 class="dd-label">Model:</h4>
+    <p class="dd-value">{model}</p>
+</div>
+
+<style>
+    .dd-decision-model {
+        display: flex;
+        align-items: start;
+        gap: 5px;
+        color: var(--dd-text-color);
+    }
+
+    .dd-decision-model .dd-label {
+        font-size: var(--dd-text-size);
+        font-weight: var(--dd-label-weight);
+        line-height: var(--dd-text-line-height);
+        color: var(--dd-text-color);
+    }
+
+    .dd-decision-model .dd-value {
+        font-size: var(--dd-text-size);
+        font-weight: var(--dd-text-weight);
+        line-height: var(--dd-text-line-height);
+        color: var(--dd-text-color);
+    }
+</style>
