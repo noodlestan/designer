@@ -9,7 +9,7 @@
   "scripts": {
     "build:clean": "rm -rf dist",
     "build:astro": "astro build",
-    "build:decisions": "node scripts/build-decisions.js",
+    "build:decisions": "node scripts/build-decisions.mjs",
     "build": "npm run build:decisions && npm run build:astro",
     "preview": "astro preview",
     "start": "npm run build && astro preview",
