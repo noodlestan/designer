@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-shows",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Visualizing design decisions and tokens: Astro and SolidJS components",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -34,11 +34,11 @@
     "ci": "npm run build:clean && npm run build"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.2",
-    "@noodlestan/designer-functions": "0.0.2"
+    "@noodlestan/designer-decisions": "0.0.3",
+    "@noodlestan/designer-functions": "0.0.3"
   },
   "peerDependencies": {
-    "astro": "^4.16.18",
+    "astro": "^5.0.0",
     "solid-js": "^1.9.3"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-docs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Designer Docs website",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -20,10 +20,10 @@
   },
   "dependencies": {
     "@astrojs/starlight": "0.30.3",
-    "@noodlestan/designer-decisions": "0.0.2",
-    "@noodlestan/designer-functions": "0.0.2",
-    "@noodlestan/designer-schemas": "0.0.2",
-    "@noodlestan/designer-shows": "0.0.2",
+    "@noodlestan/designer-decisions": "0.0.3",
+    "@noodlestan/designer-functions": "0.0.3",
+    "@noodlestan/designer-schemas": "0.0.3",
+    "@noodlestan/designer-shows": "0.0.3",
     "astro": "5.1.1",
     "sharp": "0.32.5"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-generators",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generate schemas for design decision, validators, and transformations.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -31,8 +31,8 @@
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.2",
-    "@noodlestan/designer-schemas": "0.0.2",
+    "@noodlestan/designer-decisions": "0.0.3",
+    "@noodlestan/designer-schemas": "0.0.3",
     "rimraf": "6.0.1",
     "ts-deepmerge": "7.0.0",
     "typescript-json-schema": "0.65.1",
