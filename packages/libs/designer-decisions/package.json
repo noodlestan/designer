@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/noodlestan/designer"
+    "url": "git+https://github.com/noodlestan/designer.git"
   },
   "sideEffects": false,
   "module": "src/index.ts",

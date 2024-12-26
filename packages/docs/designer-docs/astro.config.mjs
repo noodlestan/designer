@@ -12,7 +12,6 @@ export default defineConfig({
         starlight({
             title: '🎨 Designer Decisions',
             customCss: [
-                // Relative path to your custom CSS file
                 './src/styles/starlight.css',
                 './src/styles/decisions.css',
                 './src/styles/scrollbars.css',

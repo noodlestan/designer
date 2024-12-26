@@ -2,9 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./",
-    "jsxImportSource": "solid-js",
     "jsx": "preserve",
-    "types": ["solid-js"]
+    "types": ["astro/client"]
   },
   "include": ["./**/*.ts", "./**/*.tsx"]
 }

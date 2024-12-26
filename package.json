@@ -17,6 +17,7 @@
   },
   "scripts": {
     "lint": "prettier . -c && eslint .",
+    "lint:fix": "prettier . -c --write && eslint . --fix",
     "lint:silent": "prettier . -c --log-level silent && eslint .",
     "ci:libs:decisions": "npm run --prefix packages/libs/designer-decisions ci",
     "ci:libs:functions": "npm run --prefix packages/libs/designer-functions ci",
