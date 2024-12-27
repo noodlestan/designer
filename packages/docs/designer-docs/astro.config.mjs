@@ -10,9 +10,15 @@ const decisionModels = {
 export default defineConfig({
     integrations: [
         starlight({
-            title: '🎨 Designer Decisions',
+            title: 'Designer Decisions',
+            logo: {
+                dark: './src/assets/DD-logo-dark.png',
+                light: './src/assets/DD-logo-light.png',
+                replacesTitle: true,
+            },
             customCss: [
                 './src/styles/starlight.css',
+                './src/styles/starlight.custom.css',
                 './src/styles/decisions.css',
                 './src/styles/scrollbars.css',
             ],

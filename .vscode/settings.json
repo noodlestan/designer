@@ -60,5 +60,6 @@
     "dist/",
     "...*/private/.+",
     "./[^./]+/[^./]+"
-  ]
+  ],
+  "svg.preview.background": "transparent"
 }
