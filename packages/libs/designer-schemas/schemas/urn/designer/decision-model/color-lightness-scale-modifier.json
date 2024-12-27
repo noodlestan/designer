@@ -44,7 +44,24 @@
           "type": "number"
         },
         "modifier": {
-          "type": "number"
+          "type": "object",
+          "properties": {
+            "hue": {
+              "type": "number"
+            },
+            "lightness": {
+              "type": "number"
+            },
+            "saturation": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "hue",
+            "lightness",
+            "saturation"
+          ]
         },
         "steps": {
           "type": "number"

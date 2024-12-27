@@ -56,7 +56,11 @@ export type ColorLightnessScaleModifierInput = DecisionInputBase & {
     model: 'color-lightness-scale/modifier';
     params: {
         start: PercentageInput;
-        modifier: SignedPercentageInput;
+        modifier: {
+            hue: SignedDegreesInput;
+            lightness: SignedPercentageInput;
+            saturation: SignedPercentageInput;
+        };
         steps: number;
     };
 };

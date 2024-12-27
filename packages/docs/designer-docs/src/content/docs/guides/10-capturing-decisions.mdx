@@ -28,17 +28,17 @@ The following example defines two decisions:
 [
     {
         "type": "color-value/explicit",
-        "name": "Green Foreground",
+        "name": "Primary Background",
         "params": {
             "value": "#090E0B"
         }
     },
     {
         "type": "color-set/modifier",
-        "name": "Green Foregrounds",
+        "name": "Primary Backgrounds",
         "params": {
-            "start": { "$name": "Green Foreground" },
-            "modifier": { "hue": 0 },
+            "start": { "$name": "Primary Background" },
+            "modifier": { "lightness": 3 },
             "steps": 5
         }
     }

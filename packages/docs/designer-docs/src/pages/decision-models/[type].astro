@@ -3,8 +3,12 @@ import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Badge, LinkCard } from '@astrojs/starlight/components';
 import type { DecisionModelMeta } from '@noodlestan/designer-decisions';
+import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { sidebar } from '../../navigation/sidebar';
+import { decisionLoader } from '../../decisions';
+
+export const store = await decisionLoader();
 
 export async function getStaticPaths() {
     const decisionTypes = await getCollection('decisionTypes');
@@ -17,8 +21,8 @@ export async function getStaticPaths() {
 const { decisionType } = Astro.props;
 const { Content } = await render(decisionType);
 
-const decisions = await getCollection('decisions');
-const samples = decisions.filter(d => d.data.model.startsWith(decisionType.id));
+const decisions = store.records();
+const samples = decisions.filter(d => d.model.startsWith(decisionType.id));
 
 const frontmatter = {
     ...decisionType.data,
@@ -53,6 +57,7 @@ if (samples.length) {
     </blockquote>
 
     <h3 id="models">Models</h3>
+    <ul>
     {
         decisionType.data.models.map((m: DecisionModelMeta) => (
             <li>
@@ -61,20 +66,20 @@ if (samples.length) {
             </li>
         ))
     }
+    </ul>
 
     {(samples.length) ?
         <>
             <h3 id="samples">Samples</h3>
+            <ul>
             {
                 samples.map(decision => (
-                    <li>
-                        {decision.data.type}
-                        {decision.data.name}
-                        {decision.data.params}
-                        {decision.data.description}
+                    <li class="dd-sample">
+                        <ShowDecisionCard store={store} d={decision.name} model params />
                     </li>
                 ))
             }
+            </ul>
         </>
         : <></>
     }
@@ -83,3 +88,9 @@ if (samples.length) {
 
     <LinkCard href="/decision-models" title="Other decision types" />
 </StarlightPage>
+
+<style>
+    .dd-item {
+
+    }
+</style>

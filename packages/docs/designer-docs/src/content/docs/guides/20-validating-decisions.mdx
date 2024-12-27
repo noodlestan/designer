@@ -109,11 +109,11 @@ The output should look something like:
 ...
 {
   model: 'color-set/modifier',
-  name: 'Green Foregrounds',
+  name: 'Primary Foregrounds',
   description: 'Green shades for foregrounds',
   usage: { intendedFor: [ 'Typography', 'Foregrounds' ], notFor: [ 'Icons' ] },
   params: {
-    start: { '$name': 'Green Foreground', '$type': 'color-value' },
+    start: { '$name': 'Primary Foreground', '$type': 'color-value' },
     modifier: { hue: 0, lightness: 5, saturation: -5 },
     steps: 5
   }
@@ -127,7 +127,7 @@ For instance, if we delete the `param` attribute from a couple of decision input
 
 ```
 🟨 Decision Curcuma Foreground (required) must have required property 'params'
-🟨 Decision Green Foreground (required) must have required property 'params'
+🟨 Decision Primary Foreground (required) must have required property 'params'
 🐘 4 decisions, 2 errors
 ```
 

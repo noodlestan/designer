@@ -1,4 +1,4 @@
-import { DECISION_COLOR_VALUE, isColorLightnessValueDecision } from '../../../decision';
+import { DECISION_COLOR_LIGHTNESS, isColorLightnessValueDecision } from '../../../decision';
 import type { ColorLightnessInput, ValueContext } from '../../../types';
 import { isDecisionRef } from '../../ref';
 
@@ -20,7 +20,7 @@ export const resolveLightnessValue = (
             return v.get();
         } else {
             throw new Error(
-                `Did not resolve to a "${DECISION_COLOR_VALUE}" - "${JSON.stringify(input)}".`,
+                `Did not resolve to a "${DECISION_COLOR_LIGHTNESS}" - "${JSON.stringify(input)}".`,
             );
         }
     }

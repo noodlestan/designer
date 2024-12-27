@@ -16,15 +16,18 @@ export default defineConfig({
                 light: './src/assets/DD-logo-light.png',
                 replacesTitle: true,
             },
+            social: {
+                github: 'https://github.com/noodlestan',
+                discord: 'https://discord.gg/b8DkbJSF9z',
+            },
             customCss: [
                 './src/styles/decisions.css',
                 './src/styles/scrollbars.css',
                 './src/styles/starlight.css',
                 './src/styles/starlight.custom.css',
             ],
-            social: {
-                github: 'https://github.com/noodlestan',
-                discord: 'https://discord.gg/b8DkbJSF9z',
+            components: {
+                Footer: './src/components/Starlight/Footer.astro',
             },
             sidebar: staticSidebar({ decisionModels }),
         }),

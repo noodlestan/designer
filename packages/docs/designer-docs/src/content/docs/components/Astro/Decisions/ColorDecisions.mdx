@@ -1,0 +1,119 @@
+---
+title: Color Decisions
+slug: components/Astro/Decisions/color
+description: Color decision components
+sidebar:
+    order: 20
+---
+
+import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components';
+import {
+    ShowColorHueValueDecision,
+    ShowColorLightnessScaleDecision,
+    ShowColorLightnessValueDecision,
+    ShowColorSaturationValueDecision,
+    ShowColorSetDecision,
+    ShowColorValueDecision,
+} from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
+## Props
+
+##### ༶ `store` and `d` (mandatory)
+
+These components require the two mandatory [DecisionProps](/components/Astro/Props) - `store`
+and `d` - to identify and retrieve the decision.
+
+##### ༶ `value`, `viz`, and `size` (optional)
+
+They also accepts [ValueProps](/components/Astro/Props#valueprops) - `value`,
+`viz` and `size` - to control how the visualization and value are displayed.
+
+## Components
+
+```ts
+import { ... } from '@noodlestan/designer-shows/astro';
+```
+
+### ShowColorValueDecision
+
+Renders a [ColorValueDecision](/decision-models/color-value).
+
+```mdx
+<ShowColorValueDecision store={store} d="Brand Blue" size="m" value={['rgb', 'hsl']} />
+```
+
+<CardGrid>
+    <ShowColorValueDecision store={store} d="Brand Blue" size="m" value={['rgb', 'hsl']} />
+</CardGrid>
+
+### ShowColorSetDecision
+
+Renders a [ColorSetDecision](/decision-models/color-set).
+
+```mdx
+<ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'hsl']} />
+```
+
+<CardGrid>
+    <ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'hsl']} />
+</CardGrid>
+
+### ShowColorHueValueDecision
+
+Renders a [ColorHueValueDecision](/decision-models/color-hue-value).
+
+```mdx
+<ShowColorHueValueDecision d="Brand Pink Hue" store={store} size="m" />
+<ShowColorHueValueDecision d="Brand Blue Hue" store={store} size="m" />
+```
+
+<CardGrid>
+    <ShowColorHueValueDecision d="Brand Pink Hue" store={store} size="m" />
+    <ShowColorHueValueDecision d="Brand Blue Hue" store={store} size="m" />
+</CardGrid>
+
+### ShowColorSaturationValueDecision
+
+Renders a [ColorSaturationValueDecision](/decision-models/color-saturation-value).
+
+```mdx
+<ShowColorSaturationValueDecision d="Brand Pink Saturation" store={store} size="m" />
+<ShowColorSaturationValueDecision d="Brand Blue Saturation" store={store} size="m" />
+```
+
+<CardGrid>
+    <ShowColorSaturationValueDecision d="Brand Pink Saturation" store={store} size="m" />
+    <ShowColorSaturationValueDecision d="Brand Blue Saturation" store={store} size="m" />
+</CardGrid>
+
+### ShowColorLightnessValueDecision
+
+Renders a [ColorLightnessValueDecision](/decision-models/color-lightness-value).
+
+```mdx
+<ShowColorLightnessValueDecision d="Brand Pink Lightness" store={store} size="m" />
+<ShowColorLightnessValueDecision d="Brand Blue Lightness" store={store} size="m" />
+```
+
+<CardGrid>
+    <ShowColorLightnessValueDecision d="Brand Pink Lightness" store={store} size="m" />
+    <ShowColorLightnessValueDecision d="Brand Blue Lightness" store={store} size="m" />
+</CardGrid>
+
+### ShowColorLightnessScaleDecision
+
+Renders a [ShowColorLightnessScaleDecision](/decision-models/color-lightness-scale).
+
+```ts
+<ShowColorLightnessScaleDecision d="Foreground Lightness Scale" store={store} size="m" />
+<ShowColorLightnessScaleDecision d="Background Lightness Scale" store={store} size="m" />
+```
+
+<CardGrid>
+    <ShowColorLightnessScaleDecision d="Foreground Lightness Scale" store={store} size="m" />
+    <ShowColorLightnessScaleDecision d="Background Lightness Scale" store={store} size="m" />
+</CardGrid>

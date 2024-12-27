@@ -1,9 +1,9 @@
 ---
 title: Astro component props
-slug: components/astro/props
+slug: components/Astro/Props
 description: Common props for Astro design decision components.
 sidebar:
-    order: 10
+    order: 1
     label: Common Props
 ---
 
@@ -18,7 +18,7 @@ export const store = await decisionLoader();
 ## DecisionProps
 
 All components that render a decision, such as the
-[&lt;ShowDecisionCard/&gt;](/components/cards/show-decision-card/) component,
+[&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/) component,
 **require** the following props.
 
 ##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
@@ -43,11 +43,11 @@ export const store = await loader();
 A `string` with the name of the decision to visualize or a `Decision` object.
 
 ```mdx
-<ShowDecision store={store} d="Green Foreground" />
+<ShowDecision store={store} d="Brand Pink" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Green Foreground" />
+    <ShowDecision store={store} d="Brand Pink" />
 </CardGrid>
 
 ## ValueProps
@@ -56,7 +56,7 @@ All components that directly render a decision value, such as ...
 accept the `viz`, `value` and `size` props.
 
 Note that decision components, such as the
-[&lt;ShowDecisionCard/&gt;](/components/cards/show-decision-card/) component
+[&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/) component
 mentioned above, delegate to value components. For this reason, they also
 accept `viz`, `value` and `size` props.
 
@@ -65,11 +65,11 @@ accept `viz`, `value` and `size` props.
 Provide this flag to hide the decision visualization and display only the value.
 
 ```mdx
-RGB: <ShowDecision store={store} d="Green Foreground" viz={false} />
+RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
 ```
 
-<FlexRow align="center">
-    RGB: <ShowDecision store={store} d="Green Foreground" viz={false} />
+<FlexRow align="center" vpad>
+    RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
 </FlexRow>
 
 ##### ༶ `value` (optional = true): boolean | string | object
@@ -77,25 +77,26 @@ RGB: <ShowDecision store={store} d="Green Foreground" viz={false} />
 Provide this flag to hide the decision value or customize its format.
 
 ```mdx
-<ShowDecision store={store} d="Green Foreground" value={false} />
+<ShowDecision store={store} d="Brand Blue" value={false} />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Green Foreground" value={false} />
+    <ShowDecision store={store} d="Brand Blue" value={false} />
 </CardGrid>
 
 With some decision types, you may want to display their value in specific formats. The `value`
 prop is passed to the specific decision component to control how the value is displayed.
 
-For instance, the [&lt;ShowColorValue/&gt;](/components/decisions/color/show-color-value-decision),
+For instance, the
+[&lt;ShowColorValue/&gt;](/components/Astro/Decisions/color#showcolorvaluedecision),
 component can display the color value in one or more color spaces.
 
 ```mdx
-<ShowDecision store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+<ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+    <ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} />
 </CardGrid>
 
 ##### ༶ `size` (optional = 'auto'): [ShowValueSize](/api/designer-shows/Types/ShowValueSize)
@@ -103,15 +104,15 @@ component can display the color value in one or more color spaces.
 Provide one of `'s'`, `'m'` or `'l'` to control the visualization size.
 
 ```mdx
-<ShowDecision store={store} d="Green Foreground" />
-<ShowDecision store={store} d="Green Foreground" size={'l'} />
-<ShowDecision store={store} d="Green Foreground" size={'m'} />
-<ShowDecision store={store} d="Green Foreground" size={'s'} />
+<ShowDecision store={store} d="Action Color" />
+<ShowDecision store={store} d="Action Color" size={'l'} />
+<ShowDecision store={store} d="Action Color" size={'m'} />
+<ShowDecision store={store} d="Action Color" size={'s'} />
 ```
 
-<FlexStack>
-    <ShowDecision store={store} d="Green Foreground" />
-    <ShowDecision store={store} d="Green Foreground" size={'l'} />
-    <ShowDecision store={store} d="Green Foreground" size={'m'} />
-    <ShowDecision store={store} d="Green Foreground" size={'s'} />
+<FlexStack vpad>
+    <ShowDecision store={store} d="Action Color" />
+    <ShowDecision store={store} d="Action Color" size={'l'} />
+    <ShowDecision store={store} d="Action Color" size={'m'} />
+    <ShowDecision store={store} d="Action Color" size={'s'} />
 </FlexStack>

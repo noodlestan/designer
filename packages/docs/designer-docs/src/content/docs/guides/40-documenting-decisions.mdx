@@ -7,7 +7,7 @@ sidebar:
 ---
 
 import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
-import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
 
@@ -87,14 +87,14 @@ resolve decision values.
 
 ```ts
 const store = await loader();
-const decision = store.decision('Green Foreground');
+const decision = store.decision('Action Color');
 ```
 
 ## Rendering decisions in MDX
 
 Retrieve the decision `store` and pass it to the components along with the decision name.
 
-In this example we are using the [&lt;ShowDecision/&gt;](/components/decisions/show-decision/)
+In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/Decisions/show-decision/)
 component to render both a [ColorValueDecision](/decision-models/color-value) and a
 [ColorSetDecision](/decision-models/color-set). It selects
 the appropriate component according to the decision type and both visualizes
@@ -107,12 +107,12 @@ import { loader } from '../decisions';
 
 export const store = await loader();
 
-<ShowDecision store={store} d="Green Foreground" />
+<ShowDecision store={store} d="Action Color" />
 <ShowDecision store={store} d="Curcuma Palette" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Green Foreground" />
+    <ShowDecision store={store} d="Action Color" />
     <ShowDecision store={store} d="Curcuma Palette" />
 </CardGrid>
 
@@ -121,7 +121,7 @@ export const store = await loader();
 In the [Components reference](/components) you will find a comprehensive set of components
 for rendering decisions in different scenarios and layouts.
 
-For instance, the [&lt;ShowDecisionCard/&gt;](/components/cards/show-decision-card/)
+For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/)
 can also render all, or some, of the decision details.
 
 ```mdx
@@ -129,11 +129,13 @@ can also render all, or some, of the decision details.
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 <CardGrid>
-    <ShowDecisionCard d="Green Foreground" loader={decisionLoader} />
+    <ShowDecisionCard d="Action Color" loader={decisionLoader} />
 </CardGrid>
 ```
 
-<ShowDecisionCard store={store} d="Curcuma Palette" />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" />
+</FlexStack>
 
 ### Creating custom components
 
@@ -144,10 +146,10 @@ From these can compose your own components, reusing layouts and atoms, customizi
 adding additional logic.
 
 In this example, we compose the
-[&lt;ShowColorValue/&gt;](/components/values/show-color-value) and the
-[&lt;ShowDecisionUsage/&gt;](/components/decisions/show-decision-usage) atom
+[&lt;ShowColorValue/&gt;](/components/Astro/values/show-color-value) and the
+[&lt;ShowDecisionUsage/&gt;](/components/Astro/Attributes/show-decision-usage) atom
 within the standard
-[&lt;DecisionCard/&gt;](/components/layouts/decision-card) layout.
+[&lt;DecisionCard/&gt;](/components/Astro/Layouts/decision-card) layout.
 
 ```astro
 // MyColorDecision.Astro
@@ -186,7 +188,7 @@ Use the new component directly in your MDX files.
 // src/content/page.mdx
 import MyColorDecision from '../components/';
 
-<MyColorDecision store={store} d="Green Foreground" />
+<MyColorDecision store={store} d="Action Color" />
 ```
 
 ## Resolve decision values

@@ -52,31 +52,70 @@
     "name": "Foreground Lightness Scale",
     "description": "Lightness scale for foreground elements",
     "params": {
-      "values": [0.05, 0.1, 0.15, 0.2]
+      "values": [0.97, 0.82]
+    }
+  },
+  {
+    "model": "color-lightness-value/explicit",
+    "name": "Background Minimum Lightness",
+    "description": "Sets the minimum value of the background lightness scale",
+    "params": {
+      "value": 0.03
+    }
+  },
+  {
+    "model": "color-lightness-value/explicit",
+    "name": "Foreground Maximum Lightness",
+    "description": "Sets the maximum value of the foreground lightness scale",
+    "params": {
+      "value": 0.98
+    }
+  },
+  {
+    "model": "color-lightness-scale/modifier",
+    "name": "Background Lightness Scale",
+    "description": "Lightness scale for background elements",
+    "params": {
+      "start": 0.98,
+      "modifier": {
+        "hue": 0,
+        "lightness": 0.03,
+        "saturation": -0.1
+      },
+      "steps": 5
     }
   },
   {
     "model": "color-value/explicit",
-    "name": "Curcuma Foreground",
-    "description": "Strongest shade of Curcuma",
-    "usage": {
-      "intendedFor": ["Foregrounds"],
-      "notFor": ["Icons"]
-    },
+    "name": "Brand Pink",
+    "description": "Brand Pink color",
     "params": {
-      "value": "#0F0B02"
+      "value": "#d35084"
     }
   },
   {
     "model": "color-value/explicit",
-    "name": "Green Foreground",
-    "description": "Strongest shade of Green",
+    "name": "Brand Blue",
+    "description": "Brand Blue color",
+    "params": {
+      "value": "06b4e0"
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Action Color",
+    "description": "Used for buttons, links and navigation",
     "usage": {
-      "intendedFor": ["Typography", "Foregrounds"],
-      "notFor": ["Icons"]
+      "intendedFor": [
+        "Link Foreground",
+        "Button Background",
+        "Button Border",
+        "Navigation Highlight"
+      ],
+      "notFor": ["Non-interactive elements"]
     },
     "params": {
-      "value": "#090E0B"
+      "value": "#b13267"
     }
   },
   {
@@ -99,27 +138,6 @@
         "#FDDA7C",
         "#FEEBB9"
       ]
-    }
-  },
-  {
-    "model": "color-set/modifier",
-    "name": "Green Foregrounds",
-    "description": "Green shades for foregrounds",
-    "usage": {
-      "intendedFor": ["Typography", "Foregrounds"],
-      "notFor": ["Icons"]
-    },
-    "params": {
-      "start": {
-        "$name": "Green Foreground",
-        "$type": "color-value"
-      },
-      "modifier": {
-        "hue": 0,
-        "lightness": 5,
-        "saturation": -5
-      },
-      "steps": 5
     }
   }
 ]

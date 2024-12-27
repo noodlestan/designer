@@ -13,8 +13,8 @@ const { intendedFor = [], notFor = [] } = decision?.input().usage || {};
 
 <div class="dd-decision-usage">
     {
-        intendedFor.length && (
-            <FlexRow>
+        intendedFor.length > 0 && (
+            <FlexRow wrap={false}>
                 <h4 class="dd-group-header">Intended For:</h4>
                 <FlexRow tag="ul">
                     {intendedFor.map(item => (
@@ -25,7 +25,7 @@ const { intendedFor = [], notFor = [] } = decision?.input().usage || {};
         )
     }
     {
-        notFor.length && (
+        notFor.length > 0 && (
             <FlexRow>
                 <h4 class="dd-group-header">Not For:</h4>
                 <FlexRow tag="ul">
@@ -39,17 +39,24 @@ const { intendedFor = [], notFor = [] } = decision?.input().usage || {};
 </div>
 
 <style>
+    .dd-decision-usage {
+        display: flex;
+        flex-direction: column;
+        gap: var(--dd-space-gap);
+    }
+
     .dd-decision-usage .dd-group-header {
         font-size: 1rem;
-        line-height: 2rem;
+        line-height: 1.5rem;
         font-weight: 600;
         color: var(--dd-color-text);
+        white-space: nowrap;
     }
 
     .dd-decision-usage .dd-item {
         padding: 0;
         font-size: 1rem;
-        line-height: 2rem;
+        line-height: 1.5rem;
         font-weight: 300;
         color: var(--dd-color-text);
     }

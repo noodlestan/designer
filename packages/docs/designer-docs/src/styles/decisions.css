@@ -7,7 +7,7 @@
     --dd-brand-blue-hue: hsl(192, 95%, 45%);
 
     --dd-color-max: #ffffff;
-    --dd-color-min: #181818;
+    --dd-color-min: #020d0d;
 
     --dd-space-xs: 5px;
     --dd-space-s: 10px;
@@ -27,7 +27,7 @@
     --dd-text-line-height: 1.2;
     --dd-text-color: var(--sl-color-text);
 
-    --dd-description-size: 1rem;
+    --dd-description-size: 1.2rem;
 
     --dd-label-weight: 600;
 

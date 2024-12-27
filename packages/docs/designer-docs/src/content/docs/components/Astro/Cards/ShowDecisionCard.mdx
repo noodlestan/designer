@@ -1,15 +1,15 @@
 ---
 title: 'ShowDecisionCard'
-slug: components/cards/show-decision-card
+slug: components/Astro/Cards/show-decision-card
 description: Astro component to visualize any decision in a card layout, along with its details.
 sidebar:
-    order: 1000
+    order: 5
 ---
 
 import { Card } from '@astrojs/starlight/components';
-import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../decisions';
+import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
@@ -20,18 +20,20 @@ import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 Renders the appropriate visualization according to the decision type, along with any
 decision details you might want to display.
 
-<ShowDecisionCard store={store} d="Green Foreground" />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" />
+</FlexStack>
 
 ## Props
 
 ##### ༶ `store` and `d` (mandatory)
 
-This component requires the two mandatory [DecisionProps](/components/astro/props) - `store`
+This component requires the two mandatory [DecisionProps](/components/Astro/Props) - `store`
 and `d` - to identify and retrieve the decision.
 
 ##### ༶ `value`, `viz` (optional)
 
-It also accepts [ValueProps](/components/astro/props#valueprops) - `value`
+It also accepts [ValueProps](/components/Astro/Props#valueprops) - `value`
 and `viz` - to control how the visualization and value are displayed.
 
 In this example we are rendering a [ColorValueDecision](/decision-models/color-value)
@@ -41,10 +43,12 @@ and both
 -   displaying its value in `rgb` and `hsl` formats.
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+<ShowDecisionCard store={store} d="Action Color" value={['rgb', 'hsl']} />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" value={['rgb', 'hsl']} />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" value={['rgb', 'hsl']} />
+</FlexStack>
 
 ##### ༶ `name` (optional = true): boolean
 
@@ -54,64 +58,78 @@ Provide this flag to hide the decision's name.
 <ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
 ```
 
-<ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
+</FlexStack>
 
 ##### ༶ `description` (optional = true): boolean
 
 Provide this flag to hide the decision's description.
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" description={false} />
+<ShowDecisionCard store={store} d="Action Color" description={false} />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" description={false} />
+<FlexStack vpad></FlexStack>
+
+<ShowDecisionCard store={store} d="Action Color" description={false} />
 
 ##### ༶ `usage` (optional = true): boolean
 
 Provide this flag to hide the decision usage guidelines.
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" usage />
+<ShowDecisionCard store={store} d="Action Color" usage />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" usage />
+<FlexStack vpad></FlexStack>
+
+<ShowDecisionCard store={store} d="Action Color" usage />
 
 ##### ༶ `model` (optional): boolean
 
 Provide this flag to display the decision model at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" model />
+<ShowDecisionCard store={store} d="Action Color" model />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" model />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" model />
+</FlexStack>
 
 ##### ༶ `params` (optional): boolean
 
 Provide this flag to display the decision model params at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" params />
+<ShowDecisionCard store={store} d="Action Color" params />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" params />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" params />
+</FlexStack>
 
 ##### ༶ `contexts` (optional): boolean
 
 Provide this flag to display the decision's contexts at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" contexts />
+<ShowDecisionCard store={store} d="Action Color" contexts />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" contexts />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" contexts />
+</FlexStack>
 
 ##### ༶ `data` (optional): boolean
 
 Provide this flag to display the decision's raw data at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" data />
+<ShowDecisionCard store={store} d="Action Color" data />
 ```
 
-<ShowDecisionCard store={store} d="Green Foreground" data />
+<FlexStack vpad>
+    <ShowDecisionCard store={store} d="Action Color" data />
+</FlexStack>

@@ -6,44 +6,52 @@ description: Examples of color decisions documented with designer components.
 ---
 
 import { CardGrid } from '@astrojs/starlight/components';
-import {
-    ShowColorValueDecision,
-    ShowColorSetDecision,
-    ShowDecisionCard,
-} from '@noodlestan/designer-shows/astro';
+import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
 
 export const store = await decisionLoader();
 
 ```mdx
-<ShowDecisionCard store={store} d="Green Foreground" model params>
+<ShowDecisionCard store={store} d="Action Color" value="hsl" model params>
 ```
 
 <div>
-    <ShowDecisionCard store={store} d="Green Foreground" model params />
+    <ShowDecisionCard store={store} d="Action Color" value="hsl" model params />
 </div>
 
 ```mdx
-<ShowColorValueDecision store={store} d="Green Foreground" />
+<ShowDecision store={store} d="Brand Pink Hue" />
+<ShowDecision store={store} d="Brand Blue Hue" />
 ```
 
 <CardGrid>
-    <ShowColorValueDecision store={store} d="Green Foreground" />
+    <ShowDecision store={store} d="Brand Pink Hue" size="l" />
+    <ShowDecision store={store} d="Brand Blue Hue" size="l" />
 </CardGrid>
 
 ```mdx
-<ShowColorSetDecision store={store} d="Curcuma Palette" />
+<ShowDecision store={store} d="Curcuma Palette" />
 ```
 
 <CardGrid>
-    <ShowColorSetDecision store={store} d="Curcuma Palette" />
+    <ShowDecision store={store} d="Curcuma Palette" />
 </CardGrid>
 
 ```mdx
-<ShowColorValueDecision store={store} d="Green Foreground" size="s" value={['rgb', 'hsl']} />
+<ShowDecision store={store} d="Action Color" size="s" value={['rgb', 'hsl']} />
 ```
 
 <CardGrid>
-    <ShowColorValueDecision store={store} d="Green Foreground" size="s" value={['rgb', 'hsl']} />
+    <ShowDecision store={store} d="Action Color" size="s" value={['rgb', 'hsl']} />
+</CardGrid>
+
+```mdx
+<ShowDecision store={store} d="Foreground Lightness Scale" size="m" />
+<ShowDecision store={store} d="Background Lightness Scale" size="m" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Foreground Lightness Scale" size="m" />
+    <ShowDecision store={store} d="Background Lightness Scale" size="m" />
 </CardGrid>

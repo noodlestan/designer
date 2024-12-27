@@ -1,0 +1,40 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { FlexStack } from '@noodlestan/designer-shows/astro';
+
+const isHomepage = Astro.props.id === '' || Astro.props.id === 'index.mdx';
+---
+
+{
+    isHomepage ? (
+        <footer class="dd-site-footer">
+            <div class="dd-contents">
+                <FlexStack>
+                    <h3 class="">Made in Noodlestan 🐘</h3>
+                </FlexStack>
+                <FlexStack>
+                    <h3 class="">Built with Starlight 🌟</h3>
+                    <div class="" />
+                </FlexStack>
+            </div>
+        </footer>
+    ) : (
+        <Default {...Astro.props}>
+            <slot />
+        </Default>
+    )
+}
+
+<style>
+    .dd-site-footer {
+        padding-top: 100px;
+    }
+
+    .dd-site-footer .dd-contents {
+        display: flex;
+        gap: 50px;
+        padding-top: 100px;
+        border-top: 20px solid orange;
+    }
+</style>

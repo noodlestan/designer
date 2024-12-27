@@ -2,22 +2,30 @@
 type Props = {
     tag?: 'div' | 'ul' | 'li';
     justify?: 'start' | 'center';
+    vpad?: boolean;
 };
 
-const { tag: Element = 'div', justify = 'start' } = Astro.props;
+const { tag: Element = 'div', justify = 'start', vpad } = Astro.props;
 ---
 
-<Element class:list={['dd-flex-stack']}>
+<Element class:list={['dd-flex-stack', justify, { vpad }]}>
     <slot />
 </Element>
 
-<style define:vars={{ '--dd-flex-stack-justify': justify }}>
+<style define:vars={{ justify }}>
     .dd-flex-stack {
         display: flex;
         flex-direction: column;
-        justify-content: var(--dd-flex-stack-justify);
-        margin: 0 !important;
-        padding: 0 !important;
+        padding: 0;
+        justify-content: var(--justify);
         gap: var(--dd-space-gap);
+    }
+
+    .center {
+        justify-content: center;
+    }
+
+    .dd-flex-stack.vpad {
+        margin-top: 1rem;
     }
 </style>
