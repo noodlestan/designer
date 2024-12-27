@@ -1,0 +1,36 @@
+---
+import { type HueValue } from '@noodlestan/designer-decisions';
+
+import { DecisionValue, ColorSwatch } from '../../atoms';
+import type { ShowValueProps } from '../../types';
+import { ShowValueUnavailable } from '../unavailable';
+import { FlexStack } from '../../layouts';
+
+type Props = ShowValueProps & {
+    hue?: HueValue;
+};
+
+const { hue, value = true, viz = true, size } = Astro.props;
+
+const hueValue = hue?.get();
+const hueColor = hue?.getColor({ s: 0.5, l: 0.5 });
+---
+
+<div class:list={['dd-show-hue-value', { size }]}>
+    {viz && hueColor && <ColorSwatch color={hueColor} size={size} />}
+    {!hueColor && <ShowValueUnavailable />}
+    {
+        value && hueValue && (
+            <DecisionValue>
+                <FlexStack>{hueValue}</FlexStack>
+            </DecisionValue>
+        )
+    }
+</div>
+
+<style>
+    .dd-show-hue-value {
+        display: flex;
+        gap: var(--dd-space-gap);
+    }
+</style>

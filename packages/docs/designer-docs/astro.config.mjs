@@ -17,10 +17,10 @@ export default defineConfig({
                 replacesTitle: true,
             },
             customCss: [
-                './src/styles/starlight.css',
-                './src/styles/starlight.custom.css',
                 './src/styles/decisions.css',
                 './src/styles/scrollbars.css',
+                './src/styles/starlight.css',
+                './src/styles/starlight.custom.css',
             ],
             social: {
                 github: 'https://github.com/noodlestan',

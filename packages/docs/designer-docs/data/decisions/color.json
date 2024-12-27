@@ -1,5 +1,61 @@
 [
   {
+    "model": "color-hue-value/explicit",
+    "name": "Brand Pink Hue",
+    "description": "Hue component of Brand Pink color",
+    "params": {
+      "value": 336
+    }
+  },
+  {
+    "model": "color-hue-value/explicit",
+    "name": "Brand Blue Hue",
+    "description": "Hue component of Brand Blue color",
+    "params": {
+      "value": 192
+    }
+  },
+  {
+    "model": "color-saturation-value/explicit",
+    "name": "Brand Pink Saturation",
+    "description": "Saturation component of Brand Pink color",
+    "params": {
+      "value": 0.6
+    }
+  },
+  {
+    "model": "color-saturation-value/explicit",
+    "name": "Brand Blue Saturation",
+    "description": "Saturation component of Brand Blue color",
+    "params": {
+      "value": 0.95
+    }
+  },
+  {
+    "model": "color-lightness-value/explicit",
+    "name": "Brand Pink Lightness",
+    "description": "Lightness component of Brand Pink color",
+    "params": {
+      "value": 0.57
+    }
+  },
+  {
+    "model": "color-lightness-value/explicit",
+    "name": "Brand Blue Lightness",
+    "description": "Lightness component of Brand Blue color",
+    "params": {
+      "value": 0.45
+    }
+  },
+  {
+    "model": "color-lightness-scale/explicit",
+    "name": "Foreground Lightness Scale",
+    "description": "Lightness scale for foreground elements",
+    "params": {
+      "values": [0.05, 0.1, 0.15, 0.2]
+    }
+  },
+  {
     "model": "color-value/explicit",
     "name": "Curcuma Foreground",
     "description": "Strongest shade of Curcuma",

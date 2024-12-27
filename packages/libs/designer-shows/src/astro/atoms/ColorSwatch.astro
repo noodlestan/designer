@@ -4,10 +4,10 @@ import type { ShowValueSize } from '../types';
 
 interface Props {
     color: ColorValue;
-    size: ShowValueSize;
+    size?: ShowValueSize;
 }
 
-const { color, size } = Astro.props;
+const { color, size = 'auto' } = Astro.props;
 
 const hsl = color.getString('hsl');
 ---

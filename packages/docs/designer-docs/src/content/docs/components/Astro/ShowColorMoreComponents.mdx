@@ -1,0 +1,78 @@
+---
+title: More Color Components
+slug: components/decisions/color/more-components
+description: More color decision visualizations
+sidebar:
+    order: 2090
+---
+
+import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components';
+import {
+    ShowColorHueValueDecision,
+    ShowColorLightnessValueDecision,
+    ShowColorLightnessScaleDecision,
+    ShowColorSaturationValueDecision,
+} from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../decisions';
+
+export const store = await decisionLoader();
+
+## Props
+
+##### ༶ `store` and `d` (mandatory)
+
+These components require the two mandatory [DecisionProps](/components/astro/props) - `store`
+and `d` - to identify and retrieve the decision.
+
+##### ༶ `value`, `viz`, and `size` (optional)
+
+They also accepts [ValueProps](/components/astro/props#valueprops) - `value`,
+`viz` and `size` - to control how the visualization and value are displayed.
+
+## HSL Components
+
+### ShowColorHueValueDecision
+
+```ts
+import { ShowColorHueValueDecision } from '@noodlestan/designer-shows/astro';
+```
+
+<CardGrid>
+    <ShowColorHueValueDecision d="Brand Pink Hue" store={store} />
+    <ShowColorHueValueDecision d="Brand Blue Hue" store={store} />
+</CardGrid>
+
+### ShowColorSaturationValueDecision
+
+```ts
+import { ShowColorSaturationValueDecision } from '@noodlestan/designer-shows/astro';
+```
+
+<CardGrid>
+    <ShowColorSaturationValueDecision d="Brand Pink Saturation" store={store} />
+    <ShowColorSaturationValueDecision d="Brand Blue Saturation" store={store} />
+</CardGrid>
+
+### ShowColorLightnessValueDecision
+
+```ts
+import { ShowColorLightnessValueDecision } from '@noodlestan/designer-shows/astro';
+```
+
+<CardGrid>
+    <ShowColorLightnessValueDecision d="Brand Pink Lightness" store={store} />
+    <ShowColorLightnessValueDecision d="Brand Blue Lightness" store={store} />
+</CardGrid>
+
+## Scales
+
+### ShowColorLightnessScaleDecision
+
+```ts
+import { ShowColorLightnessScaleDecision } from '@noodlestan/designer-shows/astro';
+```
+
+<CardGrid>
+    <ShowColorLightnessScaleDecision d="Foreground Lightness Scale" store={store} />
+</CardGrid>

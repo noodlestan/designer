@@ -27,13 +27,11 @@ const spaces: ColorSpaceName[] | null =
     {!color && <ShowValueUnavailable />}
     {
         value && color && (
-            <DecisionValue>
-                <FlexStack>
-                    {spaces?.map(space => (
-                        <p class="dd-value">{color.getString(space)}</p>
-                    ))}
-                </FlexStack>
-            </DecisionValue>
+            <FlexStack>
+                {spaces?.map(space => (
+                    <DecisionValue>{color.getString(space)}</DecisionValue>
+                ))}
+            </FlexStack>
         )
     }
 </div>
@@ -42,13 +40,5 @@ const spaces: ColorSpaceName[] | null =
     .dd-show-color-value {
         display: flex;
         gap: var(--dd-space-gap);
-    }
-
-    .dd-value {
-        font-size: var(--dd-value-size);
-        font-weight: var(--dd-value-weight);
-        line-height: var(--dd-value-line-height);
-        color: var(--dd-value-color);
-        margin: 0 !important;
     }
 </style>

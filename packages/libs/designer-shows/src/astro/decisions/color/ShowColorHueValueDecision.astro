@@ -1,0 +1,16 @@
+---
+import { isColorHueValueDecision } from '@noodlestan/designer-decisions';
+
+import type { ShowDecisionProps } from '../../types';
+import { resolveDecisionProp } from '../../helpers';
+import ShowHueValue from '../../primitives/colors/ShowHueValue.astro';
+
+type Props = ShowDecisionProps;
+
+const { store, d, ...rest } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const hue = decision && isColorHueValueDecision(decision) ? decision.produce().value() : undefined;
+---
+
+<ShowHueValue hue={hue} {...rest} />

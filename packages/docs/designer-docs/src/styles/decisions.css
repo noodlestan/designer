@@ -3,6 +3,12 @@
 }
 
 :root {
+    --dd-brand-pink-hue: hsl(336, 60%, 57%);
+    --dd-brand-blue-hue: hsl(192, 95%, 45%);
+
+    --dd-color-max: #ffffff;
+    --dd-color-min: #181818;
+
     --dd-space-xs: 5px;
     --dd-space-s: 10px;
     --dd-space-m: 15px;
@@ -54,5 +60,8 @@
 }
 
 :root[data-theme='light'] {
+    --dd-color-max: #181818;
+    --dd-color-min: #ffffff;
+
     --dd-card-contents-bg-color: #f5eaef;
 }

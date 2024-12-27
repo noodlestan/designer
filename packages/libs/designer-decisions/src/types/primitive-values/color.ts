@@ -4,11 +4,17 @@ import type { ColorSpaceInput, ColorSpaceName } from '../decision-inputs';
 
 import type { BaseValue } from './base';
 
-export type HueValue = BaseValue<number>;
+export type HueValue = BaseValue<number> & {
+    getColor: (components: { s: number; l: number }) => ColorValue;
+};
 
-export type SaturationValue = BaseValue<number>;
+export type SaturationValue = BaseValue<number> & {
+    getColor: (components: { h: number; l: number }) => ColorValue;
+};
 
-export type LightnessValue = BaseValue<number>;
+export type LightnessValue = BaseValue<number> & {
+    getColor: (components: { h: number; s: number }) => ColorValue;
+};
 
 export type LightnessScale = BaseValue<LightnessValue[]>;
 

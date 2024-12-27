@@ -1,0 +1,36 @@
+---
+import { type SaturationValue } from '@noodlestan/designer-decisions';
+
+import { DecisionValue, ColorSwatch } from '../../atoms';
+import type { ShowValueProps } from '../../types';
+import { ShowValueUnavailable } from '../unavailable';
+import { FlexStack } from '../../layouts';
+
+type Props = ShowValueProps & {
+    saturation?: SaturationValue;
+};
+
+const { saturation: saturation, value = true, viz = true, size } = Astro.props;
+
+const saturationValue = saturation?.get();
+const saturationColor = saturation?.getColor({ h: 0, l: 0.5 });
+---
+
+<div class:list={['dd-show-hue-value', { size }]}>
+    {viz && saturationColor && <ColorSwatch color={saturationColor} size={size} />}
+    {!saturationColor && <ShowValueUnavailable />}
+    {
+        value && saturationValue && (
+            <DecisionValue>
+                <FlexStack>{saturationValue}</FlexStack>
+            </DecisionValue>
+        )
+    }
+</div>
+
+<style>
+    .dd-show-hue-value {
+        display: flex;
+        gap: var(--dd-space-gap);
+    }
+</style>

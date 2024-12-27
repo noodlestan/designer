@@ -1,14 +1,19 @@
 import type { ColorSaturationInput, SaturationValue, ValueContext } from '../../../types';
+import { createColorValue } from '../value';
+
+import { resolveSaturationValue } from './resolveLightnessValue';
 
 export const createSaturationValue = (
     context: ValueContext,
     input: ColorSaturationInput,
 ): SaturationValue => {
-    // if (typeof input === 'object') {
-    //     const
-    // }
+    const value = resolveSaturationValue(context, input);
 
     return {
-        get: () => Number(input),
+        get: () => value,
+        getColor: components => {
+            const { h, l } = components;
+            return createColorValue(context, { h, s: value, l });
+        },
     };
 };
