@@ -5,6 +5,7 @@ import type { ShowDecisionProps } from '../../types';
 import { ShowColorValue } from '../../primitives';
 import { resolveDecisionProp } from '../../helpers';
 import { FlexStack } from '../../layouts';
+import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
 
@@ -17,6 +18,13 @@ const colors = set?.get();
 const s = size || 's';
 ---
 
-<FlexStack>
-    {colors?.map(color => <ShowColorValue color={color} size={s} {...rest} />)}
-</FlexStack>
+{
+    decision && (
+        <FlexStack>
+            {colors?.map(color => (
+                <ShowColorValue color={color} size={s} {...rest} />
+            ))}
+        </FlexStack>
+    )
+}
+{!decision && <ShowDecisionUnavailable d={d as string} />}

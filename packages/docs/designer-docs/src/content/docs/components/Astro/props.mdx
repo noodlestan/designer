@@ -43,11 +43,21 @@ export const store = await loader();
 A `string` with the name of the decision to visualize or a `Decision` object.
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" />
+<ShowDecision store={store} d="Brand Pink" size="l" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Brand Pink" />
+    <ShowDecision store={store} d="Brand Pink" size="l" />
+</CardGrid>
+
+If the decision does not exist, it renders a notice.
+
+```mdx
+<ShowDecision store={store} d="Brand Green" size="m" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Brand Green" size="m" />
 </CardGrid>
 
 ## ValueProps
@@ -77,11 +87,11 @@ RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
 Provide this flag to hide the decision value or customize its format.
 
 ```mdx
-<ShowDecision store={store} d="Brand Blue" value={false} />
+<ShowDecision store={store} d="Brand Blue" value={false} size="l" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Brand Blue" value={false} />
+    <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
 </CardGrid>
 
 With some decision types, you may want to display their value in specific formats. The `value`
@@ -92,11 +102,11 @@ For instance, the
 component can display the color value in one or more color spaces.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} />
+<ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} size="m" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} />
+    <ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} size="m" />
 </CardGrid>
 
 ##### ༶ `size` (optional = 'auto'): [ShowValueSize](/api/designer-shows/Types/ShowValueSize)

@@ -1,10 +1,10 @@
 ---
-import { isColorLightnessScaleDecision } from '@noodlestan/designer-decisions';
+import { isSpaceScaleDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
 import { FlexStack } from '../../layouts';
-import { ShowLightnessValue } from '../../primitives';
+import ShowSpaceValue from '../../primitives/space/ShowSpaceValue.astro';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -12,10 +12,10 @@ type Props = ShowDecisionProps;
 const { store, d, size, ...rest } = Astro.props;
 
 const decision = resolveDecisionProp(store, d);
-const lightnessScale =
-    decision && isColorLightnessScaleDecision(decision) ? decision.produce().value() : undefined;
+const spaceScale =
+    decision && isSpaceScaleDecision(decision) ? decision.produce().value() : undefined;
 
-const items = lightnessScale?.get();
+const items = spaceScale?.get();
 
 const s = size || 's';
 ---
@@ -24,7 +24,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowLightnessValue lightness={item} size={s} {...rest} />
+                <ShowSpaceValue space={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )

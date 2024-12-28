@@ -1,0 +1,29 @@
+---
+title: Space Examples
+description: Examples of space decisions documented with designer components.
+sidebar:
+    title: Space
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../decisions';
+
+export const store = await decisionLoader();
+
+```mdx
+<ShowDecisionCard store={store} d="Space Unit" value="hsl" model params>
+```
+
+<div>
+    <ShowDecisionCard store={store} d="Space Unit" value="hsl" model params />
+</div>
+
+```mdx
+<ShowDecision store={store} d="Space Scale" size="s" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Space Scale" size="s" />
+</CardGrid>

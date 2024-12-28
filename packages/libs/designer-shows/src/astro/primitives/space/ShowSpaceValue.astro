@@ -1,0 +1,36 @@
+---
+import { type SpaceValue } from '@noodlestan/designer-decisions';
+
+import { DecisionValue, SpaceBlock } from '../../atoms';
+import type { ShowValueProps } from '../../types';
+import { ShowValueUnavailable } from '../unavailable';
+import { FlexStack } from '../../layouts';
+
+type Props = ShowValueProps & {
+    space?: SpaceValue;
+};
+
+const { space, value = true, viz = true, size } = Astro.props;
+
+const { value: v, units } = space?.getValueWithUnits() || {};
+const vWithUnits = `${v}${units}`;
+---
+
+<div class:list={['dd-show-space-value', { size }]}>
+    {viz && space && <SpaceBlock space={space} size={size} />}
+    {space === undefined && <ShowValueUnavailable />}
+    {
+        value && space && (
+            <DecisionValue>
+                <FlexStack>{vWithUnits}</FlexStack>
+            </DecisionValue>
+        )
+    }
+</div>
+
+<style>
+    .dd-show-space-value {
+        display: flex;
+        gap: var(--dd-space-gap);
+    }
+</style>

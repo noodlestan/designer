@@ -18,7 +18,7 @@ const hueColor = hue?.getColor({ s: 0.5, l: 0.5 });
 
 <div class:list={['dd-show-hue-value', { size }]}>
     {viz && hueColor && <ColorSwatch color={hueColor} size={size} />}
-    {!hueColor && <ShowValueUnavailable />}
+    {hueColor === undefined && <ShowValueUnavailable />}
     {
         value && hueValue && (
             <DecisionValue>

@@ -1,0 +1,47 @@
+---
+import { type SpaceValue } from '@noodlestan/designer-decisions';
+import type { ShowValueSize } from '../types';
+
+interface Props {
+    space: SpaceValue;
+    size?: ShowValueSize;
+}
+
+const { space, size = 'auto' } = Astro.props;
+
+const hsl = color.getString('hsl');
+---
+
+<div class:list={['dd-color-swatch', size]}><div class="swatch"></div></div>
+
+<style define:vars={{ color: hsl }}>
+    .dd-color-swatch {
+        width: 100%;
+        min-width: var(--dd-value-min-width);
+        max-width: var(--dd-value-max-width);
+    }
+
+    .s {
+        min-width: var(--dd-value-size-s);
+        max-width: var(--dd-value-size-s);
+    }
+
+    .m {
+        min-width: var(--dd-value-size-m);
+        max-width: var(--dd-value-size-m);
+    }
+
+    .l {
+        min-width: var(--dd-value-size-l);
+        max-width: var(--dd-value-size-l);
+    }
+
+    .swatch {
+        width: 100%;
+        min-height: var(--dd-value-min-width);
+        aspect-ratio: 1 / 1;
+        background-color: var(--color);
+        border: var(--dd-color-swatch-border);
+        border-radius: var(--dd-color-swatch-border-radius);
+    }
+</style>

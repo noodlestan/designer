@@ -24,7 +24,7 @@ const spaces: ColorSpaceName[] | null =
 
 <div class:list={['dd-show-color-value', { size }]}>
     {viz && color && <ColorSwatch color={color} size={size} />}
-    {!color && <ShowValueUnavailable />}
+    {color === undefined && <ShowValueUnavailable />}
     {
         value && color && (
             <FlexStack>

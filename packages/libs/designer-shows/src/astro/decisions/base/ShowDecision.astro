@@ -1,7 +1,10 @@
 ---
+import { getDecisionType } from '@noodlestan/designer-decisions';
+
 import { type ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
 import { getDecisionComponent } from '../../meta';
+import { ShowDecisionTypeUnavailable, ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
 
@@ -9,12 +12,10 @@ const { store, d, ...rest } = Astro.props;
 
 const decision = resolveDecisionProp(store, d);
 const Comp = decision && getDecisionComponent(decision);
+
+const type = decision && getDecisionType(decision);
 ---
 
-{
-    Comp && decision && (
-        <>
-            <Comp d={decision} store={store} {...rest} />
-        </>
-    )
-}
+{decision && Comp && <Comp d={decision} store={store} {...rest} />}
+{decision && type && !Comp && <ShowDecisionTypeUnavailable type={type} />}
+{!decision && <ShowDecisionUnavailable d={d as string} />}

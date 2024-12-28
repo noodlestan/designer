@@ -1,6 +1,10 @@
 # TODO
 
+## Banner
+
 ## Viz
+
+- fix: ShowColorLightnessScaleDecision `[object Object]`
 
 - SpaceScale
 - SpaceValue
@@ -8,6 +12,8 @@
 - ColorValue `viz = ColorSwatch | ColorSwatchFg | ColorSwatchBg ...`
 - ColorSwatchFg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
 - ColorSwatchBg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
+
+- Add icons to ShowDecisionUnavailable, ShowDecisionTypeUnavailable
 
 ## Model
 
@@ -57,7 +63,6 @@
 
 ## Resolution and Error handling
 
-- Better component for N/A states (resolving decisions / decision type)
 - Expose icon warning in ..? where? DecisionValue?
 - Expose validation errors in card (new section "errors")
 - WIP resolving values throws, should collect errors

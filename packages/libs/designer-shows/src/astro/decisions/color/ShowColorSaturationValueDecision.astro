@@ -3,7 +3,8 @@ import { isColorSaturationValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
-import ShowSaturationValue from '../../primitives/colors/ShowSaturationValue.astro';
+import { ShowSaturationValue } from '../../primitives';
+import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
 
@@ -14,4 +15,5 @@ const saturation =
     decision && isColorSaturationValueDecision(decision) ? decision.produce().value() : undefined;
 ---
 
-<ShowSaturationValue saturation={saturation} {...rest} />
+{decision && <ShowSaturationValue saturation={saturation} {...rest} />}
+{!decision && <ShowDecisionUnavailable d={d as string} />}

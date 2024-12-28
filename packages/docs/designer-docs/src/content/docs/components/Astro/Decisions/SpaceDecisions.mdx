@@ -1,0 +1,56 @@
+---
+title: Space Decisions
+slug: components/Astro/Decisions/space
+description: Space decision components
+sidebar:
+    order: 20
+---
+
+import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components';
+import { ShowSpaceValueDecision, ShowSpaceScaleDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
+## Props
+
+##### ༶ `store` and `d` (mandatory)
+
+These components require the two mandatory [DecisionProps](/components/Astro/Props) - `store`
+and `d` - to identify and retrieve the decision.
+
+##### ༶ `value`, `viz`, and `size` (optional)
+
+They also accepts [ValueProps](/components/Astro/Props#valueprops) - `value`,
+`viz` and `size` - to control how the visualization and value are displayed.
+
+## Components
+
+```ts
+import { ... } from '@noodlestan/designer-shows/astro';
+```
+
+### ShowSpaceValueDecision
+
+Renders a [SpaceValueDecision](/decision-models/space-value).
+
+```mdx
+<ShowSpaceValueDecision store={store} d="Space Unit" size="m" />
+```
+
+<CardGrid>
+    <ShowSpaceValueDecision store={store} d="Space Unit" size="m" />
+</CardGrid>
+
+### ShowSpaceScaleDecision
+
+Renders a [SpaceScaleDecision](/decision-models/space-scale).
+
+```mdx
+<ShowSpaceScaleDecision store={store} d="Space Scale" size="m" />
+```
+
+<CardGrid>
+    <ShowSpaceScaleDecision store={store} d="Space Scale" size="m" />
+</CardGrid>
