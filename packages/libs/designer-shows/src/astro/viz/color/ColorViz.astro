@@ -1,15 +1,11 @@
 ---
-import { type ColorValue } from '@noodlestan/designer-decisions';
-import type { ShowValueSize } from '../types';
+import type { ColorVizProps } from '../../types';
 
-interface Props {
-    color: ColorValue;
-    size?: ShowValueSize;
-}
+type Props = ColorVizProps;
 
-const { color, size = 'auto' } = Astro.props;
+const { value, size = 'auto' } = Astro.props;
 
-const hsl = color.getString('hsl');
+const hsl = value?.getString('hsl');
 ---
 
 <div class:list={['dd-color-value-viz', size]}><div class="swatch"></div></div>

@@ -1,0 +1,52 @@
+---
+import type { SpaceVizProps } from '../../types';
+
+type Props = SpaceVizProps;
+
+const { value: space, size = 'auto' } = Astro.props;
+
+const { value: v, units } = space?.getValueWithUnits() || {};
+const vWithUnits = `${v}${units}`;
+---
+
+<div class:list={['dd-space-bar-v-viz', size]}><div class="block"></div></div>
+
+<style define:vars={{ height: vWithUnits }}>
+    .dd-space-bar-v-viz {
+        min-height: var(--height);
+        max-height: var(--height);
+    }
+
+    .s {
+        min-width: var(--dd-value-size-xs);
+        max-width: var(--dd-value-size-xs);
+    }
+
+    .s {
+        min-width: var(--dd-value-size-s);
+        max-width: var(--dd-value-size-s);
+    }
+
+    .m {
+        min-width: var(--dd-value-size-m);
+        max-width: var(--dd-value-size-m);
+    }
+
+    .l {
+        min-width: var(--dd-value-size-l);
+        max-width: var(--dd-value-size-l);
+    }
+
+    .xl {
+        min-width: var(--dd-value-size-xl);
+        max-width: var(--dd-value-size-xl);
+    }
+
+    .block {
+        width: 100%;
+        height: 100%;
+        background-color: var(--dd-space-viz-color);
+        border: var(--dd-space-viz-border);
+        border-radius: var(--dd-space-viz-border-radius);
+    }
+</style>

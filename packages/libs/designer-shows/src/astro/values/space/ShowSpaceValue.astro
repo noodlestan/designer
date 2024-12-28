@@ -1,27 +1,27 @@
 ---
 import { type SpaceValue } from '@noodlestan/designer-decisions';
 
+import { getSpaceVizComponent } from '../../meta';
 import { DecisionValue } from '../../atoms';
-import { SpaceViz } from '../../viz';
 import type { ShowValueProps } from '../../types';
-import { ShowValueUnavailable } from '../unavailable';
 import { FlexStack } from '../../layouts';
 
 type Props = ShowValueProps & {
-    space?: SpaceValue;
+    v?: SpaceValue;
 };
 
-const { space, value = true, viz = true, size } = Astro.props;
+const { v: spaceValue, value = true, viz = true, size } = Astro.props;
 
-const { value: v, units } = space?.getValueWithUnits() || {};
+const { value: v, units } = spaceValue?.getValueWithUnits() || {};
 const vWithUnits = `${v}${units}`;
+
+const Viz = getSpaceVizComponent(viz);
 ---
 
 <div class:list={['dd-show-space-value', { size }]}>
-    {viz && space && <SpaceViz space={space} size={size} />}
-    {space === undefined && <ShowValueUnavailable />}
+    {viz && <Viz value={spaceValue} size={size} />}
     {
-        value && space && (
+        value && spaceValue !== undefined && (
             <DecisionValue>
                 <FlexStack>{vWithUnits}</FlexStack>
             </DecisionValue>

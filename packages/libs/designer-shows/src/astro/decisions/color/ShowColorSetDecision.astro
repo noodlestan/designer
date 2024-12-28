@@ -2,7 +2,7 @@
 import { isColorSetDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
-import { ShowColorValue } from '../../primitives';
+import { ShowColorValue } from '../../values';
 import { resolveDecisionProp } from '../../helpers';
 import { FlexStack } from '../../layouts';
 import { ShowDecisionUnavailable } from '../unavailable';
@@ -22,7 +22,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {colors?.map(color => (
-                <ShowColorValue color={color} size={s} {...rest} />
+                <ShowColorValue v={color} size={s} {...rest} />
             ))}
         </FlexStack>
     )

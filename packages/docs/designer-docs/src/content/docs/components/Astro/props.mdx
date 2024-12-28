@@ -21,7 +21,7 @@ All components that render a decision, such as the
 [&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/) component,
 **require** the following props.
 
-##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
 
 The `store` prop provides access to all decision input data so that components can
 retrieve decision objects and resolve values.
@@ -38,7 +38,7 @@ export const store = await loader();
 <ShowDecision store={store} ... />
 ```
 
-##### ༶ `d`: string | [Decision](/api/designer-decisions/Types/Decision)
+### ༶ `d`: string | [Decision](/api/designer-decisions/Types/Decision)
 
 A `string` with the name of the decision to visualize or a `Decision` object.
 
@@ -62,43 +62,70 @@ If the decision does not exist, it renders a notice.
 
 ## ValueProps
 
-All components that directly render a decision value, such as ...
-accept the `viz`, `value` and `size` props.
+All components that directly render a decision or a decision value also
+accept the following optional props.
 
-Note that decision components, such as the
-[&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/) component
-mentioned above, delegate to value components. For this reason, they also
-accept `viz`, `value` and `size` props.
+### ༶ `viz` (true): boolean | string
 
-##### ༶ `viz` (optional = true): boolean
+Provide this flag to chose between available visualizations or to hide
+the decision visualization altogether, displaying only its value(s).
 
-Provide this flag to hide the decision visualization and display only the value.
+#### Hiding the visualization
+
+In this example we are hiding the visualization and rendering its value
+next to a custom label.
 
 ```mdx
-RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
+RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
 ```
 
 <FlexRow align="center" vpad>
     RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
 </FlexRow>
 
-##### ༶ `value` (optional = true): boolean | string | object
+#### Choosing the visualization
 
-Provide this flag to hide the decision value or customize its format.
+Some decision types can be rendered using different visualizations.
+
+For instance, [Space Decisions](/components/Astro/Decisions/space) components
+can represent a space value with a few different shapes.
 
 ```mdx
-<ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+<ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
+<ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+    <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
+    <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
 </CardGrid>
+
+### ༶ `value` (true): boolean | string | object
+
+Provide this flag to customize how the value is displayed or to hide
+the value(s).
+
+#### Hiding the decision value
+
+In this example we are hiding the decision value and rendering its visualization
+under a custom label.
+
+```mdx
+<label>Brand Blue</label>
+<ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+```
+
+<FlexStack vpad>
+    <label>Brand Blue</label>
+    <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+</FlexStack>
+
+#### Formatting the decision value
 
 With some decision types, you may want to display their value in specific formats. The `value`
 prop is passed to the specific decision component to control how the value is displayed.
 
-For instance, the
-[&lt;ShowColorValue/&gt;](/components/Astro/Decisions/color#showcolorvaluedecision),
+For instance, [Color Decisions](/components/Astro/Decisions/color) components,
 component can display the color value in one or more color spaces.
 
 ```mdx
@@ -109,10 +136,9 @@ component can display the color value in one or more color spaces.
     <ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} size="m" />
 </CardGrid>
 
-##### ༶ `size` (optional = 'auto'): [ShowValueSize](/api/designer-decisions/Types/ShowValueSize/)
+### ༶ `size` (auto): [ShowValueSize](/api/designer-shows/Types/ShowValueSize/)
 
-Provide a [ShowValueSize](/api/designer-decisions/Types/ShowValueSize/) to control the
-visualization size.
+Constrains the visualization to a specific size.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'s'} />
@@ -133,24 +159,4 @@ visualization size.
     </CardGrid>
 </FlexStack>
 
-Refer to [ShowValueSize](/api/designer-decisions/Types/ShowValueSize/) for available sizes.
-
-When no `size` is provided it defaults to `auto`, in which case the visualization
-will stretch to use all available space.
-
-```mdx
-<ShowDecision store={store} d="Layout Space Scale" />
-<ShowDecision store={store} d="Action Color" />
-```
-
-Note that this can have different visual results depending on the value being visualized.
-
-For instance, [Space Components](/components/Astro/Decisions/space/) are meant to visualize actual
-space decisions and will render
-
-<FlexStack vpad>
-    <ShowDecision store={store} d="Layout Space Scale" />
-</FlexStack>
-<FlexStack vpad>
-    <ShowDecision store={store} d="Action Color" value="hsl" />
-</FlexStack>
+Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.

@@ -12,27 +12,36 @@ const domains = decisionTypes
         return acc;
     }, new Set() as Set<string>)
     .values();
+
+const headings = [{
+    depth: 2,
+    slug: 'color',
+    text: 'color'
+}]
+// const headings = Array.from(domains).map(domain => ({
+//     depth: 2,
+//     slug: domain,
+//     text: domain
+// }))
+
+const frontmatter={ title: 'Decision Models', headings }
 ---
 
-<StarlightPage frontmatter={{ title: 'Decision Models' }} sidebar={sidebar}>
-    <ul>
-        {
-            Array.from(domains).map(domain => (
-                <li>
-                    <h3>{domain}</h3>
-                    <ul>
-                        {decisionTypes
-                            .filter(type => type.data.domain === domain)
-                            .map(decisionType => (
-                                <li>
-                                    <a href={`/decision-models/${decisionType.id}`}>
-                                        {decisionType.data.name}
-                                    </a>
-                                </li>
-                            ))}
-                    </ul>
-                </li>
-            ))
-        }
-    </ul>
+<StarlightPage frontmatter={frontmatter} sidebar={sidebar}>
+{
+    Array.from(domains).map(domain => (
+            <h2>{domain}</h2>
+            <ul>
+                {decisionTypes
+                    .filter(type => type.data.domain === domain)
+                    .map(decisionType => (
+                        <li>
+                            <a href={`/decision-models/${decisionType.id}`}>
+                                {decisionType.data.name}
+                            </a>
+                        </li>
+                    ))}
+            </ul>
+    ))
+}
 </StarlightPage>

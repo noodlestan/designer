@@ -2,7 +2,7 @@
 import { isColorValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
-import { ShowColorValue } from '../../primitives';
+import { ShowColorValue } from '../../values';
 import { resolveDecisionProp } from '../../helpers';
 import { ShowDecisionUnavailable } from '../unavailable';
 
@@ -14,5 +14,5 @@ const decision = resolveDecisionProp(store, d);
 const color = decision && isColorValueDecision(decision) ? decision.produce().value() : undefined;
 ---
 
-{decision && <ShowColorValue color={color} {...rest} />}
+{decision && <ShowColorValue v={color} {...rest} />}
 {!decision && <ShowDecisionUnavailable d={d as string} />}

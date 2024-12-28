@@ -3,7 +3,7 @@ import { isSpaceValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
-import ShowSpaceValue from '../../primitives/space/ShowSpaceValue.astro';
+import ShowSpaceValue from '../../values/space/ShowSpaceValue.astro';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -14,5 +14,5 @@ const decision = resolveDecisionProp(store, d);
 const space = decision && isSpaceValueDecision(decision) ? decision.produce().value() : undefined;
 ---
 
-{decision && <ShowSpaceValue space={space} {...rest} />}
+{decision && <ShowSpaceValue v={space} {...rest} />}
 {!decision && <ShowDecisionUnavailable d={d as string} />}

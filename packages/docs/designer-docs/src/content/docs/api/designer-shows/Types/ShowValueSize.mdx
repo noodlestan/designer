@@ -1,35 +1,74 @@
 ---
 title: ShowValueSize
-slug: api/designer-decisions/Types/ShowValueSize
+slug: api/designer-shows/Types/ShowValueSize
 ---
 
-import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { FlexRow, FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
+Available visualization sizes for [all components](/components/Astro).
+
 ```ts
 type ShowValueSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 ```
 
-Provide one of `xs | s | m | l | xl` to control the visualization size.
+When rendering decisions you can chose a different visualization size
+setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
+
+#### `size="xs"`
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'xs'} />
-<ShowDecision store={store} d="Action Color" size={'s'} />
-<ShowDecision store={store} d="Action Color" size={'m'} />
-<ShowDecision store={store} d="Action Color" size={'l'} />
-<ShowDecision store={store} d="Action Color" size={'xl'} />
 ```
 
 <FlexStack vpad>
     <ShowDecision store={store} d="Action Color" size={'xs'} />
+</FlexStack>
+
+#### `size="s"`
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'s'} />
+```
+
+<FlexStack vpad>
     <ShowDecision store={store} d="Action Color" size={'s'} />
+</FlexStack>
+
+#### `size="m"`
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'m'} />
+```
+
+<FlexStack vpad>
     <ShowDecision store={store} d="Action Color" size={'m'} />
+</FlexStack>
+
+#### `size="l"`
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'l'} />
+```
+
+<FlexStack vpad>
     <ShowDecision store={store} d="Action Color" size={'l'} />
+</FlexStack>
+
+#### `size="xl"`
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'xl'} />
+```
+
+<FlexStack vpad>
     <ShowDecision store={store} d="Action Color" size={'xl'} />
 </FlexStack>
+
+#### `size="auto"` (default)
 
 Defaults to `auto` in which case it stretches to use all available space.
 
@@ -40,3 +79,20 @@ Defaults to `auto` in which case it stretches to use all available space.
 <FlexStack vpad>
     <ShowDecision store={store} d="Action Color" />
 </FlexStack>
+
+In these cases, consider adding an explicit `size` value, or composing the decisions within
+some sort of grid or list layout.
+
+```mdx
+<FlexRow>
+    <ShowDecision store={store} d="Action Color" />
+    <ShowDecision store={store} d="Brand Blue" />
+    <ShowDecision store={store} d="Brand Pink" />
+</FlexRow>
+```
+
+<FlexRow vpad>
+    <ShowDecision store={store} d="Action Color" />
+    <ShowDecision store={store} d="Brand Blue" />
+    <ShowDecision store={store} d="Brand Pink" />
+</FlexRow>

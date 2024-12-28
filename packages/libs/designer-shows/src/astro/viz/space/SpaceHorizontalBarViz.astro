@@ -1,24 +1,20 @@
 ---
-import { type SpaceValue } from '@noodlestan/designer-decisions';
-import type { ShowValueSize } from '../types';
+import type { SpaceVizProps } from '../../types';
 
-interface Props {
-    space: SpaceValue;
-    size?: ShowValueSize;
-}
+type Props = SpaceVizProps;
 
-const { space, size = 'auto' } = Astro.props;
+const { value: space, size = 'auto' } = Astro.props;
 
 const { value: v, units } = space?.getValueWithUnits() || {};
 const vWithUnits = `${v}${units}`;
 ---
 
-<div class:list={['dd-space-viz', size]}><div class="block"></div></div>
+<div class:list={['dd-space-bar-h-viz', size]}><div class="block"></div></div>
 
-<style define:vars={{ size: vWithUnits }}>
-    .dd-space-viz {
-        min-width: var(--size);
-        max-width: var(--size);
+<style define:vars={{ width: vWithUnits }}>
+    .dd-space-bar-h-viz {
+        min-width: var(--width);
+        max-width: var(--width);
     }
 
     .s {

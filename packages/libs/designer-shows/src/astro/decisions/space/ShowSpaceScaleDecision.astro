@@ -4,7 +4,7 @@ import { isSpaceScaleDecision } from '@noodlestan/designer-decisions';
 import type { ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
 import { FlexStack } from '../../layouts';
-import ShowSpaceValue from '../../primitives/space/ShowSpaceValue.astro';
+import ShowSpaceValue from '../../values/space/ShowSpaceValue.astro';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -24,7 +24,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowSpaceValue space={item} size={s} {...rest} />
+                <ShowSpaceValue v={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )

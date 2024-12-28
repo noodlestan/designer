@@ -12,19 +12,31 @@ export const createColorSet = (context: ValueContext, input: ColorInput[]): Colo
 };
 ```
 
-## Banner
+- fix headings not working!
+
+```
+const frontmatter = {
+    ...decisionType.data,
+    title: decisionType.data.name,
+    headings
+};
+```
+
+## Docs components
+
+- Banner
+- LinkCard (for example gallery and component reference)
 
 ## Viz
 
 - rename: atoms/DecisionValue => atoms/ValueLayout
 - fix: ShowColorLightnessScaleDecision `[object Object]`
 
-- SpaceScale
-- SpaceValue
+- SpaceValue `viz = SpaceSquareViz SpaceCircleViz SpaceBarViz`
 
-- ColorValue `viz = ColorViz | ColorVizFg | ColorVizBg ...`
-- ColorVizFg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
-- ColorVizBg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
+- ColorValue `viz = ColorViz | ColorFgViz | ColorBgViz ...`
+- ColorFgViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
+- ColorBgViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
 
 - Add icons to ShowDecisionUnavailable, ShowDecisionTypeUnavailable
 
@@ -38,6 +50,19 @@ export const createColorSet = (context: ValueContext, input: ColorInput[]): Colo
 - BorderStyle
 - BackgroundStyle
 - DropShadowStyle
+
+## Docs
+
+- add reference data page
+  - showcase the data included in the repository
+  - easy snippets to copy?
+- render schema page(s)
+  - link to reference data
+- get rid of decision models page
+  - render models inline in the decision type page
+  - link to model schema
+  - render one sample per model
+  - link to data reference (link to components as well?)
 
 ## Layouts
 

@@ -4,7 +4,7 @@ import { isColorLightnessScaleDecision } from '@noodlestan/designer-decisions';
 import type { ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
 import { FlexStack } from '../../layouts';
-import { ShowLightnessValue } from '../../primitives';
+import { ShowLightnessValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -24,7 +24,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowLightnessValue lightness={item} size={s} {...rest} />
+                <ShowLightnessValue v={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )

@@ -3,7 +3,7 @@ import { isColorLightnessValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
 import { resolveDecisionProp } from '../../helpers';
-import { ShowLightnessValue } from '../../primitives';
+import { ShowLightnessValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -15,5 +15,5 @@ const lightness =
     decision && isColorLightnessValueDecision(decision) ? decision.produce().value() : undefined;
 ---
 
-{decision && <ShowLightnessValue lightness={lightness} {...rest} />}
+{decision && <ShowLightnessValue v={lightness} {...rest} />}
 {!decision && <ShowDecisionUnavailable d={d as string} />}

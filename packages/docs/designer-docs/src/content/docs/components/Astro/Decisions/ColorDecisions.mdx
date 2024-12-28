@@ -8,6 +8,8 @@ sidebar:
 
 import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components';
 import {
+    FlexRow,
+    ShowDecision,
     ShowColorHueValueDecision,
     ShowColorLightnessScaleDecision,
     ShowColorLightnessValueDecision,
@@ -20,23 +22,13 @@ import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
-## Props
-
-##### ༶ `store` and `d` (mandatory)
-
-These components require the two mandatory [DecisionProps](/components/Astro/Props) - `store`
-and `d` - to identify and retrieve the decision.
-
-##### ༶ `value`, `viz`, and `size` (optional)
-
-They also accepts [ValueProps](/components/Astro/Props#valueprops) - `value`,
-`viz` and `size` - to control how the visualization and value are displayed.
-
-## Components
-
 ```ts
 import { ... } from '@noodlestan/designer-shows/astro';
 ```
+
+## Components
+
+These components render color related decisions.
 
 ### ShowColorValueDecision
 
@@ -117,3 +109,52 @@ Renders a [ShowColorLightnessScaleDecision](/decision-models/color-lightness-sca
     <ShowColorLightnessScaleDecision d="Foreground Lightness Scale" store={store} size="m" />
     <ShowColorLightnessScaleDecision d="Background Lightness Scale" store={store} size="m" />
 </CardGrid>
+
+## Props
+
+### ༶ [DecisionProps](/components/Astro/Props): `store` and `d` (mandatory)
+
+These two **mandatory** props serve to identify and retrieve the decision.
+
+### ༶ [ValueProps](/components/Astro/Props#-size-auto-showvaluesize): `size`
+
+The `size` optional prop controls the size of the visualization.
+
+### ༶ `value` (true): boolean | ...
+
+The `value` prop controls how the decision value is displayed.
+
+#### Color Values
+
+For decisions of type [ColorValueDecision](/decision-models/color-value) and
+[ColorSetDecision](/decision-models/color-set), the `value` prop can be used
+not only to show/hide the decision value but also to display
+it in one or more color spaces.
+
+Provide a `string` with one of [ColorSpaceName](/api/designer-decisions/Types/ColorSpaceName/)
+to specify .
+
+```mdx
+<ShowDecision d="Brand Blue" store={store} size="s" value="hsl" />
+```
+
+<FlexRow vpad>
+    <ShowDecision d="Brand Pink" store={store} size="s" value={'hsl'} />
+</FlexRow>
+
+Provide an `array` of [ColorSpaceName](/api/designer-decisions/Types/ColorSpaceName/)
+to list several color spaces in your preferred order.
+
+```mdx
+<ShowDecision d="Brand Pink" store={store} size="s" value={['hsl', 'rgb']} />
+```
+
+<FlexRow vpad>
+    <ShowDecision d="Brand Pink" store={store} size="s" value={['hsl', 'rgb']} />
+</FlexRow>
+
+### ༶ `viz` (true): boolean | ColorVizName
+
+Chose visualization type.
+
+Refer to [ColorVizName](/api/designer-shows/Types/ColorVizName) for available visualizations.

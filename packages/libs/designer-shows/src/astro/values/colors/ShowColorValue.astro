@@ -4,14 +4,13 @@ import { type ColorSpaceName, type ColorValue } from '@noodlestan/designer-decis
 import { DecisionValue } from '../../atoms';
 import { ColorViz } from '../../viz';
 import type { ShowValueProps } from '../../types';
-import { ShowValueUnavailable } from '../unavailable';
 import { FlexStack } from '../../layouts';
 
 type Props = ShowValueProps & {
-    color?: ColorValue;
+    v?: ColorValue;
 };
 
-const { color, value = true, viz = true, size = 'auto' } = Astro.props;
+const { v: colorValue, value = true, viz = true, size = 'auto' } = Astro.props;
 
 const spaces: ColorSpaceName[] | null =
     typeof value === 'boolean' && value
@@ -24,13 +23,12 @@ const spaces: ColorSpaceName[] | null =
 ---
 
 <div class:list={['dd-show-color-value', { size }]}>
-    {viz && color && <ColorViz color={color} size={size} />}
-    {!color && <ShowValueUnavailable />}
+    {viz && colorValue && <ColorViz value={colorValue} size={size} />}
     {
-        value && color && (
+        value && colorValue !== undefined && (
             <FlexStack>
                 {spaces?.map(space => (
-                    <DecisionValue>{color.getString(space)}</DecisionValue>
+                    <DecisionValue>{colorValue.getString(space)}</DecisionValue>
                 ))}
             </FlexStack>
         )

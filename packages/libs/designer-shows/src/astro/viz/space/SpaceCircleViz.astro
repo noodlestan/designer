@@ -1,0 +1,29 @@
+---
+import type { SpaceVizProps } from '../../types';
+
+type Props = SpaceVizProps;
+
+const { value: space } = Astro.props;
+
+const { value: v, units } = space?.getValueWithUnits() || {};
+const vWithUnits = `${v}${units}`;
+---
+
+<div class:list={['dd-space-circle-viz']}><div class="circle"></div></div>
+
+<style define:vars={{ size: vWithUnits }}>
+    .dd-space-circle-viz {
+        min-width: var(--size);
+        max-width: var(--size);
+        min-height: var(--size);
+        max-height: var(--size);
+    }
+
+    .circle {
+        width: 100%;
+        height: 100%;
+        background-color: var(--dd-space-viz-color);
+        border: var(--dd-space-viz-border);
+        border-radius: 50%;
+    }
+</style>

@@ -158,7 +158,7 @@ import { type Decision } from '@noodlestan/designer-decisions';
 import { type StaticDecisionStore } from '@noodlestan/designer-functions';
 import {
     DecisionCardLayout,
-    ShowColorValue,
+    ShowDecision,
     ShowDecisionUsage,
     resolveDecisionProp
 } from '@noodlestan/designer-shows/astro';
@@ -174,7 +174,7 @@ const decision = resolveDecisionProp(store, d);
 
 <DecisionCardLayout>
     <h2 slot="header">{decision.name}</h2>
-    <ShowColorValue slot="viz" store={store} d={decision} value={['rgb', 'hsl']} />
+    <ShowDecision slot="viz" store={store} d={decision} value={['rgb', 'hsl']} />
     <div slot="details">
         <h3>Usage</h3>
         <ShowDecisionUsage store={store} d={decision} />
