@@ -208,10 +208,10 @@ const decision = store.getDecision(d) as ColorDecision;
 const color = decision.value().toString('hsl')
 ---
 
-<div class="my-color-swatch">{color.value}</div>
+<div class="my-color-value-viz">{color.value}</div>
 
 <style define:vars={{ 'my-color': color }}>
-.my-color-swatch { background-color: var(--my-color) }
+.my-color-value-viz { background-color: var(--my-color) }
 </style>
 ```
 

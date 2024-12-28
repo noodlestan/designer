@@ -3,6 +3,40 @@ title: ShowValueSize
 slug: api/designer-decisions/Types/ShowValueSize
 ---
 
+import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
 ```ts
-type ShowValueSize = 's' | 'm' | 'l' | 'auto';
+type ShowValueSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 ```
+
+Provide one of `xs | s | m | l | xl` to control the visualization size.
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'xs'} />
+<ShowDecision store={store} d="Action Color" size={'s'} />
+<ShowDecision store={store} d="Action Color" size={'m'} />
+<ShowDecision store={store} d="Action Color" size={'l'} />
+<ShowDecision store={store} d="Action Color" size={'xl'} />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Action Color" size={'xs'} />
+    <ShowDecision store={store} d="Action Color" size={'s'} />
+    <ShowDecision store={store} d="Action Color" size={'m'} />
+    <ShowDecision store={store} d="Action Color" size={'l'} />
+    <ShowDecision store={store} d="Action Color" size={'xl'} />
+</FlexStack>
+
+Defaults to `auto` in which case it stretches to use all available space.
+
+```mdx
+<ShowDecision store={store} d="Action Color" />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Action Color" />
+</FlexStack>

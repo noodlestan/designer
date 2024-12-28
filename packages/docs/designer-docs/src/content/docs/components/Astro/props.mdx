@@ -109,20 +109,48 @@ component can display the color value in one or more color spaces.
     <ShowDecision store={store} d="Action Color" value={['rgb', 'hsl']} size="m" />
 </CardGrid>
 
-##### ༶ `size` (optional = 'auto'): [ShowValueSize](/api/designer-shows/Types/ShowValueSize)
+##### ༶ `size` (optional = 'auto'): [ShowValueSize](/api/designer-decisions/Types/ShowValueSize/)
 
-Provide one of `'s'`, `'m'` or `'l'` to control the visualization size.
+Provide a [ShowValueSize](/api/designer-decisions/Types/ShowValueSize/) to control the
+visualization size.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" />
-<ShowDecision store={store} d="Action Color" size={'l'} />
-<ShowDecision store={store} d="Action Color" size={'m'} />
 <ShowDecision store={store} d="Action Color" size={'s'} />
+<ShowDecision store={store} d="Space Unit" size={'s'} />
+
+<ShowDecision store={store} d="Action Color" size={'m'} />
+<ShowDecision store={store} d="Space Unit" size={'s'} />
 ```
 
 <FlexStack vpad>
-    <ShowDecision store={store} d="Action Color" />
-    <ShowDecision store={store} d="Action Color" size={'l'} />
-    <ShowDecision store={store} d="Action Color" size={'m'} />
-    <ShowDecision store={store} d="Action Color" size={'s'} />
+    <CardGrid>
+        <ShowDecision store={store} d="Action Color" size={'s'} />
+        <ShowDecision store={store} d="Space Unit" size={'s'} />
+    </CardGrid>
+    <CardGrid>
+        <ShowDecision store={store} d="Action Color" size={'m'} />
+        <ShowDecision store={store} d="Space Unit" size={'m'} />
+    </CardGrid>
+</FlexStack>
+
+Refer to [ShowValueSize](/api/designer-decisions/Types/ShowValueSize/) for available sizes.
+
+When no `size` is provided it defaults to `auto`, in which case the visualization
+will stretch to use all available space.
+
+```mdx
+<ShowDecision store={store} d="Layout Space Scale" />
+<ShowDecision store={store} d="Action Color" />
+```
+
+Note that this can have different visual results depending on the value being visualized.
+
+For instance, [Space Components](/components/Astro/Decisions/space/) are meant to visualize actual
+space decisions and will render
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Layout Space Scale" />
+</FlexStack>
+<FlexStack vpad>
+    <ShowDecision store={store} d="Action Color" value="hsl" />
 </FlexStack>

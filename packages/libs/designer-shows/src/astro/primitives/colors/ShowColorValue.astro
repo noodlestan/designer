@@ -1,7 +1,8 @@
 ---
 import { type ColorSpaceName, type ColorValue } from '@noodlestan/designer-decisions';
 
-import { DecisionValue, ColorSwatch } from '../../atoms';
+import { DecisionValue } from '../../atoms';
+import { ColorViz } from '../../viz';
 import type { ShowValueProps } from '../../types';
 import { ShowValueUnavailable } from '../unavailable';
 import { FlexStack } from '../../layouts';
@@ -23,8 +24,8 @@ const spaces: ColorSpaceName[] | null =
 ---
 
 <div class:list={['dd-show-color-value', { size }]}>
-    {viz && color && <ColorSwatch color={color} size={size} />}
-    {color === undefined && <ShowValueUnavailable />}
+    {viz && color && <ColorViz color={color} size={size} />}
+    {!color && <ShowValueUnavailable />}
     {
         value && color && (
             <FlexStack>

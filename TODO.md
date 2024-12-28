@@ -1,17 +1,30 @@
 # TODO
 
+## Decisions
+
+- resolve at creation time so that future methods of value, e.g. `getReferences()`, can access resolutions
+
+```
+export const createColorSet = (context: ValueContext, input: ColorInput[]): ColorSet => {
+    return {
+        get: () => input.map(item => createColorValue(context, item)),
+    };
+};
+```
+
 ## Banner
 
 ## Viz
 
+- rename: atoms/DecisionValue => atoms/ValueLayout
 - fix: ShowColorLightnessScaleDecision `[object Object]`
 
 - SpaceScale
 - SpaceValue
 
-- ColorValue `viz = ColorSwatch | ColorSwatchFg | ColorSwatchBg ...`
-- ColorSwatchFg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
-- ColorSwatchBg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
+- ColorValue `viz = ColorViz | ColorVizFg | ColorVizBg ...`
+- ColorVizFg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
+- ColorVizBg `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
 
 - Add icons to ShowDecisionUnavailable, ShowDecisionTypeUnavailable
 
@@ -33,21 +46,35 @@
 
 ## Config
 
+- document
 - pass config to store so that it is available in every component
-  - default viz
+  - use cases:
+    - default flags for cards/pills (update docs)
+    - default viz per decision type
+    - default props for viz components
+    - register new viz components
+    - generate links for decisions
+    - generate links for usage entries
+
+## Usage
+
+- visualize usage with `<ShowUsage />` and `<ShowUsageList />`
+- generate links for usage entries
 
 ## Contexts
 
-- load context decisions, create groups
-- visualize contexts (new components)
+- load context decisions, create groups, sort priorities
+- visualize contexts with `<ShowContext>` and `<ShowContextList/>`
 - load decisions vs context
 
   - if decision exists, validate that it is of the same type
 
 - pass context to store and decision components
+
   - match context
-  - display active context
-  - display decisions with other contexts (another flag?)
+  - display active context with `<ShowDecisionContexts/>` (badge)
+  - display same decision for other contexts (another flag?)
+
 - document
 
 ## Tokenize
@@ -71,6 +98,7 @@
 
 # Backlog
 
+- DevX: wrap DecisionLoader in a file watcher so that promise cache is invalidated when source files change
 - DecisionList component
 - Load decisions from YAML, TypeScript
 - Import from Figma, Specify, TokenStudio, ...

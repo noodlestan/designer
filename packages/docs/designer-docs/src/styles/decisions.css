@@ -15,6 +15,12 @@
     --dd-space-l: 20px;
     --dd-space-xl: 30px;
 
+    --dd-size-xs: 25px;
+    --dd-size-s: 50px;
+    --dd-size-m: 100px;
+    --dd-size-l: 175px;
+    --dd-size-xl: 300px;
+
     --dd-space-gap: var(--dd-space-s);
 
     --dd-heading-size: 1.8rem;
@@ -47,14 +53,19 @@
     --dd-card-border-radius: 10px;
 
     --dd-value-min-width: 50px;
-    --dd-value-max-width: 250px;
 
-    --dd-value-size-s: 50px;
-    --dd-value-size-m: 100px;
-    --dd-value-size-l: 200px;
+    --dd-value-size-xs: var(--dd-size-xs);
+    --dd-value-size-s: var(--dd-size-s);
+    --dd-value-size-m: var(--dd-size-m);
+    --dd-value-size-l: var(--dd-size-l);
+    --dd-value-size-xl: var(--dd-size-xl);
 
-    --dd-color-swatch-border: 1px solid var(--sl-color-gray-3);
-    --dd-color-swatch-border-radius: 5px;
+    --dd-space-viz-color: var(--dd-color-max);
+    --dd-space-viz-border: none;
+    --dd-space-viz-border-radius: 0;
+
+    --dd-color-viz-border: 1px solid var(--sl-color-gray-3);
+    --dd-color-viz-border-radius: 5px;
 
     --dd-data-max-height: 250px;
 }

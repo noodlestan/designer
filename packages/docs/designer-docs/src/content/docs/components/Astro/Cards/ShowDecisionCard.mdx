@@ -55,11 +55,11 @@ and both
 Provide this flag to hide the decision's name.
 
 ```mdx
-<ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
+<ShowDecisionCard store={store} d="Space Unit" name={false} />
 ```
 
 <FlexStack vpad>
-    <ShowDecisionCard store={store} d="Curcuma Palette" name={false} />
+    <ShowDecisionCard store={store} d="Space Unit" name={false} />
 </FlexStack>
 
 ##### ༶ `description` (optional = true): boolean
@@ -79,35 +79,23 @@ Provide this flag to hide the decision's description.
 Provide this flag to hide the decision usage guidelines.
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" usage />
+<ShowDecisionCard store={store} d="Action Color" usage={false} />
 ```
 
 <FlexStack vpad></FlexStack>
 
-<ShowDecisionCard store={store} d="Action Color" usage />
+<ShowDecisionCard store={store} d="Action Color" usage={false} />
 
-##### ༶ `model` (optional): boolean
+##### ༶ `model` (optional): boolean and `params` (optional): boolean
 
-Provide this flag to display the decision model at the bottom of the card
+Provide these flag to display the decision model and input params at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" model />
+<ShowDecisionCard store={store} d="Action Color" model params />
 ```
 
 <FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" model />
-</FlexStack>
-
-##### ༶ `params` (optional): boolean
-
-Provide this flag to display the decision model params at the bottom of the card
-
-```mdx
-<ShowDecisionCard store={store} d="Action Color" params />
-```
-
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" params />
+    <ShowDecisionCard store={store} d="Action Color" model params />
 </FlexStack>
 
 ##### ༶ `contexts` (optional): boolean

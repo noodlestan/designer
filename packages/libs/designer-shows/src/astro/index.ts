@@ -8,3 +8,4 @@ export * from './layouts';
 export * from './meta';
 export * from './primitives';
 export * from './types';
+export * from './viz';

@@ -36,11 +36,11 @@ import { ... } from '@noodlestan/designer-shows/astro';
 Renders a [SpaceValueDecision](/decision-models/space-value).
 
 ```mdx
-<ShowSpaceValueDecision store={store} d="Space Unit" size="m" />
+<ShowSpaceValueDecision store={store} d="Space Unit" size="s" />
 ```
 
 <CardGrid>
-    <ShowSpaceValueDecision store={store} d="Space Unit" size="m" />
+    <ShowSpaceValueDecision store={store} d="Space Unit" size="s" />
 </CardGrid>
 
 ### ShowSpaceScaleDecision
@@ -48,9 +48,11 @@ Renders a [SpaceValueDecision](/decision-models/space-value).
 Renders a [SpaceScaleDecision](/decision-models/space-scale).
 
 ```mdx
-<ShowSpaceScaleDecision store={store} d="Space Scale" size="m" />
+<ShowSpaceScaleDecision store={store} d="Layout Space Scale" size="m" />
+<ShowSpaceScaleDecision store={store} d="Sizing Space Scale" size="m" />
 ```
 
 <CardGrid>
-    <ShowSpaceScaleDecision store={store} d="Space Scale" size="m" />
+    <ShowSpaceScaleDecision store={store} d="Layout Space Scale" size="xs" />
+    <ShowSpaceScaleDecision store={store} d="Sizing Space Scale" size="xs" />
 </CardGrid>

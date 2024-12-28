@@ -1,24 +1,28 @@
 ---
-import { type SpaceValue } from '@noodlestan/designer-decisions';
+import { type ColorValue } from '@noodlestan/designer-decisions';
 import type { ShowValueSize } from '../types';
 
 interface Props {
-    space: SpaceValue;
+    color: ColorValue;
     size?: ShowValueSize;
 }
 
-const { space, size = 'auto' } = Astro.props;
+const { color, size = 'auto' } = Astro.props;
 
 const hsl = color.getString('hsl');
 ---
 
-<div class:list={['dd-color-swatch', size]}><div class="swatch"></div></div>
+<div class:list={['dd-color-value-viz', size]}><div class="swatch"></div></div>
 
 <style define:vars={{ color: hsl }}>
-    .dd-color-swatch {
+    .dd-color-value-viz {
         width: 100%;
         min-width: var(--dd-value-min-width);
-        max-width: var(--dd-value-max-width);
+    }
+
+    .xs {
+        min-width: var(--dd-value-size-xs);
+        max-width: var(--dd-value-size-xs);
     }
 
     .s {
@@ -36,12 +40,17 @@ const hsl = color.getString('hsl');
         max-width: var(--dd-value-size-l);
     }
 
+    .xl {
+        min-width: var(--dd-value-size-xl);
+        max-width: var(--dd-value-size-xl);
+    }
+
     .swatch {
         width: 100%;
         min-height: var(--dd-value-min-width);
         aspect-ratio: 1 / 1;
         background-color: var(--color);
-        border: var(--dd-color-swatch-border);
-        border-radius: var(--dd-color-swatch-border-radius);
+        border: var(--dd-color-viz-border);
+        border-radius: var(--dd-color-viz-border-radius);
     }
 </style>

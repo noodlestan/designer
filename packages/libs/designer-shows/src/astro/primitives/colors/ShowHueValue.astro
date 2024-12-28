@@ -1,7 +1,8 @@
 ---
 import { type HueValue } from '@noodlestan/designer-decisions';
 
-import { DecisionValue, ColorSwatch } from '../../atoms';
+import { DecisionValue } from '../../atoms';
+import { ColorViz } from '../../viz';
 import type { ShowValueProps } from '../../types';
 import { ShowValueUnavailable } from '../unavailable';
 import { FlexStack } from '../../layouts';
@@ -17,7 +18,7 @@ const hueColor = hue?.getColor({ s: 0.5, l: 0.5 });
 ---
 
 <div class:list={['dd-show-hue-value', { size }]}>
-    {viz && hueColor && <ColorSwatch color={hueColor} size={size} />}
+    {viz && hueColor && <ColorViz color={hueColor} size={size} />}
     {hueColor === undefined && <ShowValueUnavailable />}
     {
         value && hueValue && (

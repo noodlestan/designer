@@ -25,7 +25,7 @@ export const getDecisionComponent = (
         'color-set': ShowColorSetDecision,
         'color-value': ShowColorValueDecision,
         'space-value': ShowSpaceValueDecision,
-        'space-set': ShowSpaceScaleDecision,
+        'space-scale': ShowSpaceScaleDecision,
     };
 
     const type = getDecisionType(decision);
