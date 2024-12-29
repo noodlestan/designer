@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { CardGrid } from '@astrojs/starlight/components';
-import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { FlexRow, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
 
@@ -31,11 +31,21 @@ export const store = await decisionLoader();
 </CardGrid>
 
 ```mdx
+<ShowDecision store={store} d="Brand Color Set" size="m" row />
+```
+
+<FlexRow vpad>
+    <ShowDecision store={store} d="Brand Color Set" size="m" row />
+</FlexRow>
+
+```mdx
 <ShowDecision store={store} d="Curcuma Palette" />
+<ShowDecision store={store} d="Heat Map Color Set" />
 ```
 
 <CardGrid>
     <ShowDecision store={store} d="Curcuma Palette" />
+    <ShowDecision store={store} d="Heat Map Color Set" />
 </CardGrid>
 
 ```mdx

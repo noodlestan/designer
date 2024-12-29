@@ -77,12 +77,18 @@
     "description": "Lightness scale for background elements",
     "params": {
       "start": 0.98,
-      "modifier": {
-        "hue": 0,
-        "lightness": 0.03,
-        "saturation": -0.1
-      },
+      "modifier": { "mode": "linear", "by": -0.03 },
       "steps": 5
+    }
+  },
+  {
+    "model": "color-lightness-scale/linear-range",
+    "name": "Mid Range Lightnes Scale",
+    "description": "Lightness scale for single hue color sets",
+    "params": {
+      "from": 0.85,
+      "to": 0.25,
+      "steps": 7
     }
   },
   {
@@ -98,7 +104,35 @@
     "name": "Brand Blue",
     "description": "Brand Blue color",
     "params": {
-      "value": "06b4e0"
+      "value": "#06b4e0"
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Brand Black",
+    "description": "Brand Black Color",
+    "params": {
+      "value": "#181818"
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Brand White",
+    "description": "Brand White color",
+    "params": {
+      "value": "#f7f7f7"
+    }
+  },
+  {
+    "model": "color-set/explicit",
+    "name": "Brand Color Set",
+    "description": "Set of colors used in Logomark",
+    "usage": {
+      "intendedFor": ["Logo", "Icons"],
+      "notFor": ["Typography", "Foregrounds", "Backgrounds"]
+    },
+    "params": {
+      "values": ["#d35084", "#06b4e0", "#181818", "#f7f7f7"]
     }
   },
   {
@@ -119,7 +153,7 @@
     }
   },
   {
-    "model": "color-set/explicit",
+    "model": "color-set/modifier",
     "name": "Curcuma Palette",
     "description": "Wide range shades of Curcuma",
     "usage": {
@@ -127,17 +161,25 @@
       "notFor": ["Typography"]
     },
     "params": {
-      "values": [
-        "#312506",
-        "#564109",
-        "#7D5E0A",
-        "#A57B0A",
-        "#CF9908",
-        "#FAB705",
-        "#FCC941",
-        "#FDDA7C",
-        "#FEEBB9"
-      ]
+      "start": "#564109",
+      "steps": 9,
+      "modifier": {
+        "lightness": { "mode": "linear", "by": 0.07 }
+      }
+    }
+  },
+  {
+    "model": "color-set/linear-range",
+    "name": "Heat Map Color Set",
+    "description": "A 7 step color set ranging from hot to cold",
+    "usage": {
+      "intendedFor": ["Heat maps"],
+      "notFor": ["Typography", "Icons", "Backgrounds", "Foregrounds"]
+    },
+    "params": {
+      "from": "#DD3F3F",
+      "to": "#3049e0",
+      "steps": 7
     }
   }
 ]

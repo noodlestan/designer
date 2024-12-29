@@ -47,21 +47,16 @@
           "type": "object",
           "properties": {
             "hue": {
-              "type": "number"
+              "$ref": "urn:designer:primitive:number-modifier-input"
             },
             "lightness": {
-              "type": "number"
+              "$ref": "urn:designer:primitive:number-modifier-input"
             },
             "saturation": {
-              "type": "number"
+              "$ref": "urn:designer:primitive:number-modifier-input"
             }
           },
-          "additionalProperties": false,
-          "required": [
-            "hue",
-            "lightness",
-            "saturation"
-          ]
+          "additionalProperties": false
         },
         "steps": {
           "type": "number"

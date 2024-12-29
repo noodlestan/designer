@@ -1,4 +1,8 @@
-import { createLightnessScale, createLightnessValue } from '../../../../primitives';
+import {
+    createLightnessScale,
+    createLightnessValue,
+    createNumberSteppedSeries,
+} from '../../../../primitives';
 import type {
     ColorLightnessScaleModifierInput,
     DecisionModelFactory,
@@ -13,12 +17,15 @@ export const createColorLightnessScaleModifier: DecisionModelFactory<
     return {
         produce: (valueContext, params) => {
             const resolveValue = () => {
-                const start = createLightnessValue(valueContext, params.start);
+                const startValue = createLightnessValue(valueContext, params.start);
 
-                const values = Array(params.steps);
-                values[0] = start;
-                // WIP
-
+                const start = startValue.get();
+                const values = createNumberSteppedSeries(
+                    start,
+                    params.steps,
+                    params.modifier,
+                    [0, 1],
+                );
                 return createLightnessScale(valueContext, values);
             };
 

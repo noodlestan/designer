@@ -114,7 +114,10 @@ The output should look something like:
   usage: { intendedFor: [ 'Typography', 'Foregrounds' ], notFor: [ 'Icons' ] },
   params: {
     start: { '$name': 'Primary Foreground', '$type': 'color-value' },
-    modifier: { hue: 0, lightness: 5, saturation: -5 },
+    modifier: {
+        lightness: { type: 'linear', m: 5 },
+        saturation: { type: 'linear', m: -5 }
+    },
     steps: 5
   }
 }

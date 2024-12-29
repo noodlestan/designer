@@ -1,0 +1,52 @@
+---
+import type { ColorVizProps } from '../../types';
+
+type Props = ColorVizProps;
+
+const { value, size = 'auto' } = Astro.props;
+
+const hsl = value?.getString('hsl');
+---
+
+<div class:list={['dd-color-swatch-viz', size]}><div class="swatch"></div></div>
+
+<style define:vars={{ color: hsl }}>
+    .dd-color-swatch-viz {
+        width: 100%;
+        min-width: var(--dd-viz-min-width);
+    }
+
+    .xs {
+        min-width: var(--dd-viz-size-xs);
+        max-width: var(--dd-viz-size-xs);
+    }
+
+    .s {
+        min-width: var(--dd-viz-size-s);
+        max-width: var(--dd-viz-size-s);
+    }
+
+    .m {
+        min-width: var(--dd-viz-size-m);
+        max-width: var(--dd-viz-size-m);
+    }
+
+    .l {
+        min-width: var(--dd-viz-size-l);
+        max-width: var(--dd-viz-size-l);
+    }
+
+    .xl {
+        min-width: var(--dd-viz-size-xl);
+        max-width: var(--dd-viz-size-xl);
+    }
+
+    .swatch {
+        width: 100%;
+        min-height: var(--dd-viz-min-width);
+        aspect-ratio: 1 / 1;
+        background-color: var(--color);
+        border: var(--dd-color-viz-border);
+        border-radius: var(--dd-color-viz-border-radius);
+    }
+</style>

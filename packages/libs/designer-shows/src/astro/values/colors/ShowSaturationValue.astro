@@ -2,9 +2,9 @@
 import { type SaturationValue } from '@noodlestan/designer-decisions';
 
 import { DecisionValue } from '../../atoms';
-import { ColorViz } from '../../viz';
-import type { ShowValueProps } from '../../types';
 import { FlexStack } from '../../layouts';
+import type { ShowValueProps } from '../../types';
+import { ColorSwatchViz } from '../../viz';
 
 type Props = ShowValueProps & {
     v?: SaturationValue;
@@ -17,7 +17,7 @@ const saturationColor = saturation?.getColor({ h: 0, l: 0.5 });
 ---
 
 <div class:list={['dd-show-hue-value', { size }]}>
-    {viz && <ColorViz value={saturationColor} size={size} />}
+    {viz && <ColorSwatchViz value={saturationColor} size={size} />}
     {
         value && saturationValue !== undefined && (
             <DecisionValue>

@@ -14,7 +14,6 @@ export type VizProps = {
 };
 
 export type ShowValueProps = VizProps & {
-    v?: unknown;
     value?: boolean | string | string[];
     viz?: boolean | string;
 };
@@ -30,6 +29,8 @@ export type SpaceVizProps = VizProps & {
     value?: SpaceValue;
 };
 export type SpaceVizComponent = (props: SpaceVizProps) => unknown;
+
+export type ColorVizName = 'swatch' | 'fg' | 'bg';
 
 export type ColorVizProps = VizProps & {
     value?: ColorValue;

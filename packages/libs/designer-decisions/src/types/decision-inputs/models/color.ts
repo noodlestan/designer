@@ -1,9 +1,9 @@
 import type {
     ColorInput,
+    ColorModifierInput,
     DegreesInput,
+    NumberModifierInput,
     PercentageInput,
-    SignedDegreesInput,
-    SignedPercentageInput,
 } from '../primitives';
 
 import type { DecisionInputBase } from './base';
@@ -56,11 +56,7 @@ export type ColorLightnessScaleModifierInput = DecisionInputBase & {
     model: 'color-lightness-scale/modifier';
     params: {
         start: PercentageInput;
-        modifier: {
-            hue: SignedDegreesInput;
-            lightness: SignedPercentageInput;
-            saturation: SignedPercentageInput;
-        };
+        modifier: NumberModifierInput;
         steps: number;
     };
 };
@@ -85,11 +81,7 @@ export type ColorSetModifierInput = DecisionInputBase & {
     model: 'color-set/modifier';
     params: {
         start: ColorInput;
-        modifier: {
-            hue: SignedDegreesInput;
-            lightness: SignedPercentageInput;
-            saturation: SignedPercentageInput;
-        };
+        modifier: ColorModifierInput;
         steps: number;
     };
 };

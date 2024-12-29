@@ -27,6 +27,7 @@ const {
     d,
     value: showValue = true,
     viz: showViz = true,
+    show: showOptions,
     name: showName = true,
     description: showDescription = true,
     usage: showUsage = true,
@@ -60,6 +61,7 @@ const metaSlot = showMeta && 'meta';
                     store={store}
                     value={showValue}
                     viz={showViz}
+                    show={showOptions}
                     size="m"
                 />
             </Fragment>

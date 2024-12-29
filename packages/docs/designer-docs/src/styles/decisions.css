@@ -52,13 +52,13 @@
     --dd-card-meta-bg-color: var(--sl-color-black);
     --dd-card-border-radius: 10px;
 
-    --dd-value-min-width: var(--dd-size-xs);
+    --dd-viz-min-width: var(--dd-size-xs);
 
-    --dd-value-size-xs: var(--dd-size-xs);
-    --dd-value-size-s: var(--dd-size-s);
-    --dd-value-size-m: var(--dd-size-m);
-    --dd-value-size-l: var(--dd-size-l);
-    --dd-value-size-xl: var(--dd-size-xl);
+    --dd-viz-size-xs: var(--dd-size-xs);
+    --dd-viz-size-s: var(--dd-size-s);
+    --dd-viz-size-m: var(--dd-size-m);
+    --dd-viz-size-l: var(--dd-size-l);
+    --dd-viz-size-xl: var(--dd-size-xl);
 
     --dd-space-viz-color: var(--dd-color-max);
     --dd-space-viz-border: none;

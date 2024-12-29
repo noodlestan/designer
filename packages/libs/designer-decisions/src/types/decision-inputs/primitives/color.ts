@@ -1,6 +1,6 @@
 import type { DecisionRef } from '../../decision-values';
 
-import type { DegreesInput, PercentageInput } from './numbers';
+import type { DegreesInput, NumberModifierInput, PercentageInput } from './numbers';
 
 /** hue */
 
@@ -47,6 +47,12 @@ export type ColorSpaceHSLInput = {
     l: ColorLightnessInput;
 };
 
+export type ColorSpaceHSLLiteralInput = {
+    h: number;
+    s: number;
+    l: number;
+};
+
 export type ColorSpaceHSVInput = {
     h: ColorHueInput;
     s: ColorSaturationInput;
@@ -62,5 +68,11 @@ export type ColorSpaceRGBInput = {
 export type ColorSpaceInput = ColorSpaceHSLInput | ColorSpaceHSVInput | ColorSpaceRGBInput;
 
 export type ColorInput = ColorRef | ColorRawInput | ColorSpaceInput;
+
+export type ColorModifierInput = {
+    hue?: NumberModifierInput;
+    lightness?: NumberModifierInput;
+    saturation?: NumberModifierInput;
+};
 
 export type ColorSpaceName = 'rgb' | 'hsl' | 'hsv';

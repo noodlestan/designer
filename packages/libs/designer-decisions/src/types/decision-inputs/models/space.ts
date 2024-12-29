@@ -1,4 +1,4 @@
-import type { SignedSpaceInput, SpaceInput } from '../primitives';
+import type { NumberModifierInput, SpaceInput } from '../primitives';
 
 import type { DecisionInputBase } from './base';
 
@@ -26,10 +26,10 @@ export type SpaceScaleLinearRangeInput = DecisionInputBase & {
 };
 
 export type SpaceScaleModifierInput = DecisionInputBase & {
-    model: 'space-scale/modifier-range';
+    model: 'space-scale/modifier';
     params: {
         start: SpaceInput;
-        modifier: SignedSpaceInput;
+        modifier: NumberModifierInput;
         steps: number;
     };
 };

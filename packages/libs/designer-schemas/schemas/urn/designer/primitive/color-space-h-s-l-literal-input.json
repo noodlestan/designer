@@ -1,0 +1,22 @@
+{
+  "$id": "urn:designer:primitive:color-space-h-s-l-literal-input",
+  "type": "object",
+  "properties": {
+    "h": {
+      "type": "number"
+    },
+    "s": {
+      "type": "number"
+    },
+    "l": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "h",
+    "l",
+    "s"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

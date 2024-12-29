@@ -8,7 +8,7 @@ sidebar:
 
 import { FileTree, LinkCard } from '@astrojs/starlight/components';
 
-## Express decisions in JSON
+## Design decisions as data
 
 At a minimum, a decision record requires
 
@@ -38,7 +38,9 @@ The following example defines two decisions:
         "name": "Primary Backgrounds",
         "params": {
             "start": { "$name": "Primary Background" },
-            "modifier": { "lightness": 3 },
+            "modifier": {
+                "lightness": { "mode": "linear", "by": 3 }
+            },
             "steps": 5
         }
     }
@@ -63,7 +65,8 @@ using directories and files.
 ## Next steps
 
 Proceed to the next guide for step by step instructions on how to load all
-decision files at once and validate them.
+decision files at once, as well as how to validate the input data and inspect
+validation errors.
 
 <LinkCard
     href="/guides/validating-design-decisions-with-schemas"

@@ -8,7 +8,7 @@
       "$ref": "urn:designer:decision-model:space-scale-linear-range"
     },
     {
-      "$ref": "urn:designer:decision-model:space-scale-modifier-range"
+      "$ref": "urn:designer:decision-model:space-scale-modifier"
     }
   ],
   "$schema": "http://json-schema.org/draft-07/schema#"

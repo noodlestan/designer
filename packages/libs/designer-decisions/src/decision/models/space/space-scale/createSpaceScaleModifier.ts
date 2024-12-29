@@ -1,4 +1,8 @@
-import { createSpaceScale, createSpaceValue } from '../../../../primitives';
+import {
+    createNumberSteppedSeries,
+    createSpaceScale,
+    createSpaceValue,
+} from '../../../../primitives';
 import type { DecisionModelFactory, SpaceScale, SpaceScaleModifierInput } from '../../../../types';
 import { createDecisionValue } from '../../../values';
 
@@ -9,12 +13,10 @@ export const createSpaceScaleModifier: DecisionModelFactory<
     return {
         produce: (valueContext, params) => {
             const resolveValue = () => {
-                const start = createSpaceValue(valueContext, params.start);
+                const startValue = createSpaceValue(valueContext, params.start);
 
-                const values = Array(params.steps);
-                values[0] = start;
-                // WIP
-
+                const { value: start } = startValue.getValueWithUnits();
+                const values = createNumberSteppedSeries(start, params.steps, params.modifier);
                 return createSpaceScale(valueContext, values);
             };
 

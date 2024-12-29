@@ -153,7 +153,9 @@ requires as input:
     "type": "color-set/modifier"
     "params": {
         "start": { "$name": "Green Foreground" },
-        "modifier": { "l": 5 },
+        "modifier": {
+            "lightness": { "mode": "linear", "by": 5 }
+        },
         "steps": 5
     }
 ```

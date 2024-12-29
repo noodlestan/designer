@@ -1,4 +1,4 @@
-import { createColorSet, createColorValue } from '../../../../primitives';
+import { createColorSet, createColorSteppedSeries, createColorValue } from '../../../../primitives';
 import type { ColorSet, ColorSetModifierInput, DecisionModelFactory } from '../../../../types';
 import { createDecisionValue } from '../../../values';
 
@@ -8,10 +8,7 @@ export const createColorSetModifier: DecisionModelFactory<ColorSet, ColorSetModi
             const resolveValue = () => {
                 const start = createColorValue(valueContext, params.start);
 
-                const values = Array(params.steps);
-                values[0] = start.getString('rgb');
-                // WIP
-
+                const values = createColorSteppedSeries(start, params.steps, params.modifier);
                 return createColorSet(valueContext, values);
             };
 

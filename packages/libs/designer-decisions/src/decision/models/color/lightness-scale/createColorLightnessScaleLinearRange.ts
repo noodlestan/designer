@@ -1,4 +1,8 @@
-import { createLightnessScale, createLightnessValue } from '../../../../primitives';
+import {
+    createInterpolatedNumberSeries,
+    createLightnessScale,
+    createLightnessValue,
+} from '../../../../primitives';
 import {
     type ColorLightnessScaleLinearRangeInput,
     type DecisionModelFactory,
@@ -13,14 +17,12 @@ export const createColorLightnessScaleLinearRange: DecisionModelFactory<
     return {
         produce: (valueContext, params) => {
             const resolveValue = () => {
-                const from = createLightnessValue(valueContext, params.from);
-                const to = createLightnessValue(valueContext, params.to);
+                const fromValue = createLightnessValue(valueContext, params.from);
+                const toValue = createLightnessValue(valueContext, params.to);
 
-                const values = Array(params.steps);
-                values[0] = from;
-                // WIP
-                values[params.steps - 1] = to;
-
+                const from = fromValue.get();
+                const to = toValue.get();
+                const values = createInterpolatedNumberSeries(from, to, params.steps);
                 return createLightnessScale(valueContext, values);
             };
 

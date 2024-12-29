@@ -1,5 +1,5 @@
 {
-  "$id": "urn:designer:decision-model:space-scale-modifier-range",
+  "$id": "urn:designer:decision-model:space-scale-modifier",
   "additionalProperties": false,
   "type": "object",
   "properties": {
@@ -8,7 +8,7 @@
     },
     "model": {
       "type": "string",
-      "const": "space-scale/modifier-range"
+      "const": "space-scale/modifier"
     },
     "name": {
       "type": "string"
@@ -44,7 +44,7 @@
           "$ref": "urn:designer:primitive:space-input"
         },
         "modifier": {
-          "$ref": "urn:designer:primitive:signed-space-input"
+          "$ref": "urn:designer:primitive:number-modifier-input"
         },
         "steps": {
           "type": "number"

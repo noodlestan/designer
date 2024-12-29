@@ -44,24 +44,7 @@
           "type": "number"
         },
         "modifier": {
-          "type": "object",
-          "properties": {
-            "hue": {
-              "type": "number"
-            },
-            "lightness": {
-              "type": "number"
-            },
-            "saturation": {
-              "type": "number"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "hue",
-            "lightness",
-            "saturation"
-          ]
+          "$ref": "urn:designer:primitive:number-modifier-input"
         },
         "steps": {
           "type": "number"

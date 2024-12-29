@@ -1,4 +1,8 @@
-import { createSpaceScale, createSpaceValue } from '../../../../primitives';
+import {
+    createInterpolatedNumberSeries,
+    createSpaceScale,
+    createSpaceValue,
+} from '../../../../primitives';
 import type {
     DecisionModelFactory,
     SpaceScale,
@@ -13,13 +17,12 @@ export const createSpaceScaleLinearRange: DecisionModelFactory<
     return {
         produce: (valueContext, params) => {
             const resolveValue = () => {
-                const from = createSpaceValue(valueContext, params.from);
-                const to = createSpaceValue(valueContext, params.to);
+                const fromValue = createSpaceValue(valueContext, params.from);
+                const toValue = createSpaceValue(valueContext, params.to);
 
-                const values = Array(params.steps);
-                values[0] = from;
-                // WIP
-                values[params.steps - 1] = to;
+                const { value: from } = fromValue.getValueWithUnits();
+                const { value: to } = toValue.getValueWithUnits();
+                const values = createInterpolatedNumberSeries(from, to, params.steps);
 
                 return createSpaceScale(valueContext, values);
             };

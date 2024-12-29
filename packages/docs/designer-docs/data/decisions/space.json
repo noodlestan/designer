@@ -16,11 +16,16 @@
     }
   },
   {
-    "model": "space-scale/explicit",
+    "model": "space-scale/modifier",
     "name": "Sizing Space Scale",
     "description": "Space scale for component sizing",
     "params": {
-      "values": [25, 50, 100, 175, 300]
+      "start": 25,
+      "modifier": {
+        "mode": "geometric",
+        "by": 2
+      },
+      "steps": 5
     }
   },
   {
@@ -45,6 +50,16 @@
     "description": "Minimum size for avatar components",
     "params": {
       "value": 50
+    }
+  },
+  {
+    "model": "space-scale/modifier",
+    "name": "Avatar Sizes",
+    "description": "Space scale for avatar sizes",
+    "params": {
+      "start": 50,
+      "modifier": { "mode": "proportional", "by": 1 },
+      "steps": 4
     }
   }
 ]

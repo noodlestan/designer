@@ -1,0 +1,10 @@
+{
+  "$id": "urn:designer:primitive:number-modifier-type",
+  "enum": [
+    "geometric",
+    "linear",
+    "proportional"
+  ],
+  "type": "string",
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

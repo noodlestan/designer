@@ -12,6 +12,8 @@ export const createColorSet = (context: ValueContext, input: ColorInput[]): Colo
 };
 ```
 
+## Docs
+
 - fix headings not working!
 
 ```
@@ -22,19 +24,15 @@ const frontmatter = {
 };
 ```
 
-## Docs components
+- docs components
+  - Banner
+  - LinkCard (for example gallery and component reference)
 
-- Banner
-- LinkCard (for example gallery and component reference)
-
-## Viz
+## Visualizations
 
 - rename: atoms/DecisionValue => atoms/ValueLayout
-- fix: ShowColorLightnessScaleDecision `[object Object]`
 
-- SpaceValue `viz = SpaceSquareViz SpaceCircleViz SpaceBarViz`
-
-- ColorValue `viz = ColorViz | ColorFgViz | ColorBgViz ...`
+- ColorSwatchViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
 - ColorFgViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
 - ColorBgViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
 
