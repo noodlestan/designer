@@ -10,7 +10,7 @@ type Props = ShowValueProps & {
     v?: ColorValue;
 };
 
-const { v: colorValue, value = true, viz = true, size = 'auto', show } = Astro.props;
+const { v: colorValue, value = true, viz = true, size = 'auto', options } = Astro.props;
 
 const spaces: ColorSpaceName[] | null =
     typeof value === 'boolean' && value
@@ -25,7 +25,7 @@ const Viz = getColorVizComponent(viz);
 ---
 
 <div class:list={['dd-show-color-value', { size }]}>
-    {viz && <Viz value={colorValue} size={size} show={show} />}
+    {viz && <Viz value={colorValue} size={size} options={options} />}
     {
         value && colorValue !== undefined && (
             <FlexStack>

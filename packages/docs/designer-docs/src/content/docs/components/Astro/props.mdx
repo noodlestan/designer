@@ -65,41 +65,6 @@ If the decision does not exist, it renders a notice.
 All components that directly render a decision or a decision value also
 accept the following optional props.
 
-### ༶ `viz` (true): boolean | string
-
-Provide this flag to chose between available visualizations or to hide
-the decision visualization altogether, displaying only its value(s).
-
-#### Hiding the visualization
-
-In this example we are hiding the visualization and rendering its value
-next to a custom label.
-
-```mdx
-RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
-```
-
-<FlexRow align="center" vpad>
-    RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
-</FlexRow>
-
-#### Choosing the visualization
-
-Some decision types can be rendered using different visualizations.
-
-For instance, [Space Decisions](/components/Astro/Decisions/space) components
-can represent a space value with a few different shapes.
-
-```mdx
-<ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
-<ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
-```
-
-<CardGrid>
-    <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
-    <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
-</CardGrid>
-
 ### ༶ `value` (true): boolean | string | object
 
 Provide this flag to customize how the value is displayed or to hide
@@ -160,3 +125,45 @@ Constrains the visualization to a specific size.
 </FlexStack>
 
 Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.
+
+### ༶ `viz` (true): boolean | string
+
+Provide this flag to chose between available visualizations or to hide
+the decision visualization altogether, displaying only its value(s).
+
+#### Hiding the visualization
+
+In this example we are hiding the visualization and rendering its value
+next to a custom label.
+
+```mdx
+RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
+```
+
+<FlexRow align="center" vpad>
+    RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
+</FlexRow>
+
+#### Choosing a different visualization
+
+Some decision types can be rendered using different visualizations.
+
+For instance, [Space Decisions](/components/Astro/Decisions/space) components
+can represent a space value with a few different shapes.
+
+```mdx
+<ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
+<ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
+    <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
+</CardGrid>
+
+### ༶ `options` (optional): object
+
+Provide this prop to configure visualization options.
+
+Refer to the documentation of [Decision Components](/components/Astro/#decisions) for more details
+on available options.

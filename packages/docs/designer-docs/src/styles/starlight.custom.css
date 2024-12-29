@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900');
-/* Dark mode colors. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Aleo:wght@300');
+
 :root {
     --sl-color-bg-nav: hsl(180, 6%, 6%);
     --sl-font: Archivo;
     --sl-font-mono: Consolas;
-    /* --sl-color-bg-nav: #00b7e5; */
 }
 
-/* Light mode colors. */
 :root[data-theme='light'] {
     --sl-color-bg-nav: hsl(191, 76%, 90%);
 }

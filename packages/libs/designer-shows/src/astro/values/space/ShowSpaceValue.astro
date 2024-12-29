@@ -10,7 +10,7 @@ type Props = ShowValueProps & {
     v?: SpaceValue;
 };
 
-const { v: spaceValue, value = true, viz = true, size, show } = Astro.props;
+const { v: spaceValue, value = true, viz = true, size, options } = Astro.props;
 
 const { value: v, units } = spaceValue?.getValueWithUnits() || {};
 const vWithUnits = `${v}${units}`;
@@ -19,7 +19,7 @@ const Viz = getSpaceVizComponent(viz);
 ---
 
 <div class:list={['dd-show-space-value', { size }]}>
-    {viz && <Viz value={spaceValue} size={size} show={show} />}
+    {viz && <Viz value={spaceValue} size={size} options={options} />}
     {
         value && spaceValue !== undefined && (
             <DecisionValue>

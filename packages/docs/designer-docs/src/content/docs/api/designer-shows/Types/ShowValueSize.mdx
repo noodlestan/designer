@@ -1,6 +1,8 @@
 ---
 title: ShowValueSize
 slug: api/designer-shows/Types/ShowValueSize
+sidebar:
+    order: 1
 ---
 
 import { FlexRow, FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
@@ -18,7 +20,13 @@ type ShowValueSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 When rendering decisions you can chose a different visualization size
 setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
 
-#### `size="xs"`
+```mdx
+<ShowDecision store={store} d="Action Color" size={...} />
+```
+
+## Type Values
+
+### `xs`
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'xs'} />
@@ -28,7 +36,7 @@ setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
     <ShowDecision store={store} d="Action Color" size={'xs'} />
 </FlexStack>
 
-#### `size="s"`
+### `s`
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'s'} />
@@ -38,7 +46,7 @@ setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
     <ShowDecision store={store} d="Action Color" size={'s'} />
 </FlexStack>
 
-#### `size="m"`
+### `m`
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'m'} />
@@ -48,7 +56,7 @@ setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
     <ShowDecision store={store} d="Action Color" size={'m'} />
 </FlexStack>
 
-#### `size="l"`
+### `l`
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'l'} />
@@ -58,7 +66,7 @@ setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
     <ShowDecision store={store} d="Action Color" size={'l'} />
 </FlexStack>
 
-#### `size="xl"`
+### `xl`
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'xl'} />
@@ -68,7 +76,7 @@ setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
     <ShowDecision store={store} d="Action Color" size={'xl'} />
 </FlexStack>
 
-#### `size="auto"` (default)
+### `auto` (default)
 
 Defaults to `auto` in which case it stretches to use all available space.
 

@@ -1,0 +1,94 @@
+---
+title: ColorVizName
+slug: api/designer-shows/Types/ColorVizName
+sidebar:
+    order: 10
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
+Available visualizations for [Color Decisions](/components/Astro/Decisions/color).
+
+```ts
+export type ColorVizName = 'swatch' | 'fg' | 'bg';
+```
+
+When rendering color decisions you can chose a different visualization by
+setting the `viz` [prop](/components/Astro/Props#-viz-true-boolean--string) to one of these.
+
+```mdx
+<ShowColorValueDecision store={store} d="Brand Black" viz="..." options={options} />
+```
+
+## Type Values
+
+### `swatch` (default)
+
+Flat color surface.
+
+No options.
+
+```mdx
+<ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
+</FlexStack>
+
+### `fg`
+
+Render the decision value as the foreground content color.
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="m"
+    viz="fg"
+    options={{ contrast: '#9B2C5A' }}
+/>
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Contrast Color"
+        size="m"
+        viz="fg"
+        options={{ contrast: '#9B2C5A' }}
+    />
+</CardGrid>
+
+Refer to [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions/) for details on options.
+
+### `bg`
+
+Render the decision value as the background with custom element(s) on top.
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Action Color"
+    size="m"
+    viz="bg"
+    options={{ mode: 'text', contrast: '#FDFBFC' }}
+/>
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Color"
+        size="m"
+        viz="bg"
+        options={{ mode: 'text', contrast: '#FDFBFC' }}
+    />
+</CardGrid>
+
+Refer to [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions/) for details on options.

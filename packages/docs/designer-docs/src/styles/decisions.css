@@ -23,17 +23,24 @@
 
     --dd-space-gap: var(--dd-space-s);
 
-    --dd-heading-size: 1.8rem;
+    --dd-text-size-xs: 0.9rem;
+    --dd-text-size-s: 1rem;
+    --dd-text-size-m: 1.3rem;
+    --dd-text-size-l: 1.8rem;
+    --dd-text-size-xl: 2.5rem;
+    --dd-text-size-2xl: 3.5rem;
+
+    --dd-heading-size: var(--dd-text-size-l);
     --dd-heading-weight: 300;
     --dd-heading-line-height: 1.3;
     --dd-heading-color: var(--sl-color-text);
 
-    --dd-text-size: 1rem;
+    --dd-text-size: var(--dd-text-size-s);
     --dd-text-weight: 300;
     --dd-text-line-height: 1.2;
     --dd-text-color: var(--sl-color-text);
 
-    --dd-description-size: 1.2rem;
+    --dd-description-size: var(--dd-text-size-m);
 
     --dd-label-weight: 600;
 
@@ -66,6 +73,21 @@
 
     --dd-color-viz-border: 1px solid var(--sl-color-gray-3);
     --dd-color-viz-border-radius: 5px;
+
+    --dd-viz-typeface-family: Archivo, sans-serif;
+    --dd-viz-typeface-size-xs: 1rem;
+    --dd-viz-typeface-size-s: 1.5rem;
+    --dd-viz-typeface-size-m: 2.3rem;
+    --dd-viz-typeface-size-l: 4rem;
+    --dd-viz-typeface-size-xl: 6rem;
+
+    --dd-viz-text-family: Aleo, sans-serif;
+    --dd-text-line-height: 1.7;
+    --dd-viz-text-size-xs: 0.7;
+    --dd-viz-text-size-s: var(--dd-text-size-s);
+    --dd-viz-text-size-m: var(--dd-text-size-s);
+    --dd-viz-text-size-l: var(--dd-text-size-m);
+    --dd-viz-text-size-xl: var(--dd-text-size-m);
 
     --dd-data-max-height: 250px;
 }

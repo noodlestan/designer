@@ -10,6 +10,7 @@ import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components'
 import {
     FlexRow,
     FlexStack,
+    ShowDecision,
     ShowSpaceValueDecision,
     ShowSpaceScaleDecision,
 } from '@noodlestan/designer-shows/astro';
@@ -60,12 +61,37 @@ Use the [viz prop](#-viz-true-boolean--spacevizname) to chose the visualization 
 
 These two **mandatory** props serve to identify and retrieve the decision.
 
-### ༶ [ValueProps](/components/Astro/Props#-value-true-boolean--string--object): `value` and `size`
+### ༶ [ValueProps ༶ value](/components/Astro/Props/#-value-true-boolean--string--object)
 
-These optional props control the size of the visualization an whether the value is shown.
+The `value` prop controls how the decision value is displayed.
 
-### ༶ `viz` (true): boolean | [SpaceVizName](/api/designer-shows/Types/SpaceVizName)
+At the moment it has no effect on Space Decisions.
 
-Chose the visualization type.
+### ༶ [ValueProps ༶ size](/components/Astro/Props#-size-auto-showvaluesize)
+
+The `size` optional prop controls the size of the visualization.
+
+Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.
+
+### ༶ [ValueProps ༶ viz](/components/Astro/Props/#-viz-true-boolean--string)
+
+Chose visualization type.
+
+In this example we set the visualization to `circle`.
+
+```mdx
+<ShowDecision store={store} d="Avatar Sizes" viz="circle" />
+```
+
+<CardGrid>
+
+<ShowDecision store={store} d="Avatar Sizes" viz="circle" />
+</CardGrid>
 
 Refer to [SpaceVizName](/api/designer-shows/Types/SpaceVizName) for available visualizations.
+
+### ༶ [ValueProps ༶ options](/components/Astro/Props/#-options-optional-object)
+
+Configure the visualization.
+
+At the moment it has no effect on Space Decisions.

@@ -1,6 +1,8 @@
 ---
 title: SpaceVizName
 slug: api/designer-shows/Types/SpaceVizName
+sidebar:
+    order: 20
 ---
 
 import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
@@ -16,31 +18,33 @@ type SpaceVizName = 'bar-h' | 'bar-v' | 'square' | 'circle';
 ```
 
 When rendering decisions you can chose a different visualization by
-setting the `viz` [prop](/components/Astro/Props#valueprops) to one of these.
+setting the `viz` [prop](/components/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
-<ShowSpaceValueDecision store={store} d="Space Unit" size="xs" viz="bar-h" />
+<ShowSpaceValueDecision store={store} d={decision} viz="..." />
 ```
 
-#### `viz="bar-h"` (default)
+## Type Values
+
+### `bar-h` (default)
 
 <FlexStack vpad>
     <ShowDecision store={store} d="Space Unit" size="xs" viz="bar-h" />
 </FlexStack>
 
-#### `viz="bar-v`
+### `bar-v`
 
 <FlexStack vpad>
     <ShowDecision store={store} d="Textarea Maximum Height" size="s" viz="bar-v" />
 </FlexStack>
 
-#### `viz="square`
+### `square`
 
 <FlexStack vpad>
     <ShowDecision store={store} d="Card Thumb Minimum Size" size="s" viz="square" />
 </FlexStack>
 
-#### `viz="circle`
+### `circle`
 
 <FlexStack vpad>
     <ShowDecision store={store} d="Avatar Minimum Size" size="s" viz="circle" />

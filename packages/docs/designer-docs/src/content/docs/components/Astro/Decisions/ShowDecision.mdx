@@ -7,7 +7,7 @@ sidebar:
 ---
 
 import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
-import { ShowDecision } from '@noodlestan/designer-shows/astro';
+import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
@@ -19,13 +19,25 @@ import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 This component renders the appropriate visualization according to the decision type.
 
-In this example we are providing with decisions of 4 different types:
+In this example we are rendering decisions of 4 different types:
 
 <CardGrid>
-    <ShowDecision store={store} d="Action Color" size="m" />
-    <ShowDecision store={store} d="Space Unit" size="m" />
-    <ShowDecision store={store} d="Curcuma Palette" size="s" />
-    <ShowDecision store={store} d="Layout Space Scale" size="s" />
+    <FlexStack>
+        <label>Color</label>
+        <ShowDecision store={store} d="Action Color" size="m" />
+    </FlexStack>
+    <FlexStack>
+        <label>Space</label>
+        <ShowDecision store={store} d="Space Unit" size="m" />
+    </FlexStack>
+    <FlexStack>
+        <label>Color Set</label>
+        <ShowDecision store={store} d="Heat Map Color Set" size="s" />
+    </FlexStack>
+    <FlexStack>
+        <label>Space Scale</label>
+        <ShowDecision store={store} d="Layout Space Scale" size="s" />
+    </FlexStack>
 </CardGrid>
 
 ## Props

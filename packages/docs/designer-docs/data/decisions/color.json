@@ -142,14 +142,27 @@
     "usage": {
       "intendedFor": [
         "Link Foreground",
-        "Button Background",
-        "Button Border",
-        "Navigation Highlight"
+        "Action Background",
+        "Action Foreground",
+        "Action Border",
+        "Navigation Item Background"
       ],
       "notFor": ["Non-interactive elements"]
     },
     "params": {
-      "value": "#b13267"
+      "value": "#9B2C5A"
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Action Contrast Color",
+    "description": "Used as the constrast color in buttons and navigation that use Action Color",
+    "usage": {
+      "intendedFor": ["Action Background", "Action Foreground", "Navigation Item Foreground"],
+      "notFor": ["Non-interactive elements"]
+    },
+    "params": {
+      "value": "#FDFBFC"
     }
   },
   {

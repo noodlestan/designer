@@ -1,0 +1,67 @@
+---
+title: ShowContentMode
+slug: api/designer-shows/Types/ShowContentMode
+sidebar:
+    order: 12
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
+Available options for custom content rendered via
+[ColorVizOptions](/api/designer-shows/Types/ColorVizOptions).
+
+```ts
+export type ShowContentMode = 'typeface' | 'text';
+```
+
+```mdx
+<ShowColorValueDecision store={store} d="Brand Black" size="m" viz="..." options={options} />
+```
+
+## Type Values
+
+Defines the content type.
+
+Available only when [viz](/api/designer-shows/Types/ColorVizName) is set to either
+`fg` and ` bg` modes, and ignored in other modes.
+
+### `typeface` (default)
+
+Renders a few characters showcasing features of a typeface.
+
+```mdx
+<ShowDecision store={store} d="Brand Pink" size="m" viz="fg" />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Brand Pink" size="m" viz="fg" />
+</FlexStack>
+
+### `text`
+
+Renders a long text.
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="m"
+    viz="fg"
+    options={{ mode: 'text', contrast: '#9B2C5A' }}
+/>
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Contrast Color"
+        size="m"
+        viz="fg"
+        options={{ mode: 'text', contrast: '#9B2C5A' }}
+    />
+</CardGrid>

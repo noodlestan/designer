@@ -16,6 +16,6 @@ const Comp = decision && getDecisionComponent(decision);
 const type = decision && getDecisionType(decision);
 ---
 
-{decision && Comp && <Comp d={decision} store={store} {...rest} />}
+{decision && Comp && <Comp store={store} d={decision} {...rest} />}
 {decision && type && !Comp && <ShowDecisionTypeUnavailable type={type} />}
 {!decision && <ShowDecisionUnavailable d={d as string} />}

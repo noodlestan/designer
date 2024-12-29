@@ -1,0 +1,126 @@
+---
+title: ColorVizOptions
+slug: api/designer-shows/Types/ColorVizOptions
+sidebar:
+    order: 11
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
+Available options for [Color Visualizations](/api/designer-shows/Types/ColorVizName).
+
+```ts
+export type ColorVizOptions = {
+    contrast: string;
+    mode?: ShowContentMode;
+    content?: string;
+};
+
+export type ShowContentMode = 'typeface' | 'text';
+```
+
+When rendering color decisions you can configure visualization by
+providing the `options` [prop](/components/Astro/Props#-options-optional-object).
+
+```mdx
+<ShowColorValueDecision store={store} d="Brand Black" viz="..." options={options} />
+```
+
+## ༶ `contrast`
+
+Define the color applied to the opposite layer.
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="m"
+    viz="fg"
+    options={{ contrast: '#000000' }}
+/>
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Contrast Color"
+        size="m"
+        viz="fg"
+        options={{ contrast: '#000000' }}
+    />
+</CardGrid>
+
+## ༶ `mode`
+
+Define the content type.
+
+Available only when [viz](/api/designer-shows/Types/ColorVizName) is set to visualize
+either the decision value as `fg` or ` bg`.
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="m"
+    viz="fg"
+    options={{ mode: 'text', contrast: '#333333' }}
+/>
+```
+
+<FlexStack vpad>
+    <ShowDecision
+        store={store}
+        d="Action Contrast Color"
+        size="m"
+        viz="fg"
+        options={{ mode: 'text', contrast: '#333333' }}
+    />
+</FlexStack>
+
+Refer to [ShowContentMode](/api/designer-shows/Types/ShowContentMode/) for available content modes.
+
+## ༶ `content`
+
+Override the default content for `typeface` or `text` content types.
+
+Available only when [viz](/api/designer-shows/Types/ColorVizName) is set to visualize
+either the decision value as `fg` or ` bg`.
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Brand Blue"
+    size="s"
+    viz="fg"
+    options={{ mode: 'text', contrast: '#000000' }}
+/>
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="s"
+    viz="fg"
+    options={{ mode: 'text', contrast: '#000000', content: 'Lorem Ipsum' }}
+/>
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Brand Blue"
+        size="s"
+        viz="fg"
+        options={{ mode: 'typeface', contrast: '#000000', content: 'Aa' }}
+    />
+    <ShowDecision
+        store={store}
+        d="Action Contrast Color"
+        size="s"
+        viz="fg"
+        options={{ mode: 'text', contrast: '#000000', content: 'Lorem Ipsum' }}
+    />
+</CardGrid>

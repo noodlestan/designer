@@ -1,17 +1,5 @@
 # TODO
 
-## Decisions
-
-- resolve at creation time so that future methods of value, e.g. `getReferences()`, can access resolutions
-
-```
-export const createColorSet = (context: ValueContext, input: ColorInput[]): ColorSet => {
-    return {
-        get: () => input.map(item => createColorValue(context, item)),
-    };
-};
-```
-
 ## Docs
 
 - fix headings not working!
@@ -28,13 +16,24 @@ const frontmatter = {
   - Banner
   - LinkCard (for example gallery and component reference)
 
+## Decisions
+
+- consider renaming all decision model factories to a common suffix, e.g.:
+  - createSpaceScaleLinearRangeModel (favorite)
+  - createSpaceScaleLinearRangeDecision
+
 ## Visualizations
 
 - rename: atoms/DecisionValue => atoms/ValueLayout
 
-- ColorSwatchViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
-- ColorFgViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
-- ColorBgViz `show={symbol: 'graphic' | 'type', opposite: ColorInput }`
+- implement `graphic` and `slot` content in `<Color*Viz/>`
+
+  - document, add to examples
+  - search: `return content || '*';`
+
+- make it possible to pass values or decisions in ColorVizProps `contrast`
+
+  - make it a ColorInput, use resolveColorValue?
 
 - Add icons to ShowDecisionUnavailable, ShowDecisionTypeUnavailable
 
@@ -70,6 +69,7 @@ const frontmatter = {
 ## Config
 
 - document
+  - store: StaticDecisionStore; // WIP replace with ShowDecisionStore
 - pass config to store so that it is available in every component
   - use cases:
     - default flags for cards/pills (update docs)
@@ -78,6 +78,7 @@ const frontmatter = {
     - register new viz components
     - generate links for decisions
     - generate links for usage entries
+    - resolveVizContent graphic
 
 ## Usage
 

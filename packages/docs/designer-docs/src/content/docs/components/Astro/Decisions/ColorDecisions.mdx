@@ -59,13 +59,13 @@ Renders a [ColorSetDecision](/decision-models/color-set).
 Renders a [ColorHueValueDecision](/decision-models/color-hue-value).
 
 ```mdx
-<ShowColorHueValueDecision d="Brand Pink Hue" store={store} size="m" />
-<ShowColorHueValueDecision d="Brand Blue Hue" store={store} size="m" />
+<ShowColorHueValueDecision store={store} d="Brand Pink Hue" size="m" />
+<ShowColorHueValueDecision store={store} d="Brand Blue Hue" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorHueValueDecision d="Brand Pink Hue" store={store} size="m" />
-    <ShowColorHueValueDecision d="Brand Blue Hue" store={store} size="m" />
+    <ShowColorHueValueDecision store={store} d="Brand Pink Hue" size="m" />
+    <ShowColorHueValueDecision store={store} d="Brand Blue Hue" size="m" />
 </CardGrid>
 
 ### ShowColorSaturationValueDecision
@@ -73,13 +73,13 @@ Renders a [ColorHueValueDecision](/decision-models/color-hue-value).
 Renders a [ColorSaturationValueDecision](/decision-models/color-saturation-value).
 
 ```mdx
-<ShowColorSaturationValueDecision d="Brand Pink Saturation" store={store} size="m" />
-<ShowColorSaturationValueDecision d="Brand Blue Saturation" store={store} size="m" />
+<ShowColorSaturationValueDecision store={store} d="Brand Pink Saturation" size="m" />
+<ShowColorSaturationValueDecision store={store} d="Brand Blue Saturation" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorSaturationValueDecision d="Brand Pink Saturation" store={store} size="m" />
-    <ShowColorSaturationValueDecision d="Brand Blue Saturation" store={store} size="m" />
+    <ShowColorSaturationValueDecision store={store} d="Brand Pink Saturation" size="m" />
+    <ShowColorSaturationValueDecision store={store} d="Brand Blue Saturation" size="m" />
 </CardGrid>
 
 ### ShowColorLightnessValueDecision
@@ -87,40 +87,36 @@ Renders a [ColorSaturationValueDecision](/decision-models/color-saturation-value
 Renders a [ColorLightnessValueDecision](/decision-models/color-lightness-value).
 
 ```mdx
-<ShowColorLightnessValueDecision d="Brand Pink Lightness" store={store} size="m" />
-<ShowColorLightnessValueDecision d="Brand Blue Lightness" store={store} size="m" />
+<ShowColorLightnessValueDecision store={store} d="Brand Pink Lightness" size="m" />
+<ShowColorLightnessValueDecision store={store} d="Brand Blue Lightness" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorLightnessValueDecision d="Brand Pink Lightness" store={store} size="m" />
-    <ShowColorLightnessValueDecision d="Brand Blue Lightness" store={store} size="m" />
+    <ShowColorLightnessValueDecision store={store} d="Brand Pink Lightness" size="m" />
+    <ShowColorLightnessValueDecision store={store} d="Brand Blue Lightness" size="m" />
 </CardGrid>
 
 ### ShowColorLightnessScaleDecision
 
 Renders a [ShowColorLightnessScaleDecision](/decision-models/color-lightness-scale).
 
-```ts
-<ShowColorLightnessScaleDecision d="Foreground Lightness Scale" store={store} size="m" />
-<ShowColorLightnessScaleDecision d="Background Lightness Scale" store={store} size="m" />
+```mdx
+<ShowColorLightnessScaleDecision store={store} d="Foreground Lightness Scale" size="m" />
+<ShowColorLightnessScaleDecision store={store} d="Background Lightness Scale" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorLightnessScaleDecision d="Foreground Lightness Scale" store={store} size="m" />
-    <ShowColorLightnessScaleDecision d="Background Lightness Scale" store={store} size="m" />
+    <ShowColorLightnessScaleDecision store={store} d="Foreground Lightness Scale" size="m" />
+    <ShowColorLightnessScaleDecision store={store} d="Background Lightness Scale" size="m" />
 </CardGrid>
 
 ## Props
 
-### ༶ [DecisionProps](/components/Astro/Props): `store` and `d` (mandatory)
+### ༶ [DecisionProps](/components/Astro/Props): `store` and `d`
 
 These two **mandatory** props serve to identify and retrieve the decision.
 
-### ༶ [ValueProps](/components/Astro/Props#-size-auto-showvaluesize): `size`
-
-The `size` optional prop controls the size of the visualization.
-
-### ༶ `value` (true): boolean | ...
+### ༶ [ValueProps ༶ value](/components/Astro/Props/#-value-true-boolean--string--object)
 
 The `value` prop controls how the decision value is displayed.
 
@@ -153,8 +149,53 @@ to list several color spaces in your preferred order.
     <ShowDecision d="Brand Pink" store={store} size="s" value={['hsl', 'rgb']} />
 </FlexRow>
 
-### ༶ `viz` (true): boolean | ColorVizName
+### ༶ [ValueProps ༶ size](/components/Astro/Props#-size-auto-showvaluesize)
+
+The `size` optional prop controls the size of the visualization.
+
+Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.
+
+### ༶ [ValueProps ༶ viz](/components/Astro/Props/#-viz-true-boolean--string)
 
 Chose visualization type.
 
+In this example we set the visualization to `bg`.
+
+```mdx
+<ShowDecision store={store} d="Action Color" size="m" viz="bg" options={{ contrast: '#FDFBFC' }} />
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Color"
+        size="m"
+        viz="bg"
+        options={{ contrast: '#FDFBFC' }}
+    />
+</CardGrid>
+
 Refer to [ColorVizName](/api/designer-shows/Types/ColorVizName) for available visualizations.
+
+### ༶ [ValueProps ༶ options](/components/Astro/Props/#-options-optional-object)
+
+Configure the visualization.
+
+In this example we change it to `fg` and provide the
+additional `options` prop for defining the visualization options.
+
+```mdx
+<ShowDecision store={store} d="Action Color" size="m" viz="fg" options={{ contrast: '#FDFBFC' }} />
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Color"
+        size="m"
+        viz="fg"
+        options={{ mode: 'text', contrast: '#FDFBFC' }}
+    />
+</CardGrid>
+
+Refer to [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions) for available options.

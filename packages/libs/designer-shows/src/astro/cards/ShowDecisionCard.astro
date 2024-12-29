@@ -27,7 +27,7 @@ const {
     d,
     value: showValue = true,
     viz: showViz = true,
-    show: showOptions,
+    options: showOptions,
     name: showName = true,
     description: showDescription = true,
     usage: showUsage = true,
@@ -57,11 +57,11 @@ const metaSlot = showMeta && 'meta';
         showValueOrViz && (
             <Fragment slot={vizSlot}>
                 <ShowDecision
-                    d={decision || d}
                     store={store}
+                    d={decision || d}
                     value={showValue}
                     viz={showViz}
-                    show={showOptions}
+                    options={showOptions}
                     size="m"
                 />
             </Fragment>
@@ -71,19 +71,19 @@ const metaSlot = showMeta && 'meta';
         decision && showDetails && (
             <Fragment slot={detailsSlot}>
                 {showDescription !== false && (
-                    <ShowDecisionDescription d={decision} store={store} />
+                    <ShowDecisionDescription store={store} d={decision} />
                 )}
-                {showUsage !== false && <ShowDecisionUsage d={decision} store={store} />}
+                {showUsage !== false && <ShowDecisionUsage store={store} d={decision} />}
             </Fragment>
         )
     }
     {
         decision && showMeta && (
             <Fragment slot={metaSlot}>
-                {showModel && <ShowDecisionModel d={decision} store={store} />}
-                {showParams && <ShowDecisionParams d={decision} store={store} />}
-                {showData && <ShowDecisionData d={decision} store={store} />}
-                {showContexts && <ShowDecisionContexts d={decision} store={store} />}
+                {showModel && <ShowDecisionModel store={store} d={decision} />}
+                {showParams && <ShowDecisionParams store={store} d={decision} />}
+                {showData && <ShowDecisionData store={store} d={decision} />}
+                {showContexts && <ShowDecisionContexts store={store} d={decision} />}
             </Fragment>
         )
     }
