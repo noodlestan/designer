@@ -33,11 +33,3 @@ export type SpaceScaleModifierInput = DecisionInputBase & {
         steps: number;
     };
 };
-
-export type SpaceValueDecisionInput = SpaceValueExplicitInput;
-export type SpaceScaleDecisionInput =
-    | SpaceScaleExplicitInput
-    | SpaceScaleLinearRangeInput
-    | SpaceScaleModifierInput;
-
-export type SpaceDecisionInput = SpaceValueDecisionInput | SpaceScaleDecisionInput;

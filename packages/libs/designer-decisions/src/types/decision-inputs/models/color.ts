@@ -85,27 +85,3 @@ export type ColorSetModifierInput = DecisionInputBase & {
         steps: number;
     };
 };
-
-export type ColorHueValueDecisionInput = ColorHueValueExplicitInput;
-export type ColorSaturationValueDecisionInput = ColorSaturationValueExplicitInput;
-export type ColorLightnessValueDecisionInput = ColorLightnessValueExplicitInput;
-
-export type ColorValueDecisionInput = ColorValueExplicitInput;
-
-export type ColorLightnessScaleDecisionInput =
-    | ColorLightnessScaleExplicitInput
-    | ColorLightnessScaleLinearRangeInput
-    | ColorLightnessScaleModifierInput;
-
-export type ColorSetDecisionInput =
-    | ColorSetExplicitInput
-    | ColorSetLinearRangeInput
-    | ColorSetModifierInput;
-
-export type ColorDecisionInput =
-    | ColorHueValueDecisionInput
-    | ColorLightnessValueDecisionInput
-    | ColorSaturationValueDecisionInput
-    | ColorValueDecisionInput
-    | ColorLightnessScaleDecisionInput
-    | ColorSetDecisionInput;
