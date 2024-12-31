@@ -7,14 +7,17 @@ import type {
 import type { ErrorObject } from 'ajv';
 
 import { createDecisionFactory } from './parts';
-import type { StaticDecisionStore, StaticInputMap } from './types';
+import type { StaticDecisionStore, StaticDecisionStoreError, StaticInputMap } from './types';
 
 export type DecisionInputData = {
     decision: DecisionInputBase;
     errors: ErrorObject[] | null | undefined;
 };
 
-export const createStaticDecisionStore = (inputStore: StaticInputMap): StaticDecisionStore => {
+export const createStaticDecisionStore = (
+    inputStore: StaticInputMap,
+    errors: StaticDecisionStoreError[] = [],
+): StaticDecisionStore => {
     const decisions = createDecisionFactory(inputStore);
 
     const decision = <V = unknown>(
@@ -28,8 +31,9 @@ export const createStaticDecisionStore = (inputStore: StaticInputMap): StaticDec
     };
 
     return {
-        hasErrors: inputStore.hasErrors,
-        allErrors: inputStore.allErrors,
+        hasErrors: () => errors.length > 0 || inputStore.hasErrors(),
+        storeErrors: () => errors,
+        validationErrors: inputStore.validationErrors,
         records: inputStore.records,
         record: inputStore.record,
         decision,

@@ -11,12 +11,12 @@ const mockDecision = (model: string) =>
 
 describe('isDecisionOfType', () => {
     it('returns true for matching type', () => {
-        const decision = mockDecision('color-lightness-decision/static-value');
-        expect(isDecisionOfType(decision, 'color-lightness-decision')).toBe(true);
+        const decision = mockDecision('color-srgb-lightness-decision/static-value');
+        expect(isDecisionOfType(decision, 'color-srgb-lightness-decision')).toBe(true);
     });
 
     it('returns false for non-matching type', () => {
         const decision = mockDecision('space-padding-decision/static-value');
-        expect(isDecisionOfType(decision, 'color-lightness-decision')).toBe(false);
+        expect(isDecisionOfType(decision, 'color-srgb-lightness-decision')).toBe(false);
     });
 });

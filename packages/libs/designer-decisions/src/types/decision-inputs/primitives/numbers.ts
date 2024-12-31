@@ -1,16 +1,16 @@
 export type NumberModifierType = 'linear' | 'proportional' | 'geometric';
 
-export type NumberModifierLinearInput = { mode: 'linear'; by: number };
+export type NumberLinearModifier = { mode: 'linear'; by: number };
 
-export type NumberModifierProportionalInput = { mode: 'proportional'; by: number };
+export type NumberProportionalModifier = { mode: 'proportional'; by: number };
 
-export type NumberModifierGeometricInput = { mode: 'geometric'; by: number };
+export type NumberGeometricModifier = { mode: 'geometric'; by: number };
 
-export type NumberModifierInput =
-    | NumberModifierLinearInput
-    | NumberModifierProportionalInput
-    | NumberModifierGeometricInput;
+export type NumberModifier =
+    | NumberLinearModifier
+    | NumberProportionalModifier
+    | NumberGeometricModifier;
 
-export type PercentageInput = number;
+export type NormalNumber = number;
 
-export type DegreesInput = number;
+export type Degrees = number; // between 0 and 360

@@ -1,6 +1,8 @@
 import type {
-    ColorInput,
-    ColorSpaceInput,
+    ColorInputValue,
+    ColorObjectLiteral,
+    ColorOkLCHLiteral,
+    ColorOkLabLiteral,
     ColorSpaceName,
     ColorValue,
     ValueContext,
@@ -8,23 +10,32 @@ import type {
 
 import { resolveColorValue } from './resolveColorValue';
 
-export const createColorValue = (context: ValueContext, input: ColorInput): ColorValue => {
+export const createColorValue = (context: ValueContext, input: ColorInputValue): ColorValue => {
     const value = resolveColorValue(context, input);
 
-    const getSpace = (space: ColorSpaceName): ColorSpaceInput => {
-        if (space === 'hsl') {
+    const toObject = (space: ColorSpaceName): ColorObjectLiteral => {
+        if (space === 'oklch') {
+            const [l, c, h] = value.oklch();
+            return { l, c, h };
+        } else if (space === 'oklab') {
+            const [l, a, b] = value.oklab();
+            return { l, a, b };
+        } else if (space === 'hsl') {
             const [h, s, l] = value.hsl();
             return { h, s, l };
-        } else if (space === 'hsv') {
-            const [h, s, v] = value.hsv();
-            return { h, s, v };
         }
-        const [r, g, b] = value.rgb(true);
+        const [r, g, b] = value.rgb();
         return { r, g, b };
     };
 
-    const getString = (space: ColorSpaceName) => {
-        if (space === 'hsl') {
+    const toString = (space: ColorSpaceName) => {
+        if (space === 'oklch') {
+            const object = toObject(space) as ColorOkLCHLiteral;
+            return `oklch(${object.l * 100}% ${object.c} ${object.h})`;
+        } else if (space === 'oklab') {
+            const object = toObject(space) as ColorOkLabLiteral;
+            return `oklab(${object.l * 100}% ${object.a} ${object.b})`;
+        } else if (space === 'hsl') {
             return value.css('hsl');
         }
         return value.hex('rgb');
@@ -32,7 +43,7 @@ export const createColorValue = (context: ValueContext, input: ColorInput): Colo
 
     return {
         get: () => value,
-        getSpace,
-        getString,
+        toObject,
+        toString,
     };
 };

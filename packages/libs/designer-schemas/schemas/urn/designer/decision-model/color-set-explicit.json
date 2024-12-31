@@ -43,7 +43,7 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "urn:designer:primitive:color-input"
+            "$ref": "urn:designer:primitive:color-input-value"
           }
         }
       },

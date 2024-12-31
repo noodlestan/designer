@@ -1,0 +1,22 @@
+{
+  "$id": "urn:designer:primitive:color-ok-l-c-h",
+  "type": "object",
+  "properties": {
+    "l": {
+      "$ref": "urn:designer:primitive:color-oklab-lightness"
+    },
+    "c": {
+      "$ref": "urn:designer:primitive:color-oklab-chroma"
+    },
+    "h": {
+      "$ref": "urn:designer:primitive:color-oklab-hue"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "c",
+    "h",
+    "l"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

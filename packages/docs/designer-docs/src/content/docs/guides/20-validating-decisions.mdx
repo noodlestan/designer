@@ -87,11 +87,14 @@ We can use this store to inspect loaded decision records and errors.
 const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
-        store.allErrors().forEach(error => console.error(formatValidationError(error)));
+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
     } else {
         store.records().forEach(record => console.info(record));
     }
-    console.info(`🐘 ${store.records().length} decisions, ${store.allErrors().length} errors`);
+    const decisions = store.records().length;
+    const errors = store.storeErrors().length;
+    const validationErrors = store.validationErrors().length;
+    console.info(`🐘 ${decisions} decisions, ${errors} errors, ${validationErrors} warnings`);
 };
 
 loadDecisions();
@@ -108,15 +111,16 @@ The output should look something like:
 ```
 ...
 {
-  model: 'color-set/modifier',
+  model: 'color-set/anchored',
   name: 'Primary Foregrounds',
   description: 'Green shades for foregrounds',
   usage: { intendedFor: [ 'Typography', 'Foregrounds' ], notFor: [ 'Icons' ] },
   params: {
-    start: { '$name': 'Primary Foreground', '$type': 'color-value' },
+    start: { '$name': 'Primary Foreground' },
     modifier: {
-        lightness: { type: 'linear', m: 5 },
-        saturation: { type: 'linear', m: -5 }
+        "space": "oklch",
+        lightness: { type: 'linear', by: 0.05 },
+        chroma: { type: 'linear', by: -0.01 }
     },
     steps: 5
   }

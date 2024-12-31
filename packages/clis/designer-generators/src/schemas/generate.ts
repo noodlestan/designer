@@ -57,8 +57,11 @@ export function createSchemaGenerator(
     const generate = async () => {
         await rimraf(targetDir);
 
-        const primitives = generatePrimitiveSchemas(cache.primitiveInfos);
-        const decisionModels = generateModelSchemas(cache.modelsInfos);
+        const infos = [...cache.primitiveInfos, ...cache.modelsInfos];
+        const symbolToSchemaIdMap = new Map(infos.map(info => [info.symbolName, info.schemaId]));
+
+        const primitives = generatePrimitiveSchemas(cache.primitiveInfos, symbolToSchemaIdMap);
+        const decisionModels = generateModelSchemas(cache.modelsInfos, symbolToSchemaIdMap);
         const allSchemas = [...primitives, ...decisionModels];
 
         const files = writeSchemas(targetDir, allSchemas);

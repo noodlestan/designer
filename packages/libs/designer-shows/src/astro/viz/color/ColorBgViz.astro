@@ -6,7 +6,7 @@ type Props = ColorVizProps;
 
 const { value, size = 'auto', options } = Astro.props;
 
-const hsl = value?.getString('hsl');
+const hsl = value?.toString('oklch');
 
 const { contrast, mode = 'typeface' } = options || {};
 

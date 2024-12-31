@@ -41,7 +41,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "$ref": "urn:designer:primitive:color-input"
+          "$ref": "urn:designer:primitive:color-input-value"
         }
       },
       "additionalProperties": false,

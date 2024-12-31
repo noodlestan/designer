@@ -1,6 +1,6 @@
-import type { HueValue } from '../../../primitive-values';
+import type { SRGBHueValue } from '../../../primitive-values';
 import type { Decision } from '../../base';
 
 /* ColorHueValue */
 
-export type ColorHueValueDecision = Decision<HueValue>;
+export type ColorSRGBHueValueDecision = Decision<SRGBHueValue>;

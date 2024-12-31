@@ -12,14 +12,23 @@ export const createDecisionLoader = (
     moduleResolver: (moduleName: string) => Promise<string>,
 ): (() => Promise<StaticDecisionStore>) => {
     const loader = async () => {
-        const paths = await resolveSchemaPathsFromConfigs(schemaConfigs, moduleResolver);
-        const schemas = await loadSchemasFromPaths(paths);
-        const schemaMap = validateSchemaMap(schemas);
-        const validator = createDecisionValidator(schemaMap);
+        try {
+            const paths = await resolveSchemaPathsFromConfigs(schemaConfigs, moduleResolver);
+            const schemas = await loadSchemasFromPaths(paths);
+            const schemaMap = validateSchemaMap(schemas);
+            const validator = createDecisionValidator(schemaMap);
 
-        const inputData = await loadDecisionsFromPaths(dataPaths);
-        const inputMap = createStaticInputMap(inputData, validator);
-        return createStaticDecisionStore(inputMap);
+            const inputData = await loadDecisionsFromPaths(dataPaths);
+            const inputMap = createStaticInputMap(inputData, validator);
+            return createStaticDecisionStore(inputMap);
+        } catch (error) {
+            const inputMap = createStaticInputMap([]);
+            const err = {
+                msg: 'Unexpected error creating store',
+                error: error as Error,
+            };
+            return createStaticDecisionStore(inputMap, [err]);
+        }
     };
 
     let promise: Promise<StaticDecisionStore>;

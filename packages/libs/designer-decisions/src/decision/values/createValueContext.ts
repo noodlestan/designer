@@ -3,16 +3,16 @@ import type {
     DecisionContext,
     DecisionLookup,
     DecisionRef,
-    PartialValueContext,
+    ParentValueContext,
     ValueContext,
 } from '../../types';
 
 export const createValueContext = (
     decisionContext: DecisionContext,
-    valueContext?: PartialValueContext,
+    parentContext?: ParentValueContext,
 ): ValueContext => {
     const { resolve: resolver } = decisionContext;
-    const contexts = valueContext?.contexts || { all: [] };
+    const contexts = parentContext?.contexts || { all: [] };
 
     const lookups: DecisionLookup[] = [];
 
@@ -25,9 +25,18 @@ export const createValueContext = (
         return decision;
     };
 
-    return {
-        contexts,
-        lookups,
+    const valueContext = {
         resolve,
+        contexts,
+        parent: parentContext,
+        children: [],
+        lookups,
+        errors,
     };
+
+    if (parentContext) {
+        parentContext.children?.push(valueContext);
+    }
+
+    return valueContext;
 };

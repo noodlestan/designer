@@ -10,10 +10,10 @@ import { Card, CardGrid, Code, LinkButton } from '@astrojs/starlight/components'
 import {
     FlexRow,
     ShowDecision,
-    ShowColorHueValueDecision,
-    ShowColorLightnessScaleDecision,
-    ShowColorLightnessValueDecision,
-    ShowColorSaturationValueDecision,
+    ShowColorSRGBHueValueDecision,
+    ShowColorSRGBLightnessScaleDecision,
+    ShowColorSRGBLightnessValueDecision,
+    ShowColorSRGBSaturationValueDecision,
     ShowColorSetDecision,
     ShowColorValueDecision,
 } from '@noodlestan/designer-shows/astro';
@@ -35,11 +35,11 @@ These components render color related decisions.
 Renders a [ColorValueDecision](/decision-models/color-value).
 
 ```mdx
-<ShowColorValueDecision store={store} d="Brand Blue" size="m" value={['rgb', 'hsl']} />
+<ShowColorValueDecision store={store} d="Brand Blue" size="m" value={['rgb', 'oklch']} />
 ```
 
 <CardGrid>
-    <ShowColorValueDecision store={store} d="Brand Blue" size="m" value={['rgb', 'hsl']} />
+    <ShowColorValueDecision store={store} d="Brand Blue" size="m" value={['rgb', 'oklch']} />
 </CardGrid>
 
 ### ShowColorSetDecision
@@ -47,67 +47,67 @@ Renders a [ColorValueDecision](/decision-models/color-value).
 Renders a [ColorSetDecision](/decision-models/color-set).
 
 ```mdx
-<ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'hsl']} />
+<ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'oklch']} />
 ```
 
 <CardGrid>
-    <ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'hsl']} />
+    <ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'oklch']} />
 </CardGrid>
 
-### ShowColorHueValueDecision
+### ShowColorSRGBHueValueDecision
 
-Renders a [ColorHueValueDecision](/decision-models/color-hue-value).
+Renders a [ColorHueValueDecision](/decision-models/color-srgb-hue-value).
 
 ```mdx
-<ShowColorHueValueDecision store={store} d="Brand Pink Hue" size="m" />
-<ShowColorHueValueDecision store={store} d="Brand Blue Hue" size="m" />
+<ShowColorSRGBHueValueDecision store={store} d="Brand Pink Hue" size="m" />
+<ShowColorSRGBHueValueDecision store={store} d="Brand Blue Hue" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorHueValueDecision store={store} d="Brand Pink Hue" size="m" />
-    <ShowColorHueValueDecision store={store} d="Brand Blue Hue" size="m" />
+    <ShowColorSRGBHueValueDecision store={store} d="Brand Pink Hue" size="m" />
+    <ShowColorSRGBHueValueDecision store={store} d="Brand Blue Hue" size="m" />
 </CardGrid>
 
-### ShowColorSaturationValueDecision
+### ShowColorSRGBSaturationValueDecision
 
-Renders a [ColorSaturationValueDecision](/decision-models/color-saturation-value).
+Renders a [ColorSaturationValueDecision](/decision-models/color-srgb-saturation-value).
 
 ```mdx
-<ShowColorSaturationValueDecision store={store} d="Brand Pink Saturation" size="m" />
-<ShowColorSaturationValueDecision store={store} d="Brand Blue Saturation" size="m" />
+<ShowColorSRGBSaturationValueDecision store={store} d="Brand Pink Saturation" size="m" />
+<ShowColorSRGBSaturationValueDecision store={store} d="Brand Blue Saturation" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorSaturationValueDecision store={store} d="Brand Pink Saturation" size="m" />
-    <ShowColorSaturationValueDecision store={store} d="Brand Blue Saturation" size="m" />
+    <ShowColorSRGBSaturationValueDecision store={store} d="Brand Pink Saturation" size="m" />
+    <ShowColorSRGBSaturationValueDecision store={store} d="Brand Blue Saturation" size="m" />
 </CardGrid>
 
-### ShowColorLightnessValueDecision
+### ShowColorSRGBLightnessValueDecision
 
-Renders a [ColorLightnessValueDecision](/decision-models/color-lightness-value).
+Renders a [ColorLightnessValueDecision](/decision-models/color-srgb-lightness-value).
 
 ```mdx
-<ShowColorLightnessValueDecision store={store} d="Brand Pink Lightness" size="m" />
-<ShowColorLightnessValueDecision store={store} d="Brand Blue Lightness" size="m" />
+<ShowColorSRGBLightnessValueDecision store={store} d="Brand Pink Lightness" size="m" />
+<ShowColorSRGBLightnessValueDecision store={store} d="Brand Blue Lightness" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorLightnessValueDecision store={store} d="Brand Pink Lightness" size="m" />
-    <ShowColorLightnessValueDecision store={store} d="Brand Blue Lightness" size="m" />
+    <ShowColorSRGBLightnessValueDecision store={store} d="Brand Pink Lightness" size="m" />
+    <ShowColorSRGBLightnessValueDecision store={store} d="Brand Blue Lightness" size="m" />
 </CardGrid>
 
-### ShowColorLightnessScaleDecision
+### ShowColorSRGBLightnessScaleDecision
 
-Renders a [ShowColorLightnessScaleDecision](/decision-models/color-lightness-scale).
+Renders a [ShowColorSRGBLightnessScaleDecision](/decision-models/color-srgb-lightness-scale).
 
 ```mdx
-<ShowColorLightnessScaleDecision store={store} d="Foreground Lightness Scale" size="m" />
-<ShowColorLightnessScaleDecision store={store} d="Background Lightness Scale" size="m" />
+<ShowColorSRGBLightnessScaleDecision store={store} d="Foreground Lightness Scale" size="m" />
+<ShowColorSRGBLightnessScaleDecision store={store} d="Background Lightness Scale" size="m" />
 ```
 
 <CardGrid>
-    <ShowColorLightnessScaleDecision store={store} d="Foreground Lightness Scale" size="m" />
-    <ShowColorLightnessScaleDecision store={store} d="Background Lightness Scale" size="m" />
+    <ShowColorSRGBLightnessScaleDecision store={store} d="Foreground Lightness Scale" size="m" />
+    <ShowColorSRGBLightnessScaleDecision store={store} d="Background Lightness Scale" size="m" />
 </CardGrid>
 
 ## Props
@@ -128,25 +128,25 @@ not only to show/hide the decision value but also to display
 it in one or more color spaces.
 
 Provide a `string` with one of [ColorSpaceName](/api/designer-decisions/Types/ColorSpaceName/)
-to specify .
+to specify which color space / format to use.
 
 ```mdx
-<ShowDecision d="Brand Blue" store={store} size="s" value="hsl" />
+<ShowDecision d="Brand Blue" store={store} size="s" value="oklch" />
 ```
 
 <FlexRow vpad>
-    <ShowDecision d="Brand Pink" store={store} size="s" value={'hsl'} />
+    <ShowDecision d="Brand Pink" store={store} size="s" value={'oklch'} />
 </FlexRow>
 
 Provide an `array` of [ColorSpaceName](/api/designer-decisions/Types/ColorSpaceName/)
 to list several color spaces in your preferred order.
 
 ```mdx
-<ShowDecision d="Brand Pink" store={store} size="s" value={['hsl', 'rgb']} />
+<ShowDecision d="Brand Pink" store={store} size="s" value={['oklch', 'rgb']} />
 ```
 
 <FlexRow vpad>
-    <ShowDecision d="Brand Pink" store={store} size="s" value={['hsl', 'rgb']} />
+    <ShowDecision d="Brand Pink" store={store} size="s" value={['oklch', 'rgb']} />
 </FlexRow>
 
 ### ༶ [ValueProps ༶ size](/components/Astro/Props#-size-auto-showvaluesize)

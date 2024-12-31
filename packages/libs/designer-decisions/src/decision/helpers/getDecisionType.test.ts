@@ -11,8 +11,8 @@ const mockDecision = (model: string) =>
 
 describe('getDecisionType', () => {
     it('extracts the type from a valid model path', () => {
-        const decision = mockDecision('color-lightness-decision/static-value');
-        expect(getDecisionType(decision)).toEqual('color-lightness-decision');
+        const decision = mockDecision('color-srgb-lightness-decision/static-value');
+        expect(getDecisionType(decision)).toEqual('color-srgb-lightness-decision');
     });
 
     it('returns the entire model if there are no slashes', () => {

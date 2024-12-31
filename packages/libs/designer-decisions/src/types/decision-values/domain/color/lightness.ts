@@ -1,10 +1,10 @@
-import type { LightnessScale, LightnessValue } from '../../../primitive-values';
+import type { SRGBLightnessScale, SRGBLightnessValue } from '../../../primitive-values';
 import type { Decision } from '../../base';
 
 /* ColorLightnessValue */
 
-export type ColorLightnessValueDecision = Decision<LightnessValue>;
+export type ColorSRGBLightnessValueDecision = Decision<SRGBLightnessValue>;
 
 /* ColorLightnessScale */
 
-export type ColorLightnessScaleDecision = Decision<LightnessScale>;
+export type ColorSRGBLightnessScaleDecision = Decision<SRGBLightnessScale>;

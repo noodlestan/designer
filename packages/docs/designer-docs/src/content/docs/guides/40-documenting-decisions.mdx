@@ -174,7 +174,7 @@ const decision = resolveDecisionProp(store, d);
 
 <DecisionCardLayout>
     <h2 slot="header">{decision.name}</h2>
-    <ShowDecision slot="viz" store={store} d={decision} value={['rgb', 'hsl']} />
+    <ShowDecision slot="viz" store={store} d={decision} value={['rgb', 'oklch']} />
     <div slot="details">
         <h3>Usage</h3>
         <ShowDecisionUsage store={store} d={decision} />
@@ -205,7 +205,7 @@ const store = createDecisionStaticStore(decisions);
 const { d } = Astro.props
 const decision = store.getDecision(d) as ColorDecision;
 
-const color = decision.value().toString('hsl')
+const color = decision.value().toString('oklch')
 ---
 
 <div class="my-color-value-viz">{color.value}</div>

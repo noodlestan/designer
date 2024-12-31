@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-hue-value/explicit",
+    "model": "color-srgb-hue-value/explicit",
     "name": "Brand Pink Hue",
     "description": "Hue component of Brand Pink color",
     "params": {
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "color-hue-value/explicit",
+    "model": "color-srgb-hue-value/explicit",
     "name": "Brand Blue Hue",
     "description": "Hue component of Brand Blue color",
     "params": {
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "color-saturation-value/explicit",
+    "model": "color-srgb-saturation-value/explicit",
     "name": "Brand Pink Saturation",
     "description": "Saturation component of Brand Pink color",
     "params": {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "color-saturation-value/explicit",
+    "model": "color-srgb-saturation-value/explicit",
     "name": "Brand Blue Saturation",
     "description": "Saturation component of Brand Blue color",
     "params": {
@@ -32,7 +32,7 @@
     }
   },
   {
-    "model": "color-lightness-value/explicit",
+    "model": "color-srgb-lightness-value/explicit",
     "name": "Brand Pink Lightness",
     "description": "Lightness component of Brand Pink color",
     "params": {
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "color-lightness-value/explicit",
+    "model": "color-srgb-lightness-value/explicit",
     "name": "Brand Blue Lightness",
     "description": "Lightness component of Brand Blue color",
     "params": {
@@ -48,7 +48,7 @@
     }
   },
   {
-    "model": "color-lightness-scale/explicit",
+    "model": "color-srgb-lightness-scale/explicit",
     "name": "Foreground Lightness Scale",
     "description": "Lightness scale for foreground elements",
     "params": {
@@ -56,7 +56,7 @@
     }
   },
   {
-    "model": "color-lightness-value/explicit",
+    "model": "color-srgb-lightness-value/explicit",
     "name": "Background Minimum Lightness",
     "description": "Sets the minimum value of the background lightness scale",
     "params": {
@@ -64,7 +64,7 @@
     }
   },
   {
-    "model": "color-lightness-value/explicit",
+    "model": "color-srgb-lightness-value/explicit",
     "name": "Foreground Maximum Lightness",
     "description": "Sets the maximum value of the foreground lightness scale",
     "params": {
@@ -72,17 +72,19 @@
     }
   },
   {
-    "model": "color-lightness-scale/modifier",
+    "model": "color-srgb-lightness-scale/anchored",
     "name": "Background Lightness Scale",
     "description": "Lightness scale for background elements",
     "params": {
-      "start": 0.98,
-      "modifier": { "mode": "linear", "by": -0.03 },
-      "steps": 5
+      "anchor": 0.98,
+      "after": {
+        "steps": 5,
+        "modifier": { "mode": "linear", "by": -0.03 }
+      }
     }
   },
   {
-    "model": "color-lightness-scale/linear-range",
+    "model": "color-srgb-lightness-scale/bounded",
     "name": "Mid Range Lightnes Scale",
     "description": "Lightness scale for single hue color sets",
     "params": {
@@ -166,7 +168,7 @@
     }
   },
   {
-    "model": "color-set/modifier",
+    "model": "color-set/anchored",
     "name": "Curcuma Palette",
     "description": "Wide range shades of Curcuma",
     "usage": {
@@ -174,15 +176,25 @@
       "notFor": ["Typography"]
     },
     "params": {
-      "start": "#564109",
-      "steps": 9,
-      "modifier": {
-        "lightness": { "mode": "linear", "by": 0.07 }
+      "anchor": "#564109",
+      "after": {
+        "steps": 4,
+        "modifier": {
+          "space": "oklch",
+          "l": { "mode": "linear", "by": 0.07 }
+        }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": {
+          "space": "oklch",
+          "l": { "mode": "linear", "by": 0.07 }
+        }
       }
     }
   },
   {
-    "model": "color-set/linear-range",
+    "model": "color-set/bounded",
     "name": "Heat Map Color Set",
     "description": "A 7 step color set ranging from hot to cold",
     "usage": {

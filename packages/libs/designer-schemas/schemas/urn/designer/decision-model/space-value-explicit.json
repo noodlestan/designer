@@ -41,7 +41,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "$ref": "urn:designer:primitive:space-input"
+          "$ref": "urn:designer:primitive:space-input-value"
         }
       },
       "additionalProperties": false,

@@ -2,14 +2,19 @@
 
 import type { DecisionRef } from '../../decision-values';
 
-export type SpaceRefOfSpaceValue = DecisionRef & {
-    $type: 'space-value';
+export type SpaceScaleRef = DecisionRef & {
+    $subset:
+        | number[]
+        | {
+              start: number;
+              count: number;
+          };
 };
 
-export type SpaceRawInput = string | number;
+export type SpaceRaw = string | number;
 
-export type SpaceInputUnits = 'px' | 'em' | 'rem';
+export type SpaceUnits = 'px' | 'em' | 'rem';
 
-export type SpaceWithUnitsInput = { value: number; units: SpaceInputUnits };
+export type SpaceWithUnits = { value: number; units: SpaceUnits };
 
-export type SpaceInput = SpaceRefOfSpaceValue | SpaceRawInput | SpaceWithUnitsInput;
+export type SpaceInputValue = DecisionRef | SpaceRaw | SpaceWithUnits;

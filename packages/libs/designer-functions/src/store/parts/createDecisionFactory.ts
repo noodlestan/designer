@@ -20,7 +20,7 @@ export const createDecisionFactory = (inputStore: StaticInputMap): StaticDecisio
     ): Decision<V> | undefined => {
         const input = inputStore.record(ref, parent.contexts);
         if (input) {
-            const context = createDecisionContext(input, parent.contexts, _resolver);
+            const context = createDecisionContext(_resolver, input, parent.contexts);
             const decision = _createDecision(context, input);
             return decision as Decision<V>;
         }
@@ -30,7 +30,7 @@ export const createDecisionFactory = (inputStore: StaticInputMap): StaticDecisio
         input: DecisionInputBase,
         contexts?: DecisionContexts,
     ): Decision<V> | undefined => {
-        const context = createDecisionContext(input, contexts, _resolver);
+        const context = createDecisionContext(_resolver, input, contexts);
         return _createDecision(context, input) as Decision<V>;
     };
 

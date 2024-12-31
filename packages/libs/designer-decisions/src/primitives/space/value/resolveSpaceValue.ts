@@ -1,28 +1,14 @@
-import { DECISION_SPACE_VALUE, isSpaceValueDecision } from '../../../decision';
-import type { SpaceInput, SpaceWithUnitsInput, ValueContext } from '../../../types';
+import type { SpaceInputValue, SpaceWithUnits, ValueContext } from '../../../types';
 import { isDecisionRef } from '../../ref';
+
+import { resolveSpaceValueRef } from './resolveSpaceValueRef';
 
 export const resolveSpaceValue = (
     context: ValueContext,
-    input: SpaceInput,
-): SpaceWithUnitsInput => {
+    input: SpaceInputValue,
+): SpaceWithUnits => {
     if (isDecisionRef(input)) {
-        // const resolution = context.resolve();
-        const decision = context.resolve(input);
-
-        // WIP if (!decision)
-        if (!decision) {
-            // push to context.errors ?
-            throw new Error(`Could not find decision by ref "${JSON.stringify(input)}".`);
-        }
-        if (isSpaceValueDecision(decision)) {
-            const v = decision.produce(context).value();
-            return v.getValueWithUnits();
-        } else {
-            throw new Error(
-                `Did not resolve to a "${DECISION_SPACE_VALUE}" - "${JSON.stringify(input)}".`,
-            );
-        }
+        return resolveSpaceValueRef(context, input);
     } else if (typeof input === 'string') {
         return {
             value: Number(input),

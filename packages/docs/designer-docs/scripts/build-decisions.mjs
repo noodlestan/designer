@@ -14,9 +14,14 @@ const loader = createDecisionLoader(
 const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
-        store.allErrors().forEach(error => console.error(formatValidationError(error)));
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
     }
-    console.info(`🐘 ${store.records().length} decisions, ${store.allErrors().length} errors`);
+    const decisions = store.records().length;
+    const errors = store.storeErrors().length;
+    const validationErrors = store.validationErrors().length;
+    console.info(`🐘 ${decisions} decisions, ${errors} errors, ${validationErrors} warnings`);
+
     if (store.hasErrors()) {
         process.exit(1);
     }

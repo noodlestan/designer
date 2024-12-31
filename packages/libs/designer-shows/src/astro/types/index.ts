@@ -9,7 +9,6 @@ export type ShowDataProps = {
 export type ShowValueSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 
 export type VizProps = {
-    store: StaticDecisionStore; // WIP replace with ShowDecisionStore
     size?: ShowValueSize;
     options?: object;
 };

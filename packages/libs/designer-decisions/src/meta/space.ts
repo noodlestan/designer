@@ -1,8 +1,8 @@
 import {
-    createSpaceScaleExplicit,
-    createSpaceScaleLinearRange,
-    createSpaceScaleModifier,
-    createSpaceValueExplicit,
+    createSpaceScaleAnchoredModel,
+    createSpaceScaleExplicitModel,
+    createSpaceScaleBoundedModel,
+    createSpaceValueExplicitModel,
 } from '../decision';
 import type { DecisionType } from '../types';
 
@@ -20,7 +20,7 @@ export const SpaceDecisionTypes: DecisionType[] = [
                 model: 'explicit',
                 name: 'Explicit value',
                 description: 'Defines a space value.',
-                factory: castFactory(createSpaceValueExplicit),
+                factory: castFactory(createSpaceValueExplicitModel),
             },
         ],
     },
@@ -35,21 +35,21 @@ export const SpaceDecisionTypes: DecisionType[] = [
                 model: 'explicit',
                 name: 'Explicit value',
                 description: 'Defines a space scale with arbitrary space values.',
-                factory: castFactory(createSpaceScaleExplicit),
+                factory: castFactory(createSpaceScaleExplicitModel),
             },
             {
-                model: 'linear-range',
-                name: 'Linear Range',
+                model: 'bounded',
+                name: 'Bounded',
                 description:
                     'Defines a space scale interpolating linearly between two space values.',
-                factory: castFactory(createSpaceScaleLinearRange),
+                factory: castFactory(createSpaceScaleBoundedModel),
             },
             {
-                model: 'modifier',
-                name: 'Stepped Modifier',
+                model: 'anchored',
+                name: 'Anchored',
                 description:
-                    'Defines a space scale by successively applying a modifier to the previous step.',
-                factory: castFactory(createSpaceScaleModifier),
+                    'Defines a space scale from an anchor value applying modifiers to generate items before and/or after the anchor .',
+                factory: castFactory(createSpaceScaleAnchoredModel),
             },
         ],
     },

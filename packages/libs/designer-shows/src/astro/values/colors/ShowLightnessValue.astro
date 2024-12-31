@@ -1,28 +1,28 @@
 ---
-import { type LightnessValue } from '@noodlestan/designer-decisions';
+import { type SRGBLightnessValue } from '@noodlestan/designer-decisions';
 
-import { DecisionValue } from '../../atoms';
+import { DecisionValueContainer } from '../../atoms';
 import { FlexStack } from '../../layouts';
 import type { ShowValueProps } from '../../types';
 import { ColorSwatchViz } from '../../viz';
 
 type Props = ShowValueProps & {
-    v?: LightnessValue;
+    v?: SRGBLightnessValue;
 };
 
 const { v: lightness, value = true, viz = true, size } = Astro.props;
 
 const lightnessValue = lightness?.get();
-const lightnessColor = lightness?.getColor({ h: 0, s: 0.1 });
+const lightnessColor = lightness?.toColor({ h: 0, s: 0.1 });
 ---
 
 <div class:list={['dd-show-hue-value', { size }]}>
     {viz && lightnessColor && <ColorSwatchViz value={lightnessColor} size={size} />}
     {
         value && lightnessValue !== undefined && (
-            <DecisionValue>
+            <DecisionValueContainer>
                 <FlexStack>{lightnessValue}</FlexStack>
-            </DecisionValue>
+            </DecisionValueContainer>
         )
     }
 </div>

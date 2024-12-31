@@ -1,0 +1,34 @@
+---
+import { isColorSRGBLightnessScaleDecision } from '@noodlestan/designer-decisions';
+
+import type { ShowDecisionProps } from '../../types';
+import { resolveDecisionProp } from '../../helpers';
+import { FlexStack } from '../../layouts';
+import { ShowLightnessValue } from '../../values';
+import { ShowDecisionUnavailable } from '../unavailable';
+
+type Props = ShowDecisionProps;
+
+const { store, d, size, ...rest } = Astro.props;
+
+const decision = resolveDecisionProp(store, d);
+const lightnessScale =
+    decision && isColorSRGBLightnessScaleDecision(decision)
+        ? decision.produce().value()
+        : undefined;
+
+const items = lightnessScale?.get();
+
+const s = size || 's';
+---
+
+{
+    decision && (
+        <FlexStack>
+            {items?.map(item => (
+                <ShowLightnessValue v={item} size={s} {...rest} />
+            ))}
+        </FlexStack>
+    )
+}
+{!decision && <ShowDecisionUnavailable d={d as string} />}

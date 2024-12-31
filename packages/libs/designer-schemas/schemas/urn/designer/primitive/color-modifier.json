@@ -1,0 +1,50 @@
+{
+  "$id": "urn:designer:primitive:color-modifier",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "space": {
+          "type": "string",
+          "const": "hsl"
+        },
+        "h": {
+          "$ref": "urn:designer:primitive:number-modifier"
+        },
+        "s": {
+          "$ref": "urn:designer:primitive:number-modifier"
+        },
+        "l": {
+          "$ref": "urn:designer:primitive:number-modifier"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "space"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "space": {
+          "type": "string",
+          "const": "oklch"
+        },
+        "l": {
+          "$ref": "urn:designer:primitive:number-modifier"
+        },
+        "c": {
+          "$ref": "urn:designer:primitive:number-modifier"
+        },
+        "h": {
+          "$ref": "urn:designer:primitive:number-modifier"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "space"
+      ]
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

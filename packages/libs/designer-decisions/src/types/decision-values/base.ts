@@ -8,9 +8,9 @@ export type Params = object;
 // };
 
 export type DecisionContext = {
+    resolve: DecisionRefResolver;
     owner: DecisionInputBase;
     contexts: DecisionContexts;
-    resolve: DecisionRefResolver;
 };
 
 export type DecisionLookup = {
@@ -20,13 +20,18 @@ export type DecisionLookup = {
 
 export type DecisionValueRefResolver = <V = unknown>(ref: DecisionRef) => Decision<V> | undefined;
 
+export type ValueError = {};
+
 export type ValueContext = {
-    contexts: DecisionContexts;
-    lookups: DecisionLookup[];
     resolve: DecisionValueRefResolver;
+    contexts: DecisionContexts;
+    parent?: ParentValueContext;
+    children: ValueContext[];
+    lookups: DecisionLookup[];
+    errors: ValueError[];
 };
 
-export type PartialValueContext = Partial<Omit<ValueContext, 'resolver'>>;
+export type ParentValueContext = Partial<Omit<ValueContext, 'resolver'>>;
 
 export type DecisionContexts = {
     all: string[];
@@ -40,8 +45,11 @@ export type DecisionValue<V> = {
 
 export type Decision<V extends Value> = {
     input: () => DecisionInputBase;
-    produce: (context?: PartialValueContext) => DecisionValue<V>;
+    produce: (parentContext?: ParentValueContext) => DecisionValue<V>;
     // token: () => Token<T> | undefined;
+    // explain: () => ...
+    // validate: () => ...
+    // errors: () => ...
 };
 
 export type DecisionFactory = <V = unknown>(
@@ -49,13 +57,17 @@ export type DecisionFactory = <V = unknown>(
     resolver: <V>(ref: DecisionRef) => Decision<V>,
 ) => Decision<V>;
 
-export type DecisionRef =
-    | {
-          $name: DecisionName;
-      }
-    | {
-          $uuid: DecisionId;
-      };
+export type DecisionNameRef = {
+    $name: DecisionName;
+    index?: number;
+};
+
+export type DecisionUuidRef = {
+    $uuid: DecisionId;
+    index?: number;
+};
+
+export type DecisionRef = DecisionNameRef | DecisionUuidRef;
 
 export type DecisionRefResolver = <V = unknown>(
     parent: DecisionContext,

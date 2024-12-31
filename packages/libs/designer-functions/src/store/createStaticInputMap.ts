@@ -38,7 +38,7 @@ export const createStaticInputMap = (
         return data.some(item => item.errors !== null);
     };
 
-    const allErrors = (): DecisionError[] => {
+    const validationErrors = (): DecisionError[] => {
         return data.flatMap(({ decision, errors = [] }) => {
             return errors ? errors.map(error => ({ decision, error })) : [];
         });
@@ -71,7 +71,7 @@ export const createStaticInputMap = (
 
     return {
         hasErrors,
-        allErrors,
+        validationErrors,
         records,
         record,
     };

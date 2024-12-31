@@ -16,12 +16,6 @@ const frontmatter = {
   - Banner
   - LinkCard (for example gallery and component reference)
 
-## Decisions
-
-- consider renaming all decision model factories to a common suffix, e.g.:
-  - createSpaceScaleLinearRangeModel (favorite)
-  - createSpaceScaleLinearRangeDecision
-
 ## Visualizations
 
 - rename: atoms/DecisionValue => atoms/ValueLayout
@@ -33,7 +27,7 @@ const frontmatter = {
 
 - make it possible to pass values or decisions in ColorVizProps `contrast`
 
-  - make it a ColorInput, use resolveColorValue?
+  - make it a ColorValueInput, use resolveColorValue?
 
 - Add icons to ShowDecisionUnavailable, ShowDecisionTypeUnavailable
 

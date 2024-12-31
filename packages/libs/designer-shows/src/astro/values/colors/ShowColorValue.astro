@@ -1,10 +1,10 @@
 ---
 import { type ColorSpaceName, type ColorValue } from '@noodlestan/designer-decisions';
 
-import { DecisionValue } from '../../atoms';
+import { DecisionValueContainer } from '../../atoms';
 import { FlexStack } from '../../layouts';
 import { getColorVizComponent } from '../../meta';
-import type { ShowValueProps } from '../../types';
+import type { ColorVizOptions, ShowValueProps } from '../../types';
 
 type Props = ShowValueProps & {
     v?: ColorValue;
@@ -22,15 +22,17 @@ const spaces: ColorSpaceName[] | null =
             : null;
 
 const Viz = getColorVizComponent(viz);
+
+const opt = options as ColorVizOptions;
 ---
 
 <div class:list={['dd-show-color-value', { size }]}>
-    {viz && <Viz value={colorValue} size={size} options={options} />}
+    {viz && <Viz value={colorValue} size={size} options={opt} />}
     {
         value && colorValue !== undefined && (
             <FlexStack>
                 {spaces?.map(space => (
-                    <DecisionValue>{colorValue.getString(space)}</DecisionValue>
+                    <DecisionValueContainer>{colorValue.toString(space)}</DecisionValueContainer>
                 ))}
             </FlexStack>
         )

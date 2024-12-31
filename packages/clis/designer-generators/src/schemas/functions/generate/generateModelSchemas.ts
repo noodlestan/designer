@@ -4,9 +4,10 @@ import { SymbolInfo } from '../../types';
 
 import { normalizeSchema } from './normalizeSchema';
 
-export function generateModelSchemas(infos: SymbolInfo[]): TJS.Definition[] {
-    const symbolToSchemaIdMap = new Map(infos.map(info => [info.symbolName, info.schemaId]));
-
+export function generateModelSchemas(
+    infos: SymbolInfo[],
+    symbolToSchemaIdMap: Map<string, string>,
+): TJS.Definition[] {
     return infos
         .map(info => {
             const program = TJS.getProgramFromFiles([info.filePath], {

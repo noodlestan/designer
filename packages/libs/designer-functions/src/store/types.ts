@@ -9,7 +9,7 @@ import type {
 
 export type StaticInputMap = {
     hasErrors: () => boolean;
-    allErrors: () => DecisionError[] | null;
+    validationErrors: () => DecisionError[];
     records: (filter?: (item: DecisionInputBase) => boolean) => DecisionInputBase[];
     record: (ref: DecisionRef, contexts?: DecisionContexts) => DecisionInputBase | undefined;
 };
@@ -22,9 +22,15 @@ export type StaticDecisionMap = {
     resolve: DecisionRefResolver;
 };
 
+export type StaticDecisionStoreError = {
+    msg: string;
+    error: Error;
+};
+
 export type StaticDecisionStore = {
     hasErrors: StaticInputMap['hasErrors'];
-    allErrors: StaticInputMap['allErrors'];
+    storeErrors: () => StaticDecisionStoreError[];
+    validationErrors: StaticInputMap['validationErrors'];
     records: StaticInputMap['records'];
     record: StaticInputMap['record'];
     decision: <V = unknown>(

@@ -1,7 +1,7 @@
 ---
 import { type SpaceValue } from '@noodlestan/designer-decisions';
 
-import { DecisionValue } from '../../atoms';
+import { DecisionValueContainer } from '../../atoms';
 import { FlexStack } from '../../layouts';
 import { getSpaceVizComponent } from '../../meta';
 import type { ShowValueProps } from '../../types';
@@ -22,9 +22,9 @@ const Viz = getSpaceVizComponent(viz);
     {viz && <Viz value={spaceValue} size={size} options={options} />}
     {
         value && spaceValue !== undefined && (
-            <DecisionValue>
+            <DecisionValueContainer>
                 <FlexStack>{vWithUnits}</FlexStack>
-            </DecisionValue>
+            </DecisionValueContainer>
         )
     }
 </div>

@@ -1,5 +1,10 @@
 import { createValueContext } from '@noodlestan/designer-decisions';
-import type { Decision, DecisionContext, DecisionInputBase } from '@noodlestan/designer-decisions';
+import type {
+    Decision,
+    DecisionContext,
+    DecisionInputBase,
+    ParentValueContext,
+} from '@noodlestan/designer-decisions';
 
 import { getDecisionModelFactory } from '../../factories';
 
@@ -10,10 +15,14 @@ export const createStaticStoreDecision = <V = unknown>(
     const modelFactory = getDecisionModelFactory<V>(input.model);
     const model = modelFactory();
 
+    const produce = (parentContext?: ParentValueContext) => {
+        const valueContext = createValueContext(context, parentContext);
+        return model.produce(valueContext, input.params);
+    };
+
     const api: Decision<V> = {
         input: () => input,
-        produce: valueContext =>
-            model.produce(createValueContext(context, valueContext), input.params),
+        produce,
     };
 
     return api;

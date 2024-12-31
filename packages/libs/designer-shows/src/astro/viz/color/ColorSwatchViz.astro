@@ -5,7 +5,7 @@ type Props = ColorVizProps;
 
 const { value, size = 'auto' } = Astro.props;
 
-const hsl = value?.getString('hsl');
+const hsl = value?.toString('oklch');
 ---
 
 <div class:list={['dd-color-swatch-viz', size]}><div class="swatch"></div></div>

@@ -1,0 +1,22 @@
+{
+  "$id": "urn:designer:primitive:color-s-r-g-b",
+  "type": "object",
+  "properties": {
+    "h": {
+      "$ref": "urn:designer:primitive:color-s-r-g-b-hue"
+    },
+    "s": {
+      "$ref": "urn:designer:primitive:color-s-r-g-b-saturation"
+    },
+    "l": {
+      "$ref": "urn:designer:primitive:color-s-r-g-b-lightness"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "h",
+    "l",
+    "s"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

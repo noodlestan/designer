@@ -2,7 +2,8 @@
   "$id": "urn:designer:primitive:color-space-name",
   "enum": [
     "hsl",
-    "hsv",
+    "oklab",
+    "oklch",
     "rgb"
   ],
   "type": "string",

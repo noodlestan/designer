@@ -6,9 +6,9 @@ import type {
 } from '@noodlestan/designer-decisions';
 
 export const createDecisionContext = (
+    resolver: DecisionRefResolver,
     owner: DecisionInputBase,
     contexts: DecisionContexts = { all: [] },
-    resolver: DecisionRefResolver,
 ): DecisionContext => {
     return { owner, contexts, resolve: resolver };
 };

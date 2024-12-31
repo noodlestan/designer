@@ -22,7 +22,7 @@ The following example defines two decisions:
     [color-value/explicit](/decision-models/color-value/explicit) model
 
 -   a [color-set](/decision-models/color-set) decision, via the
-    [color-set/modifier](/decision-models/color-set/modifier) model
+    [color-set/anchored](/decision-models/color-set/anchored) model
 
 ```json
 [
@@ -34,14 +34,15 @@ The following example defines two decisions:
         }
     },
     {
-        "type": "color-set/modifier",
+        "type": "color-set/anchored",
         "name": "Primary Backgrounds",
         "params": {
             "start": { "$name": "Primary Background" },
+            "steps": 5,
             "modifier": {
-                "lightness": { "mode": "linear", "by": 3 }
-            },
-            "steps": 5
+                "space": "oklch",
+                "l": { "mode": "linear", "by": 3 }
+            }
         }
     }
 ]

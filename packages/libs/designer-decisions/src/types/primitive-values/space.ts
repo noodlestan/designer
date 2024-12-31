@@ -1,9 +1,9 @@
-import type { SpaceWithUnitsInput } from '../decision-inputs';
+import type { SpaceWithUnits } from '../decision-inputs';
 
 import type { BaseValue } from './base';
 
 export type SpaceValue = BaseValue<string> & {
-    getValueWithUnits(): SpaceWithUnitsInput;
+    getValueWithUnits(): SpaceWithUnits;
 };
 
 export type SpaceScale = BaseValue<SpaceValue[]>;

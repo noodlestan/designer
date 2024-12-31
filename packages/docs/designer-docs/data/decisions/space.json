@@ -16,16 +16,15 @@
     }
   },
   {
-    "model": "space-scale/modifier",
+    "model": "space-scale/anchored",
     "name": "Sizing Space Scale",
     "description": "Space scale for component sizing",
     "params": {
-      "start": 25,
-      "modifier": {
-        "mode": "geometric",
-        "by": 2
-      },
-      "steps": 5
+      "anchor": 25,
+      "after": {
+        "steps": 5,
+        "modifier": { "mode": "geometric", "by": 2 }
+      }
     }
   },
   {
@@ -53,13 +52,15 @@
     }
   },
   {
-    "model": "space-scale/modifier",
+    "model": "space-scale/anchored",
     "name": "Avatar Sizes",
     "description": "Space scale for avatar sizes",
     "params": {
-      "start": 50,
-      "modifier": { "mode": "proportional", "by": 1 },
-      "steps": 4
+      "anchor": 50,
+      "after": {
+        "steps": 4,
+        "modifier": { "mode": "proportional", "by": 1 }
+      }
     }
   }
 ]
