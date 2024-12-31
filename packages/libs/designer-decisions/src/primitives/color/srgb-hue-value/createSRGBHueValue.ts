@@ -1,9 +1,12 @@
-import type { ColorSRGBHue, SRGBHueValue, ValueContext } from '../../../types';
+import type { ColorSRGBHue, DecisionValueContext, SRGBHueValue } from '../../../types';
 import { createColorValue } from '../value';
 
 import { resolveSRGBHueValue } from './resolveSRGBHueValue';
 
-export const createSRGBHueValue = (context: ValueContext, input: ColorSRGBHue): SRGBHueValue => {
+export const createSRGBHueValue = (
+    context: DecisionValueContext,
+    input: ColorSRGBHue,
+): SRGBHueValue => {
     const value = resolveSRGBHueValue(context, input);
 
     return {

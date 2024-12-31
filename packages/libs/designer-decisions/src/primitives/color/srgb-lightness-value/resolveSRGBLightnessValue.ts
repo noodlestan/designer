@@ -1,31 +1,14 @@
-import {
-    DECISION_COLOR_SRGB_LIGHTNESS,
-    isColorSRGBLightnessValueDecision,
-} from '../../../decision';
-import type { ColorSRGBLightness, ValueContext } from '../../../types';
+import type { ColorSRGBLightness, DecisionValueContext } from '../../../types';
 import { isDecisionRef } from '../../ref';
 
+import { resolveSRGBLightnessValueRef } from './resolveSRGBLightnessValueRef';
+
 export const resolveSRGBLightnessValue = (
-    context: ValueContext,
+    context: DecisionValueContext,
     input: ColorSRGBLightness,
 ): number => {
     if (isDecisionRef(input)) {
-        // const resolution = context.resolve();
-        const decision = context.resolve(input);
-
-        // WIP if (!decision)
-        if (!decision) {
-            // push to context.errors ?
-            throw new Error(`Could not find decision by ref "${JSON.stringify(input)}".`);
-        }
-        if (isColorSRGBLightnessValueDecision(decision)) {
-            const v = decision.produce(context).value();
-            return v.get();
-        } else {
-            throw new Error(
-                `Did not resolve to a "${DECISION_COLOR_SRGB_LIGHTNESS}" - "${JSON.stringify(input)}".`,
-            );
-        }
+        return resolveSRGBLightnessValueRef(context, input);
     }
     return input;
 };

@@ -15,3 +15,14 @@ export type ColorModifierLCH = {
 };
 
 export type ColorModifier = ColorModifierLCH | ColorModifierHSL;
+
+export type AnchoredColorListParams = {
+    before?: {
+        modifier: ColorModifier;
+        steps: number;
+    };
+    after?: {
+        modifier: ColorModifier;
+        steps: number;
+    };
+};

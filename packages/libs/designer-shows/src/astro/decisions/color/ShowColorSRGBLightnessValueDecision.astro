@@ -2,7 +2,6 @@
 import { isColorSRGBLightnessValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
-import { resolveDecisionProp } from '../../helpers';
 import { ShowLightnessValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
@@ -10,7 +9,7 @@ type Props = ShowDecisionProps;
 
 const { store, d, ...rest } = Astro.props;
 
-const decision = resolveDecisionProp(store, d);
+const [, decision] = store.decision({ $name: d });
 const lightness =
     decision && isColorSRGBLightnessValueDecision(decision)
         ? decision.produce().value()

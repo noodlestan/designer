@@ -1,9 +1,9 @@
 import {
     createSpaceScaleAnchoredModel,
-    createSpaceScaleExplicitModel,
     createSpaceScaleBoundedModel,
+    createSpaceScaleExplicitModel,
     createSpaceValueExplicitModel,
-} from '../decision';
+} from '../models';
 import type { DecisionType } from '../types';
 
 import { castFactory } from './functions';

@@ -38,6 +38,7 @@
       "additionalProperties": false
     },
     "params": {
+      "additionalProperties": false,
       "type": "object",
       "properties": {
         "anchor": {
@@ -46,11 +47,11 @@
         "before": {
           "type": "object",
           "properties": {
-            "modifier": {
-              "$ref": "urn:designer:primitive:number-modifier"
-            },
             "steps": {
               "type": "number"
+            },
+            "modifier": {
+              "$ref": "urn:designer:primitive:number-modifier"
             }
           },
           "additionalProperties": false,
@@ -62,11 +63,11 @@
         "after": {
           "type": "object",
           "properties": {
-            "modifier": {
-              "$ref": "urn:designer:primitive:number-modifier"
-            },
             "steps": {
               "type": "number"
+            },
+            "modifier": {
+              "$ref": "urn:designer:primitive:number-modifier"
             }
           },
           "additionalProperties": false,
@@ -76,7 +77,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "anchor"
       ]

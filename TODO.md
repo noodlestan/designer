@@ -1,16 +1,27 @@
 # TODO
 
+## Visualize errors
+
+- <ShowDecisionErrors store={store} filter={([context, decision]) => boolean}>
+  - model errors properly
+    - expose attributes
+    - `msg:` becomes `toString(includeStackTraces?: boolean)`
+  - list decisions using `<DecisionListLayout>`
+    - and `<DecisionPill>`
+
+## Resolution and Error handling
+
+- expose value errors in decision context
+
+  - think DecisionValueContext should be created by ValueContext and keep a reference.
+  - `|| Boolean(children.find(child => child.hasErrors()))`
+
+- Expose icon warning in ..? where? DecisionValue?
+- Expose validation errors in card (new section "errors")
+- Expose resolution details
+  - display in card (new section "linked decisions")
+
 ## Docs
-
-- fix headings not working!
-
-```
-const frontmatter = {
-    ...decisionType.data,
-    title: decisionType.data.name,
-    headings
-};
-```
 
 - docs components
   - Banner
@@ -18,12 +29,12 @@ const frontmatter = {
 
 ## Visualizations
 
-- rename: atoms/DecisionValue => atoms/ValueLayout
-
+- rethink `bg` mode
+- think `value` mode
 - implement `graphic` and `slot` content in `<Color*Viz/>`
 
-  - document, add to examples
   - search: `return content || '*';`
+  - document, add to examples
 
 - make it possible to pass values or decisions in ColorVizProps `contrast`
 
@@ -46,7 +57,7 @@ const frontmatter = {
 
 - add reference data page
   - showcase the data included in the repository
-  - easy snippets to copy?
+  - easy data snippets to copy?
 - render schema page(s)
   - link to reference data
 - get rid of decision models page
@@ -105,14 +116,6 @@ const frontmatter = {
 - generate CSS vars
   - query contexts
   - resolve to tokens instead of values
-
-## Resolution and Error handling
-
-- Expose icon warning in ..? where? DecisionValue?
-- Expose validation errors in card (new section "errors")
-- WIP resolving values throws, should collect errors
-- Expose resolution details
-  - display in card (new section "linked decisions")
 
 # Backlog
 

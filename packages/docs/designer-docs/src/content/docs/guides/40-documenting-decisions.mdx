@@ -160,24 +160,23 @@ import {
     DecisionCardLayout,
     ShowDecision,
     ShowDecisionUsage,
-    resolveDecisionProp
 } from '@noodlestan/designer-shows/astro';
 
 type Props = {
-    d: string | Decision<unknown>;
+    d: string;
     store: StaticDecisionStore;
 };
 
 const { d, store } = Astro.props;
-const decision = resolveDecisionProp(store, d);
+const [decision] = store.decision(d)
 ---
 
 <DecisionCardLayout>
     <h2 slot="header">{decision.name}</h2>
-    <ShowDecision slot="viz" store={store} d={decision} value={['rgb', 'oklch']} />
+    <ShowDecision slot="viz" store={store} d={d} value={['rgb', 'oklch']} />
     <div slot="details">
         <h3>Usage</h3>
-        <ShowDecisionUsage store={store} d={decision} />
+        <ShowDecisionUsage store={store} d={d} />
     </div>
 </DecisionCardLayout>
 ```
@@ -193,6 +192,12 @@ import MyColorDecision from '../components/';
 
 ## Resolve decision values
 
+{/* 🚧 move these details to the API docs */}
+
+You can retrieve resolved decision values by calling `value()` on the decision object.
+
+This code block demonstrates how you can use a decision value to build your own visualization.
+
 ```astro
 ---
 import { getCollection } from 'astro:content';
@@ -203,7 +208,7 @@ const decisions = await getCollection('decisions');
 const store = createDecisionStaticStore(decisions);
 
 const { d } = Astro.props
-const decision = store.getDecision(d) as ColorDecision;
+const [, decision] = store.decision<ColorDecision>(d);
 
 const color = decision.value().toString('oklch')
 ---

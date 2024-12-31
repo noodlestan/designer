@@ -1,4 +1,4 @@
-import type { ColorInputValue, ColorModifier } from '../../primitives';
+import type { AnchoredColorListParams, ColorInputValue } from '../../primitives';
 import type { DecisionInputBase } from '../base';
 
 export type ColorSetExplicitInput = DecisionInputBase & {
@@ -21,13 +21,5 @@ export type ColorSetAnchoredInput = DecisionInputBase & {
     model: 'color-set/anchored';
     params: {
         anchor: ColorInputValue;
-        before?: {
-            modifier: ColorModifier;
-            steps: number;
-        };
-        after?: {
-            modifier: ColorModifier;
-            steps: number;
-        };
-    };
+    } & AnchoredColorListParams;
 };

@@ -1,4 +1,4 @@
-import type { NumberModifier, SpaceInputValue } from '../../primitives';
+import type { AnchoredNumberSeriesParams, SpaceInputValue } from '../../primitives';
 import type { DecisionInputBase } from '../base';
 
 export type SpaceValueExplicitInput = DecisionInputBase & {
@@ -28,13 +28,5 @@ export type SpaceScaleAnchoredInput = DecisionInputBase & {
     model: 'space-scale/anchored';
     params: {
         anchor: SpaceInputValue;
-        before?: {
-            modifier: NumberModifier;
-            steps: number;
-        };
-        after?: {
-            modifier: NumberModifier;
-            steps: number;
-        };
-    };
+    } & AnchoredNumberSeriesParams;
 };

@@ -1,4 +1,4 @@
-import type { Degrees, NumberModifier } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, Degrees } from '../../../primitives';
 import type { DecisionInputBase } from '../../base';
 
 export type ColorOklabHueValueExplicitInput = DecisionInputBase & {
@@ -28,13 +28,5 @@ export type ColorOklabHueScaleAnchoredInput = DecisionInputBase & {
     model: 'color-oklab-hue-scale/anchored';
     params: {
         anchor: Degrees;
-        before?: {
-            modifier: NumberModifier;
-            steps: number;
-        };
-        after?: {
-            modifier: NumberModifier;
-            steps: number;
-        };
-    };
+    } & AnchoredNumberSeriesParams;
 };

@@ -1,6 +1,5 @@
 ---
 import { type ShowDecisionProps } from '../types';
-import { resolveDecisionProp } from '../helpers';
 import { ShowDecision } from '../decisions';
 import { DecisionCardLayout } from '../layouts';
 import {
@@ -37,7 +36,7 @@ const {
     data: showData,
 } = Astro.props;
 
-const decision = resolveDecisionProp(store, d);
+const [, decision] = store.decision({ $name: d });
 
 const nameSlot = showName && 'header';
 
@@ -58,7 +57,7 @@ const metaSlot = showMeta && 'meta';
             <Fragment slot={vizSlot}>
                 <ShowDecision
                     store={store}
-                    d={decision || d}
+                    d={d}
                     value={showValue}
                     viz={showViz}
                     options={showOptions}
@@ -70,20 +69,18 @@ const metaSlot = showMeta && 'meta';
     {
         decision && showDetails && (
             <Fragment slot={detailsSlot}>
-                {showDescription !== false && (
-                    <ShowDecisionDescription store={store} d={decision} />
-                )}
-                {showUsage !== false && <ShowDecisionUsage store={store} d={decision} />}
+                {showDescription !== false && <ShowDecisionDescription store={store} d={d} />}
+                {showUsage !== false && <ShowDecisionUsage store={store} d={d} />}
             </Fragment>
         )
     }
     {
         decision && showMeta && (
             <Fragment slot={metaSlot}>
-                {showModel && <ShowDecisionModel store={store} d={decision} />}
-                {showParams && <ShowDecisionParams store={store} d={decision} />}
-                {showData && <ShowDecisionData store={store} d={decision} />}
-                {showContexts && <ShowDecisionContexts store={store} d={decision} />}
+                {showModel && <ShowDecisionModel store={store} d={d} />}
+                {showParams && <ShowDecisionParams store={store} d={d} />}
+                {showData && <ShowDecisionData store={store} d={d} />}
+                {showContexts && <ShowDecisionContexts store={store} d={d} />}
             </Fragment>
         )
     }

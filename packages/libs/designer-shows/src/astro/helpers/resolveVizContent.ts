@@ -1,8 +1,7 @@
 import type { ShowContent, ShowValueSize } from '../types';
 
 import { createShuffledText } from './createShuffledText';
-import { TEXT_SENTENCES, TYPEFACE_STRING } from './private';
-import { resolveVizContentLength } from './resolveVizContentLength';
+import { TEXT_SENTENCES, TYPEFACE_STRING, resolveVizContentLength } from './private';
 
 const trimToMaxLength = (text: string, maxLength?: number): string => {
     const t = text.trim();

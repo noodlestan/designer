@@ -1,19 +1,20 @@
-import {
-    DECISION_SPACE_VALUE,
-    isSpaceScaleDecision,
-    isSpaceValueDecision,
-} from '../../../decision';
-import type { DecisionRef, SpaceWithUnits, ValueContext } from '../../../types';
+import { isSpaceScaleDecision, isSpaceValueDecision } from '../../../models';
+import type { DecisionRef, DecisionValueContext, SpaceWithUnits } from '../../../types';
+import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
-export const resolveSpaceValueRef = (context: ValueContext, ref: DecisionRef): SpaceWithUnits => {
-    // const resolution = context.resolve();
+import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
+
+export const resolveSpaceValueRef = (
+    context: DecisionValueContext,
+    ref: DecisionRef,
+): SpaceWithUnits => {
     const decision = context.resolve(ref);
-
-    // WIP if (!decision)
     if (!decision) {
-        // push to context.errors ?
-        throw new Error(`Could not find decision by ref "${JSON.stringify(ref)}".`);
+        const error = createRefNotFoundError(context, VALUE_NAME, ref);
+        context.addError(error);
+        return FALLBACK_VALUE;
     }
+
     if (isSpaceValueDecision(decision)) {
         const v = decision.produce(context).value();
         return v.getValueWithUnits();
@@ -22,8 +23,8 @@ export const resolveSpaceValueRef = (context: ValueContext, ref: DecisionRef): S
         const v = scale.get()[ref.index || 0];
         return v.getValueWithUnits();
     } else {
-        throw new Error(
-            `Did not resolve to a "${DECISION_SPACE_VALUE}" - "${JSON.stringify(ref)}".`,
-        );
+        const error = createRefMatchError(context, VALUE_NAME, ref, decision, REF_CHECKED_TYPES);
+        context.addError(error);
+        return FALLBACK_VALUE;
     }
 };

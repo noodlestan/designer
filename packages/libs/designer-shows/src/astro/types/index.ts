@@ -1,8 +1,8 @@
-import type { ColorValue, Decision, SpaceValue } from '@noodlestan/designer-decisions';
+import type { ColorValue, SpaceValue } from '@noodlestan/designer-decisions';
 import type { StaticDecisionStore } from '@noodlestan/designer-functions';
 
 export type ShowDataProps = {
-    d: string | Decision<unknown>;
+    d: string;
     store: StaticDecisionStore; // WIP replace with ShowDecisionStore
 };
 

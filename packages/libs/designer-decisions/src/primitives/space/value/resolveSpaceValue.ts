@@ -1,10 +1,10 @@
-import type { SpaceInputValue, SpaceWithUnits, ValueContext } from '../../../types';
+import type { DecisionValueContext, SpaceInputValue, SpaceWithUnits } from '../../../types';
 import { isDecisionRef } from '../../ref';
 
 import { resolveSpaceValueRef } from './resolveSpaceValueRef';
 
 export const resolveSpaceValue = (
-    context: ValueContext,
+    context: DecisionValueContext,
     input: SpaceInputValue,
 ): SpaceWithUnits => {
     if (isDecisionRef(input)) {

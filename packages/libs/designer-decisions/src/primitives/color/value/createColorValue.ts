@@ -5,12 +5,15 @@ import type {
     ColorOkLabLiteral,
     ColorSpaceName,
     ColorValue,
-    ValueContext,
+    DecisionValueContext,
 } from '../../../types';
 
 import { resolveColorValue } from './resolveColorValue';
 
-export const createColorValue = (context: ValueContext, input: ColorInputValue): ColorValue => {
+export const createColorValue = (
+    context: DecisionValueContext,
+    input: ColorInputValue,
+): ColorValue => {
     const value = resolveColorValue(context, input);
 
     const toObject = (space: ColorSpaceName): ColorObjectLiteral => {

@@ -1,0 +1,40 @@
+{
+  "$id": "urn:designer:primitive:anchored-color-list-params",
+  "type": "object",
+  "properties": {
+    "before": {
+      "type": "object",
+      "properties": {
+        "modifier": {
+          "$ref": "urn:designer:primitive:color-modifier"
+        },
+        "steps": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "modifier",
+        "steps"
+      ]
+    },
+    "after": {
+      "type": "object",
+      "properties": {
+        "modifier": {
+          "$ref": "urn:designer:primitive:color-modifier"
+        },
+        "steps": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "modifier",
+        "steps"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,28 +1,14 @@
-import { DECISION_COLOR_VALUE, isColorSRGBSaturationValueDecision } from '../../../decision';
-import type { ColorSRGBSaturation, ValueContext } from '../../../types';
+import type { ColorSRGBSaturation, DecisionValueContext } from '../../../types';
 import { isDecisionRef } from '../../ref';
 
+import { resolveSRGBSaturationValueRef } from './resolveSRGBSaturationValueRef';
+
 export const resolveSRGBSaturationValue = (
-    context: ValueContext,
+    context: DecisionValueContext,
     input: ColorSRGBSaturation,
 ): number => {
     if (isDecisionRef(input)) {
-        // const resolution = context.resolve();
-        const decision = context.resolve(input);
-
-        // WIP if (!decision)
-        if (!decision) {
-            // push to context.errors ?
-            throw new Error(`Could not find decision by ref "${JSON.stringify(input)}".`);
-        }
-        if (isColorSRGBSaturationValueDecision(decision)) {
-            const v = decision.produce(context).value();
-            return v.get();
-        } else {
-            throw new Error(
-                `Did not resolve to a "${DECISION_COLOR_VALUE}" - "${JSON.stringify(input)}".`,
-            );
-        }
+        return resolveSRGBSaturationValueRef(context, input);
     }
     return input;
 };

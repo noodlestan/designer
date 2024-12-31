@@ -11,6 +11,17 @@ export type NumberModifier =
     | NumberProportionalModifier
     | NumberGeometricModifier;
 
+export type AnchoredNumberSeriesParams = {
+    before?: {
+        steps: number;
+        modifier: NumberModifier;
+    };
+    after?: {
+        steps: number;
+        modifier: NumberModifier;
+    };
+};
+
 export type NormalNumber = number;
 
 export type Degrees = number; // between 0 and 360

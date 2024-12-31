@@ -7,10 +7,17 @@ export type Params = object;
 //     decision: () => Decision<T>;
 // };
 
+export type DecisionError = {
+    msg: string;
+};
+
 export type DecisionContext = {
     resolve: DecisionRefResolver;
-    owner: DecisionInputBase;
-    contexts: DecisionContexts;
+    owner: () => DecisionInputBase;
+    contexts: () => LookupContexts;
+    hasErrors: () => boolean;
+    errors: () => DecisionError[];
+    addError: (error: DecisionError) => void;
 };
 
 export type DecisionLookup = {
@@ -20,27 +27,38 @@ export type DecisionLookup = {
 
 export type DecisionValueRefResolver = <V = unknown>(ref: DecisionRef) => Decision<V> | undefined;
 
-export type ValueError = {};
-
-export type ValueContext = {
-    resolve: DecisionValueRefResolver;
-    contexts: DecisionContexts;
-    parent?: ParentValueContext;
-    children: ValueContext[];
-    lookups: DecisionLookup[];
-    errors: ValueError[];
+export type DecisionValueError = {
+    msg: string;
 };
 
-export type ParentValueContext = Partial<Omit<ValueContext, 'resolver'>>;
+export type DecisionValueContext = {
+    owner: () => DecisionInputBase;
+    resolve: DecisionValueRefResolver;
+    createChildContext: () => DecisionValueContext;
+    contexts: () => LookupContexts;
+    parent: () => LinkedValueContext | undefined;
+    children: () => LinkedValueContext[];
+    lookups: () => DecisionLookup[];
+    hasErrors: () => boolean;
+    errors: () => DecisionValueError[];
+    addError: (error: DecisionValueError) => void;
+};
 
-export type DecisionContexts = {
+export type ParentValueContext = Omit<DecisionValueContext, 'resolve' | 'addError'>;
+export type LinkedValueContext = Omit<
+    DecisionValueContext,
+    'resolve' | 'createChildContext' | 'addError'
+>;
+
+export type LookupContexts = {
     all: string[];
     any?: string[];
 };
 
 export type DecisionValue<V> = {
+    hasErrors: () => boolean;
+    errors: () => DecisionValueError[];
     value: () => V;
-    maybeValue: () => V | undefined;
 };
 
 export type Decision<V extends Value> = {
@@ -75,7 +93,7 @@ export type DecisionRefResolver = <V = unknown>(
 ) => Decision<V> | undefined;
 
 export type DecisionModel<V = unknown, P = object> = {
-    produce: (context: ValueContext, params: P) => DecisionValue<V>;
+    produce: (context: DecisionValueContext, params: P) => DecisionValue<V>;
     // explain: (params: P) =>
 };
 

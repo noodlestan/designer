@@ -1,13 +1,20 @@
 import type {
     Decision,
-    DecisionContexts,
+    DecisionContext,
     DecisionInputBase,
     DecisionRef,
+    LookupContexts,
+    StaticInputMap,
+} from '@noodlestan/designer-decisions';
+import {
+    createDecisionContext,
+    createDecisionFactory,
+    createInputNotFoundError,
 } from '@noodlestan/designer-decisions';
 import type { ErrorObject } from 'ajv';
 
-import { createDecisionFactory } from './parts';
-import type { StaticDecisionStore, StaticDecisionStoreError, StaticInputMap } from './types';
+import { createInputSub } from './functions';
+import type { StaticDecisionStore, StaticDecisionStoreError } from './types';
 
 export type DecisionInputData = {
     decision: DecisionInputBase;
@@ -22,12 +29,17 @@ export const createStaticDecisionStore = (
 
     const decision = <V = unknown>(
         ref: DecisionRef,
-        contexts: DecisionContexts = { all: [] },
-    ): Decision<V> | undefined => {
+        contexts: LookupContexts = { all: [] },
+    ): [DecisionContext, Decision<V> | undefined] => {
         const input = inputStore.record(ref, contexts);
         if (input) {
             return decisions.create(input, contexts);
         }
+        const inputStub = createInputSub(ref);
+        const context = createDecisionContext(decisions.resolve, inputStub, contexts);
+        const error = createInputNotFoundError(context, ref);
+        context.addError(error);
+        return [context, undefined];
     };
 
     return {
@@ -37,5 +49,6 @@ export const createStaticDecisionStore = (
         records: inputStore.records,
         record: inputStore.record,
         decision,
+        resolver: decisions.resolve,
     };
 };

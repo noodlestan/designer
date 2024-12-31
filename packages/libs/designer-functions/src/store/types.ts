@@ -1,26 +1,11 @@
 import type {
     Decision,
-    DecisionContexts,
-    DecisionError,
-    DecisionInputBase,
+    DecisionContext,
     DecisionRef,
     DecisionRefResolver,
+    LookupContexts,
+    StaticInputMap,
 } from '@noodlestan/designer-decisions';
-
-export type StaticInputMap = {
-    hasErrors: () => boolean;
-    validationErrors: () => DecisionError[];
-    records: (filter?: (item: DecisionInputBase) => boolean) => DecisionInputBase[];
-    record: (ref: DecisionRef, contexts?: DecisionContexts) => DecisionInputBase | undefined;
-};
-
-export type StaticDecisionMap = {
-    create: <V = unknown>(
-        input: DecisionInputBase,
-        contexts?: DecisionContexts,
-    ) => Decision<V> | undefined;
-    resolve: DecisionRefResolver;
-};
 
 export type StaticDecisionStoreError = {
     msg: string;
@@ -35,6 +20,7 @@ export type StaticDecisionStore = {
     record: StaticInputMap['record'];
     decision: <V = unknown>(
         ref: DecisionRef,
-        contexts?: DecisionContexts,
-    ) => Decision<V> | undefined;
+        contexts?: LookupContexts,
+    ) => [DecisionContext, Decision<V> | undefined];
+    resolver: DecisionRefResolver;
 };

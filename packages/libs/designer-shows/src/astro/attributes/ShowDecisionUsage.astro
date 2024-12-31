@@ -1,13 +1,12 @@
 ---
 import { type ShowDataProps } from '../types';
-import { resolveDecisionProp } from '../helpers';
 import { FlexRow } from '../layouts';
 
 type Props = ShowDataProps;
 
 const { store, d } = Astro.props;
 
-const decision = resolveDecisionProp(store, d);
+const [, decision] = store.decision({ $name: d });
 const { intendedFor = [], notFor = [] } = decision?.input().usage || {};
 ---
 

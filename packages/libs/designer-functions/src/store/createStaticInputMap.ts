@@ -1,14 +1,14 @@
 import type {
-    DecisionContexts,
-    DecisionError,
     DecisionInputBase,
+    DecisionInputError,
     DecisionRef,
+    LookupContexts,
+    StaticInputMap,
 } from '@noodlestan/designer-decisions';
 
 import type { DecisionValidator } from '../schemas';
 
 import type { DecisionInputData } from './createStaticDecisionStore';
-import type { StaticInputMap } from './types';
 
 export const createStaticInputMap = (
     inputData: DecisionInputBase[],
@@ -38,7 +38,7 @@ export const createStaticInputMap = (
         return data.some(item => item.errors !== null);
     };
 
-    const validationErrors = (): DecisionError[] => {
+    const validationErrors = (): DecisionInputError[] => {
         return data.flatMap(({ decision, errors = [] }) => {
             return errors ? errors.map(error => ({ decision, error })) : [];
         });
@@ -49,10 +49,7 @@ export const createStaticInputMap = (
         return filter ? items.filter(filter) : items;
     };
 
-    const record = (
-        ref: DecisionRef,
-        contexts?: DecisionContexts,
-    ): DecisionInputBase | undefined => {
+    const record = (ref: DecisionRef, contexts?: LookupContexts): DecisionInputBase | undefined => {
         if ('$uuid' in ref) {
             const inputs = inputsByUuid.get(ref.$uuid)?.find(input => {
                 // WIP match contexts

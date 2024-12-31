@@ -1,31 +1,19 @@
 import type { Color } from 'chroma-js';
 import chroma from 'chroma-js';
 
-import { DECISION_COLOR_VALUE, isColorValueDecision } from '../../../decision';
-import type { ColorInputValue, ValueContext } from '../../../types';
+import type { ColorInputValue, DecisionValueContext } from '../../../types';
+import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { resolveSRGBHueValue } from '../srgb-hue-value';
 import { resolveSRGBLightnessValue } from '../srgb-lightness-value';
 import { resolveSRGBSaturationValue } from '../srgb-saturation-value';
 
-export const resolveColorValue = (context: ValueContext, input: ColorInputValue): Color => {
-    if (isDecisionRef(input)) {
-        // const resolution = context.resolve();
-        const decision = context.resolve(input);
+import { FALLBACK_VALUE, VALUE_NAME } from './private';
+import { resolveColorValueRef } from './resolveColorValueRef';
 
-        // WIP if (!decision)
-        if (!decision) {
-            // push to context.errors ?
-            throw new Error(`Could not find decision by ref "${JSON.stringify(input)}".`);
-        }
-        if (isColorValueDecision(decision)) {
-            const v = decision.produce(context).value();
-            return v.get();
-        } else {
-            throw new Error(
-                `Did not resolve to a "${DECISION_COLOR_VALUE}" - "${JSON.stringify(input)}".`,
-            );
-        }
+export const resolveColorValue = (context: DecisionValueContext, input: ColorInputValue): Color => {
+    if (isDecisionRef(input)) {
+        return resolveColorValueRef(context, input);
     } else if (typeof input === 'object') {
         if ('s' in input) {
             return chroma.hsl(
@@ -41,8 +29,15 @@ export const resolveColorValue = (context: ValueContext, input: ColorInputValue)
             //     );
         }
     } else if (typeof input === 'string' || typeof input === 'number') {
-        return chroma(input);
+        try {
+            const value = chroma(input);
+            return value;
+        } catch (error) {
+            context.addError(createInvalidInputError(context, VALUE_NAME, input, error));
+            return FALLBACK_VALUE;
+        }
     }
-    console.error(input);
-    throw new Error(`Unexpected type "${typeof input}".`);
+
+    context.addError(createInvalidInputError(context, VALUE_NAME, input));
+    return FALLBACK_VALUE;
 };

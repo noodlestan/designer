@@ -38,6 +38,7 @@
       "additionalProperties": false
     },
     "params": {
+      "additionalProperties": false,
       "type": "object",
       "properties": {
         "anchor": {
@@ -76,7 +77,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "anchor"
       ]

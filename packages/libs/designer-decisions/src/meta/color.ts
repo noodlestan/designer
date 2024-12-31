@@ -9,7 +9,7 @@ import {
     createColorSetBoundedModel,
     createColorSetExplicitModel,
     createColorValueExplicitModel,
-} from '../decision';
+} from '../models';
 import type { DecisionType } from '../types';
 
 import { castFactory } from './functions';

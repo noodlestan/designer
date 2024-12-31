@@ -1,8 +1,7 @@
-import type { ColorInputValue, ColorSet, ValueContext } from '../../../types';
-import { createColorValue } from '../value';
+import type { ColorSet, ColorValue, DecisionValueContext } from '../../../types';
 
-export const createColorSet = (context: ValueContext, input: ColorInputValue[]): ColorSet => {
+export const createColorSet = (context: DecisionValueContext, colors: ColorValue[]): ColorSet => {
     return {
-        get: () => input.map(item => createColorValue(context, item)),
+        get: () => colors,
     };
 };

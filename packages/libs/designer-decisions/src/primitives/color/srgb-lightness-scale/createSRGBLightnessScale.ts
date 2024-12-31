@@ -1,11 +1,10 @@
-import type { ColorSRGBLightness, SRGBLightnessScale, ValueContext } from '../../../types';
-import { createSRGBLightnessValue } from '../srgb-lightness-value';
+import type { DecisionValueContext, SRGBLightnessScale, SRGBLightnessValue } from '../../../types';
 
 export const createSRGBLightnessScale = (
-    context: ValueContext,
-    input: ColorSRGBLightness[],
+    context: DecisionValueContext,
+    values: SRGBLightnessValue[],
 ): SRGBLightnessScale => {
     return {
-        get: () => input.map(item => createSRGBLightnessValue(context, item)),
+        get: () => values,
     };
 };

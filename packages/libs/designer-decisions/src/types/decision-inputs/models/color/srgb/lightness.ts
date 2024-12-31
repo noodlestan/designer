@@ -1,4 +1,4 @@
-import type { NormalNumber, NumberModifier } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, NormalNumber } from '../../../primitives';
 import type { DecisionInputBase } from '../../base';
 
 export type ColorSRGBLightnessValueExplicitInput = DecisionInputBase & {
@@ -28,13 +28,5 @@ export type ColorSRGBLightnessScaleAnchoredInput = DecisionInputBase & {
     model: 'color-srgb-lightness-scale/anchored';
     params: {
         anchor: NormalNumber;
-        before?: {
-            modifier: NumberModifier;
-            steps: number;
-        };
-        after?: {
-            modifier: NumberModifier;
-            steps: number;
-        };
-    };
+    } & AnchoredNumberSeriesParams;
 };

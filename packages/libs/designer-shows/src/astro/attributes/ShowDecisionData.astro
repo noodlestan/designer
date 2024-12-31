@@ -1,12 +1,11 @@
 ---
 import { type ShowDataProps } from '../types';
-import { resolveDecisionProp } from '../helpers';
 
 type Props = ShowDataProps;
 
 const { store, d } = Astro.props;
 
-const decision = resolveDecisionProp(store, d);
+const [, decision] = store.decision({ $name: d });
 const json = JSON.stringify(decision?.input(), null, 2);
 ---
 

@@ -16,7 +16,7 @@ or `undefined` if not matched.
 **Parameters:**
 
 -   `ref`: [DecisionRef](/api/designer-decisions/Types/DecisionRef)
--   `contexts`: [DecisionContexts](/api/designer-decisions/Types/DecisionContexts) -
+-   `contexts`: [LookupContexts](/api/designer-decisions/Types/LookupContexts) -
     When a decision `ref` matches more than one decision input and no `contexts`
     were provided, it resolves to the decision with less (or higher) context.
 
@@ -35,5 +35,5 @@ or `undefined` if not matched.
 ##### ༶ `validationErrors()`
 
 **Return Value:**
-[DecisionError](/api/designer-decisions/Types/DecisionError)[]
+[DecisionInputError](/api/designer-decisions/Types/DecisionInputError)[]
 or `null` if there were validation errors.

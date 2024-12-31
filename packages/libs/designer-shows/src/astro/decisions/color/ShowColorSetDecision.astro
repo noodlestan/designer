@@ -3,7 +3,7 @@ import { isColorSetDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
 import { ShowColorValue } from '../../values';
-import { resolveDecisionProp } from '../../helpers';
+
 import { FlexStack } from '../../layouts';
 import { ShowDecisionUnavailable } from '../unavailable';
 
@@ -11,7 +11,7 @@ type Props = ShowDecisionProps;
 
 const { store, d, size, ...rest } = Astro.props;
 
-const decision = resolveDecisionProp(store, d);
+const [, decision] = store.decision({ $name: d });
 const set = decision && isColorSetDecision(decision) ? decision.produce().value() : undefined;
 
 const colors = set?.get();

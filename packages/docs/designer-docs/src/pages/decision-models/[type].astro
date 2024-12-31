@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { Badge, LinkCard } from '@astrojs/starlight/components';
+import { Badge } from '@astrojs/starlight/components';
 import type { DecisionModelMeta } from '@noodlestan/designer-decisions';
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
@@ -22,32 +22,35 @@ const { decisionType } = Astro.props;
 const { Content } = await render(decisionType);
 
 const decisions = store.records();
-const samples = decisions.filter(d => d.model.startsWith(decisionType.id));
 
+const decisionsByModel = (m: DecisionModelMeta) => {
+    return decisions.filter(d => d.model === m.model);
+}
+
+const decisionModelId = (m: DecisionModelMeta) => {
+    return m.model.split('/')[1];
+}
 
 const headings = [
     {
         depth: 2,
         slug: 'models',
-        text: 'Decision models'
-    }
-]
-if (samples.length) {
-    headings.unshift({
-        depth: 2,
-        slug: 'samples',
-        text: 'Samples'
-    })
-}
+        text: 'Decision models',
+    },
+    ...decisionType.data.models.map(m => ({
+        depth: 3,
+        slug: decisionModelId(m),
+        text: m.name,
+    }))
+];
 
 const frontmatter = {
     ...decisionType.data,
     title: decisionType.data.name,
-    headings
 };
 ---
 
-<StarlightPage frontmatter={frontmatter} sidebar={sidebar}>
+<StarlightPage frontmatter={frontmatter} sidebar={sidebar} headings={headings}>
     <p>
         <Badge variant="tip" text={decisionType.data.domain} />
         <Badge variant="note" text={decisionType.data.category} />
@@ -58,41 +61,25 @@ const frontmatter = {
         {decisionType.data.description}
     </blockquote>
 
-    <h3 id="models">Models</h3>
-    <ul>
+    <h2 id="models">Models</h2>
     {
         decisionType.data.models.map((m: DecisionModelMeta) => (
-            <li>
-                <a href={`/decision-models/${m.model}`}>{m.name}</a>
+            <div>
+                <h3 id={decisionModelId(m)}>{m.name}</h3>
                 {m.description}
-            </li>
+                <p>🚧 Schema Link</p>
+                {decisionsByModel(m).length > 0 && (
+                    <h4 id="samples">Samples</h4>
+                    <ShowDecisionCard store={store} d={decisionsByModel(m)[0].name} model params />
+                )}
+            </div>
         ))
-    }
-    </ul>
-
-    {(samples.length) ?
-        <>
-            <h3 id="samples">Samples</h3>
-            <ul>
-            {
-                samples.map(decision => (
-                    <li class="dd-sample">
-                        <ShowDecisionCard store={store} d={decision.name} model params />
-                    </li>
-                ))
-            }
-            </ul>
-        </>
-        : <></>
     }
 
     <Content />
-
-    <LinkCard href="/decision-models" title="Other decision types" />
 </StarlightPage>
 
 <style>
     .dd-item {
-
     }
 </style>

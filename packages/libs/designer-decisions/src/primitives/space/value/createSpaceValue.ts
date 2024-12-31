@@ -1,8 +1,11 @@
-import type { SpaceInputValue, SpaceValue, ValueContext } from '../../../types';
+import type { DecisionValueContext, SpaceInputValue, SpaceValue } from '../../../types';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
 
-export const createSpaceValue = (context: ValueContext, input: SpaceInputValue): SpaceValue => {
+export const createSpaceValue = (
+    context: DecisionValueContext,
+    input: SpaceInputValue,
+): SpaceValue => {
     const value = resolveSpaceValue(context, input);
 
     return {

@@ -1,8 +1,10 @@
-import type { SpaceInputValue, SpaceScale, ValueContext } from '../../../types';
-import { createSpaceValue } from '../value';
+import type { DecisionValueContext, SpaceScale, SpaceValue } from '../../../types';
 
-export const createSpaceScale = (context: ValueContext, input: SpaceInputValue[]): SpaceScale => {
+export const createSpaceScale = (
+    context: DecisionValueContext,
+    values: SpaceValue[],
+): SpaceScale => {
     return {
-        get: () => input.map(item => createSpaceValue(context, item)),
+        get: () => values,
     };
 };

@@ -21,10 +21,10 @@ const loadDecisions = async () => {
         store.storeErrors()?.forEach(error => console.error(formatStoreError(error)));
         store.validationErrors()?.forEach(error => console.error(formatValidationError(error)));
     }
-    const decisions = store.records().length;
+    const records = store.records().length;
     const errors = store.storeErrors().length;
     const validationErrors = store.validationErrors().length;
-    console.info(`🐘 ${decisions} decisions, ${errors} errors, ${validationErrors} warnings`);
+    console.info(`🐘 ${records} records, ${errors} errors, ${validationErrors} warnings`);
 };
 
 loadDecisions();

@@ -11,7 +11,9 @@ import { CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
 
 ## Setup
 
-This guide assumes... 🚧
+{/* 🚧 missing intro: "This guide assumes..." */}
+
+{/* 🚧 also: this guide is too long, split details into API */}
 
 ### Dependencies
 
@@ -41,7 +43,7 @@ guide, you can simply create one or more JSON files anywhere in your project.
 
 </FileTree>
 
-## Script
+## Validation input schemas
 
 Add a script to load decisions and print eventual validation errors.
 
@@ -80,21 +82,20 @@ The loader returns a
 [populated decision store](/api/designer-functions/Types/StaticDecisionStore)
 asynchronously.
 
-We can use this store to inspect loaded decision records and errors.
+We can use this store to inspect validation errors.
 
 ```js
 // src/scripts/validate-decisions.js
 const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
         store.validationErrors().forEach(error => console.error(formatValidationError(error)));
-    } else {
-        store.records().forEach(record => console.info(record));
     }
-    const decisions = store.records().length;
+    const records = store.records();
     const errors = store.storeErrors().length;
     const validationErrors = store.validationErrors().length;
-    console.info(`🐘 ${decisions} decisions, ${errors} errors, ${validationErrors} warnings`);
+    console.info(`🐘 ${records.length} records, ${errors} errors, ${validationErrors} warnings`);
 };
 
 loadDecisions();
@@ -136,6 +137,67 @@ For instance, if we delete the `param` attribute from a couple of decision input
 🟨 Decision Curcuma Foreground (required) must have required property 'params'
 🟨 Decision Primary Foreground (required) must have required property 'params'
 🐘 4 decisions, 2 errors
+```
+
+## Inspecting and validating decision values
+
+Schema validation does not check for errors such as broken references between decisions because
+values are only resolved on-demand.
+
+To show all errors you can the following to your script:
+
+```js
+// src/scripts/validate-decisions.js
+import { formatDecision, getDecisionStatus } from '@noodlestan/designer-functions';
+
+records.forEach(record => {
+    const status = getDecisionStatus(store, record);
+    console.info(formatDecision(status));
+});
+```
+
+In the following example output, using `formatDecision()` default options, the
+reference error is expanded after the value.
+
+```
+🐘 4 records, 0 errors, 0 warnings
+🟩 | Curcuma Palette | color-set/anchored | [8] |
+🟩 | Space Unit | space-value/explicit | 5px |
+🟥 | Action Contrast Color | color-value/explicit | false | 1 errors |
+
+💥 Decision "Action Contrast Color" ...
+
+🟩 | Layout Space Scale | space-scale/explicit | [6] |
+```
+
+You can customize the output by providing a second argument to `formatDecision()`
+specifying which columns should be printed and in which order.
+
+The following values are accepted:
+
+-   `status`
+-   `uuid`
+-   `name`
+-   `model`
+-   `value`
+-   `error-count`
+
+Additionally, the following two items - when provided in whatever order - determine
+how status and errors are displayed:
+
+-   `status-colors` - print 🟩/🟥 (when absent, prints `-/X` instead)
+-   `error-details` - when present, eventual errors are show in full after each decision
+
+If you wish to filter out decisions that produce valid values, and inspect only the errors,
+you can adjust your script to the following:
+
+```js
+records.forEach(record => {
+    const status = getDecisionStatus(store, record);
+    if (status.hasErrors) {
+        console.error(formatDecision(status, ['error-details']));
+    }
+});
 ```
 
 ## Next steps
