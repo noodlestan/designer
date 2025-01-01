@@ -11,8 +11,9 @@ export const createSpaceScaleAnchoredModel: DecisionModelFactory<
             const anchorValue = createSpaceValue(valueContext, params.anchor);
             const { value: anchor } = anchorValue.getValueWithUnits();
 
-            const series = generateAnchoredSeries(anchor, params, [0, 1]);
+            const series = generateAnchoredSeries(anchor, params);
             const values = series.map(space => createSpaceValue(valueContext, space));
+
             const value = createSpaceScale(valueContext, values);
 
             return createDecisionValue(valueContext, value);

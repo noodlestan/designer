@@ -1,8 +1,19 @@
 # TODO
 
+## References
+
+- first: switch all sample data to Oklch (string?)
+  - requires implementing
+
+## Model
+
+- OkLCH Colors input not implemented yet
+
+  - use it `generateBoundedColorList()` and `generateModifierColorList()`
+
 ## Visualize errors
 
-- <ShowDecisionErrors store={store} filter={([context, decision]) => boolean}>
+- `<ShowDecisionErrors store={store} filter={([context, decision]) => boolean}>`
   - model errors properly
     - expose attributes
     - `msg:` becomes `toString(includeStackTraces?: boolean)`
@@ -11,6 +22,7 @@
 
 ## Resolution and Error handling
 
+- do not use a decision (or a decision ref) if the context is marked as having errors
 - expose value errors in decision context
 
   - think DecisionValueContext should be created by ValueContext and keep a reference.
@@ -35,6 +47,8 @@
 
   - search: `return content || '*';`
   - document, add to examples
+
+make it possible to render
 
 - make it possible to pass values or decisions in ColorVizProps `contrast`
 
@@ -119,6 +133,8 @@
 
 # Backlog
 
+- Assets
+- Model contexts: devices, responsive breakpoints, ...
 - DevX: wrap DecisionLoader in a file watcher so that promise cache is invalidated when source files change
 - DecisionList component
 - Load decisions from YAML, TypeScript

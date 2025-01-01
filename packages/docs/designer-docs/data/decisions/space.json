@@ -22,7 +22,7 @@
     "params": {
       "anchor": 25,
       "after": {
-        "steps": 5,
+        "steps": 3,
         "modifier": { "mode": "geometric", "by": 2 }
       }
     }
@@ -58,7 +58,7 @@
     "params": {
       "anchor": 50,
       "after": {
-        "steps": 4,
+        "steps": 3,
         "modifier": { "mode": "proportional", "by": 1 }
       }
     }

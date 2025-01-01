@@ -1,4 +1,4 @@
-# Designer Docs
+# Designer Decisions - Docs
 
 > The [Designer Docs](https://designer-docs.noodlestan.org/) website.
 

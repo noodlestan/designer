@@ -1,11 +1,11 @@
 import type {
     Decision,
     DecisionContext,
-    LookupContexts,
     DecisionInputBase,
     DecisionInputError,
     DecisionRef,
     DecisionRefResolver,
+    LookupContexts,
 } from '../types';
 
 export type StaticInputMap = {

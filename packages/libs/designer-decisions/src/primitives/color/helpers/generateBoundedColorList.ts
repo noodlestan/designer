@@ -1,22 +1,19 @@
 import chroma from 'chroma-js';
 
-import type { ColorOkLCHLiteral, ColorValue } from '../../../types';
+import type { ColorSRGBHSLLiteral, ColorValue } from '../../../types';
 
 export const generateBoundedColorList = (
     fromValue: ColorValue,
     toValue: ColorValue,
     steps: number,
-): ColorOkLCHLiteral[] => {
+): ColorSRGBHSLLiteral[] => {
     const from = fromValue.get();
     const to = toValue.get();
 
-    const colors = chroma
-        .scale([from, to])
-        .mode('lab')
-        .colors(steps + 2);
+    const colors = chroma.scale([from, to]).mode('oklab').colors(steps);
 
     return colors.map(color => {
-        const [l, c, h] = chroma(color).oklch();
-        return { l: l || 0, c: c || 0, h: h || 0 };
+        const [h, s, l] = chroma(color).hsl();
+        return { h: h || 0, s: s || 0, l: l || 0 };
     });
 };

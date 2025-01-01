@@ -48,11 +48,19 @@
     }
   },
   {
+    "model": "color-srgb-lightness-value/explicit",
+    "name": "Foreground Maximum Lightness",
+    "description": "Sets the maximum value of the foreground lightness scale",
+    "params": {
+      "value": 0.97
+    }
+  },
+  {
     "model": "color-srgb-lightness-scale/explicit",
     "name": "Foreground Lightness Scale",
     "description": "Lightness scale for foreground elements",
     "params": {
-      "values": [0.97, 0.82]
+      "values": [0.97, 0.91, 0.83]
     }
   },
   {
@@ -64,22 +72,14 @@
     }
   },
   {
-    "model": "color-srgb-lightness-value/explicit",
-    "name": "Foreground Maximum Lightness",
-    "description": "Sets the maximum value of the foreground lightness scale",
-    "params": {
-      "value": 0.98
-    }
-  },
-  {
     "model": "color-srgb-lightness-scale/anchored",
     "name": "Background Lightness Scale",
     "description": "Lightness scale for background elements",
     "params": {
-      "anchor": 0.98,
+      "anchor": 0.03,
       "after": {
-        "steps": 5,
-        "modifier": { "mode": "linear", "by": -0.03 }
+        "steps": 4,
+        "modifier": { "mode": "linear", "by": 0.03 }
       }
     }
   },
@@ -112,7 +112,7 @@
   {
     "model": "color-value/explicit",
     "name": "Brand Black",
-    "description": "Brand Black Color",
+    "description": "Brand Black color",
     "params": {
       "value": "#181818"
     }
@@ -169,26 +169,28 @@
   },
   {
     "model": "color-set/anchored",
-    "name": "Curcuma Palette",
-    "description": "Wide range shades of Curcuma",
+    "name": "Pink Palette",
+    "description": "Wide range shades of Pink",
     "usage": {
       "intendedFor": ["Icons", "Backgrounds"],
       "notFor": ["Typography"]
     },
     "params": {
-      "anchor": "#564109",
+      "anchor": "#d35084",
       "after": {
         "steps": 4,
         "modifier": {
-          "space": "oklch",
-          "l": { "mode": "linear", "by": 0.07 }
+          "space": "hsl",
+          "l": { "mode": "linear", "by": 0.07 },
+          "s": { "mode": "linear", "by": -0.05 }
         }
       },
       "before": {
         "steps": 4,
         "modifier": {
-          "space": "oklch",
-          "l": { "mode": "linear", "by": 0.07 }
+          "space": "hsl",
+          "l": { "mode": "linear", "by": -0.1 },
+          "s": { "mode": "linear", "by": -0.05 }
         }
       }
     }
@@ -204,7 +206,7 @@
     "params": {
       "from": "#DD3F3F",
       "to": "#3049e0",
-      "steps": 7
+      "steps": 5
     }
   }
 ]

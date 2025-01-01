@@ -1,4 +1,4 @@
-# Designer Schemas
+# Designer Decisions - Schemas
 
 > A collection of JSON schemas to validate design decision inputs.
 

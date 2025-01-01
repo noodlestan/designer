@@ -1,5 +1,5 @@
 {
-  "$id": "urn:designer:primitive:color-space-name",
+  "$id": "urn:designer:primitive:color-format",
   "enum": [
     "hsl",
     "oklab",

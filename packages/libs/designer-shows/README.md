@@ -1,4 +1,4 @@
-# Designer Shows
+# Designer Decisions - Shows
 
 > Visualizing design decisions and tokens: Astro and SolidJS components.
 

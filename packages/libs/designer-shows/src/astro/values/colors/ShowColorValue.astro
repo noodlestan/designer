@@ -1,5 +1,5 @@
 ---
-import { type ColorSpaceName, type ColorValue } from '@noodlestan/designer-decisions';
+import { type ColorFormat, type ColorValue } from '@noodlestan/designer-decisions';
 
 import { DecisionValueContainer } from '../../atoms';
 import { FlexStack } from '../../layouts';
@@ -12,13 +12,13 @@ type Props = ShowValueProps & {
 
 const { v: colorValue, value = true, viz = true, size = 'auto', options } = Astro.props;
 
-const spaces: ColorSpaceName[] | null =
+const formats: ColorFormat[] | null =
     typeof value === 'boolean' && value
         ? ['rgb']
         : typeof value === 'string'
-          ? [value as ColorSpaceName]
+          ? [value as ColorFormat]
           : Array.isArray(value)
-            ? (value as ColorSpaceName[])
+            ? (value as ColorFormat[])
             : null;
 
 const Viz = getColorVizComponent(viz);
@@ -31,8 +31,8 @@ const opt = options as ColorVizOptions;
     {
         value && colorValue !== undefined && (
             <FlexStack>
-                {spaces?.map(space => (
-                    <DecisionValueContainer>{colorValue.toString(space)}</DecisionValueContainer>
+                {formats?.map(format => (
+                    <DecisionValueContainer>{colorValue.toString(format)}</DecisionValueContainer>
                 ))}
             </FlexStack>
         )

@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Badge } from '@astrojs/starlight/components';
 import type { DecisionModelMeta } from '@noodlestan/designer-decisions';
-import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { FlexStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { sidebar } from '../../navigation/sidebar';
 import { decisionLoader } from '../../decisions';
@@ -70,7 +70,9 @@ const frontmatter = {
                 <p>🚧 Schema Link</p>
                 {decisionsByModel(m).length > 0 && (
                     <h4 id="samples">Samples</h4>
-                    <ShowDecisionCard store={store} d={decisionsByModel(m)[0].name} model params />
+                    <FlexStack vpad>
+                        <ShowDecisionCard store={store} d={decisionsByModel(m)[0].name} model params />
+                    </FlexStack>
                 )}
             </div>
         ))

@@ -1,4 +1,4 @@
-# Noodlestan Designer
+# Designer Decisions
 
 > Modeling design decisions. Schemas, transformations, visualizations, the works.
 

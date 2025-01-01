@@ -47,11 +47,11 @@ Renders a [ColorValueDecision](/decision-models/color-value).
 Renders a [ColorSetDecision](/decision-models/color-set).
 
 ```mdx
-<ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'oklch']} />
+<ShowColorSetDecision store={store} d="Pink Palette" size="m" value={['rgb', 'oklch']} />
 ```
 
 <CardGrid>
-    <ShowColorSetDecision store={store} d="Curcuma Palette" size="m" value={['rgb', 'oklch']} />
+    <ShowColorSetDecision store={store} d="Pink Palette" size="m" value={['rgb', 'oklch']} />
 </CardGrid>
 
 ### ShowColorSRGBHueValueDecision
@@ -127,8 +127,8 @@ For decisions of type [ColorValueDecision](/decision-models/color-value) and
 not only to show/hide the decision value but also to display
 it in one or more color spaces.
 
-Provide a `string` with one of [ColorSpaceName](/api/designer-decisions/Types/ColorSpaceName/)
-to specify which color space / format to use.
+Provide a `string` with one of [ColorFormat](/api/designer-decisions/Types/ColorFormat/)
+to specify which color space and format to use.
 
 ```mdx
 <ShowDecision d="Brand Blue" store={store} size="s" value="oklch" />
@@ -138,7 +138,7 @@ to specify which color space / format to use.
     <ShowDecision d="Brand Pink" store={store} size="s" value={'oklch'} />
 </FlexRow>
 
-Provide an `array` of [ColorSpaceName](/api/designer-decisions/Types/ColorSpaceName/)
+Provide an `array` of [ColorFormat](/api/designer-decisions/Types/ColorFormat/)
 to list several color spaces in your preferred order.
 
 ```mdx

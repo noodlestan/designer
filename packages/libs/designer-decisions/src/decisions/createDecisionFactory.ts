@@ -2,9 +2,9 @@ import type { StaticDecisionMap, StaticInputMap } from '../inputs';
 import type {
     Decision,
     DecisionContext,
-    LookupContexts,
     DecisionInputBase,
     DecisionRef,
+    LookupContexts,
 } from '../types';
 
 import { createDecisionContext, createStaticStoreDecision, createUnexpectedError } from '.';

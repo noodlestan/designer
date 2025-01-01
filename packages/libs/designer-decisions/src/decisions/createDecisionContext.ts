@@ -1,9 +1,9 @@
 import type {
     DecisionContext,
-    LookupContexts,
     DecisionError,
     DecisionInputBase,
     DecisionRefResolver,
+    LookupContexts,
 } from '../types';
 
 export const createDecisionContext = (

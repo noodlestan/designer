@@ -1,4 +1,4 @@
-# Designer Decisions
+# Designer Decisions - Functions
 
 > A library of functions to load, validate, and manipulate design decisions.
 

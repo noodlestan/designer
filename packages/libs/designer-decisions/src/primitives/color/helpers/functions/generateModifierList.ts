@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 import type {
     ColorModifier,
     ColorOkLCHLiteral,
@@ -10,7 +12,7 @@ export const generateModifierColorList = (
     anchor: ColorValue,
     steps: number,
     modifier?: ColorModifier,
-): ColorOkLCHLiteral[] => {
+): ColorSRGBHSLLiteral[] => {
     if (!modifier) {
         const v = anchor.toObject('oklch');
         return Array(steps).fill(v);
@@ -24,19 +26,19 @@ export const generateModifierColorList = (
 
         return hues.map((hue, index) => ({
             h: hue,
-            c: saturations[index],
+            s: saturations[index],
             l: lightnesses[index],
         }));
     } else {
         const { l, c, h } = anchor.toObject('oklch') as ColorOkLCHLiteral;
-        const lightnesses = generateModifierSeries(h, steps, modifier.l, [0, 1]);
+        const lightnesses = generateModifierSeries(l, steps, modifier.l, [0, 1]);
         const chromas = generateModifierSeries(c, steps, modifier.c, [0, 0.5]);
-        const hues = generateModifierSeries(l, steps, modifier.h, [0, 360]);
+        const hues = generateModifierSeries(h, steps, modifier.h, [0, 360]);
 
-        return lightnesses.map((lightness, index) => ({
-            l: lightness,
-            h: hues[index],
-            c: chromas[index],
-        }));
+        return lightnesses.map((lightness, index) => {
+            const color = chroma.oklch(lightness, chromas[index], hues[index]);
+            const [h, s, l] = chroma(color).hsl();
+            return { h: h || 0, s: s || 0, l: l || 0 };
+        });
     }
 };

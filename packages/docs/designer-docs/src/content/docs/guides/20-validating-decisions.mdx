@@ -95,6 +95,7 @@ const loadDecisions = async () => {
     const records = store.records();
     const errors = store.storeErrors().length;
     const validationErrors = store.validationErrors().length;
+    records.forEach(record => console.info(record));
     console.info(`🐘 ${records.length} records, ${errors} errors, ${validationErrors} warnings`);
 };
 
@@ -112,21 +113,14 @@ The output should look something like:
 ```
 ...
 {
-  model: 'color-set/anchored',
-  name: 'Primary Foregrounds',
-  description: 'Green shades for foregrounds',
-  usage: { intendedFor: [ 'Typography', 'Foregrounds' ], notFor: [ 'Icons' ] },
-  params: {
-    start: { '$name': 'Primary Foreground' },
-    modifier: {
-        "space": "oklch",
-        lightness: { type: 'linear', by: 0.05 },
-        chroma: { type: 'linear', by: -0.01 }
-    },
-    steps: 5
-  }
+    model: 'color-srgb-hue-value/explicit',
+    name: 'Brand Pink Hue',
+    description: 'Hue component of Brand Pink color',
+    params: {
+      value: 336
+    }
 }
-🐘 4 decisions, 0 errors
+🐘 4 records, 0 errors, 0 warnings
 ```
 
 In case of validation errors these will be printed using the `formatValidationError()` formatter.
@@ -134,17 +128,22 @@ In case of validation errors these will be printed using the `formatValidationEr
 For instance, if we delete the `param` attribute from a couple of decision input records:
 
 ```
-🟨 Decision Curcuma Foreground (required) must have required property 'params'
-🟨 Decision Primary Foreground (required) must have required property 'params'
-🐘 4 decisions, 2 errors
+🟨 Decision Pink Palette (required) must have required property 'params'
+🟨 Brand Pink Hue (required) must have required property 'params'
+🐘 4 records, 0 errors, 2 warnings
 ```
 
 ## Inspecting and validating decision values
 
-Schema validation does not check for errors such as broken references between decisions because
-values are only resolved on-demand.
+Schema validation does not check for data errors such as
 
-To show all errors you can the following to your script:
+-   missing references between decisions
+-   color values out of range
+
+These values are only resolved on-demand.
+
+To show all errors you can use the `getDecisionStatus()` and `formatDecision()`
+utility functions.
 
 ```js
 // src/scripts/validate-decisions.js
@@ -161,7 +160,7 @@ reference error is expanded after the value.
 
 ```
 🐘 4 records, 0 errors, 0 warnings
-🟩 | Curcuma Palette | color-set/anchored | [8] |
+🟩 | Pink Palette | color-set/anchored | [8] |
 🟩 | Space Unit | space-value/explicit | 5px |
 🟥 | Action Contrast Color | color-value/explicit | false | 1 errors |
 

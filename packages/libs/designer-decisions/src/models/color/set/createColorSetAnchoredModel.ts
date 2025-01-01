@@ -10,7 +10,7 @@ export const createColorSetAnchoredModel: DecisionModelFactory<
         produce: (valueContext, params) => {
             const anchor = createColorValue(valueContext, params.anchor);
 
-            const list = generateAnchoredColorList(anchor, params).slice(1);
+            const list = generateAnchoredColorList(anchor, params);
             const values = list.map(item => createColorValue(valueContext, item));
             const value = createColorSet(valueContext, values);
 
