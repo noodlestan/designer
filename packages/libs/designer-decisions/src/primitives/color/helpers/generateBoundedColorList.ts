@@ -1,12 +1,12 @@
 import chroma from 'chroma-js';
 
-import type { ColorSRGBHSLLiteral, ColorValue } from '../../../types';
+import type { ColorSRGBHSLiteral, ColorValue } from '../../../types';
 
 export const generateBoundedColorList = (
     fromValue: ColorValue,
     toValue: ColorValue,
     steps: number,
-): ColorSRGBHSLLiteral[] => {
+): ColorSRGBHSLiteral[] => {
     const from = fromValue.get();
     const to = toValue.get();
 

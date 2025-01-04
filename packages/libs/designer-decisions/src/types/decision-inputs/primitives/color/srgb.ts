@@ -13,7 +13,7 @@ export type ColorSRGBHSL = {
     l: ColorSRGBLightness;
 };
 
-export type ColorSRGBHSLLiteral = {
+export type ColorSRGBHSLiteral = {
     h: number;
     s: number;
     l: number;
@@ -27,4 +27,4 @@ export type ColorSRGBChannels = {
 
 export type ColorSRGB = ColorSRGBHSL;
 
-export type ColorSRGBLiteral = ColorSRGBHSLLiteral | ColorSRGBChannels;
+export type ColorSRGBLiteral = ColorSRGBHSLiteral | ColorSRGBChannels;

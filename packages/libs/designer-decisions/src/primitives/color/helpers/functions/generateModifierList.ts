@@ -3,7 +3,7 @@ import chroma from 'chroma-js';
 import type {
     ColorModifier,
     ColorOkLCHLiteral,
-    ColorSRGBHSLLiteral,
+    ColorSRGBHSLiteral,
     ColorValue,
 } from '../../../../types';
 import { generateModifierSeries } from '../../../number';
@@ -12,14 +12,14 @@ export const generateModifierColorList = (
     anchor: ColorValue,
     steps: number,
     modifier?: ColorModifier,
-): ColorSRGBHSLLiteral[] => {
+): ColorSRGBHSLiteral[] => {
     if (!modifier) {
         const v = anchor.toObject('oklch');
         return Array(steps).fill(v);
     }
 
     if (modifier.space === 'hsl') {
-        const { h, s, l } = anchor.toObject('hsl') as ColorSRGBHSLLiteral;
+        const { h, s, l } = anchor.toObject('hsl') as ColorSRGBHSLiteral;
         const hues = generateModifierSeries(h, steps, modifier.h, [0, 360]);
         const saturations = generateModifierSeries(s, steps, modifier.s, [0, 1]);
         const lightnesses = generateModifierSeries(l, steps, modifier.l, [0, 1]);
