@@ -1,7 +1,7 @@
 import type { Color } from 'chroma-js';
 
 import type { ColorFormat, ColorObjectLiteral, NormalNumber } from '../../decision-inputs';
-import type { BaseValue } from '../base';
+import type { BaseSet, BaseValue } from '../base';
 
 export type AlphaValue = BaseValue<NormalNumber>;
 
@@ -10,4 +10,4 @@ export type ColorValue = BaseValue<Color> & {
     toString(format: ColorFormat): string;
 };
 
-export type ColorSet = BaseValue<ColorValue[]>;
+export type ColorSet = BaseSet<ColorValue>;
