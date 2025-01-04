@@ -1,5 +1,5 @@
-import { DECISION_COLOR_SRGB_SATURATION } from '../../../../constants';
+import { DECISION_COLOR_SRGB_SATURATION_VALUE } from '../../../../constants';
 
 export const VALUE_NAME = 'SRGBSaturationValue';
 export const FALLBACK_VALUE = 0;
-export const REF_CHECKED_TYPES = [DECISION_COLOR_SRGB_SATURATION];
+export const REF_CHECKED_TYPES = [DECISION_COLOR_SRGB_SATURATION_VALUE];

@@ -10,7 +10,7 @@ import type { Decision } from '../../base';
 
 export type ColorSRGBHueValueDecision = Decision<SRGBHueValue>;
 
-export type ColorSRGBHueScaleDecision = Decision<SRGBHueSet>;
+export type ColorSRGBHueSetDecision = Decision<SRGBHueSet>;
 
 export type ColorSRGBSaturationValueDecision = Decision<SRGBSaturationValue>;
 

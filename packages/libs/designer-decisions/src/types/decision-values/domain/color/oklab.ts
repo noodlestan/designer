@@ -18,4 +18,4 @@ export type ColorOklabChromaScaleDecision = Decision<OklabChromaScale>;
 
 export type ColorOklabHueValueDecision = Decision<OklabHueValue>;
 
-export type ColorOklabHueScaleDecision = Decision<OklabHueSet>;
+export type ColorOklabHueSetDecision = Decision<OklabHueSet>;

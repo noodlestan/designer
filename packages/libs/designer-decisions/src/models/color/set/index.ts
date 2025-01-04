@@ -2,4 +2,3 @@
 export * from './createColorSetAnchoredModel';
 export * from './createColorSetBoundedModel';
 export * from './createColorSetExplicitModel';
-export * from './isColorSetDecision';
