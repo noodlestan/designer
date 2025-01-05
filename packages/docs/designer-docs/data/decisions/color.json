@@ -16,6 +16,40 @@
     }
   },
   {
+    "model": "color-srgb-hue-set/explicit",
+    "name": "Brand Hues",
+    "description": "Hue components of Brand colors",
+    "params": {
+      "values": [336, 192]
+    }
+  },
+  {
+    "model": "color-srgb-hue-set/bounded",
+    "name": "Heat Map Hue Set",
+    "description": "A 7 step hue set ranging from hot to cold",
+    "params": {
+      "from": 360,
+      "to": 231,
+      "steps": 5
+    }
+  },
+  {
+    "model": "color-srgb-hue-set/anchored",
+    "name": "Warm hues",
+    "description": "A 5 step hue set of warm tones",
+    "params": {
+      "anchor": 30,
+      "after": {
+        "steps": 2,
+        "modifier": { "mode": "linear", "by": 15 }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": { "mode": "linear", "by": -15 }
+      }
+    }
+  },
+  {
     "model": "color-srgb-saturation-value/explicit",
     "name": "Brand Pink Saturation",
     "description": "Saturation component of Brand Pink color",
@@ -29,6 +63,46 @@
     "description": "Saturation component of Brand Blue color",
     "params": {
       "value": 0.95
+    }
+  },
+  {
+    "model": "color-srgb-saturation-scale/explicit",
+    "name": "Background Desaturation Scale",
+    "description": "Saturation values for background elements",
+    "params": {
+      "values": [0.05, 0.1, 0.15]
+    }
+  },
+  {
+    "model": "color-srgb-saturation-scale/bounded",
+    "name": "Palette Saturation Scale",
+    "description": "Saturation values for 7 steps palette",
+    "params": {
+      "from": 0.1,
+      "to": 0.9,
+      "steps": 7
+    }
+  },
+  {
+    "model": "color-srgb-saturation-scale/anchored",
+    "name": "Illustration Saturation Scale",
+    "description": "Saturation scale for illustrations",
+    "params": {
+      "anchor": 0.5,
+      "after": {
+        "steps": 4,
+        "modifier": {
+          "mode": "linear",
+          "by": 0.05
+        }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": {
+          "mode": "linear",
+          "by": -0.05
+        }
+      }
     }
   },
   {
