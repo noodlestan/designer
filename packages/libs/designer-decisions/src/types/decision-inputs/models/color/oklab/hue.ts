@@ -8,15 +8,15 @@ export type ColorOklabHueValueExplicitInput = DecisionInputBase & {
     };
 };
 
-export type ColorOklabHueScaleExplicitInput = DecisionInputBase & {
-    model: 'color-oklab-hue-scale/explicit';
+export type ColorOklabHueSetExplicitInput = DecisionInputBase & {
+    model: 'color-oklab-hue-set/explicit';
     params: {
         values: Degrees[];
     };
 };
 
-export type ColorOklabHueScaleBoundedInput = DecisionInputBase & {
-    model: 'color-oklab-hue-scale/bounded';
+export type ColorOklabHueSetBoundedInput = DecisionInputBase & {
+    model: 'color-oklab-hue-set/bounded';
     params: {
         from: Degrees;
         to: Degrees;
@@ -24,8 +24,8 @@ export type ColorOklabHueScaleBoundedInput = DecisionInputBase & {
     };
 };
 
-export type ColorOklabHueScaleAnchoredInput = DecisionInputBase & {
-    model: 'color-oklab-hue-scale/anchored';
+export type ColorOklabHueSetAnchoredInput = DecisionInputBase & {
+    model: 'color-oklab-hue-set/anchored';
     params: {
         anchor: Degrees;
     } & AnchoredNumberSeriesParams;
