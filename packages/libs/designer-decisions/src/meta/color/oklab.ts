@@ -18,7 +18,7 @@ import { castFactory } from '../functions';
 export const ColorOklabDecisionTypes: DecisionType[] = [
     {
         type: 'color-oklab-hue-value',
-        name: 'Color Oklab Hue Value',
+        name: 'Oklab Hue Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the hue of a Oklab color.',
@@ -33,7 +33,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-oklab-hue-set',
-        name: 'Color Oklab Hue Set',
+        name: 'Oklab Hue Set',
         category: 'set',
         domain: 'color',
         description: 'A decision to define the hue set for Oklab colors.',
@@ -62,7 +62,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-oklab-chroma-value',
-        name: 'Color Oklab Chroma Value',
+        name: 'Oklab Chroma Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the chroma of a Oklab color.',
@@ -77,7 +77,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-oklab-chroma-scale',
-        name: 'Color Oklab Chroma Scale',
+        name: 'Oklab Chroma Scale',
         category: 'scale',
         domain: 'color',
         description: 'A decision to define a chroma scale for Oklab colors.',
@@ -106,7 +106,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-oklab-lightness-value',
-        name: 'Color Oklab Lightness Value',
+        name: 'Oklab Lightness Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the lightness of a Oklab color.',
@@ -121,7 +121,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-oklab-lightness-scale',
-        name: 'Color Oklab Lightness Scale',
+        name: 'Oklab Lightness Scale',
         category: 'scale',
         domain: 'color',
         description: 'A decision to define a lightness scale for Oklab colors.',

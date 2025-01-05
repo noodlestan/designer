@@ -18,7 +18,7 @@ import { castFactory } from '../functions';
 export const ColorSRGBDecisionTypes: DecisionType[] = [
     {
         type: 'color-srgb-hue-value',
-        name: 'Color sRGB Hue Value',
+        name: 'sRGB Hue Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the hue of a sRGB color.',
@@ -33,7 +33,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-srgb-hue-set',
-        name: 'Color sRGB Hue Set',
+        name: 'sRGB Hue Set',
         category: 'set',
         domain: 'color',
         description: 'A decision to define the hue set for sRGB colors.',
@@ -62,7 +62,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-srgb-saturation-value',
-        name: 'Color sRGB Saturation Value',
+        name: 'sRGB Saturation Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the saturation of a sRGB color.',
@@ -77,7 +77,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-srgb-saturation-scale',
-        name: 'Color sRGB Saturation Scale',
+        name: 'sRGB Saturation Scale',
         category: 'scale',
         domain: 'color',
         description: 'A decision to define a saturation scale for sRGB colors.',
@@ -106,7 +106,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-srgb-lightness-value',
-        name: 'Color sRGB Lightness Value',
+        name: 'sRGB Lightness Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the lightness of a sRGB color.',
@@ -121,7 +121,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
     },
     {
         type: 'color-srgb-lightness-scale',
-        name: 'Color sRGB Lightness Scale',
+        name: 'sRGB Lightness Scale',
         category: 'scale',
         domain: 'color',
         description: 'A decision to define a lightness scale for sRGB colors.',
