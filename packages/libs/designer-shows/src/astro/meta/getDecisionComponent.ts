@@ -1,9 +1,11 @@
 import { type Decision, getDecisionType } from '@noodlestan/designer-decisions';
 
 import {
+    ShowColorSRGBHueSetDecision,
     ShowColorSRGBHueValueDecision,
     ShowColorSRGBLightnessScaleDecision,
     ShowColorSRGBLightnessValueDecision,
+    ShowColorSRGBSaturationScaleDecision,
     ShowColorSRGBSaturationValueDecision,
     ShowColorSetDecision,
     ShowColorValueDecision,
@@ -19,9 +21,11 @@ export const getDecisionComponent = (
     // component function references are not available in the unit scope
     const DECISION_TYPE_COMPONENT_MAP: Record<string, DecisionTypeComponent> = {
         'color-srgb-hue-value': ShowColorSRGBHueValueDecision,
+        'color-srgb-hue-set': ShowColorSRGBHueSetDecision,
         'color-srgb-lightness-value': ShowColorSRGBLightnessValueDecision,
         'color-srgb-lightness-scale': ShowColorSRGBLightnessScaleDecision,
         'color-srgb-saturation-value': ShowColorSRGBSaturationValueDecision,
+        'color-srgb-saturation-scale': ShowColorSRGBSaturationScaleDecision,
         'color-set': ShowColorSetDecision,
         'color-value': ShowColorValueDecision,
         'space-value': ShowSpaceValueDecision,

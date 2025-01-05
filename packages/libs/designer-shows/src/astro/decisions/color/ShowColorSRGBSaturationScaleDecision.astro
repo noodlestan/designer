@@ -1,0 +1,33 @@
+---
+import { isColorSRGBSaturationScaleDecision } from '@noodlestan/designer-decisions';
+
+import type { ShowDecisionProps } from '../../types';
+import { FlexStack } from '../../layouts';
+import { ShowSaturationValue } from '../../values';
+import { ShowDecisionUnavailable } from '../unavailable';
+
+type Props = ShowDecisionProps;
+
+const { store, d, size, ...rest } = Astro.props;
+
+const [, decision] = store.decision({ $name: d });
+const saturationScale =
+    decision && isColorSRGBSaturationScaleDecision(decision)
+        ? decision.produce().value()
+        : undefined;
+
+const items = saturationScale?.get();
+
+const s = size || 's';
+---
+
+{
+    decision && (
+        <FlexStack>
+            {items?.map(item => (
+                <ShowSaturationValue v={item} size={s} {...rest} />
+            ))}
+        </FlexStack>
+    )
+}
+{!decision && <ShowDecisionUnavailable d={d as string} />}

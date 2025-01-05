@@ -1,0 +1,31 @@
+---
+import { isColorSRGBHueSetDecision } from '@noodlestan/designer-decisions';
+
+import type { ShowDecisionProps } from '../../types';
+import { FlexStack } from '../../layouts';
+import { ShowHueValue } from '../../values';
+import { ShowDecisionUnavailable } from '../unavailable';
+
+type Props = ShowDecisionProps;
+
+const { store, d, size, ...rest } = Astro.props;
+
+const [, decision] = store.decision({ $name: d });
+const hueSet =
+    decision && isColorSRGBHueSetDecision(decision) ? decision.produce().value() : undefined;
+
+const items = hueSet?.get();
+
+const s = size || 's';
+---
+
+{
+    decision && (
+        <FlexStack>
+            {items?.map(item => (
+                <ShowHueValue v={item} size={s} {...rest} />
+            ))}
+        </FlexStack>
+    )
+}
+{!decision && <ShowDecisionUnavailable d={d as string} />}
