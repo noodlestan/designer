@@ -3,7 +3,7 @@ import { isColorSRGBLightnessScaleDecision } from '@noodlestan/designer-decision
 
 import type { ShowDecisionProps } from '../../types';
 import { FlexStack } from '../../layouts';
-import { ShowLightnessValue } from '../../values';
+import { ShowSRGBLightnessValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -25,7 +25,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowLightnessValue v={item} size={s} {...rest} />
+                <ShowSRGBLightnessValue v={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )

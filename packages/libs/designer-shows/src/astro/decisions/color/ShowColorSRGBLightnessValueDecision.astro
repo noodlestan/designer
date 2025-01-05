@@ -2,7 +2,7 @@
 import { isColorSRGBLightnessValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
-import { ShowLightnessValue } from '../../values';
+import { ShowSRGBLightnessValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -16,5 +16,5 @@ const lightness =
         : undefined;
 ---
 
-{decision && <ShowLightnessValue v={lightness} {...rest} />}
+{decision && <ShowSRGBLightnessValue v={lightness} {...rest} />}
 {!decision && <ShowDecisionUnavailable d={d as string} />}

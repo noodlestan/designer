@@ -3,7 +3,7 @@ import { isColorSRGBHueSetDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
 import { FlexStack } from '../../layouts';
-import { ShowHueValue } from '../../values';
+import { ShowSRGBHueValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -23,7 +23,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowHueValue v={item} size={s} {...rest} />
+                <ShowSRGBHueValue v={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )

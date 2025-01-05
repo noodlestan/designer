@@ -3,7 +3,7 @@ import { isColorSRGBSaturationScaleDecision } from '@noodlestan/designer-decisio
 
 import type { ShowDecisionProps } from '../../types';
 import { FlexStack } from '../../layouts';
-import { ShowSaturationValue } from '../../values';
+import { ShowSRGBSaturationValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -25,7 +25,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowSaturationValue v={item} size={s} {...rest} />
+                <ShowSRGBSaturationValue v={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )
