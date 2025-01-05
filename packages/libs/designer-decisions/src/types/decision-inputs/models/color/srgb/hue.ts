@@ -8,15 +8,15 @@ export type ColorSRGBHueValueExplicitInput = DecisionInputBase & {
     };
 };
 
-export type ColorSRGBHueScaleExplicitInput = DecisionInputBase & {
-    model: 'color-srgb-hue-scale/explicit';
+export type ColorSRGBHueSetExplicitInput = DecisionInputBase & {
+    model: 'color-srgb-hue-set/explicit';
     params: {
         values: Degrees[];
     };
 };
 
-export type ColorSRGBHueScaleBoundedInput = DecisionInputBase & {
-    model: 'color-srgb-hue-scale/bounded';
+export type ColorSRGBHueSetBoundedInput = DecisionInputBase & {
+    model: 'color-srgb-hue-set/bounded';
     params: {
         from: Degrees;
         to: Degrees;
@@ -24,8 +24,8 @@ export type ColorSRGBHueScaleBoundedInput = DecisionInputBase & {
     };
 };
 
-export type ColorSRGBHueScaleAnchoredInput = DecisionInputBase & {
-    model: 'color-srgb-hue-scale/anchored';
+export type ColorSRGBHueSetAnchoredInput = DecisionInputBase & {
+    model: 'color-srgb-hue-set/anchored';
     params: {
         anchor: Degrees;
     } & AnchoredNumberSeriesParams;
