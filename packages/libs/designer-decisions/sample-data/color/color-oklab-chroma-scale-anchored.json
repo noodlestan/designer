@@ -1,0 +1,23 @@
+[
+  {
+    "model": "color-oklab-chroma-scale/anchored",
+    "name": "Oklab Chroma Scale Anchored Sample",
+    "params": {
+      "anchor": 0.2,
+      "after": {
+        "steps": 4,
+        "modifier": {
+          "mode": "linear",
+          "by": 0.025
+        }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": {
+          "mode": "linear",
+          "by": -0.05
+        }
+      }
+    }
+  }
+]

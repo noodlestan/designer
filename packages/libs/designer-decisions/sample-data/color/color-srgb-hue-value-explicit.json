@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-srgb-hue-value/explicit",
+    "name": "sRGB Hue Value Explicit Sample",
+    "params": {
+      "value": 336
+    }
+  }
+]

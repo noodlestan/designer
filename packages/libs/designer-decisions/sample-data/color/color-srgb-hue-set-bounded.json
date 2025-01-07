@@ -1,0 +1,11 @@
+[
+  {
+    "model": "color-srgb-hue-set/bounded",
+    "name": "sRGB Hue Set Bounded Sample",
+    "params": {
+      "from": 360,
+      "to": 231,
+      "steps": 5
+    }
+  }
+]

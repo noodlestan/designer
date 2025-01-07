@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-srgb-lightness-scale/explicit",
+    "name": "sRGB Lightness Scale Explicit Sample",
+    "params": {
+      "values": [0.97, 0.91, 0.83]
+    }
+  }
+]

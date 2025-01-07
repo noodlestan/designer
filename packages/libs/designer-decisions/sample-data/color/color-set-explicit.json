@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-set/explicit",
+    "name": "Color Set Explicit Sample",
+    "params": {
+      "values": ["#d35084", "#06b4e0", "#181818", "#f7f7f7"]
+    }
+  }
+]

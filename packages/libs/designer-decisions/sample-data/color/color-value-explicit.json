@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-value/explicit",
+    "name": "Color Value Explicit Sample",
+    "params": {
+      "value": "#9B2C5A"
+    }
+  }
+]

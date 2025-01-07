@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-oklab-hue-set/explicit",
+    "name": "Oklab Hue Set Explicit Sample",
+    "params": {
+      "values": [336, 192]
+    }
+  }
+]

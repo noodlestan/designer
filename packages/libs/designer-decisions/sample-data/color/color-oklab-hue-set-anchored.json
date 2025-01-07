@@ -1,0 +1,17 @@
+[
+  {
+    "model": "color-oklab-hue-set/anchored",
+    "name": "Oklab Hue Set Anchored Sample",
+    "params": {
+      "anchor": 30,
+      "after": {
+        "steps": 2,
+        "modifier": { "mode": "linear", "by": 15 }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": { "mode": "linear", "by": -15 }
+      }
+    }
+  }
+]

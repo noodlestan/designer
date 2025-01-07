@@ -1,0 +1,11 @@
+[
+  {
+    "model": "color-set/bounded",
+    "name": "Color Set Bounded Sample",
+    "params": {
+      "from": "#DD3F3F",
+      "to": "#3049e0",
+      "steps": 5
+    }
+  }
+]

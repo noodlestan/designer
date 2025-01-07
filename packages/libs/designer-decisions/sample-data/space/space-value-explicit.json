@@ -1,0 +1,9 @@
+[
+  {
+    "model": "space-value/explicit",
+    "name": "Space Value Explicit Sample",
+    "params": {
+      "value": 5
+    }
+  }
+]

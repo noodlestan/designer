@@ -1,0 +1,11 @@
+[
+  {
+    "model": "color-oklab-hue-set/bounded",
+    "name": "Oklab Hue Set Bounded Sample",
+    "params": {
+      "from": 360,
+      "to": 231,
+      "steps": 5
+    }
+  }
+]

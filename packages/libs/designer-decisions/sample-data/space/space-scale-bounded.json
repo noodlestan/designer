@@ -1,0 +1,11 @@
+[
+  {
+    "model": "space-scale/bounded",
+    "name": "Space Scale Bounded Sample",
+    "params": {
+      "from": 25,
+      "to": 200,
+      "steps": 5
+    }
+  }
+]

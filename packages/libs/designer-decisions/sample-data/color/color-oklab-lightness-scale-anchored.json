@@ -1,0 +1,17 @@
+[
+  {
+    "model": "color-oklab-lightness-scale/anchored",
+    "name": "Oklab Lightness Scale Anchored Sample",
+    "params": {
+      "anchor": 0.5,
+      "after": {
+        "steps": 4,
+        "modifier": { "mode": "linear", "by": 0.075 }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": { "mode": "linear", "by": -0.075 }
+      }
+    }
+  }
+]

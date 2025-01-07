@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-oklab-lightness-value/explicit",
+    "name": "Color Lightness Value Explicit Sample",
+    "params": {
+      "value": 0.57
+    }
+  }
+]

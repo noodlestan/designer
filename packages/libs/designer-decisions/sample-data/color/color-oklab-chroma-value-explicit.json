@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-oklab-chroma-value/explicit",
+    "name": "Oklab Chroma Value Explicit Sample",
+    "params": {
+      "value": 0.2
+    }
+  }
+]

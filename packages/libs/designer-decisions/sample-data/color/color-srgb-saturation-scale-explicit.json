@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-srgb-saturation-scale/explicit",
+    "name": "sRGB Saturation Scale Explicit Sample",
+    "params": {
+      "values": [0.05, 0.1, 0.15]
+    }
+  }
+]

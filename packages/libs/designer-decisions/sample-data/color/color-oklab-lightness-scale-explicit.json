@@ -1,0 +1,9 @@
+[
+  {
+    "model": "color-oklab-lightness-scale/explicit",
+    "name": "Oklab Lightness Scale Explicit Sample",
+    "params": {
+      "values": [0.97, 0.91, 0.83]
+    }
+  }
+]

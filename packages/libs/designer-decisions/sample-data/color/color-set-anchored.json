@@ -1,0 +1,25 @@
+[
+  {
+    "model": "color-set/anchored",
+    "name": "Color Set Anchored Sample",
+    "params": {
+      "anchor": "#d35084",
+      "after": {
+        "steps": 4,
+        "modifier": {
+          "space": "hsl",
+          "l": { "mode": "linear", "by": 0.07 },
+          "s": { "mode": "linear", "by": -0.05 }
+        }
+      },
+      "before": {
+        "steps": 4,
+        "modifier": {
+          "space": "hsl",
+          "l": { "mode": "linear", "by": -0.1 },
+          "s": { "mode": "linear", "by": -0.05 }
+        }
+      }
+    }
+  }
+]
