@@ -19,7 +19,7 @@ export const SpaceDecisionTypes: DecisionType[] = [
             {
                 model: 'explicit',
                 name: 'Explicit value',
-                description: 'Defines a space value.',
+                description: 'Defines a space value explicitly.',
                 factory: castFactory(createSpaceValueExplicitModel),
             },
         ],

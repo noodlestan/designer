@@ -26,7 +26,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
             {
                 model: 'explicit',
                 name: 'Explicit value',
-                description: 'Defines the hue of a sRGB color as degrees on the color wheel.',
+                description: 'Defines the hue of a sRGB color as degrees on the sRGB color wheel.',
                 factory: castFactory(createColorSRGBHueValueExplicitModel),
             },
         ],

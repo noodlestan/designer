@@ -26,7 +26,8 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
             {
                 model: 'explicit',
                 name: 'Explicit value',
-                description: 'Defines the hue of a Oklab color as degrees on the color wheel.',
+                description:
+                    'Defines the hue of a Oklab color as degrees on the Oklab color wheel.',
                 factory: castFactory(createColorOklabHueValueExplicitModel),
             },
         ],
@@ -70,7 +71,8 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
             {
                 model: 'explicit',
                 name: 'Explicit value',
-                description: 'Defines the chroma of a Oklab color as a percentage.',
+                description:
+                    'Defines the chroma of a Oklab color as a number, where 0.4 is equivalent to 100%.',
                 factory: castFactory(createColorOklabChromaValueExplicitModel),
             },
         ],

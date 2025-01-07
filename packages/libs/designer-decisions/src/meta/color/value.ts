@@ -13,7 +13,7 @@ export const ColorValueDecisionTypes: DecisionType[] = [
             {
                 model: 'explicit',
                 name: 'Explicit value',
-                description: 'Defines a color value (either RGB, HSL, or other formats).',
+                description: 'Defines a color value explicitly.',
                 factory: castFactory(createColorValueExplicitModel),
             },
         ],
