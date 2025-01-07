@@ -1,9 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { SchemaSource } from '@noodlestan/designer-decisions';
-
-import { resolveSchemaSourcePath } from './resolveSchemaSourcePath';
+import { DataSource } from '@noodlestan/designer-decisions';
+import { resolveSourcePath } from '@noodlestan/designer-functions';
 
 function isFile(entry: fs.Dirent, entryPAth: string) {
     return (
@@ -15,11 +14,11 @@ function isFile(entry: fs.Dirent, entryPAth: string) {
 }
 
 export async function findTypeFiles(
-    source: SchemaSource,
+    source: DataSource,
     paths: string[],
     moduleResolver: (moduleName: string) => Promise<string>,
 ): Promise<string[]> {
-    const sourcePath = await resolveSchemaSourcePath(source, moduleResolver);
+    const sourcePath = await resolveSourcePath(source, moduleResolver);
 
     function getAllTsFiles(dirPath: string): string[] {
         const entries = fs.readdirSync(dirPath, { withFileTypes: true });

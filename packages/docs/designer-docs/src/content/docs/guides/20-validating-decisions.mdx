@@ -58,8 +58,10 @@ We will use the _all-in-one_
 [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader)
 providing it with:
 
--   A list of directories to look for JSON files.
--   A list of SchemaConfig to load validation schemas from.
+-   The
+    schemas for the built-in decision models
+    https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts
+-   A directory to load decision data from.
 -   A function to resolve the physical location of node modules containing the schemas.
 
 ```js
@@ -72,8 +74,8 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 const DATA_PATH = path.resolve('./data/decisions');
 
 const loader = createDecisionLoader(
-    [DATA_PATH],
     [DECISION_SCHEMAS],
+    [DATA_PATH],
     async (moduleName: string) => `../../../node_modules/${moduleName}`,
 );
 ```

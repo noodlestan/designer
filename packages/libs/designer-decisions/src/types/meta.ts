@@ -34,11 +34,11 @@ export type DecisionModelMeta = {
     description: string;
 };
 
-export type SchemaSourcePackage = { type: 'package'; package: string; path?: string };
+export type DataSourcePackage = { type: 'package'; package: string; path: string };
 
-export type SchemaSourcePath = { type: 'path'; path: string };
+export type DataSourcePath = { type: 'path'; path: string };
 
-export type SchemaSource = SchemaSourcePackage | SchemaSourcePath;
+export type SchemaSource = DataSourcePackage | DataSourcePath;
 
 export type SchemaGeneratorConfig = {
     urnBase: string;
@@ -52,4 +52,11 @@ export type SchemaGeneratorConfig = {
 export type SchemaConfig = {
     urnBase: string;
     source: SchemaSource;
+};
+
+export type DataSource = DataSourcePackage | DataSourcePath;
+
+export type DecisionSource = {
+    name: string;
+    source: DataSource;
 };

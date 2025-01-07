@@ -7,8 +7,8 @@ sidebar:
 
 ```ts
 type createDecisionLoader = (
-    dataPaths: string[],
-    schemaConfigs: SchemaConfig[],
+    schemas: SchemaConfig[],
+    sources: (DecisionSource | string)[],
     moduleResolver: (moduleName: string) => Promise<string>,
 ) => () => Promise<StaticDecisionStore>;
 ```
@@ -35,13 +35,13 @@ Given a list of paths and schemas configs:
 
 ## Params
 
-##### ༶ `dataPaths`: string[]
-
-A list of directories where to look for JSON files.
-
-##### ༶ `schemaConfigs`: [SchemaConfig](/api/designer-decisions/Types/SchemaConfig)\[\]
+##### ༶ `schemas`: [SchemaConfig](/api/designer-decisions/Types/SchemaConfig)\[\]
 
 A list of schema configurations to load validation schemas from.
+
+##### ༶ `sources`: Array\<[DecisionSource](/api/designer-decisions/Types/DecisionSource) | string\>
+
+A list of data sources to load decision data from.
 
 ##### ༶ `moduleResolver`: (moduleName: string) => Promise&lt;string&gt;
 
@@ -53,8 +53,8 @@ A function to resolve the physical location of node modules containing the schem
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 const DATA_PATH = path.resolve('./data/decisions');
 const loader = createDecisionLoader(
-    [DATA_PATH],
     [DECISION_SCHEMAS],
+    [DATA_PATH],
     async moduleName => `./node_modules/${moduleName}`,
 );
 const store = await loader();

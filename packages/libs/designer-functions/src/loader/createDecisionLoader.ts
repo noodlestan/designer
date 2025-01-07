@@ -1,24 +1,23 @@
-import type { SchemaConfig } from '@noodlestan/designer-decisions';
+import type { DecisionSource, SchemaConfig } from '@noodlestan/designer-decisions';
 
-import { createDecisionValidator, loadSchemasFromPaths, validateSchemaMap } from '../schemas';
+import { createDecisionValidator, loadSchemasFromConfigs, validateSchemaMap } from '../schemas';
 import { type StaticDecisionStore, createStaticDecisionStore } from '../store';
 import { createStaticInputMap } from '../store';
 
-import { loadDecisionsFromPaths, resolveSchemaPathsFromConfigs } from './functions';
+import { loadDecisionsFromSources } from './functions';
 
 export const createDecisionLoader = (
-    dataPaths: string[],
-    schemaConfigs: SchemaConfig[],
+    schemas: SchemaConfig[],
+    sources: (DecisionSource | string)[],
     moduleResolver: (moduleName: string) => Promise<string>,
 ): (() => Promise<StaticDecisionStore>) => {
     const loader = async () => {
         try {
-            const paths = await resolveSchemaPathsFromConfigs(schemaConfigs, moduleResolver);
-            const schemas = await loadSchemasFromPaths(paths);
-            const schemaMap = validateSchemaMap(schemas);
+            const rawSchemaMap = await loadSchemasFromConfigs(schemas, moduleResolver);
+            const schemaMap = validateSchemaMap(rawSchemaMap);
             const validator = createDecisionValidator(schemaMap);
 
-            const inputData = await loadDecisionsFromPaths(dataPaths);
+            const inputData = await loadDecisionsFromSources(sources, moduleResolver);
             const inputMap = createStaticInputMap(inputData, validator);
             return createStaticDecisionStore(inputMap);
         } catch (error) {

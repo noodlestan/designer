@@ -3,6 +3,5 @@ export * from './createProgramForTypes';
 export * from './findTypeFiles';
 export * from './makeDecisionModelSchemaId';
 export * from './makePrimitiveSchemaId';
-export * from './resolveSchemaSourcePath';
 export * from './toKebabCase';
 export * from './traverseProgramSymbols';

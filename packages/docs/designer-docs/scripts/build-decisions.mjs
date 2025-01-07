@@ -1,5 +1,6 @@
 import path from 'path';
 
+import { SAMPLE_DATA } from '@noodlestan/designer-decisions';
 import {
     createDecisionLoader,
     formatDecision,
@@ -11,8 +12,8 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 const DATA_PATH = path.resolve('./data/decisions');
 
 const loader = createDecisionLoader(
-    [DATA_PATH],
     [DECISION_SCHEMAS],
+    [SAMPLE_DATA, DATA_PATH],
     async moduleName => `../../../node_modules/${moduleName}`,
 );
 
