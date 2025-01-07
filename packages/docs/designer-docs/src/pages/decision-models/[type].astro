@@ -23,8 +23,15 @@ const { Content } = await render(decisionType);
 
 const decisions = store.records();
 
-const decisionsByModel = (m: DecisionModelMeta) => {
-    return decisions.filter(d => d.model === m.model);
+const decisionByModel = (m: DecisionModelMeta) => {
+    return decisions.filter(d => d.model === m.model)[0];
+}
+
+const decisionDataByModel = (m: DecisionModelMeta) => {
+    const d= decisionByModel(m)
+    const [, decision] = store.decision({ $name: d.name });
+    const json = JSON.stringify(decision?.input(), null, 2);
+    return json;
 }
 
 const decisionModelId = (m: DecisionModelMeta) => {
@@ -62,16 +69,18 @@ const frontmatter = {
     </blockquote>
 
     <h2 id="models">Models</h2>
+    <p>The following models can be used to produce a {decisionType.data.name} decision.</p>
     {
         decisionType.data.models.map((m: DecisionModelMeta) => (
             <div>
                 <h3 id={decisionModelId(m)}>{m.name}</h3>
                 {m.description}
-                <p>🚧 Schema Link</p>
-                {decisionsByModel(m).length > 0 && (
-                    <h4 id="samples">Samples</h4>
+                <h5 id="schema">🚧 Schema</h5>
+                {decisionByModel(m) && (
+                    <h5 id="sample-data">Sample data</h5>
+                    <pre>{decisionDataByModel(m)}</pre>
                     <FlexStack vpad>
-                        <ShowDecisionCard store={store} d={decisionsByModel(m)[0].name} model params />
+                        <ShowDecisionCard store={store} d={decisionByModel(m).name} model params />
                     </FlexStack>
                 )}
             </div>

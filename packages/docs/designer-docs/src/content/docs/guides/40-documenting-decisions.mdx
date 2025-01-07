@@ -1,5 +1,5 @@
 ---
-title: Rendering in Astro MDX
+title: Rendering Decisions in Docs
 slug: guides/documenting-design-decisions-with-astro-and-mdx
 description: How to document design decisions and tokens with MDX in Astro/Starlight based docs
 sidebar:
@@ -19,6 +19,21 @@ export const store = await decisionLoader();
 [Astro](https://docs.astro.build/en/getting-started/) website. You can create a website similar
 to this one using the [Starlight theme](https://starlight.astro.build/getting-started/) in
 a matter of minutes.
+
+This guide presents a simple way to document design decisions and tokens in your documentation
+pages.
+
+**Example:**
+
+```mdx
+<ShowDecision store={store} d="Brand Color Set" size="xs" value="hsl" />
+<ShowDecision store={store} d="Sizing Space Scale" size="xs" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Brand Color Set" size="xs" value="hsl" />
+    <ShowDecision store={store} d="Sizing Space Scale" size="xs" />
+</CardGrid>
 
 ### Dependencies
 
@@ -59,8 +74,10 @@ We will use the _all-in-one_
 [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader/),
 providing it with:
 
--   A list of directories to look for JSON files.
--   A list of `SchemaConfig` to load validation schemas from.
+-   The
+    schemas for the built-in decision models
+    https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts
+-   A directory to load decision data from.
 -   A function to resolve the physical location of node modules containing the schemas.
 
 ```ts
@@ -73,8 +90,8 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 const DATA_PATH = path.resolve('./data/decisions');
 
 export const loader = createDecisionLoader(
-    [DATA_PATH],
     [DECISION_SCHEMAS],
+    [DATA_PATH],
     async (moduleName: string) => `./node_modules/${moduleName}`,
 );
 ```
@@ -107,13 +124,13 @@ import { loader } from '../decisions';
 
 export const store = await loader();
 
-<ShowDecision store={store} d="Action Color" />
-<ShowDecision store={store} d="Curcuma Palette" />
+<ShowDecision store={store} d="Action Color" size="m" />
+<ShowDecision store={store} d="Pink Palette" size="xs" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Action Color" />
-    <ShowDecision store={store} d="Curcuma Palette" />
+    <ShowDecision store={store} d="Action Color" size="m" />
+    <ShowDecision store={store} d="Pink Palette" size="xs" />
 </CardGrid>
 
 ### Using built-in components
@@ -139,11 +156,13 @@ import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 ### Creating custom components
 
-In the [Components reference](/components) you will find a comprehensive set of primitives
-that render specific decision types, decision values, layouts, and atoms
+In the [Components reference](/components) you will also find a comprehensive set of primitives
+that render specific decision types and decision values, as well as a few helpful layouts
+and atoms.
 
-From these can compose your own components, reusing layouts and atoms, customizing styles, and
-adding additional logic.
+You can reuse these built-in components to create your own, composing any layout of your choice,
+with total control over styling. You can also merge data from
+other sources, add custom logic, and format values as you wish.
 
 In this example, we compose the
 [&lt;ShowColorValue/&gt;](/components/Astro/values/show-color-value) and the
@@ -151,8 +170,7 @@ In this example, we compose the
 within the standard
 [&lt;DecisionCard/&gt;](/components/Astro/Layouts/decision-card) layout.
 
-```astro
-// MyColorDecision.Astro
+```astro title="MyColorDecision.Astro"
 ---
 import { type Decision } from '@noodlestan/designer-decisions';
 import { type StaticDecisionStore } from '@noodlestan/designer-functions';
@@ -194,7 +212,7 @@ import MyColorDecision from '../components/';
 
 {/* 🚧 move these details to the API docs */}
 
-You can retrieve resolved decision values by calling `value()` on the decision object.
+You can also resolve decision values by calling `value()` on the decision object.
 
 This code block demonstrates how you can use a decision value to build your own visualization.
 
