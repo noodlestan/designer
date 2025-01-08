@@ -2,7 +2,7 @@
 
 > Modeling design decisions. Schemas, transformations, visualizations, the works.
 
-## 📖 [Documentation](https://designer-docs.noodlestan.org/)
+## 📖 [Documentation](https://designer-decisions.noodlestan.org/)
 
 ## Noodlestan 🐘 Collective
 
@@ -19,7 +19,7 @@ System requirements:
 - [Node.js](https://nodejs.org/)
 - [NVM](https://github.com/nvm-sh/nvm)
 
-We recommended using [VS Code](https://code.visualstudio.com/) with the following extensions: [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx), [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode), [SpellRight](https://marketplace.visualstudio.com/items?itemName=ban.spellright)
+We recommended using [VS Code](https://code.visualstudio.com/) with the following extensions: [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx), [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode), [SpellRight](https://marketplace.visualstudio.com/items?itemName=ban.spellright), [Generate Index](https://marketplace.visualstudio.com/items?itemName=JayFong.generate-index)
 
 ### Getting started
 
@@ -27,24 +27,30 @@ First make sure you are using the correct node version by running `nvm use`.
 
 Install dependencies with `npm install`.
 
+Run a full build with `npm run build:deps`.
+
 Run `npm run dev` in the docs directory: `packages/docs/designer-docs/`.
 
 ### In this repository
 
 Libraries:
 
-- [Designer Decisions](./packages/libs/designer-decisions/README.md)
-- [Designer Functions](./packages/libs/designer-functions/README.md)
-- [Designer Schemas](./packages/libs/designer-schemas/README.md)
-- [Designer Shows](./packages/libs/designer-shows/README.md)
+- [Designer Decisions](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/README.md)
+- [Designer Functions](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-functions/README.md)
+- [Designer Schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/README.md)
+- [Designer Shows](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-shows/README.md)
 
 Cli tools:
 
-- [Designer Generators](./packages/clis/designer-generators/README.md)
+- [Designer Generators](https://github.com/noodlestan/designer/blob/main/packages/clis/designer-generators/README.md)
 
 Docs:
 
-- [Designer Docs](./packages/docs/designer-docs/README.md)
+- [Designer Docs](https://github.com/noodlestan/designer?tab=readme-ov-file)
+
+Support tools:
+
+- [Designer Build](https://github.com/noodlestan/designer/blob/main/tools/designer-build/README.md)
 
 ### Stack
 

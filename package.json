@@ -30,7 +30,8 @@
     "ci:schemas": "npm run ci:generate:schemas && npm run ci:libs:schemas",
     "ci:docs:designer": "npm run --prefix packages/docs/designer-docs ci",
     "ci:docs": "npm run ci:docs:designer",
-    "ci": "npm run ci:libs && npm run ci:clis && npm run ci:schemas && npm run ci:docs"
+    "ci": "npm run ci:libs && npm run ci:clis && npm run ci:schemas && npm run ci:docs",
+    "build:deps": "npm run ci:libs && npm run ci:clis && npm run ci:schemas"
   },
   "devDependencies": {
     "@noodlestan/eslint-config": "0.0.4",

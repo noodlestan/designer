@@ -4,13 +4,13 @@
 
 ## How to use
 
-📖 [Documentation](https://designer-docs.noodlestan.org/)
+📖 [Documentation](https://designer-decisions.noodlestan.org/)
 
 ## Development
 
-### Getting started
+Make sure you [README](https://github.com/noodlestan/designer/blob/main/README.md) first.
 
-Make sure you [README](../../../README.md) first.
+### Scripts
 
 - **$** `npm run build` - uses `astro check` and `tsc --noEmit` to type check Astro and SolidJS sources (does not produce any `dist/`)
 - **$** `npm run test` / `npm run test:watch` - 🚧 no tests.
