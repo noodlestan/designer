@@ -19,7 +19,7 @@ System requirements:
 - [Node.js](https://nodejs.org/)
 - [NVM](https://github.com/nvm-sh/nvm)
 
-We recommended using [VS Code](https://code.visualstudio.com/) with the following extensions: [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx), [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode), [SpellRight](https://marketplace.visualstudio.com/items?itemName=ban.spellright), [Generate Index](https://marketplace.visualstudio.com/items?itemName=JayFong.generate-index)
+We recommended using [VS Code](https://code.visualstudio.com/) with the following extensions: [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx), [Github Actions](https://marketplace.visualstudio.com/items?itemName=github.vscode-github-actions), [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode), [SpellRight](https://marketplace.visualstudio.com/items?itemName=ban.spellright), [Generate Index](https://marketplace.visualstudio.com/items?itemName=JayFong.generate-index)
 
 ### Getting started
 

@@ -19,6 +19,12 @@
             }
         },
         {
+            "files": "*.yml",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
             "files": "*.html",
             "options": {
                 "tabWidth": 2
