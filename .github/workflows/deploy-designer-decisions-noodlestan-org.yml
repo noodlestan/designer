@@ -1,0 +1,42 @@
+name: Deploy Designer Decisions to Production
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/libs/**"
+      - "packages/docs/designer-docs/**"
+  workflow_dispatch: 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_DEPLOY_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_DEPLOY_KEY_SECRET }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build application (root)
+        run: npm run ci
+
+      - name: Build designer-decisions
+        run: npm run ci --prefix packages/docs/designer-docs/
+
+      - name: Deploy to S3
+        run: aws s3 sync --delete ./packages/docs/designer-docs/dist/ s3://${{ secrets.BUCKET_ID }}
+
+      - name: Create CloudFront invalidation
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*
