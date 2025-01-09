@@ -22,14 +22,14 @@
 
 - No longer producing schemas for union types (no use case so far).
 
-### Document
+### Docs
 
 - Streamlined component references and documentation.
 - Add sample data for all decision types and models. including Oklab and sRGB.
 - Render sample data next to sample card in Decision reference.
 - Refined decision model metas.
 
-### Fixed
+### Fixes
 
 - Fixed typos in decision models.
 - Resolved AJV strict mode warnings.
