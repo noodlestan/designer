@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 
+import { href } from '../mdx';
 import { sidebar } from '../navigation/sidebar';
 
 const decisionTypes = await getCollection('decisionTypes');
@@ -38,7 +39,7 @@ const frontmatter={ title: 'Decision Models', headings }
                     .filter(type => type.data.domain === domain)
                     .map(decisionType => (
                         <li>
-                            <a href={`/decision-models/${decisionType.id}`}>
+                            <a href={href(`/decision-models/${decisionType.id}`)}>
                                 {decisionType.data.name}
                             </a>
                         </li>

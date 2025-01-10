@@ -77,3 +77,8 @@ instanceof
 len
 vscode
 github
+noopener
+mdast
+unist
+vfile
+rehype

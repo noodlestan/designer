@@ -10,6 +10,8 @@ hero:
 
 import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components';
 
+import { href } from '../../mdx';
+
 <CardGrid stagger>
     <div>
         This suite provides a collection of tools to enhance design system automation
@@ -18,12 +20,12 @@ import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components'
         You can use it to capture, track, and visualize context-aware design decisions,
         integrate data from other systems, and generate code artifacts and beautiful documentation.
 
-        <LinkButton href="/guides/welcome">Get Started</LinkButton>
+        <LinkButton href={href('guides/welcome')}>Get Started</LinkButton>
     </div>
     <Card title="Capture Decisions" icon="puzzle">
         <p>Define design decisions as data with relationships, context, and traceability.</p>
 
-        <a href="/guides/capturing-design-decisions-in-data" variant="minimal">
+        <a href={href('guides/capturing-design-decisions-in-data')} variant="minimal">
             Learn more
         </a>
     </Card>
@@ -31,7 +33,7 @@ import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components'
         More granular and abstract than tokens: capture the processes and parameters that generate
         color components and palettes, typographies, and scales.
 
-        <a href="/decision-models">All decision models</a>
+        <a href={href('decision-models')}>All decision models</a>
     </Card>
     <Card title="Context-Aware" icon="puzzle">
         Support for context-based decisions: Color Schemes, Themes, Channels,
@@ -40,14 +42,14 @@ import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components'
     <Card title="Document Everything" icon="puzzle">
         Create interactive, visual documentation components for MDX-based sites.
 
-        <a href="/guides/documenting-design-decisions-with-astro-and-mdx" variant="minimal">
+        <a href={href('guides/documenting-design-decisions-with-astro-and-mdx')} variant="minimal">
             Learn more
         </a>
     </Card>
     <Card title="Generate code" icon="puzzle">
         Generate tokens as data, CSS, or type safe objects.
 
-        <a href="/guides/generating-css-variables-from-design-decisions-and-tokens" variant="minimal">
+        <a href={href('guides/generating-css-variables-from-design-decisions-and-tokens')} variant="minimal">
             Learn more
         </a>
     </Card>

@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { staticSidebar } from './sidebar.static.mjs';
+import { processLinks } from './src/mdx/rehype/processLinks.ts';
+
+const remarkPlugins = [];
+const rehypePlugins = [processLinks];
 
 const decisionModels = {
     label: 'Decision Models',
@@ -8,6 +12,7 @@ const decisionModels = {
 };
 
 export default defineConfig({
+    markdown: { remarkPlugins, rehypePlugins },
     integrations: [
         starlight({
             title: 'Designer Decisions',

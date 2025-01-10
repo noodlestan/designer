@@ -9,6 +9,8 @@ sidebar:
 
 import { Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
 
+import { href } from '../../../mdx';
+
 ### Design Decisions?
 
 -   How are designer decisions different from design tokens?
@@ -20,19 +22,19 @@ Learn more about the [key concepts](/guides/designer-decisions-concepts).
 ## Setup guides
 
 <LinkCard
-    href="/guides/capturing-design-decisions-in-data"
+    href={href('/guides/capturing-design-decisions-in-data')}
     title="Capturing design decisions in data"
 />
 <LinkCard
-    href="/guides/validating-design-decisions-with-schemas"
+    href={href('/guides/validating-design-decisions-with-schemas')}
     title="Validate decisions using JSON schema and validators"
 />
 <LinkCard
-    href="/guides/generating-css-variables-from-design-decisions-and-tokens"
+    href={href('/guides/generating-css-variables-from-design-decisions-and-tokens')}
     title="Generate CSS variables from design decisions and design tokens"
 />
 <LinkCard
-    href="/guides/documenting-design-decisions-with-mdx"
+    href={href('/guides/documenting-design-decisions-with-mdx')}
     title="Document design decisions and tokens with MDX components"
 />
 

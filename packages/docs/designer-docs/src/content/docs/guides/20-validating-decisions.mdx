@@ -9,6 +9,8 @@ sidebar:
 
 import { CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
 
+import { href } from '../../../mdx';
+
 ## Setup
 
 {/* 🚧 missing intro: "This guide assumes..." */}
@@ -207,11 +209,11 @@ The next guides provide step by step instructions on practical uses cases for yo
 
 <CardGrid>
     <LinkCard
-        href="/guides/generating-css-variables-from-design-decisions-and-tokens"
+        href={href('/guides/generating-css-variables-from-design-decisions-and-tokens')}
         title="Generating CSS Variables"
     />
     <LinkCard
-        href="/guides/documenting-design-decisions-with-astro-and-mdx"
+        href={href('/guides/documenting-design-decisions-with-astro-and-mdx')}
         title="Rendering in Astro MDX"
     />
 

@@ -2,6 +2,8 @@
 
 > Modeling design decisions. Schemas, transformations, visualizations, the works.
 
+![](https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/packages/docs/designer-docs/public/https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/packages/docs/designer-docs/public/favicon.svg)
+
 ## 📖 [Documentation](https://designer-decisions.noodlestan.org/)
 
 ## Noodlestan 🐘 Collective
