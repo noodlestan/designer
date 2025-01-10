@@ -10,6 +10,8 @@ sidebar:
 import Banner from '@astrojs/starlight/components/Banner.astro';
 import { LinkCard } from '@astrojs/starlight/components';
 
+import { href } from '../../../../mdx';
+
 🚧🚧 TODO Banner component
 This reference assumes you are using an Astro based build,
 such as the one powering these docs, and that you have followed
@@ -17,40 +19,51 @@ the [Rendering in Astro MDX](/guides/documenting-design-decisions-with-astro-and
 
 ## Cards
 
-<LinkCard href="/components/Astro/Cards/show-decision-card" title="ShowDecisionCard" />
+<LinkCard href={href('/components/Astro/Cards/show-decision-card')} title="ShowDecisionCard" />
 
 ## Decisions
 
 These components render the decision visualization and value.
 
-<LinkCard href="/components/Astro/Decisions/show-decision" title="ShowDecision" />
-<LinkCard href="/components/Astro/Decisions/color" title="Color Decisions" />
-<LinkCard href="/components/Astro/Decisions/space" title="Space Decisions" />
+<LinkCard href={href('/components/Astro/Decisions/show-decision')} title="ShowDecision" />
+<LinkCard href={href('/components/Astro/Decisions/color')} title="Color Decisions" />
+<LinkCard href={href('/components/Astro/Decisions/space')} title="Space Decisions" />
 
 ## Attributes
 
-<LinkCard href="/components/Astro/Attributes/show-decision-model" title="ShowDecisionModel" />
-<LinkCard href="/components/Astro/Attributes/show-decision-params" title="ShowDecisionParams" />
+<LinkCard href={href('/components/Astro/Attributes/show-decision-model')}
+title="ShowDecisionModel" />
+<LinkCard href={href('/components/Astro/Attributes/show-decision-params')}
+title="ShowDecisionParams" />
 <LinkCard
-    href="/components/Astro/Attributes/show-decision-description"
+    href={href('/components/Astro/Attributes/show-decision-descriptio')}
+
     title="ShowDecisionDescription"
+
 />
-<LinkCard href="/components/Astro/Attributes/show-decision-contexts" title="ShowDecisionContexts" />
-<LinkCard href="/components/Astro/Attributes/show-decision-usage" title="ShowDecisionUsage" />
-<LinkCard href="/components/Astro/Attributes/show-decision-data" title="ShowDecisionData" />
+
+<LinkCard
+    href={href('/components/Astro/Attributes/show-decision-contexts')}
+    title="ShowDecisionContexts"
+/>
+<LinkCard
+    href={href('/components/Astro/Attributes/show-decision-usage')}
+    title="ShowDecisionUsage"
+/>
+<LinkCard href={href('/components/Astro/Attributes/show-decision-data')} title="ShowDecisionData" />
 
 ## Values
 
 These components render the decision values.
 
-<LinkCard href="/components/Astro/Values/color" title="Color Values" />
-<LinkCard href="/components/Astro/Values/space" title="Space Values" />
+<LinkCard href={href('/components/Astro/Values/color')} title="Color Values" />
+<LinkCard href={href('/components/Astro/Values/space')} title="Space Values" />
 
 ## Layouts
 
-<LinkCard href="/components/Astro/Layouts/decision-card" title="DecisionCardLayout" />
+<LinkCard href={href('/components/Astro/Layouts/decision-card')} title="DecisionCardLayout" />
 
 ## Atoms
 
-<LinkCard href="/components/Astro/Viz/color" title="Color Visualizations" />
-<LinkCard href="/components/Astro/Viz/space" title="Space Visualizations" />
+<LinkCard href={href('/components/Astro/Viz/color')} title="Color Visualizations" />
+<LinkCard href={href('/components/Astro/Viz/space')} title="Space Visualizations" />

@@ -25,6 +25,8 @@
     "@noodlestan/designer-schemas": "0.0.6",
     "@noodlestan/designer-shows": "0.0.6",
     "astro": "5.1.1",
-    "sharp": "0.32.5"
+    "mdast-util-to-string": "^4.0.0",
+    "sharp": "0.32.5",
+    "unist-util-visit": "^5.0.0"
   }
 }

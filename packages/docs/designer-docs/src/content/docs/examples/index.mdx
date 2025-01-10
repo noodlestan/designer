@@ -7,26 +7,28 @@ sidebar:
 
 import { CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
 
+import { href } from '../../../mdx';
+
 <CardGrid>
     <LinkCard
         title="Color"
-        href="/examples/color"
+        href={href('/examples/color')}
         description="🎨 Color components, swatches, scales, and palettes"
     />
     <LinkCard
         title="Space"
-        href="/examples/space"
+        href={href('/examples/space')}
         description="📐 Space values and scales. Covers spacing units, paddings, margins, gaps, and measurements for responsive design."
     />
-    {/* href="/examples/space" */}
+    {/* href={href('/examples/space')} */}
     <LinkCard
         title="Typography"
         description="🅰️ Typefaces, font families, font variants, and scales."
     />
-    {/* href="/examples/typography" */}
+    {/* href={href('/examples/typography')} */}
     <LinkCard
         title="Contexts"
         description="🫥 Color schemes, themes, devices, containers, surfaces, and custom contexts. Used to scope and adapt design decisions to specific usage scenarios."
     />
-    {/* href="/examples/context" */}
+    {/* href={href('/examples/context')} */}
 </CardGrid>

@@ -9,12 +9,14 @@ sidebar:
 
 import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
 
+import { href } from '../../../mdx';
+
 <CardGrid>
 
     <Card title="Astro MDX" icon="astro">
         <p>Components for Astro/Starlight based docs.</p>
 
-        <a href="/components/Astro" variant="minimal">
+        <a href={href('/components/Astro')} variant="minimal">
             All components
         </a>
     </Card>
@@ -23,7 +25,7 @@ import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/compone
 
         🚧🚧
 
-        {/* <a href="/components/solidjs">All components</a> */}
+        {/* <a href={href('/components/solidjs')}>All components</a> */}
     </Card>
 
 </CardGrid>

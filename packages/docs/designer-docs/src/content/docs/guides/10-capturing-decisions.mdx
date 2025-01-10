@@ -8,6 +8,8 @@ sidebar:
 
 import { FileTree, LinkCard } from '@astrojs/starlight/components';
 
+import { href } from '../../../mdx';
+
 ## Design decisions as data
 
 At a minimum, a decision record requires
@@ -70,7 +72,7 @@ decision files at once, as well as how to validate the input data and inspect
 validation errors.
 
 <LinkCard
-    href="/guides/validating-design-decisions-with-schemas"
+    href={href('/guides/validating-design-decisions-with-schemas')}
     title="Loading and validating decisions"
 />
 
