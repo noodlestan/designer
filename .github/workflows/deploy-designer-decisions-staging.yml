@@ -1,0 +1,72 @@
+name: Deploy Designer Decisions (Staging)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.10.0'
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_DEPLOY_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_DEPLOY_KEY_SECRET }}
+          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Set staging env vars
+        run: |
+          echo "ASTRO_SITE_URL=http://designer-decisions-noodlestan-org-stage.s3-website-eu-west-1.amazonaws.com/pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+          echo "ASTRO_BASE_PATH=/pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
+      - name: Build root project
+        run: npm run ci
+
+      - name: Build application
+        run: npm run pre-deploy:staging --prefix packages/docs/designer-docs/
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync --delete ./packages/docs/designer-docs/dist/ s3://${{ vars.BUCKET_NAME }}/pr-${{ github.event.pull_request.number }}
+
+      - name: Create CloudFront invalidation
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.DISTRIBUTION_ID }} --paths "/*"
+
+      - name: Create PR Comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prNumber = ${{ github.event.pull_request.number }};
+            const bucketUrl = `http://designer-decisions-noodlestan-org-stage.s3-website-eu-west-1.amazonaws.com/pr-${prNumber}`;
+            const cdnUrl = `https://stage-designer-decisions.noodlestan.org/pr-${prNumber}`;
+            const comment = `# 🐘 deployed to staging\n\n- S3: ${bucketUrl}\n- CDN: ${cdnUrl}\n\n**Note:** ⏳ Invalidating CDN cache may take up to 5 minutes`;
+
+            const { data: commentData } = await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+            console.log(commentData);
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

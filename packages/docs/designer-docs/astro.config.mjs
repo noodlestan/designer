@@ -11,7 +11,12 @@ const decisionModels = {
     items: [{ label: 'Index', link: 'decision-models' }],
 };
 
+const site = process.env.ASTRO_SITE_URL || 'https://designer-decisions.noodlestan.org/';
+const base = process.env.ASTRO_BASE_PATH || '/';
+
 export default defineConfig({
+    site,
+    base,
     markdown: { remarkPlugins, rehypePlugins },
     integrations: [
         starlight({

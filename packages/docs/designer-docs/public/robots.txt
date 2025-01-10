@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://designer-decisions.noodlestan.org/sitemap-index.xml
