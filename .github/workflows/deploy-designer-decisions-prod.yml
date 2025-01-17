@@ -1,4 +1,4 @@
-name: Deploy Designer Decisions to Production
+name: Deploy Designer Decisions (Production)
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-production:
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -34,8 +34,14 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-      - name: Build application (root)
+      - name: Build root project
         run: npm run ci
+
+      - name: Build root project
+        run: npm run ci
+
+      - name: Build application
+        run: npm run pre-deploy:production --prefix packages/docs/designer-docs/
 
       - name: Deploy to S3
         run: aws s3 sync --delete ./packages/docs/designer-docs/dist/ s3://${{ vars.BUCKET_NAME }}
