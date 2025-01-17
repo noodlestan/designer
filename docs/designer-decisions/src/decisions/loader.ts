@@ -13,7 +13,7 @@ const DECISION_DATA = path.resolve('./data/decisions');
 export const decisionLoader = createDecisionLoader(
     [DECISION_SCHEMAS],
     [SAMPLE_DATA, DECISION_DATA],
-    async (moduleName: string) => `../../../node_modules/${moduleName}`,
+    async (moduleName: string) => `../../node_modules/${moduleName}`,
 );
 
 const loadDecisions = async () => {
