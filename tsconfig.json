@@ -15,6 +15,6 @@
       "*": ["./node_modules/*"]
     }
   },
-  "include": ["packages/", "tools"],
+  "include": ["docs/", "packages/", "tools"],
   "exclude": ["**/node_modules/", "**/dist/", "**/coverage/"]
 }

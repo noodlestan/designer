@@ -6,10 +6,8 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/apps/*",
-    "packages/clis/*",
-    "packages/docs/*",
-    "packages/libs/*",
+    "docs/*",
+    "packages/*",
     "tools/*"
   ],
   "engines": {
@@ -28,7 +26,7 @@
     "ci:generate:schemas": "npm run --prefix tools/designer-build build:schemas",
     "ci:libs:schemas": "npm run --prefix packages/libs/designer-schemas ci",
     "ci:schemas": "npm run ci:generate:schemas && npm run ci:libs:schemas",
-    "ci:docs:designer": "npm run --prefix packages/docs/designer-docs ci",
+    "ci:docs:designer": "npm run --prefix docs/designer-decisions ci",
     "ci:docs": "npm run ci:docs:designer",
     "ci": "npm run ci:libs && npm run ci:clis && npm run ci:schemas && npm run ci:docs",
     "build:deps": "npm run ci:libs && npm run ci:clis && npm run ci:schemas"

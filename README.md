@@ -2,7 +2,7 @@
 
 > Modeling design decisions. Schemas, transformations, visualizations, the works.
 
-![](https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/packages/docs/designer-docs/public/https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/packages/docs/designer-docs/public/favicon.svg)
+![](https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/docs/designer-decisions/public/designer-decisions-og-1280x640.png)
 
 ## 📖 [Documentation](https://designer-decisions.noodlestan.org/)
 
@@ -31,7 +31,7 @@ Install dependencies with `npm install`.
 
 Run a full build with `npm run build:deps`.
 
-Run `npm run dev` in the docs directory: `packages/docs/designer-docs/`.
+Run `npm run dev` in the docs directory: `docs/designer-decisions/`.
 
 ### In this repository
 
@@ -48,7 +48,7 @@ Cli tools:
 
 Docs:
 
-- [Designer Docs](https://github.com/noodlestan/designer?tab=readme-ov-file)
+- [Designer Docs](https://github.com/noodlestan/designer/blob/main/docs/designer-decisions/README.m)
 
 Support tools:
 

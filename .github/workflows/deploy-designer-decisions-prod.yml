@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'packages/libs/**'
-      - 'packages/docs/designer-docs/**'
+      - 'docs/designer-decisions/**'
   workflow_dispatch:
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
         run: npm run pre-deploy:production --prefix packages/docs/designer-docs/
 
       - name: Deploy to S3
-        run: aws s3 sync --delete ./packages/docs/designer-docs/dist/ s3://${{ vars.BUCKET_NAME }}
+        run: aws s3 sync --delete ./docs/designer-decisions/dist/ s3://${{ vars.BUCKET_NAME }}
 
       - name: Create CloudFront invalidation
         run: aws cloudfront create-invalidation --distribution-id ${{ vars.DISTRIBUTION_ID }} --paths "/*"
