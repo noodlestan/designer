@@ -48,7 +48,7 @@ Cli tools:
 
 Docs:
 
-- [Designer Docs](https://github.com/noodlestan/designer/blob/main/docs/designer-decisions/README.m)
+- [Designer Docs](https://github.com/noodlestan/designer/blob/main/docs/designer-decisions/README.md)
 
 Support tools:
 
