@@ -41,7 +41,7 @@ jobs:
         run: npm run ci
 
       - name: Build application
-        run: npm run pre-deploy:production --prefix packages/docs/designer-docs/
+        run: npm run pre-deploy:production --prefix docs/designer-decisions/
 
       - name: Deploy to S3
         run: aws s3 sync --delete ./docs/designer-decisions/dist/ s3://${{ vars.BUCKET_NAME }}
