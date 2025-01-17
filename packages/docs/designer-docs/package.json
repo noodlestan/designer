@@ -17,7 +17,7 @@
     "sync": "astro sync",
     "dev": "astro dev",
     "ci": "npm run build:clean && astro check && npm run build",
-    "pre-deploy:staging": "cp dist/_staging.robots..txt dist/robots.txt",
+    "pre-deploy:staging": "cp dist/_staging.robots.txt dist/robots.txt",
     "pre-deploy:production": "echo ."
   },
   "dependencies": {
