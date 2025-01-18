@@ -1,7 +1,7 @@
 {
-  "name": "@noodlestan/designer-docs",
+  "name": "@noodlestan/designer-decisions-docs",
   "version": "0.0.6",
-  "description": "Designer Docs website",
+  "description": "Designer Decisions Docs website",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": true,
