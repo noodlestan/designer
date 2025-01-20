@@ -1,6 +1,6 @@
 ---
 title: Attribute Components
-slug: components/Astro/Attributes
+slug: components/Astro/Composable/Attributes
 description: Astro components that render design decision details and metadata.
 sidebar:
     order: 30
@@ -18,7 +18,7 @@ import {
     ShowDecisionUsage,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../decisions';
+import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
