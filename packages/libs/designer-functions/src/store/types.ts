@@ -23,4 +23,5 @@ export type StaticDecisionStore = {
         contexts?: LookupContexts,
     ) => [DecisionContext, Decision<V> | undefined];
     resolver: DecisionRefResolver;
+    createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
 };

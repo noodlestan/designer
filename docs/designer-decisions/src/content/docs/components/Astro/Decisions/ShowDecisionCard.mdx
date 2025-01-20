@@ -20,7 +20,7 @@ import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 Renders a card layout with the appropriate visualization
 according to the decision type, along with any decision details you might want to display.
 
-By default it renders only the decision description and usage guidelines.
+By default it renders only the decision **description** and **usage** guidelines.
 
 <FlexStack vpad>
     <ShowDecisionCard store={store} d="Action Color" />
@@ -28,11 +28,11 @@ By default it renders only the decision description and usage guidelines.
 
 ## Composes
 
-This component renders the [ShowDecision](/components/Astro/Decisions/show-decision/) and
-inherits all its props.
+This component composes:
 
-It uses the (🚧 link) `DecisionCardLayout` component and optionally renders one or more
-Decision Attribute (🚧 link) components.
+-   [ShowDecision](/components/Astro/Decisions/show-decision/) component (value and visualization)
+-   inside of `DecisionCardLayout` (🚧 link)
+-   and one or more Decision Attribute (🚧 link) components.
 
 ## Props
 
@@ -40,22 +40,25 @@ Decision Attribute (🚧 link) components.
 
 These two **mandatory** props serve to identify and retrieve the decision.
 
-### ༶ [ValueProps](/components/Astro/Props#valueprops): `value` and `viz`
+### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`, `viz`, and `options`
 
 You can use these props to control how the visualization and value are displayed.
 
+Note: 🚧 The common [size](/components/Astro/Props/#-size-auto-showvaluesize) prop is not exposed
+by `<ShowDecisionCard />` and the size is managed internally.
+
 In this example we are rendering a [ColorValueDecision](/decision-models/color-value)
-and both
+and at the same time:
 
 -   hiding the visualization;
--   and displaying its value in `rgb` and `hsl` formats.
+-   displaying its value in `rgb` and `hsl` formats.
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" value={['rgb', 'oklch']} />
+<ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
 ```
 
 <FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" value={['rgb', 'oklch']} />
+    <ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
 </FlexStack>
 
 ### ༶ `name` (true): boolean

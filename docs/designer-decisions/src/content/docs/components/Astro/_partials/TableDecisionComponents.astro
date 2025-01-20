@@ -1,6 +1,12 @@
 ---
 import { Table, TableRow } from '@noodlestan/designer-shows/astro';
 
+type Props = {
+    domain?: string;
+};
+
+const { domain } = Astro.props;
+
 const types = [
     {
         name: 'SpaceValue',
@@ -30,80 +36,82 @@ const types = [
         name: 'Oklab Hue Value',
         type: 'color-oklab-hue-value',
         component: 'ShowOklabHueValue',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'Oklab Hue Set',
         type: 'color-oklab-hue-set',
         component: 'ShowOklabHueSet',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'Oklab Chroma Value',
         type: 'color-oklab-chroma-value',
         component: 'ShowOklabChromaValue',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'Oklab Chroma Scale',
         type: 'color-oklab-chroma-scale',
         component: 'ShowOklabChromaScale',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'Oklab Lightness Value',
         type: 'color-oklab-lightness-value',
         component: 'ShowOklabLightnessValue',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'Oklab Lightness Scale',
         type: 'color-oklab-lightness-scale',
         component: 'ShowOklabLightnessScale',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'sRGB Hue Value',
         type: 'color-srgb-hue-value',
         component: 'ShowsRGBHueValue',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'sRGB Hue Set',
         type: 'color-srgb-hue-set',
         component: 'ShowsRGBHueSet',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'sRGB Saturation Value',
         type: 'color-srgb-saturation-value',
         component: 'ShowsRGBSaturationValue',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'sRGB Saturation Scale',
         type: 'color-srgb-saturation-scale',
         component: 'ShowsRGBSaturationScale',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'sRGB Lightness Value',
         type: 'color-srgb-lightness-value',
         component: 'ShowsRGBLightnessValue',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
     {
         name: 'sRGB Lightness Scale ',
         type: 'color-srgb-lightness-scale ',
         component: 'ShowsRGBLightnessScale',
-        value: 'ShowColorChannelValue',
+        value: 'ShowColorChannel',
     },
 ];
+
+const items = domain ? types.filter(({ type }) => type.startsWith(domain)) : types;
 ---
 
 <Table columns={['Decision Type', 'Component', 'Value Component (🚧 link)']} vpad>
     {
-        types.map(({ name, type, component, value }) => (
+        items.map(({ name, type, component, value }) => (
             <TableRow>
                 <td>
                     <a href={`/decision-models/${type}`}>{name}</a>
