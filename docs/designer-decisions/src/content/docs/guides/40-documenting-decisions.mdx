@@ -7,13 +7,20 @@ sidebar:
 ---
 
 import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
-import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import {
+    FlexStack,
+    FlexRow,
+    ShowDecision,
+    ShowDecisionCard,
+} from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
 
 export const store = await decisionLoader();
 
-This guide explains how to document design decisions and tokens in your documentation.
+This guide explains how to document design decisions and tokens in your documentation
+using the [built-in components](/components) provided by the
+[@noodlestan/designer-shows](/api/designer-shows) package.
 
 **Example:**
 
@@ -112,9 +119,7 @@ Retrieve the decision `store` and pass it to the components along with the decis
 
 In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/Decisions/show-decision/)
 component to render both a [ColorValueDecision](/decision-models/color-value) and a
-[ColorSetDecision](/decision-models/color-set). It selects
-the appropriate component according to the decision type and both visualizes
-and renders its value.
+[ColorSetDecision](/decision-models/color-set).
 
 ```mdx
 // src/content/page.mdx
@@ -132,13 +137,11 @@ export const store = await loader();
     <ShowDecision store={store} d="Pink Palette" size="xs" />
 </CardGrid>
 
-### Using built-in components
-
 In the [Components reference](/components) you will find a comprehensive set of components
 for rendering decisions in different scenarios and layouts.
 
 For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/)
-can also render all, or some, of the decision details.
+component composes decision visualization, value, and details in a single layout.
 
 ```mdx
 // src/content/page.mdx
@@ -152,6 +155,112 @@ import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 <FlexStack vpad>
     <ShowDecisionCard store={store} d="Action Color" />
 </FlexStack>
+
+## Customizing value and visualization
+
+All decision components expose [common props](/components/Astro/Props/#valueprops) that
+provide a high degree of control over how the decisions are rendered:
+
+-   `value` - hide or format the decision value
+-   `viz` - hide or configure the visualization
+-   `options` - visualization options passed down to the viz components (🚧 link)
+
+### Formatting the decision value
+
+With some decision types, you may want to display their value in specific formats. The `value`
+prop is passed down to the specific decision component to control how the value is displayed.
+
+For instance, [Color Decisions](/components/Astro/Decisions/color) components
+can display the color value in one or more color spaces.
+
+```mdx
+<ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
+</CardGrid>
+
+### Hiding the decision value
+
+In this example we are hiding the decision value and rendering its visualization
+under a custom label.
+
+```mdx
+<label>Brand Blue</label>
+<ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+```
+
+<FlexStack vpad>
+    <label>Brand Blue</label>
+    <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+</FlexStack>
+
+### Choosing a different visualization
+
+Some decision types can be rendered using different visualizations.
+
+The `viz` prop is passed down to value components to determine which visualization is used.
+
+For instance, [Space Decisions](/components/Astro/Decisions/space) components
+can represent a space value with a few different shapes.
+
+```mdx
+<ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
+<ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
+```
+
+<CardGrid>
+    <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
+    <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
+</CardGrid>
+
+### Configuring visualization options
+
+(🚧 links)
+
+Some visualization primitives expose also an `options` prop.
+
+In this example we are rendering the same color decision using two different
+modes: `fg` and `bg`.
+
+In both cases we are providing a `contrast` color. We also set the
+custom `content` for the first one, and switch to `text` mode on the second.
+
+```mdx
+<ShowDecision ... viz="fg" options={{ contrast: '#000000', content: 'Hello' }} />
+<ShowDecision ... viz="bg" options={{ contrast: '#FDFBFC', mode: 'text' }} />
+```
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Action Color"
+        value={false}
+        viz="fg"
+        options={{ contrast: '#000000', content: 'Hello' }}
+    />
+    <ShowDecision
+        store={store}
+        d="Action Color"
+        value={false}
+        viz="bg"
+        options={{ contrast: '#FDFBFC', mode: 'text' }}
+    />
+</CardGrid>
+
+### Hiding the visualization
+
+In this example we are hiding the visualization and rendering its value
+next to a custom label.
+
+```mdx
+RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
+```
+
+<FlexRow align="center" vpad>
+    RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
+</FlexRow>
 
 ## See Also
 
