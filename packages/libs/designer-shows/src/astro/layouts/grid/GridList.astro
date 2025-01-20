@@ -21,6 +21,10 @@ const style = { '--columns': columns };
         grid-template-columns: repeat(var(--columns), 1fr);
     }
 
+    .dd-grid-list > :global(*) {
+        margin: 0 !important;
+    }
+
     .dd-vpad {
         padding-top: 1rem;
     }

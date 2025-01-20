@@ -7,7 +7,6 @@ sidebar:
     label: Common Props
 ---
 
-import Banner from '@astrojs/starlight/components/Banner.astro';
 import { CardGrid } from '@astrojs/starlight/components';
 import { FlexRow, FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
 
@@ -18,7 +17,7 @@ export const store = await decisionLoader();
 ## DecisionProps
 
 All components that render a decision, such as the
-[&lt;ShowDecisionCard/&gt;](/components/Astro/Cards/show-decision-card/) component,
+[&lt;ShowDecisionCard/&gt;](/components/Astro/Decisions/show-decision-card/) component,
 **require** the following props.
 
 ### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
@@ -43,11 +42,11 @@ export const store = await loader();
 A `string` with the name of the decision to visualize.
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" size="l" />
+<ShowDecision store={store} d="Brand Pink" size="m" />
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Brand Pink" size="l" />
+    <ShowDecision store={store} d="Brand Pink" size="m" />
 </CardGrid>
 
 If the decision does not exist, it renders a notice.
@@ -76,22 +75,13 @@ Constrains the visualization to a specific size.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'s'} />
-<ShowDecision store={store} d="Space Unit" size={'s'} />
-
-<ShowDecision store={store} d="Action Color" size={'m'} />
-<ShowDecision store={store} d="Space Unit" size={'s'} />
+<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 ```
 
-<FlexStack vpad>
-    <CardGrid>
-        <ShowDecision store={store} d="Action Color" size={'s'} />
-        <ShowDecision store={store} d="Space Unit" size={'s'} />
-    </CardGrid>
-    <CardGrid>
-        <ShowDecision store={store} d="Action Color" size={'m'} />
-        <ShowDecision store={store} d="Space Unit" size={'m'} />
-    </CardGrid>
-</FlexStack>
+<CardGrid>
+    <ShowDecision store={store} d="Action Color" size={'s'} />
+    <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+</CardGrid>
 
 Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.
 

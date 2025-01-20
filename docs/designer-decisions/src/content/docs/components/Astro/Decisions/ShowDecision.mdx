@@ -7,8 +7,9 @@ sidebar:
 ---
 
 import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
-import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { FlexStack, Table, TableRow, ShowDecision } from '@noodlestan/designer-shows/astro';
 
+import { TableDecisionComponents } from '../_partials';
 import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
@@ -17,28 +18,37 @@ export const store = await decisionLoader();
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 ```
 
-This component renders the appropriate visualization according to the decision type.
+Renders the appropriate visualization according to the decision type.
 
-In this example we are rendering decisions of 4 different types:
+In the following two examples we use the `<ShowDecision/>` to render two different
+decision types.
 
-<CardGrid>
-    <FlexStack>
-        <label>Color</label>
-        <ShowDecision store={store} d="Action Color" size="m" />
-    </FlexStack>
-    <FlexStack>
-        <label>Space</label>
-        <ShowDecision store={store} d="Space Unit" size="m" />
-    </FlexStack>
-    <FlexStack>
-        <label>Color Set</label>
-        <ShowDecision store={store} d="Heat Map Color Set" size="s" />
-    </FlexStack>
-    <FlexStack>
-        <label>Space Scale</label>
-        <ShowDecision store={store} d="Layout Space Scale" size="s" />
-    </FlexStack>
-</CardGrid>
+A [color value](/decision-models/color-value) decision:
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
+</FlexStack>
+
+A [space scale](/decision-models/space-scale) decision:
+
+```mdx
+<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+</FlexStack>
+
+## Composes
+
+The following table lists all decision types and which component
+is used internally to render the decision value and visualization.
+
+<TableDecisionComponents />
 
 ## Props
 
@@ -46,31 +56,11 @@ In this example we are rendering decisions of 4 different types:
 
 These two **mandatory** props serve to identify and retrieve the decision.
 
-### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`, `viz`, and `size`
+### ༶ [ValueProps](/components/Astro/Props#valueprops): `size`, `value`, `viz`, and `options`
 
-You can use these props to control how the visualization and value are displayed.
+These props control how the visualization and value are displayed.
 
-In the following example we are hiding the visualization and customizing
-the color value display to render both `rgb` and `hsl` color spaces.
+The [Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx/) guide
+showcases these props in action.
 
-```mdx
-<ShowDecision store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
-```
-
-<CardGrid>
-    <ShowDecision store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
-</CardGrid>
-
-In this other example we are rendering the space scale with size `xs`.
-
-```mdx
-<ShowDecision store={store} d="Layout Space Scale" size="xs" />
-```
-
-<CardGrid>
-    <ShowDecision store={store} d="Layout Space Scale" size="xs" />
-</CardGrid>
-
-For more details about which visualizations are available and
-the different ways in which decision values can be displayed,
-refer to the documentation for specific [Decision Components](/components/Astro/#decisions).
+Refer to each Value Component for details on available visualizations and options.

@@ -2,3 +2,4 @@
 export * from './cards';
 export * from './flex';
 export * from './grid';
+export * from './table';

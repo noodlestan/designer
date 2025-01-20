@@ -1,0 +1,120 @@
+---
+import { Table, TableRow } from '@noodlestan/designer-shows/astro';
+
+const types = [
+    {
+        name: 'SpaceValue',
+        type: 'space-value',
+        component: 'ShowSpaceValue',
+        value: 'ShowSpaceValue',
+    },
+    {
+        name: 'SpaceScale',
+        type: 'space-scale',
+        component: 'ShowSpaceScale',
+        value: 'ShowSpaceValue',
+    },
+    {
+        name: 'ColorValue',
+        type: 'color-value',
+        component: 'ShowColorValue',
+        value: 'ShowColorValue',
+    },
+    {
+        name: 'ColorSet',
+        type: 'color-set',
+        component: 'ShowColorSet',
+        value: 'ShowColorValue',
+    },
+    {
+        name: 'Oklab Hue Value',
+        type: 'color-oklab-hue-value',
+        component: 'ShowOklabHueValue',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'Oklab Hue Set',
+        type: 'color-oklab-hue-set',
+        component: 'ShowOklabHueSet',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'Oklab Chroma Value',
+        type: 'color-oklab-chroma-value',
+        component: 'ShowOklabChromaValue',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'Oklab Chroma Scale',
+        type: 'color-oklab-chroma-scale',
+        component: 'ShowOklabChromaScale',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'Oklab Lightness Value',
+        type: 'color-oklab-lightness-value',
+        component: 'ShowOklabLightnessValue',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'Oklab Lightness Scale',
+        type: 'color-oklab-lightness-scale',
+        component: 'ShowOklabLightnessScale',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'sRGB Hue Value',
+        type: 'color-srgb-hue-value',
+        component: 'ShowsRGBHueValue',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'sRGB Hue Set',
+        type: 'color-srgb-hue-set',
+        component: 'ShowsRGBHueSet',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'sRGB Saturation Value',
+        type: 'color-srgb-saturation-value',
+        component: 'ShowsRGBSaturationValue',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'sRGB Saturation Scale',
+        type: 'color-srgb-saturation-scale',
+        component: 'ShowsRGBSaturationScale',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'sRGB Lightness Value',
+        type: 'color-srgb-lightness-value',
+        component: 'ShowsRGBLightnessValue',
+        value: 'ShowColorChannelValue',
+    },
+    {
+        name: 'sRGB Lightness Scale ',
+        type: 'color-srgb-lightness-scale ',
+        component: 'ShowsRGBLightnessScale',
+        value: 'ShowColorChannelValue',
+    },
+];
+---
+
+<Table columns={['Decision Type', 'Component', 'Value Component (🚧 link)']} vpad>
+    {
+        types.map(({ name, type, component, value }) => (
+            <TableRow>
+                <td>
+                    <a href={`/decision-models/${type}`}>{name}</a>
+                </td>
+                <td>
+                    <code>&lt;{component} /&gt;</code>
+                </td>
+                <td>
+                    <a href={`/components/Astro/Values/${value}`}>{value}</a>
+                </td>
+            </TableRow>
+        ))
+    }
+</Table>
