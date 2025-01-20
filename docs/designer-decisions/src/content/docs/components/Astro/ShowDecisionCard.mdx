@@ -1,6 +1,6 @@
 ---
 title: 'ShowDecisionCard'
-slug: components/Astro/Decisions/show-decision-card
+slug: components/Astro/ShowDecisionCard
 description: Astro component to visualize any decision along with its details in a card layout.
 sidebar:
     order: 20
@@ -9,7 +9,7 @@ sidebar:
 import { Card } from '@astrojs/starlight/components';
 import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../../decisions';
+import { decisionLoader } from '../../../../decisions';
 
 export const store = await decisionLoader();
 
@@ -30,7 +30,7 @@ By default it renders only the decision **description** and **usage** guidelines
 
 This component composes:
 
--   [ShowDecision](/components/Astro/Decisions/show-decision/) component (value and visualization)
+-   [ShowDecision](/components/Astro/ShowDecision) component (value and visualization)
 -   inside of `DecisionCardLayout` (🚧 link)
 -   and one or more [Decision Attribute](/components/Astro/Composable/Attributes).
 

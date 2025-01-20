@@ -117,7 +117,7 @@ const decision = store.decision('Action Color');
 
 Retrieve the decision `store` and pass it to the components along with the decision name.
 
-In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/Decisions/show-decision/)
+In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/ShowDecision/)
 component to render both a [ColorValueDecision](/decision-models/color-value) and a
 [ColorSetDecision](/decision-models/color-set).
 
@@ -140,7 +140,7 @@ export const store = await loader();
 In the [Components reference](/components) you will find a comprehensive set of components
 for rendering decisions in different scenarios and layouts.
 
-For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/Decisions/show-decision-card/)
+For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/)
 component composes decision visualization, value, and details in a single layout.
 
 ```mdx
@@ -170,7 +170,7 @@ provide a high degree of control over how the decisions are rendered:
 With some decision types, you may want to display their value in specific formats. The `value`
 prop is passed down to the specific decision component to control how the value is displayed.
 
-For instance, [Color Decisions](/components/Astro/Decisions/color) components
+For instance, [Color Decisions](/components/Astro/color) components
 can display the color value in one or more color spaces.
 
 ```mdx
@@ -202,7 +202,7 @@ Some decision types can be rendered using different visualizations.
 
 The `viz` prop is passed down to value components to determine which visualization is used.
 
-For instance, [Space Decisions](/components/Astro/Decisions/space) components
+For instance, [Space Decisions](/components/Astro/space) components
 can represent a space value with a few different shapes.
 
 ```mdx

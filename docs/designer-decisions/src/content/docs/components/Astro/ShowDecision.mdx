@@ -1,6 +1,6 @@
 ---
 title: ShowDecision
-slug: components/Astro/Decisions/show-decision
+slug: components/Astro/ShowDecision
 description: Astro component to visualize any decision.
 sidebar:
     order: 10
@@ -9,8 +9,8 @@ sidebar:
 import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
 import { FlexStack, Table, TableRow, ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { TableDecisionComponents } from '../_partials';
-import { decisionLoader } from '../../../../../decisions';
+import { TableDecisionComponents } from './_partials';
+import { decisionLoader } from '../../../../decisions';
 
 export const store = await decisionLoader();
 

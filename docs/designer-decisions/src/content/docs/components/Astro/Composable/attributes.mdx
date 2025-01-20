@@ -3,7 +3,7 @@ title: Attribute Components
 slug: components/Astro/Composable/Attributes
 description: Astro components that render design decision details and metadata.
 sidebar:
-    order: 30
+    order: 50
     label: Decision Attributes
 ---
 
@@ -25,7 +25,7 @@ export const store = await decisionLoader();
 These components render decision details and metadata.
 
 Tip: 🚧 You don't have to use these components directly in your docs.
-Using [ShowDecision](/components/Astro/Decisions/show-decision/) will select
+Using [ShowDecision](/components/Astro/ShowDecision/) will select
 the appropriate one for you.
 
 They are exposed so that anyone can
@@ -37,20 +37,13 @@ composing these directly in their custom components.
 All of these components share the same [common props](/components/Astro/Props/#decisionprops) –
 `d` and `store` – to identify and retrieve the decision.
 
-## ShowDecisionModel
+## Decision Data
 
-Renders the [model](/decision-models) used in the decision.
-
-```mdx
-<ShowDecisionModel store={store} d="Pink Palette" />
-```
-
-<FlexStack vpad>
-    <ShowDecisionModel store={store} d="Pink Palette" />
-</FlexStack>
-, , ## ShowDecisionDescription
+### ShowDecisionDescription
 
 Renders the decision's description.
+
+#### Example
 
 ```mdx
 <ShowDecisionDescription store={store} d="Pink Palette" />
@@ -60,9 +53,11 @@ Renders the decision's description.
     <ShowDecisionDescription store={store} d="Pink Palette" />
 </FlexStack>
 
-## ShowDecisionUsage
+### ShowDecisionUsage
 
 Renders the decision's usage guidelines.
+
+#### Example
 
 ```mdx
 <ShowDecisionUsage store={store} d="Pink Palette" />
@@ -72,9 +67,25 @@ Renders the decision's usage guidelines.
     <ShowDecisionUsage store={store} d="Pink Palette" />
 </FlexStack>
 
-## ShowDecisionParams
+### ShowDecisionModel
+
+Renders the [model](/decision-models) used in the decision.
+
+#### Example
+
+```mdx
+<ShowDecisionModel store={store} d="Pink Palette" />
+```
+
+<FlexStack vpad>
+    <ShowDecisionModel store={store} d="Pink Palette" />
+</FlexStack>
+
+### ShowDecisionParams
 
 Renders the decision parameters.
+
+#### Example
 
 ```mdx
 <ShowDecisionParams store={store} d="Pink Palette" />
@@ -84,9 +95,11 @@ Renders the decision parameters.
     <ShowDecisionParams store={store} d="Pink Palette" />
 </FlexStack>
 
-## ShowDecisionContexts
+### ShowDecisionContexts
 
 Renders the decision contexts.
+
+#### Example
 
 ```mdx
 <ShowDecisionContexts store={store} d="Pink Palette" />
@@ -96,9 +109,13 @@ Renders the decision contexts.
     <ShowDecisionContexts store={store} d="Pink Palette" />
 </FlexStack>
 
-## ShowDecisionData
+## Metadata
+
+### ShowDecisionData
 
 Renders the decision raw data.
+
+#### Example
 
 ```mdx
 <ShowDecisionData store={store} d="Pink Palette" />

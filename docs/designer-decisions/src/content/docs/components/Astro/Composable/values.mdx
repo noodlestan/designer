@@ -3,7 +3,7 @@ title: Value Components
 slug: components/Astro/Composable/Values
 description: Astro components that render design decision viz and value together.
 sidebar:
-    order: 20
+    order: 40
     label: Decision Values
 ---
 
@@ -27,14 +27,14 @@ export const spaceValue = createSpaceValue(context, 12);
 These components render a decision's visualization and value directly.
 
 Tip: 🚧 You don't have to use these components directly in your docs.
-Using [ShowDecision](/components/Astro/Decisions/show-decision/) will select
+Using [ShowDecision](/components/Astro/ShowDecision/) will select
 the appropriate one for you.
 
 They are exposed so that anyone can
 [create custom visualizations](/guides/creating-custom-design-decision-visualizations/),
 composing values and visualizations directly in their custom components.
 
-In the [ShowDecision](/components/Astro/Decisions/show-decision) reference,
+In the [ShowDecision](/components/Astro/ShowDecision) reference,
 you will find all decision types and their corresponding value components.
 
 ## Common Props
@@ -51,15 +51,15 @@ can have full control of the options.
 ## Color
 
 Color related components used by
-[ShowDecision (color decisions)](/components/Astro/Decisions/show-decision/#color).
+[ShowDecision (color decisions)](/components/Astro/ShowDecision/#color).
 
 ### ShowColorValue
 
-##### ༶ `viz`: [ColorVizName](/api/designer-shows/Types/ColorVizName)
+#### ༶ `viz`: [ColorVizName](/api/designer-shows/Types/ColorVizName)
 
-##### ༶ `options`: [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions)
+#### ༶ `options`: [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions)
 
-##### Example
+#### Example
 
 ```mdx
 export const colorValue = createColorValue(context, '#ff0000');
@@ -78,13 +78,13 @@ export const colorValue = createColorValue(context, '#ff0000');
 ## Space
 
 Space related components used by
-[ShowDecision (space decisions)](/components/Astro/Decisions/show-decision/#space).
+[ShowDecision (space decisions)](/components/Astro/ShowDecision/#space).
 
 ### ShowSpaceValue
 
-##### ༶ `viz`: [SpaceVizName](/api/designer-shows/Types/SpaceVizName/)
+#### ༶ `viz`: [SpaceVizName](/api/designer-shows/Types/SpaceVizName/)
 
-##### Example
+#### Example
 
 ```mdx
 export const spaceValue = createSpaceValue(context, 12);
