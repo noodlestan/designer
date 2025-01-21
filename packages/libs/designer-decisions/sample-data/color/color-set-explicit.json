@@ -3,7 +3,12 @@
     "model": "color-set/explicit",
     "name": "Color Set Explicit Sample",
     "params": {
-      "values": ["#d35084", "#06b4e0", "#181818", "#f7f7f7"]
+      "values": [
+        "oklch(61.92% 0.1717 358.75)",
+        "oklch(71.53% 0.1332 223.66)",
+        "oklch(20.9% 0 0)",
+        "oklch(97.61% 0 0)"
+      ]
     }
   }
 ]
