@@ -23,7 +23,7 @@ const formats: ColorFormat[] | null =
 
 const Viz = getColorVizComponent(viz);
 
-const opt = options as ColorVizOptions;
+const opt = (options || {}) as ColorVizOptions;
 ---
 
 <div class:list={['dd-show-color-value', { size }]}>

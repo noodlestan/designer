@@ -42,6 +42,10 @@ export const createStaticDecisionStore = (
         return [context, undefined];
     };
 
+    const createContext = (contexts: LookupContexts = { all: [] }) => {
+        return createDecisionContext(decisions.resolve, createInputSub(), contexts);
+    };
+
     return {
         hasErrors: () => errors.length > 0 || inputStore.hasErrors(),
         storeErrors: () => errors,
@@ -50,5 +54,6 @@ export const createStaticDecisionStore = (
         record: inputStore.record,
         decision,
         resolver: decisions.resolve,
+        createDecisionContext: createContext,
     };
 };

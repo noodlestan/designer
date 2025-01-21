@@ -12,12 +12,12 @@ const { tag: Element = 'div', justify = 'start', vpad } = Astro.props;
     <slot />
 </Element>
 
-<style define:vars={{ justify }}>
+<style>
     .dd-flex-stack {
         display: flex;
         flex-direction: column;
         padding: 0;
-        justify-content: var(--justify);
+        justify-content: start;
         gap: var(--dd-space-gap);
     }
 

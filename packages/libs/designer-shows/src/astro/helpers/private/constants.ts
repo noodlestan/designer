@@ -6,7 +6,7 @@ export const TYPEFACE_SIZE_TO_LENGTH: Record<ShowValueSize, number | undefined> 
     m: 2,
     l: 3,
     xl: 3,
-    auto: undefined,
+    auto: 5,
 };
 
 export const TYPEFACE_STRING = 'GgAbTjqQfiRrwWmM!123;';

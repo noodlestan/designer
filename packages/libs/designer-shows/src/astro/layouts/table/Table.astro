@@ -1,0 +1,29 @@
+---
+import TableHead from './TableHead.astro';
+
+type Props = {
+    columns: string[];
+    caption?: string;
+    vpad?: boolean;
+};
+
+const { caption, columns, vpad } = Astro.props;
+---
+
+<table class:list={['dd-table', { 'dd-vpad': vpad }]}>
+    {caption && <caption>{caption}</caption>}
+    <TableHead columns={columns} />
+    <tbody>
+        <slot />
+    </tbody>
+</table>
+
+<style>
+    .dd-table {
+        width: 100%;
+    }
+
+    .dd-vpad {
+        padding-top: 1rem;
+    }
+</style>

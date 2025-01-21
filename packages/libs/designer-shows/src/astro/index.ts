@@ -6,6 +6,6 @@ export * from './decisions';
 export * from './helpers';
 export * from './layouts';
 export * from './meta';
-export * from './values';
 export * from './types';
+export * from './values';
 export * from './viz';

@@ -1,0 +1,73 @@
+---
+title: ShowDecision
+slug: components/Astro/ShowDecision
+description: Astro component to visualize any decision.
+sidebar:
+    order: 10
+---
+
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+import { FlexStack, Table, TableRow, ShowDecision } from '@noodlestan/designer-shows/astro';
+
+import { TableDecisionComponents } from './_partials';
+import { decisionLoader } from '../../../../decisions';
+
+export const store = await decisionLoader();
+
+```ts
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
+```
+
+Renders the appropriate visualization according to the decision type.
+
+In the following two examples we use the `<ShowDecision/>` to render two different
+decision types.
+
+A [color value](/decision-models/color-value) decision:
+
+```mdx
+<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
+</FlexStack>
+
+A [space scale](/decision-models/space-scale) decision:
+
+```mdx
+<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+```
+
+<FlexStack vpad>
+    <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+</FlexStack>
+
+## Composes
+
+The following table lists all decision types and which component
+is used internally to render the decision value and visualization.
+
+### Space
+
+<TableDecisionComponents domain="space" />
+
+### Color
+
+<TableDecisionComponents domain="color" />
+
+## Props
+
+### ༶ [DecisionProps](/components/Astro/Props): `store` and `d`
+
+These two **mandatory** props serve to identify and retrieve the decision.
+
+### ༶ [ValueProps](/components/Astro/Props#valueprops): `size`, `value`, `viz`, and `options`
+
+These props control how the visualization and value are displayed.
+
+The [Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx/) guide
+showcases these props in action.
+
+Refer to each [Value Component](/components/Astro/Composable/Values) for details
+on available visualizations and options.

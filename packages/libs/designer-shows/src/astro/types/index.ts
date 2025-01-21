@@ -39,7 +39,7 @@ export type ShowContent = {
     content?: string;
 };
 
-export type ColorVizOptions = ShowContent & { contrast: string };
+export type ColorVizOptions = ShowContent & { contrast?: string };
 
 export type ColorVizProps = VizProps & {
     value?: ColorValue;

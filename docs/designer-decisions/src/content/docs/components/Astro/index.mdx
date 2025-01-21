@@ -7,7 +7,6 @@ sidebar:
     label: Astro Index
 ---
 
-import Banner from '@astrojs/starlight/components/Banner.astro';
 import { LinkCard } from '@astrojs/starlight/components';
 
 import { href } from '../../../../mdx';
@@ -17,53 +16,72 @@ This reference assumes you are using an Astro based build,
 such as the one powering these docs, and that you have followed
 the [Rendering in Astro MDX](/guides/documenting-design-decisions-with-astro-and-mdx) guide.
 
-## Cards
+## Common Props
 
-<LinkCard href={href('/components/Astro/Cards/show-decision-card')} title="ShowDecisionCard" />
+All components that render a decision, such as the
+[ShowDecisionCard](components/Astro/ShowDecisionCard/) component,
+share the same common props:
+
+-   `d` and `store`: to identify and retrieve the decision.
+-   `value`, `size`, `viz`, and `options`: to control
+    how the visualization and value are displayed.
+
+Refer to [Common Props](components/Astro/Props) for more details on these props.
 
 ## Decisions
 
 These components render the decision visualization and value.
 
-<LinkCard href={href('/components/Astro/Decisions/show-decision')} title="ShowDecision" />
-<LinkCard href={href('/components/Astro/Decisions/color')} title="Color Decisions" />
-<LinkCard href={href('/components/Astro/Decisions/space')} title="Space Decisions" />
+<LinkCard href={href('/components/Astro/ShowDecision')} title="ShowDecision" />
+<LinkCard href={href('/components/Astro/ShowDecisionCard')} title="ShowDecisionCard" />
 
-## Attributes
+## Composable
 
-<LinkCard href={href('/components/Astro/Attributes/show-decision-model')}
-title="ShowDecisionModel" />
-<LinkCard href={href('/components/Astro/Attributes/show-decision-params')}
-title="ShowDecisionParams" />
-<LinkCard
-    href={href('/components/Astro/Attributes/show-decision-descriptio')}
+These components render values, visualizations and decision details individually.
 
-    title="ShowDecisionDescription"
+They are exposed so that anyone can
+[create custom visualizations](/guides/creating-custom-design-decision-visualizations/),
+composing these directly in their custom components.
 
-/>
-
-<LinkCard
-    href={href('/components/Astro/Attributes/show-decision-contexts')}
-    title="ShowDecisionContexts"
-/>
-<LinkCard
-    href={href('/components/Astro/Attributes/show-decision-usage')}
-    title="ShowDecisionUsage"
-/>
-<LinkCard href={href('/components/Astro/Attributes/show-decision-data')} title="ShowDecisionData" />
-
-## Values
+### Values
 
 These components render the decision values.
 
-<LinkCard href={href('/components/Astro/Values/color')} title="Color Values" />
-<LinkCard href={href('/components/Astro/Values/space')} title="Space Values" />
+<LinkCard href={href('/components/Astro/Composable/Values#color')} title="Color Values" />
+<LinkCard href={href('/components/Astro/Composable/Values#space')} title="Space Values" />
 
-## Layouts
+### Attributes
 
-<LinkCard href={href('/components/Astro/Layouts/decision-card')} title="DecisionCardLayout" />
+<LinkCard
+    href={href('/components/Astro/Composable/Attributes/#ShowDecisionModel')}
+    title="ShowDecisionModel"
+/>
+<LinkCard
+    href={href('/components/Astro/Composable/Attributes/#ShowDecisionParams')}
+    title="ShowDecisionParams"
+/>
+<LinkCard
+    href={href('/components/Astro/Composable/Attributes/#ShowDecisionDescription')}
+    title="ShowDecisionDescription"
+/>
+<LinkCard
+    href={href('/components/Astro/Composable/Attributes/#ShowDecisionContexts')}
+    title="ShowDecisionContexts"
+/>
+<LinkCard
+    href={href('/components/Astro/Composable/Attributes/#ShowDecisionYsage')}
+    title="ShowDecisionUsage"
+/>
+<LinkCard
+    href={href('/components/Astro/Composable/Attributes/#ShowDecisionData')}
+    title="ShowDecisionData"
+/>
 
-## Atoms
+### Layouts
 
-<LinkCard href={href('/components/Astro/Viz/color')} title="Color Visualizations" />
-<LinkCard href={href('/components/Astro/Viz/space')} title="Space Visualizations" />
+<LinkCard href={href('/components/Astro/Layouts/decision-card')} title="🚧 DecisionCardLayout" />
+
+### Atoms
+
+<LinkCard href={href('/components/Astro/Viz/color')} title="🚧 Color Visualizations" />
+<LinkCard href={href('/components/Astro/Viz/space')} title="🚧 Space Visualizations" />

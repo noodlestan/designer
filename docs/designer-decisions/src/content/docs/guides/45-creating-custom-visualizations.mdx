@@ -1,0 +1,114 @@
+---
+title: Creating Custom Visualizations
+slug: guides/creating-custom-design-decision-visualizations
+description: How to create custom design decisions visualizations for Astro/Starlight based docs
+sidebar:
+    order: 45
+---
+
+import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../decisions';
+
+export const store = await decisionLoader();
+
+This guide explains how to create custom visualizations for design decisions for your documentation.
+
+**Example:** 🚧
+
+## Setup
+
+🚧 This guide is for `@noodlestan/designer-shows/astro` components and requires a working
+[Astro](https://docs.astro.build/en/getting-started/) website. Refer to the
+[Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx) for
+how to quickly setup a website similar to this one.
+
+## Creating custom components
+
+In the [Components reference](/components) you will also find a comprehensive set of primitives
+that render specific decision types and decision values, as well as a few helpful layouts
+and atoms.
+
+You can reuse these built-in components to create your own, composing any layout of your choice,
+with total control over styling. You can also merge data from
+other sources, add custom logic, and format values as you wish.
+
+In this example, we compose the
+[&lt;ShowColorValue/&gt;](/components/Astro/Composable/Values/show-color-value) and the
+[&lt;ShowDecisionUsage/&gt;](/components/Astro/Composable/Attributes/show-decision-usage) atom
+within the standard
+[&lt;DecisionCard/&gt;](/components/Astro/Layouts/decision-card) layout.
+
+```astro title="MyColorDecision.Astro"
+---
+import { type Decision } from '@noodlestan/designer-decisions';
+import { type StaticDecisionStore } from '@noodlestan/designer-functions';
+import {
+    DecisionCardLayout,
+    ShowDecision,
+    ShowDecisionUsage,
+} from '@noodlestan/designer-shows/astro';
+
+type Props = {
+    d: string;
+    store: StaticDecisionStore;
+};
+
+const { d, store } = Astro.props;
+const [decision] = store.decision(d)
+---
+
+<DecisionCardLayout>
+    <h2 slot="header">{decision.name}</h2>
+    <ShowDecision slot="viz" store={store} d={d} value={['rgb', 'oklch']} />
+    <div slot="details">
+        <h3>Usage</h3>
+        <ShowDecisionUsage store={store} d={d} />
+    </div>
+</DecisionCardLayout>
+```
+
+Use the new component directly in your MDX files.
+
+```mdx
+// src/content/page.mdx
+import MyColorDecision from '../components/';
+
+<MyColorDecision store={store} d="Action Color" />
+```
+
+## Resolve decision values
+
+{/* 🚧 move these details to the API docs */}
+
+You can also resolve decision values by calling `value()` on the decision object.
+
+This code block demonstrates how you can use a decision value to build your own visualization.
+
+```astro
+---
+import { getCollection } from 'astro:content';
+import { type ColorDecision } from '@noodlestan/designer-decisions';
+import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+const decisions = await getCollection('decisions');
+const store = createDecisionStaticStore(decisions);
+
+const { d } = Astro.props
+const [, decision] = store.decision<ColorDecision>(d);
+
+const color = decision.value().toString('oklch')
+---
+
+<div class="my-color-value-viz">{color.value}</div>
+
+<style define:vars={{ 'my-color': color }}>
+.my-color-value-viz { background-color: var(--my-color) }
+</style>
+```
+
+## See Also
+
+-   [Examples](/examples)
+-   [Components Reference](/components)

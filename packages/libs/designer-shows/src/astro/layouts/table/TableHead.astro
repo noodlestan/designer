@@ -1,0 +1,18 @@
+---
+type Props = {
+    columns: string[];
+};
+
+const { columns } = Astro.props;
+---
+
+<thead class="dd-table-head">
+    <tr>
+        {columns.map(col => <th>{col}</th>)}
+    </tr>
+</thead>
+
+<style>
+    .dd-table-head {
+    }
+</style>

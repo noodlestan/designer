@@ -13,7 +13,7 @@ export type DecisionError = {
 
 export type DecisionContext = {
     resolve: DecisionRefResolver;
-    owner: () => DecisionInputBase;
+    owner: () => DecisionInputBase; // WIP rename to input
     contexts: () => LookupContexts;
     hasErrors: () => boolean;
     errors: () => DecisionError[];
