@@ -32,36 +32,30 @@ Available only when [viz](/api/designer-shows/Types/ColorVizName) is set to eith
 
 ### `typeface` (default)
 
-Renders a few characters showcasing features of a typeface.
+Renders a few characters.
+
+You can override the content via
+[options.content](/api/designer-shows/Types/ColorVizOptions#-content).
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" size="m" viz="fg" />
+<ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
 ```
 
 <FlexStack vpad>
-    <ShowDecision store={store} d="Brand Pink" size="m" viz="fg" />
+    <ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
 </FlexStack>
 
 ### `text`
 
 Renders a long text.
 
+You can override the content via
+[options.content](/api/designer-shows/Types/ColorVizOptions#-content).
+
 ```mdx
-<ShowDecision
-    store={store}
-    d="Action Contrast Color"
-    size="m"
-    viz="fg"
-    options={{ mode: 'text', contrast: '#9B2C5A' }}
-/>
+<ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
 ```
 
 <CardGrid>
-    <ShowDecision
-        store={store}
-        d="Action Contrast Color"
-        size="m"
-        viz="fg"
-        options={{ mode: 'text', contrast: '#9B2C5A' }}
-    />
+    <ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
 </CardGrid>
