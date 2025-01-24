@@ -14,7 +14,7 @@ const { store, d, size, ...rest } = Astro.props;
 const [, decision] = store.decision({ $name: d });
 const set = decision && isColorSetDecision(decision) ? decision.produce() : undefined;
 
-const colors = set?.get();
+const colors = set?.get().items();
 const s = size || 's';
 ---
 

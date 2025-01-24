@@ -90,9 +90,9 @@ export type DecisionUuidRef = {
 
 export type DecisionRef = DecisionNameRef | DecisionUuidRef;
 
-export type DecisionRefResolver = <T>(
+export type DecisionRefResolver = <V extends BaseValue<unknown> = BaseValue<unknown>>(
     ref: DecisionRef,
-) => [DecisionContext, Decision<BaseValue<T>> | undefined];
+) => [DecisionContext, Decision<V> | undefined];
 
 export type DecisionModel<V = BaseValue<unknown>, P = object> = {
     produce: (context: DecisionValueContext, params: P) => V;

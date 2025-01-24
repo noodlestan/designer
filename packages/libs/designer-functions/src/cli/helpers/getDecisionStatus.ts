@@ -1,6 +1,6 @@
 import {
-    type Decision,
     type DecisionInputBase,
+    type DecisionUnknown,
     createLookupContext,
 } from '@noodlestan/designer-decisions';
 
@@ -8,7 +8,7 @@ import type { StaticDecisionStore } from '../../store';
 
 import type { DecisionStatus } from './types';
 
-const extractValue = (decision?: Decision<unknown>) => {
+const extractValue = (decision?: DecisionUnknown) => {
     const value = decision?.produce();
     if (
         typeof value === 'object' &&

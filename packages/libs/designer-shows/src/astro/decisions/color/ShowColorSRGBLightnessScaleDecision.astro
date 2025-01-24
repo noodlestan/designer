@@ -14,7 +14,7 @@ const [, decision] = store.decision({ $name: d });
 const lightnessScale =
     decision && isColorSRGBLightnessScaleDecision(decision) ? decision.produce() : undefined;
 
-const items = lightnessScale?.get();
+const items = lightnessScale?.get().items();
 
 const s = size || 's';
 ---

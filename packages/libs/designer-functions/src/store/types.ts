@@ -1,4 +1,5 @@
 import type {
+    BaseValue,
     Decision,
     DecisionContext,
     DecisionRef,
@@ -18,7 +19,7 @@ export type StaticDecisionStore = {
     storeErrors: () => StaticDecisionStoreError[];
     validationErrors: StaticInputMap['validationErrors'];
     records: StaticInputMap['records'];
-    decision: <V = unknown>(
+    decision: <V extends BaseValue<unknown> = BaseValue<unknown>>(
         ref: DecisionRef,
         contexts?: LookupContexts,
     ) => [DecisionContext, Decision<V> | undefined];

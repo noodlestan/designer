@@ -34,13 +34,13 @@ export const createValueContext = (
     const lookups: DecisionLookup[] = [];
     const errors: DecisionValueError[] = [];
 
-    const resolve = <T>(
+    const resolve = <V extends BaseValue<unknown> = BaseValue<unknown>>(
         ref: DecisionRef,
-    ): [DecisionContext, Decision<BaseValue<T>> | undefined] => {
-        const [decisionContext, decision] = resolver<T>(ref);
+    ): [DecisionContext, Decision<V> | undefined] => {
+        const [decisionContext, decision] = resolver<V>(ref);
         lookups.push({
             ref,
-            decision: decision as Decision<BaseValue<T>>,
+            decision: decision as Decision<V>,
         });
         return [decisionContext, decision];
     };
