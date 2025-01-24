@@ -17,10 +17,10 @@ export const resolveColorValueRef = (context: DecisionValueContext, ref: Decisio
     }
 
     if (isColorValueDecision(decision)) {
-        const v = decision.produce(context).value();
+        const v = decision.produce(context);
         return v.get();
     } else if (isColorSetDecision(decision)) {
-        const set = decision.produce(context).value();
+        const set = decision.produce(context);
         const v = set.get()[ref.index || 0];
         return v.get();
     } else {

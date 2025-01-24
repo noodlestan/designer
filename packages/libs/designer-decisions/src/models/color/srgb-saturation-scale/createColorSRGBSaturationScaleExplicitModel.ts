@@ -4,7 +4,6 @@ import type {
     DecisionModelFactory,
     SRGBSaturationScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSRGBSaturationScaleExplicitModel: DecisionModelFactory<
     SRGBSaturationScale,
@@ -16,9 +15,7 @@ export const createColorSRGBSaturationScaleExplicitModel: DecisionModelFactory<
                 createSRGBSaturationValue(valueContext, value),
             );
 
-            const value = createSRGBSaturationScale(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createSRGBSaturationScale(valueContext, values);
         },
     };
 };

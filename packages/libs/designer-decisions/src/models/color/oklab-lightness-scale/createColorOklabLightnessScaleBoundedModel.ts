@@ -8,7 +8,6 @@ import {
     type DecisionModelFactory,
     type OklabLightnessScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
     OklabLightnessScale,
@@ -24,9 +23,7 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series.map(item => createOklabLightnessValue(valueContext, item));
-            const value = createOklabLightnessScale(valueContext, [fromValue, ...values, toValue]);
-
-            return createDecisionValue(valueContext, value);
+            return createOklabLightnessScale(valueContext, [fromValue, ...values, toValue]);
         },
     };
 };

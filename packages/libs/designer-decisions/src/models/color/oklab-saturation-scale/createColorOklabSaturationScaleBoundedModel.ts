@@ -8,7 +8,6 @@ import {
     type DecisionModelFactory,
     type OklabChromaScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<
     OklabChromaScale,
@@ -24,9 +23,7 @@ export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series.map(item => createOklabChromaValue(valueContext, item));
-            const value = createOklabChromaScale(valueContext, [fromValue, ...values, toValue]);
-
-            return createDecisionValue(valueContext, value);
+            return createOklabChromaScale(valueContext, [fromValue, ...values, toValue]);
         },
     };
 };

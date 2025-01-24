@@ -11,8 +11,7 @@ type Props = ShowDecisionProps;
 const { store, d, size, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const spaceScale =
-    decision && isSpaceScaleDecision(decision) ? decision.produce().value() : undefined;
+const spaceScale = decision && isSpaceScaleDecision(decision) ? decision.produce() : undefined;
 
 const items = spaceScale?.get();
 

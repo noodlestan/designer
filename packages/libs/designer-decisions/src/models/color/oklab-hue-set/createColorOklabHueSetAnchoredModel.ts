@@ -8,7 +8,6 @@ import type {
     DecisionModelFactory,
     OklabHueSet,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<
     OklabHueSet,
@@ -21,9 +20,7 @@ export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<
 
             const series = generateAnchoredSeries(anchor, params, [0, 360]);
             const values = series.map(item => createOklabHueValue(valueContext, item));
-            const value = createOklabHueSet(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createOklabHueSet(valueContext, values);
         },
     };
 };

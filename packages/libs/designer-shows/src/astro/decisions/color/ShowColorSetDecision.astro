@@ -12,7 +12,7 @@ type Props = ShowDecisionProps;
 const { store, d, size, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const set = decision && isColorSetDecision(decision) ? decision.produce().value() : undefined;
+const set = decision && isColorSetDecision(decision) ? decision.produce() : undefined;
 
 const colors = set?.get();
 const s = size || 's';

@@ -4,7 +4,6 @@ import type {
     DecisionModelFactory,
     SRGBLightnessScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSRGBLightnessScaleExplicitModel: DecisionModelFactory<
     SRGBLightnessScale,
@@ -16,9 +15,7 @@ export const createColorSRGBLightnessScaleExplicitModel: DecisionModelFactory<
                 createSRGBLightnessValue(valueContext, value),
             );
 
-            const value = createSRGBLightnessScale(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createSRGBLightnessScale(valueContext, values);
         },
     };
 };

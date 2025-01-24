@@ -8,7 +8,6 @@ import {
     type DecisionModelFactory,
     type SRGBSaturationScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
     SRGBSaturationScale,
@@ -24,9 +23,7 @@ export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series.map(item => createSRGBSaturationValue(valueContext, item));
-            const value = createSRGBSaturationScale(valueContext, [fromValue, ...values, toValue]);
-
-            return createDecisionValue(valueContext, value);
+            return createSRGBSaturationScale(valueContext, [fromValue, ...values, toValue]);
         },
     };
 };

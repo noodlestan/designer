@@ -4,7 +4,6 @@ import type {
     DecisionModelFactory,
     SRGBHueSet,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSRGBHueSetExplicitModel: DecisionModelFactory<
     SRGBHueSet,
@@ -14,9 +13,7 @@ export const createColorSRGBHueSetExplicitModel: DecisionModelFactory<
         produce: (valueContext, params) => {
             const values = params.values.map(value => createSRGBHueValue(valueContext, value));
 
-            const value = createSRGBHueSet(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createSRGBHueSet(valueContext, values);
         },
     };
 };

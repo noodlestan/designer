@@ -1,6 +1,5 @@
 import { createColorSet, createColorValue } from '../../../primitives';
 import type { ColorSet, ColorSetExplicitInput, DecisionModelFactory } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSetExplicitModel: DecisionModelFactory<
     ColorSet,
@@ -9,9 +8,7 @@ export const createColorSetExplicitModel: DecisionModelFactory<
     return {
         produce: (valueContext, params) => {
             const values = params.values.map(value => createColorValue(valueContext, value));
-            const value = createColorSet(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createColorSet(valueContext, values);
         },
     };
 };

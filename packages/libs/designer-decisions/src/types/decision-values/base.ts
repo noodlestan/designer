@@ -54,12 +54,6 @@ export type LookupContexts = {
     any?: string[];
 };
 
-export type DecisionValue<V> = {
-    hasErrors: () => boolean;
-    errors: () => DecisionValueError[];
-    value: () => V;
-};
-
 export type Decision<V extends Value> = {
     type: () => string;
     uuid: () => string | undefined;
@@ -69,7 +63,7 @@ export type Decision<V extends Value> = {
     input: () => DecisionInputBase; // WIP match contexts
     model: () => string; // WIP match contexts
     params: () => object; // WIP match contexts
-    produce: (context?: LookupContexts | ParentValueContext) => DecisionValue<V>;
+    produce: (context?: LookupContexts | ParentValueContext) => V;
     // token: () => Token<T> | undefined;
 };
 
@@ -95,7 +89,7 @@ export type DecisionRefResolver = <V = unknown>(
 ) => [DecisionContext, Decision<V> | undefined];
 
 export type DecisionModel<V = unknown, P = object> = {
-    produce: (context: DecisionValueContext, params: P) => DecisionValue<V>;
+    produce: (context: DecisionValueContext, params: P) => V;
 };
 
 export type DecisionModelFactory<

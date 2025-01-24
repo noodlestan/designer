@@ -4,7 +4,6 @@ import {
     type DecisionModelFactory,
     type OklabHueValue,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorOklabHueValueExplicitModel: DecisionModelFactory<
     OklabHueValue,
@@ -12,9 +11,7 @@ export const createColorOklabHueValueExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (valueContext, params) => {
-            const value = createOklabHueValue(valueContext, params.value);
-
-            return createDecisionValue(valueContext, value);
+            return createOklabHueValue(valueContext, params.value);
         },
     };
 };

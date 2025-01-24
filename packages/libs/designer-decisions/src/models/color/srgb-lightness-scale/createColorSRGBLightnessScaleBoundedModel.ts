@@ -8,7 +8,6 @@ import {
     type DecisionModelFactory,
     type SRGBLightnessScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSRGBLightnessScaleBoundedModel: DecisionModelFactory<
     SRGBLightnessScale,
@@ -24,9 +23,7 @@ export const createColorSRGBLightnessScaleBoundedModel: DecisionModelFactory<
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series.map(item => createSRGBLightnessValue(valueContext, item));
-            const value = createSRGBLightnessScale(valueContext, [fromValue, ...values, toValue]);
-
-            return createDecisionValue(valueContext, value);
+            return createSRGBLightnessScale(valueContext, [fromValue, ...values, toValue]);
         },
     };
 };

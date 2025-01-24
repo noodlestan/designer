@@ -4,7 +4,6 @@ import {
     type DecisionModelFactory,
     type SRGBHueSet,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
     SRGBHueSet,
@@ -20,9 +19,7 @@ export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series.map(item => createSRGBHueValue(valueContext, item));
-            const value = createSRGBHueSet(valueContext, [fromValue, ...values, toValue]);
-
-            return createDecisionValue(valueContext, value);
+            return createSRGBHueSet(valueContext, [fromValue, ...values, toValue]);
         },
     };
 };
