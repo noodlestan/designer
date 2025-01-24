@@ -3,6 +3,7 @@ import type {
     DecisionValueContext,
     SRGBSaturationValue,
 } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
 import { resolveSRGBSaturationValue } from './resolveSRGBSaturationValue';
@@ -16,6 +17,7 @@ export const createSRGBSaturationValue = (
     const value = resolveSRGBSaturationValue(context, input);
 
     return {
+        ...createBaseValue(context),
         get: () => value,
         toColor: components => {
             const { h, l } = components;

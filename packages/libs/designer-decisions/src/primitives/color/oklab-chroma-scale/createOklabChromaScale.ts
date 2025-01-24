@@ -1,4 +1,5 @@
 import type { DecisionValueContext, OklabChromaScale, OklabChromaValue } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createOklabChromaScale = (
@@ -10,6 +11,7 @@ export const createOklabChromaScale = (
     const items = createItemSet(input);
 
     return {
+        ...createBaseValue(context),
         get: () => items,
     };
 };

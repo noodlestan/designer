@@ -7,6 +7,7 @@ import type {
     ColorValue,
     DecisionValueContext,
 } from '../../../types';
+import { createBaseValue } from '../../base';
 
 import { resolveColorValue } from './resolveColorValue';
 
@@ -53,6 +54,7 @@ export const createColorValue = (
     };
 
     return {
+        ...createBaseValue(context),
         get: () => value,
         toObject,
         toString,

@@ -1,4 +1,5 @@
 import type { DecisionValueContext, OklabHueSet, OklabHueValue } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createOklabHueSet = (
@@ -10,6 +11,7 @@ export const createOklabHueSet = (
     const items = createItemSet(input);
 
     return {
+        ...createBaseValue(context),
         get: () => items,
     };
 };

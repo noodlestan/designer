@@ -1,4 +1,5 @@
 import type { ColorOklabHue, DecisionValueContext, OklabHueValue } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
 import { resolveOklabHueValue } from './resolveOklabHueValue';
@@ -12,6 +13,7 @@ export const createOklabHueValue = (
     const value = resolveOklabHueValue(context, input);
 
     return {
+        ...createBaseValue(context),
         get: () => value,
         toColor: components => {
             const { l, c } = components;

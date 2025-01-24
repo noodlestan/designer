@@ -1,4 +1,10 @@
-export type BaseValue<T> = {
+import type { DecisionValueContext } from '../decision-values';
+
+export type BaseValueAbstract = {
+    context(): DecisionValueContext;
+};
+
+export type BaseValue<T> = BaseValueAbstract & {
     get(): T;
 };
 

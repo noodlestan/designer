@@ -1,4 +1,5 @@
 import type { DecisionValueContext, SpaceScale, SpaceValue } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createSpaceScale = (
@@ -10,6 +11,7 @@ export const createSpaceScale = (
     const items = createItemSet(input);
 
     return {
+        ...createBaseValue(context),
         get: () => items,
     };
 };
