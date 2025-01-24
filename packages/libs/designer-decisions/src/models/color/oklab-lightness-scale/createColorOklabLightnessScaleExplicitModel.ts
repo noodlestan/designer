@@ -4,7 +4,6 @@ import type {
     DecisionModelFactory,
     OklabLightnessScale,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorOklabLightnessScaleExplicitModel: DecisionModelFactory<
     OklabLightnessScale,
@@ -16,9 +15,7 @@ export const createColorOklabLightnessScaleExplicitModel: DecisionModelFactory<
                 createOklabLightnessValue(valueContext, value),
             );
 
-            const value = createOklabLightnessScale(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createOklabLightnessScale(valueContext, values);
         },
     };
 };

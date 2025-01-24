@@ -18,10 +18,10 @@ export const resolveSpaceValueRef = (
     }
 
     if (isSpaceValueDecision(decision)) {
-        const v = decision.produce(context).value();
+        const v = decision.produce(context);
         return v.getValueWithUnits();
     } else if (isSpaceScaleDecision(decision)) {
-        const scale = decision.produce(context).value();
+        const scale = decision.produce(context);
         const v = scale.get()[ref.index || 0];
         return v.getValueWithUnits();
     } else {

@@ -1,6 +1,5 @@
 import { createSpaceScale, createSpaceValue, generateAnchoredSeries } from '../../../primitives';
 import type { DecisionModelFactory, SpaceScale, SpaceScaleAnchoredInput } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createSpaceScaleAnchoredModel: DecisionModelFactory<
     SpaceScale,
@@ -14,9 +13,7 @@ export const createSpaceScaleAnchoredModel: DecisionModelFactory<
             const series = generateAnchoredSeries(anchor, params);
             const values = series.map(space => createSpaceValue(valueContext, space));
 
-            const value = createSpaceScale(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createSpaceScale(valueContext, values);
         },
     };
 };

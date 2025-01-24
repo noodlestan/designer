@@ -10,8 +10,7 @@ type Props = ShowDecisionProps;
 const { store, d, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const hue =
-    decision && isColorSRGBHueValueDecision(decision) ? decision.produce().value() : undefined;
+const hue = decision && isColorSRGBHueValueDecision(decision) ? decision.produce() : undefined;
 ---
 
 {decision && <ShowSRGBHueValue v={hue} {...rest} />}

@@ -16,7 +16,7 @@ export const resolveOklabHueValueRef = (
         return FALLBACK_VALUE;
     }
     if (isColorOklabHueValueDecision(decision)) {
-        const v = decision.produce(context).value();
+        const v = decision.produce(context);
         return v.get();
     } else {
         const error = createRefMatchError(context, VALUE_NAME, ref, decision, REF_CHECKED_TYPES);

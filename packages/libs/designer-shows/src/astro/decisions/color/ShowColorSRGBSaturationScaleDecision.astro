@@ -12,9 +12,7 @@ const { store, d, size, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
 const saturationScale =
-    decision && isColorSRGBSaturationScaleDecision(decision)
-        ? decision.produce().value()
-        : undefined;
+    decision && isColorSRGBSaturationScaleDecision(decision) ? decision.produce() : undefined;
 
 const items = saturationScale?.get();
 

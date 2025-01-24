@@ -9,7 +9,7 @@ import type { StaticDecisionStore } from '../../store';
 import type { DecisionStatus } from './types';
 
 const extractValue = (decision?: Decision<unknown>) => {
-    const value = decision?.produce().value();
+    const value = decision?.produce();
     if (
         typeof value === 'object' &&
         value !== null &&

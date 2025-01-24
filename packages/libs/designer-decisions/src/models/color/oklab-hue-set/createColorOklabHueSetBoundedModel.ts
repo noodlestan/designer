@@ -4,7 +4,6 @@ import {
     type DecisionModelFactory,
     type OklabHueSet,
 } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
     OklabHueSet,
@@ -20,9 +19,7 @@ export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series.map(item => createOklabHueValue(valueContext, item));
-            const value = createOklabHueSet(valueContext, [fromValue, ...values, toValue]);
-
-            return createDecisionValue(valueContext, value);
+            return createOklabHueSet(valueContext, [fromValue, ...values, toValue]);
         },
     };
 };

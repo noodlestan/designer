@@ -1,6 +1,5 @@
 import { createColorSet, createColorValue, generateAnchoredColorList } from '../../../primitives';
 import type { ColorSet, ColorSetAnchoredInput, DecisionModelFactory } from '../../../types';
-import { createDecisionValue } from '../../../values';
 
 export const createColorSetAnchoredModel: DecisionModelFactory<
     ColorSet,
@@ -12,9 +11,7 @@ export const createColorSetAnchoredModel: DecisionModelFactory<
 
             const list = generateAnchoredColorList(anchor, params);
             const values = list.map(item => createColorValue(valueContext, item));
-            const value = createColorSet(valueContext, values);
-
-            return createDecisionValue(valueContext, value);
+            return createColorSet(valueContext, values);
         },
     };
 };

@@ -98,10 +98,10 @@ const store = createDecisionStaticStore(decisions);
 const { d } = Astro.props
 const [, decision] = store.decision<ColorDecision>(d);
 
-const color = decision.value().toString('oklch')
+const color = decision.produce().toString('oklch')
 ---
 
-<div class="my-color-value-viz">{color.value}</div>
+<div class="my-color-value-viz">{color}</div>
 
 <style define:vars={{ 'my-color': color }}>
 .my-color-value-viz { background-color: var(--my-color) }

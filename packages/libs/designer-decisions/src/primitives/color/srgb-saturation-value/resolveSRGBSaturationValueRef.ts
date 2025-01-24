@@ -16,7 +16,7 @@ export const resolveSRGBSaturationValueRef = (
         return FALLBACK_VALUE;
     }
     if (isColorSRGBSaturationValueDecision(decision)) {
-        const v = decision.produce(context).value();
+        const v = decision.produce(context);
         return v.get();
     } else {
         const error = createRefMatchError(context, VALUE_NAME, ref, decision, REF_CHECKED_TYPES);
