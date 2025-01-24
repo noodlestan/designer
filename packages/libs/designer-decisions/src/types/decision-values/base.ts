@@ -31,7 +31,8 @@ export type DecisionValueError = {
 
 export type DecisionValueContext = {
     decisionContext: () => DecisionContext;
-    input: () => DecisionInputBase | undefined;
+    decisionInput: () => DecisionInputBase | undefined;
+    valueInput: () => unknown | undefined;
     lookupContexts: () => LookupContexts;
     parent: () => LinkedValueContext | undefined;
     resolve: DecisionRefResolver;
@@ -39,15 +40,13 @@ export type DecisionValueContext = {
     lookups: () => DecisionLookup[];
     errors: () => DecisionValueError[];
     hasErrors: () => boolean;
+    consume: (input: unknown) => void;
     addError: (error: DecisionValueError) => void;
     createChildContext: (input?: DecisionInputBase) => DecisionValueContext;
 };
 
-export type ParentValueContext = Omit<DecisionValueContext, 'resolve' | 'addError'>;
-export type LinkedValueContext = Omit<
-    DecisionValueContext,
-    'resolve' | 'createChildContext' | 'addError'
->;
+export type ParentValueContext = Omit<DecisionValueContext, 'resolve' | 'consume' | 'addError'>;
+export type LinkedValueContext = Omit<ParentValueContext, 'createChildContext'>;
 
 export type LookupContexts = {
     all: string[];

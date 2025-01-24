@@ -8,7 +8,8 @@ export const createRefMatchError = (
     accepted: string[],
 ): DecisionValueError => {
     const refStr = JSON.stringify(ref);
-    const referenced = ` referenced in "${context.input.name}`;
+    const decisionRefStr = JSON.stringify(context.decisionContext().ref());
+    const referenced = `referenced in "${decisionRefStr}"`;
     const actual = decision.model();
     const mismatch = ` matched "${actual}", expected one of [${accepted.join(', ')}]`;
     const msg = `Ref (${valueName}) ${refStr} ${referenced} ${mismatch}.`;

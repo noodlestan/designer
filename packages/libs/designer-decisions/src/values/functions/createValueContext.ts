@@ -11,11 +11,17 @@ import type {
     LookupContexts,
 } from '../../types';
 
+type State = {
+    valueInput?: unknown;
+};
+
 export const createValueContext = (
     decisionContext: DecisionContext,
     parentContext?: LookupContexts | LinkedValueContext,
     input?: DecisionInputBase,
 ): DecisionValueContext => {
+    const state: State = {};
+
     const { resolve: resolver } = decisionContext;
     const lookupContexts = isLookupContext(parentContext)
         ? parentContext
@@ -37,7 +43,8 @@ export const createValueContext = (
 
     const baseContext: LinkedValueContext = {
         decisionContext: () => decisionContext,
-        input: () => input,
+        decisionInput: () => input,
+        valueInput: () => state.valueInput,
         lookupContexts: () => lookupContexts,
         parent: () => parent,
         children: () => children,
@@ -47,19 +54,28 @@ export const createValueContext = (
             Boolean(errors.length) || Boolean(children.find(child => child.hasErrors())),
     };
 
-    const createChildContext = (input?: DecisionInputBase) => {
-        const child = createValueContext(decisionContext, baseContext, input);
-        children.push(child);
-        return child;
+    const consume = (input: unknown) => {
+        if ('input' in state) {
+            const data = JSON.stringify(state.valueInput);
+            throw new Error(`Value has already consumed input: "${data}".`);
+        }
+        state.valueInput = input;
     };
 
     const addError = (error: DecisionValueError) => {
         errors.push(error);
     };
 
+    const createChildContext = (input?: DecisionInputBase) => {
+        const child = createValueContext(decisionContext, baseContext, input);
+        children.push(child);
+        return child;
+    };
+
     const valueContext: DecisionValueContext = {
         ...baseContext,
         resolve,
+        consume,
         addError,
         createChildContext,
     };

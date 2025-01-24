@@ -7,6 +7,7 @@ export const resolveOklabHueValue = (
     context: DecisionValueContext,
     input: ColorOklabHue,
 ): number => {
+    context.consume(input);
     if (isDecisionRef(input)) {
         return resolveOklabHueValueRef(context, input);
     }

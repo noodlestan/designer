@@ -9,7 +9,6 @@ import type {
 
 import { createValueContext, resolveLookupContext } from './functions';
 
-// WIP move to ../values
 export const createDecisionValueContext = (
     decisionContext: DecisionContext,
     context?: LookupContexts | ParentValueContext,
@@ -20,5 +19,6 @@ export const createDecisionValueContext = (
     if (parent) {
         return parent.createChildContext(input);
     }
+
     return createValueContext(decisionContext, lookupContexts, input);
 };
