@@ -51,7 +51,7 @@ const metaSlot = showMeta && 'meta';
 ---
 
 <DecisionCardLayout>
-    {decision && showName && <Fragment slot={nameSlot}>{decision.input().name}</Fragment>}
+    {decision && showName && <Fragment slot={nameSlot}>{decision.name()}</Fragment>}
     {
         showValueOrViz && (
             <Fragment slot={vizSlot}>

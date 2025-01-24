@@ -1,4 +1,4 @@
-import { type Decision, getDecisionType } from '@noodlestan/designer-decisions';
+import { type Decision } from '@noodlestan/designer-decisions';
 
 import {
     ShowColorSRGBHueSetDecision,
@@ -32,6 +32,5 @@ export const getDecisionComponent = (
         'space-scale': ShowSpaceScaleDecision,
     };
 
-    const type = getDecisionType(decision);
-    return DECISION_TYPE_COMPONENT_MAP[type];
+    return DECISION_TYPE_COMPONENT_MAP[decision.type()];
 };

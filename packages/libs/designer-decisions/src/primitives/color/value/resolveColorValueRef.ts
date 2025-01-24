@@ -8,7 +8,7 @@ import { isColorValueDecision } from './isColorValueDecision';
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
 export const resolveColorValueRef = (context: DecisionValueContext, ref: DecisionRef): Color => {
-    const decision = context.resolve(ref);
+    const [, decision] = context.resolve(ref);
 
     if (!decision) {
         const error = createRefNotFoundError(context, VALUE_NAME, ref);

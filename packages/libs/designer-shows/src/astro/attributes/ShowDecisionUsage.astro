@@ -7,7 +7,7 @@ type Props = ShowDataProps;
 const { store, d } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const { intendedFor = [], notFor = [] } = decision?.input().usage || {};
+const { intendedFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP match context (and encapsulate)
 ---
 
 <div class="dd-decision-usage">

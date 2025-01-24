@@ -1,24 +1,37 @@
-import type { Decision, DecisionContext, DecisionInputBase, ParentValueContext } from '../types';
+import type {
+    Decision,
+    DecisionContext,
+    DecisionInputBase,
+    DecisionValue,
+    LookupContexts,
+    ParentValueContext,
+} from '../types';
 import { createDecisionValueContext } from '../values';
 
 import { getDecisionModelFactory } from '.';
 
 export const createStaticStoreDecision = <V = unknown>(
-    context: DecisionContext,
-    input: DecisionInputBase,
+    decisionContext: DecisionContext,
+    inputs: DecisionInputBase[],
 ): Decision<V> => {
-    const modelFactory = getDecisionModelFactory<V>(input.model);
-    const model = modelFactory();
+    const produce = (context?: LookupContexts | ParentValueContext): DecisionValue<V> => {
+        const input = inputs[0]; // WIP match context
+        const modelFactory = getDecisionModelFactory<V>(input.model);
+        const model = modelFactory();
 
-    const produce = (parentContext?: ParentValueContext) => {
-        const valueContext = parentContext
-            ? parentContext.createChildContext()
-            : createDecisionValueContext(context);
+        const valueContext = createDecisionValueContext(decisionContext, context, input);
         return model.produce(valueContext, input.params);
     };
 
     const api: Decision<V> = {
-        input: () => input,
+        uuid: () => inputs[0].uuid,
+        type: () => inputs[0].model.split('/')[0],
+        name: () => inputs[0].name,
+        description: () => inputs[0].description,
+        inputs: () => inputs,
+        input: () => inputs[0], // WIP match context
+        model: () => inputs[0].model, // WIP match context
+        params: () => inputs[0].params, // WIP match context
         produce,
     };
 

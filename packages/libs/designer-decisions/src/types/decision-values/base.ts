@@ -12,9 +12,9 @@ export type DecisionError = {
 };
 
 export type DecisionContext = {
+    ref: () => DecisionRef;
     resolve: DecisionRefResolver;
-    owner: () => DecisionInputBase; // WIP rename to input
-    contexts: () => LookupContexts;
+    inputs: () => DecisionInputBase[];
     hasErrors: () => boolean;
     errors: () => DecisionError[];
     addError: (error: DecisionError) => void;
@@ -25,23 +25,22 @@ export type DecisionLookup = {
     decision: Decision<unknown>;
 };
 
-export type DecisionValueRefResolver = <V = unknown>(ref: DecisionRef) => Decision<V> | undefined;
-
 export type DecisionValueError = {
     msg: string;
 };
 
 export type DecisionValueContext = {
-    owner: () => DecisionInputBase;
-    resolve: DecisionValueRefResolver;
-    createChildContext: () => DecisionValueContext;
-    contexts: () => LookupContexts;
+    decisionContext: () => DecisionContext;
+    input: () => DecisionInputBase | undefined;
+    lookupContexts: () => LookupContexts;
     parent: () => LinkedValueContext | undefined;
+    resolve: DecisionRefResolver;
     children: () => LinkedValueContext[];
     lookups: () => DecisionLookup[];
-    hasErrors: () => boolean;
     errors: () => DecisionValueError[];
+    hasErrors: () => boolean;
     addError: (error: DecisionValueError) => void;
+    createChildContext: (input?: DecisionInputBase) => DecisionValueContext;
 };
 
 export type ParentValueContext = Omit<DecisionValueContext, 'resolve' | 'addError'>;
@@ -62,12 +61,16 @@ export type DecisionValue<V> = {
 };
 
 export type Decision<V extends Value> = {
-    input: () => DecisionInputBase;
-    produce: (parentContext?: ParentValueContext) => DecisionValue<V>;
+    type: () => string;
+    uuid: () => string | undefined;
+    name: () => string;
+    description: () => string | undefined;
+    inputs: () => DecisionInputBase[];
+    input: () => DecisionInputBase; // WIP match contexts
+    model: () => string; // WIP match contexts
+    params: () => object; // WIP match contexts
+    produce: (context?: LookupContexts | ParentValueContext) => DecisionValue<V>;
     // token: () => Token<T> | undefined;
-    // explain: () => ...
-    // validate: () => ...
-    // errors: () => ...
 };
 
 export type DecisionFactory = <V = unknown>(
@@ -88,13 +91,11 @@ export type DecisionUuidRef = {
 export type DecisionRef = DecisionNameRef | DecisionUuidRef;
 
 export type DecisionRefResolver = <V = unknown>(
-    parent: DecisionContext,
     ref: DecisionRef,
-) => Decision<V> | undefined;
+) => [DecisionContext, Decision<V> | undefined];
 
 export type DecisionModel<V = unknown, P = object> = {
     produce: (context: DecisionValueContext, params: P) => DecisionValue<V>;
-    // explain: (params: P) =>
 };
 
 export type DecisionModelFactory<
