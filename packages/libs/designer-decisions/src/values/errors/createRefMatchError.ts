@@ -1,10 +1,15 @@
-import type { Decision, DecisionRef, DecisionValueContext, DecisionValueError } from '../../types';
+import type {
+    DecisionRef,
+    DecisionUnknown,
+    DecisionValueContext,
+    DecisionValueError,
+} from '../../types';
 
 export const createRefMatchError = (
     context: DecisionValueContext,
     valueName: string,
     ref: DecisionRef,
-    decision: Decision<unknown>,
+    decision: DecisionUnknown,
     accepted: string[],
 ): DecisionValueError => {
     const refStr = JSON.stringify(ref);

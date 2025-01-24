@@ -1,4 +1,5 @@
 import type { DecisionValueContext, SRGBHueSet, SRGBHueValue } from '../../../types';
+import { createItemSet } from '../../set';
 
 export const createSRGBHueSet = (
     context: DecisionValueContext,
@@ -6,7 +7,9 @@ export const createSRGBHueSet = (
 ): SRGBHueSet => {
     context.consume(input);
 
+    const items = createItemSet(input);
+
     return {
-        get: () => input,
+        get: () => items,
     };
 };

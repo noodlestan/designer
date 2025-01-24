@@ -1,4 +1,5 @@
 import type {
+    BaseValue,
     Decision,
     DecisionContext,
     DecisionInputBase,
@@ -26,7 +27,7 @@ export const createStaticDecisionStore = (
 ): StaticDecisionStore => {
     const decisionMap = createStaticDecisionMap(inputStore);
 
-    const decision = <V = unknown>(
+    const decision = <V extends BaseValue<unknown> = BaseValue<unknown>>(
         ref: DecisionRef,
     ): [DecisionContext, Decision<V> | undefined] => {
         return decisionMap.resolve(ref);

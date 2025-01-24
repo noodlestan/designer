@@ -1,4 +1,4 @@
-import { type Decision } from '@noodlestan/designer-decisions';
+import { type DecisionUnknown } from '@noodlestan/designer-decisions';
 
 import {
     ShowColorSRGBHueSetDecision,
@@ -15,7 +15,7 @@ import {
 import type { DecisionTypeComponent } from '../types';
 
 export const getDecisionComponent = (
-    decision: Decision<unknown>,
+    decision: DecisionUnknown,
 ): DecisionTypeComponent | undefined => {
     // WIP we would rather have this in a constants.ts file but it looks like
     // component function references are not available in the unit scope

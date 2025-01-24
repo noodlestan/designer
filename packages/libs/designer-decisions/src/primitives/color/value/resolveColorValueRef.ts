@@ -21,7 +21,19 @@ export const resolveColorValueRef = (context: DecisionValueContext, ref: Decisio
         return v.get();
     } else if (isColorSetDecision(decision)) {
         const set = decision.produce(context);
-        const v = set.get()[ref.index || 0];
+        const v = set.get().item(ref.index || 0);
+        if (!v) {
+            // WIP createRefIndexError
+            const error = createRefMatchError(
+                context,
+                VALUE_NAME,
+                ref,
+                decision,
+                REF_CHECKED_TYPES,
+            );
+            context.addError(error);
+            return FALLBACK_VALUE;
+        }
         return v.get();
     } else {
         const error = createRefMatchError(context, VALUE_NAME, ref, decision, REF_CHECKED_TYPES);

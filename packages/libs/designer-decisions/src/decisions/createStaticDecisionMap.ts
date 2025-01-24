@@ -1,5 +1,11 @@
 import type { StaticDecisionMap, StaticInputMap } from '../inputs';
-import type { Decision, DecisionContext, DecisionInputBase, DecisionRef } from '../types';
+import type {
+    BaseValue,
+    Decision,
+    DecisionContext,
+    DecisionInputBase,
+    DecisionRef,
+} from '../types';
 
 import {
     createDecisionContext,
@@ -18,7 +24,7 @@ export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecis
         }
     };
 
-    const resolver = <V = unknown>(
+    const resolver = <V extends BaseValue<unknown>>(
         ref: DecisionRef,
     ): [DecisionContext, Decision<V> | undefined] => {
         const inputs = inputStore.records(r => '$name' in ref && r.name === ref.$name); // WIP ref matching
