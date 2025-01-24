@@ -1,4 +1,5 @@
 import type { DecisionValueContext, SRGBHueSet, SRGBHueValue } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createSRGBHueSet = (
@@ -10,6 +11,7 @@ export const createSRGBHueSet = (
     const items = createItemSet(input);
 
     return {
+        ...createBaseValue(context),
         get: () => items,
     };
 };

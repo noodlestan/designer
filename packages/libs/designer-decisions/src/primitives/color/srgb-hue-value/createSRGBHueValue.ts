@@ -1,4 +1,5 @@
 import type { ColorSRGBHue, DecisionValueContext, SRGBHueValue } from '../../../types';
+import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
 import { resolveSRGBHueValue } from './resolveSRGBHueValue';
@@ -12,6 +13,7 @@ export const createSRGBHueValue = (
     const value = resolveSRGBHueValue(context, input);
 
     return {
+        ...createBaseValue(context),
         get: () => value,
         toColor: components => {
             const { s, l } = components;
