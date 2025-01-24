@@ -8,7 +8,6 @@ type Props = ShowDecisionProps;
 const { store, d, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-console.log(d, Boolean(decision));
 const Comp = decision && getDecisionComponent(decision);
 
 const type = decision && decision.type();

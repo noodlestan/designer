@@ -10,8 +10,8 @@ export const createColorValueExplicitModel: DecisionModelFactory<
     ColorValueExplicitInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            return createColorValue(valueContext, params.value);
+        produce: (context, params) => {
+            return createColorValue(context, params.value);
         },
     };
 };

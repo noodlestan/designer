@@ -11,13 +11,15 @@ export const createSRGBSaturationValue = (
     context: DecisionValueContext,
     input: ColorSRGBSaturation,
 ): SRGBSaturationValue => {
+    context.consume(input);
+
     const value = resolveSRGBSaturationValue(context, input);
 
     return {
         get: () => value,
         toColor: components => {
             const { h, l } = components;
-            return createColorValue(context, { h, s: value, l });
+            return createColorValue(context.outputContext(), { h, s: value, l });
         },
     };
 };

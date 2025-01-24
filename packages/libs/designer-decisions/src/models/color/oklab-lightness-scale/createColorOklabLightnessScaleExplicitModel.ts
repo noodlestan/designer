@@ -10,12 +10,12 @@ export const createColorOklabLightnessScaleExplicitModel: DecisionModelFactory<
     ColorOklabLightnessScaleExplicitInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
+        produce: (context, params) => {
             const values = params.values.map(value =>
-                createOklabLightnessValue(valueContext, value),
+                createOklabLightnessValue(context.nestedContext(), value),
             );
 
-            return createOklabLightnessScale(valueContext, values);
+            return createOklabLightnessScale(context, values);
         },
     };
 };

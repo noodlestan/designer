@@ -6,9 +6,11 @@ export const createSpaceScaleExplicitModel: DecisionModelFactory<
     SpaceScaleExplicitInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const values = params.values.map(value => createSpaceValue(valueContext, value));
-            return createSpaceScale(valueContext, values);
+        produce: (context, params) => {
+            const values = params.values.map(value =>
+                createSpaceValue(context.nestedContext(), value),
+            );
+            return createSpaceScale(context, values);
         },
     };
 };

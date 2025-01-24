@@ -10,13 +10,13 @@ export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
     ColorSRGBHueSetAnchoredInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const anchorValue = createSRGBHueValue(valueContext, params.anchor);
+        produce: (context, params) => {
+            const anchorValue = createSRGBHueValue(context.nestedContext(), params.anchor);
             const anchor = anchorValue.get();
 
             const series = generateAnchoredSeries(anchor, params, [0, 360]);
-            const values = series.map(item => createSRGBHueValue(valueContext, item));
-            return createSRGBHueSet(valueContext, values);
+            const values = series.map(item => createSRGBHueValue(context.nestedContext(), item));
+            return createSRGBHueSet(context, values);
         },
     };
 };

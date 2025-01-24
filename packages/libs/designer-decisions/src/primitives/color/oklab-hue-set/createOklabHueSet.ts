@@ -2,9 +2,11 @@ import type { DecisionValueContext, OklabHueSet, OklabHueValue } from '../../../
 
 export const createOklabHueSet = (
     context: DecisionValueContext,
-    values: OklabHueValue[],
+    input: OklabHueValue[],
 ): OklabHueSet => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };

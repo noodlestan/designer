@@ -6,6 +6,8 @@ export const createSpaceValue = (
     context: DecisionValueContext,
     input: SpaceInputValue,
 ): SpaceValue => {
+    context.consume(input);
+
     const value = resolveSpaceValue(context, input);
 
     return {

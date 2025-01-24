@@ -2,9 +2,11 @@ import type { DecisionValueContext, SRGBLightnessScale, SRGBLightnessValue } fro
 
 export const createSRGBLightnessScale = (
     context: DecisionValueContext,
-    values: SRGBLightnessValue[],
+    input: SRGBLightnessValue[],
 ): SRGBLightnessScale => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };

@@ -2,9 +2,11 @@ import type { DecisionValueContext, SpaceScale, SpaceValue } from '../../../type
 
 export const createSpaceScale = (
     context: DecisionValueContext,
-    values: SpaceValue[],
+    input: SpaceValue[],
 ): SpaceScale => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };

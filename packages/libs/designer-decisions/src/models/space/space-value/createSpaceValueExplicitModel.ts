@@ -10,8 +10,8 @@ export const createSpaceValueExplicitModel: DecisionModelFactory<
     SpaceValueExplicitInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            return createSpaceValue(valueContext, params.value);
+        produce: (context, params) => {
+            return createSpaceValue(context, params.value);
         },
     };
 };

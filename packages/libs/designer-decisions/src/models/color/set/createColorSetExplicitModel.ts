@@ -6,9 +6,11 @@ export const createColorSetExplicitModel: DecisionModelFactory<
     ColorSetExplicitInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const values = params.values.map(value => createColorValue(valueContext, value));
-            return createColorSet(valueContext, values);
+        produce: (context, params) => {
+            const values = params.values.map(value =>
+                createColorValue(context.nestedContext(), value),
+            );
+            return createColorSet(context, values);
         },
     };
 };

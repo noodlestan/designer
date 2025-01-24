@@ -28,7 +28,8 @@ export const createValueContext = (
         : parentContext?.lookupContexts() || { all: [] };
     const parent = isLookupContext(parentContext) ? undefined : parentContext;
 
-    const children: LinkedValueContext[] = [];
+    const childContexts: LinkedValueContext[] = [];
+    const nestedContexts: LinkedValueContext[] = [];
     const lookups: DecisionLookup[] = [];
     const errors: DecisionValueError[] = [];
 
@@ -47,17 +48,23 @@ export const createValueContext = (
         valueInput: () => state.valueInput,
         lookupContexts: () => lookupContexts,
         parent: () => parent,
-        children: () => children,
         lookups: () => lookups,
+        children: () => childContexts,
+        nested: () => nestedContexts,
         errors: () => errors,
         hasErrors: () =>
-            Boolean(errors.length) || Boolean(children.find(child => child.hasErrors())),
+            Boolean(errors.length) ||
+            Boolean(childContexts.find(child => child.hasErrors())) ||
+            Boolean(nestedContexts.find(nested => nested.hasErrors())),
     };
 
     const consume = (input: unknown) => {
-        if ('input' in state) {
-            const data = JSON.stringify(state.valueInput);
-            throw new Error(`Value has already consumed input: "${data}".`);
+        if ('valueInput' in state) {
+            const valueStr = JSON.stringify(state.valueInput);
+            const decisionRefStr = JSON.stringify(decisionContext.ref());
+            throw new Error(
+                `Value for "${decisionRefStr}" has already consumed input (${valueStr}).`,
+            );
         }
         state.valueInput = input;
     };
@@ -66,10 +73,20 @@ export const createValueContext = (
         errors.push(error);
     };
 
-    const createChildContext = (input?: DecisionInputBase) => {
+    const childContext = (input?: DecisionInputBase) => {
         const child = createValueContext(decisionContext, baseContext, input);
-        children.push(child);
+        childContexts.push(child);
         return child;
+    };
+
+    const nestedContext = (input?: DecisionInputBase) => {
+        const nested = createValueContext(decisionContext, baseContext, input);
+        nestedContexts.push(nested);
+        return nested;
+    };
+
+    const outputContext = () => {
+        return createValueContext(decisionContext, baseContext);
     };
 
     const valueContext: DecisionValueContext = {
@@ -77,7 +94,9 @@ export const createValueContext = (
         resolve,
         consume,
         addError,
-        createChildContext,
+        childContext,
+        nestedContext,
+        outputContext,
     };
 
     return valueContext;

@@ -6,9 +6,11 @@ import type {
 
 export const createOklabLightnessScale = (
     context: DecisionValueContext,
-    values: OklabLightnessValue[],
+    input: OklabLightnessValue[],
 ): OklabLightnessScale => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };
