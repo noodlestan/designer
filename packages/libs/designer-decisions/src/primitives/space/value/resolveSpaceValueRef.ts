@@ -9,7 +9,8 @@ export const resolveSpaceValueRef = (
     context: DecisionValueContext,
     ref: DecisionRef,
 ): SpaceWithUnits => {
-    const decision = context.resolve(ref);
+    const [, decision] = context.resolve(ref);
+
     if (!decision) {
         const error = createRefNotFoundError(context, VALUE_NAME, ref);
         context.addError(error);

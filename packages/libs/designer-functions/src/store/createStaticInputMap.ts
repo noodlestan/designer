@@ -1,8 +1,6 @@
 import type {
     DecisionInputBase,
     DecisionInputError,
-    DecisionRef,
-    LookupContexts,
     StaticInputMap,
 } from '@noodlestan/designer-decisions';
 
@@ -49,27 +47,9 @@ export const createStaticInputMap = (
         return filter ? items.filter(filter) : items;
     };
 
-    const record = (ref: DecisionRef, contexts?: LookupContexts): DecisionInputBase | undefined => {
-        if ('$uuid' in ref) {
-            const inputs = inputsByUuid.get(ref.$uuid)?.find(input => {
-                // WIP match contexts
-                return Boolean(input || contexts);
-            });
-            return inputs;
-        }
-        if ('$name' in ref) {
-            const inputs = inputsByName.get(ref.$name)?.find(input => {
-                // WIP match contexts
-                return Boolean(input || contexts);
-            });
-            return inputs;
-        }
-    };
-
     return {
         hasErrors,
         validationErrors,
         records,
-        record,
     };
 };

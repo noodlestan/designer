@@ -6,7 +6,7 @@ type Props = ShowDataProps;
 const { store, d } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const json = JSON.stringify(decision?.input(), null, 2);
+const json = JSON.stringify(decision?.inputs()[0], null, 2); // WIP match context
 ---
 
 <div class="dd-decision-data">

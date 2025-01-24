@@ -8,7 +8,7 @@ export const resolveSRGBSaturationValueRef = (
     context: DecisionValueContext,
     ref: DecisionRef,
 ): number => {
-    const decision = context.resolve(ref);
+    const [, decision] = context.resolve(ref);
 
     if (!decision) {
         const error = createRefNotFoundError(context, VALUE_NAME, ref);

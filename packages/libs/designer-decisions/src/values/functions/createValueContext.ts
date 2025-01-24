@@ -1,37 +1,45 @@
+import { isLookupContext } from '../../context';
 import type {
     Decision,
     DecisionContext,
+    DecisionInputBase,
     DecisionLookup,
     DecisionRef,
     DecisionValueContext,
     DecisionValueError,
     LinkedValueContext,
+    LookupContexts,
 } from '../../types';
 
 export const createValueContext = (
     decisionContext: DecisionContext,
-    parentContext?: LinkedValueContext,
+    parentContext?: LookupContexts | LinkedValueContext,
+    input?: DecisionInputBase,
 ): DecisionValueContext => {
     const { resolve: resolver } = decisionContext;
-    const contexts = parentContext?.contexts() || { all: [] };
+    const lookupContexts = isLookupContext(parentContext)
+        ? parentContext
+        : parentContext?.lookupContexts() || { all: [] };
+    const parent = isLookupContext(parentContext) ? undefined : parentContext;
 
     const children: LinkedValueContext[] = [];
     const lookups: DecisionLookup[] = [];
     const errors: DecisionValueError[] = [];
 
-    const resolve = <V>(ref: DecisionRef) => {
-        const decision = resolver(decisionContext, ref) as Decision<V>;
+    const resolve = <V>(ref: DecisionRef): [DecisionContext, Decision<V> | undefined] => {
+        const [decisionContext, decision] = resolver<V>(ref);
         lookups.push({
             ref,
-            decision,
+            decision: decision as Decision<V>,
         });
-        return decision;
+        return [decisionContext, decision];
     };
 
     const baseContext: LinkedValueContext = {
-        owner: decisionContext.owner,
-        contexts: () => contexts,
-        parent: () => parentContext,
+        decisionContext: () => decisionContext,
+        input: () => input,
+        lookupContexts: () => lookupContexts,
+        parent: () => parent,
         children: () => children,
         lookups: () => lookups,
         errors: () => errors,
@@ -39,8 +47,8 @@ export const createValueContext = (
             Boolean(errors.length) || Boolean(children.find(child => child.hasErrors())),
     };
 
-    const createChildContext = () => {
-        const child = createValueContext(decisionContext, baseContext);
+    const createChildContext = (input?: DecisionInputBase) => {
+        const child = createValueContext(decisionContext, baseContext, input);
         children.push(child);
         return child;
     };
@@ -49,11 +57,11 @@ export const createValueContext = (
         errors.push(error);
     };
 
-    const valueContext = {
+    const valueContext: DecisionValueContext = {
         ...baseContext,
         resolve,
-        createChildContext,
         addError,
+        createChildContext,
     };
 
     return valueContext;

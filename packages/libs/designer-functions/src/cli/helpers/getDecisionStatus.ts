@@ -1,7 +1,7 @@
 import {
     type Decision,
     type DecisionInputBase,
-    createLookupContexts,
+    createLookupContext,
 } from '@noodlestan/designer-decisions';
 
 import type { StaticDecisionStore } from '../../store';
@@ -24,12 +24,12 @@ export const getDecisionStatus = (
     store: StaticDecisionStore,
     record: DecisionInputBase,
 ): DecisionStatus => {
-    const contexts = createLookupContexts(record.contexts);
+    const contexts = createLookupContext(record.contexts);
     const [context, decision] = store.decision({ $name: record.name }, contexts);
 
-    const uuid = decision?.input().uuid || context.owner().uuid;
-    const name = decision?.input().name || context.owner().name;
-    const model = decision?.input().model || context.owner().model;
+    const uuid = decision?.uuid() || context.inputs()[0].uuid;
+    const name = decision?.name() || context.inputs()[0].name; // WIP expose
+    const model = decision?.model() || context.inputs()[0].model; // WIP expose
     const value = extractValue(decision);
 
     const hasErrors = context.hasErrors();

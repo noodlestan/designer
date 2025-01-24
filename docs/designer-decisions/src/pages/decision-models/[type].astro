@@ -21,16 +21,17 @@ export async function getStaticPaths() {
 const { decisionType } = Astro.props;
 const { Content } = await render(decisionType);
 
-const decisions = store.records();
+const records = store.records();
 
-const decisionByModel = (m: DecisionModelMeta) => {
-    return decisions.filter(d => d.model === m.model)[0];
+const decisionByModel = (meta: DecisionModelMeta) => {
+    // WIP make sure we use only decisions from the sample set (name includes "Sample")
+    return records.filter(record => record.model === meta.model)[0];
 }
 
 const decisionDataByModel = (m: DecisionModelMeta) => {
-    const d= decisionByModel(m)
+    const d = decisionByModel(m)
     const [, decision] = store.decision({ $name: d.name });
-    const json = JSON.stringify(decision?.input(), null, 2);
+    const json = JSON.stringify(decision?.inputs()[0], null, 2);
     return json;
 }
 

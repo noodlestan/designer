@@ -8,12 +8,11 @@ import type {
 } from '@noodlestan/designer-decisions';
 import {
     createDecisionContext,
-    createDecisionFactory,
-    createInputNotFoundError,
+    createDecisionValueContext,
+    createStaticDecisionMap,
 } from '@noodlestan/designer-decisions';
 import type { ErrorObject } from 'ajv';
 
-import { createInputSub } from './functions';
 import type { StaticDecisionStore, StaticDecisionStoreError } from './types';
 
 export type DecisionInputData = {
@@ -25,25 +24,21 @@ export const createStaticDecisionStore = (
     inputStore: StaticInputMap,
     errors: StaticDecisionStoreError[] = [],
 ): StaticDecisionStore => {
-    const decisions = createDecisionFactory(inputStore);
+    const decisionMap = createStaticDecisionMap(inputStore);
 
     const decision = <V = unknown>(
         ref: DecisionRef,
-        contexts: LookupContexts = { all: [] },
     ): [DecisionContext, Decision<V> | undefined] => {
-        const input = inputStore.record(ref, contexts);
-        if (input) {
-            return decisions.create(input, contexts);
-        }
-        const inputStub = createInputSub(ref);
-        const context = createDecisionContext(decisions.resolve, inputStub, contexts);
-        const error = createInputNotFoundError(context, ref);
-        context.addError(error);
-        return [context, undefined];
+        return decisionMap.resolve(ref);
     };
 
-    const createContext = (contexts: LookupContexts = { all: [] }) => {
-        return createDecisionContext(decisions.resolve, createInputSub(), contexts);
+    const _createDecisionContext = () => {
+        return createDecisionContext({ $name: '<unknown>' }, decisionMap.resolve, []); // WIP
+    };
+
+    const _createDecisionValueContext = (lookupContexts?: LookupContexts) => {
+        const decisionContext = _createDecisionContext();
+        return createDecisionValueContext(decisionContext, lookupContexts);
     };
 
     return {
@@ -51,9 +46,9 @@ export const createStaticDecisionStore = (
         storeErrors: () => errors,
         validationErrors: inputStore.validationErrors,
         records: inputStore.records,
-        record: inputStore.record,
         decision,
-        resolver: decisions.resolve,
-        createDecisionContext: createContext,
+        resolver: decisionMap.resolve,
+        createDecisionContext: _createDecisionContext,
+        createDecisionValueContext: _createDecisionValueContext,
     };
 };

@@ -3,6 +3,7 @@ import type {
     DecisionContext,
     DecisionRef,
     DecisionRefResolver,
+    DecisionValueContext,
     LookupContexts,
     StaticInputMap,
 } from '@noodlestan/designer-decisions';
@@ -17,11 +18,11 @@ export type StaticDecisionStore = {
     storeErrors: () => StaticDecisionStoreError[];
     validationErrors: StaticInputMap['validationErrors'];
     records: StaticInputMap['records'];
-    record: StaticInputMap['record'];
     decision: <V = unknown>(
         ref: DecisionRef,
         contexts?: LookupContexts,
     ) => [DecisionContext, Decision<V> | undefined];
     resolver: DecisionRefResolver;
     createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
+    createDecisionValueContext: (lookupContexts?: LookupContexts) => DecisionValueContext;
 };

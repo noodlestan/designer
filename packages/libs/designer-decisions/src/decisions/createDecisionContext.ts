@@ -2,14 +2,14 @@ import type {
     DecisionContext,
     DecisionError,
     DecisionInputBase,
+    DecisionRef,
     DecisionRefResolver,
-    LookupContexts,
 } from '../types';
 
 export const createDecisionContext = (
+    ref: DecisionRef,
     resolver: DecisionRefResolver,
-    owner: DecisionInputBase,
-    contexts: LookupContexts = { all: [] },
+    inputs: DecisionInputBase[],
 ): DecisionContext => {
     const errors: DecisionError[] = [];
 
@@ -18,9 +18,9 @@ export const createDecisionContext = (
     };
 
     return {
+        ref: () => ref,
         resolve: resolver,
-        owner: () => owner,
-        contexts: () => contexts,
+        inputs: () => inputs,
         errors: () => errors,
         hasErrors: () => Boolean(errors.length),
         addError,

@@ -6,7 +6,7 @@ type Props = ShowDataProps;
 const { store, d } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const params = (decision && decision.input().params) || {};
+const params = (decision && decision.inputs()[0].params) || {}; // WIP match context (and encapsulate)
 
 const entries = Object.entries(params);
 ---
