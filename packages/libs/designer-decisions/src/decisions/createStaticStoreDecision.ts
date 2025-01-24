@@ -1,4 +1,5 @@
 import type {
+    BaseValue,
     Decision,
     DecisionContext,
     DecisionInputBase,
@@ -9,20 +10,20 @@ import { createDecisionValueContext } from '../values';
 
 import { getDecisionModelFactory } from '.';
 
-export const createStaticStoreDecision = <V = unknown>(
+export const createStaticStoreDecision = <T = unknown>(
     decisionContext: DecisionContext,
     inputs: DecisionInputBase[],
-): Decision<V> => {
-    const produce = (context?: LookupContexts | ParentValueContext): V => {
+): Decision<BaseValue<T>> => {
+    const produce = (context?: LookupContexts | ParentValueContext): BaseValue<T> => {
         const input = inputs[0]; // WIP match context
-        const modelFactory = getDecisionModelFactory<V>(input.model);
+        const modelFactory = getDecisionModelFactory<T>(input.model);
         const model = modelFactory();
 
         const valueContext = createDecisionValueContext(decisionContext, context, input);
-        return model.produce(valueContext, input.params);
+        return model.produce(valueContext, input.params) as BaseValue<T>;
     };
 
-    const api: Decision<V> = {
+    const api: Decision<BaseValue<T>> = {
         uuid: () => inputs[0].uuid,
         type: () => inputs[0].model.split('/')[0],
         name: () => inputs[0].name,

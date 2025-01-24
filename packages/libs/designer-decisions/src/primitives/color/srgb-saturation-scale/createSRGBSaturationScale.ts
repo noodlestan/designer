@@ -3,6 +3,7 @@ import type {
     SRGBSaturationScale,
     SRGBSaturationValue,
 } from '../../../types';
+import { createItemSet } from '../../set';
 
 export const createSRGBSaturationScale = (
     context: DecisionValueContext,
@@ -10,7 +11,9 @@ export const createSRGBSaturationScale = (
 ): SRGBSaturationScale => {
     context.consume(input);
 
+    const items = createItemSet(input);
+
     return {
-        get: () => input,
+        get: () => items,
     };
 };

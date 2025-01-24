@@ -1,4 +1,5 @@
 import type { DecisionId, DecisionInputBase, DecisionName } from '../decision-inputs';
+import type { BaseValue } from '../primitive-values';
 
 export type Value = unknown;
 export type Params = object;
@@ -22,7 +23,7 @@ export type DecisionContext = {
 
 export type DecisionLookup = {
     ref: DecisionRef;
-    decision: Decision<unknown>;
+    decision: DecisionUnknown;
 };
 
 export type DecisionValueError = {
@@ -59,7 +60,7 @@ export type LookupContexts = {
     any?: string[];
 };
 
-export type Decision<V extends Value> = {
+export type Decision<V extends BaseValue<unknown>> = {
     type: () => string;
     uuid: () => string | undefined;
     name: () => string;
@@ -74,8 +75,8 @@ export type Decision<V extends Value> = {
 
 export type DecisionFactory = <V = unknown>(
     input: unknown,
-    resolver: <V>(ref: DecisionRef) => Decision<V>,
-) => Decision<V>;
+    resolver: <V extends BaseValue<unknown>>(ref: DecisionRef) => Decision<V>,
+) => Decision<BaseValue<V>>;
 
 export type DecisionNameRef = {
     $name: DecisionName;
@@ -89,17 +90,17 @@ export type DecisionUuidRef = {
 
 export type DecisionRef = DecisionNameRef | DecisionUuidRef;
 
-export type DecisionRefResolver = <V = unknown>(
+export type DecisionRefResolver = <T>(
     ref: DecisionRef,
-) => [DecisionContext, Decision<V> | undefined];
+) => [DecisionContext, Decision<BaseValue<T>> | undefined];
 
-export type DecisionModel<V = unknown, P = object> = {
+export type DecisionModel<V = BaseValue<unknown>, P = object> = {
     produce: (context: DecisionValueContext, params: P) => V;
 };
 
 export type DecisionModelFactory<
-    V = unknown,
+    V = BaseValue<unknown>,
     I extends DecisionInputBase = DecisionInputBase,
 > = () => DecisionModel<V, I['params']>;
 
-export type DecisionUnknown = Decision<unknown>;
+export type DecisionUnknown = Decision<BaseValue<unknown>>;

@@ -22,7 +22,19 @@ export const resolveSpaceValueRef = (
         return v.getValueWithUnits();
     } else if (isSpaceScaleDecision(decision)) {
         const scale = decision.produce(context);
-        const v = scale.get()[ref.index || 0];
+        const v = scale.get().item(ref.index || 0);
+        if (!v) {
+            // WIP createRefIndexError
+            const error = createRefMatchError(
+                context,
+                VALUE_NAME,
+                ref,
+                decision,
+                REF_CHECKED_TYPES,
+            );
+            context.addError(error);
+            return FALLBACK_VALUE;
+        }
         return v.getValueWithUnits();
     } else {
         const error = createRefMatchError(context, VALUE_NAME, ref, decision, REF_CHECKED_TYPES);

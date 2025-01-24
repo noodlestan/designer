@@ -1,5 +1,6 @@
 import { isLookupContext } from '../../context';
 import type {
+    BaseValue,
     Decision,
     DecisionContext,
     DecisionInputBase,
@@ -33,11 +34,13 @@ export const createValueContext = (
     const lookups: DecisionLookup[] = [];
     const errors: DecisionValueError[] = [];
 
-    const resolve = <V>(ref: DecisionRef): [DecisionContext, Decision<V> | undefined] => {
-        const [decisionContext, decision] = resolver<V>(ref);
+    const resolve = <T>(
+        ref: DecisionRef,
+    ): [DecisionContext, Decision<BaseValue<T>> | undefined] => {
+        const [decisionContext, decision] = resolver<T>(ref);
         lookups.push({
             ref,
-            decision: decision as Decision<V>,
+            decision: decision as Decision<BaseValue<T>>,
         });
         return [decisionContext, decision];
     };
