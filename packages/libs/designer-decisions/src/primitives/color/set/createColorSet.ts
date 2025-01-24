@@ -1,7 +1,9 @@
 import type { ColorSet, ColorValue, DecisionValueContext } from '../../../types';
 
-export const createColorSet = (context: DecisionValueContext, colors: ColorValue[]): ColorSet => {
+export const createColorSet = (context: DecisionValueContext, input: ColorValue[]): ColorSet => {
+    context.consume(input);
+
     return {
-        get: () => colors,
+        get: () => input,
     };
 };

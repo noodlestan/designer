@@ -10,16 +10,16 @@ export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
     ColorOklabHueSetBoundedInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const fromValue = createOklabHueValue(valueContext, params.from);
-            const toValue = createOklabHueValue(valueContext, params.to);
+        produce: (context, params) => {
+            const fromValue = createOklabHueValue(context.nestedContext(), params.from);
+            const toValue = createOklabHueValue(context.nestedContext(), params.to);
 
             const from = fromValue.get();
             const to = toValue.get();
 
             const series = generateBoundedSeries(from, to, params.steps);
-            const values = series.map(item => createOklabHueValue(valueContext, item));
-            return createOklabHueSet(valueContext, [fromValue, ...values, toValue]);
+            const values = series.map(item => createOklabHueValue(context.nestedContext(), item));
+            return createOklabHueSet(context, [fromValue, ...values, toValue]);
         },
     };
 };

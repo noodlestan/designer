@@ -10,16 +10,16 @@ export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
     ColorSRGBHueSetBoundedInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const fromValue = createSRGBHueValue(valueContext, params.from);
-            const toValue = createSRGBHueValue(valueContext, params.to);
+        produce: (context, params) => {
+            const fromValue = createSRGBHueValue(context.nestedContext(), params.from);
+            const toValue = createSRGBHueValue(context.nestedContext(), params.to);
 
             const from = fromValue.get();
             const to = toValue.get();
 
             const series = generateBoundedSeries(from, to, params.steps);
-            const values = series.map(item => createSRGBHueValue(valueContext, item));
-            return createSRGBHueSet(valueContext, [fromValue, ...values, toValue]);
+            const values = series.map(item => createSRGBHueValue(context.nestedContext(), item));
+            return createSRGBHueSet(context, [fromValue, ...values, toValue]);
         },
     };
 };

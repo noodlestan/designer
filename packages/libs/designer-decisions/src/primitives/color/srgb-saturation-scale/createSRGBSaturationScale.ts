@@ -6,9 +6,11 @@ import type {
 
 export const createSRGBSaturationScale = (
     context: DecisionValueContext,
-    values: SRGBSaturationValue[],
+    input: SRGBSaturationValue[],
 ): SRGBSaturationScale => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };

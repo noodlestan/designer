@@ -6,13 +6,13 @@ export const createColorSetBoundedModel: DecisionModelFactory<
     ColorSetBoundedInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const fromValue = createColorValue(valueContext, params.from);
-            const toValue = createColorValue(valueContext, params.to);
+        produce: (context, params) => {
+            const fromValue = createColorValue(context.nestedContext(), params.from);
+            const toValue = createColorValue(context.nestedContext(), params.to);
 
             const list = generateBoundedColorList(fromValue, toValue, params.steps);
-            const values = list.map(item => createColorValue(valueContext, item));
-            return createColorSet(valueContext, [fromValue, ...values, toValue]);
+            const values = list.map(item => createColorValue(context.nestedContext(), item));
+            return createColorSet(context, [fromValue, ...values, toValue]);
         },
     };
 };

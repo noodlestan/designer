@@ -13,15 +13,14 @@ import { ShowColorValue, ShowSpaceValue } from '@noodlestan/designer-shows/astro
 import { decisionLoader } from '../../../../../decisions';
 import {
     createColorValue,
-    createDecisionContext,
+    createDecisionValueContext,
     createSpaceValue,
 } from '@noodlestan/designer-decisions';
 
 export const store = await decisionLoader();
 
-export const context = store.createDecisionContext();
-export const colorValue = createColorValue(context, '#ff0000');
-export const spaceValue = createSpaceValue(context, 12);
+export const colorValue = createColorValue(store.createDecisionValueContext(), '#ff0000');
+export const spaceValue = createSpaceValue(store.createDecisionValueContext(), 12);
 
 These components render a decision's visualization and value directly.
 

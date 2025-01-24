@@ -6,8 +6,9 @@ export function createRefNotFoundError(
     ref: DecisionRef,
 ): DecisionValueError {
     const refStr = JSON.stringify(ref);
-    const referenced = `referenced in "${context.input.name}`;
-    const msg = `Ref (${valueName}) ${refStr} not found ${referenced}.`;
+    const decisionRefStr = JSON.stringify(context.decisionContext().ref());
+    const referenced = `referenced in "${decisionRefStr}"`;
+    const msg = `Ref (${valueName}) ${refStr} not found, ${referenced}.`;
     return {
         msg,
     };

@@ -14,13 +14,15 @@ export const createColorOklabChromaScaleAnchoredModel: DecisionModelFactory<
     ColorOklabChromaScaleAnchoredInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const anchorValue = createOklabChromaValue(valueContext, params.anchor);
+        produce: (context, params) => {
+            const anchorValue = createOklabChromaValue(context.nestedContext(), params.anchor);
             const anchor = anchorValue.get();
 
             const series = generateAnchoredSeries(anchor, params, [0, 0.4]);
-            const values = series.map(item => createOklabChromaValue(valueContext, item));
-            return createOklabChromaScale(valueContext, values);
+            const values = series.map(item =>
+                createOklabChromaValue(context.nestedContext(), item),
+            );
+            return createOklabChromaScale(context, values);
         },
     };
 };

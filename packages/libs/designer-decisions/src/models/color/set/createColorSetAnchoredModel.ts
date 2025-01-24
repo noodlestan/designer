@@ -6,12 +6,12 @@ export const createColorSetAnchoredModel: DecisionModelFactory<
     ColorSetAnchoredInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const anchor = createColorValue(valueContext, params.anchor);
+        produce: (context, params) => {
+            const anchor = createColorValue(context.nestedContext(), params.anchor);
 
             const list = generateAnchoredColorList(anchor, params);
-            const values = list.map(item => createColorValue(valueContext, item));
-            return createColorSet(valueContext, values);
+            const values = list.map(item => createColorValue(context.nestedContext(), item));
+            return createColorSet(context, values);
         },
     };
 };

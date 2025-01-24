@@ -2,9 +2,11 @@ import type { DecisionValueContext, SRGBHueSet, SRGBHueValue } from '../../../ty
 
 export const createSRGBHueSet = (
     context: DecisionValueContext,
-    values: SRGBHueValue[],
+    input: SRGBHueValue[],
 ): SRGBHueSet => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };

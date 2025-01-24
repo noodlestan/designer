@@ -7,13 +7,15 @@ export const createOklabChromaValue = (
     context: DecisionValueContext,
     input: ColorOklabChroma,
 ): OklabChromaValue => {
+    context.consume(input);
+
     const value = resolveOklabChromaValue(context, input);
 
     return {
         get: () => value,
         toColor: components => {
             const { h, l } = components;
-            return createColorValue(context, { h, c: value, l });
+            return createColorValue(context.outputContext(), { h, c: value, l });
         },
     };
 };

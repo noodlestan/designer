@@ -10,8 +10,8 @@ export const createColorSRGBSaturationValueExplicitModel: DecisionModelFactory<
     ColorSRGBSaturationValueExplicitInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            return createSRGBSaturationValue(valueContext, params.value);
+        produce: (context, params) => {
+            return createSRGBSaturationValue(context, params.value);
         },
     };
 };

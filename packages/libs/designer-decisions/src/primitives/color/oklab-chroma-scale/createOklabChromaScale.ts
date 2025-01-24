@@ -2,9 +2,11 @@ import type { DecisionValueContext, OklabChromaScale, OklabChromaValue } from '.
 
 export const createOklabChromaScale = (
     context: DecisionValueContext,
-    values: OklabChromaValue[],
+    input: OklabChromaValue[],
 ): OklabChromaScale => {
+    context.consume(input);
+
     return {
-        get: () => values,
+        get: () => input,
     };
 };

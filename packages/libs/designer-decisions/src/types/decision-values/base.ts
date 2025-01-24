@@ -31,23 +31,28 @@ export type DecisionValueError = {
 
 export type DecisionValueContext = {
     decisionContext: () => DecisionContext;
-    input: () => DecisionInputBase | undefined;
+    decisionInput: () => DecisionInputBase | undefined;
+    valueInput: () => unknown | undefined;
     lookupContexts: () => LookupContexts;
     parent: () => LinkedValueContext | undefined;
     resolve: DecisionRefResolver;
-    children: () => LinkedValueContext[];
     lookups: () => DecisionLookup[];
+    nested: () => LinkedValueContext[];
+    children: () => LinkedValueContext[];
     errors: () => DecisionValueError[];
     hasErrors: () => boolean;
+    consume: (input: unknown) => void;
     addError: (error: DecisionValueError) => void;
-    createChildContext: (input?: DecisionInputBase) => DecisionValueContext;
+    childContext: (input?: DecisionInputBase) => DecisionValueContext;
+    nestedContext: () => DecisionValueContext;
+    outputContext: () => DecisionValueContext;
 };
 
-export type ParentValueContext = Omit<DecisionValueContext, 'resolve' | 'addError'>;
-export type LinkedValueContext = Omit<
+export type ParentValueContext = Omit<
     DecisionValueContext,
-    'resolve' | 'createChildContext' | 'addError'
+    'resolve' | 'consume' | 'addError' | 'nestedContext' | 'outputContext'
 >;
+export type LinkedValueContext = Omit<ParentValueContext, 'childContext'>;
 
 export type LookupContexts = {
     all: string[];

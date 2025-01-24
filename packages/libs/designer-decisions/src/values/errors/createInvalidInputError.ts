@@ -6,11 +6,10 @@ export const createInvalidInputError = (
     data: unknown,
     err?: unknown,
 ): DecisionValueError => {
-    const dataStr = ` ${JSON.stringify(data)}`;
-    const ref = context.decisionContext().ref();
-    const inRef = `in "${'$name' in ref ? ref.$name : ref.$uuid}"`; // WIP stringify ref
+    const dataStr = JSON.stringify(data);
+    const refStr = JSON.stringify(context.decisionContext().ref());
     const errStr = err && ` Error: "${err instanceof Error ? err.stack : JSON.stringify(err)}"`;
-    const msg = `Invalid input data for a ${valueName} ${inRef}: ${dataStr}${errStr}.`;
+    const msg = `Invalid input data for a ${valueName} in ${refStr}: ${dataStr}${errStr}.`;
     return {
         msg,
     };

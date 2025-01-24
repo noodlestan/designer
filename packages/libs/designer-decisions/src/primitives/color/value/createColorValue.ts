@@ -19,6 +19,8 @@ export const createColorValue = (
     context: DecisionValueContext,
     input: ColorInputValue,
 ): ColorValue => {
+    context.consume(input);
+
     const value = resolveColorValue(context, input);
 
     const toObject = (format: ColorFormat): ColorObjectLiteral => {

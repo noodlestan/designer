@@ -7,13 +7,15 @@ export const createSRGBLightnessValue = (
     context: DecisionValueContext,
     input: ColorSRGBLightness,
 ): SRGBLightnessValue => {
+    context.consume(input);
+
     const value = resolveSRGBLightnessValue(context, input);
 
     return {
         get: () => value,
         toColor: components => {
             const { h, s } = components;
-            return createColorValue(context, { h, s, l: value });
+            return createColorValue(context.outputContext(), { h, s, l: value });
         },
     };
 };

@@ -14,16 +14,18 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
     ColorOklabLightnessScaleBoundedInput
 > = () => {
     return {
-        produce: (valueContext, params) => {
-            const fromValue = createOklabLightnessValue(valueContext, params.from);
-            const toValue = createOklabLightnessValue(valueContext, params.to);
+        produce: (context, params) => {
+            const fromValue = createOklabLightnessValue(context.nestedContext(), params.from);
+            const toValue = createOklabLightnessValue(context.nestedContext(), params.to);
 
             const from = fromValue.get();
             const to = toValue.get();
 
             const series = generateBoundedSeries(from, to, params.steps);
-            const values = series.map(item => createOklabLightnessValue(valueContext, item));
-            return createOklabLightnessScale(valueContext, [fromValue, ...values, toValue]);
+            const values = series.map(item =>
+                createOklabLightnessValue(context.nestedContext(), item),
+            );
+            return createOklabLightnessScale(context, [fromValue, ...values, toValue]);
         },
     };
 };
