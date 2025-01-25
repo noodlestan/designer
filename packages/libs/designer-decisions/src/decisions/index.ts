@@ -1,7 +1,7 @@
-// @index(['./*.ts', '!./*.test.ts', './!(private|parts|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
+// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
 export * from './createDecisionContext';
-export * from './createLookupContexts';
 export * from './createStaticDecisionMap';
 export * from './createStaticStoreDecision';
 export * from './errors';
 export * from './getDecisionModelFactory';
+export * from './mocks';
