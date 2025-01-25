@@ -1,6 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionType } from '../../types';
 import { MOCK_DECISION_TYPES } from '../mocks';
 
 import { getDecisionTypeMeta } from './getDecisionTypeMeta';
@@ -15,13 +14,9 @@ describe('getDecisionTypeMeta()', () => {
     describe('Given a valid decision type', () => {
         const type = 'type';
 
-        let result: DecisionType;
-
-        beforeEach(() => {
-            result = getDecisionTypeMeta(type);
-        });
-
         it('should return the matching decision type', () => {
+            const result = getDecisionTypeMeta(type);
+
             expect(result).toBe(MOCK_DECISION_TYPES[0]);
         });
     });

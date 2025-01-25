@@ -13,7 +13,7 @@ vi.mock('./functions/createValueContext', () => ({
 
 const createValueContextMocked = vi.mocked(createValueContext);
 
-describe('createDecisionValueContext', () => {
+describe('createDecisionValueContext()', () => {
     describe('Given no context', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];

@@ -5,24 +5,34 @@ import type { LookupContexts } from '../types';
 import { isLookupContext } from './isLookupContext';
 
 describe('isLookupContext', () => {
-    it('returns true for a valid LookupContexts object', () => {
-        const validContext: LookupContexts = { all: [] };
-        expect(isLookupContext(validContext)).toBe(true);
+    describe('Given LookupContexts', () => {
+        const context: LookupContexts = { all: [] };
+
+        it('should returns true', () => {
+            expect(isLookupContext(context)).toBe(true);
+        });
     });
 
-    it('returns false for an object missing the "all" property', () => {
-        const invalidContext = { some: [] };
-        expect(isLookupContext(invalidContext)).toBe(false);
+    describe('Given an incomplete object', () => {
+        const context = { some: [] };
+
+        it('should return false', () => {
+            expect(isLookupContext(context)).toBe(false);
+        });
     });
 
-    it('returns false for null', () => {
-        expect(isLookupContext(null)).toBe(false);
+    describe('Given a null value', () => {
+        it('should return false', () => {
+            expect(isLookupContext(null)).toBe(false);
+        });
     });
 
-    it('returns false for non-object types', () => {
-        expect(isLookupContext(undefined)).toBe(false);
-        expect(isLookupContext('string')).toBe(false);
-        expect(isLookupContext(123)).toBe(false);
-        expect(isLookupContext([])).toBe(false);
+    describe('Given non-object types', () => {
+        it('should return false', () => {
+            expect(isLookupContext(undefined)).toBe(false);
+            expect(isLookupContext('string')).toBe(false);
+            expect(isLookupContext(123)).toBe(false);
+            expect(isLookupContext([])).toBe(false);
+        });
     });
 });
