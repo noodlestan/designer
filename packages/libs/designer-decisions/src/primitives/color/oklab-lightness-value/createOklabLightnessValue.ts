@@ -19,8 +19,8 @@ export const createOklabLightnessValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
-        toColor: components => {
-            const { c, h } = components;
+        toColor: channels => {
+            const { c, h } = channels;
             return createColorValue(context.outputContext(), { l: value, c, h });
         },
     };

@@ -15,8 +15,8 @@ export const createSRGBLightnessValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
-        toColor: components => {
-            const { h, s } = components;
+        toColor: channels => {
+            const { h, s } = channels;
             return createColorValue(context.outputContext(), { h, s, l: value });
         },
     };
