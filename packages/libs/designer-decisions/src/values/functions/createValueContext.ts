@@ -38,27 +38,24 @@ export const createValueContext = (
         ref: DecisionRef,
     ): [DecisionContext, Decision<V> | undefined] => {
         const [decisionContext, decision] = resolver<V>(ref);
-        lookups.push({
-            ref,
-            decision: decision as Decision<V>,
-        });
+        lookups.push({ ref, context: decisionContext, decision });
         return [decisionContext, decision];
     };
 
     const baseContext: LinkedValueContext = {
         decisionContext: () => decisionContext,
+        parent: () => parent,
+        lookupContexts: () => lookupContexts,
         decisionInput: () => input,
         valueInput: () => state.valueInput,
-        lookupContexts: () => lookupContexts,
-        parent: () => parent,
         lookups: () => lookups,
-        children: () => childContexts,
         nested: () => nestedContexts,
+        children: () => childContexts,
         errors: () => errors,
         hasErrors: () =>
             Boolean(errors.length) ||
-            Boolean(childContexts.find(child => child.hasErrors())) ||
-            Boolean(nestedContexts.find(nested => nested.hasErrors())),
+            Boolean(nestedContexts.find(nested => nested.hasErrors())) ||
+            Boolean(childContexts.find(child => child.hasErrors())),
     };
 
     const consume = (input: unknown) => {
@@ -82,8 +79,8 @@ export const createValueContext = (
         return child;
     };
 
-    const nestedContext = (input?: DecisionInputBase) => {
-        const nested = createValueContext(decisionContext, baseContext, input);
+    const nestedContext = () => {
+        const nested = createValueContext(decisionContext, baseContext);
         nestedContexts.push(nested);
         return nested;
     };
