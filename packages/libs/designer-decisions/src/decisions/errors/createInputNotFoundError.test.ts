@@ -1,18 +1,22 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { DecisionRef } from '../../types';
+import type { DecisionError, DecisionRef } from '../../types';
 import { createDecisionContext } from '../createDecisionContext';
 
 import { createInputNotFoundError } from './createInputNotFoundError';
 
 describe('createInputNotFoundError()', () => {
+    const ref: DecisionRef = { $uuid: 'test-uuid' };
+    const context = createDecisionContext(ref, vi.fn(), []);
+
+    let result: DecisionError;
+
     describe('Given a context and a ref', () => {
-        const ref: DecisionRef = { $uuid: 'test-uuid' };
-        const context = createDecisionContext(ref, vi.fn(), []);
+        beforeEach(() => {
+            result = createInputNotFoundError(context, ref);
+        });
 
         it('should return a DecisionError object with the expected message', () => {
-            const result = createInputNotFoundError(context, ref);
-
             const expectedMessage = `Ref ${JSON.stringify(ref)} not found.`;
             expect(result.msg).toBe(expectedMessage);
         });
