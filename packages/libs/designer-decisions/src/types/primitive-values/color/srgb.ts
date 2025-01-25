@@ -20,3 +20,5 @@ export type SRGBHueSet = BaseSet<SRGBHueValue>;
 export type SRGBSaturationScale = BaseSet<SRGBSaturationValue>;
 
 export type SRGBLightnessScale = BaseSet<SRGBLightnessValue>;
+
+export type ColorSRGBChannelName = 'srgb-hue' | 'srgb-saturation' | 'srgb-lightness';

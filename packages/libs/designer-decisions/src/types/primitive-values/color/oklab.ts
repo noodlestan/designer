@@ -20,3 +20,5 @@ export type OklabLightnessScale = BaseSet<OklabLightnessValue>;
 export type OklabChromaScale = BaseSet<OklabChromaValue>;
 
 export type OklabHueSet = BaseSet<OklabHueValue>;
+
+export type ColorOklabChannelName = 'oklab-lightness' | 'oklab-chroma' | 'oklab-hue';
