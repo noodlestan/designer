@@ -3,7 +3,7 @@ import { isColorSRGBSaturationScaleDecision } from '@noodlestan/designer-decisio
 
 import type { ShowDecisionProps } from '../../types';
 import { FlexStack } from '../../layouts';
-import { ShowSRGBSaturationValue } from '../../values';
+import { ShowColorChannelValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -23,7 +23,7 @@ const s = size || 's';
     decision && (
         <FlexStack>
             {items?.map(item => (
-                <ShowSRGBSaturationValue v={item} size={s} {...rest} />
+                <ShowColorChannelValue channel="srgb-saturation" v={item} size={s} {...rest} />
             ))}
         </FlexStack>
     )

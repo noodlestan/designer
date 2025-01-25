@@ -1,0 +1,51 @@
+---
+import type {
+    ColorChannelValue,
+    ColorChannelName,
+    ColorComplementaryChannels,
+    ColorChannelValueCommon,
+} from '@noodlestan/designer-decisions';
+
+import type { ShowValueProps } from '../../types';
+import { FlexStack } from '../../layouts';
+import { DecisionValueContainer } from '../../atoms';
+import { ColorSwatchViz } from '../../viz';
+
+type Props = Omit<ShowValueProps, 'v'> & {
+    v?: ColorChannelValue;
+    channel: ColorChannelName;
+};
+
+const { v, value = true, viz = true, size, channel } = Astro.props;
+
+const channelToColors: Record<ColorChannelName, ColorComplementaryChannels> = {
+    'srgb-hue': { s: 0.5, l: 0.5 },
+    'srgb-saturation': { h: 0, l: 0.5 },
+    'srgb-lightness': { h: 0, s: 0.1 },
+    'oklab-lightness': { c: 0, h: 0.1 },
+    'oklab-chroma': { l: 0, h: 0.5 },
+    'oklab-hue': { l: 0.5, c: 0.5 },
+};
+
+const channelV = v as ColorChannelValueCommon;
+const channelValue = channelV?.get();
+const channelColor = channelV?.toColor(channelToColors[channel]);
+---
+
+<div class:list={['dd-show-hue-value', { size }]}>
+    {viz && channelColor && <ColorSwatchViz value={channelColor} size={size} />}
+    {
+        value && channelV !== undefined && (
+            <DecisionValueContainer>
+                <FlexStack>{channelValue}</FlexStack>
+            </DecisionValueContainer>
+        )
+    }
+</div>
+
+<style>
+    .dd-show-hue-value {
+        display: flex;
+        gap: var(--dd-space-gap);
+    }
+</style>

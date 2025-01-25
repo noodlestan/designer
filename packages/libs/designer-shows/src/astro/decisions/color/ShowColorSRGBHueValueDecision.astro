@@ -2,7 +2,7 @@
 import { isColorSRGBHueValueDecision } from '@noodlestan/designer-decisions';
 
 import type { ShowDecisionProps } from '../../types';
-import { ShowSRGBHueValue } from '../../values';
+import { ShowColorChannelValue } from '../../values';
 import { ShowDecisionUnavailable } from '../unavailable';
 
 type Props = ShowDecisionProps;
@@ -13,5 +13,5 @@ const [, decision] = store.decision({ $name: d });
 const hue = decision && isColorSRGBHueValueDecision(decision) ? decision.produce() : undefined;
 ---
 
-{decision && <ShowSRGBHueValue v={hue} {...rest} />}
+{decision && <ShowColorChannelValue v={hue} channel="srgb-hue" {...rest} />}
 {!decision && <ShowDecisionUnavailable d={d as string} />}
