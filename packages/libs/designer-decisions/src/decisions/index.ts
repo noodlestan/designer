@@ -4,4 +4,3 @@ export * from './createStaticDecisionMap';
 export * from './createStaticStoreDecision';
 export * from './errors';
 export * from './getDecisionModelFactory';
-export * from './mocks';
