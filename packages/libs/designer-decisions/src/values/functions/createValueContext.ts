@@ -51,7 +51,12 @@ export const createValueContext = (
         lookups: () => lookups,
         nested: () => nestedContexts,
         children: () => childContexts,
-        errors: () => errors,
+        ownErrors: () => errors,
+        allErrors: () => [
+            ...errors,
+            ...nestedContexts.flatMap(nested => nested.allErrors()),
+            ...childContexts.flatMap(child => child.allErrors()),
+        ],
         hasErrors: () =>
             Boolean(errors.length) ||
             Boolean(nestedContexts.find(nested => nested.hasErrors())) ||

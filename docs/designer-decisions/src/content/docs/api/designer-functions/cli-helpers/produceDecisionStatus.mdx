@@ -1,0 +1,52 @@
+---
+title: produceDecisionStatus()
+slug: api/designer-functions/cli-helpers/produceDecisionStatus
+sidebar:
+    label: produceDecisionStatus
+---
+
+```ts
+type produceDecisionStatus = (
+    store: StaticDecisionStore,
+    input: DecisionInputBase,
+) => ProducedDecisionStatus;
+```
+
+Given a populated `store` and an input record, produces the decision value and returns
+an object aggregating status, errors, context and values.
+
+## Return Value
+
+Returns a `ProducedDecisionStatus` object.
+
+```ts
+type ProducedDecisionStatus = {
+    uuid?: string;
+    name: string;
+    model: string;
+    hasErrors: boolean;
+    input: DecisionInputBase;
+    context: DecisionContext;
+    value?: BaseValue<unknown>;
+};
+```
+
+## Params
+
+##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+
+##### ༶ `input`: [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)
+
+&nbsp;
+
+## Usage
+
+```js
+const store = await decisionLoader();
+const statuses = store.records().map(record => produceDecisionStatus(store, record));
+statuses.forEach(status => console.info(formatDecisionStatus(status)));
+```
+
+## Related
+
+-   [Guides / Loading and Validating Decisions](/guides/validating-design-decisions-with-schemas/)

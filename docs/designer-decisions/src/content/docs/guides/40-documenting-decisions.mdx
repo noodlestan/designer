@@ -101,6 +101,7 @@ const DATA_PATH = path.resolve('./data/decisions');
 export const loader = createDecisionLoader(
     [DECISION_SCHEMAS],
     [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
     async (moduleName: string) => `./node_modules/${moduleName}`,
 );
 ```
