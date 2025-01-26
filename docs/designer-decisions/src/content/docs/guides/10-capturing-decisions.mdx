@@ -10,7 +10,7 @@ import { FileTree, LinkCard } from '@astrojs/starlight/components';
 
 import { href } from '../../../mdx';
 
-## Design decisions as data
+## Creating decision records
 
 At a minimum, a decision record requires
 
@@ -20,11 +20,8 @@ At a minimum, a decision record requires
 
 The following example defines two decisions:
 
--   a [color-value](/decision-models/color-value) decision, via the
-    [color-value/explicit](/decision-models/color-value#explicit) model
-
--   a [color-set](/decision-models/color-set) decision, via the
-    [color-set/anchored](/decision-models/color-set#anchored) model
+-   a [color-value](/decision-models/color-value) decision and a
+    [color-set](/decision-models/color-set), both based on explicit values.
 
 ```json
 [
@@ -36,15 +33,10 @@ The following example defines two decisions:
         }
     },
     {
-        "type": "color-set/anchored",
-        "name": "Primary Backgrounds",
+        "type": "color-set/explicit",
+        "name": "Brand Color",
         "params": {
-            "start": { "$name": "Primary Background" },
-            "steps": 5,
-            "modifier": {
-                "space": "oklch",
-                "l": { "mode": "linear", "by": 3 }
-            }
+            "values": ["#FF0000", "#00FF00", "#0000FF"]
         }
     }
 ]
@@ -64,6 +56,54 @@ using directories and files.
 -   contexts/
 
 </FileTree>
+
+## Referencing decisions
+
+You can reuse decision values and avoid repetition by referencing them in other decisions.
+
+The following example defines an explicit [space-value](/decision-models/space-value)
+decision called "Space Unit" and a [space-scale](/decision-models/space-scale#anchored) anchored
+on the value of the first one.
+
+```json
+[
+    {
+        "type": "space-value/explicit",
+        "name": "Space Unit",
+        "params": {
+            "value": "8"
+        }
+    },
+    {
+        "type": "space-scale/anchored",
+        "name": "Sizing Scale",
+        "params": {
+            "anchor": { "$name": "Space Unit" },
+            "after": {
+                "steps": 5,
+                "modifier": { "mode": "gemetric", "by": 1.5 }
+            }
+        }
+    }
+]
+```
+
+You can also reference items of a decision set set or scale by adding the index to the reference.
+
+In the following example we are creating a [space-value](/decision-models/space-value) decision
+based on the second element of the "Sizing Scale" declared before.
+
+```json
+[
+    {
+        "type": "space-value/explicit",
+        "name": "Default Size",
+        "params": {
+            "value": { "$name": "Sizing Scale", "index": 3 }
+        }
+    }
+]
+```
 
 ## Next steps
 
