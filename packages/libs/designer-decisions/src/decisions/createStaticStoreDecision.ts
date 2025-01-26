@@ -8,7 +8,7 @@ import type {
 } from '../types';
 import { createDecisionValueContext } from '../values';
 
-import { getDecisionModelFactory } from '.';
+import { getDecisionModelFactory } from './getDecisionModelFactory';
 
 export const createStaticStoreDecision = <T = unknown>(
     decisionContext: DecisionContext,

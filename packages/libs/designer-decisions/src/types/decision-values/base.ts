@@ -23,7 +23,8 @@ export type DecisionContext = {
 
 export type DecisionLookup = {
     ref: DecisionRef;
-    decision: DecisionUnknown;
+    context: DecisionContext;
+    decision: DecisionUnknown | undefined;
 };
 
 export type DecisionValueError = {
@@ -32,11 +33,11 @@ export type DecisionValueError = {
 
 export type DecisionValueContext = {
     decisionContext: () => DecisionContext;
-    decisionInput: () => DecisionInputBase | undefined;
-    valueInput: () => unknown | undefined;
-    lookupContexts: () => LookupContexts;
     parent: () => LinkedValueContext | undefined;
+    lookupContexts: () => LookupContexts;
+    decisionInput: () => DecisionInputBase | undefined;
     resolve: DecisionRefResolver;
+    valueInput: () => unknown | undefined;
     lookups: () => DecisionLookup[];
     nested: () => LinkedValueContext[];
     children: () => LinkedValueContext[];

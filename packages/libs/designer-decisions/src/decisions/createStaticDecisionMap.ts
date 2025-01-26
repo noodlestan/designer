@@ -7,12 +7,9 @@ import type {
     DecisionRef,
 } from '../types';
 
-import {
-    createDecisionContext,
-    createInputNotFoundError,
-    createStaticStoreDecision,
-    createUnexpectedError,
-} from '.';
+import { createDecisionContext } from './createDecisionContext';
+import { createStaticStoreDecision } from './createStaticStoreDecision';
+import { createInputNotFoundError, createUnexpectedError } from './errors';
 
 export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecisionMap => {
     const _createDecision = (context: DecisionContext, inputs: DecisionInputBase[]) => {
