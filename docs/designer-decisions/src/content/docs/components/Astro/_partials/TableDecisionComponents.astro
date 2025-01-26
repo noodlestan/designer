@@ -109,7 +109,7 @@ const types = [
 const items = domain ? types.filter(({ type }) => type.startsWith(domain)) : types;
 ---
 
-<Table columns={['Decision Type', 'Component', 'Value Component (🚧 link)']} vpad>
+<Table columns={['Decision Type', 'Component', 'Value Component']} vpad>
     {
         items.map(({ name, type, component, value }) => (
             <TableRow>

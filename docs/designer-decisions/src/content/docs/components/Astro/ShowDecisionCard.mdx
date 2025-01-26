@@ -6,7 +6,7 @@ sidebar:
     order: 20
 ---
 
-import { Card } from '@astrojs/starlight/components';
+import { Card, Aside } from '@astrojs/starlight/components';
 import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../decisions';
@@ -44,8 +44,10 @@ These two **mandatory** props serve to identify and retrieve the decision.
 
 You can use these props to control how the visualization and value are displayed.
 
-Note: 🚧 The common [size](/components/Astro/Props/#-size-auto-showvaluesize) prop is not exposed
-by `<ShowDecisionCard />` and the size is managed internally.
+<Aside type="note">
+    The common [size](/components/Astro/Props/#-size-auto-showvaluesize) prop is not exposed by `
+    <ShowDecisionCard />` and the size is managed internally.
+</Aside>
 
 In this example we are rendering a [ColorValueDecision](/decision-models/color-value)
 and at the same time:

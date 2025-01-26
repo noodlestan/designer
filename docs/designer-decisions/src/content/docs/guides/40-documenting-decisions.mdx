@@ -6,7 +6,7 @@ sidebar:
     order: 40
 ---
 
-import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { Aside, CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
 import {
     FlexStack,
     FlexRow,
@@ -36,10 +36,12 @@ using the [built-in components](/components) provided by the
 
 ## Setup
 
-🚧 This guide is for `@noodlestan/designer-shows/astro` components and requires a working
-[Astro](https://docs.astro.build/en/getting-started/) website. You can create a website similar
-to this one using the [Starlight theme](https://starlight.astro.build/getting-started/) in
-a matter of minutes.
+<Aside type="note">
+    This guide is for `@noodlestan/designer-shows/astro` components and requires a working
+    [Astro](https://docs.astro.build/en/getting-started/) website. You can create a website similar
+    to this one using the [Starlight theme](https://starlight.astro.build/getting-started/) in a
+    matter of minutes.
+</Aside>
 
 ### Dependencies
 
@@ -57,7 +59,7 @@ npm install @noodlestan/designer-decisions @noodlestan/designer-functions \
 
 ### Decision data
 
-Populate your design decisions data source. 🚧
+Populate your design decisions data source.
 
 As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data)
 guide, you can simply create one or more JSON files anywhere in your project.
@@ -102,7 +104,7 @@ export const loader = createDecisionLoader(
 );
 ```
 
-API 🚧🚧 Banner: Help appreciated: how to provide a package resolution default?
+API 🚧🚧 GetInvolved: Help appreciated: how to provide a package resolution default?
 
 The loader is an async function that returns a decision store. We will pass this
 store directly to our Astro components for them to retrieve decision data and

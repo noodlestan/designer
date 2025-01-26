@@ -7,7 +7,7 @@ sidebar:
     label: Decision Attributes
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
+import { CardGrid, Aside } from '@astrojs/starlight/components';
 import {
     FlexStack,
     ShowDecisionContexts,
@@ -24,9 +24,10 @@ export const store = await decisionLoader();
 
 These components render decision details and metadata.
 
-Tip: 🚧 You don't have to use these components directly in your docs.
-Using [ShowDecision](/components/Astro/ShowDecision/) will select
-the appropriate one for you.
+<Aside type="tip">
+    You don't have to use these components directly in your docs. Using
+    [ShowDecision](/components/Astro/ShowDecision/) will select the appropriate one for you.
+</Aside>
 
 They are exposed so that anyone can
 [create custom visualizations](/guides/creating-custom-design-decision-visualizations/),

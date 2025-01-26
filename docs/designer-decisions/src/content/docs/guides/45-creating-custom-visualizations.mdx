@@ -6,7 +6,7 @@ sidebar:
     order: 45
 ---
 
-import { CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, Code, FileTree, LinkCard, Aside } from '@astrojs/starlight/components';
 import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
@@ -19,10 +19,12 @@ This guide explains how to create custom visualizations for design decisions for
 
 ## Setup
 
-🚧 This guide is for `@noodlestan/designer-shows/astro` components and requires a working
-[Astro](https://docs.astro.build/en/getting-started/) website. Refer to the
-[Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx) for
-how to quickly setup a website similar to this one.
+<Aside type="note">
+    This guide is for `@noodlestan/designer-shows/astro` components and requires a working
+    [Astro](https://docs.astro.build/en/getting-started/) website. Refer to the [Rendering Decisions
+    in Docs](/guides/documenting-design-decisions-with-astro-and-mdx) for how to quickly setup a
+    website similar to this one.
+</Aside>
 
 ## Creating custom components
 
