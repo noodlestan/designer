@@ -15,8 +15,8 @@ export const createOklabHueValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
-        toColor: components => {
-            const { l, c } = components;
+        toColor: channels => {
+            const { l, c } = channels;
             return createColorValue(context.outputContext(), { l, c, h: value });
         },
     };

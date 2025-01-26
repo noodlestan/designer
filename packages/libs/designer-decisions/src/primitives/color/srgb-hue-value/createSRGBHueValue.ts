@@ -15,8 +15,8 @@ export const createSRGBHueValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
-        toColor: components => {
-            const { s, l } = components;
+        toColor: channels => {
+            const { s, l } = channels;
             return createColorValue(context.outputContext(), { h: value, s, l });
         },
     };
