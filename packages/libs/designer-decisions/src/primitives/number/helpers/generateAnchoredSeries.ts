@@ -1,6 +1,6 @@
 import type { AnchoredNumberSeriesParams } from '../../../types';
 
-import { generateModifierSeries } from './functions';
+import { generateModifierSeries } from './generateModifierSeries';
 
 export const generateAnchoredSeries = (
     anchor: number,
