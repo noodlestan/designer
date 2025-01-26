@@ -1,0 +1,28 @@
+---
+type Props = {
+    url: string;
+    title?: string;
+};
+
+const { url, title = 'Get involved' } = Astro.props;
+---
+
+<div>
+    <span> 🐘 </span>{title}:
+    <a href={url}>
+        <slot />
+    </a>
+</div>
+<style>
+    div {
+        border-inline-start: 0.25rem solid #ac44d2;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.2rem;
+    }
+    span {
+        font-size: 2rem;
+    }
+</style>
