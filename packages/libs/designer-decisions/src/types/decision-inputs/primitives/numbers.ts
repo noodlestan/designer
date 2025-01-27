@@ -6,6 +6,8 @@ export type NumberProportionalModifier = { mode: 'proportional'; by: number };
 
 export type NumberGeometricModifier = { mode: 'geometric'; by: number };
 
+export type NumberClamp = [number, number];
+
 export type NumberModifier =
     | NumberLinearModifier
     | NumberProportionalModifier

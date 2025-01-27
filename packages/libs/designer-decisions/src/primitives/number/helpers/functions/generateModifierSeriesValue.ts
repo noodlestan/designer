@@ -1,16 +1,26 @@
 import type { NumberModifier } from '../../../../types';
 
-export const generateModifierSeriesValue = (series: number[], modifier: NumberModifier): number => {
+export const generateModifierSeriesValue = (
+    series: number[],
+    modifier: Partial<NumberModifier>,
+): number => {
     const index = series.length;
     const prev = series[index - 1];
 
-    if (modifier.mode === 'linear') {
-        return prev + modifier.by;
-    } else if (modifier.mode === 'proportional') {
-        return series[0] + modifier.by * index * series[0];
-    } else if (modifier.mode === 'geometric') {
-        return prev * modifier.by;
+    if (!index) {
+        throw new Error(`Series is empty`);
     }
 
-    return prev;
+    const { mode = 'linear' } = modifier;
+
+    if (mode === 'proportional') {
+        const { by = 0 } = modifier;
+        return series[0] + by * index * series[0];
+    } else if (mode === 'geometric') {
+        const { by = 1 } = modifier;
+        return prev * by;
+    }
+
+    const { by = 0 } = modifier;
+    return prev + by;
 };

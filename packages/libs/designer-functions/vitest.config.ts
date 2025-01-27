@@ -6,7 +6,7 @@ export default defineConfig({
     },
     test: {
         coverage: {
-            exclude: ['**/meta/*', '**/index.ts'],
+            exclude: ['**/meta/*', '**/index.ts', '**/mocks/*.ts'],
         },
     },
 });
