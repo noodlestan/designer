@@ -3,9 +3,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type {
     DecisionContext,
     DecisionError,
-    DecisionInputBase,
     DecisionRef,
     DecisionRefResolver,
+    InputRecord,
 } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
@@ -13,7 +13,7 @@ import { createDecisionContext } from './createDecisionContext';
 describe('createDecisionContext()', () => {
     const mockRef: DecisionRef = { $uuid: 'decision-1' };
     const mockResolver: DecisionRefResolver = vi.fn();
-    const mockInputs: DecisionInputBase[] = [{ model: 'model', name: 'value-1', params: {} }];
+    const mockInputs: InputRecord[] = [{ model: 'model', name: 'value-1', params: {} }];
 
     describe('Given a an array of inputs', () => {
         let result: DecisionContext;

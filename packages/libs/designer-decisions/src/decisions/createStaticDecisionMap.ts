@@ -1,22 +1,16 @@
 import type { StaticDecisionMap, StaticInputMap } from '../decisions';
-import type {
-    BaseValue,
-    Decision,
-    DecisionContext,
-    DecisionInputBase,
-    DecisionRef,
-} from '../types';
+import type { BaseValue, Decision, DecisionContext, DecisionRef, InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
-import { createStaticStoreDecision } from './createStaticStoreDecision';
+import { createStaticDecision } from './createStaticDecision';
 import { createInputNotFoundError, createUnexpectedError } from './errors';
 
 export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecisionMap => {
-    const _createDecision = (context: DecisionContext, inputs: DecisionInputBase[]) => {
+    const _createDecision = (context: DecisionContext, inputs: InputRecord[]) => {
         try {
-            return createStaticStoreDecision(context, inputs);
+            return createStaticDecision(context, inputs);
         } catch (error) {
-            const err = createUnexpectedError(context, error);
+            const err = createUnexpectedError({ context, error });
             context.addError(err);
         }
     };
@@ -31,7 +25,7 @@ export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecis
             return [context, decision as Decision<V>];
         }
         const context = createDecisionContext(ref, resolver, []);
-        const error = createInputNotFoundError(context, ref);
+        const error = createInputNotFoundError({ context, ref });
         context.addError(error);
         return [context, undefined];
     };

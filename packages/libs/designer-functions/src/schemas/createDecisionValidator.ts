@@ -1,4 +1,4 @@
-import type { DecisionInputBase } from '@noodlestan/designer-decisions';
+import type { InputRecord } from '@noodlestan/designer-decisions';
 import Ajv, { type ErrorObject } from 'ajv';
 
 import type { DecisionValidator, SchemaMap } from './types';
@@ -10,7 +10,7 @@ export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator
         ajv.addSchema(schema);
     });
 
-    const validate = (decision: DecisionInputBase): ErrorObject[] | null => {
+    const validate = (decision: InputRecord): ErrorObject[] | null => {
         const schemaId = `urn:designer:decision-model:${decision.model.replace('/', '-')}`;
         const validateFn = ajv.getSchema(schemaId);
         if (!validateFn) {

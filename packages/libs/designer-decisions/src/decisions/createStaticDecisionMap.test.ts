@@ -1,17 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { StaticDecisionMap, StaticInputMap } from '../inputs';
-import type { DecisionContext, DecisionInputBase, DecisionRef, DecisionUnknown } from '../types';
+import type { DecisionContext, DecisionRef, DecisionUnknown, InputRecord } from '../types';
 
+import { createStaticDecision } from './createStaticDecision';
 import { createStaticDecisionMap } from './createStaticDecisionMap';
-import { createStaticStoreDecision } from './createStaticStoreDecision';
-import { createStaticInputMapMock, createStaticStoreDecisionMockImplementation } from './mocks';
+import { createStaticDecisionMockImplementation, createStaticInputMapMock } from './mocks';
+import type { StaticDecisionMap, StaticInputMap } from './types';
 
-vi.mock('./createStaticStoreDecision', () => ({
-    createStaticStoreDecision: vi.fn(),
+vi.mock('./createStaticDecision', () => ({
+    createStaticDecision: vi.fn(),
 }));
 
-const createStaticStoreDecisionMocked = vi.mocked(createStaticStoreDecision);
+const createStaticDecisionMocked = vi.mocked(createStaticDecision);
 
 describe('createStaticDecisionMap()', () => {
     describe('Given a ref and matching inputs', () => {
@@ -25,8 +25,8 @@ describe('createStaticDecisionMap()', () => {
         beforeEach(() => {
             vi.resetAllMocks();
             const inputStore: StaticInputMap = createStaticInputMapMock(inputs);
-            createStaticStoreDecisionMocked.mockImplementation(
-                createStaticStoreDecisionMockImplementation(mockValue),
+            createStaticDecisionMocked.mockImplementation(
+                createStaticDecisionMockImplementation(mockValue),
             );
 
             staticDecisionMap = createStaticDecisionMap(inputStore);
@@ -37,8 +37,8 @@ describe('createStaticDecisionMap()', () => {
         it('should invoke decision factory with a new context and the matching inputs', () => {
             const [context] = result;
 
-            expect(createStaticStoreDecisionMocked).toHaveBeenCalledOnce();
-            expect(createStaticStoreDecisionMocked).toHaveBeenCalledWith(context, inputs);
+            expect(createStaticDecisionMocked).toHaveBeenCalledOnce();
+            expect(createStaticDecisionMocked).toHaveBeenCalledWith(context, inputs);
         });
 
         it('should return a context with the expected ref and inputs', () => {
@@ -94,7 +94,7 @@ describe('createStaticDecisionMap()', () => {
     });
 
     describe('When an unexpected error occurs during decision creation', () => {
-        const mockInputs: DecisionInputBase[] = [
+        const mockInputs: InputRecord[] = [
             { uuid: '2', model: 'model/type', name: 'Decision2', params: {} },
         ];
 
@@ -106,7 +106,7 @@ describe('createStaticDecisionMap()', () => {
             vi.resetAllMocks();
             const inputStore: StaticInputMap = createStaticInputMapMock(mockInputs);
 
-            createStaticStoreDecisionMocked.mockImplementation(() => {
+            createStaticDecisionMocked.mockImplementation(() => {
                 throw new Error('Mock error');
             });
 

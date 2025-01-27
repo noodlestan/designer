@@ -3,24 +3,24 @@ import type {
     BaseValue,
     Decision,
     DecisionContext,
-    DecisionInputBase,
     DecisionLookup,
     DecisionRef,
-    DecisionValueContext,
     DecisionValueError,
+    InputRecord,
     LinkedValueContext,
     LookupContexts,
+    ValueContext,
 } from '../../types';
 
 type State = {
     valueInput?: unknown;
 };
 
-export const createValueContext = (
+export const createValueContextPrivate = (
     decisionContext: DecisionContext,
     parentContext?: LookupContexts | LinkedValueContext,
-    input?: DecisionInputBase,
-): DecisionValueContext => {
+    input?: InputRecord,
+): ValueContext => {
     const state: State = {};
 
     const { resolve: resolver } = decisionContext;
@@ -78,23 +78,23 @@ export const createValueContext = (
         errors.push(error);
     };
 
-    const childContext = (input?: DecisionInputBase) => {
-        const child = createValueContext(decisionContext, baseContext, input);
+    const childContext = (input?: InputRecord) => {
+        const child = createValueContextPrivate(decisionContext, baseContext, input);
         childContexts.push(child);
         return child;
     };
 
     const nestedContext = () => {
-        const nested = createValueContext(decisionContext, baseContext);
+        const nested = createValueContextPrivate(decisionContext, baseContext);
         nestedContexts.push(nested);
         return nested;
     };
 
     const outputContext = () => {
-        return createValueContext(decisionContext, baseContext);
+        return createValueContextPrivate(decisionContext, baseContext);
     };
 
-    const valueContext: DecisionValueContext = {
+    const valueContext: ValueContext = {
         ...baseContext,
         resolve,
         consume,

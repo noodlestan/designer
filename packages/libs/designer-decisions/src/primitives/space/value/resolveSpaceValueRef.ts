@@ -1,17 +1,18 @@
 import { isSpaceScaleDecision, isSpaceValueDecision } from '../../../decisions';
-import type { DecisionRef, DecisionValueContext, SpaceWithUnits } from '../../../types';
-import { createRefMatchError, createRefNotFoundError } from '../../../values';
+import type { DecisionRef, SpaceWithUnits, ValueContext } from '../../../types';
+import {
+    createRefIndexError,
+    createRefMismatchError,
+    createRefNotFoundError,
+} from '../../../values';
 
-import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
+import { FALLBACK_VALUE, REF_CHECKED_TYPES as accepted, VALUE_NAME as name } from './private';
 
-export const resolveSpaceValueRef = (
-    context: DecisionValueContext,
-    ref: DecisionRef,
-): SpaceWithUnits => {
+export const resolveSpaceValueRef = (context: ValueContext, ref: DecisionRef): SpaceWithUnits => {
     const [, decision] = context.resolve(ref);
 
     if (!decision) {
-        const error = createRefNotFoundError(context, VALUE_NAME, ref);
+        const error = createRefNotFoundError({ context, name, ref });
         context.addError(error);
         return FALLBACK_VALUE;
     }
@@ -23,20 +24,13 @@ export const resolveSpaceValueRef = (
         const scale = decision.produce(context);
         const v = scale.get().item(ref.index || 0);
         if (!v) {
-            // WIP createRefIndexError
-            const error = createRefMatchError(
-                context,
-                VALUE_NAME,
-                ref,
-                decision,
-                REF_CHECKED_TYPES,
-            );
+            const error = createRefIndexError({ context, name, ref });
             context.addError(error);
             return FALLBACK_VALUE;
         }
         return v.getValueWithUnits();
     } else {
-        const error = createRefMatchError(context, VALUE_NAME, ref, decision, REF_CHECKED_TYPES);
+        const error = createRefMismatchError({ context, name, ref, decision, accepted });
         context.addError(error);
         return FALLBACK_VALUE;
     }

@@ -1,7 +1,7 @@
 import type { ColorInputValue } from '../../primitives';
-import type { DecisionInputBase } from '../base';
+import type { InputRecord } from '../base';
 
-export type ColorValueExplicitInput = DecisionInputBase & {
+export type ColorValueExplicitInput = InputRecord & {
     model: 'color-value/explicit';
     params: {
         value: ColorInputValue;

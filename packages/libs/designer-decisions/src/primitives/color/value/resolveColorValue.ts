@@ -1,7 +1,7 @@
 import type { Color } from 'chroma-js';
 import chroma from 'chroma-js';
 
-import type { ColorInputValue, DecisionValueContext } from '../../../types';
+import type { ColorInputValue, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { resolveSRGBHueValue } from '../srgb-hue-value';
@@ -11,7 +11,7 @@ import { resolveSRGBSaturationValue } from '../srgb-saturation-value';
 import { FALLBACK_VALUE, VALUE_NAME } from './private';
 import { resolveColorValueRef } from './resolveColorValueRef';
 
-export const resolveColorValue = (context: DecisionValueContext, input: ColorInputValue): Color => {
+export const resolveColorValue = (context: ValueContext, input: ColorInputValue): Color => {
     if (isDecisionRef(input)) {
         return resolveColorValueRef(context, input);
     } else if (typeof input === 'object') {
@@ -33,11 +33,11 @@ export const resolveColorValue = (context: DecisionValueContext, input: ColorInp
             const value = chroma(input);
             return value;
         } catch (error) {
-            context.addError(createInvalidInputError(context, VALUE_NAME, input, error));
+            context.addError(createInvalidInputError({ context, name: VALUE_NAME, input, error }));
             return FALLBACK_VALUE;
         }
     }
 
-    context.addError(createInvalidInputError(context, VALUE_NAME, input));
+    context.addError(createInvalidInputError({ context, name: VALUE_NAME, input }));
     return FALLBACK_VALUE;
 };

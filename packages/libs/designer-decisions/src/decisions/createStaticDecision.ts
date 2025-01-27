@@ -2,24 +2,24 @@ import type {
     BaseValue,
     Decision,
     DecisionContext,
-    DecisionInputBase,
+    InputRecord,
     LookupContexts,
     ParentValueContext,
 } from '../types';
-import { createDecisionValueContext } from '../values';
+import { createValueContext } from '../values';
 
 import { getDecisionModelFactory } from './getDecisionModelFactory';
 
-export const createStaticStoreDecision = <T = unknown>(
+export const createStaticDecision = <T = unknown>(
     decisionContext: DecisionContext,
-    inputs: DecisionInputBase[],
+    inputs: InputRecord[],
 ): Decision<BaseValue<T>> => {
     const produce = (context?: LookupContexts | ParentValueContext): BaseValue<T> => {
         const input = inputs[0]; // WIP match context
         const modelFactory = getDecisionModelFactory<T>(input.model);
         const model = modelFactory();
 
-        const valueContext = createDecisionValueContext(decisionContext, context, input);
+        const valueContext = createValueContext(decisionContext, context, input);
         return model.produce(valueContext, input.params) as BaseValue<T>;
     };
 

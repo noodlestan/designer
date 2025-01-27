@@ -1,21 +1,21 @@
 import type { AnchoredNumberSeriesParams, ColorOklabAxisLiteral } from '../../../primitives';
-import type { DecisionInputBase } from '../../base';
+import type { InputRecord } from '../../base';
 
-export type ColorOklabChromaValueExplicitInput = DecisionInputBase & {
+export type ColorOklabChromaValueExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-value/explicit';
     params: {
         value: ColorOklabAxisLiteral;
     };
 };
 
-export type ColorOklabChromaScaleExplicitInput = DecisionInputBase & {
+export type ColorOklabChromaScaleExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-scale/explicit';
     params: {
         values: ColorOklabAxisLiteral[];
     };
 };
 
-export type ColorOklabChromaScaleBoundedInput = DecisionInputBase & {
+export type ColorOklabChromaScaleBoundedInput = InputRecord & {
     model: 'color-oklab-chroma-scale/bounded';
     params: {
         from: ColorOklabAxisLiteral;
@@ -24,7 +24,7 @@ export type ColorOklabChromaScaleBoundedInput = DecisionInputBase & {
     };
 };
 
-export type ColorOklabChromaScaleAnchoredInput = DecisionInputBase & {
+export type ColorOklabChromaScaleAnchoredInput = InputRecord & {
     model: 'color-oklab-chroma-scale/anchored';
     params: {
         anchor: ColorOklabAxisLiteral;

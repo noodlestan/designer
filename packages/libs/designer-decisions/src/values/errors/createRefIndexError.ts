@@ -6,14 +6,16 @@ type Attributes = {
     ref: DecisionRef;
 };
 
-export function createRefNotFoundError(attributes: Attributes): DecisionValueError {
-    const { context, name, ref } = attributes;
+export const createRefIndexError = (attributes: Attributes): DecisionValueError => {
+    const { context, ref, name } = attributes;
+
+    context.decisionContext().ref();
 
     const refStr = JSON.stringify(ref);
     const decisionRefStr = JSON.stringify(context.decisionContext().ref());
     const referenced = `referenced in "${decisionRefStr}"`;
-    const msg = `Ref (${name}) ${refStr} not found, ${referenced}.`;
+    const msg = `Ref (${name}) ${refStr} out of bounds ${referenced}.`;
     return {
         msg,
     };
-}
+};

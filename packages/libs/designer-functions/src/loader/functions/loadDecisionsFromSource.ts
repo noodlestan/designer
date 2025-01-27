@@ -1,4 +1,4 @@
-import type { DecisionInputBase, DecisionSource } from '@noodlestan/designer-decisions';
+import type { DecisionSource, InputRecord } from '@noodlestan/designer-decisions';
 
 import { resolveSourcePath } from '../../helpers';
 
@@ -15,7 +15,7 @@ function resolveSource(sourceOrPath: string | DecisionSource): DecisionSource {
 export const loadDecisionsFromSource = async (
     sourceOrPath: DecisionSource | string,
     moduleResolver: (moduleName: string) => Promise<string>,
-): Promise<DecisionInputBase[]> => {
+): Promise<InputRecord[]> => {
     const resolved = resolveSource(sourceOrPath);
     const resolvedPath = await resolveSourcePath(resolved.source, moduleResolver);
     const files = await findJsonFiles(resolvedPath);

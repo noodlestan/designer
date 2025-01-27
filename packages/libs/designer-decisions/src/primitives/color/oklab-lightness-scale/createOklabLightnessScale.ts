@@ -1,13 +1,9 @@
-import type {
-    DecisionValueContext,
-    OklabLightnessScale,
-    OklabLightnessValue,
-} from '../../../types';
+import type { OklabLightnessScale, OklabLightnessValue, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createOklabLightnessScale = (
-    context: DecisionValueContext,
+    context: ValueContext,
     input: OklabLightnessValue[],
 ): OklabLightnessScale => {
     context.consume(input);

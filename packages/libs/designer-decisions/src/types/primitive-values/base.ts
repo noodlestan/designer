@@ -1,7 +1,7 @@
-import type { DecisionValueContext } from '../decision-values';
+import type { ValueContext } from '../decision-values';
 
 export type BaseValueAbstract = {
-    context(): DecisionValueContext;
+    context(): ValueContext;
 };
 
 export type BaseValue<T> = BaseValueAbstract & {

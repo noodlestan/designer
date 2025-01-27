@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { DecisionInputBase, DecisionUnknown } from '../types';
+import type { DecisionUnknown, InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
-import { createStaticStoreDecision } from './createStaticStoreDecision';
+import { createStaticDecision } from './createStaticDecision';
 import { getDecisionModelFactory } from './getDecisionModelFactory';
 import { createDecisionModelMock } from './mocks';
 
@@ -14,7 +14,7 @@ vi.mock('./getDecisionModelFactory', () => ({
 const getDecisionModelFactoryMocked = vi.mocked(getDecisionModelFactory);
 
 describe('createStaticStoreDecision()', () => {
-    const mockInputs: DecisionInputBase[] = [
+    const mockInputs: InputRecord[] = [
         {
             uuid: 'test-uuid',
             model: 'type/model',
@@ -31,7 +31,7 @@ describe('createStaticStoreDecision()', () => {
                 vi.fn(),
                 [],
             );
-            const decision = createStaticStoreDecision<string>(decisionContext, mockInputs);
+            const decision = createStaticDecision<string>(decisionContext, mockInputs);
 
             expect(decision.uuid()).toBe('test-uuid');
             expect(decision.type()).toBe('type');
@@ -53,7 +53,7 @@ describe('createStaticStoreDecision()', () => {
 
         beforeEach(() => {
             getDecisionModelFactoryMocked.mockReturnValue(() => mockModel);
-            result = createStaticStoreDecision<string>(decisionContext, mockInputs);
+            result = createStaticDecision<string>(decisionContext, mockInputs);
         });
 
         it('should invoke the model produce method with context and params', () => {
@@ -72,7 +72,7 @@ describe('createStaticStoreDecision()', () => {
                 vi.fn(),
                 [],
             );
-            const decision = createStaticStoreDecision<string>(decisionContext, mockInputs);
+            const decision = createStaticDecision<string>(decisionContext, mockInputs);
             const producedValue = decision.produce();
 
             expect(producedValue.context().decisionContext()).toBe(decisionContext);
@@ -85,7 +85,7 @@ describe('createStaticStoreDecision()', () => {
                 vi.fn(),
                 [],
             );
-            const decision = createStaticStoreDecision<string>(decisionContext, mockInputs);
+            const decision = createStaticDecision<string>(decisionContext, mockInputs);
             const producedValue = decision.produce();
 
             expect(producedValue.get()).toBe(mockValue);

@@ -3,23 +3,23 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type {
     DecisionContext,
     DecisionUnknown,
-    DecisionValueContext,
     DecisionValueError,
+    ValueContext,
 } from '../../types';
 
-import { createValueContext } from './createValueContext';
+import { createValueContextPrivate } from './createValueContextPrivate';
 
-describe('createValueContext', () => {
+describe('createValueContextPrivate()', () => {
     describe('Given a DecisionContext and no parentContext or input', () => {
         const mockDecisionContext = {
             resolve: vi.fn(),
             ref: vi.fn(),
         } as unknown as DecisionContext;
 
-        let result: DecisionValueContext;
+        let result: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
         });
 
         it('should have the provided decisionContext', () => {
@@ -63,10 +63,10 @@ describe('createValueContext', () => {
         const mockLookupContexts = { all: ['Context A'] };
         const mockInput = { model: 'model', name: 'value-1', params: {} };
 
-        let result: DecisionValueContext;
+        let result: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext, mockLookupContexts, mockInput);
+            result = createValueContextPrivate(mockDecisionContext, mockLookupContexts, mockInput);
         });
 
         it('should have the provided decisionContext', () => {
@@ -95,11 +95,11 @@ describe('createValueContext', () => {
             const resolveMocked = vi.mocked(mockDecisionContext.resolve);
             const mockDecisionRef = { $uuid: 'test-uuid' };
 
-            let result: DecisionValueContext;
+            let result: ValueContext;
 
             beforeEach(() => {
                 resolveMocked.mockReturnValue([mockDecisionContext, undefined]);
-                result = createValueContext(mockDecisionContext);
+                result = createValueContextPrivate(mockDecisionContext);
             });
 
             it('should call resolver on the DecisionContext with the DecisionRef', () => {
@@ -133,12 +133,12 @@ describe('createValueContext', () => {
             const mockDecision = {} as DecisionUnknown;
             mockDecision.uuid = () => mockDecisionRef.$uuid;
 
-            let result: DecisionValueContext;
+            let result: ValueContext;
             let resolved: [DecisionContext, DecisionUnknown | undefined];
 
             beforeEach(() => {
                 resolveMocked.mockReturnValue([mockDecisionContext, mockDecision]);
-                result = createValueContext(mockDecisionContext);
+                result = createValueContextPrivate(mockDecisionContext);
                 resolved = result.resolve(mockDecisionRef);
             });
 
@@ -170,10 +170,10 @@ describe('createValueContext', () => {
         } as unknown as DecisionContext;
         const mockInput = { model: 'model', name: 'value-1', params: {} };
 
-        let result: DecisionValueContext;
+        let result: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             result.consume(mockInput);
         });
 
@@ -197,10 +197,10 @@ describe('createValueContext', () => {
         } as unknown as DecisionContext;
         const mockError = { msg: 'Test error' } as DecisionValueError;
 
-        let result: DecisionValueContext;
+        let result: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             result.addError(mockError);
         });
 
@@ -223,11 +223,11 @@ describe('createValueContext', () => {
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
 
-        let result: DecisionValueContext;
-        let nested: DecisionValueContext;
+        let result: ValueContext;
+        let nested: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             nested = result.nestedContext();
         });
 
@@ -248,11 +248,11 @@ describe('createValueContext', () => {
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
 
-        let result: DecisionValueContext;
-        let child: DecisionValueContext;
+        let result: ValueContext;
+        let child: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             child = result.childContext();
         });
 
@@ -274,11 +274,11 @@ describe('createValueContext', () => {
         } as unknown as DecisionContext;
         const mockInput = { model: 'model', name: 'value-1', params: {} };
 
-        let result: DecisionValueContext;
-        let child: DecisionValueContext;
+        let result: ValueContext;
+        let child: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             child = result.childContext(mockInput);
         });
 
@@ -299,11 +299,11 @@ describe('createValueContext', () => {
         } as unknown as DecisionContext;
         const mockError = { msg: 'Test error' } as DecisionValueError;
 
-        let result: DecisionValueContext;
-        let child: DecisionValueContext;
+        let result: ValueContext;
+        let child: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             child = result.childContext();
             child.addError(mockError);
         });
@@ -328,11 +328,11 @@ describe('createValueContext', () => {
         } as unknown as DecisionContext;
         const mockError = { msg: 'Test error' } as DecisionValueError;
 
-        let result: DecisionValueContext;
-        let nested: DecisionValueContext;
+        let result: ValueContext;
+        let nested: ValueContext;
 
         beforeEach(() => {
-            result = createValueContext(mockDecisionContext);
+            result = createValueContextPrivate(mockDecisionContext);
             nested = result.nestedContext();
             nested.addError(mockError);
         });

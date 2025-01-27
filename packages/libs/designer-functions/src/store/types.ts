@@ -4,9 +4,9 @@ import type {
     DecisionContext,
     DecisionRef,
     DecisionRefResolver,
-    DecisionValueContext,
     LookupContexts,
     StaticInputMap,
+    ValueContext,
 } from '@noodlestan/designer-decisions';
 
 export type StaticDecisionStoreError = {
@@ -25,5 +25,5 @@ export type StaticDecisionStore = {
     ) => [DecisionContext, Decision<V> | undefined];
     resolver: DecisionRefResolver;
     createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
-    createDecisionValueContext: (lookupContexts?: LookupContexts) => DecisionValueContext;
+    createValueContext: (lookupContexts?: LookupContexts) => ValueContext;
 };

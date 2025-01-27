@@ -1,4 +1,4 @@
-import type { DecisionId, DecisionInputBase, DecisionName } from '../decision-inputs';
+import type { DecisionId, DecisionName, InputRecord } from '../decision-inputs';
 import type { BaseValue } from '../primitive-values';
 
 export type Value = unknown;
@@ -15,7 +15,7 @@ export type DecisionError = {
 export type DecisionContext = {
     ref: () => DecisionRef;
     resolve: DecisionRefResolver;
-    inputs: () => DecisionInputBase[];
+    inputs: () => InputRecord[];
     hasErrors: () => boolean;
     errors: () => DecisionError[];
     addError: (error: DecisionError) => void;
@@ -31,11 +31,11 @@ export type DecisionValueError = {
     msg: string;
 };
 
-export type DecisionValueContext = {
+export type ValueContext = {
     decisionContext: () => DecisionContext;
     parent: () => LinkedValueContext | undefined;
     lookupContexts: () => LookupContexts;
-    decisionInput: () => DecisionInputBase | undefined;
+    decisionInput: () => InputRecord | undefined;
     resolve: DecisionRefResolver;
     valueInput: () => unknown | undefined;
     lookups: () => DecisionLookup[];
@@ -46,13 +46,13 @@ export type DecisionValueContext = {
     hasErrors: () => boolean;
     consume: (input: unknown) => void;
     addError: (error: DecisionValueError) => void;
-    childContext: (input?: DecisionInputBase) => DecisionValueContext;
-    nestedContext: () => DecisionValueContext;
-    outputContext: () => DecisionValueContext;
+    childContext: (input?: InputRecord) => ValueContext;
+    nestedContext: () => ValueContext;
+    outputContext: () => ValueContext;
 };
 
 export type ParentValueContext = Omit<
-    DecisionValueContext,
+    ValueContext,
     'resolve' | 'consume' | 'addError' | 'nestedContext' | 'outputContext'
 >;
 export type LinkedValueContext = Omit<ParentValueContext, 'childContext'>;
@@ -67,8 +67,8 @@ export type Decision<V extends BaseValue<unknown>> = {
     uuid: () => string | undefined;
     name: () => string;
     description: () => string | undefined;
-    inputs: () => DecisionInputBase[];
-    input: () => DecisionInputBase; // WIP match contexts
+    inputs: () => InputRecord[];
+    input: () => InputRecord; // WIP match contexts
     model: () => string; // WIP match contexts
     params: () => object; // WIP match contexts
     produce: (context?: LookupContexts | ParentValueContext) => V;
@@ -97,12 +97,12 @@ export type DecisionRefResolver = <V extends BaseValue<unknown> = BaseValue<unkn
 ) => [DecisionContext, Decision<V> | undefined];
 
 export type DecisionModel<V = BaseValue<unknown>, P = object> = {
-    produce: (context: DecisionValueContext, params: P) => V;
+    produce: (context: ValueContext, params: P) => V;
 };
 
 export type DecisionModelFactory<
     V = BaseValue<unknown>,
-    I extends DecisionInputBase = DecisionInputBase,
+    I extends InputRecord = InputRecord,
 > = () => DecisionModel<V, I['params']>;
 
 export type DecisionUnknown = Decision<BaseValue<unknown>>;

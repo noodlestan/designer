@@ -2,9 +2,9 @@ import type {
     BaseValue,
     DecisionContext,
     DecisionError,
-    DecisionInputBase,
-    DecisionInputError,
     DecisionValueError,
+    InputRecord,
+    InputValidationError,
 } from '@noodlestan/designer-decisions';
 
 import type { StaticDecisionStoreError } from '../../store';
@@ -14,7 +14,7 @@ export type ProducedDecisionStatus = {
     name: string;
     model: string;
     hasErrors: boolean;
-    input: DecisionInputBase;
+    input: InputRecord;
     context: DecisionContext;
     value?: BaseValue<unknown>;
 };
@@ -25,7 +25,7 @@ export type ProducedDecisionStore = {
     errors: {
         count: () => number;
         store: () => StaticDecisionStoreError[];
-        validation: () => DecisionInputError[];
+        validation: () => InputValidationError[];
         value: () => (DecisionError | DecisionValueError)[];
     };
     summary: () => string;
