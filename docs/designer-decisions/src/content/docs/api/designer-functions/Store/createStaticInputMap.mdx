@@ -7,7 +7,7 @@ sidebar:
 
 ```ts
 type createStaticInputMap = (
-    inputData: DecisionInputBase[],
+    inputs: InputRecord[],
     validator?: DecisionValidator,
 ) => StaticInputMap;
 ```
@@ -19,9 +19,9 @@ that can be used to retrieve decision inputs and validation errors.
 
 ## Params
 
-##### ༶ `inputData`: [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)[]
+##### ༶ `inputs`: [InputRecord](/api/designer-decisions/Types/InputRecord)[]
 
-An array of decision inputs.
+An array of decision input records.
 
 ##### ༶ `validator`: [DecisionValidator](/api/designer-functions/Types/DecisionValidator)
 
@@ -34,6 +34,6 @@ in scenarios where the data is guaranteed to have been validated in a different 
 
 ```ts
 const validator = createDecisionValidator(schemaMap);
-const inputData = await loadDecisionsFromPaths(dataPaths);
-const inputMap = createStaticInputMap(inputData, validator);
+const inputs = await loadDecisionsFromPaths(dataPaths);
+const inputMap = createStaticInputMap(inputs, validator);
 ```

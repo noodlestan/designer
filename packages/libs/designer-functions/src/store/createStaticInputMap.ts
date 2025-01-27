@@ -1,6 +1,6 @@
 import type {
-    DecisionInputBase,
-    DecisionInputError,
+    InputRecord,
+    InputValidationError,
     StaticInputMap,
 } from '@noodlestan/designer-decisions';
 
@@ -9,13 +9,13 @@ import type { DecisionValidator } from '../schemas';
 import type { DecisionInputData } from './createStaticDecisionStore';
 
 export const createStaticInputMap = (
-    inputData: DecisionInputBase[],
+    inputs: InputRecord[],
     validator?: DecisionValidator,
 ): StaticInputMap => {
-    const inputsByUuid: Map<string, DecisionInputBase[]> = new Map();
-    const inputsByName: Map<string, DecisionInputBase[]> = new Map();
+    const inputsByUuid: Map<string, InputRecord[]> = new Map();
+    const inputsByName: Map<string, InputRecord[]> = new Map();
 
-    const data: DecisionInputData[] = inputData.map(input => {
+    const data: DecisionInputData[] = inputs.map(input => {
         if (input.uuid) {
             const byUuid = inputsByUuid.get(input.uuid) || [];
             byUuid.push(input);
@@ -36,13 +36,13 @@ export const createStaticInputMap = (
         return data.some(item => item.errors !== null);
     };
 
-    const validationErrors = (): DecisionInputError[] => {
+    const validationErrors = (): InputValidationError[] => {
         return data.flatMap(({ decision, errors = [] }) => {
             return errors ? errors.map(error => ({ decision, error })) : [];
         });
     };
 
-    const records = (filter?: (item: DecisionInputBase) => boolean): DecisionInputBase[] => {
+    const records = (filter?: (item: InputRecord) => boolean): InputRecord[] => {
         const items = data.map(item => item.decision);
         return filter ? items.filter(filter) : items;
     };

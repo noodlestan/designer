@@ -2,8 +2,8 @@ import type {
     BaseValue,
     Decision,
     DecisionContext,
-    DecisionInputBase,
     DecisionRef,
+    InputRecord,
     LookupContexts,
     StaticInputMap,
 } from '@noodlestan/designer-decisions';
@@ -17,7 +17,7 @@ import type { ErrorObject } from 'ajv';
 import type { StaticDecisionStore, StaticDecisionStoreError } from './types';
 
 export type DecisionInputData = {
-    decision: DecisionInputBase;
+    decision: InputRecord;
     errors: ErrorObject[] | null | undefined;
 };
 

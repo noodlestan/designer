@@ -24,7 +24,7 @@ export type ProducedDecisionStore = {
     errors: {
         count: () => number;
         store: () => StaticDecisionStoreError[];
-        validation: () => DecisionInputError[];
+        validation: () => InputValidationError[];
         value: () => (DecisionError | DecisionValueError)[];
     };
     summary: () => string;

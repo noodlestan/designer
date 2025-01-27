@@ -1,21 +1,21 @@
 import type { AnchoredNumberSeriesParams, Degrees } from '../../../primitives';
-import type { DecisionInputBase } from '../../base';
+import type { InputRecord } from '../../base';
 
-export type ColorOklabHueValueExplicitInput = DecisionInputBase & {
+export type ColorOklabHueValueExplicitInput = InputRecord & {
     model: 'color-oklab-hue-value/explicit';
     params: {
         value: Degrees;
     };
 };
 
-export type ColorOklabHueSetExplicitInput = DecisionInputBase & {
+export type ColorOklabHueSetExplicitInput = InputRecord & {
     model: 'color-oklab-hue-set/explicit';
     params: {
         values: Degrees[];
     };
 };
 
-export type ColorOklabHueSetBoundedInput = DecisionInputBase & {
+export type ColorOklabHueSetBoundedInput = InputRecord & {
     model: 'color-oklab-hue-set/bounded';
     params: {
         from: Degrees;
@@ -24,7 +24,7 @@ export type ColorOklabHueSetBoundedInput = DecisionInputBase & {
     };
 };
 
-export type ColorOklabHueSetAnchoredInput = DecisionInputBase & {
+export type ColorOklabHueSetAnchoredInput = InputRecord & {
     model: 'color-oklab-hue-set/anchored';
     params: {
         anchor: Degrees;

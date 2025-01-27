@@ -1,18 +1,12 @@
 import type { StaticDecisionMap, StaticInputMap } from '../decisions';
-import type {
-    BaseValue,
-    Decision,
-    DecisionContext,
-    DecisionInputBase,
-    DecisionRef,
-} from '../types';
+import type { BaseValue, Decision, DecisionContext, DecisionRef, InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
 import { createInputNotFoundError, createUnexpectedError } from './errors';
 
 export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecisionMap => {
-    const _createDecision = (context: DecisionContext, inputs: DecisionInputBase[]) => {
+    const _createDecision = (context: DecisionContext, inputs: InputRecord[]) => {
         try {
             return createStaticDecision(context, inputs);
         } catch (error) {

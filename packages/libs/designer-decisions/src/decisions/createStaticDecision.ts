@@ -2,7 +2,7 @@ import type {
     BaseValue,
     Decision,
     DecisionContext,
-    DecisionInputBase,
+    InputRecord,
     LookupContexts,
     ParentValueContext,
 } from '../types';
@@ -12,7 +12,7 @@ import { getDecisionModelFactory } from './getDecisionModelFactory';
 
 export const createStaticDecision = <T = unknown>(
     decisionContext: DecisionContext,
-    inputs: DecisionInputBase[],
+    inputs: InputRecord[],
 ): Decision<BaseValue<T>> => {
     const produce = (context?: LookupContexts | ParentValueContext): BaseValue<T> => {
         const input = inputs[0]; // WIP match context

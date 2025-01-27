@@ -1,4 +1,4 @@
-import { type DecisionInputBase, createLookupContexts } from '@noodlestan/designer-decisions';
+import { type InputRecord, createLookupContexts } from '@noodlestan/designer-decisions';
 
 import type { StaticDecisionStore } from '../../store';
 
@@ -6,7 +6,7 @@ import type { ProducedDecisionStatus } from './types';
 
 export const produceDecisionStatus = (
     store: StaticDecisionStore,
-    input: DecisionInputBase,
+    input: InputRecord,
 ): ProducedDecisionStatus => {
     const contexts = createLookupContexts(input.contexts);
     const [context, decision] = store.decision({ $name: input.name }, contexts);

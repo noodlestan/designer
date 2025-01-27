@@ -1,15 +1,15 @@
 import type {
     DecisionContext,
     DecisionError,
-    DecisionInputBase,
     DecisionRef,
     DecisionRefResolver,
+    InputRecord,
 } from '../types';
 
 export const createDecisionContext = (
     ref: DecisionRef,
     resolver: DecisionRefResolver,
-    inputs: DecisionInputBase[],
+    inputs: InputRecord[],
 ): DecisionContext => {
     const errors: DecisionError[] = [];
 

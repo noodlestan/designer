@@ -1,8 +1,8 @@
 import type { ErrorObject } from 'ajv';
 
-import type { DecisionInputBase } from '../models';
+import type { InputRecord } from '../models';
 
-export type DecisionInputError = {
-    decision: DecisionInputBase;
+export type InputValidationError = {
+    decision: InputRecord;
     error: ErrorObject;
 };

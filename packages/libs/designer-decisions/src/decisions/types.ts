@@ -1,9 +1,9 @@
-import type { DecisionInputBase, DecisionInputError, DecisionRefResolver } from '../types';
+import type { DecisionRefResolver, InputRecord, InputValidationError } from '../types';
 
 export type StaticInputMap = {
     hasErrors: () => boolean;
-    validationErrors: () => DecisionInputError[];
-    records: (filter?: (item: DecisionInputBase) => boolean) => DecisionInputBase[];
+    validationErrors: () => InputValidationError[];
+    records: (filter?: (item: InputRecord) => boolean) => InputRecord[];
 };
 
 export type StaticDecisionMap = {

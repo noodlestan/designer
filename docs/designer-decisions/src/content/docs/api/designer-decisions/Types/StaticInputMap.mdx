@@ -10,7 +10,7 @@ and validation errors.
 
 ##### ༶ `record(ref, contexts)`
 
-**Return Value:** [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)
+**Return Value:** [InputRecord](/api/designer-decisions/Types/InputRecord)
 or `undefined` if not matched.
 
 **Parameters:**
@@ -22,11 +22,11 @@ or `undefined` if not matched.
 
 ##### ༶ `records(filter?)`
 
-**Return Value:** [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)[]
+**Return Value:** [InputRecord](/api/designer-decisions/Types/InputRecord)[]
 
 **Parameters:**
 
--   `filter` (optional): A filter function `(item: DecisionInputBase) => boolean`
+-   `filter` (optional): A filter function `(item: InputRecord) => boolean`
 
 ##### ༶ `hasErrors()`
 
@@ -35,5 +35,5 @@ or `undefined` if not matched.
 ##### ༶ `validationErrors()`
 
 **Return Value:**
-[DecisionInputError](/api/designer-decisions/Types/DecisionInputError)[]
+[InputValidationError](/api/designer-decisions/Types/InputValidationError)[]
 or `null` if there were validation errors.

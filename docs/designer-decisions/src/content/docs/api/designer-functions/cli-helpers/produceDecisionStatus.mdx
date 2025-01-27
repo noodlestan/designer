@@ -8,7 +8,7 @@ sidebar:
 ```ts
 type produceDecisionStatus = (
     store: StaticDecisionStore,
-    input: DecisionInputBase,
+    input: InputRecord,
 ) => ProducedDecisionStatus;
 ```
 
@@ -25,7 +25,7 @@ type ProducedDecisionStatus = {
     name: string;
     model: string;
     hasErrors: boolean;
-    input: DecisionInputBase;
+    input: InputRecord;
     context: DecisionContext;
     value?: BaseValue<unknown>;
 };
@@ -35,7 +35,7 @@ type ProducedDecisionStatus = {
 
 ##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
 
-##### ༶ `input`: [DecisionInputBase](/api/designer-decisions/Types/DecisionInputBase)
+##### ༶ `input`: [InputRecord](/api/designer-decisions/Types/InputRecord)
 
 &nbsp;
 

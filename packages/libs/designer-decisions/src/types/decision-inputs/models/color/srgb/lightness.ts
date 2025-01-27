@@ -1,21 +1,21 @@
 import type { AnchoredNumberSeriesParams, NormalNumber } from '../../../primitives';
-import type { DecisionInputBase } from '../../base';
+import type { InputRecord } from '../../base';
 
-export type ColorSRGBLightnessValueExplicitInput = DecisionInputBase & {
+export type ColorSRGBLightnessValueExplicitInput = InputRecord & {
     model: 'color-srgb-lightness-value/explicit';
     params: {
         value: NormalNumber;
     };
 };
 
-export type ColorSRGBLightnessScaleExplicitInput = DecisionInputBase & {
+export type ColorSRGBLightnessScaleExplicitInput = InputRecord & {
     model: 'color-srgb-lightness-scale/explicit';
     params: {
         values: NormalNumber[];
     };
 };
 
-export type ColorSRGBLightnessScaleBoundedInput = DecisionInputBase & {
+export type ColorSRGBLightnessScaleBoundedInput = InputRecord & {
     model: 'color-srgb-lightness-scale/bounded';
     params: {
         from: NormalNumber;
@@ -24,7 +24,7 @@ export type ColorSRGBLightnessScaleBoundedInput = DecisionInputBase & {
     };
 };
 
-export type ColorSRGBLightnessScaleAnchoredInput = DecisionInputBase & {
+export type ColorSRGBLightnessScaleAnchoredInput = InputRecord & {
     model: 'color-srgb-lightness-scale/anchored';
     params: {
         anchor: NormalNumber;

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { DecisionInputBase, DecisionUnknown } from '../types';
+import type { DecisionUnknown, InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
@@ -14,7 +14,7 @@ vi.mock('./getDecisionModelFactory', () => ({
 const getDecisionModelFactoryMocked = vi.mocked(getDecisionModelFactory);
 
 describe('createStaticStoreDecision()', () => {
-    const mockInputs: DecisionInputBase[] = [
+    const mockInputs: InputRecord[] = [
         {
             uuid: 'test-uuid',
             model: 'type/model',

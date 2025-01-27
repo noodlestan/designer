@@ -3,11 +3,11 @@ import type {
     BaseValue,
     Decision,
     DecisionContext,
-    DecisionInputBase,
     DecisionLookup,
     DecisionRef,
     DecisionValueContext,
     DecisionValueError,
+    InputRecord,
     LinkedValueContext,
     LookupContexts,
 } from '../../types';
@@ -19,7 +19,7 @@ type State = {
 export const createValueContext = (
     decisionContext: DecisionContext,
     parentContext?: LookupContexts | LinkedValueContext,
-    input?: DecisionInputBase,
+    input?: InputRecord,
 ): DecisionValueContext => {
     const state: State = {};
 
@@ -78,7 +78,7 @@ export const createValueContext = (
         errors.push(error);
     };
 
-    const childContext = (input?: DecisionInputBase) => {
+    const childContext = (input?: InputRecord) => {
         const child = createValueContext(decisionContext, baseContext, input);
         childContexts.push(child);
         return child;

@@ -1,8 +1,8 @@
 import fs from 'fs/promises';
 
-import type { DecisionInputBase } from '@noodlestan/designer-decisions';
+import type { InputRecord } from '@noodlestan/designer-decisions';
 
-export async function loadDecisionFile(filePath: string): Promise<DecisionInputBase[]> {
+export async function loadDecisionFile(filePath: string): Promise<InputRecord[]> {
     const content = await fs.readFile(filePath, 'utf-8');
     let parsed;
     try {
@@ -14,5 +14,5 @@ export async function loadDecisionFile(filePath: string): Promise<DecisionInputB
     if (!Array.isArray(parsed)) {
         throw new Error(`Decision file does not contain an array: "${filePath}".`);
     }
-    return parsed as DecisionInputBase[];
+    return parsed as InputRecord[];
 }

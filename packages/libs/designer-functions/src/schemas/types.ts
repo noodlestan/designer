@@ -1,4 +1,4 @@
-import type { DecisionInputBase } from '@noodlestan/designer-decisions';
+import type { InputRecord } from '@noodlestan/designer-decisions';
 import type { ErrorObject } from 'ajv';
 
 export type SchemaId = string;
@@ -9,5 +9,5 @@ export type SchemaMap = Map<SchemaId, SchemaData>;
 
 export type DecisionValidator = {
     schemas: () => SchemaData[];
-    validate: (decision: DecisionInputBase) => ErrorObject[] | null;
+    validate: (decision: InputRecord) => ErrorObject[] | null;
 };

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { DecisionContext, DecisionInputBase, DecisionRef, DecisionUnknown } from '../types';
+import type { DecisionContext, DecisionRef, DecisionUnknown, InputRecord } from '../types';
 
 import { createStaticDecision } from './createStaticDecision';
 import { createStaticDecisionMap } from './createStaticDecisionMap';
@@ -94,7 +94,7 @@ describe('createStaticDecisionMap()', () => {
     });
 
     describe('When an unexpected error occurs during decision creation', () => {
-        const mockInputs: DecisionInputBase[] = [
+        const mockInputs: InputRecord[] = [
             { uuid: '2', model: 'model/type', name: 'Decision2', params: {} },
         ];
 
