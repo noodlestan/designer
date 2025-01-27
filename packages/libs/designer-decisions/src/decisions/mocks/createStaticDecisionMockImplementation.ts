@@ -7,7 +7,7 @@ import type {
 } from '../../types';
 import { createDecisionValueContext } from '../../values';
 
-export const createStaticStoreDecisionMockImplementation = (mockValue: string) => {
+export const createStaticDecisionMockImplementation = (mockValue: string) => {
     return (decisionContext: DecisionContext, inputs: DecisionInputBase[]): DecisionUnknown => {
         const produce = (context?: LookupContexts | ParentValueContext) => {
             const valueContext = createDecisionValueContext(decisionContext, context, inputs[0]);

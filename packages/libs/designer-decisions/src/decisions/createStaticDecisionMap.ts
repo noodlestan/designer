@@ -8,13 +8,13 @@ import type {
 } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
-import { createStaticStoreDecision } from './createStaticStoreDecision';
+import { createStaticDecision } from './createStaticDecision';
 import { createInputNotFoundError, createUnexpectedError } from './errors';
 
 export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecisionMap => {
     const _createDecision = (context: DecisionContext, inputs: DecisionInputBase[]) => {
         try {
-            return createStaticStoreDecision(context, inputs);
+            return createStaticDecision(context, inputs);
         } catch (error) {
             const err = createUnexpectedError(context, error);
             context.addError(err);

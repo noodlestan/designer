@@ -10,7 +10,7 @@ import { createDecisionValueContext } from '../values';
 
 import { getDecisionModelFactory } from './getDecisionModelFactory';
 
-export const createStaticStoreDecision = <T = unknown>(
+export const createStaticDecision = <T = unknown>(
     decisionContext: DecisionContext,
     inputs: DecisionInputBase[],
 ): Decision<BaseValue<T>> => {
