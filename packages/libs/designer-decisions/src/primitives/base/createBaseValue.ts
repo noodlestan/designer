@@ -1,5 +1,5 @@
-import type { BaseValueAbstract, DecisionValueContext } from '../../types';
+import type { BaseValueAbstract, ValueContext } from '../../types';
 
-export const createBaseValue = (context: DecisionValueContext): BaseValueAbstract => ({
+export const createBaseValue = (context: ValueContext): BaseValueAbstract => ({
     context: () => context,
 });

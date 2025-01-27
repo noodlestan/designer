@@ -1,9 +1,9 @@
-import type { DecisionValueContext, OklabChromaScale, OklabChromaValue } from '../../../types';
+import type { OklabChromaScale, OklabChromaValue, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createOklabChromaScale = (
-    context: DecisionValueContext,
+    context: ValueContext,
     input: OklabChromaValue[],
 ): OklabChromaScale => {
     context.consume(input);

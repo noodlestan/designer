@@ -1,13 +1,10 @@
 import { isColorOklabHueValueDecision } from '../../../decisions';
-import type { DecisionRef, DecisionValueContext } from '../../../types';
+import type { DecisionRef, ValueContext } from '../../../types';
 import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
-export const resolveOklabHueValueRef = (
-    context: DecisionValueContext,
-    ref: DecisionRef,
-): number => {
+export const resolveOklabHueValueRef = (context: ValueContext, ref: DecisionRef): number => {
     const [, decision] = context.resolve(ref);
 
     if (!decision) {

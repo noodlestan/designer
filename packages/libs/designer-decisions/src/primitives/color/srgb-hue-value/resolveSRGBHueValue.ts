@@ -1,9 +1,9 @@
-import type { ColorSRGBHue, DecisionValueContext } from '../../../types';
+import type { ColorSRGBHue, ValueContext } from '../../../types';
 import { isDecisionRef } from '../../ref';
 
 import { resolveSRGBHueValueRef } from './resolveSRGBHueValueRef';
 
-export const resolveSRGBHueValue = (context: DecisionValueContext, input: ColorSRGBHue): number => {
+export const resolveSRGBHueValue = (context: ValueContext, input: ColorSRGBHue): number => {
     if (isDecisionRef(input)) {
         return resolveSRGBHueValueRef(context, input);
     }

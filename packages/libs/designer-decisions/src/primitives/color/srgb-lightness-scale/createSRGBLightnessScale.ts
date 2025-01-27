@@ -1,9 +1,9 @@
-import type { DecisionValueContext, SRGBLightnessScale, SRGBLightnessValue } from '../../../types';
+import type { SRGBLightnessScale, SRGBLightnessValue, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
 
 export const createSRGBLightnessScale = (
-    context: DecisionValueContext,
+    context: ValueContext,
     input: SRGBLightnessValue[],
 ): SRGBLightnessScale => {
     context.consume(input);

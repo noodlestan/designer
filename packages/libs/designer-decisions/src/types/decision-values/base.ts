@@ -31,7 +31,7 @@ export type DecisionValueError = {
     msg: string;
 };
 
-export type DecisionValueContext = {
+export type ValueContext = {
     decisionContext: () => DecisionContext;
     parent: () => LinkedValueContext | undefined;
     lookupContexts: () => LookupContexts;
@@ -46,13 +46,13 @@ export type DecisionValueContext = {
     hasErrors: () => boolean;
     consume: (input: unknown) => void;
     addError: (error: DecisionValueError) => void;
-    childContext: (input?: InputRecord) => DecisionValueContext;
-    nestedContext: () => DecisionValueContext;
-    outputContext: () => DecisionValueContext;
+    childContext: (input?: InputRecord) => ValueContext;
+    nestedContext: () => ValueContext;
+    outputContext: () => ValueContext;
 };
 
 export type ParentValueContext = Omit<
-    DecisionValueContext,
+    ValueContext,
     'resolve' | 'consume' | 'addError' | 'nestedContext' | 'outputContext'
 >;
 export type LinkedValueContext = Omit<ParentValueContext, 'childContext'>;
@@ -97,7 +97,7 @@ export type DecisionRefResolver = <V extends BaseValue<unknown> = BaseValue<unkn
 ) => [DecisionContext, Decision<V> | undefined];
 
 export type DecisionModel<V = BaseValue<unknown>, P = object> = {
-    produce: (context: DecisionValueContext, params: P) => V;
+    produce: (context: ValueContext, params: P) => V;
 };
 
 export type DecisionModelFactory<

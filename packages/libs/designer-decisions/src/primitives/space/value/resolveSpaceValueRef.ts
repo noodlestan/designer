@@ -1,13 +1,10 @@
 import { isSpaceScaleDecision, isSpaceValueDecision } from '../../../decisions';
-import type { DecisionRef, DecisionValueContext, SpaceWithUnits } from '../../../types';
+import type { DecisionRef, SpaceWithUnits, ValueContext } from '../../../types';
 import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
-export const resolveSpaceValueRef = (
-    context: DecisionValueContext,
-    ref: DecisionRef,
-): SpaceWithUnits => {
+export const resolveSpaceValueRef = (context: ValueContext, ref: DecisionRef): SpaceWithUnits => {
     const [, decision] = context.resolve(ref);
 
     if (!decision) {

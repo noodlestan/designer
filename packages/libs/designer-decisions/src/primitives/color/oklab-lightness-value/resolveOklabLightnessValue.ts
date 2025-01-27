@@ -1,10 +1,10 @@
-import type { ColorOklabLightness, DecisionValueContext } from '../../../types';
+import type { ColorOklabLightness, ValueContext } from '../../../types';
 import { isDecisionRef } from '../../ref';
 
 import { resolveOklabLightnessValueRef } from './resolveOklabLightnessValueRef';
 
 export const resolveOklabLightnessValue = (
-    context: DecisionValueContext,
+    context: ValueContext,
     input: ColorOklabLightness,
 ): number => {
     if (isDecisionRef(input)) {

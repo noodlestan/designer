@@ -5,12 +5,12 @@ import type {
     LookupContexts,
     ParentValueContext,
 } from '../../types';
-import { createDecisionValueContext } from '../../values';
+import { createValueContext } from '../../values';
 
 export const createStaticDecisionMockImplementation = (mockValue: string) => {
     return (decisionContext: DecisionContext, inputs: InputRecord[]): DecisionUnknown => {
         const produce = (context?: LookupContexts | ParentValueContext) => {
-            const valueContext = createDecisionValueContext(decisionContext, context, inputs[0]);
+            const valueContext = createValueContext(decisionContext, context, inputs[0]);
             return {
                 context: () => valueContext,
                 get: () => mockValue,

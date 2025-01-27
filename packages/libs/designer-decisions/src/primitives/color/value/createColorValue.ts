@@ -5,7 +5,7 @@ import type {
     ColorOkLCHLiteral,
     ColorOkLabLiteral,
     ColorValue,
-    DecisionValueContext,
+    ValueContext,
 } from '../../../types';
 import { createBaseValue } from '../../base';
 
@@ -16,10 +16,7 @@ const round = (value: number, precision: number): number => {
     return Math.round(value * factor) / factor;
 };
 
-export const createColorValue = (
-    context: DecisionValueContext,
-    input: ColorInputValue,
-): ColorValue => {
+export const createColorValue = (context: ValueContext, input: ColorInputValue): ColorValue => {
     context.consume(input);
 
     const value = resolveColorValue(context, input);

@@ -6,7 +6,7 @@ import type {
     LookupContexts,
     ParentValueContext,
 } from '../types';
-import { createDecisionValueContext } from '../values';
+import { createValueContext } from '../values';
 
 import { getDecisionModelFactory } from './getDecisionModelFactory';
 
@@ -19,7 +19,7 @@ export const createStaticDecision = <T = unknown>(
         const modelFactory = getDecisionModelFactory<T>(input.model);
         const model = modelFactory();
 
-        const valueContext = createDecisionValueContext(decisionContext, context, input);
+        const valueContext = createValueContext(decisionContext, context, input);
         return model.produce(valueContext, input.params) as BaseValue<T>;
     };
 

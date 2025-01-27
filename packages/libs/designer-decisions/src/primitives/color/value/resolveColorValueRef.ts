@@ -1,12 +1,12 @@
 import type { Color } from 'chroma-js';
 
 import { isColorSetDecision, isColorValueDecision } from '../../../decisions';
-import type { DecisionRef, DecisionValueContext } from '../../../types';
+import type { DecisionRef, ValueContext } from '../../../types';
 import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
-export const resolveColorValueRef = (context: DecisionValueContext, ref: DecisionRef): Color => {
+export const resolveColorValueRef = (context: ValueContext, ref: DecisionRef): Color => {
     const [, decision] = context.resolve(ref);
 
     if (!decision) {

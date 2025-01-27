@@ -1,24 +1,24 @@
 import { isLookupContext } from '../context';
 import type {
     DecisionContext,
-    DecisionValueContext,
     InputRecord,
     LookupContexts,
     ParentValueContext,
+    ValueContext,
 } from '../types';
 
-import { createValueContext, resolveLookupContext } from './functions';
+import { createValueContextPrivate, resolveLookupContext } from './functions';
 
-export const createDecisionValueContext = (
+export const createValueContext = (
     decisionContext: DecisionContext,
     context?: LookupContexts | ParentValueContext,
     input?: InputRecord,
-): DecisionValueContext => {
+): ValueContext => {
     const lookupContexts = resolveLookupContext(context);
     const parent = isLookupContext(context) ? undefined : context;
     if (parent) {
         return parent.childContext(input);
     }
 
-    return createValueContext(decisionContext, lookupContexts, input);
+    return createValueContextPrivate(decisionContext, lookupContexts, input);
 };

@@ -1,12 +1,7 @@
-import type {
-    DecisionRef,
-    DecisionUnknown,
-    DecisionValueContext,
-    DecisionValueError,
-} from '../../types';
+import type { DecisionRef, DecisionUnknown, DecisionValueError, ValueContext } from '../../types';
 
 export const createRefMatchError = (
-    context: DecisionValueContext,
+    context: ValueContext,
     valueName: string,
     ref: DecisionRef,
     decision: DecisionUnknown,

@@ -1,15 +1,11 @@
-import type {
-    ColorSRGBSaturation,
-    DecisionValueContext,
-    SRGBSaturationValue,
-} from '../../../types';
+import type { ColorSRGBSaturation, SRGBSaturationValue, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
 import { resolveSRGBSaturationValue } from './resolveSRGBSaturationValue';
 
 export const createSRGBSaturationValue = (
-    context: DecisionValueContext,
+    context: ValueContext,
     input: ColorSRGBSaturation,
 ): SRGBSaturationValue => {
     context.consume(input);

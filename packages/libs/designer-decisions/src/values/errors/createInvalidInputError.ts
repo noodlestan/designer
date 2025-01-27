@@ -1,7 +1,7 @@
-import type { DecisionValueContext, DecisionValueError } from '../../types';
+import type { DecisionValueError, ValueContext } from '../../types';
 
 export const createInvalidInputError = (
-    context: DecisionValueContext,
+    context: ValueContext,
     valueName: string,
     data: unknown,
     err?: unknown,

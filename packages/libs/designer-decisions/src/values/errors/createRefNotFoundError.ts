@@ -1,7 +1,7 @@
-import type { DecisionRef, DecisionValueContext, DecisionValueError } from '../../types';
+import type { DecisionRef, DecisionValueError, ValueContext } from '../../types';
 
 export function createRefNotFoundError(
-    context: DecisionValueContext,
+    context: ValueContext,
     valueName: string,
     ref: DecisionRef,
 ): DecisionValueError {

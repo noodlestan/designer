@@ -9,8 +9,8 @@ import type {
 } from '@noodlestan/designer-decisions';
 import {
     createDecisionContext,
-    createDecisionValueContext,
     createStaticDecisionMap,
+    createValueContext,
 } from '@noodlestan/designer-decisions';
 import type { ErrorObject } from 'ajv';
 
@@ -37,9 +37,9 @@ export const createStaticDecisionStore = (
         return createDecisionContext({ $name: '<unknown>' }, decisionMap.resolve, []); // WIP
     };
 
-    const _createDecisionValueContext = (lookupContexts?: LookupContexts) => {
+    const _createValueContext = (lookupContexts?: LookupContexts) => {
         const decisionContext = _createDecisionContext();
-        return createDecisionValueContext(decisionContext, lookupContexts);
+        return createValueContext(decisionContext, lookupContexts);
     };
 
     return {
@@ -50,6 +50,6 @@ export const createStaticDecisionStore = (
         decision,
         resolver: decisionMap.resolve,
         createDecisionContext: _createDecisionContext,
-        createDecisionValueContext: _createDecisionValueContext,
+        createValueContext: _createValueContext,
     };
 };
