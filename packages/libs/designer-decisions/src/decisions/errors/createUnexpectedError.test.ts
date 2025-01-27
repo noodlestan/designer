@@ -12,7 +12,7 @@ describe('createUnexpectedError()', () => {
         const mockError = new Error('Test error');
 
         it('should return a DecisionError object with the expected message', () => {
-            const result = createUnexpectedError(context, mockError);
+            const result = createUnexpectedError({ context, error: mockError });
 
             const expectedMessage = `Unexpected error in {"$uuid":"test-uuid"}: ${mockError.stack}.`;
             expect(result.msg).toBe(expectedMessage);
@@ -21,7 +21,7 @@ describe('createUnexpectedError()', () => {
 
     describe('Given a context and no error', () => {
         it('should return a DecisionError object with the expected message', () => {
-            const result = createUnexpectedError(context);
+            const result = createUnexpectedError({ context });
 
             const expectedMessage = `Unexpected error in {"$uuid":"test-uuid"}: undefined.`;
             expect(result.msg).toBe(expectedMessage);

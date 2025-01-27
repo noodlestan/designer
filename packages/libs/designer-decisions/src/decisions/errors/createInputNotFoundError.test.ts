@@ -11,7 +11,7 @@ describe('createInputNotFoundError()', () => {
         const context = createDecisionContext(ref, vi.fn(), []);
 
         it('should return a DecisionError object with the expected message', () => {
-            const result = createInputNotFoundError(context, ref);
+            const result = createInputNotFoundError({ context, ref });
 
             const expectedMessage = `Ref ${JSON.stringify(ref)} not found.`;
             expect(result.msg).toBe(expectedMessage);

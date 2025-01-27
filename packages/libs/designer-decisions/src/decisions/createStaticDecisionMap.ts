@@ -10,7 +10,7 @@ export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecis
         try {
             return createStaticDecision(context, inputs);
         } catch (error) {
-            const err = createUnexpectedError(context, error);
+            const err = createUnexpectedError({ context, error });
             context.addError(err);
         }
     };
@@ -25,7 +25,7 @@ export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecis
             return [context, decision as Decision<V>];
         }
         const context = createDecisionContext(ref, resolver, []);
-        const error = createInputNotFoundError(context, ref);
+        const error = createInputNotFoundError({ context, ref });
         context.addError(error);
         return [context, undefined];
     };

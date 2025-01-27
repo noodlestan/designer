@@ -33,11 +33,11 @@ export const resolveColorValue = (context: ValueContext, input: ColorInputValue)
             const value = chroma(input);
             return value;
         } catch (error) {
-            context.addError(createInvalidInputError(context, VALUE_NAME, input, error));
+            context.addError(createInvalidInputError({ context, name: VALUE_NAME, input, error }));
             return FALLBACK_VALUE;
         }
     }
 
-    context.addError(createInvalidInputError(context, VALUE_NAME, input));
+    context.addError(createInvalidInputError({ context, name: VALUE_NAME, input }));
     return FALLBACK_VALUE;
 };
