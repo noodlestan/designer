@@ -1,7 +1,7 @@
+import { isColorOklabHueValueDecision } from '../../../decisions';
 import type { DecisionRef, DecisionValueContext } from '../../../types';
 import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
-import { isColorOklabHueValueDecision } from './isColorOklabHueValueDecision';
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
 export const resolveOklabHueValueRef = (

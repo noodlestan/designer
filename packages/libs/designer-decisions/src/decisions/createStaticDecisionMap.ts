@@ -1,4 +1,4 @@
-import type { StaticDecisionMap, StaticInputMap } from '../inputs';
+import type { StaticDecisionMap, StaticInputMap } from '../decisions';
 import type {
     BaseValue,
     Decision,

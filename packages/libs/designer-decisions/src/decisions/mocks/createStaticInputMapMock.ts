@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import type { StaticInputMap } from '../../inputs';
+import type { StaticInputMap } from '../../decisions';
 import type { DecisionInputBase } from '../../types';
 
 export function createStaticInputMapMock(inputs: DecisionInputBase[]): StaticInputMap {

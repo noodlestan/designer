@@ -1,7 +1,7 @@
+import { isColorSRGBHueValueDecision } from '../../../decisions';
 import type { DecisionRef, DecisionValueContext } from '../../../types';
 import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
-import { isColorSRGBHueValueDecision } from './isColorSRGBHueValueDecision';
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
 export const resolveSRGBHueValueRef = (context: DecisionValueContext, ref: DecisionRef): number => {

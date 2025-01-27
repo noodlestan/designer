@@ -1,7 +1,7 @@
+import { isColorOklabChromaValueDecision } from '../../../decisions';
 import type { DecisionRef, DecisionValueContext } from '../../../types';
 import { createRefMatchError, createRefNotFoundError } from '../../../values';
 
-import { isColorOklabChromaValueDecision } from './isColorOklabChromaValueDecision';
 import { FALLBACK_VALUE, REF_CHECKED_TYPES, VALUE_NAME } from './private';
 
 export const resolveOklabChromaValueRef = (
