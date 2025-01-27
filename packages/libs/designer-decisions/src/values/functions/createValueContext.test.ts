@@ -42,15 +42,16 @@ describe('createValueContext', () => {
             expect(result.valueInput()).toBeUndefined();
         });
 
-        it('should have no children, nested contexts, lookups, or errors', () => {
+        it('should have no children, nested contexts, lookups', () => {
             expect(result.lookups()).toEqual([]);
             expect(result.nested()).toEqual([]);
             expect(result.children()).toEqual([]);
-            expect(result.errors()).toEqual([]);
         });
 
         it('should have no errors', () => {
             expect(result.hasErrors()).toEqual(false);
+            expect(result.ownErrors()).toEqual([]);
+            expect(result.allErrors()).toEqual([]);
         });
     });
 
@@ -203,12 +204,16 @@ describe('createValueContext', () => {
             result.addError(mockError);
         });
 
-        it('should add the error to the errors list', () => {
-            expect(result.errors()).toContain(mockError);
-        });
-
         it('should return true for hasErrors()', () => {
             expect(result.hasErrors()).toBe(true);
+        });
+
+        it('should expose the error in ownErrors()', () => {
+            expect(result.ownErrors()).toContain(mockError);
+        });
+
+        it('should expose the error in allErrors()', () => {
+            expect(result.ownErrors()).toContain(mockError);
         });
     });
 
@@ -292,6 +297,7 @@ describe('createValueContext', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
+        const mockError = { msg: 'Test error' } as DecisionValueError;
 
         let result: DecisionValueContext;
         let child: DecisionValueContext;
@@ -299,11 +305,19 @@ describe('createValueContext', () => {
         beforeEach(() => {
             result = createValueContext(mockDecisionContext);
             child = result.childContext();
-            child.addError({ msg: 'Test error' });
+            child.addError(mockError);
         });
 
         it('should return true for hasErrors()', () => {
             expect(result.hasErrors()).toBe(true);
+        });
+
+        it('should not expose the error in ownErrors()', () => {
+            expect(result.ownErrors()).not.toContain(mockError);
+        });
+
+        it('should expose the error in allErrors()', () => {
+            expect(result.allErrors()).toContain(mockError);
         });
     });
 
@@ -312,6 +326,7 @@ describe('createValueContext', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
+        const mockError = { msg: 'Test error' } as DecisionValueError;
 
         let result: DecisionValueContext;
         let nested: DecisionValueContext;
@@ -319,11 +334,19 @@ describe('createValueContext', () => {
         beforeEach(() => {
             result = createValueContext(mockDecisionContext);
             nested = result.nestedContext();
-            nested.addError({ msg: 'Test error' });
+            nested.addError(mockError);
         });
 
         it('should return true for hasErrors()', () => {
             expect(result.hasErrors()).toBe(true);
+        });
+
+        it('should not expose the error in ownErrors()', () => {
+            expect(result.ownErrors()).not.toContain(mockError);
+        });
+
+        it('should expose the error in allErrors()', () => {
+            expect(result.allErrors()).toContain(mockError);
         });
     });
 });

@@ -2,6 +2,8 @@ import {
     formatStoreError,
     formatValidationError,
     createDecisionLoader,
+    produceDecisions,
+    formatDecisionStatus,
 } from '@noodlestan/designer-functions';
 import path from 'path';
 
@@ -22,13 +24,20 @@ const load = async () => {
         store.storeErrors()?.forEach(error => console.error(formatStoreError(error)));
         store.validationErrors()?.forEach(error => console.error(formatValidationError(error)));
     }
-    const records = store.records().length;
-    const errors = store.storeErrors().length;
-    const validationErrors = store.validationErrors().length;
-    console.info(`🐘 ${records} records, ${errors} errors, ${validationErrors} warnings`);
-    if (store.hasErrors()) {
-        throw new Error();
+
+    const produced = produceDecisions(store);
+    produced
+        .decisions()
+        // .filter(status => status.hasErrors)
+        .forEach(status => console.info(formatDecisionStatus(status)));
+
+    console.info('🐘', produced.summary());
+    if (produced.hasErrors()) {
+        throw new Error(`Errors (${produced.errors.count()}) encountered producing decisions.`);
     }
 };
 
-load().catch(() => process.exit(1));
+load().catch(err => {
+    console.error(err);
+    process.exit(1);
+});

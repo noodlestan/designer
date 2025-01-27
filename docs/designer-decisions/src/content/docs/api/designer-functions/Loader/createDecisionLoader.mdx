@@ -5,6 +5,8 @@ sidebar:
     label: createDecisionLoader
 ---
 
+import { GetInvolved } from '../../../../../components/atoms';
+
 ```ts
 type createDecisionLoader = (
     schemas: SchemaConfig[],
@@ -35,27 +37,64 @@ Given a list of paths and schemas configs:
 
 ## Params
 
-##### ༶ `schemas`: [SchemaConfig](/api/designer-decisions/Types/SchemaConfig)\[\]
+##### ༶ `schemas`: SchemaConfig[]
 
 A list of schema configurations to load validation schemas from.
 
-##### ༶ `sources`: Array\<[DecisionSource](/api/designer-decisions/Types/DecisionSource) | string\>
+##### ༶ `sources`: (DecisionSource | string)[]
 
 A list of data sources to load decision data from.
+
+Values of type `string` are treated as absolute paths, or relative to the current working
+directory.
+
+You can also specify data sources in the following format:
+
+```ts
+export type DecisionSource = {
+    name: string;
+    source: DataSourcePackage | DataSourcePath;
+};
+```
+
+Where `DataSourcePackage` defines a path in a package installed in the current project.
+
+```ts
+const data = { type: 'package'; package: 'my-package'; path: '/data' };
+```
+
+And `DataSourcePath` defines any path in the file system.
+
+```ts
+const data = { type: 'path'; path: './data' };
+```
 
 ##### ༶ `moduleResolver`: (moduleName: string) => Promise&lt;string&gt;
 
 A function to resolve the physical location of node modules containing the schemas.
 
+<GetInvolved url="https://github.com/noodlestan/designer/issues/80">
+    How to provide a package resolution default?
+</GetInvolved>
+
 ## Usage
 
 ```ts
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
 const DATA_PATH = path.resolve('./data/decisions');
+
 const loader = createDecisionLoader(
     [DECISION_SCHEMAS],
     [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
     async moduleName => `./node_modules/${moduleName}`,
 );
+
 const store = await loader();
 ```
+
+## Related
+
+-   [Guides / Loading and Validating Decisions](/guides/validating-design-decisions-with-schemas/)
+-   [Guides / Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx/)

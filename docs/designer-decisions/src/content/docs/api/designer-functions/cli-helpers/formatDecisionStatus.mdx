@@ -1,0 +1,75 @@
+---
+title: formatDecisionStatus()
+slug: api/designer-functions/cli-helpers/formatDecisionStatus
+sidebar:
+    label: formatDecisionStatus
+---
+
+```ts
+type formatDecisionStatus = (
+    status: ProducedDecisionStatus,
+    show: ShowOptions[] = DEFAULT_OPTIONS,
+) => string;
+```
+
+Given a produced decision status, as returned by
+[produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus)
+returns a string with the decision status, value, details, and errors.
+
+## Return value
+
+`string`
+
+## Params
+
+##### ༶ `status`: DecisionStatus
+
+As returned by
+[produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus).
+
+##### ༶ `show`: `ShowOptions[]`
+
+The following values are accepted:
+
+-   `status`
+-   `uuid`
+-   `name`
+-   `model`
+-   `value`
+-   `error-count`
+
+Additionally, the following two items - when provided in whatever order - determine
+how status and errors are displayed:
+
+-   `status-colors` - print 🟩, 🟨, or 🟥 (when absent, prints `-`, `!` or `X` instead)
+-   `error-details` - when present, eventual errors are shown in full after each decision
+
+## Usage
+
+```js
+const store = await decisionLoader();
+const produced = produceDecisions(store);
+produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
+```
+
+Returns one decision per line, with nested value errors.
+
+```
+🟨 | Sizing Scale | space-scale/bounded | [0px, 0px, 0px, 0px, 0px, 0px] | 2 warnings
+
+ > 🟨 Ref (SpaceValue) {"$name":"Size Smallest"} not found.
+ > 🟨 Ref (SpaceValue) {"$name":"Brand Black"} matched "color-value".
+```
+
+Using `formatDecisionStatus(status, ['status-colors', 'name', 'value'])`
+
+```
+🟩 | Background Lightness Scale | [0.03, 0.06, 0.09, 0.12, 0.15]
+🟩 | Brand Pink | #d35084
+🟩 | Avatar Minimum Size | 50px
+🟩 | Avatar Sizes | [50px, 100px, 150px, 200px]
+```
+
+## Related
+
+-   [Guides / Loading and Validating Decisions](/guides/validating-design-decisions-with-schemas/)

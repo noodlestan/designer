@@ -1,7 +1,7 @@
-import type { DecisionError } from '@noodlestan/designer-decisions';
+import type { DecisionValueError } from '@noodlestan/designer-decisions';
 
-export const formatDecisionError = (
-    error: DecisionError,
+export const formatValueError = (
+    error: DecisionValueError,
     name?: string,
     useColor?: boolean,
 ): string => {

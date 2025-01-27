@@ -1,0 +1,50 @@
+---
+title: produceDecisions()
+slug: api/designer-functions/cli-helpers/produceDecisions
+sidebar:
+    label: produceDecisions
+---
+
+```ts
+type produceDecisions = (store: StaticDecisionStore) => ProducedDecisionStore;
+```
+
+Given a populated
+[StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+produces all decision values and expose all decisions, contexts and aggregated errors.
+
+## Return Value
+
+Returns a `ProducedDecisionStore` object.
+
+```ts
+export type ProducedDecisionStore = {
+    decisions: () => ProducedDecisionStatus[];
+    hasErrors: () => boolean;
+    errors: {
+        count: () => number;
+        store: () => StaticDecisionStoreError[];
+        validation: () => DecisionInputError[];
+        value: () => (DecisionError | DecisionValueError)[];
+    };
+    summary: () => string;
+};
+```
+
+## Params
+
+##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+
+&nbsp;
+
+## Usage
+
+```js
+const store = await decisionLoader();
+const produced = produceDecisions(store);
+console.log(produced.summary());
+```
+
+## Related
+
+-   [Guides / Loading and Validating Decisions](/guides/validating-design-decisions-with-schemas/)

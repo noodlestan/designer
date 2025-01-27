@@ -32,7 +32,7 @@
     "build:deps": "npm run ci:libs && npm run ci:clis && npm run ci:schemas"
   },
   "devDependencies": {
-    "@noodlestan/eslint-config": "0.0.4",
+    "@noodlestan/eslint-config": "0.0.5",
     "@typescript-eslint/eslint-plugin": "8.11.0",
     "dotenv": "16.3.1",
     "eslint": "8.57.1",
