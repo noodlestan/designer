@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { SpaceWithUnits } from '../../../types';
+import type { SpaceInputValue, SpaceWithUnits } from '../../../types';
 import { createValueContextMock } from '../../mocks';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
@@ -11,7 +11,7 @@ vi.mock('./resolveSpaceValueRef');
 const resolveSpaceValueRefMock = vi.mocked(resolveSpaceValueRef);
 
 describe('resolveSpaceValue', () => {
-    const [mockContext] = createValueContextMock();
+    const [mockContext, { addErrorSpy }] = createValueContextMock();
 
     beforeEach(() => {
         vi.clearAllMocks();
@@ -62,6 +62,33 @@ describe('resolveSpaceValue', () => {
         it('should return the input as-is', () => {
             const result = resolveSpaceValue(mockContext, mockInput);
             expect(result).toEqual(mockInput);
+        });
+    });
+
+    describe('When input is invalid', () => {
+        const invalidInputs = [
+            null,
+            undefined,
+            true,
+            false,
+            { value: 'not-a-number', units: 'px' },
+            { value: 12, units: 'invalid-unit' },
+            { units: 'px' },
+            { value: 10 },
+            'invalid-string',
+        ] as unknown[];
+
+        it('should add an error to the context and return the fallback value', () => {
+            invalidInputs.forEach(invalidInput => {
+                const result = resolveSpaceValue(mockContext, invalidInput as SpaceInputValue);
+
+                expect(addErrorSpy).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        input: invalidInput,
+                    }),
+                );
+                expect(result).toEqual({ value: 0, units: 'px' });
+            });
         });
     });
 });
