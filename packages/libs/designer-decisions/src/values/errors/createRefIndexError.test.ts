@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionRef, DecisionValueRefIndexError, ValueContext } from '../../types';
+import type { DecisionRef, ValueContext } from '../../types';
 
 import { createRefIndexError } from './createRefIndexError';
 
@@ -16,19 +16,17 @@ describe('createRefIndexError()', () => {
         const valueName = 'ValueName';
         const mockRef: DecisionRef = { $uuid: 'ref-uuid', index: 99 };
 
-        let result: DecisionValueRefIndexError;
-
-        beforeEach(() => {
-            result = createRefIndexError({ context: mockContext, valueName, ref: mockRef });
-        });
-
         it('should return a DecisionValueRefIndexError object with the expected attributes', () => {
+            const result = createRefIndexError({ context: mockContext, valueName, ref: mockRef });
+
             expect(result.context).toBe(mockContext);
             expect(result.valueName).toBe(valueName);
             expect(result.ref).toBe(mockRef);
         });
 
         it('should return a DecisionValueRefIndexError object with the expected message', () => {
+            const result = createRefIndexError({ context: mockContext, valueName, ref: mockRef });
+
             expect(result.message()).toContain('out of bounds');
         });
     });

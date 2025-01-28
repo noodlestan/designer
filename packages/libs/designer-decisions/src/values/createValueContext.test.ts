@@ -1,7 +1,7 @@
-import { type MockInstance, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createDecisionContext } from '../decisions';
-import type { DecisionContext, ValueContext } from '../types';
+import type { ValueContext } from '../types';
 
 import { createValueContext } from './createValueContext';
 import * as functionsModule from './functions';
@@ -17,25 +17,19 @@ describe('createValueContext()', () => {
     describe('Given no context', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];
-        const valueContextMock = {} as ValueContext;
-        let resolveLookupContextSpy: MockInstance;
+        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
 
-        let decisionContext: DecisionContext;
-        let result: ValueContext;
+        const valueContextMock = {} as ValueContext;
+        createValueContextMocked.mockReturnValue(valueContextMock);
+        const resolveLookupContextSpy = vi.spyOn(functionsModule, 'resolveLookupContext');
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveLookupContextSpy = vi.spyOn(functionsModule, 'resolveLookupContext');
-            createValueContextMocked.mockReturnValue(valueContextMock);
-            decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
-            result = createValueContext(decisionContext);
-        });
-
-        afterEach(() => {
-            resolveLookupContextSpy.mockRestore();
         });
 
         it('should call createValueContext with decisionContext', () => {
+            createValueContext(decisionContext);
+
             expect(createValueContextPrivate).toHaveBeenCalledWith(
                 decisionContext,
                 { all: [] },
@@ -44,10 +38,14 @@ describe('createValueContext()', () => {
         });
 
         it('should call resolveLookupContext with undefined', () => {
+            createValueContext(decisionContext);
+
             expect(resolveLookupContextSpy).toHaveBeenCalledWith(undefined);
         });
 
         it('should return the created context', () => {
+            const result = createValueContext(decisionContext);
+
             expect(result).toEqual(valueContextMock);
         });
     });
@@ -55,30 +53,31 @@ describe('createValueContext()', () => {
     describe('Given a LookupContext and an input', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];
-        const mockLookupContext = { all: ['Context A'] };
-        const valueContextMock = {} as ValueContext;
-        let resolveLookupContextSpy: MockInstance;
 
-        let decisionContext: DecisionContext;
-        let result: ValueContext;
+        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
+        const mockLookupContext = { all: ['Context A'] };
+
+        const valueContextMock = {} as ValueContext;
+        createValueContextMocked.mockReturnValue(valueContextMock);
+        const resolveLookupContextSpy = vi.spyOn(functionsModule, 'resolveLookupContext');
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveLookupContextSpy = vi.spyOn(functionsModule, 'resolveLookupContext');
-            createValueContextMocked.mockReturnValue(valueContextMock);
-            decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
-            result = createValueContext(decisionContext, mockLookupContext, mockInputs[0]);
         });
 
-        afterEach(() => {
-            resolveLookupContextSpy.mockRestore();
+        beforeEach(() => {
+            vi.clearAllMocks();
         });
 
         it('should call resolveLookupContext with the provided context', () => {
+            createValueContext(decisionContext, mockLookupContext, mockInputs[0]);
+
             expect(resolveLookupContextSpy).toHaveBeenCalledWith(mockLookupContext);
         });
 
         it('should call createValueContext with decisionContext, provided lookup context, and input', () => {
+            createValueContext(decisionContext, mockLookupContext, mockInputs[0]);
+
             expect(createValueContextPrivate).toHaveBeenCalledWith(
                 decisionContext,
                 mockLookupContext,
@@ -87,6 +86,8 @@ describe('createValueContext()', () => {
         });
 
         it('should return the created context', () => {
+            const result = createValueContext(decisionContext, mockLookupContext, mockInputs[0]);
+
             expect(result).toEqual(valueContextMock);
         });
     });
@@ -94,41 +95,44 @@ describe('createValueContext()', () => {
     describe('Given a ParentValueContext and an input', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];
+
+        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
+
+        const valueContextMock = {} as ValueContext;
+        createValueContextMocked.mockReturnValue(valueContextMock);
+        const resolveLookupContextSpy = vi.spyOn(functionsModule, 'resolveLookupContext');
+
         const childContext = vi.fn();
+        childContext.mockReturnValue(valueContextMock);
         const mockParentContext = {} as ValueContext;
         mockParentContext.lookupContexts = () => ({ all: ['Context V'] });
         mockParentContext.childContext = childContext;
-        const valueContextMock = {} as ValueContext;
-        let resolveLookupContextSpy: MockInstance;
-
-        let decisionContext: DecisionContext;
-        let result: ValueContext;
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveLookupContextSpy = vi.spyOn(functionsModule, 'resolveLookupContext');
-            childContext.mockReturnValue(valueContextMock);
-            decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
-            result = createValueContext(decisionContext, mockParentContext, mockInputs[0]);
-        });
-
-        afterEach(() => {
-            resolveLookupContextSpy.mockRestore();
         });
 
         it('should call resolveLookupContext with the parent context', () => {
+            createValueContext(decisionContext, mockParentContext, mockInputs[0]);
+
             expect(resolveLookupContextSpy).toHaveBeenCalledWith(mockParentContext);
         });
 
         it('should call parent context childContext() with the input', () => {
+            createValueContext(decisionContext, mockParentContext, mockInputs[0]);
+
             expect(mockParentContext.childContext).toHaveBeenCalledWith(mockInputs[0]);
         });
 
         it('should not call createValueContext', () => {
+            createValueContext(decisionContext, mockParentContext, mockInputs[0]);
+
             expect(createValueContextPrivate).not.toHaveBeenCalled();
         });
 
         it('should return the child context', () => {
+            const result = createValueContext(decisionContext, mockParentContext, mockInputs[0]);
+
             expect(result).toEqual(valueContextMock);
         });
     });

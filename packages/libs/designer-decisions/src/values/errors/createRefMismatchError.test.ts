@@ -1,11 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import type {
-    DecisionRef,
-    DecisionUnknown,
-    DecisionValueRefMismatchError,
-    ValueContext,
-} from '../../types';
+import type { DecisionRef, DecisionUnknown, ValueContext } from '../../types';
 
 import { createRefMismatchError } from './createRefMismatchError';
 
@@ -25,16 +20,13 @@ describe('createRefMismatchError()', () => {
         const valueName = 'ValueName';
         const accepted = ['TypeA', 'TypeB'];
 
-        let result: DecisionValueRefMismatchError;
-
-        beforeEach(() => {
-            const context = mockContext;
-            const decision = mockDecision;
-            const ref = mockRef;
-            result = createRefMismatchError({ context, decision, valueName, ref, accepted });
-        });
+        const context = mockContext;
+        const decision = mockDecision;
+        const ref = mockRef;
 
         it('should return a DecisionValueRefMismatchError object with the expected attributes', () => {
+            const result = createRefMismatchError({ context, decision, valueName, ref, accepted });
+
             expect(result.context).toBe(mockContext);
             expect(result.valueName).toBe(valueName);
             expect(result.ref).toBe(mockRef);
@@ -43,6 +35,8 @@ describe('createRefMismatchError()', () => {
         });
 
         it('should return a DecisionValueRefMismatchError object with the expected message', () => {
+            const result = createRefMismatchError({ context, decision, valueName, ref, accepted });
+
             const expectedMessage = `matched "TestType", expected`;
             expect(result.message()).toContain(expectedMessage);
         });

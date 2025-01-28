@@ -1,6 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionUnexpectedError } from '../../types';
 import { createDecisionContext } from '../createDecisionContext';
 
 import { createUnexpectedError } from './createUnexpectedError';
@@ -11,18 +10,17 @@ describe('createUnexpectedError()', () => {
 
     describe('Given a context and an error', () => {
         const mockError = new Error('Test error');
-        let result: DecisionUnexpectedError;
-
-        beforeEach(() => {
-            result = createUnexpectedError({ context: mockContext, error: mockError });
-        });
 
         it('should return a DecisionError object with the expected attributes', () => {
+            const result = createUnexpectedError({ context: mockContext, error: mockError });
+
             expect(result.context).toEqual(mockContext);
             expect(result.error).toEqual(mockError);
         });
 
         it('should return a DecisionError object with the expected message', () => {
+            const result = createUnexpectedError({ context: mockContext, error: mockError });
+
             expect(result.message()).toContain('Unexpected error');
             expect(result.message()).toContain('test-uuid');
             expect(result.message()).toContain('Test error');
@@ -30,13 +28,9 @@ describe('createUnexpectedError()', () => {
     });
 
     describe('Given a context and no error', () => {
-        let result: DecisionUnexpectedError;
-
-        beforeEach(() => {
-            result = createUnexpectedError({ context: mockContext });
-        });
-
         it('should return a DecisionError object with no error object', () => {
+            const result = createUnexpectedError({ context: mockContext });
+
             expect(result.error).toBeUndefined();
         });
 

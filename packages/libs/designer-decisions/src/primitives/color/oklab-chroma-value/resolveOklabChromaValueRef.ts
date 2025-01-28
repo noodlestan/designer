@@ -8,7 +8,7 @@ import type {
     ColorOkLCHLiteral,
     ColorValue,
     DecisionRef,
-    SRGBSaturationValue,
+    OklabChromaValue,
     ValueContext,
 } from '../../../types';
 import {
@@ -41,12 +41,7 @@ export const resolveOklabChromaValueRef = (context: ValueContext, ref: DecisionR
     }
 
     if (isColorOklabChromaScaleDecision(decision)) {
-        const value = resolveScaleRefDecision<SRGBSaturationValue>(
-            decision,
-            context,
-            valueName,
-            ref,
-        );
+        const value = resolveScaleRefDecision<OklabChromaValue>(decision, context, valueName, ref);
         return value?.get() ?? fallback;
     }
 

@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionRef, DecisionValueRefNotFoundError, ValueContext } from '../../types';
+import type { DecisionRef, ValueContext } from '../../types';
 
 import { createRefNotFoundError } from './createRefNotFoundError';
 
@@ -15,20 +15,20 @@ describe('createRefNotFoundError()', () => {
 
         const mockRef: DecisionRef = { $uuid: 'ref-uuid' };
         const valueName = 'TestName';
-        let result: DecisionValueRefNotFoundError;
 
-        beforeEach(() => {
-            const context = mockContext;
-            result = createRefNotFoundError({ context, valueName, ref: mockRef });
-        });
+        const context = mockContext;
 
         it('should return a DecisionValueError object with the expected attributes', () => {
+            const result = createRefNotFoundError({ context, valueName, ref: mockRef });
+
             expect(result.context).toBe(mockContext);
             expect(result.valueName).toBe(valueName);
             expect(result.ref).toBe(mockRef);
         });
 
         it('should return a DecisionValueError object with the expected message', () => {
+            const result = createRefNotFoundError({ context, valueName, ref: mockRef });
+
             expect(result.message()).toContain('not found, referenced in');
         });
     });

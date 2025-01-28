@@ -37,17 +37,13 @@ describe('getDecisionModelFactory()', () => {
     describe('Given a model name', () => {
         const modelName = 'model-name';
 
-        let result: DecisionModelFactory;
-
-        beforeEach(() => {
-            result = getDecisionModelFactory(modelName);
-        });
-
         it('should call getDecisionModelMeta with the model name', () => {
+            getDecisionModelFactory(modelName);
             expect(getDecisionModelMetaMocked).toHaveBeenCalledWith(modelName);
         });
 
         it('should return the factory function for the specified model', () => {
+            const result = getDecisionModelFactory(modelName);
             expect(result).toBe(mockFactory);
         });
     });

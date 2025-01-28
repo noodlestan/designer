@@ -16,55 +16,53 @@ describe('createDecisionContext()', () => {
     const mockInputs: InputRecord[] = [{ model: 'model', name: 'value-1', params: {} }];
 
     describe('Given a an array of inputs', () => {
-        let result: DecisionContext;
-
-        beforeEach(() => {
-            result = createDecisionContext(mockRef, mockResolver, mockInputs);
-        });
-
         it('should create a context with the expected ref, resolver, and inputs', () => {
+            const result = createDecisionContext(mockRef, mockResolver, mockInputs);
+
             expect(result.ref()).toBe(mockRef);
             expect(result.resolve).toBe(mockResolver);
             expect(result.inputs()).toEqual(mockInputs);
         });
 
         it('should create a context with no errors', () => {
+            const result = createDecisionContext(mockRef, mockResolver, mockInputs);
+
             expect(result.errors()).toEqual([]);
             expect(result.hasErrors()).toBe(false);
         });
     });
 
     describe('When addError() is called', () => {
-        const error1: DecisionError = { msg: 'Error 1' };
+        const mockError = {} as DecisionError;
+        mockError.context = {} as DecisionContext;
 
-        let result: DecisionContext;
+        const context = createDecisionContext(mockRef, mockResolver, mockInputs);
 
         beforeEach(() => {
-            result = createDecisionContext(mockRef, mockResolver, mockInputs);
-            result.addError(error1);
+            context.addError(mockError);
         });
 
         it('should add the error to the context', () => {
-            expect(result.errors()).toEqual([error1]);
-            expect(result.hasErrors()).toBe(true);
+            expect(context.errors()).toEqual([mockError]);
+            expect(context.hasErrors()).toBe(true);
         });
     });
 
     describe('When addError() is called multiple times', () => {
-        const error1: DecisionError = { msg: 'Error 1' };
-        const error2: DecisionError = { msg: 'Error 2' };
+        const mockError1 = {} as DecisionError;
+        mockError1.context = {} as DecisionContext;
+        const mockError2 = {} as DecisionError;
 
-        let result: DecisionContext;
+        const context = createDecisionContext(mockRef, mockResolver, mockInputs);
 
         beforeEach(() => {
-            result = createDecisionContext(mockRef, mockResolver, mockInputs);
-            result.addError(error1);
-            result.addError(error2);
+            context.addError(mockError1);
+            context.addError(mockError2);
         });
 
         it('should add all errors to the context', () => {
-            expect(result.errors()).toEqual([error1, error2]);
-            expect(result.hasErrors()).toBe(true);
+            expect(context.errors()).toEqual([mockError1, mockError2]);
+            expect(context.hasErrors()).toBe(true);
         });
     });
 });

@@ -1,6 +1,21 @@
-import { isColorOklabLightnessValueDecision } from '../../../decisions';
-import type { DecisionRef, ValueContext } from '../../../types';
-import { createRefMismatchError, createRefNotFoundError } from '../../../values';
+import {
+    isColorOklabLightnessScaleDecision,
+    isColorOklabLightnessValueDecision,
+    isColorSetDecision,
+    isColorValueDecision,
+} from '../../../decisions';
+import type {
+    ColorOkLCHLiteral,
+    ColorValue,
+    DecisionRef,
+    OklabLightnessValue,
+    ValueContext,
+} from '../../../types';
+import {
+    handleDecisionNotFound,
+    handleRefMismatchError,
+    resolveScaleRefDecision,
+} from '../../functions';
 
 import {
     REF_CHECKED_TYPES as accepted,
@@ -12,16 +27,33 @@ export const resolveOklabLightnessValueRef = (context: ValueContext, ref: Decisi
     const [, decision] = context.resolve(ref);
 
     if (!decision) {
-        const error = createRefNotFoundError({ context, valueName, ref });
-        context.addError(error);
+        handleDecisionNotFound(context, valueName, ref);
         return fallback;
     }
+
+    if (isColorSetDecision(decision)) {
+        const value = resolveScaleRefDecision<ColorValue>(decision, context, valueName, ref);
+        return value?.toObject<ColorOkLCHLiteral>('oklch').l ?? fallback;
+    }
+
+    if (isColorValueDecision(decision)) {
+        return decision.produce(context).toObject<ColorOkLCHLiteral>('oklch').l;
+    }
+
+    if (isColorOklabLightnessScaleDecision(decision)) {
+        const value = resolveScaleRefDecision<OklabLightnessValue>(
+            decision,
+            context,
+            valueName,
+            ref,
+        );
+        return value?.get() ?? fallback;
+    }
+
     if (isColorOklabLightnessValueDecision(decision)) {
-        const v = decision.produce(context);
-        return v.get();
-    } else {
-        const error = createRefMismatchError({ context, valueName, ref, decision, accepted });
-        context.addError(error);
-        return fallback;
+        return decision.produce(context).get();
     }
+
+    handleRefMismatchError(context, decision, valueName, ref, accepted);
+    return fallback;
 };

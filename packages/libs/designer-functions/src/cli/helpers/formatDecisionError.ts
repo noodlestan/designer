@@ -5,10 +5,8 @@ export const formatDecisionError = (
     name?: string,
     useColor?: boolean,
 ): string => {
-    const { msg } = error;
-
     const symbol = useColor ? '🟨' : '!';
     const prefix = name ? `Decision "${name}" ` : '';
 
-    return `${symbol} ${prefix}${msg}`;
+    return `${symbol} ${prefix}${error.message()}`;
 };
