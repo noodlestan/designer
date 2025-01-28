@@ -1,7 +1,5 @@
-import type { Color } from 'chroma-js';
-
 import { isColorSetDecision, isColorValueDecision } from '../../../decisions';
-import type { DecisionRef, ValueContext } from '../../../types';
+import type { Color, DecisionRef, ValueContext } from '../../../types';
 import {
     createRefIndexError,
     createRefMismatchError,
@@ -20,8 +18,7 @@ export const resolveColorValueRef = (context: ValueContext, ref: DecisionRef): C
     }
 
     if (isColorValueDecision(decision)) {
-        const v = decision.produce(context);
-        return v.get();
+        return decision.produce(context);
     } else if (isColorSetDecision(decision)) {
         const set = decision.produce(context);
         const v = set.get().item(ref.index || 0);
@@ -30,7 +27,7 @@ export const resolveColorValueRef = (context: ValueContext, ref: DecisionRef): C
             context.addError(error);
             return FALLBACK_VALUE;
         }
-        return v.get();
+        return v;
     } else {
         const error = createRefMismatchError({ context, name, ref, decision, accepted });
         context.addError(error);

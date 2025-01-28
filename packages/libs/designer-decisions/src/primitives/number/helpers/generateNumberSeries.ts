@@ -1,6 +1,6 @@
 import type { NumberClamp, NumberModifier } from '../../../types';
 
-import { generateModifierSeriesValue } from './functions/generateModifierSeriesValue';
+import { generateNumberSeriesStep } from './functions/generateNumberSeriesStep';
 
 export const generateNumberSeries = (
     start: number = 0,
@@ -11,13 +11,15 @@ export const generateNumberSeries = (
 ): number[] => {
     const roundedStart = parseFloat(start.toFixed(precision));
 
+    const count = Math.floor(items);
+
     if (!modifier) {
-        return Array(items).fill(roundedStart);
+        return Array(count).fill(roundedStart);
     }
 
     const series = [start];
-    for (let i = 1; i < items; i++) {
-        let next = generateModifierSeriesValue(series, modifier);
+    for (let i = 1; i < count; i++) {
+        let next = generateNumberSeriesStep(series, modifier);
         if (clamp) {
             next = Math.max(clamp[0], Math.min(clamp[1], next));
         }

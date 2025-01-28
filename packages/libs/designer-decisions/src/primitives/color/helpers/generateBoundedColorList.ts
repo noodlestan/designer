@@ -1,19 +1,27 @@
 import chroma from 'chroma-js';
 
-import type { ColorSRGBHSLiteral, ColorValue } from '../../../types';
+import type { ColorFormat, ColorObjectLiteral, ColorValue } from '../../../types';
 
-export const generateBoundedColorList = (
+import { chromaColorToLiteral } from './functions';
+
+export const generateBoundedColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(
     fromValue: ColorValue,
     toValue: ColorValue,
-    steps: number,
-): ColorSRGBHSLiteral[] => {
+    steps: number = 0,
+    format: ColorFormat = 'oklch',
+): T[] => {
     const from = fromValue.get();
     const to = toValue.get();
 
-    const colors = chroma.scale([from, to]).mode('oklab').colors(steps);
+    if (steps < 1) {
+        return [fromValue.toObject(format), toValue.toObject(format)] as T[];
+    }
 
-    return colors.map(color => {
-        const [h, s, l] = chroma(color).hsl();
-        return { h: h || 0, s: s || 0, l: l || 0 };
-    });
+    const s = Math.floor(steps);
+    const colors = chroma
+        .scale([from, to])
+        .mode('oklab')
+        .colors(s + 2);
+
+    return colors.map(color => chromaColorToLiteral(chroma(color), format));
 };

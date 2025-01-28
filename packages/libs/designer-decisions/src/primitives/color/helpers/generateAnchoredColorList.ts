@@ -1,19 +1,22 @@
-import type { AnchoredColorListParams, ColorSRGBHSLiteral, ColorValue } from '../../../types';
+import type {
+    AnchoredColorListParams,
+    ColorFormat,
+    ColorObjectLiteral,
+    ColorValue,
+} from '../../../types';
 
-import { generateModifierColorList } from './functions';
+import { generateColorList } from './functions';
 
-export const generateAnchoredColorList = (
+export const generateAnchoredColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(
     anchor: ColorValue,
     params: AnchoredColorListParams,
-): ColorSRGBHSLiteral[] => {
+    format: ColorFormat = 'oklch',
+): T[] => {
     const { steps: beforeSteps = 0, modifier: beforeMod } = params.before || {};
-    const before = generateModifierColorList(anchor, beforeSteps + 1, beforeMod);
+    const before = generateColorList(anchor, beforeSteps + 1, beforeMod, format);
 
     const { steps: afterSteps = 0, modifier: afterMod } = params.after || {};
-    const after = generateModifierColorList(anchor, afterSteps + 1, afterMod);
+    const after = generateColorList(anchor, afterSteps + 1, afterMod, format);
 
-    const { h, s, l } = anchor.toObject('hsl') as ColorSRGBHSLiteral;
-    const anchorValue = { h: h || 0, s: s || 0, l: l || 0 };
-
-    return [...before.splice(1).reverse(), anchorValue, ...after.splice(1)];
+    return [...before.splice(1).reverse(), anchor.toObject(format), ...after.splice(1)] as T[];
 };

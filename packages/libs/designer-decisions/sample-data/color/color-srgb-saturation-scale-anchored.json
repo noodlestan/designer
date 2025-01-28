@@ -4,19 +4,13 @@
     "name": "sRGB Saturation Scale Anchored Sample",
     "params": {
       "anchor": 0.5,
-      "after": {
-        "steps": 4,
-        "modifier": {
-          "mode": "linear",
-          "by": 0.05
-        }
-      },
       "before": {
-        "steps": 4,
-        "modifier": {
-          "mode": "linear",
-          "by": -0.05
-        }
+        "steps": 2,
+        "modifier": { "mode": "linear", "by": -0.2 }
+      },
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "linear", "by": 0.1 }
       }
     }
   }

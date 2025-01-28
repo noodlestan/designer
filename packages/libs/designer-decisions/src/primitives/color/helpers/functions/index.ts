@@ -1,2 +1,5 @@
 // @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './generateModifierList';
+export * from './chromaColorFromLiteral';
+export * from './chromaColorToLiteral';
+export * from './chromaColorToString';
+export * from './generateColorList';

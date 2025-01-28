@@ -78,4 +78,16 @@ describe('generateNumberSeries()', () => {
             expect(result).toEqual([1.1, 1.7, 2.2, 2.8]);
         });
     });
+
+    describe('Given a non-integer number of items', () => {
+        const anchor = 1.111;
+        const items = 4.7;
+        const modifier: NumberModifier = { mode: 'linear', by: 0.555 };
+        const precision = 1;
+
+        it('should return a series with floored number of items', () => {
+            const result = generateNumberSeries(anchor, items, modifier, undefined, precision);
+            expect(result).toEqual([1.1, 1.7, 2.2, 2.8]);
+        });
+    });
 });

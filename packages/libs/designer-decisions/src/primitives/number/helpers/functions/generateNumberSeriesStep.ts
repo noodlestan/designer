@@ -1,6 +1,6 @@
 import type { NumberModifier } from '../../../../types';
 
-export const generateModifierSeriesValue = (
+export const generateNumberSeriesStep = (
     series: number[],
     modifier: Partial<NumberModifier>,
 ): number => {

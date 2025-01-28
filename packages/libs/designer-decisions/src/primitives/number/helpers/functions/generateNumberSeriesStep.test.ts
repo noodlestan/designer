@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest';
 
 import type { NumberModifier } from '../../../../types';
 
-import { generateModifierSeriesValue } from './generateModifierSeriesValue';
+import { generateNumberSeriesStep } from './generateNumberSeriesStep';
 
-describe('generateModifierSeriesValue()', () => {
+describe('generateNumberSeriesStep()', () => {
     describe('Given an empty series', () => {
         it('should throw an error with the message "Series is empty"', () => {
-            expect(() => generateModifierSeriesValue([], { mode: 'linear', by: 2 })).toThrowError(
+            expect(() => generateNumberSeriesStep([], { mode: 'linear', by: 2 })).toThrowError(
                 'Series is empty',
             );
         });
@@ -18,7 +18,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: Partial<NumberModifier> = { by: 5 };
 
         it('should return the next value on a linear series', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(15);
         });
     });
@@ -28,7 +28,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: Partial<NumberModifier> = { mode: 'linear' };
 
         it('should return the next value on the series', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(10);
         });
     });
@@ -38,7 +38,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: NumberModifier = { mode: 'linear', by: 5 };
 
         it('should return the next value on the series plus the `by` value', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(15);
         });
     });
@@ -48,7 +48,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: Partial<NumberModifier> = { mode: 'proportional' };
 
         it('should return the next value on the series', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(1);
         });
     });
@@ -58,7 +58,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: NumberModifier = { mode: 'proportional', by: 0.2 };
 
         it('should return the next value on the series plus `by * index * first value`', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(1.4);
         });
     });
@@ -68,7 +68,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: Partial<NumberModifier> = { mode: 'geometric' };
 
         it('should return the next value on the series multiplied by 1 (default `by` value)', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(10);
         });
     });
@@ -78,7 +78,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: NumberModifier = { mode: 'geometric', by: 1.2 };
 
         it('should return the next value on the series multiplied by the `by` value', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(12);
         });
     });
@@ -88,7 +88,7 @@ describe('generateModifierSeriesValue()', () => {
         const modifier: NumberModifier = { mode: 'geometric', by: 0 };
 
         it('should return 0', () => {
-            const result = generateModifierSeriesValue(series, modifier);
+            const result = generateNumberSeriesStep(series, modifier);
             expect(result).toBe(0);
         });
     });

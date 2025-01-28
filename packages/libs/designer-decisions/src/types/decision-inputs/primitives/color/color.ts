@@ -11,4 +11,6 @@ export type ColorObjectLiteral = ColorOkLiteral | ColorSRGBLiteral;
 
 export type ColorInputValue = DecisionRef | ColorRaw | ColorObject;
 
+export type ColorLiteral = ColorRaw | ColorObjectLiteral;
+
 export type ColorFormat = 'oklch' | 'oklab' | 'hsl' | 'rgb';

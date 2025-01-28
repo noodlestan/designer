@@ -19,12 +19,12 @@ export type ColorSRGBHSLiteral = {
     l: number;
 };
 
-export type ColorSRGBChannels = {
+export type ColorSRGBChannelsLiteral = {
     r: number;
     g: number;
     b: number;
 };
 
-export type ColorSRGB = ColorSRGBHSL;
+export type ColorSRGB = ColorSRGBHSL | ColorSRGBChannelsLiteral;
 
-export type ColorSRGBLiteral = ColorSRGBHSLiteral | ColorSRGBChannels;
+export type ColorSRGBLiteral = ColorSRGBHSLiteral | ColorSRGBChannelsLiteral;
