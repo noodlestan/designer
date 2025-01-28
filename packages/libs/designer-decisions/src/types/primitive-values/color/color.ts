@@ -7,7 +7,7 @@ export type AlphaValue = BaseValue<NormalNumber>;
 
 export type Color = {
     get: () => ChromaColor;
-    toObject(format: ColorFormat): ColorObjectLiteral;
+    toObject<T extends ColorObjectLiteral = ColorObjectLiteral>(format: ColorFormat): T;
     toString(format: ColorFormat): string;
 };
 

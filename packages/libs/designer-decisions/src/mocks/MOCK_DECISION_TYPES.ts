@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import type { DecisionType, DecisionTypeModel } from '../../types';
+import type { DecisionType, DecisionTypeModel } from '../types';
 
 const mockModelMeta: DecisionTypeModel = {
     model: 'model-name',

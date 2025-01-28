@@ -1,30 +1,51 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import type { DecisionUnexpectedError } from '../../types';
 import { createDecisionContext } from '../createDecisionContext';
 
 import { createUnexpectedError } from './createUnexpectedError';
 
 describe('createUnexpectedError()', () => {
     const ref = { $uuid: 'test-uuid' };
-    const context = createDecisionContext(ref, vi.fn(), []);
+    const mockContext = createDecisionContext(ref, vi.fn(), []);
 
     describe('Given a context and an error', () => {
         const mockError = new Error('Test error');
+        let result: DecisionUnexpectedError;
+
+        beforeEach(() => {
+            result = createUnexpectedError({ context: mockContext, error: mockError });
+        });
+
+        it('should return a DecisionError object with the expected attributes', () => {
+            expect(result.context).toEqual(mockContext);
+            expect(result.error).toEqual(mockError);
+        });
 
         it('should return a DecisionError object with the expected message', () => {
-            const result = createUnexpectedError({ context, error: mockError });
-
-            const expectedMessage = `Unexpected error in {"$uuid":"test-uuid"}: ${mockError.stack}.`;
-            expect(result.msg).toBe(expectedMessage);
+            expect(result.message()).toContain('Unexpected error');
+            expect(result.message()).toContain('test-uuid');
+            expect(result.message()).toContain('Test error');
         });
     });
 
     describe('Given a context and no error', () => {
-        it('should return a DecisionError object with the expected message', () => {
-            const result = createUnexpectedError({ context });
+        let result: DecisionUnexpectedError;
 
-            const expectedMessage = `Unexpected error in {"$uuid":"test-uuid"}: undefined.`;
-            expect(result.msg).toBe(expectedMessage);
+        beforeEach(() => {
+            result = createUnexpectedError({ context: mockContext });
+        });
+
+        it('should return a DecisionError object with no error object', () => {
+            expect(result.error).toBeUndefined();
+        });
+
+        it('should return a DecisionError object with the expected message', () => {
+            const result = createUnexpectedError({ context: mockContext });
+
+            expect(result.message()).toContain('Unexpected error');
+            expect(result.message()).toContain('test-uuid');
+            expect(result.message()).toContain('undefined');
         });
     });
 });

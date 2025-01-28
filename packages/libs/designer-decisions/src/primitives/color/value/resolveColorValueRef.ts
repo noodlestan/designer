@@ -1,36 +1,34 @@
 import { isColorSetDecision, isColorValueDecision } from '../../../decisions';
-import type { Color, DecisionRef, ValueContext } from '../../../types';
+import type { Color, ColorValue, DecisionRef, ValueContext } from '../../../types';
 import {
-    createRefIndexError,
-    createRefMismatchError,
-    createRefNotFoundError,
-} from '../../../values';
+    handleDecisionNotFound,
+    handleRefMismatchError,
+    resolveScaleRefDecision,
+} from '../../functions';
 
-import { FALLBACK_VALUE, REF_CHECKED_TYPES as accepted, VALUE_NAME as name } from './private';
+import {
+    REF_CHECKED_TYPES as accepted,
+    FALLBACK_VALUE as fallback,
+    VALUE_NAME as valueName,
+} from './private';
 
 export const resolveColorValueRef = (context: ValueContext, ref: DecisionRef): Color => {
     const [, decision] = context.resolve(ref);
 
     if (!decision) {
-        const error = createRefNotFoundError({ context, name, ref });
-        context.addError(error);
-        return FALLBACK_VALUE;
+        handleDecisionNotFound(context, valueName, ref);
+        return fallback;
+    }
+
+    if (isColorSetDecision(decision)) {
+        const value = resolveScaleRefDecision<ColorValue>(decision, context, valueName, ref);
+        return value ?? fallback;
     }
 
     if (isColorValueDecision(decision)) {
         return decision.produce(context);
-    } else if (isColorSetDecision(decision)) {
-        const set = decision.produce(context);
-        const v = set.get().item(ref.index || 0);
-        if (!v) {
-            const error = createRefIndexError({ context, name, ref });
-            context.addError(error);
-            return FALLBACK_VALUE;
-        }
-        return v;
-    } else {
-        const error = createRefMismatchError({ context, name, ref, decision, accepted });
-        context.addError(error);
-        return FALLBACK_VALUE;
     }
+
+    handleRefMismatchError(context, decision, valueName, ref, accepted);
+    return fallback;
 };

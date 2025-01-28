@@ -8,7 +8,7 @@ import { resolveSRGBHueValue } from '../../srgb-hue-value';
 import { resolveSRGBLightnessValue } from '../../srgb-lightness-value';
 import { resolveSRGBSaturationValue } from '../../srgb-saturation-value';
 
-import { FALLBACK_VALUE, VALUE_NAME } from './constants';
+import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './constants';
 
 export function resolveColorObject(input: ColorObject, context: ValueContext): Color {
     if ('s' in input) {
@@ -30,6 +30,6 @@ export function resolveColorObject(input: ColorObject, context: ValueContext): C
             h: resolveOklabHueValue(context, input.h),
         });
     }
-    context.addError(createInvalidInputError({ context, name: VALUE_NAME, input }));
-    return FALLBACK_VALUE;
+    context.addError(createInvalidInputError({ context, valueName, input }));
+    return fallback;
 }

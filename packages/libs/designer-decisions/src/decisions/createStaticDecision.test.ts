@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createDecisionModelMock } from '../mocks';
 import type { DecisionUnknown, InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
 import { getDecisionModelFactory } from './getDecisionModelFactory';
-import { createDecisionModelMock } from './mocks';
 
 vi.mock('./getDecisionModelFactory', () => ({
     getDecisionModelFactory: vi.fn(),

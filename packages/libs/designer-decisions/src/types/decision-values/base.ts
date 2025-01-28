@@ -9,7 +9,16 @@ export type Params = object;
 // };
 
 export type DecisionError = {
-    msg: string;
+    context: DecisionContext;
+    message: () => string;
+};
+
+export type DecisionUnexpectedError = DecisionError & {
+    error?: unknown;
+};
+
+export type DecisionNotFoundError = DecisionError & {
+    ref: DecisionRef;
 };
 
 export type DecisionContext = {
@@ -28,7 +37,28 @@ export type DecisionLookup = {
 };
 
 export type DecisionValueError = {
-    msg: string;
+    context: ValueContext;
+    valueName: string;
+    message: () => string;
+};
+
+export type DecisionValueInputError = DecisionValueError & {
+    input: unknown;
+    error?: unknown;
+};
+
+export type DecisionValueRefNotFoundError = DecisionValueError & {
+    ref: DecisionRef;
+};
+
+export type DecisionValueRefMismatchError = DecisionValueError & {
+    ref: DecisionRef;
+    decision: DecisionUnknown;
+    accepted: string[];
+};
+
+export type DecisionValueRefIndexError = DecisionValueError & {
+    ref: DecisionRef;
 };
 
 export type ValueContext = {

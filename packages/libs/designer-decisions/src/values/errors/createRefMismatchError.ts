@@ -1,23 +1,21 @@
-import type { DecisionRef, DecisionUnknown, DecisionValueError, ValueContext } from '../../types';
+import type { DecisionValueRefMismatchError } from '../../types';
 
-type Attributes = {
-    context: ValueContext;
-    name: string;
-    ref: DecisionRef;
-    decision: DecisionUnknown;
-    accepted: string[];
-};
+type Attributes = Omit<DecisionValueRefMismatchError, 'message'>;
 
-export const createRefMismatchError = (attributes: Attributes): DecisionValueError => {
-    const { context, ref, name, decision, accepted } = attributes;
+export const createRefMismatchError = (attributes: Attributes): DecisionValueRefMismatchError => {
+    const { context, valueName, ref, decision, accepted } = attributes;
 
-    const refStr = JSON.stringify(ref);
-    const decisionRefStr = JSON.stringify(context.decisionContext().ref());
-    const referenced = `referenced in "${decisionRefStr}"`;
-    const actual = decision.type();
-    const mismatch = `matched "${actual}", expected ${accepted.join(', ')}`;
-    const msg = `Ref (${name}) ${refStr} ${referenced} ${mismatch}.`;
+    const message = () => {
+        const refStr = JSON.stringify(ref);
+        const decisionRefStr = JSON.stringify(context.decisionContext().ref());
+        const referenced = `referenced in "${decisionRefStr}"`;
+        const actual = decision.type();
+        const mismatch = `matched "${actual}", expected ${accepted.join(', ')}`;
+        return `Ref (${valueName}) ${refStr} ${referenced} ${mismatch}.`;
+    };
+
     return {
-        msg,
+        ...attributes,
+        message,
     };
 };

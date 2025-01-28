@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createStaticDecisionMockImplementation, createStaticInputMapMock } from '../mocks';
 import type { DecisionContext, DecisionRef, DecisionUnknown, InputRecord } from '../types';
 
 import { createStaticDecision } from './createStaticDecision';
 import { createStaticDecisionMap } from './createStaticDecisionMap';
-import { createStaticDecisionMockImplementation, createStaticInputMapMock } from './mocks';
 import type { StaticDecisionMap, StaticInputMap } from './types';
 
 vi.mock('./createStaticDecision', () => ({
@@ -26,7 +26,7 @@ describe('createStaticDecisionMap()', () => {
             vi.resetAllMocks();
             const inputStore: StaticInputMap = createStaticInputMapMock(inputs);
             createStaticDecisionMocked.mockImplementation(
-                createStaticDecisionMockImplementation(mockValue),
+                createStaticDecisionMockImplementation({ get: () => mockValue }),
             );
 
             staticDecisionMap = createStaticDecisionMap(inputStore);
@@ -74,9 +74,7 @@ describe('createStaticDecisionMap()', () => {
 
             expect(context.hasErrors()).toBe(true);
             expect(context.errors()).toHaveLength(1);
-            expect(context.errors()[0].msg).toEqual(
-                'Ref {"$name":"NonexistentDecision"} not found.',
-            );
+            expect(context.errors()[0].message()).toContain('not found');
         });
 
         it('should return a context with the expected ref and empty inputs', () => {
@@ -120,9 +118,8 @@ describe('createStaticDecisionMap()', () => {
 
             expect(context.hasErrors()).toBe(true);
             expect(context.errors()).toHaveLength(1);
-            expect(context.errors()[0].msg).toContain(
-                'Unexpected error in {"$name":"Decision2"}: Error: Mock error',
-            );
+            expect(context.errors()[0].message()).toContain('Unexpected error');
+            expect(context.errors()[0].message()).toContain('Mock error');
         });
 
         it('should return a context with the expected ref and inputs', () => {
