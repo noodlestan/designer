@@ -1,8 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { SpaceInputValue, SpaceWithUnits } from '../../../types';
+import type { DecisionValueInputError, SpaceInputValue, SpaceWithUnits } from '../../../types';
 import { createValueContextMock } from '../../mocks';
 
+import { FALLBACK_VALUE } from './private';
 import { resolveSpaceValue } from './resolveSpaceValue';
 import { resolveSpaceValueRef } from './resolveSpaceValueRef';
 
@@ -65,7 +66,7 @@ describe('resolveSpaceValue', () => {
         });
     });
 
-    describe('When input is invalid', () => {
+    describe('When the input is invalid', () => {
         const invalidInputs = [
             null,
             undefined,
@@ -78,17 +79,23 @@ describe('resolveSpaceValue', () => {
             'invalid-string',
         ] as unknown[];
 
-        it('should add an error to the context and return the fallback value', () => {
-            invalidInputs.forEach(invalidInput => {
+        it.each(invalidInputs)(
+            'should return the fallback value for invalid input: %s',
+            invalidInput => {
                 const result = resolveSpaceValue(mockContext, invalidInput as SpaceInputValue);
+                expect(result).toEqual(FALLBACK_VALUE);
+            },
+        );
+        it.each(invalidInputs)(
+            'should add an error to the context for invalid input: %s',
+            invalidInput => {
+                resolveSpaceValue(mockContext, invalidInput as SpaceInputValue);
 
-                expect(addErrorSpy).toHaveBeenCalledWith(
-                    expect.objectContaining({
-                        input: invalidInput,
-                    }),
-                );
-                expect(result).toEqual({ value: 0, units: 'px' });
-            });
-        });
+                expect(addErrorSpy).toHaveBeenCalledOnce();
+                const error = addErrorSpy.mock.calls[0][0] as DecisionValueInputError;
+                expect(error.message()).toContain('Invalid input data');
+                expect(error.input).toEqual(invalidInput);
+            },
+        );
     });
 });

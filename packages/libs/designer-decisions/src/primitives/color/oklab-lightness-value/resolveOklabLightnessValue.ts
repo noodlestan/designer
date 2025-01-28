@@ -1,6 +1,9 @@
 import type { ColorOklabLightness, ValueContext } from '../../../types';
+import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
+import { clampChannelValue } from '../helpers';
 
+import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
 import { resolveOklabLightnessValueRef } from './resolveOklabLightnessValueRef';
 
 export const resolveOklabLightnessValue = (
@@ -10,5 +13,11 @@ export const resolveOklabLightnessValue = (
     if (isDecisionRef(input)) {
         return resolveOklabLightnessValueRef(context, input);
     }
-    return input;
+
+    if (typeof input !== 'number') {
+        context.addError(createInvalidInputError({ context, valueName, input }));
+        return fallback;
+    }
+
+    return clampChannelValue(input, 'oklab-lightness');
 };
