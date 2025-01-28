@@ -9,7 +9,7 @@ import type {
     SpaceValue,
     SpaceWithUnits,
 } from '../../../types';
-import { resolveScaleRefDecision } from '../../functions';
+import { resolveSetRefDecision } from '../../functions';
 import { createValueContextMock, createValueContextWithResolveMock } from '../../mocks';
 
 import { createSpaceValue } from './createSpaceValue';
@@ -19,11 +19,11 @@ import { resolveSpaceValueRef } from './resolveSpaceValueRef';
 vi.mock('../../functions', async importOriginal => {
     return {
         ...(await importOriginal<typeof import('../../functions')>()),
-        resolveScaleRefDecision: vi.fn(),
+        resolveSetRefDecision: vi.fn(),
     };
 });
 
-const resolveScaleRefDecisionMocked = vi.mocked(resolveScaleRefDecision);
+const resolveSetRefDecisionMocked = vi.mocked(resolveSetRefDecision);
 
 describe('resolveSpaceValueRef()', () => {
     describe('When the decision cannot be resolved', () => {
@@ -62,13 +62,13 @@ describe('resolveSpaceValueRef()', () => {
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveScaleRefDecisionMocked.mockReturnValue(spaceValue);
+            resolveSetRefDecisionMocked.mockReturnValue(spaceValue);
         });
 
-        it('should call resolveScaleRefDecision() with the correct arguments', () => {
+        it('should call resolveSetRefDecision() with the correct arguments', () => {
             resolveSpaceValueRef(mockValueContext, mockRef);
-            expect(resolveScaleRefDecisionMocked).toHaveBeenCalledOnce();
-            expect(resolveScaleRefDecisionMocked).toHaveBeenCalledWith(
+            expect(resolveSetRefDecisionMocked).toHaveBeenCalledOnce();
+            expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
                 'SpaceValue',
@@ -90,7 +90,7 @@ describe('resolveSpaceValueRef()', () => {
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveScaleRefDecisionMocked.mockReturnValue(undefined);
+            resolveSetRefDecisionMocked.mockReturnValue(undefined);
         });
 
         it('should return the fallback value', () => {

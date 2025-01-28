@@ -1,7 +1,7 @@
 import type { BaseSet, Decision, DecisionRef, ValueContext } from '../../types';
 import { createRefIndexError } from '../../values';
 
-export const resolveScaleRefDecision = <
+export const resolveSetRefDecision = <
     V = unknown,
     T extends Decision<BaseSet<V>> = Decision<BaseSet<V>>,
 >(

@@ -16,8 +16,10 @@ export function createValueContextMock(): [ValueContext, Mocks] {
     mockDecisionContext.ref = vi.fn().mockReturnValue({ $uuid: 'decision-uuid' });
 
     const mockValueContext = {} as ValueContext;
-    mockValueContext.consume = consumeSpy;
     mockValueContext.decisionContext = vi.fn().mockReturnValue(mockDecisionContext);
+    mockValueContext.lookupContexts = vi.fn().mockReturnValue({ all: [] });
+    mockValueContext.childContext = vi.fn().mockImplementation(() => createValueContextMock());
+    mockValueContext.consume = consumeSpy;
     mockValueContext.resolve = resolveSpy;
     mockValueContext.addError = addErrorSpy;
 

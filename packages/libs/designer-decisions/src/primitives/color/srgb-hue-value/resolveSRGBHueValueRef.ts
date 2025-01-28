@@ -14,7 +14,7 @@ import type {
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
-    resolveScaleRefDecision,
+    resolveSetRefDecision,
 } from '../../functions';
 
 import {
@@ -32,7 +32,7 @@ export const resolveSRGBHueValueRef = (context: ValueContext, ref: DecisionRef):
     }
 
     if (isColorSetDecision(decision)) {
-        const value = resolveScaleRefDecision<ColorValue>(decision, context, valueName, ref);
+        const value = resolveSetRefDecision<ColorValue>(decision, context, valueName, ref);
         return value?.toObject<ColorSRGBHSLiteral>('hsl').h ?? fallback;
     }
 
@@ -41,7 +41,7 @@ export const resolveSRGBHueValueRef = (context: ValueContext, ref: DecisionRef):
     }
 
     if (isColorSRGBHueSetDecision(decision)) {
-        const value = resolveScaleRefDecision<SRGBHueValue>(decision, context, valueName, ref);
+        const value = resolveSetRefDecision<SRGBHueValue>(decision, context, valueName, ref);
         return value?.get() ?? fallback;
     }
 

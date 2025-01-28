@@ -14,7 +14,7 @@ import type {
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
-    resolveScaleRefDecision,
+    resolveSetRefDecision,
 } from '../../functions';
 
 import {
@@ -32,7 +32,7 @@ export const resolveOklabChromaValueRef = (context: ValueContext, ref: DecisionR
     }
 
     if (isColorSetDecision(decision)) {
-        const value = resolveScaleRefDecision<ColorValue>(decision, context, valueName, ref);
+        const value = resolveSetRefDecision<ColorValue>(decision, context, valueName, ref);
         return value?.toObject<ColorOkLCHLiteral>('oklch').c ?? fallback;
     }
 
@@ -41,7 +41,7 @@ export const resolveOklabChromaValueRef = (context: ValueContext, ref: DecisionR
     }
 
     if (isColorOklabChromaScaleDecision(decision)) {
-        const value = resolveScaleRefDecision<OklabChromaValue>(decision, context, valueName, ref);
+        const value = resolveSetRefDecision<OklabChromaValue>(decision, context, valueName, ref);
         return value?.get() ?? fallback;
     }
 

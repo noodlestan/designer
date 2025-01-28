@@ -8,7 +8,7 @@ import type {
     DecisionValueRefNotFoundError,
     InputRecord,
 } from '../../../types';
-import { resolveScaleRefDecision } from '../../functions';
+import { resolveSetRefDecision } from '../../functions';
 import { createValueContextMock, createValueContextWithResolveMock } from '../../mocks';
 import { createColorValue } from '../value';
 
@@ -19,11 +19,11 @@ import { resolveSRGBSaturationValueRef } from './resolveSRGBSaturationValueRef';
 vi.mock('../../functions', async importOriginal => {
     return {
         ...(await importOriginal<typeof import('../../functions')>()),
-        resolveScaleRefDecision: vi.fn(),
+        resolveSetRefDecision: vi.fn(),
     };
 });
 
-const resolveScaleRefDecisionMocked = vi.mocked(resolveScaleRefDecision);
+const resolveSetRefDecisionMocked = vi.mocked(resolveSetRefDecision);
 
 describe('resolveSRGBSaturationValueRef()', () => {
     describe('When the decision cannot be resolved', () => {
@@ -62,13 +62,13 @@ describe('resolveSRGBSaturationValueRef()', () => {
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveScaleRefDecisionMocked.mockReturnValue(colorValue);
+            resolveSetRefDecisionMocked.mockReturnValue(colorValue);
         });
 
-        it('should call resolveScaleRefDecision() with the correct arguments', () => {
+        it('should call resolveSetRefDecision() with the correct arguments', () => {
             resolveSRGBSaturationValueRef(mockValueContext, mockRef);
-            expect(resolveScaleRefDecisionMocked).toHaveBeenCalledOnce();
-            expect(resolveScaleRefDecisionMocked).toHaveBeenCalledWith(
+            expect(resolveSetRefDecisionMocked).toHaveBeenCalledOnce();
+            expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
                 'SRGBSaturationValue',
@@ -90,7 +90,7 @@ describe('resolveSRGBSaturationValueRef()', () => {
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveScaleRefDecisionMocked.mockReturnValue(undefined);
+            resolveSetRefDecisionMocked.mockReturnValue(undefined);
         });
 
         it('should return the fallback value', () => {
@@ -129,13 +129,13 @@ describe('resolveSRGBSaturationValueRef()', () => {
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveScaleRefDecisionMocked.mockReturnValue(colorValue);
+            resolveSetRefDecisionMocked.mockReturnValue(colorValue);
         });
 
-        it('should call resolveScaleRefDecision() with the correct arguments', () => {
+        it('should call resolveSetRefDecision() with the correct arguments', () => {
             resolveSRGBSaturationValueRef(mockValueContext, mockRef);
-            expect(resolveScaleRefDecisionMocked).toHaveBeenCalledOnce();
-            expect(resolveScaleRefDecisionMocked).toHaveBeenCalledWith(
+            expect(resolveSetRefDecisionMocked).toHaveBeenCalledOnce();
+            expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
                 'SRGBSaturationValue',
@@ -157,7 +157,7 @@ describe('resolveSRGBSaturationValueRef()', () => {
 
         beforeEach(() => {
             vi.clearAllMocks();
-            resolveScaleRefDecisionMocked.mockReturnValue(undefined);
+            resolveSetRefDecisionMocked.mockReturnValue(undefined);
         });
 
         it('should return the fallback value', () => {

@@ -3,7 +3,7 @@ import type { DecisionRef, SpaceValue, SpaceWithUnits, ValueContext } from '../.
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
-    resolveScaleRefDecision,
+    resolveSetRefDecision,
 } from '../../functions';
 
 import {
@@ -21,7 +21,7 @@ export const resolveSpaceValueRef = (context: ValueContext, ref: DecisionRef): S
     }
 
     if (isSpaceScaleDecision(decision)) {
-        const value = resolveScaleRefDecision<SpaceValue>(decision, context, valueName, ref);
+        const value = resolveSetRefDecision<SpaceValue>(decision, context, valueName, ref);
         return value?.getValueWithUnits() ?? fallback;
     }
 

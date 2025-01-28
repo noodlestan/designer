@@ -3,7 +3,7 @@ import type { Color, ColorValue, DecisionRef, ValueContext } from '../../../type
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
-    resolveScaleRefDecision,
+    resolveSetRefDecision,
 } from '../../functions';
 
 import {
@@ -21,7 +21,7 @@ export const resolveColorValueRef = (context: ValueContext, ref: DecisionRef): C
     }
 
     if (isColorSetDecision(decision)) {
-        const value = resolveScaleRefDecision<ColorValue>(decision, context, valueName, ref);
+        const value = resolveSetRefDecision<ColorValue>(decision, context, valueName, ref);
         return value ?? fallback;
     }
 
