@@ -1,5 +1,81 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.7] - 2025-01-29
+
+### Highlights
+
+- Implements Ref resolution across values. E.g.:
+  - referencing a `ColorValue` in a `*HueValue` extracts color channel from color
+  - referencing a `SpaceScale` in a `SpaceValue` extracts value at `index`
+- No more WIP left over in existing `Color` and `Space` models and primitives
+- Improves error handling
+  - more specific error types that capture attributes of the error
+  - `ValueContext` tracks and exposes nested errors
+  - new `produceDecisions()` helper validates all values at once
+- 100% test coverage for `@noodlestan/designer-decisions` (all primitives! and models!)
+
+### Added
+
+- New component `ShowColorChannelValue` replaces all other channel components
+- All values now extend `BaseVale` and expose `context()`
+- New `ValueContext` methods
+  - `nestedContext()` - to resolve model values
+  - `childContext()` - to resolve refs
+  - `children()`
+  - `nested()`
+  - `ownErrors()`
+  - `allErrors()`
+- New primitives and helpers:
+  - `ItemSet` encapsulates lists as a value for use in scales/sets
+  - `Color` wraps `chroma` and is merged into `ColorValue`
+  - `resolveSetRefDecision()` resolves to item within a set
+  - `chromaColorFromLiteral()`
+  - `chromaColorToLiteral()`
+  - `chromaColorToString()`
+  - `generateColorList()`
+- Specific types for each error that extends `DecisionError` and `ValueError`
+- New errors `DecisionValueRefIndexError`
+- helpers for `cli` code
+  - `produceDecisions()`
+  - `produceDecisionStatus()`
+  - `formatDecisionStatus()`
+
+### Changed
+
+- Renamed `DecisionValueContext` to `ValueContext`
+- Separated public and private constructors for `ValueContext`
+- Renamed `StaticStoreDecision` to `StaticDecision`
+- Renamed `DecisionValueError` to `ValueError`
+- Renamed `DecisionInputBase` to `InputRecord`
+- Renamed `DecisionInputError` to `ValidationError`
+- Renamed `createRefMatchError`() `to createRefMismatchError()`
+- Decisions `StaticStoreDecision` now created with `input[]` (all matching inputs, across all contexts)
+- All `create.*Error()` functions now accept a single object param
+- All subclasses of `DecisionError` and `ValueError` now expose `message(): string` (and context attributes) instead of just `msg: string`
+- `create*Error()` functions accept a single object instead of many params
+
+### Removed
+
+- Eliminate `DecisionValue<V>` indirection
+- Removed everything resolution related (e.g.: lookupContext) from `DecisionContext`
+- `StaticDecisionMap:createDecision()` making `resolve()` the single entry point
+
+### Docs
+
+- Added "How to use references" to "Capturing decisions in data" guide
+- Added references to sample data
+- new `<GetInvolved />` component to link to github issues
+
+## Tests
+
+- Add mocks for commonly used params
+- 100% test coverage
+
+### Fixes
+
+- Bounded scale/sets were repeating first and last element
+- Example data contained sets with clamped values
+
 ## [0.0.6] - 2025-01-08
 
 ### Added
