@@ -1,20 +1,21 @@
-import type { DecisionValueError, ValueContext } from '../../types';
+import type { DecisionValueInputError } from '../../types';
 
-type Attributes = {
-    context: ValueContext;
-    name: string;
-    input: unknown;
-    error?: unknown;
-};
+type Attributes = Omit<DecisionValueInputError, 'message'>;
 
-export const createInvalidInputError = (attributes: Attributes): DecisionValueError => {
-    const { context, name, input, error: err } = attributes;
+export const createInvalidInputError = (attributes: Attributes): DecisionValueInputError => {
+    const { context, valueName, input, error: err } = attributes;
 
-    const dataStr = JSON.stringify(input);
-    const refStr = JSON.stringify(context.decisionContext().ref());
-    const errStr = err ? ` Error: "${err instanceof Error ? err.stack : JSON.stringify(err)}"` : '';
-    const msg = `Invalid input data for a ${name} in ${refStr}: ${dataStr}${errStr}.`;
+    const message = () => {
+        const dataStr = JSON.stringify(input);
+        const refStr = JSON.stringify(context.decisionContext().ref());
+        const errStr = err
+            ? ` Error: "${err instanceof Error ? err.stack : JSON.stringify(err)}"`
+            : '';
+        return `Invalid input data for a ${valueName} in ${refStr}: ${dataStr}${errStr}.`;
+    };
+
     return {
-        msg,
+        ...attributes,
+        message,
     };
 };

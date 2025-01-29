@@ -15,7 +15,7 @@ export type SpaceScaleExplicitInput = InputRecord & {
     };
 };
 
-export type SpaceScaleLinearBounded = InputRecord & {
+export type SpaceScaleBoundedInput = InputRecord & {
     model: 'space-scale/bounded';
     params: {
         from: SpaceInputValue;

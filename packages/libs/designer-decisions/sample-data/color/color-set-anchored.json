@@ -4,20 +4,20 @@
     "name": "Color Set Anchored Sample",
     "params": {
       "anchor": "#d35084",
-      "after": {
-        "steps": 4,
+      "before": {
+        "steps": 2,
         "modifier": {
           "space": "hsl",
-          "l": { "mode": "linear", "by": 0.07 },
+          "l": { "mode": "linear", "by": -0.05 },
           "s": { "mode": "linear", "by": -0.05 }
         }
       },
-      "before": {
-        "steps": 4,
+      "after": {
+        "steps": 3,
         "modifier": {
           "space": "hsl",
-          "l": { "mode": "linear", "by": -0.1 },
-          "s": { "mode": "linear", "by": -0.05 }
+          "l": { "mode": "linear", "by": 0.1 },
+          "s": { "mode": "linear", "by": -0.1 }
         }
       }
     }

@@ -9,8 +9,6 @@ describe('createRefMismatchError()', () => {
         const mockDecisionContext = {
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         };
-
-        const refStr = JSON.stringify(mockDecisionContext.ref());
         const mockContext = {
             decisionContext: vi.fn(() => mockDecisionContext),
         } as unknown as ValueContext;
@@ -19,19 +17,28 @@ describe('createRefMismatchError()', () => {
         } as unknown as DecisionUnknown;
 
         const mockRef: DecisionRef = { $uuid: 'ref-uuid' };
-        const mockRefStr = JSON.stringify(mockRef);
-        const name = 'ValueName';
+        const valueName = 'ValueName';
         const accepted = ['TypeA', 'TypeB'];
 
-        it('should return a DecisionValueError object with the expected message', () => {
-            const context = mockContext;
-            const decision = mockDecision;
-            const ref = mockRef;
-            const result = createRefMismatchError({ context, name, ref, decision, accepted });
+        const context = mockContext;
+        const decision = mockDecision;
+        const ref = mockRef;
 
-            const expectedMessage = `Ref (${name}) ${mockRefStr} referenced in "${refStr}" matched "TestType", expected ${accepted.join(', ')}.`;
+        it('should return a DecisionValueRefMismatchError object with the expected attributes', () => {
+            const result = createRefMismatchError({ context, decision, valueName, ref, accepted });
 
-            expect(result.msg).toBe(expectedMessage);
+            expect(result.context).toBe(mockContext);
+            expect(result.valueName).toBe(valueName);
+            expect(result.ref).toBe(mockRef);
+            expect(result.decision).toBe(mockDecision);
+            expect(result.accepted).toEqual(accepted);
+        });
+
+        it('should return a DecisionValueRefMismatchError object with the expected message', () => {
+            const result = createRefMismatchError({ context, decision, valueName, ref, accepted });
+
+            const expectedMessage = `matched "TestType", expected`;
+            expect(result.message()).toContain(expectedMessage);
         });
     });
 });

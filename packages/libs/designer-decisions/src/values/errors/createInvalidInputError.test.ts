@@ -8,41 +8,61 @@ describe('createInvalidInputError()', () => {
     const mockDecisionContext = {
         ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
     };
-    const refStr = JSON.stringify(mockDecisionContext.ref());
     const mockContext = {
         decisionContext: vi.fn(() => mockDecisionContext),
     } as unknown as ValueContext;
 
-    const name = 'ValueName';
+    const valueName = 'ValueName';
     const input = { key: 'value' };
-    const inputStr = JSON.stringify(input);
+
+    const context = mockContext;
 
     describe('Given context, name, data, and no error', () => {
-        it('should return a DecisionValueError object with the expected message', () => {
-            const result = createInvalidInputError({ context: mockContext, name, input });
+        it('should return a DecisionValueRefIndexError object with the expected attributes', () => {
+            const result = createInvalidInputError({ context, valueName, input });
 
-            const expectedMessage = `Invalid input data for a ${name} in ${refStr}: ${inputStr}.`;
-            expect(result.msg).toBe(expectedMessage);
+            expect(result.context).toBe(mockContext);
+            expect(result.valueName).toBe(valueName);
+            expect(result.input).toBe(input);
+            expect(result.error).toBeUndefined();
+        });
+
+        it('should return a DecisionValueInvalidInputError object with the expected message', () => {
+            const result = createInvalidInputError({ context, valueName, input });
+
+            expect(result.message()).toContain('Invalid input data for a ValueName');
         });
     });
 
     describe('Given context, name, data, and an Error', () => {
-        it('should return a DecisionValueError object with the expected message', () => {
-            const error = new Error('Sample error');
-            const result = createInvalidInputError({ context: mockContext, name, input, error });
+        const error = new Error('Sample error');
 
-            const expectedMessage = `Invalid input data for a ${name} in ${refStr}: ${inputStr} Error: "${error.stack}".`;
-            expect(result.msg).toBe(expectedMessage);
+        it('should return a DecisionValueRefIndexError object with the error', () => {
+            const result = createInvalidInputError({ context, valueName, input, error });
+
+            expect(result.error).toBe(error);
+        });
+
+        it('should return a DecisionValueInvalidInputError object with the expected message', () => {
+            const result = createInvalidInputError({ context, valueName, input, error });
+
+            expect(result.message()).toContain('Sample error');
         });
     });
 
-    describe('Given context, name, data, and an non-Error object', () => {
-        it('should return a DecisionValueError object with the expected message', () => {
-            const error = { code: 123, message: 'Sample error object' };
-            const result = createInvalidInputError({ context: mockContext, name, input, error });
+    describe('Given context, name, data, and a non-Error object', () => {
+        const error = { code: 123, message: 'Sample error object' };
 
-            const expectedMessage = `Invalid input data for a ${name} in ${refStr}: ${inputStr} Error: "${JSON.stringify(error)}".`;
-            expect(result.msg).toBe(expectedMessage);
+        it('should return a DecisionValueRefIndexError object with the error', () => {
+            const result = createInvalidInputError({ context, valueName, input, error });
+
+            expect(result.error).toBe(error);
+        });
+
+        it('should return a DecisionValueInvalidInputError object with the expected message', () => {
+            const result = createInvalidInputError({ context, valueName, input, error });
+
+            expect(result.message()).toContain(JSON.stringify(error));
         });
     });
 });

@@ -6,7 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { loadSchemasFromDirectory } from './loadSchemasFromDirectory';
 
-describe('loadSchemasFromDirectory', () => {
+describe('loadSchemasFromDirectory()', () => {
     const fileHandler = vi.fn();
 
     beforeEach(() => {

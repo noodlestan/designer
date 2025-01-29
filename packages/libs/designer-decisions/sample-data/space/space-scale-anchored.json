@@ -4,13 +4,13 @@
     "name": "Space Scale Anchored Sample",
     "params": {
       "anchor": 30,
-      "after": {
-        "steps": 3,
-        "modifier": { "mode": "geometric", "by": 2 }
-      },
       "before": {
         "steps": 2,
         "modifier": { "mode": "linear", "by": -10 }
+      },
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "geometric", "by": 2 }
       }
     }
   }

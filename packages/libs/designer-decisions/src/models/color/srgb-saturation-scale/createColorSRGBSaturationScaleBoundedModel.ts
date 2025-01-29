@@ -22,9 +22,9 @@ export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
             const to = toValue.get();
 
             const series = generateBoundedSeries(from, to, params.steps);
-            const values = series.map(item =>
-                createSRGBSaturationValue(context.nestedContext(), item),
-            );
+            const values = series
+                .slice(1, series.length - 1)
+                .map(item => createSRGBSaturationValue(context.nestedContext(), item));
             return createSRGBSaturationScale(context, [fromValue, ...values, toValue]);
         },
     };

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { MOCK_DECISION_TYPES } from '../mocks';
+import { MOCK_DECISION_TYPES } from '../../mocks';
 
 import { getDecisionTypeMeta } from './getDecisionTypeMeta';
 

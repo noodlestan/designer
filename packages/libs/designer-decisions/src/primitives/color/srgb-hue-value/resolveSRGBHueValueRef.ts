@@ -1,23 +1,54 @@
-import { isColorSRGBHueValueDecision } from '../../../decisions';
-import type { DecisionRef, ValueContext } from '../../../types';
-import { createRefMismatchError, createRefNotFoundError } from '../../../values';
+import {
+    isColorSRGBHueSetDecision,
+    isColorSRGBHueValueDecision,
+    isColorSetDecision,
+    isColorValueDecision,
+} from '../../../decisions';
+import type {
+    ColorSRGBHSLiteral,
+    ColorValue,
+    DecisionRef,
+    SRGBHueValue,
+    ValueContext,
+} from '../../../types';
+import {
+    handleDecisionNotFound,
+    handleRefMismatchError,
+    resolveSetRefDecision,
+} from '../../functions';
 
-import { FALLBACK_VALUE, REF_CHECKED_TYPES as accepted, VALUE_NAME as name } from './private';
+import {
+    REF_CHECKED_TYPES as accepted,
+    FALLBACK_VALUE as fallback,
+    VALUE_NAME as valueName,
+} from './private';
 
 export const resolveSRGBHueValueRef = (context: ValueContext, ref: DecisionRef): number => {
     const [, decision] = context.resolve(ref);
 
     if (!decision) {
-        const error = createRefNotFoundError({ context, name, ref });
-        context.addError(error);
-        return FALLBACK_VALUE;
+        handleDecisionNotFound(context, valueName, ref);
+        return fallback;
     }
+
+    if (isColorSetDecision(decision)) {
+        const value = resolveSetRefDecision<ColorValue>(decision, context, valueName, ref);
+        return value?.toObject<ColorSRGBHSLiteral>('hsl').h ?? fallback;
+    }
+
+    if (isColorValueDecision(decision)) {
+        return decision.produce(context).toObject<ColorSRGBHSLiteral>('hsl').h;
+    }
+
+    if (isColorSRGBHueSetDecision(decision)) {
+        const value = resolveSetRefDecision<SRGBHueValue>(decision, context, valueName, ref);
+        return value?.get() ?? fallback;
+    }
+
     if (isColorSRGBHueValueDecision(decision)) {
-        const v = decision.produce(context);
-        return v.get();
-    } else {
-        const error = createRefMismatchError({ context, name, ref, decision, accepted });
-        context.addError(error);
-        return FALLBACK_VALUE;
+        return decision.produce(context).get();
     }
+
+    handleRefMismatchError(context, decision, valueName, ref, accepted);
+    return fallback;
 };

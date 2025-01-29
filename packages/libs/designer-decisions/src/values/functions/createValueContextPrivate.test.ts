@@ -1,11 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type {
-    DecisionContext,
-    DecisionUnknown,
-    DecisionValueError,
-    ValueContext,
-} from '../../types';
+import type { DecisionContext, DecisionUnknown, DecisionValueError } from '../../types';
 
 import { createValueContextPrivate } from './createValueContextPrivate';
 
@@ -16,39 +11,47 @@ describe('createValueContextPrivate()', () => {
             ref: vi.fn(),
         } as unknown as DecisionContext;
 
-        let result: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-        });
-
         it('should have the provided decisionContext', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.decisionContext()).toEqual(mockDecisionContext);
         });
 
         it('should have no parent', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.parent()).toBeUndefined();
         });
 
         it('should have default lookupContexts', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.lookupContexts()).toEqual({ all: [] });
         });
 
         it('should have no decisionInput', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.decisionInput()).toEqual(undefined);
         });
 
         it('should have no valueInput ', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.valueInput()).toBeUndefined();
         });
 
         it('should have no children, nested contexts, lookups', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.lookups()).toEqual([]);
             expect(result.nested()).toEqual([]);
             expect(result.children()).toEqual([]);
         });
 
         it('should have no errors', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+
             expect(result.hasErrors()).toEqual(false);
             expect(result.ownErrors()).toEqual([]);
             expect(result.allErrors()).toEqual([]);
@@ -63,25 +66,29 @@ describe('createValueContextPrivate()', () => {
         const mockLookupContexts = { all: ['Context A'] };
         const mockInput = { model: 'model', name: 'value-1', params: {} };
 
-        let result: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext, mockLookupContexts, mockInput);
-        });
+        const context = mockDecisionContext;
 
         it('should have the provided decisionContext', () => {
+            const result = createValueContextPrivate(context, mockLookupContexts, mockInput);
+
             expect(result.decisionContext()).toEqual(mockDecisionContext);
         });
 
         it('should have no parent', () => {
+            const result = createValueContextPrivate(context, mockLookupContexts, mockInput);
+
             expect(result.parent()).toBeUndefined();
         });
 
         it('should have the provided lookupContexts', () => {
+            const result = createValueContextPrivate(context, mockLookupContexts, mockInput);
+
             expect(result.lookupContexts()).toEqual(mockLookupContexts);
         });
 
         it('should have the provided decisionInput', () => {
+            const result = createValueContextPrivate(context, mockLookupContexts, mockInput);
+
             expect(result.decisionInput()).toEqual(mockInput);
         });
     });
@@ -93,23 +100,25 @@ describe('createValueContextPrivate()', () => {
                 ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
             } as unknown as DecisionContext;
             const resolveMocked = vi.mocked(mockDecisionContext.resolve);
+            resolveMocked.mockReturnValue([mockDecisionContext, undefined]);
             const mockDecisionRef = { $uuid: 'test-uuid' };
 
-            let result: ValueContext;
-
             beforeEach(() => {
-                resolveMocked.mockReturnValue([mockDecisionContext, undefined]);
-                result = createValueContextPrivate(mockDecisionContext);
+                vi.clearAllMocks();
             });
 
             it('should call resolver on the DecisionContext with the DecisionRef', () => {
-                result.resolve(mockDecisionRef);
+                const context = createValueContextPrivate(mockDecisionContext);
+                context.resolve(mockDecisionRef);
+
                 expect(resolveMocked).toHaveBeenCalledWith(mockDecisionRef);
             });
 
             it('should add the failed lookup to the lookups list', () => {
-                result.resolve(mockDecisionRef);
-                expect(result.lookups()).toContainEqual({
+                const context = createValueContextPrivate(mockDecisionContext);
+                context.resolve(mockDecisionRef);
+
+                expect(context.lookups()).toContainEqual({
                     ref: mockDecisionRef,
                     context: mockDecisionContext,
                     decision: undefined,
@@ -117,7 +126,9 @@ describe('createValueContextPrivate()', () => {
             });
 
             it("should return the resolution's context and no decision", () => {
-                const [resolvedContext, resolvedDecision] = result.resolve(mockDecisionRef);
+                const context = createValueContextPrivate(mockDecisionContext);
+                const [resolvedContext, resolvedDecision] = context.resolve(mockDecisionRef);
+
                 expect(resolvedContext).toEqual(mockDecisionContext);
                 expect(resolvedDecision).toBeUndefined();
             });
@@ -128,26 +139,28 @@ describe('createValueContextPrivate()', () => {
                 resolve: vi.fn(),
                 ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
             } as unknown as DecisionContext;
-            const resolveMocked = vi.mocked(mockDecisionContext.resolve);
-            const mockDecisionRef = { $uuid: 'test-uuid' };
             const mockDecision = {} as DecisionUnknown;
+            const resolveMocked = vi.mocked(mockDecisionContext.resolve);
+            resolveMocked.mockReturnValue([mockDecisionContext, mockDecision]);
+            const mockDecisionRef = { $uuid: 'test-uuid' };
             mockDecision.uuid = () => mockDecisionRef.$uuid;
 
-            let result: ValueContext;
-            let resolved: [DecisionContext, DecisionUnknown | undefined];
-
             beforeEach(() => {
-                resolveMocked.mockReturnValue([mockDecisionContext, mockDecision]);
-                result = createValueContextPrivate(mockDecisionContext);
-                resolved = result.resolve(mockDecisionRef);
+                vi.clearAllMocks();
             });
 
             it('should call resolver on the DecisionContext with the DecisionRef', () => {
+                const context = createValueContextPrivate(mockDecisionContext);
+                context.resolve(mockDecisionRef);
+
                 expect(resolveMocked).toHaveBeenCalledWith(mockDecisionRef);
             });
 
             it('should add the successful lookup to the lookups list', () => {
-                expect(result.lookups()).toContainEqual({
+                const context = createValueContextPrivate(mockDecisionContext);
+                context.resolve(mockDecisionRef);
+
+                expect(context.lookups()).toContainEqual({
                     ref: mockDecisionRef,
                     context: mockDecisionContext,
                     decision: mockDecision,
@@ -155,7 +168,8 @@ describe('createValueContextPrivate()', () => {
             });
 
             it("should return the resolution's context and decision", () => {
-                const [resolvedContext, resolvedDecision] = resolved;
+                const context = createValueContextPrivate(mockDecisionContext);
+                const [resolvedContext, resolvedDecision] = context.resolve(mockDecisionRef);
 
                 expect(resolvedContext).toEqual(mockDecisionContext);
                 expect(resolvedDecision).toEqual(mockDecision);
@@ -170,19 +184,18 @@ describe('createValueContextPrivate()', () => {
         } as unknown as DecisionContext;
         const mockInput = { model: 'model', name: 'value-1', params: {} };
 
-        let result: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            result.consume(mockInput);
-        });
-
         it('should set the valueInput state', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            result.consume(mockInput);
+
             expect(result.valueInput()).toEqual(mockInput);
         });
 
         describe('When consume() is called twice', () => {
             it('should throw an error', () => {
+                const result = createValueContextPrivate(mockDecisionContext);
+                result.consume(mockInput);
+
                 expect(() => result.consume(mockInput)).toThrowError(
                     `Value for "{"$uuid":"test-uuid"}" has already consumed input ({"model":"model","name":"value-1","params":{}}).`,
                 );
@@ -195,25 +208,28 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockError = { msg: 'Test error' } as DecisionValueError;
-
-        let result: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            result.addError(mockError);
-        });
+        const mockError = {} as DecisionValueError;
+        mockError.valueName = 'ValueName';
 
         it('should return true for hasErrors()', () => {
-            expect(result.hasErrors()).toBe(true);
+            const context = createValueContextPrivate(mockDecisionContext);
+            context.addError(mockError);
+
+            expect(context.hasErrors()).toBe(true);
         });
 
         it('should expose the error in ownErrors()', () => {
-            expect(result.ownErrors()).toContain(mockError);
+            const context = createValueContextPrivate(mockDecisionContext);
+            context.addError(mockError);
+
+            expect(context.ownErrors()).toContain(mockError);
         });
 
         it('should expose the error in allErrors()', () => {
-            expect(result.ownErrors()).toContain(mockError);
+            const context = createValueContextPrivate(mockDecisionContext);
+            context.addError(mockError);
+
+            expect(context.ownErrors()).toContain(mockError);
         });
     });
 
@@ -223,20 +239,18 @@ describe('createValueContextPrivate()', () => {
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
 
-        let result: ValueContext;
-        let nested: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            nested = result.nestedContext();
-        });
-
         it('should add the nested context to the list', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const nested = result.nestedContext();
+
             expect(result.nested()).toHaveLength(1);
             expect(result.nested()[0]).toBe(nested);
         });
 
         it('should return the nested context', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const nested = result.nestedContext();
+
             expect(nested.parent()?.decisionContext()).toEqual(result.decisionContext());
             expect(nested.parent()?.decisionInput()).toEqual(result.decisionInput());
         });
@@ -248,20 +262,18 @@ describe('createValueContextPrivate()', () => {
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
 
-        let result: ValueContext;
-        let child: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            child = result.childContext();
-        });
-
         it('should add the child context to the list', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext();
+
             expect(result.children()).toHaveLength(1);
             expect(result.children()[0]).toBe(child);
         });
 
         it('should return the child context', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext();
+
             expect(child.parent()?.decisionContext()).toEqual(result.decisionContext());
             expect(child.parent()?.decisionInput()).toEqual(result.decisionInput());
         });
@@ -274,20 +286,18 @@ describe('createValueContextPrivate()', () => {
         } as unknown as DecisionContext;
         const mockInput = { model: 'model', name: 'value-1', params: {} };
 
-        let result: ValueContext;
-        let child: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            child = result.childContext(mockInput);
-        });
-
         it('should add the child context to the list', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext(mockInput);
+
             expect(result.children()).toHaveLength(1);
             expect(result.children()[0]).toBe(child);
         });
 
         it('should return the child context with the provided input', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext(mockInput);
+
             expect(child.decisionInput()).toEqual(mockInput);
         });
     });
@@ -297,26 +307,30 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockError = { msg: 'Test error' } as DecisionValueError;
-
-        let result: ValueContext;
-        let child: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            child = result.childContext();
-            child.addError(mockError);
-        });
+        const mockError = {} as DecisionValueError;
+        mockError.valueName = 'ValueName';
 
         it('should return true for hasErrors()', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext();
+            child.addError(mockError);
+
             expect(result.hasErrors()).toBe(true);
         });
 
         it('should not expose the error in ownErrors()', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext();
+            child.addError(mockError);
+
             expect(result.ownErrors()).not.toContain(mockError);
         });
 
         it('should expose the error in allErrors()', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const child = result.childContext();
+            child.addError(mockError);
+
             expect(result.allErrors()).toContain(mockError);
         });
     });
@@ -326,26 +340,30 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockError = { msg: 'Test error' } as DecisionValueError;
-
-        let result: ValueContext;
-        let nested: ValueContext;
-
-        beforeEach(() => {
-            result = createValueContextPrivate(mockDecisionContext);
-            nested = result.nestedContext();
-            nested.addError(mockError);
-        });
+        const mockError = {} as DecisionValueError;
+        mockError.valueName = 'ValueName';
 
         it('should return true for hasErrors()', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const nested = result.nestedContext();
+            nested.addError(mockError);
+
             expect(result.hasErrors()).toBe(true);
         });
 
         it('should not expose the error in ownErrors()', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const nested = result.nestedContext();
+            nested.addError(mockError);
+
             expect(result.ownErrors()).not.toContain(mockError);
         });
 
         it('should expose the error in allErrors()', () => {
+            const result = createValueContextPrivate(mockDecisionContext);
+            const nested = result.nestedContext();
+            nested.addError(mockError);
+
             expect(result.allErrors()).toContain(mockError);
         });
     });

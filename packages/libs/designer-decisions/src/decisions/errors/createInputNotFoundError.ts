@@ -1,16 +1,17 @@
-import type { DecisionContext, DecisionError, DecisionRef } from '../../types';
+import type { DecisionNotFoundError } from '../../types';
 
-type Attributes = {
-    context: DecisionContext;
-    ref: DecisionRef;
-};
+type Attributes = Omit<DecisionNotFoundError, 'message'>;
 
-export function createInputNotFoundError(attributes: Attributes): DecisionError {
+export function createInputNotFoundError(attributes: Attributes): DecisionNotFoundError {
     const { ref } = attributes;
 
-    const refStr = JSON.stringify(ref);
-    const msg = `Ref ${refStr} not found.`;
+    const message = () => {
+        const refStr = JSON.stringify(ref);
+        return `Ref ${refStr} not found.`;
+    };
+
     return {
-        msg,
+        ...attributes,
+        message,
     };
 }

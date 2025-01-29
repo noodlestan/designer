@@ -4,13 +4,13 @@
     "name": "Oklab Lightness Scale Anchored Sample",
     "params": {
       "anchor": 0.5,
-      "after": {
-        "steps": 4,
-        "modifier": { "mode": "linear", "by": 0.075 }
-      },
       "before": {
-        "steps": 4,
-        "modifier": { "mode": "linear", "by": -0.075 }
+        "steps": 2,
+        "modifier": { "mode": "linear", "by": -0.05 }
+      },
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "linear", "by": 0.075 }
       }
     }
   }

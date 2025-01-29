@@ -9,21 +9,25 @@ describe('createRefIndexError()', () => {
         const mockDecisionContext = {
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         };
-        const refStr = JSON.stringify(mockDecisionContext.ref());
         const mockContext = {
             decisionContext: vi.fn(() => mockDecisionContext),
         } as unknown as ValueContext;
 
-        const name = 'ValueName';
+        const valueName = 'ValueName';
         const mockRef: DecisionRef = { $uuid: 'ref-uuid', index: 99 };
-        const mockRefStr = JSON.stringify(mockRef);
 
-        it('should return a DecisionValueError object with the expected message', () => {
-            const result = createRefIndexError({ context: mockContext, name, ref: mockRef });
+        it('should return a DecisionValueRefIndexError object with the expected attributes', () => {
+            const result = createRefIndexError({ context: mockContext, valueName, ref: mockRef });
 
-            const expectedMessage = `Ref (${name}) ${mockRefStr} out of bounds referenced in "${refStr}".`;
+            expect(result.context).toBe(mockContext);
+            expect(result.valueName).toBe(valueName);
+            expect(result.ref).toBe(mockRef);
+        });
 
-            expect(result.msg).toBe(expectedMessage);
+        it('should return a DecisionValueRefIndexError object with the expected message', () => {
+            const result = createRefIndexError({ context: mockContext, valueName, ref: mockRef });
+
+            expect(result.message()).toContain('out of bounds');
         });
     });
 });

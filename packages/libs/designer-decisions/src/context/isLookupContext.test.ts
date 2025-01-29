@@ -4,7 +4,7 @@ import type { LookupContexts } from '../types';
 
 import { isLookupContext } from './isLookupContext';
 
-describe('isLookupContext', () => {
+describe('isLookupContext()', () => {
     describe('Given LookupContexts', () => {
         const context: LookupContexts = { all: [] };
 

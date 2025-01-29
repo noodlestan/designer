@@ -17,7 +17,7 @@ const missingReferencesMultipleRefs: [SchemaId, SchemaId[]][] = [
 
 const noMissingReferences: [SchemaId, SchemaId[]][] = [];
 
-describe('formatMissingSchemaReferences', () => {
+describe('formatMissingSchemaReferences()', () => {
     it('should format a single missing reference correctly', () => {
         const result = formatMissingSchemaReferences(missingReferencesSingle);
         expect(result).toEqual('Missing schema "missingSchema1", referenced in "schema1".');

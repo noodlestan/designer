@@ -58,7 +58,7 @@ const schemaDataWithMixedRefTypes = {
     },
 };
 
-describe('extractSchemaReferences', () => {
+describe('extractSchemaReferences()', () => {
     it('should return an empty array when there are no $ref keys', () => {
         const result = extractSchemaReferences(schemaDataWithoutRefs);
         expect(result).toEqual([]);

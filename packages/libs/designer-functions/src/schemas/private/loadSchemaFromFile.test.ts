@@ -15,7 +15,7 @@ const schemaDataWithMissingID = JSON.stringify({ type: 'object' });
 const duplicateSchemaData = JSON.stringify({ $id: 'duplicateId', type: 'object' });
 const unexpectedError = new Error('Unexpected error occurred');
 
-describe('loadSchemaFromFile', () => {
+describe('loadSchemaFromFile()', () => {
     beforeEach(() => {
         vi.resetAllMocks();
     });

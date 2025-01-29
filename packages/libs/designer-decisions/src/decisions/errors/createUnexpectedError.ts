@@ -1,18 +1,19 @@
-import type { DecisionContext, DecisionError } from '../../types';
+import type { DecisionUnexpectedError } from '../../types';
 
-type Attributes = {
-    context: DecisionContext;
-    error?: unknown;
-};
+type Attributes = Omit<DecisionUnexpectedError, 'message'>;
 
-export const createUnexpectedError = (attributes: Attributes): DecisionError => {
+export const createUnexpectedError = (attributes: Attributes): DecisionUnexpectedError => {
     const { context, error } = attributes;
 
-    const ref = context.ref();
-    const refStr = JSON.stringify(ref);
-    const errStr = error && error instanceof Error ? error.stack : JSON.stringify(error);
-    const msg = `Unexpected error in ${refStr}: ${errStr}.`;
+    const message = () => {
+        const ref = context.ref();
+        const refStr = JSON.stringify(ref);
+        const errStr = error && error instanceof Error ? error.stack : JSON.stringify(error);
+        return `Unexpected error in ${refStr}: ${errStr}.`;
+    };
+
     return {
-        msg,
+        ...attributes,
+        message,
     };
 };

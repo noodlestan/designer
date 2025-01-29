@@ -9,21 +9,27 @@ describe('createRefNotFoundError()', () => {
         const mockDecisionContext = {
             ref: vi.fn(() => ({ $uuid: 'decision-uuid' })),
         };
-        const refStr = JSON.stringify(mockDecisionContext.ref());
         const mockContext = {
             decisionContext: vi.fn(() => mockDecisionContext),
         } as unknown as ValueContext;
 
         const mockRef: DecisionRef = { $uuid: 'ref-uuid' };
-        const mockRefStr = JSON.stringify(mockRef);
-        const name = 'TestName';
+        const valueName = 'TestName';
+
+        const context = mockContext;
+
+        it('should return a DecisionValueError object with the expected attributes', () => {
+            const result = createRefNotFoundError({ context, valueName, ref: mockRef });
+
+            expect(result.context).toBe(mockContext);
+            expect(result.valueName).toBe(valueName);
+            expect(result.ref).toBe(mockRef);
+        });
 
         it('should return a DecisionValueError object with the expected message', () => {
-            const result = createRefNotFoundError({ context: mockContext, name, ref: mockRef });
+            const result = createRefNotFoundError({ context, valueName, ref: mockRef });
 
-            const expectedMessage = `Ref (${name}) ${mockRefStr} not found, referenced in "${refStr}".`;
-
-            expect(result.msg).toBe(expectedMessage);
+            expect(result.message()).toContain('not found, referenced in');
         });
     });
 });

@@ -13,7 +13,7 @@ const mockInvalidSchemaMap = new Map<SchemaId, SchemaData>([
     ['schema2', { $id: 'schema2', $ref: 'schema3' }],
 ]);
 
-describe('validateSchemaMap', () => {
+describe('validateSchemaMap()', () => {
     beforeEach(() => {
         vi.resetAllMocks();
     });

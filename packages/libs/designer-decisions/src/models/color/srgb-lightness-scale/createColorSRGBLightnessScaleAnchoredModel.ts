@@ -18,7 +18,7 @@ export const createColorSRGBLightnessScaleAnchoredModel: DecisionModelFactory<
             const anchorValue = createSRGBLightnessValue(context.nestedContext(), params.anchor);
             const anchor = anchorValue.get();
 
-            const series = generateAnchoredSeries(anchor, params, [0, 1]);
+            const series = generateAnchoredSeries(anchor, params);
             const values = series.map(item =>
                 createSRGBLightnessValue(context.nestedContext(), item),
             );
