@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import { chromaColorToString } from './chromaColorToString';
 
-describe('chromaColorToString', () => {
+describe('chromaColorToString()', () => {
     it('should convert to OKLCH string', () => {
         const color = chroma.oklch(0.04, 0.01, 15);
         const result = chromaColorToString(color, 'oklch', 2);

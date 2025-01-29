@@ -11,7 +11,9 @@ export const createColorSetBoundedModel: DecisionModelFactory<
             const toValue = createColorValue(context.nestedContext(), params.to);
 
             const list = generateBoundedColorList(fromValue, toValue, params.steps);
-            const values = list.map(item => createColorValue(context.nestedContext(), item));
+            const values = list
+                .slice(1, list.length - 1)
+                .map(item => createColorValue(context.nestedContext(), item));
             return createColorSet(context, [fromValue, ...values, toValue]);
         },
     };

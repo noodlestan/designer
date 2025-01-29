@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createValueContextMock } from '../../../../mocks';
 import type { Color, ColorObject } from '../../../../types';
-import { createValueContextMock } from '../../../mocks';
 import { createColor } from '../../helpers';
 import { resolveOklabChromaValue } from '../../oklab-chroma-value';
 import { resolveOklabHueValue } from '../../oklab-hue-value';

@@ -28,7 +28,7 @@ const schemaMapWithMissingRefs = new Map([
     ['schema2', { $id: 'schema2', type: 'object', properties: { age: { type: 'number' } } }],
 ]);
 
-describe('validateSchemas', () => {
+describe('validateSchemas()', () => {
     it('should not throw when schema map is empty', () => {
         expect(() => validateSchemas(schemaMapWithNoSchemas)).not.toThrow();
     });

@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { createDecisionContextMock, createValueContextMock } from '../../../mocks';
 import type { ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
-import { createDecisionContextMock, createValueContextMock } from '../../mocks';
 import { createOklabChromaValue } from '../oklab-chroma-value';
 
 import { createOklabChromaScale } from './createOklabChromaScale';
 
-describe('createOklabChromaScale', () => {
+describe('createOklabChromaScale()', () => {
     const [decisionContextMock] = createDecisionContextMock();
     const mockInput = 0.01;
     const chromaValue = createOklabChromaValue(createValueContextMock()[0], mockInput);

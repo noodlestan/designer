@@ -18,7 +18,7 @@ export const createColorSRGBSaturationScaleAnchoredModel: DecisionModelFactory<
             const anchorValue = createSRGBSaturationValue(context.nestedContext(), params.anchor);
             const anchor = anchorValue.get();
 
-            const series = generateAnchoredSeries(anchor, params, [0, 1]);
+            const series = generateAnchoredSeries(anchor, params);
             const values = series.map(item =>
                 createSRGBSaturationValue(context.nestedContext(), item),
             );

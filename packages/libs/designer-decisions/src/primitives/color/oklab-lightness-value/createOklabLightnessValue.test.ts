@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { createDecisionContextMock } from '../../../mocks';
 import type { ColorOklabLightness, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
-import { createDecisionContextMock } from '../../mocks';
 
 import { createOklabLightnessValue } from './createOklabLightnessValue';
 
-describe('createOklabLightnessValue', () => {
+describe('createOklabLightnessValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
     const mockInput: ColorOklabLightness = 0.7;
 

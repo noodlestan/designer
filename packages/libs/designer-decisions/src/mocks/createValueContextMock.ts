@@ -1,6 +1,6 @@
 import { type Mock, vi } from 'vitest';
 
-import type { DecisionContext, ValueContext } from '../../types';
+import type { DecisionContext, ValueContext } from '../types';
 
 type Mocks = {
     resolveSpy: Mock;
@@ -18,7 +18,8 @@ export function createValueContextMock(): [ValueContext, Mocks] {
     const mockValueContext = {} as ValueContext;
     mockValueContext.decisionContext = vi.fn().mockReturnValue(mockDecisionContext);
     mockValueContext.lookupContexts = vi.fn().mockReturnValue({ all: [] });
-    mockValueContext.childContext = vi.fn().mockImplementation(() => createValueContextMock());
+    mockValueContext.childContext = vi.fn().mockImplementation(() => createValueContextMock()[0]);
+    mockValueContext.nestedContext = vi.fn().mockImplementation(() => createValueContextMock()[0]);
     mockValueContext.consume = consumeSpy;
     mockValueContext.resolve = resolveSpy;
     mockValueContext.addError = addErrorSpy;

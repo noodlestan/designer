@@ -29,7 +29,7 @@ const resolveSourcePathMocked = resolveSourcePathMock as unknown as (
 
 const mockConfig: SchemaConfig = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
 
-describe('loadSchemasFromConfig', () => {
+describe('loadSchemasFromConfig()', () => {
     const mockSchema: SchemaData = {
         $id: 'schema1',
         type: 'object',

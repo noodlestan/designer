@@ -1,6 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createStaticDecisionMock } from '../../../mocks';
+import {
+    createStaticDecisionMock,
+    createValueContextMock,
+    createValueContextWithResolveMock,
+} from '../../../mocks';
 import type {
     ColorSet,
     ColorValue,
@@ -9,7 +13,6 @@ import type {
     InputRecord,
 } from '../../../types';
 import { resolveSetRefDecision } from '../../functions';
-import { createValueContextMock, createValueContextWithResolveMock } from '../../mocks';
 import { createColorValue } from '../value';
 
 import { createOklabHueValue } from './createOklabHueValue';

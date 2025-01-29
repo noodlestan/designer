@@ -27,7 +27,7 @@ const mockSchema2: SchemaData = {
     items: { type: 'number' },
 };
 
-describe('loadSchemasFromConfigs', () => {
+describe('loadSchemasFromConfigs()', () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });

@@ -14,7 +14,7 @@ export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
             const anchorValue = createSRGBHueValue(context.nestedContext(), params.anchor);
             const anchor = anchorValue.get();
 
-            const series = generateAnchoredSeries(anchor, params, [0, 360]);
+            const series = generateAnchoredSeries(anchor, params);
             const values = series.map(item => createSRGBHueValue(context.nestedContext(), item));
             return createSRGBHueSet(context, values);
         },

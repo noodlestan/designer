@@ -10,7 +10,7 @@ import type {
 
 import { chromaColorToLiteral } from './chromaColorToLiteral';
 
-describe('chromaColorToLiteral', () => {
+describe('chromaColorToLiteral()', () => {
     it('should convert to OKLCH format', () => {
         const color = chroma.oklch(0.04, 0.01, 15);
         const result = chromaColorToLiteral<ColorOkLCHLiteral>(color, 'oklch');

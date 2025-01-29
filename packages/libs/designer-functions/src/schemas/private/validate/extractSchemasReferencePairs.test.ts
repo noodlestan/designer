@@ -48,7 +48,7 @@ const schemaMapWithMixedRefs = new Map([
     ],
 ]);
 
-describe('extractSchemasReferencePairs', () => {
+describe('extractSchemasReferencePair()', () => {
     it('should return an empty array when no $ref keys are found in any schema', () => {
         const result = extractSchemasReferencePairs(schemaMapWithNoRefs);
         expect(result).toEqual([]);

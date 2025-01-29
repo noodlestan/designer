@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createValueContextMock } from '../../../mocks';
 import type { DecisionValueInputError } from '../../../types';
-import { createValueContextMock } from '../../mocks';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveSRGBHueValue } from './resolveSRGBHueValue';
@@ -11,7 +11,7 @@ vi.mock('./resolveSRGBHueValueRef');
 
 const resolveSRGBHueValueRefMock = vi.mocked(resolveSRGBHueValueRef);
 
-describe('resolveSRGBHueValue', () => {
+describe('resolveSRGBHueValue()', () => {
     const [mockContext, { addErrorSpy }] = createValueContextMock();
 
     beforeEach(() => {

@@ -1,6 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createStaticDecisionMock } from '../../../mocks';
+import {
+    createStaticDecisionMock,
+    createValueContextMock,
+    createValueContextWithResolveMock,
+} from '../../../mocks';
 import type {
     DecisionRef,
     DecisionValueRefNotFoundError,
@@ -10,7 +14,6 @@ import type {
     SpaceWithUnits,
 } from '../../../types';
 import { resolveSetRefDecision } from '../../functions';
-import { createValueContextMock, createValueContextWithResolveMock } from '../../mocks';
 
 import { createSpaceValue } from './createSpaceValue';
 import { FALLBACK_VALUE } from './private';

@@ -1,13 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createStaticDecisionMock } from '../../mocks';
+import { createStaticDecisionMock, createValueContextMock } from '../../mocks';
 import type { BaseSet, DecisionRef, DecisionValueInputError } from '../../types';
-import { createValueContextMock } from '../mocks';
 import { createItemSet } from '../set';
 
 import { resolveSetRefDecision } from './resolveSetRefDecision';
 
-describe('resolveSetRefDecision', () => {
+describe('resolveSetRefDecision()', () => {
     const [mockContext, { addErrorSpy }] = createValueContextMock();
     const mockValueName = 'mock-scale';
     const mockSpace1 = { value: 10, units: 'px' };

@@ -7,9 +7,7 @@ import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
 import { getDecisionModelFactory } from './getDecisionModelFactory';
 
-vi.mock('./getDecisionModelFactory', () => ({
-    getDecisionModelFactory: vi.fn(),
-}));
+vi.mock('./getDecisionModelFactory');
 
 const getDecisionModelFactoryMocked = vi.mocked(getDecisionModelFactory);
 

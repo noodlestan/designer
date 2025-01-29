@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createValueContextMock } from '../../../mocks';
 import type { DecisionValueInputError, SpaceInputValue, SpaceWithUnits } from '../../../types';
-import { createValueContextMock } from '../../mocks';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveSpaceValue } from './resolveSpaceValue';
@@ -11,7 +11,7 @@ vi.mock('./resolveSpaceValueRef');
 
 const resolveSpaceValueRefMock = vi.mocked(resolveSpaceValueRef);
 
-describe('resolveSpaceValue', () => {
+describe('resolveSpaceValue()', () => {
     const [mockContext, { addErrorSpy }] = createValueContextMock();
 
     beforeEach(() => {

@@ -32,7 +32,7 @@ const referencePairsWithMixedRefs: [SchemaId, SchemaId][] = [
     ['schema2', 'missingSchema2'],
 ];
 
-describe('findMissingSchemaReferences', () => {
+describe('findMissingSchemaReferences()', () => {
     it('should return an empty array when all references are present in the schema map', () => {
         const result = findMissingSchemaReferences(
             schemaMapWithAllRefsPresent,

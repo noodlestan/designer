@@ -4,7 +4,7 @@ import type { ColorLiteral } from '../../../../types';
 
 import { chromaColorFromLiteral } from './chromaColorFromLiteral';
 
-describe('chromaColorFromLiteral', () => {
+describe('chromaColorFromLiteral()', () => {
     it('should create a ChromaColor from an HSL literal', () => {
         const input = { h: 240, s: 0.5, l: 0.4 };
         const [h, s, l] = chromaColorFromLiteral(input).hsl();

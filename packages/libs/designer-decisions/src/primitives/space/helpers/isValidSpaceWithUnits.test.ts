@@ -4,7 +4,7 @@ import type { SpaceWithUnits } from '../../../types';
 
 import { isValidSpaceWithUnits } from './isValidSpaceWithUnits';
 
-describe('isValidSpaceWithUnits', () => {
+describe('isValidSpaceWithUnits()', () => {
     describe('When input is valid', () => {
         const validInputs: SpaceWithUnits[] = [
             { value: 10, units: 'px' },
