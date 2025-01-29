@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-decisions-docs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Designer Decisions Docs website",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@astrojs/starlight": "0.30.3",
-    "@noodlestan/designer-decisions": "0.0.6",
-    "@noodlestan/designer-functions": "0.0.6",
-    "@noodlestan/designer-schemas": "0.0.6",
-    "@noodlestan/designer-shows": "0.0.6",
+    "@noodlestan/designer-decisions": "0.0.7",
+    "@noodlestan/designer-functions": "0.0.7",
+    "@noodlestan/designer-schemas": "0.0.7",
+    "@noodlestan/designer-shows": "0.0.7",
     "astro": "5.1.1",
     "mdast-util-to-string": "^4.0.0",
     "sharp": "0.32.5",

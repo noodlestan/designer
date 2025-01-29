@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-build",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Build tools for designer schemas.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -11,8 +11,8 @@
     "lint:fix": "prettier . -c --write && eslint . --fix"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.6",
-    "@noodlestan/designer-generators": "0.0.6"
+    "@noodlestan/designer-decisions": "0.0.7",
+    "@noodlestan/designer-generators": "0.0.7"
   },
   "peerDependencies": {},
   "devDependencies": {
