@@ -1,4 +1,4 @@
-import type { ColorSRGBLightness, ValueContext } from '../../../types';
+import type { ColorSRGBLightnessInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { clampChannelValue } from '../helpers';
@@ -8,7 +8,7 @@ import { resolveSRGBLightnessValueRef } from './resolveSRGBLightnessValueRef';
 
 export const resolveSRGBLightnessValue = (
     context: ValueContext,
-    input: ColorSRGBLightness,
+    input: ColorSRGBLightnessInput,
 ): number => {
     if (isDecisionRef(input)) {
         return resolveSRGBLightnessValueRef(context, input);

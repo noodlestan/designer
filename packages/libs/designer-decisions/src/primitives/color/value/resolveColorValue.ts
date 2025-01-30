@@ -1,4 +1,4 @@
-import type { Color, ColorInputValue, ValueContext } from '../../../types';
+import type { Color, ColorValueInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { createColor } from '../helpers';
@@ -6,7 +6,7 @@ import { createColor } from '../helpers';
 import { FALLBACK_VALUE as fallback, resolveColorObject, VALUE_NAME as valueName } from './private';
 import { resolveColorValueRef } from './resolveColorValueRef';
 
-export const resolveColorValue = (context: ValueContext, input: ColorInputValue): Color => {
+export const resolveColorValue = (context: ValueContext, input: ColorValueInput): Color => {
     if (isDecisionRef(input)) {
         return resolveColorValueRef(context, input);
     } else if (typeof input === 'object') {

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createValueContextMock } from '../../../../mocks';
-import type { Color, ColorObject } from '../../../../types';
+import type { Color, ColorObjectInput } from '../../../../types';
 import { createColor } from '../../helpers';
 import { resolveOklabChromaValue } from '../../oklab-chroma-value';
 import { resolveOklabHueValue } from '../../oklab-hue-value';
@@ -37,7 +37,7 @@ describe('resolveColorObject()', () => {
     });
 
     describe('When input contains sRGB properties', () => {
-        const input: ColorObject = { h: 99, s: 99, l: 99 };
+        const input: ColorObjectInput = { h: 99, s: 99, l: 99 };
 
         beforeEach(() => {
             resolveSRGBHueValueMock.mockReturnValue(10);
@@ -62,7 +62,7 @@ describe('resolveColorObject()', () => {
     });
 
     describe('When input contains Oklab (a, b) properties', () => {
-        const input: ColorObject = { l: 99, a: 0.2, b: 0.4 };
+        const input: ColorObjectInput = { l: 99, a: 0.2, b: 0.4 };
 
         beforeEach(() => {
             resolveOklabLightnessValueMock.mockReturnValue(0.9);
@@ -83,7 +83,7 @@ describe('resolveColorObject()', () => {
     });
 
     describe('When input contains Oklab (c, h) properties', () => {
-        const input: ColorObject = { l: 99, c: 99, h: 99 };
+        const input: ColorObjectInput = { l: 99, c: 99, h: 99 };
 
         beforeEach(() => {
             resolveOklabLightnessValueMock.mockReturnValue(0.9);
@@ -108,7 +108,7 @@ describe('resolveColorObject()', () => {
     });
 
     describe('When input is invalid', () => {
-        const input = {} as ColorObject;
+        const input = {} as ColorObjectInput;
 
         it('should add an error to the context', () => {
             resolveColorObject(input, mockContext);

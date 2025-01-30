@@ -1,15 +1,15 @@
 import type { DecisionRef } from '../../../decision-values';
 
-import type { ColorOk, ColorOkLiteral } from './oklab';
-import type { ColorSRGB, ColorSRGBLiteral } from './srgb';
+import type { ColorOkInput, ColorOkLiteral } from './oklab';
+import type { ColorSRGBInput, ColorSRGBLiteral } from './srgb';
 
 export type ColorRaw = string | number;
 
-export type ColorObject = ColorOk | ColorSRGB;
+export type ColorObjectInput = ColorOkInput | ColorSRGBInput;
 
 export type ColorObjectLiteral = ColorOkLiteral | ColorSRGBLiteral;
 
-export type ColorInputValue = DecisionRef | ColorRaw | ColorObject;
+export type ColorValueInput = DecisionRef | ColorRaw | ColorObjectInput;
 
 export type ColorLiteral = ColorRaw | ColorObjectLiteral;
 

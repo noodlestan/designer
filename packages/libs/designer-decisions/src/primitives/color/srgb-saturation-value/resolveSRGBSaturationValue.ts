@@ -1,4 +1,4 @@
-import type { ColorSRGBSaturation, ValueContext } from '../../../types';
+import type { ColorSRGBSaturationInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { clampChannelValue } from '../helpers';
@@ -8,7 +8,7 @@ import { resolveSRGBSaturationValueRef } from './resolveSRGBSaturationValueRef';
 
 export const resolveSRGBSaturationValue = (
     context: ValueContext,
-    input: ColorSRGBSaturation,
+    input: ColorSRGBSaturationInput,
 ): number => {
     if (isDecisionRef(input)) {
         return resolveSRGBSaturationValueRef(context, input);

@@ -1,25 +1,25 @@
-import type { AnchoredNumberSeriesParams, ColorSRGBLightness } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, ColorSRGBLightnessInput } from '../../../primitives';
 import type { InputRecord } from '../../base';
 
 export type ColorSRGBLightnessValueExplicitInput = InputRecord & {
     model: 'color-srgb-lightness-value/explicit';
     params: {
-        value: ColorSRGBLightness;
+        value: ColorSRGBLightnessInput;
     };
 };
 
 export type ColorSRGBLightnessScaleExplicitInput = InputRecord & {
     model: 'color-srgb-lightness-scale/explicit';
     params: {
-        values: ColorSRGBLightness[];
+        values: ColorSRGBLightnessInput[];
     };
 };
 
 export type ColorSRGBLightnessScaleBoundedInput = InputRecord & {
     model: 'color-srgb-lightness-scale/bounded';
     params: {
-        from: ColorSRGBLightness;
-        to: ColorSRGBLightness;
+        from: ColorSRGBLightnessInput;
+        to: ColorSRGBLightnessInput;
         steps: number;
     };
 };
@@ -27,6 +27,6 @@ export type ColorSRGBLightnessScaleBoundedInput = InputRecord & {
 export type ColorSRGBLightnessScaleAnchoredInput = InputRecord & {
     model: 'color-srgb-lightness-scale/anchored';
     params: {
-        anchor: ColorSRGBLightness;
+        anchor: ColorSRGBLightnessInput;
     } & AnchoredNumberSeriesParams;
 };

@@ -1,4 +1,4 @@
-import type { ColorOklabHue, ValueContext } from '../../../types';
+import type { ColorOklabHueInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { clampChannelValue } from '../helpers';
@@ -6,7 +6,7 @@ import { clampChannelValue } from '../helpers';
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
 import { resolveOklabHueValueRef } from './resolveOklabHueValueRef';
 
-export const resolveOklabHueValue = (context: ValueContext, input: ColorOklabHue): number => {
+export const resolveOklabHueValue = (context: ValueContext, input: ColorOklabHueInput): number => {
     if (isDecisionRef(input)) {
         return resolveOklabHueValueRef(context, input);
     }
