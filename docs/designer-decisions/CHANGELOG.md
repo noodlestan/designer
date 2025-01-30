@@ -1,5 +1,15 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.9] - 2025-01-30
+
+### Changed
+
+- Rename `designer-integrations-astro` to `designer-integration-atro` ([#110](https://github.com/noodlestan/designer/issues/110))
+
+### Fixes
+
+- Fix: demo data not published to npm (#[108](https://github.com/noodlestan/designer/issues/108))
+
 ## [0.0.8] - 2025-01-30
 
 ### Added
