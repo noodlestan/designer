@@ -12,6 +12,10 @@ import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components'
 
 import { href } from '../../mdx';
 
+<LinkButton href={href('/guides/welcome')}>Get Started</LinkButton>
+
+&nbsp;
+
 <CardGrid stagger>
     <div>
         This suite provides a collection of tools to enhance design system automation
@@ -20,7 +24,6 @@ import { href } from '../../mdx';
         You can use it to capture, track, and visualize context-aware design decisions,
         integrate data from other systems, and generate code artifacts and beautiful documentation.
 
-        <LinkButton href={href('/guides/welcome')}>Get Started</LinkButton>
     </div>
     <Card title="Capture Decisions" icon="puzzle">
         <p>Define design decisions as data with relationships, context, and traceability.</p>

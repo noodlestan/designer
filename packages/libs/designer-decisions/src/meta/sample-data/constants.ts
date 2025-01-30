@@ -1,4 +1,4 @@
-import type { DecisionSource } from '../types';
+import type { DecisionSource } from '../../types';
 
 const SAMPLE_DATA: DecisionSource = {
     name: 'Designer Decisions Sample Data',

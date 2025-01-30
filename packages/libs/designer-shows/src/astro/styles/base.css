@@ -3,7 +3,7 @@
 }
 
 :root {
-    --dd-brand-pink-hue: hsl(336, 60%, 57%);
+    --dd-brand-pink-hue: oklch(61.9% 0.172 359deg);
     --dd-brand-blue-hue: hsl(192, 95%, 45%);
 
     --dd-color-max: #ffffff;
@@ -96,5 +96,5 @@
     --dd-color-max: #181818;
     --dd-color-min: #ffffff;
 
-    --dd-card-contents-bg-color: #f5eaef;
+    --dd-card-contents-bg-color: hsl(333, 15%, 97%);
 }

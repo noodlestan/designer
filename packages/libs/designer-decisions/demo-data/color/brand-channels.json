@@ -4,7 +4,7 @@
     "name": "Brand Pink Lightness",
     "description": "Lightness channel of Brand Pink color",
     "params": {
-      "value": 0.619
+      "value": 0.62
     }
   },
   {
@@ -28,7 +28,7 @@
     "name": "Brand Blue Lightness",
     "description": "Lightness channel of Brand Blue color",
     "params": {
-      "value": 0.7
+      "value": 0.71
     }
   },
   {
@@ -36,7 +36,7 @@
     "name": "Brand Blue Chroma",
     "description": "Chroma channel of Brand Blue color",
     "params": {
-      "value": 0.133
+      "value": 0.13
     }
   },
   {

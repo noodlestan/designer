@@ -5,6 +5,5 @@ export * from './decisions';
 export * from './meta';
 export * from './models';
 export * from './primitives';
-export * from './sample-data';
 export * from './types';
 export * from './values';
