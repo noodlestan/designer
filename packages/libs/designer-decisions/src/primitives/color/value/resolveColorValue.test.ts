@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createValueContextMock } from '../../../mocks';
-import type { ColorInputValue } from '../../../types';
+import type { ColorValueInput } from '../../../types';
 import { createColor } from '../helpers';
 
 import { FALLBACK_VALUE, VALUE_NAME, resolveColorObject } from './private';
@@ -103,7 +103,7 @@ describe('resolveColorValue()', () => {
         const mockInput: unknown = true;
 
         it('should add an error to the context', () => {
-            resolveColorValue(mockContext, mockInput as ColorInputValue);
+            resolveColorValue(mockContext, mockInput as ColorValueInput);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0];
@@ -114,7 +114,7 @@ describe('resolveColorValue()', () => {
         });
 
         it('should return the fallback value', () => {
-            const result = resolveColorValue(mockContext, mockInput as ColorInputValue);
+            const result = resolveColorValue(mockContext, mockInput as ColorValueInput);
 
             expect(result).toEqual(FALLBACK_VALUE);
         });

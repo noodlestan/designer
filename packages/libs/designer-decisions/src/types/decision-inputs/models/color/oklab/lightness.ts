@@ -1,25 +1,25 @@
-import type { AnchoredNumberSeriesParams, ColorOklabLightness } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, ColorOklabLightnessInput } from '../../../primitives';
 import type { InputRecord } from '../../base';
 
 export type ColorOklabLightnessValueExplicitInput = InputRecord & {
     model: 'color-oklab-lightness-value/explicit';
     params: {
-        value: ColorOklabLightness;
+        value: ColorOklabLightnessInput;
     };
 };
 
 export type ColorOklabLightnessScaleExplicitInput = InputRecord & {
     model: 'color-oklab-lightness-scale/explicit';
     params: {
-        values: ColorOklabLightness[];
+        values: ColorOklabLightnessInput[];
     };
 };
 
 export type ColorOklabLightnessScaleBoundedInput = InputRecord & {
     model: 'color-oklab-lightness-scale/bounded';
     params: {
-        from: ColorOklabLightness;
-        to: ColorOklabLightness;
+        from: ColorOklabLightnessInput;
+        to: ColorOklabLightnessInput;
         steps: number;
     };
 };
@@ -27,6 +27,6 @@ export type ColorOklabLightnessScaleBoundedInput = InputRecord & {
 export type ColorOklabLightnessScaleAnchoredInput = InputRecord & {
     model: 'color-oklab-lightness-scale/anchored';
     params: {
-        anchor: ColorOklabLightness;
+        anchor: ColorOklabLightnessInput;
     } & AnchoredNumberSeriesParams;
 };

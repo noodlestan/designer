@@ -1,4 +1,4 @@
-import type { ColorOklabLightness, ValueContext } from '../../../types';
+import type { ColorOklabLightnessInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { clampChannelValue } from '../helpers';
@@ -8,7 +8,7 @@ import { resolveOklabLightnessValueRef } from './resolveOklabLightnessValueRef';
 
 export const resolveOklabLightnessValue = (
     context: ValueContext,
-    input: ColorOklabLightness,
+    input: ColorOklabLightnessInput,
 ): number => {
     if (isDecisionRef(input)) {
         return resolveOklabLightnessValueRef(context, input);

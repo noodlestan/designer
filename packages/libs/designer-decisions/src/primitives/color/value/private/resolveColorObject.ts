@@ -1,4 +1,4 @@
-import type { Color, ColorObject, ValueContext } from '../../../../types';
+import type { Color, ColorObjectInput, ValueContext } from '../../../../types';
 import { createInvalidInputError } from '../../../../values';
 import { createColor } from '../../helpers';
 import { resolveOklabChromaValue } from '../../oklab-chroma-value';
@@ -10,7 +10,7 @@ import { resolveSRGBSaturationValue } from '../../srgb-saturation-value';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './constants';
 
-export function resolveColorObject(input: ColorObject, context: ValueContext): Color {
+export function resolveColorObject(input: ColorObjectInput, context: ValueContext): Color {
     if ('s' in input) {
         return createColor({
             h: resolveSRGBHueValue(context, input.h),

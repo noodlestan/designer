@@ -4,20 +4,20 @@ import type { Degrees, NormalNumber } from '../numbers';
 export type ColorOklabAxisLiteral = number; // between -125 and 125
 export type ColorOklabChromaLiteral = number; // between 0 and 0.4
 
-export type ColorOklabLightness = NormalNumber | DecisionRef;
+export type ColorOklabLightnessInput = NormalNumber | DecisionRef;
 
-export type ColorOklabChroma = NormalNumber | DecisionRef;
+export type ColorOklabChromaInput = NormalNumber | DecisionRef;
 
-export type ColorOklabHue = Degrees | DecisionRef;
+export type ColorOklabHueInput = Degrees | DecisionRef;
 
-export type ColorOkLCH = {
-    l: ColorOklabLightness;
-    c: ColorOklabChroma;
-    h: ColorOklabHue;
+export type ColorOkLCHInput = {
+    l: ColorOklabLightnessInput;
+    c: ColorOklabChromaInput;
+    h: ColorOklabHueInput;
 };
 
-export type ColorOkLab = {
-    l: ColorOklabLightness;
+export type ColorOkLabInput = {
+    l: ColorOklabLightnessInput;
     a: ColorOklabAxisLiteral;
     b: ColorOklabAxisLiteral;
 };
@@ -34,6 +34,6 @@ export type ColorOkLabLiteral = {
     b: ColorOklabAxisLiteral;
 };
 
-export type ColorOk = ColorOkLCH | ColorOkLab;
+export type ColorOkInput = ColorOkLCHInput | ColorOkLabInput;
 
 export type ColorOkLiteral = ColorOkLCHLiteral | ColorOkLabLiteral;

@@ -1,25 +1,25 @@
-import type { AnchoredNumberSeriesParams, ColorOklabHue } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, ColorOklabHueInput } from '../../../primitives';
 import type { InputRecord } from '../../base';
 
 export type ColorOklabHueValueExplicitInput = InputRecord & {
     model: 'color-oklab-hue-value/explicit';
     params: {
-        value: ColorOklabHue;
+        value: ColorOklabHueInput;
     };
 };
 
 export type ColorOklabHueSetExplicitInput = InputRecord & {
     model: 'color-oklab-hue-set/explicit';
     params: {
-        values: ColorOklabHue[];
+        values: ColorOklabHueInput[];
     };
 };
 
 export type ColorOklabHueSetBoundedInput = InputRecord & {
     model: 'color-oklab-hue-set/bounded';
     params: {
-        from: ColorOklabHue;
-        to: ColorOklabHue;
+        from: ColorOklabHueInput;
+        to: ColorOklabHueInput;
         steps: number;
     };
 };
@@ -27,6 +27,6 @@ export type ColorOklabHueSetBoundedInput = InputRecord & {
 export type ColorOklabHueSetAnchoredInput = InputRecord & {
     model: 'color-oklab-hue-set/anchored';
     params: {
-        anchor: ColorOklabHue;
+        anchor: ColorOklabHueInput;
     } & AnchoredNumberSeriesParams;
 };

@@ -1,16 +1,16 @@
 import type { DecisionRef } from '../../../decision-values';
 import type { Degrees, NormalNumber } from '../numbers';
 
-export type ColorSRGBHue = Degrees | DecisionRef;
+export type ColorSRGBHueInput = Degrees | DecisionRef;
 
-export type ColorSRGBSaturation = NormalNumber | DecisionRef;
+export type ColorSRGBSaturationInput = NormalNumber | DecisionRef;
 
-export type ColorSRGBLightness = NormalNumber | DecisionRef;
+export type ColorSRGBLightnessInput = NormalNumber | DecisionRef;
 
-export type ColorSRGBHSL = {
-    h: ColorSRGBHue;
-    s: ColorSRGBSaturation;
-    l: ColorSRGBLightness;
+export type ColorSRGBHSLInput = {
+    h: ColorSRGBHueInput;
+    s: ColorSRGBSaturationInput;
+    l: ColorSRGBLightnessInput;
 };
 
 export type ColorSRGBHSLiteral = {
@@ -25,6 +25,6 @@ export type ColorSRGBChannelsLiteral = {
     b: number;
 };
 
-export type ColorSRGB = ColorSRGBHSL | ColorSRGBChannelsLiteral;
+export type ColorSRGBInput = ColorSRGBHSLInput | ColorSRGBChannelsLiteral;
 
 export type ColorSRGBLiteral = ColorSRGBHSLiteral | ColorSRGBChannelsLiteral;

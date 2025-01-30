@@ -1,4 +1,4 @@
-import type { SpaceInputValue, SpaceWithUnits, ValueContext } from '../../../types';
+import type { SpaceValueInput, SpaceWithUnits, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { isValidSpaceWithUnits } from '../helpers';
@@ -8,7 +8,7 @@ import { resolveSpaceValueRef } from './resolveSpaceValueRef';
 
 export const resolveSpaceValue = (
     context: ValueContext,
-    input: SpaceInputValue,
+    input: SpaceValueInput,
 ): SpaceWithUnits => {
     if (isDecisionRef(input)) {
         return resolveSpaceValueRef(context, input);

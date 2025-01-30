@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { createDecisionContextMock, createValueContextMock } from '../../../mocks';
-import type { SpaceInputValue, ValueContext } from '../../../types';
+import type { SpaceValueInput, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
 import { createSpaceValue } from '../value';
 
@@ -9,7 +9,7 @@ import { createSpaceScale } from './createSpaceScale';
 
 describe('createSpaceScale()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = { value: 123, units: 'rem' } as SpaceInputValue;
+    const mockInput = { value: 123, units: 'rem' } as SpaceValueInput;
     const spaceValue = createSpaceValue(createValueContextMock()[0], mockInput);
 
     let valueContext: ValueContext;

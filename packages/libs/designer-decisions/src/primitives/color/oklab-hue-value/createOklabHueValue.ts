@@ -1,10 +1,13 @@
-import type { ColorOklabHue, OklabHueValue, ValueContext } from '../../../types';
+import type { ColorOklabHueInput, OklabHueValue, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
 import { resolveOklabHueValue } from './resolveOklabHueValue';
 
-export const createOklabHueValue = (context: ValueContext, input: ColorOklabHue): OklabHueValue => {
+export const createOklabHueValue = (
+    context: ValueContext,
+    input: ColorOklabHueInput,
+): OklabHueValue => {
     context.consume(input);
 
     const value = resolveOklabHueValue(context, input);
