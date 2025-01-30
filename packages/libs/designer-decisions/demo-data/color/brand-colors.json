@@ -1,0 +1,75 @@
+[
+  {
+    "model": "color-value/explicit",
+    "name": "Brand Pink",
+    "description": "Brand Pink color",
+    "usage": {
+      "intendedFor": ["Branded elements"],
+      "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
+    },
+    "params": {
+      "value": {
+        "l": { "$name": "Brand Pink Lightness" },
+        "c": { "$name": "Brand Pink Chroma" },
+        "h": { "$name": "Brand Pink Hue" }
+      }
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Brand Blue",
+    "description": "Brand Blue color",
+    "usage": {
+      "intendedFor": ["Branded elements"],
+      "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
+    },
+    "params": {
+      "value": {
+        "l": { "$name": "Brand Blue Lightness" },
+        "c": { "$name": "Brand Blue Chroma" },
+        "h": { "$name": "Brand Blue Hue" }
+      }
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Brand Black",
+    "description": "Brand Black color",
+    "usage": {
+      "intendedFor": ["Branded elements"],
+      "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
+    },
+    "params": {
+      "value": { "l": 0.17, "c": 0, "h": 0 }
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Brand White",
+    "description": "Brand White color",
+    "usage": {
+      "intendedFor": ["Branded elements"],
+      "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
+    },
+    "params": {
+      "value": { "l": 0.97, "c": 0, "h": 0 }
+    }
+  },
+  {
+    "model": "color-set/explicit",
+    "name": "Brand Color Set",
+    "description": "Set of colors used in Logomark",
+    "usage": {
+      "intendedFor": ["Branded elements"],
+      "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
+    },
+    "params": {
+      "values": [
+        { "$name": "Brand Pink" },
+        { "$name": "Brand Blue" },
+        { "$name": "Brand Black" },
+        { "$name": "Brand White" }
+      ]
+    }
+  }
+]

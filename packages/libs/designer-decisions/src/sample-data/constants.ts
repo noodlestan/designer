@@ -8,5 +8,13 @@ const SAMPLE_DATA: DecisionSource = {
         path: 'sample-data/',
     },
 };
+const DEMO_DATA: DecisionSource = {
+    name: 'Designer Decisions Demo Data',
+    source: {
+        type: 'package',
+        package: '@noodlestan/designer-decisions',
+        path: 'demo-data/',
+    },
+};
 
-export { SAMPLE_DATA };
+export { SAMPLE_DATA, DEMO_DATA };

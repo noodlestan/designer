@@ -19,7 +19,7 @@
     }
   },
   {
-    "model": "context-group/colour-scheme",
+    "model": "context-group/color-scheme",
     "name": "Colour Scheme",
     "params": {
       "dark": "Dark Mode",

@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { SAMPLE_DATA } from '@noodlestan/designer-decisions';
+import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 import {
     createDecisionLoader,
     formatStoreError,
@@ -8,11 +8,11 @@ import {
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DECISION_DATA = path.resolve('./data/decisions');
+const DECISION_DATA_PATH = path.resolve('./data/decisions');
 
 export const decisionLoader = createDecisionLoader(
     [DECISION_SCHEMAS],
-    [SAMPLE_DATA, DECISION_DATA],
+    [SAMPLE_DATA, DEMO_DATA, DECISION_DATA_PATH],
     async (moduleName: string) => `../../node_modules/${moduleName}`,
 );
 

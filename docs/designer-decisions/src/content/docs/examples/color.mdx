@@ -35,7 +35,14 @@ export const store = await decisionLoader();
 ```
 
 <FlexRow vpad>
-    <ShowDecision store={store} d="Brand Color Set" size="m" row />
+    <ShowDecision
+        store={store}
+        d="Brand Color Set"
+        size="m"
+        layout="row"
+        viz="fg"
+        options={{ contrast: '#ccc' }}
+    />
 </FlexRow>
 
 ```mdx
@@ -53,15 +60,46 @@ export const store = await decisionLoader();
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Action Color" size="s" value={['rgb', 'oklch']} />
+    <ShowDecision
+        store={store}
+        d="Action Color"
+        size="s"
+        viz="fg"
+        options={{ contrast: 'oklch(24% 0.08 257)' }}
+        value={['rgb', 'oklch']}
+    />
 </CardGrid>
 
 ```mdx
-<ShowDecision store={store} d="Foreground Lightness Scale" size="m" />
-<ShowDecision store={store} d="Background Lightness Scale" size="m" />
+<ShowDecision
+    store={store}
+    d="Foreground Lightness Scale"
+    size="m"
+    viz="fg"
+    options={{ contrast: 'oklch(24% 0.08 257)' }}
+/>
+<ShowDecision
+    store={store}
+    d="Background Lightness Scale"
+    size="m"
+    viz="fg"
+    options={{ contrast: 'oklch(24% 0.08 257)' }}
+/>
 ```
 
 <CardGrid>
-    <ShowDecision store={store} d="Foreground Lightness Scale" size="m" />
-    <ShowDecision store={store} d="Background Lightness Scale" size="m" />
+    <ShowDecision
+        store={store}
+        d="Foreground Lightness Scale"
+        size="m"
+        viz="fg"
+        options={{ contrast: 'oklch(24% 0.08 257)' }}
+    />
+    <ShowDecision
+        store={store}
+        d="Background Lightness Scale"
+        size="m"
+        viz="fg"
+        options={{ contrast: 'oklch(24% 0.08 257)' }}
+    />
 </CardGrid>

@@ -1,0 +1,40 @@
+[
+  {
+    "model": "color-value/explicit",
+    "name": "Action Color",
+    "description": "Used for buttons, links and navigation",
+    "usage": {
+      "intendedFor": [
+        "Link Foreground",
+        "Action Background",
+        "Action Foreground",
+        "Action Border",
+        "Navigation Item Background"
+      ],
+      "notFor": ["Non-interactive elements"]
+    },
+    "params": {
+      "value": {
+        "l": 0.48,
+        "c": 0.15,
+        "h": { "$name": "Brand Pink Hue" }
+      }
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Action Contrast Color",
+    "description": "Used as the constrast color in buttons and navigation items that use Action Color",
+    "usage": {
+      "intendedFor": ["Action Background", "Action Foreground", "Navigation Item Foreground"],
+      "notFor": ["Non-interactive elements"]
+    },
+    "params": {
+      "value": {
+        "l": 0.98,
+        "c": 0.002,
+        "h": { "$name": "Brand Pink Hue" }
+      }
+    }
+  }
+]
