@@ -2,6 +2,8 @@ import { ColorDecisionTypes } from './color';
 import { createDecisionModelMetas, createDecisionTypeMeta } from './functions';
 import { SpaceDecisionTypes } from './space';
 
+export * from './sample-data';
+
 export const DECISION_TYPES = [...ColorDecisionTypes, ...SpaceDecisionTypes];
 
 export const DECISION_TYPE_METAS = DECISION_TYPES.map(createDecisionTypeMeta);

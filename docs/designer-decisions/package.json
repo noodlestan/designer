@@ -23,6 +23,7 @@
   "dependencies": {
     "@astrojs/starlight": "0.30.3",
     "@noodlestan/designer-decisions": "0.0.7",
+    "@noodlestan/designer-integrations-astro": "0.0.7",
     "@noodlestan/designer-functions": "0.0.7",
     "@noodlestan/designer-schemas": "0.0.7",
     "@noodlestan/designer-shows": "0.0.7",

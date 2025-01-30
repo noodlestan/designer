@@ -43,8 +43,7 @@
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.7",
-    "@noodlestan/designer-schemas": "0.0.7"
+    "@noodlestan/designer-decisions": "0.0.7"
   },
   "peerDependencies": {},
   "devDependencies": {
