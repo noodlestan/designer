@@ -15,7 +15,7 @@ This is an Astro integration that allows you to use [Designer Decisions componen
 ## Installation
 
 ```shell
-npm install @noodlestan/designer-integrations-astro
+npm install @noodlestan/designer-integration-astro
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ Import the integration and add it to your `astro.config.*` file:
 
 ```js
 import { defineConfig } from 'astro/config';
-import designerDecisions from '@noodlestan/designer-integrations-astro';
+import designerDecisions from '@noodlestan/designer-integration-astro';
 
 export default defineConfig({
   integrations: [

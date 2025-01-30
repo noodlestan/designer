@@ -8,10 +8,11 @@ Make sure you [README](https://github.com/noodlestan/designer/blob/main/README.m
 
 These tools are responsible for generating some of the code in this repository, including code in other packages.
 
-We kept this separate entry point (as opposed from running these build-steps from within the packages themselves) so that:
+We keep this separate entry point (as opposed from running these build steps from within the packages) so that:
 
-- we don't pollute the target packages with unnecessary dependencies
-- we keep a clear separation between `designer-decisions` consumer code and internal tools
+- We can use `ts-node` without messing up env (this packages is NOT `type: module`).
+- We don't pollute the target packages with unnecessary dependencies.
+- We keep a clear separation between `designer-decisions` consumer code and internal tools.
 
 ### Scripts
 
