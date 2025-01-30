@@ -1,25 +1,25 @@
-import type { AnchoredNumberSeriesParams, NormalNumber } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, ColorSRGBSaturation } from '../../../primitives';
 import type { InputRecord } from '../../base';
 
 export type ColorSRGBSaturationValueExplicitInput = InputRecord & {
     model: 'color-srgb-saturation-value/explicit';
     params: {
-        value: NormalNumber;
+        value: ColorSRGBSaturation;
     };
 };
 
 export type ColorSRGBSaturationScaleExplicitInput = InputRecord & {
     model: 'color-srgb-saturation-scale/explicit';
     params: {
-        values: NormalNumber[];
+        values: ColorSRGBSaturation[];
     };
 };
 
 export type ColorSRGBSaturationScaleBoundedInput = InputRecord & {
     model: 'color-srgb-saturation-scale/bounded';
     params: {
-        from: NormalNumber;
-        to: NormalNumber;
+        from: ColorSRGBSaturation;
+        to: ColorSRGBSaturation;
         steps: number;
     };
 };
@@ -27,6 +27,6 @@ export type ColorSRGBSaturationScaleBoundedInput = InputRecord & {
 export type ColorSRGBSaturationScaleAnchoredInput = InputRecord & {
     model: 'color-srgb-saturation-scale/anchored';
     params: {
-        anchor: NormalNumber;
+        anchor: ColorSRGBSaturation;
     } & AnchoredNumberSeriesParams;
 };
