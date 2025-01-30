@@ -1,25 +1,25 @@
-import type { AnchoredNumberSeriesParams, Degrees } from '../../../primitives';
+import type { AnchoredNumberSeriesParams, ColorSRGBHue } from '../../../primitives';
 import type { InputRecord } from '../../base';
 
 export type ColorSRGBHueValueExplicitInput = InputRecord & {
     model: 'color-srgb-hue-value/explicit';
     params: {
-        value: Degrees;
+        value: ColorSRGBHue;
     };
 };
 
 export type ColorSRGBHueSetExplicitInput = InputRecord & {
     model: 'color-srgb-hue-set/explicit';
     params: {
-        values: Degrees[];
+        values: ColorSRGBHue[];
     };
 };
 
 export type ColorSRGBHueSetBoundedInput = InputRecord & {
     model: 'color-srgb-hue-set/bounded';
     params: {
-        from: Degrees;
-        to: Degrees;
+        from: ColorSRGBHue;
+        to: ColorSRGBHue;
         steps: number;
     };
 };
@@ -27,6 +27,6 @@ export type ColorSRGBHueSetBoundedInput = InputRecord & {
 export type ColorSRGBHueSetAnchoredInput = InputRecord & {
     model: 'color-srgb-hue-set/anchored';
     params: {
-        anchor: Degrees;
+        anchor: ColorSRGBHue;
     } & AnchoredNumberSeriesParams;
 };
