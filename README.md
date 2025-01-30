@@ -41,7 +41,7 @@ Libraries:
 - [Designer Functions](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-functions/README.md)
 - [Designer Schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/README.md)
 - [Designer Shows](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-shows/README.md)
-- [Astro Integration](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-integrations-astro/README.md)
+- [Astro Integration](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-integration-astro/README.md)
 
 Cli tools:
 

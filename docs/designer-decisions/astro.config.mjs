@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { staticSidebar } from './sidebar.static.mjs';
 import { processLinks } from './src/mdx/rehype/processLinks.ts';
-import designerDecisionsIntegration from '@noodlestan/designer-integrations-astro';
+import designerDecisionsIntegration from '@noodlestan/designer-integration-astro';
 
 const remarkPlugins = [];
 const rehypePlugins = [processLinks];

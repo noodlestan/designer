@@ -1,5 +1,5 @@
 {
-  "name": "@noodlestan/designer-integrations-astro",
+  "name": "@noodlestan/designer-integration-astro",
   "version": "v0.0.8",
   "description": "Astro integration for Designer Decisions",
   "author": "Noodlestan Collective",
