@@ -17,4 +17,4 @@ export type SpaceUnits = 'px' | 'em' | 'rem';
 
 export type SpaceWithUnits = { value: number; units: SpaceUnits };
 
-export type SpaceInputValue = DecisionRef | SpaceRaw | SpaceWithUnits;
+export type SpaceValueInput = DecisionRef | SpaceRaw | SpaceWithUnits;

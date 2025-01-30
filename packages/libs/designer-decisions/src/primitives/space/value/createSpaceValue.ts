@@ -1,9 +1,9 @@
-import type { SpaceInputValue, SpaceValue, ValueContext } from '../../../types';
+import type { SpaceValue, SpaceValueInput, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
 
-export const createSpaceValue = (context: ValueContext, input: SpaceInputValue): SpaceValue => {
+export const createSpaceValue = (context: ValueContext, input: SpaceValueInput): SpaceValue => {
     context.consume(input);
 
     const value = resolveSpaceValue(context, input);

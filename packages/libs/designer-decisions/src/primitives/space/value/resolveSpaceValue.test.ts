@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createValueContextMock } from '../../../mocks';
-import type { DecisionValueInputError, SpaceInputValue, SpaceWithUnits } from '../../../types';
+import type { DecisionValueInputError, SpaceValueInput, SpaceWithUnits } from '../../../types';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveSpaceValue } from './resolveSpaceValue';
@@ -82,14 +82,14 @@ describe('resolveSpaceValue()', () => {
         it.each(invalidInputs)(
             'should return the fallback value for invalid input: %s',
             invalidInput => {
-                const result = resolveSpaceValue(mockContext, invalidInput as SpaceInputValue);
+                const result = resolveSpaceValue(mockContext, invalidInput as SpaceValueInput);
                 expect(result).toEqual(FALLBACK_VALUE);
             },
         );
         it.each(invalidInputs)(
             'should add an error to the context for invalid input: %s',
             invalidInput => {
-                resolveSpaceValue(mockContext, invalidInput as SpaceInputValue);
+                resolveSpaceValue(mockContext, invalidInput as SpaceValueInput);
 
                 expect(addErrorSpy).toHaveBeenCalledOnce();
                 const error = addErrorSpy.mock.calls[0][0] as DecisionValueInputError;
