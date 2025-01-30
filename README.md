@@ -41,6 +41,7 @@ Libraries:
 - [Designer Functions](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-functions/README.md)
 - [Designer Schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/README.md)
 - [Designer Shows](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-shows/README.md)
+- [Astro Integration](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-integrations-astro/README.md)
 
 Cli tools:
 
@@ -48,11 +49,12 @@ Cli tools:
 
 Docs:
 
-- [Designer Docs](https://github.com/noodlestan/designer/blob/main/docs/designer-decisions/README.md)
+- [Designer Decisions](https://github.com/noodlestan/designer/blob/main/docs/designer-decisions/README.md) - live at https://designer-decisions.noodlestan.org/
 
 Support tools:
 
 - [Designer Build](https://github.com/noodlestan/designer/blob/main/tools/designer-build/README.md)
+- [Packages](https://github.com/noodlestan/designer/blob/main/tools/packages/README.md)
 
 ### Stack
 
@@ -77,6 +79,37 @@ Documentation is built on top of [Astro](https://docs.astro.build) / [Starlight]
 ### Committing
 
 Make sure the `pre-commit` hook was executed. It runs automatically before every commit and lints all code. Under the hood it runs `npm run lint` and `npm run ci`. Run these to inspect error details.
+
+### Publishing a new release
+
+Update [CHANGELOG](./docs/designer-decisions/CHANGELOG.md).
+
+Bump version and publish to npm
+
+```
+npm login
+npm run release:prepare v0.0.8
+npm run release:publish
+```
+
+Commit changes. Make sure `package-lock.json` is updated and included.
+
+```
+checkout -b v0.0.8`
+npm install
+commit -am 'v0.0.8'
+git push origin v0-0-8
+```
+
+Merge the release PR.
+
+```
+git pull origin main
+git tag v0.0.8`
+git push --tags`
+```
+
+Create a [release on Github](https://github.com/noodlestan/designer/releases)
 
 ## MIT License
 

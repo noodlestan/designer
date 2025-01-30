@@ -1,0 +1,16 @@
+{
+  "name": "@noodlestan/designer-packages-tools",
+  "version": "0.0.7",
+  "description": "Tools to support publishing public packages",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "bump-version": "ts-node scripts/bump-version.ts",
+    "publish-version": "ts-node scripts/publish-version.ts"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "ts-node": "10.9.2"
+  }
+}
