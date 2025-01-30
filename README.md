@@ -98,12 +98,20 @@ Commit changes. Make sure `package-lock.json` is updated and included.
 git checkout -b v0.0.8
 npm install
 git commit -am 'v0.0.8'
-git tag v0.0.8
 git push origin v0-0-8
 git push --tags
 ```
 
 Merge the release PR ([example](https://github.com/noodlestan/designer/pull/88)).
+
+Tag the (merged) release commit.
+
+```
+git checkout main
+git pull
+git tag v0.0.8
+git push --tags
+```
 
 Create the [release on Github](https://github.com/noodlestan/designer/releases).
 
