@@ -95,21 +95,17 @@ npm run release:publish
 Commit changes. Make sure `package-lock.json` is updated and included.
 
 ```
-checkout -b v0.0.8`
+git checkout -b v0.0.8
 npm install
-commit -am 'v0.0.8'
+git commit -am 'v0.0.8'
+git tag v0.0.8
 git push origin v0-0-8
+git push --tags
 ```
 
-Merge the release PR.
+Merge the release PR ([example](https://github.com/noodlestan/designer/pull/88)).
 
-```
-git pull origin main
-git tag v0.0.8`
-git push --tags`
-```
-
-Create a [release on Github](https://github.com/noodlestan/designer/releases)
+Create the [release on Github](https://github.com/noodlestan/designer/releases).
 
 ## MIT License
 
