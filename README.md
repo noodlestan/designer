@@ -53,7 +53,7 @@ Docs:
 
 Support tools:
 
-- [Designer Build](https://github.com/noodlestan/designer/blob/main/tools/designer-build/README.md)
+- [Designer Build](https://github.com/noodlestan/designer/blob/main/tools/build/README.md)
 - [Packages](https://github.com/noodlestan/designer/blob/main/tools/packages/README.md)
 
 ### Stack

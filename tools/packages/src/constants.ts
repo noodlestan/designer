@@ -13,6 +13,6 @@ export const PACKAGE_META: PackageMeta[] = [
     { path: 'packages/libs/designer-shows' },
     { path: 'packages/clis/designer-generators' },
     { path: 'docs/designer-decisions' },
-    { path: 'tools/designer-build' },
+    { path: 'tools/build' },
     { path: 'tools/packages' },
 ];

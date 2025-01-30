@@ -25,7 +25,7 @@
     "ci:integrations": "npm run ci:integrations:astro",
     "ci:clis:generators": "npm run --prefix packages/clis/designer-generators ci",
     "ci:clis": "npm run ci:clis:generators",
-    "ci:generate:schemas": "npm run --prefix tools/designer-build build:schemas",
+    "ci:generate:schemas": "npm run --prefix tools/build build:schemas",
     "ci:libs:schemas": "npm run --prefix packages/libs/designer-schemas ci",
     "ci:schemas": "npm run ci:generate:schemas && npm run ci:libs:schemas",
     "ci:docs:designer": "npm run --prefix docs/designer-decisions ci",
