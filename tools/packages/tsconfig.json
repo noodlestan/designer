@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ESNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "lib": ["ES2022"]
+  },
+  "include": ["scripts/**/*"],
+  "exclude": ["**/*.test.ts"]
+}

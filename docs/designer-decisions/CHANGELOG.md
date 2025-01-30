@@ -1,5 +1,20 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.8] - 2025-01-30
+
+### Added
+
+- Basic Astro integration `@noodlestan/designer-astro-integration` loads CSS for `Show` components [#91](https://github.com/noodlestan/designer/issues/91)
+- Docs sample data is now available as `DEMO_DATA` in `@noodlestan/designer-decisions` [#94](https://github.com/noodlestan/designer/issues/94)
+
+### Changed
+
+- Renamed input types that compose `DecisionRef` to end with `Input` suffix [#95](https://github.com/noodlestan/designer/issues/95)
+
+### Fixed
+
+- Fix: color channel input types don't allow using reference [#93](https://github.com/noodlestan/designer/issues/93)
+
 ## [0.0.7] - 2025-01-29
 
 ### Highlights

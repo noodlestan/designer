@@ -31,7 +31,9 @@
     "ci:docs:designer": "npm run --prefix docs/designer-decisions ci",
     "ci:docs": "npm run ci:docs:designer",
     "ci": "npm run ci:libs && npm run ci:clis && npm run ci:integrations && npm run ci:schemas && npm run ci:docs",
-    "build:deps": "npm run ci:libs && npm run ci:clis && npm run ci:schemas"
+    "build:deps": "npm run ci:libs && npm run ci:clis && npm run ci:integrations && npm run ci:schemas",
+    "release:prepare": "npm run --prefix tools/packages bump-version",
+    "release:publish": "npm run --prefix tools/packages publish-version"
   },
   "devDependencies": {
     "@noodlestan/eslint-config": "0.0.5",
