@@ -5,7 +5,7 @@ const SAMPLE_DATA: DecisionSource = {
     source: {
         type: 'package',
         package: '@noodlestan/designer-decisions',
-        path: 'sample-data/',
+        path: 'resources/data/samples',
     },
 };
 const DEMO_DATA: DecisionSource = {
@@ -13,7 +13,7 @@ const DEMO_DATA: DecisionSource = {
     source: {
         type: 'package',
         package: '@noodlestan/designer-decisions',
-        path: 'demo-data/',
+        path: 'resources/data/demo',
     },
 };
 
