@@ -1,0 +1,79 @@
+[
+  {
+    "model": "color-oklab-hue-value/explicit",
+    "name": "Content Primary Hue",
+    "description": "Base hue for creating Foreground and Background tints",
+    "params": {
+      "value": 0.97
+    }
+  },
+  {
+    "model": "color-oklab-chroma-value/explicit",
+    "name": "Content Primary Chroma",
+    "description": "Base chroma for creating Foreground and Background tints",
+    "params": {
+      "value": 0.14
+    }
+  },
+  {
+    "model": "color-oklab-lightness-value/explicit",
+    "name": "Foreground Maximum Lightness",
+    "description": "Sets the maximum value of the foreground lightness scale",
+    "params": {
+      "value": 0.97
+    }
+  },
+  {
+    "model": "color-oklab-lightness-value/explicit",
+    "name": "Foreground Minimum Lightness",
+    "description": "Sets the minimum value of the foreground lightness scale",
+    "params": {
+      "value": 0.83
+    }
+  },
+  {
+    "model": "color-set/bounded",
+    "name": "Content Foreground Scale",
+    "description": " scale for foreground elements",
+    "params": {
+      "from": {
+        "l": { "$name": "Foreground Minimum Lightness" },
+        "c": { "$name": "Content Primary Chroma" },
+        "h": { "$name": "Content Primary Hue" }
+      },
+      "to": {
+        "l": { "$name": "Foreground Maximum Lightness" },
+        "c": { "$name": "Content Primary Chroma" },
+        "h": { "$name": "Content Primary Hue" }
+      },
+      "steps": 5
+    }
+  },
+  {
+    "model": "color-oklab-lightness-value/explicit",
+    "name": "Background Lightness Minimum",
+    "description": "Lightness scale for background elements",
+    "params": {
+      "value": 0.03
+    }
+  },
+  {
+    "model": "color-set/anchored",
+    "name": "Content Background Scale",
+    "description": "Lightness scale for background elements",
+    "params": {
+      "anchor": {
+        "l": { "$name": "Background Lightness Minimum" },
+        "c": { "$name": "Content Primary Chroma" },
+        "h": { "$name": "Content Primary Hue" }
+      },
+      "after": {
+        "steps": 4,
+        "modifier": {
+          "space": "oklch",
+          "l": { "mode": "linear", "by": 0.03 }
+        }
+      }
+    }
+  }
+]

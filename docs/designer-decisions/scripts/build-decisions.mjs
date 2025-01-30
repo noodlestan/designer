@@ -7,14 +7,14 @@ import {
 } from '@noodlestan/designer-functions';
 import path from 'path';
 
-import { SAMPLE_DATA } from '@noodlestan/designer-decisions';
+import { SAMPLE_DATA, DEMO_DATA } from '@noodlestan/designer-decisions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DATA_PATH = path.resolve('./data/decisions');
+const DECISION_DATA_PATH = path.resolve('./data/decisions');
 
 const decisionLoader = createDecisionLoader(
     [DECISION_SCHEMAS],
-    [SAMPLE_DATA, DATA_PATH],
+    [SAMPLE_DATA, DEMO_DATA, DECISION_DATA_PATH],
     async moduleName => `../../node_modules/${moduleName}`,
 );
 

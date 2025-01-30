@@ -1,0 +1,58 @@
+[
+  {
+    "model": "color-oklab-lightness-value/explicit",
+    "name": "Brand Pink Lightness",
+    "description": "Lightness channel of Brand Pink color",
+    "params": {
+      "value": 0.619
+    }
+  },
+  {
+    "model": "color-oklab-chroma-value/explicit",
+    "name": "Brand Pink Chroma",
+    "description": "Chroma channel of Brand Pink color",
+    "params": {
+      "value": 0.172
+    }
+  },
+  {
+    "model": "color-oklab-hue-value/explicit",
+    "name": "Brand Pink Hue",
+    "description": "Hue channel of Brand Pink color",
+    "params": {
+      "value": 359
+    }
+  },
+  {
+    "model": "color-oklab-lightness-value/explicit",
+    "name": "Brand Blue Lightness",
+    "description": "Lightness channel of Brand Blue color",
+    "params": {
+      "value": 0.7
+    }
+  },
+  {
+    "model": "color-oklab-chroma-value/explicit",
+    "name": "Brand Blue Chroma",
+    "description": "Chroma channel of Brand Blue color",
+    "params": {
+      "value": 0.133
+    }
+  },
+  {
+    "model": "color-oklab-hue-value/explicit",
+    "name": "Brand Blue Hue",
+    "description": "Hue channel of Brand Blue color",
+    "params": {
+      "value": 224
+    }
+  },
+  {
+    "model": "color-oklab-hue-set/explicit",
+    "name": "Brand Hues",
+    "description": "Hue channels of Brand colors",
+    "params": {
+      "values": [{ "$name": "Brand Pink Hue" }, { "$name": "Brand Blue Hue" }]
+    }
+  }
+]
