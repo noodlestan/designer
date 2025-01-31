@@ -41,6 +41,6 @@ export default defineConfig({
             },
             sidebar: staticSidebar({ decisionModels }),
         }),
-        designerDecisionsIntegration(),
+        designerDecisionsIntegration({ applyStarlightStyles: true }),
     ],
 });

@@ -1,0 +1,12 @@
+@import url('./vars.css');
+
+/**
+ * guarantee top level dd-components are vertically separated from surrounding markdown content
+ */
+.sl-markdown-content [class^='dd-'] {
+    margin-block-start: var(--st-dd-block-start);
+    margin-block-end: var(--st-dd-block-start);
+}
+.sl-markdown-content [class^='dd-'] [class^='dd-'] {
+    margin: 0;
+}
