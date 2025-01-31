@@ -64,10 +64,9 @@ providing it with:
 -   A directory to load decision data from.
 -   A function to resolve the physical location of the `node_module` containing the schemas.
 
-```js
-// src/scripts/validate-decisions.js
+```js "createDecisionLoader"
+// scripts/validate-decisions.js
 import path from 'path';
-
 import { createDecisionLoader } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
@@ -79,13 +78,6 @@ const loader = createDecisionLoader(
     // NOTE: you might need to adjust the path according to your repository setup
     async (moduleName: string) => `./node_modules/${moduleName}`
 );
-
-const loadDecisions = async () => {
-    const store = await loader();
-    // ...
-};
-
-loadDecisions();
 ```
 
 <GetInvolved url="https://github.com/noodlestan/designer/issues/80">
@@ -104,9 +96,20 @@ occurred while loading data and schemas or when validating input data.
 We can format the errors using the `formatValidationError()` utility function and print all the
 validation errors so that we can inspect them.
 
-```js
-// src/scripts/validate-decisions.js
-import { formatValidationError } from '@noodlestan/designer-functions';
+```js collapse={4-13,27-28} "formatValidationError"
+// scripts/validate-decisions.js
+import path from 'path';
+import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const DATA_PATH = path.resolve('./data/decisions');
+
+const loader = createDecisionLoader(
+    [DECISION_SCHEMAS],
+    [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
+    async (moduleName: string) => `./node_modules/${moduleName}`
+);
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -117,9 +120,11 @@ const loadDecisions = async () => {
     }
 
     const records = store.records();
-    records.forEach(record => console.log(record.name));
-    console.log(`🐘 ${records.length} records`);
+    records.forEach(record => console.info(record.name));
+    console.info(`🐘 ${records.length} records`);
 };
+
+loadDecisions();
 ```
 
 You can run this directly from the command line:
@@ -165,16 +170,41 @@ The following 2 utility functions help with this:
 
 Add these 2 lines to the script:
 
-```js
-// src/scripts/validate-decisions.js
-import { formatDecisionStatus, produceDecisionStatus } from '@noodlestan/designer-functions';
+```js collapse={9-26,31-34} "formatDecisionStatus" "produceDecisions"
+// scripts/validate-decisions.js
+import path from 'path';
+import {
+    createDecisionLoader,
+    formatValidationError,
+    formatDecisionStatus,
+    produceDecisions
+} from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const DATA_PATH = path.resolve('./data/decisions');
+
+const loader = createDecisionLoader(
+    [DECISION_SCHEMAS],
+    [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
+    async (moduleName: string) => `./node_modules/${moduleName}`
+);
 
 const loadDecisions = async () => {
-    // ...
+    const store = await loader();
+    if (store.hasErrors()) {
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+        throw new Error(`Validation errors.`);
+    }
 
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
+
+    console.info(`🐘 ${records.length} records`);
 };
+
+loadDecisions();
 ```
 
 The output will look something like this.
@@ -203,15 +233,44 @@ introducing two issues:
 If you wish to filter out decisions that produce valid values, and inspect only the errors,
 you can adjust your script to the following:
 
-```js
-// src/scripts/validate-decisions.js
+```js collapse={2-28,34-37} "filter" "hasErrors"
+// scripts/validate-decisions.js
+import path from 'path';
+import {
+    createDecisionLoader,
+    formatValidationError,
+    formatDecisionStatus,
+    produceDecisions
+} from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const DATA_PATH = path.resolve('./data/decisions');
+
+const loader = createDecisionLoader(
+    [DECISION_SCHEMAS],
+    [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
+    async (moduleName: string) => `./node_modules/${moduleName}`
+);
+
 const loadDecisions = async () => {
-    // ...
+    const store = await loader();
+    if (store.hasErrors()) {
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+        throw new Error(`Validation errors.`);
+    }
+
+    const produced = produceDecisions(store);
     produced
         .decisions()
         .filter(status => status.hasErrors)
         .forEach(status => console.info(formatDecisionStatus(status)));
+
+    console.info(`🐘 ${records.length} records`);
 };
+
+loadDecisions();
 ```
 
 ## Summarizing and catching errors
@@ -219,12 +278,41 @@ const loadDecisions = async () => {
 The `produced` object reports counts for decision records, and different types of errors in
 a single string.
 
-```js
-// src/scripts/validate-decisions.js
+```js collapse={2-29,33-35} "filter" "hasErrors"
+// scripts/validate-decisions.js
+import path from 'path';
+import {
+    createDecisionLoader,
+    formatValidationError,
+    formatDecisionStatus,
+    produceDecisions
+} from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const DATA_PATH = path.resolve('./data/decisions');
+
+const loader = createDecisionLoader(
+    [DECISION_SCHEMAS],
+    [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
+    async (moduleName: string) => `./node_modules/${moduleName}`
+);
+
 const loadDecisions = async () => {
-    // ...
+    const store = await loader();
+    if (store.hasErrors()) {
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+        throw new Error(`Validation errors.`);
+    }
+
+    const produced = produceDecisions(store);
+    produced.forEach(status => console.info(formatDecisionStatus(status)));
+
     console.info('🐘', produced.summary());
 };
+
+loadDecisions();
 ```
 
 You can use it to summarize all counts in one line.
@@ -237,9 +325,38 @@ You can use it to summarize all counts in one line.
 If you are running this as part of your build process you will probably want to exit the script
 with an error code.
 
-```js
+```js collapse={1-30} "throw" "catch" "exit(1)"
+// scripts/validate-decisions.js
+import path from 'path';
+import {
+    createDecisionLoader,
+    formatValidationError,
+    formatDecisionStatus,
+    produceDecisions
+} from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const DATA_PATH = path.resolve('./data/decisions');
+
+const loader = createDecisionLoader(
+    [DECISION_SCHEMAS],
+    [DATA_PATH],
+    // NOTE: you might need to adjust the path according to your repository setup
+    async (moduleName: string) => `./node_modules/${moduleName}`
+);
+
 const loadDecisions = async () => {
-    // ...
+    const store = await loader();
+    if (store.hasErrors()) {
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+        throw new Error(`Validation errors.`);
+    }
+
+    const produced = produceDecisions(store);
+    produced.forEach(status => console.info(formatDecisionStatus(status)));
+    console.info('🐘', produced.summary());
+
     if (produced.hasErrors()) {
         throw new Error(`Errors encountered producing decisions.`);
     }

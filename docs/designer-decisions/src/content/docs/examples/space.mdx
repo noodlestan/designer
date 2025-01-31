@@ -12,28 +12,75 @@ import { decisionLoader } from '../../../decisions';
 
 export const store = await decisionLoader();
 
+## Space values
+
+<details>
+<summary>SpaceValue</summary>
+
+```mdx
+<ShowDecision store={store} d="Space Unit" />
+```
+
+</details>
+
+<div>
+    <ShowDecision store={store} d="Space Unit" model />
+</div>
+
+## Space scales
+
+<details>
+<summary>SpaceScale (default viz, xs size)</summary>
+
+```mdx
+<ShowDecision store={store} d="Layout Space Scale" size="xs" />
+```
+
+</details>
+
+<CardGrid>
+    <ShowDecision store={store} d="Layout Space Scale" size="xs" />
+</CardGrid>
+
+<details>
+<summary>SpaceScale (vertical bar viz)</summary>
+
+```mdx
+<ShowDecision store={store} d="Layout Rhythm Scale" viz="v-bar" />
+```
+
+</details>
+
+<CardGrid>
+    <ShowDecision store={store} d="Layout Rhythm Scale" viz="circle" />
+</CardGrid>
+
+<details>
+<summary>SpaceScale (square viz vs circle viz)</summary>
+
+```mdx
+<ShowDecision store={store} d="Sizing Space Scale" viz="square" />
+<ShowDecision store={store} d="Sizing Space Scale" viz="circle" />
+```
+
+</details>
+
+<CardGrid>
+    <ShowDecision store={store} d="Sizing Space Scale" viz="square" />
+    <ShowDecision store={store} d="Sizing Space Scale" viz="circle" />
+</CardGrid>
+
+## Cards
+
+<details>
+<summary>ColorSet (different color-channels shown)</summary>
+
 ```mdx
 <ShowDecisionCard store={store} d="Space Unit" model params>
 ```
 
+</details>
+
 <div>
     <ShowDecisionCard store={store} d="Space Unit" model params />
 </div>
-
-```mdx
-<ShowDecision store={store} d="Layout Space Scale" size="s" />
-<ShowDecision store={store} d="Avatar Sizes" viz="circle" />
-```
-
-<CardGrid>
-    <ShowDecision store={store} d="Layout Space Scale" size="s" />
-    <ShowDecision store={store} d="Avatar Sizes" viz="circle" />
-</CardGrid>
-
-```mdx
-<ShowDecision store={store} d="Sizing Space Scale" viz="square" />
-```
-
-<CardGrid>
-    <ShowDecision store={store} d="Sizing Space Scale" viz="square" />
-</CardGrid>

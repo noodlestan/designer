@@ -12,94 +12,152 @@ import { decisionLoader } from '../../../decisions';
 
 export const store = await decisionLoader();
 
+## Color sets
+
+<details>
+<summary>ColorSet (foreground viz)</summary>
 ```mdx
-<ShowDecisionCard store={store} d="Brand Pink" value={['hsl', 'rgb', 'oklch']} model params />
-```
+<ShowDecision store={store} d="Brand Color Set" size="m"
+        value={false}
+        viz="fg"
+        options={{ contrast: '#ccc' }}
 
-<div>
-    <ShowDecisionCard store={store} d="Brand Pink" value={['hsl', 'rgb', 'oklch']} model params />
-</div>
+/>
 
-```mdx
-<ShowDecision store={store} d="Brand Pink Hue" size="l" />
-<ShowDecision store={store} d="Brand Blue Hue" size="l" />
-```
+````
 
-<CardGrid>
-    <ShowDecision store={store} d="Brand Pink Hue" size="l" />
-    <ShowDecision store={store} d="Brand Blue Hue" size="l" />
-</CardGrid>
-
-```mdx
-<ShowDecision store={store} d="Brand Color Set" size="m" row />
-```
+</details>
 
 <FlexRow vpad>
     <ShowDecision
         store={store}
         d="Brand Color Set"
         size="m"
-        layout="row"
+        value={false}
         viz="fg"
         options={{ contrast: '#ccc' }}
     />
 </FlexRow>
 
+<details>
+<summary>ColorSet (different color-channels shown)</summary>
+
 ```mdx
-<ShowDecision store={store} d="Pink Palette" />
-<ShowDecision store={store} d="Heat Map Color Set" />
-```
+<ShowDecision store={store} d="Pink Palette" value="rgb" />
+<ShowDecision store={store} d="Heat Map Color Set" value="hsl" />
+````
+
+</details>
 
 <CardGrid>
-    <ShowDecision store={store} d="Pink Palette" />
-    <ShowDecision store={store} d="Heat Map Color Set" value={['hsl', 'oklch']} />
+    <ShowDecision store={store} d="Pink Palette" value="rgb" />
+    <ShowDecision store={store} d="Heat Map Color Set" value="hsl" />
 </CardGrid>
 
+<details>
+<summary>ColorSet (foreground vs background viz)</summary>
+
 ```mdx
-<ShowDecision store={store} d="Action Color" size="s" value={['rgb', 'oklch']} />
+<ShowDecision
+    store={store}
+    d="Content Foreground Scale"
+    size="m"
+    viz="fg"
+    options={{ contrast: 'oklch(17% 0 0deg)' }}
+/>
+<ShowDecision
+    store={store}
+    d="Content Background Scale"
+    size="m"
+    viz="bg"
+    options={{ contrast: 'oklch(83% 0.02 0deg)' }}
+/>
 ```
+
+</details>
+
+<CardGrid>
+    <ShowDecision
+        store={store}
+        d="Content Foreground Scale"
+        size="m"
+        viz="fg"
+        options={{ contrast: 'oklch(17% 0 0deg)' }}
+    />
+    <ShowDecision
+        store={store}
+        d="Content Background Scale"
+        size="m"
+        viz="bg"
+        options={{ contrast: 'oklch(83% 0.02 0deg)' }}
+    />
+</CardGrid>
+
+## Color values
+
+<details>
+<summary>Color (foreground viz, different contrast color)</summary>
+
+```mdx
+<ShowDecision
+    store={store}
+    d="Action Color"
+    size="l"
+    viz="fg"
+    options={{ contrast: 'oklch(17% 0 0deg)' }}
+/>
+<ShowDecision
+    store={store}
+    d="Action Constrast Color"
+    size="l"
+    viz="fg"
+    options={{ contrast: 'oklch(48% 0.15 0deg) ' }}
+/>
+```
+
+</details>
 
 <CardGrid>
     <ShowDecision
         store={store}
         d="Action Color"
-        size="s"
+        size="l"
         viz="fg"
-        options={{ contrast: 'oklch(24% 0.08 257)' }}
-        value={['rgb', 'oklch']}
+        options={{ contrast: 'oklch(17% 0 0deg)' }}
+    />
+    <ShowDecision
+        store={store}
+        d="Action Constrast Color"
+        size="l"
+        viz="fg"
+        options={{ contrast: 'oklch(48% 0.15 0deg) ' }}
     />
 </CardGrid>
+
+## Cards
+
+<details>
+<summary>Color (DecisionCard)</summary>
 
 ```mdx
-<ShowDecision
-    store={store}
-    d="Foreground Lightness Scale"
-    size="m"
-    viz="fg"
-    options={{ contrast: 'oklch(24% 0.08 257)' }}
-/>
-<ShowDecision
-    store={store}
-    d="Background Lightness Scale"
-    size="m"
-    viz="fg"
-    options={{ contrast: 'oklch(24% 0.08 257)' }}
-/>
+<ShowDecisionCard store={store} d="Action Color" viz="bg" />
 ```
 
-<CardGrid>
-    <ShowDecision
-        store={store}
-        d="Foreground Lightness Scale"
-        size="m"
-        viz="fg"
-        options={{ contrast: 'oklch(24% 0.08 257)' }}
-    />
-    <ShowDecision
-        store={store}
-        d="Background Lightness Scale"
-        size="m"
-        viz="fg"
-        options={{ contrast: 'oklch(24% 0.08 257)' }}
-    />
-</CardGrid>
+</details>
+
+<div>
+    <ShowDecisionCard store={store} d="Action Color" viz="bg" />
+</div>
+
+<details>
+<summary>ColorSet (DecisionCard, viz hidden, model and params shown)</summary>
+
+```mdx
+<ShowDecisionCard store={store} d="Heat Map Color Set" viz={false} model params />
+```
+
+</details>
+
+<div>
+    <ShowDecisionCard store={store} d="Heat Map Color Set" viz={false} model params />
+</div>
