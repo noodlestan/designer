@@ -12,7 +12,7 @@
     "name": "Content Primary Chroma",
     "description": "Base chroma for creating Foreground and Background tints",
     "params": {
-      "value": 0.14
+      "value": 0.02
     }
   },
   {
@@ -37,16 +37,16 @@
     "description": " scale for foreground elements",
     "params": {
       "from": {
-        "l": { "$name": "Foreground Minimum Lightness" },
-        "c": { "$name": "Content Primary Chroma" },
-        "h": { "$name": "Content Primary Hue" }
-      },
-      "to": {
         "l": { "$name": "Foreground Maximum Lightness" },
         "c": { "$name": "Content Primary Chroma" },
         "h": { "$name": "Content Primary Hue" }
       },
-      "steps": 5
+      "to": {
+        "l": { "$name": "Foreground Minimum Lightness" },
+        "c": { "$name": "Content Primary Chroma" },
+        "h": { "$name": "Content Primary Hue" }
+      },
+      "steps": 1
     }
   },
   {
@@ -60,7 +60,7 @@
   {
     "model": "color-set/anchored",
     "name": "Content Background Scale",
-    "description": "Lightness scale for background elements",
+    "description": "Sets the minimum value for of the background lightness scale",
     "params": {
       "anchor": {
         "l": { "$name": "Background Lightness Minimum" },
@@ -68,10 +68,10 @@
         "h": { "$name": "Content Primary Hue" }
       },
       "after": {
-        "steps": 4,
+        "steps": 3,
         "modifier": {
           "space": "oklch",
-          "l": { "mode": "linear", "by": 0.03 }
+          "l": { "mode": "linear", "by": 0.05 }
         }
       }
     }

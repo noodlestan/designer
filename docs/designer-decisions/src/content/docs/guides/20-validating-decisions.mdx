@@ -65,7 +65,7 @@ providing it with:
 -   A function to resolve the physical location of the `node_module` containing the schemas.
 
 ```js
-// src/scripts/validate-decisions.js
+// scripts/validate-decisions.js
 import path from 'path';
 
 import { createDecisionLoader } from '@noodlestan/designer-functions';
@@ -104,9 +104,9 @@ occurred while loading data and schemas or when validating input data.
 We can format the errors using the `formatValidationError()` utility function and print all the
 validation errors so that we can inspect them.
 
-```js
-// src/scripts/validate-decisions.js
-import { formatValidationError } from '@noodlestan/designer-functions';
+```js {3-6,12-14}
+// scripts/validate-decisions.js
+import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -120,6 +120,8 @@ const loadDecisions = async () => {
     records.forEach(record => console.log(record.name));
     console.log(`🐘 ${records.length} records`);
 };
+
+loadDecisions();
 ```
 
 You can run this directly from the command line:
@@ -166,7 +168,7 @@ The following 2 utility functions help with this:
 Add these 2 lines to the script:
 
 ```js
-// src/scripts/validate-decisions.js
+// scripts/validate-decisions.js
 import { formatDecisionStatus, produceDecisionStatus } from '@noodlestan/designer-functions';
 
 const loadDecisions = async () => {
@@ -204,7 +206,7 @@ If you wish to filter out decisions that produce valid values, and inspect only 
 you can adjust your script to the following:
 
 ```js
-// src/scripts/validate-decisions.js
+// scripts/validate-decisions.js
 const loadDecisions = async () => {
     // ...
     produced
@@ -220,7 +222,7 @@ The `produced` object reports counts for decision records, and different types o
 a single string.
 
 ```js
-// src/scripts/validate-decisions.js
+// scripts/validate-decisions.js
 const loadDecisions = async () => {
     // ...
     console.info('🐘', produced.summary());
