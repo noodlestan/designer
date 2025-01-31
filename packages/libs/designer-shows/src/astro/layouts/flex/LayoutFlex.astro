@@ -1,0 +1,57 @@
+---
+type Props = {
+    tag?: 'div' | 'ul' | 'li';
+    align?: 'start' | 'center';
+    direction: 'row' | 'column';
+    gap?: 's' | 'm' | 'l';
+    wrap?: boolean;
+};
+
+const {
+    tag: Element = 'div',
+    align = 'start',
+    direction = 'row',
+    gap = 'm',
+    wrap = true,
+} = Astro.props;
+
+const shouldWrap = wrap && direction !== 'column';
+---
+
+<Element class:list={['dd-layout-flex', align, direction, gap, { wrap: shouldWrap }]}>
+    <slot />
+</Element>
+
+<style>
+    .dd-flex-row {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        gap: var(--dd-space-gap);
+        list-style: none;
+    }
+
+    .center {
+        align-items: center;
+    }
+
+    .column {
+        flex-direction: column;
+    }
+
+    .s {
+        gap: var(--dd-gap-s);
+    }
+
+    .m {
+        gap: var(--dd-gap-m);
+    }
+
+    .l {
+        gap: var(--dd-gap-l);
+    }
+
+    .wrap {
+        flex-wrap: wrap;
+    }
+</style>
