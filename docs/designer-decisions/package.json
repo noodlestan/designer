@@ -22,9 +22,10 @@
   },
   "dependencies": {
     "@astrojs/starlight": "0.30.3",
+    "@expressive-code/plugin-collapsible-sections": "^0.40.1",
     "@noodlestan/designer-decisions": "v0.0.9",
-    "@noodlestan/designer-integration-astro": "v0.0.9",
     "@noodlestan/designer-functions": "v0.0.9",
+    "@noodlestan/designer-integration-astro": "v0.0.9",
     "@noodlestan/designer-schemas": "v0.0.9",
     "@noodlestan/designer-shows": "v0.0.9",
     "astro": "5.1.1",
