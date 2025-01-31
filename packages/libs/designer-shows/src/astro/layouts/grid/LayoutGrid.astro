@@ -1,5 +1,5 @@
 ---
-type Props = {
+export type LayoutGridProps = {
     columns?: number;
     align?: 'start' | 'center';
     gap?: 's' | 'm' | 'l';
@@ -7,6 +7,8 @@ type Props = {
     vGap?: 's' | 'm' | 'l';
     tag?: 'div' | 'ul' | 'li';
 };
+
+type Props = LayoutGridProps;
 
 const {
     align = 'start',
@@ -17,7 +19,7 @@ const {
     tag: Element = 'div',
 } = Astro.props;
 
-const gap = maybeGap || 'm';
+const gap = maybeGap || 's';
 const hGap = maybeHGap ?? gap;
 const vGap = maybeVGap ?? hGap ?? gap;
 

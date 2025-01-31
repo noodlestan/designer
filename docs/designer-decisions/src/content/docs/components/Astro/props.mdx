@@ -7,8 +7,7 @@ sidebar:
     label: Common Props
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import { FlexRow, FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../decisions';
 
@@ -45,9 +44,7 @@ A `string` with the name of the decision to visualize.
 <ShowDecision store={store} d="Brand Pink" size="m" />
 ```
 
-<CardGrid>
-    <ShowDecision store={store} d="Brand Pink" size="m" />
-</CardGrid>
+<ShowDecision store={store} d="Brand Pink" size="m" />
 
 If the decision does not exist, it renders a notice.
 
@@ -55,9 +52,7 @@ If the decision does not exist, it renders a notice.
 <ShowDecision store={store} d="Brand Green" size="m" />
 ```
 
-<CardGrid>
-    <ShowDecision store={store} d="Brand Green" size="m" />
-</CardGrid>
+<ShowDecision store={store} d="Brand Green" size="m" />
 
 ## ValueProps
 
@@ -80,10 +75,10 @@ Constrains the visualization to a specific size.
 <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 ```
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision store={store} d="Action Color" size={'s'} />
     <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
-</CardGrid>
+</LayoutGrid>
 
 Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.
 

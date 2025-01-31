@@ -3,8 +3,7 @@ title: ColorVizOptions
 slug: api/designer-shows/Types/ColorVizOptions
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
@@ -43,15 +42,13 @@ Define the color applied to the opposite layer.
 />
 ```
 
-<CardGrid>
-    <ShowDecision
-        store={store}
-        d="Action Contrast Color"
-        size="m"
-        viz="fg"
-        options={{ contrast: '#000000' }}
-    />
-</CardGrid>
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="m"
+    viz="fg"
+    options={{ contrast: '#000000' }}
+/>
 
 ## ༶ `mode`
 
@@ -70,15 +67,13 @@ either the decision value as `fg` or ` bg`.
 />
 ```
 
-<FlexStack vpad>
-    <ShowDecision
-        store={store}
-        d="Action Contrast Color"
-        size="m"
-        viz="fg"
-        options={{ mode: 'text', contrast: '#333333' }}
-    />
-</FlexStack>
+<ShowDecision
+    store={store}
+    d="Action Contrast Color"
+    size="m"
+    viz="fg"
+    options={{ mode: 'text', contrast: '#333333' }}
+/>
 
 Refer to [ShowContentMode](/api/designer-shows/Types/ShowContentMode/) for available content modes.
 
@@ -106,7 +101,7 @@ either the decision value as `fg` or ` bg`.
 />
 ```
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision
         store={store}
         d="Brand Blue"
@@ -121,4 +116,4 @@ either the decision value as `fg` or ` bg`.
         viz="fg"
         options={{ mode: 'text', contrast: '#000000', content: 'Lorem Ipsum' }}
     />
-</CardGrid>
+</LayoutGrid>

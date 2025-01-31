@@ -2,7 +2,7 @@
 import { type ColorFormat, type ColorValue } from '@noodlestan/designer-decisions';
 
 import { DecisionValueContainer } from '../../atoms';
-import { FlexStack } from '../../layouts';
+import { LayoutStack } from '../../layouts';
 import { getColorVizComponent } from '../../meta';
 import type { ColorVizOptions, ShowValueProps } from '../../types';
 
@@ -30,11 +30,11 @@ const opt = (options || {}) as ColorVizOptions;
     {viz && <Viz value={colorValue} size={size} options={opt} />}
     {
         value && colorValue !== undefined && (
-            <FlexStack>
+            <LayoutStack>
                 {formats?.map(format => (
                     <DecisionValueContainer>{colorValue.toString(format)}</DecisionValueContainer>
                 ))}
-            </FlexStack>
+            </LayoutStack>
         )
     }
 </div>

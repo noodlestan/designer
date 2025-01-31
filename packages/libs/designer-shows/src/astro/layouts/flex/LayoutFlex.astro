@@ -1,34 +1,40 @@
 ---
-type Props = {
-    tag?: 'div' | 'ul' | 'li';
+export type LayoutFlexProps = {
     align?: 'start' | 'center';
-    direction: 'row' | 'column';
+    direction?: 'row' | 'column';
     gap?: 's' | 'm' | 'l';
     wrap?: boolean;
+    tag?: 'div' | 'ul' | 'li';
 };
 
+type Props = LayoutFlexProps;
+
 const {
-    tag: Element = 'div',
     align = 'start',
     direction = 'row',
     gap = 'm',
     wrap = true,
+    tag: Element = 'div',
 } = Astro.props;
 
 const shouldWrap = wrap && direction !== 'column';
 ---
 
-<Element class:list={['dd-layout-flex', align, direction, gap, { wrap: shouldWrap }]}>
+<Element class:list={['dd-layout-flex', align, direction, `gap-${gap}`, { wrap: shouldWrap }]}>
     <slot />
 </Element>
 
 <style>
-    .dd-flex-row {
+    .dd-layout-flex {
         display: flex;
         flex-direction: row;
         padding: 0;
-        gap: var(--dd-space-gap);
+        gap: var(--_layout-flex-gap);
         list-style: none;
+    }
+
+    .dd-layout-flex > :global(*) {
+        margin: 0 !important;
     }
 
     .center {
@@ -39,16 +45,16 @@ const shouldWrap = wrap && direction !== 'column';
         flex-direction: column;
     }
 
-    .s {
-        gap: var(--dd-gap-s);
+    .gap-s {
+        --_layout-flex-gap: var(--dd-gap-s);
     }
 
-    .m {
-        gap: var(--dd-gap-m);
+    .gap-m {
+        --_layout-flex-gap: var(--dd-gap-m);
     }
 
-    .l {
-        gap: var(--dd-gap-l);
+    .gap-l {
+        --_layout-flex-gap: var(--dd-gap-l);
     }
 
     .wrap {

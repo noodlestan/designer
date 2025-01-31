@@ -7,9 +7,8 @@ sidebar:
     label: Decision Attributes
 ---
 
-import { CardGrid, Aside } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 import {
-    FlexStack,
     ShowDecisionContexts,
     ShowDecisionData,
     ShowDecisionDescription,
@@ -50,9 +49,7 @@ Renders the decision's description.
 <ShowDecisionDescription store={store} d="Pink Palette" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionDescription store={store} d="Pink Palette" />
-</FlexStack>
+<ShowDecisionDescription store={store} d="Pink Palette" />
 
 ### ShowDecisionUsage
 
@@ -64,9 +61,7 @@ Renders the decision's usage guidelines.
 <ShowDecisionUsage store={store} d="Pink Palette" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionUsage store={store} d="Pink Palette" />
-</FlexStack>
+<ShowDecisionUsage store={store} d="Pink Palette" />
 
 ### ShowDecisionModel
 
@@ -78,9 +73,7 @@ Renders the [model](/decision-models) used in the decision.
 <ShowDecisionModel store={store} d="Pink Palette" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionModel store={store} d="Pink Palette" />
-</FlexStack>
+<ShowDecisionModel store={store} d="Pink Palette" />
 
 ### ShowDecisionParams
 
@@ -92,9 +85,7 @@ Renders the decision parameters.
 <ShowDecisionParams store={store} d="Pink Palette" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionParams store={store} d="Pink Palette" />
-</FlexStack>
+<ShowDecisionParams store={store} d="Pink Palette" />
 
 ### ShowDecisionContexts
 
@@ -106,9 +97,7 @@ Renders the decision contexts.
 <ShowDecisionContexts store={store} d="Pink Palette" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionContexts store={store} d="Pink Palette" />
-</FlexStack>
+<ShowDecisionContexts store={store} d="Pink Palette" />
 
 ## Metadata
 
@@ -122,6 +111,4 @@ Renders the decision raw data.
 <ShowDecisionData store={store} d="Pink Palette" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionData store={store} d="Pink Palette" />
-</FlexStack>
+<ShowDecisionData store={store} d="Pink Palette" />

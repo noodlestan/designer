@@ -1,6 +1,6 @@
 ---
 import { type ShowDataProps } from '../types';
-import { FlexRow } from '../layouts';
+import { LayoutFlex } from '../layouts';
 
 type Props = ShowDataProps;
 
@@ -13,26 +13,26 @@ const { intendedFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // 
 <div class="dd-decision-usage">
     {
         intendedFor.length > 0 && (
-            <FlexRow wrap={false}>
+            <LayoutFlex wrap={false}>
                 <h4 class="dd-group-header">Intended For:</h4>
-                <FlexRow tag="ul">
+                <LayoutFlex tag="ul">
                     {intendedFor.map(item => (
                         <li class="dd-item">{item}</li>
                     ))}
-                </FlexRow>
-            </FlexRow>
+                </LayoutFlex>
+            </LayoutFlex>
         )
     }
     {
         notFor.length > 0 && (
-            <FlexRow>
+            <LayoutFlex>
                 <h4 class="dd-group-header">Not For:</h4>
-                <FlexRow tag="ul">
+                <LayoutFlex tag="ul">
                     {notFor.map(item => (
                         <li class="dd-item">{item}</li>
                     ))}
-                </FlexRow>
-            </FlexRow>
+                </LayoutFlex>
+            </LayoutFlex>
         )
     }
 </div>

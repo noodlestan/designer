@@ -3,7 +3,7 @@ title: SpaceVizName
 slug: api/designer-shows/Types/SpaceVizName
 ---
 
-import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
@@ -26,24 +26,16 @@ setting the `viz` [prop](/components/Astro/Props#-viz-true-boolean--string) to o
 
 ### `bar-h` (default)
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Space Unit" size="xs" viz="bar-h" />
-</FlexStack>
+<ShowDecision store={store} d="Space Unit" size="xs" viz="bar-h" />
 
 ### `bar-v`
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Textarea Maximum Height" size="s" viz="bar-v" />
-</FlexStack>
+<ShowDecision store={store} d="Textarea Maximum Height" size="s" viz="bar-v" />
 
 ### `square`
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Card Thumb Minimum Size" size="s" viz="square" />
-</FlexStack>
+<ShowDecision store={store} d="Card Thumb Minimum Size" size="s" viz="square" />
 
 ### `circle`
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Avatar Minimum Size" size="s" viz="circle" />
-</FlexStack>
+<ShowDecision store={store} d="Avatar Minimum Size" size="s" viz="circle" />

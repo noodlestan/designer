@@ -3,8 +3,7 @@ title: ColorVizName
 slug: api/designer-shows/Types/ColorVizName
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
@@ -35,9 +34,7 @@ No options.
 <ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
 ```
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
-</FlexStack>
+<ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
 
 ### `fg`
 
@@ -53,15 +50,13 @@ Render the decision value as the foreground content color.
 />
 ```
 
-<CardGrid>
-    <ShowDecision
-        store={store}
-        d="Brand Pink"
-        size="m"
-        viz="fg"
-        options={{ contrast: 'oklch(24% 0.08 257)' }}
-    />
-</CardGrid>
+<ShowDecision
+    store={store}
+    d="Brand Pink"
+    size="m"
+    viz="fg"
+    options={{ contrast: 'oklch(24% 0.08 257)' }}
+/>
 
 Refer to [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions/) for details on options.
 
@@ -79,14 +74,12 @@ Render the decision value as the background with custom element(s) on top.
 />
 ```
 
-<CardGrid>
-    <ShowDecision
-        store={store}
-        d="Action Color"
-        size="m"
-        viz="bg"
-        options={{ mode: 'text', contrast: 'oklch(99% 0.002 345)' }}
-    />
-</CardGrid>
+<ShowDecision
+    store={store}
+    d="Action Color"
+    size="m"
+    viz="bg"
+    options={{ mode: 'text', contrast: 'oklch(99% 0.002 345)' }}
+/>
 
 Refer to [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions/) for details on options.

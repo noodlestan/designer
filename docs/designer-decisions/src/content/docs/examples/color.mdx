@@ -5,8 +5,7 @@ sidebar:
     title: Color
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import { FlexRow, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { LayoutGrid, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
 
@@ -28,16 +27,14 @@ export const store = await decisionLoader();
 
 </details>
 
-<FlexRow vpad>
-    <ShowDecision
-        store={store}
-        d="Brand Color Set"
-        size="m"
-        value={false}
-        viz="fg"
-        options={{ contrast: '#ccc' }}
-    />
-</FlexRow>
+<ShowDecision
+    store={store}
+    d="Brand Color Set"
+    size="m"
+    value={false}
+    viz="fg"
+    options={{ contrast: '#ccc' }}
+/>
 
 <details>
 <summary>ColorSet (different color-channels shown)</summary>
@@ -49,10 +46,10 @@ export const store = await decisionLoader();
 
 </details>
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision store={store} d="Pink Palette" value="rgb" />
     <ShowDecision store={store} d="Heat Map Color Set" value="hsl" />
-</CardGrid>
+</LayoutGrid>
 
 <details>
 <summary>ColorSet (foreground vs background viz)</summary>
@@ -76,7 +73,7 @@ export const store = await decisionLoader();
 
 </details>
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision
         store={store}
         d="Content Foreground Scale"
@@ -91,7 +88,7 @@ export const store = await decisionLoader();
         viz="bg"
         options={{ contrast: 'oklch(83% 0.02 0deg)' }}
     />
-</CardGrid>
+</LayoutGrid>
 
 ## Color values
 
@@ -117,7 +114,7 @@ export const store = await decisionLoader();
 
 </details>
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision
         store={store}
         d="Action Color"
@@ -132,7 +129,7 @@ export const store = await decisionLoader();
         viz="fg"
         options={{ contrast: 'oklch(48% 0.15 0deg) ' }}
     />
-</CardGrid>
+</LayoutGrid>
 
 ## Cards
 
@@ -145,9 +142,7 @@ export const store = await decisionLoader();
 
 </details>
 
-<div>
-    <ShowDecisionCard store={store} d="Action Color" viz="bg" />
-</div>
+<ShowDecisionCard store={store} d="Action Color" viz="bg" />
 
 <details>
 <summary>ColorSet (DecisionCard, viz hidden, model and params shown)</summary>
@@ -158,6 +153,4 @@ export const store = await decisionLoader();
 
 </details>
 
-<div>
-    <ShowDecisionCard store={store} d="Heat Map Color Set" viz={false} model params />
-</div>
+<ShowDecisionCard store={store} d="Heat Map Color Set" viz={false} model params />

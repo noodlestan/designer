@@ -6,10 +6,10 @@ sidebar:
     order: 40
 ---
 
-import { Aside, CardGrid, Code, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { Aside, Code, FileTree } from '@astrojs/starlight/components';
 import {
-    FlexStack,
-    FlexRow,
+    LayoutCentered,
+    LayoutGrid,
     ShowDecision,
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
@@ -30,10 +30,10 @@ using the [built-in components](/components) provided by the
 <ShowDecision store={store} d="Sizing Space Scale" size="xs" />
 ```
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision store={store} d="Brand Color Set" size="xs" value="hsl" />
     <ShowDecision store={store} d="Sizing Space Scale" size="xs" />
-</CardGrid>
+</LayoutGrid>
 
 ## Setup
 
@@ -138,10 +138,10 @@ export const store = await loader();
 <ShowDecision store={store} d="Pink Palette" size="xs" />
 ```
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision store={store} d="Action Color" size="m" />
     <ShowDecision store={store} d="Pink Palette" size="xs" />
-</CardGrid>
+</LayoutGrid>
 
 In the [Components reference](/components) you will find a comprehensive set of components
 for rendering decisions in different scenarios and layouts.
@@ -153,14 +153,10 @@ component composes decision visualization, value, and details in a single layout
 // src/content/page.mdx
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-<CardGrid>
-    <ShowDecisionCard d="Action Color" loader={decisionLoader} />
-</CardGrid>
+<ShowDecisionCard store={store} d="Action Color" />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" />
-</FlexStack>
+<ShowDecisionCard store={store} d="Action Color" />
 
 ## Customizing value and visualization
 
@@ -183,9 +179,7 @@ can display the color value in one or more color spaces.
 <ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
 ```
 
-<CardGrid>
-    <ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
-</CardGrid>
+<ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
 
 ### Hiding the decision value
 
@@ -197,10 +191,10 @@ under a custom label.
 <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
 ```
 
-<FlexStack vpad>
+<LayoutCentered>
     <label>Brand Blue</label>
     <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
-</FlexStack>
+</LayoutCentered>
 
 ### Choosing a different visualization
 
@@ -216,10 +210,10 @@ can represent a space value with a few different shapes.
 <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
 ```
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
     <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
-</CardGrid>
+</LayoutGrid>
 
 ### Configuring visualization options
 
@@ -238,7 +232,7 @@ custom `content` for the first one, and switch to `text` mode on the second.
 <ShowDecision ... viz="bg" options={{ contrast: '#FFFFFF', mode: 'text' }} />
 ```
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision
         store={store}
         d="Action Color"
@@ -253,7 +247,7 @@ custom `content` for the first one, and switch to `text` mode on the second.
         viz="bg"
         options={{ contrast: '#FFFFFF', mode: 'text' }}
     />
-</CardGrid>
+</LayoutGrid>
 
 ### Hiding the visualization
 
@@ -264,9 +258,9 @@ next to a custom label.
 RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
 ```
 
-<FlexRow align="center" vpad>
-    RGB: <ShowDecision store={store} d="Brand Pink" viz={false} />
-</FlexRow>
+<LayoutCentered pad="l">
+    RGB <ShowDecision store={store} d="Brand Pink" viz={false} />
+</LayoutCentered>
 
 ## See Also
 

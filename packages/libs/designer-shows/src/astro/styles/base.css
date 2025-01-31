@@ -21,6 +21,10 @@
     --dd-gap-m: var(--dd-space-m);
     --dd-gap-l: var(--dd-space-l);
 
+    --dd-padd-s: var(--dd-space-s);
+    --dd-padd-m: var(--dd-space-m);
+    --dd-padd-l: var(--dd-space-l);
+
     /* WIP rename to --dd-gap-base */
     --dd-space-gap: var(--dd-gap-m);
 

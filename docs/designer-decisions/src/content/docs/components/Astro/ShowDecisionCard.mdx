@@ -6,8 +6,8 @@ sidebar:
     order: 20
 ---
 
-import { Card, Aside } from '@astrojs/starlight/components';
-import { FlexStack, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { Aside } from '@astrojs/starlight/components';
+import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../decisions';
 
@@ -22,9 +22,7 @@ according to the decision type, along with any decision details you might want t
 
 By default it renders only the decision **description** and **usage** guidelines.
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" />
-</FlexStack>
+<ShowDecisionCard store={store} d="Action Color" />
 
 ## Composes
 
@@ -59,9 +57,7 @@ and at the same time:
 <ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
-</FlexStack>
+<ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
 
 ### ༶ `name` (true): boolean
 
@@ -71,9 +67,7 @@ Provide this flag to hide the decision's name.
 <ShowDecisionCard store={store} d="Space Unit" name={false} />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Space Unit" name={false} />
-</FlexStack>
+<ShowDecisionCard store={store} d="Space Unit" name={false} />
 
 ### ༶ `description` (true): boolean
 
@@ -82,8 +76,6 @@ Provide this flag to hide the decision's description.
 ```mdx
 <ShowDecisionCard store={store} d="Action Color" description={false} />
 ```
-
-<FlexStack vpad></FlexStack>
 
 <ShowDecisionCard store={store} d="Action Color" description={false} />
 
@@ -95,10 +87,6 @@ Provide this flag to hide the decision usage guidelines.
 <ShowDecisionCard store={store} d="Action Color" usage={false} />
 ```
 
-<FlexStack vpad></FlexStack>
-
-<ShowDecisionCard store={store} d="Action Color" usage={false} />
-
 ### ༶ `model` (optional): boolean
 
 ### ༶ `params` (optional): boolean
@@ -109,9 +97,7 @@ Provide these flag to display the decision model and input params at the bottom 
 <ShowDecisionCard store={store} d="Action Color" model params />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" model params />
-</FlexStack>
+<ShowDecisionCard store={store} d="Action Color" model params />
 
 ### ༶ `contexts` (optional): boolean
 
@@ -121,9 +107,7 @@ Provide this flag to display the decision's contexts at the bottom of the card
 <ShowDecisionCard store={store} d="Action Color" contexts />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" contexts />
-</FlexStack>
+<ShowDecisionCard store={store} d="Action Color" contexts />
 
 ### ༶ `data` (optional): boolean
 
@@ -133,6 +117,4 @@ Provide this flag to display the decision's raw data at the bottom of the card
 <ShowDecisionCard store={store} d="Action Color" data />
 ```
 
-<FlexStack vpad>
-    <ShowDecisionCard store={store} d="Action Color" data />
-</FlexStack>
+<ShowDecisionCard store={store} d="Action Color" data />

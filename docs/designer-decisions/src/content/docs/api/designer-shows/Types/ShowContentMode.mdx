@@ -3,8 +3,7 @@ title: ShowContentMode
 slug: api/designer-shows/Types/ShowContentMode
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import { FlexStack, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
@@ -39,9 +38,7 @@ You can override the content via
 <ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
 ```
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
-</FlexStack>
+<ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
 
 ### `text`
 
@@ -54,6 +51,4 @@ You can override the content via
 <ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
 ```
 
-<CardGrid>
-    <ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
-</CardGrid>
+<ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />

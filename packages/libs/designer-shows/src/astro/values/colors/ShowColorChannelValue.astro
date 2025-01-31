@@ -7,7 +7,7 @@ import type {
 } from '@noodlestan/designer-decisions';
 
 import type { ShowValueProps } from '../../types';
-import { FlexStack } from '../../layouts';
+import { LayoutStack } from '../../layouts';
 import { DecisionValueContainer } from '../../atoms';
 import { ColorSwatchViz } from '../../viz';
 
@@ -37,7 +37,7 @@ const channelColor = channelV?.toColor(channelToColors[channel]);
     {
         value && channelV !== undefined && (
             <DecisionValueContainer>
-                <FlexStack>{channelValue}</FlexStack>
+                <LayoutStack>{channelValue}</LayoutStack>
             </DecisionValueContainer>
         )
     }

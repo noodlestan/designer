@@ -6,8 +6,7 @@ sidebar:
     order: 10
 ---
 
-import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
-import { FlexStack, Table, TableRow, ShowDecision } from '@noodlestan/designer-shows/astro';
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { TableDecisionComponents } from './_partials';
 import { decisionLoader } from '../../../../decisions';
@@ -29,9 +28,7 @@ A [color value](/decision-models/color-value) decision:
 <ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
 ```
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
-</FlexStack>
+<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
 
 A [space scale](/decision-models/space-scale) decision:
 
@@ -39,9 +36,7 @@ A [space scale](/decision-models/space-scale) decision:
 <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 ```
 
-<FlexStack vpad>
-    <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
-</FlexStack>
+<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 
 ## Composes
 
