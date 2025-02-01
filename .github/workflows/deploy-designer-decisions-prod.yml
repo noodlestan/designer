@@ -1,12 +1,6 @@
 name: Deploy Designer Decisions (Production)
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'packages/libs/**'
-      - 'docs/designer-decisions/**'
   workflow_dispatch:
 
 jobs:

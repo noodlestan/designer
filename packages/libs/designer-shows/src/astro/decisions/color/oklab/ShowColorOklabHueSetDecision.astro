@@ -1,0 +1,30 @@
+---
+import { isColorOklabHueSetDecision } from '@noodlestan/designer-decisions';
+
+import type { ShowDecisionProps } from '../../../types';
+import { LayoutStack } from '../../../layouts';
+import { ShowColorChannelValue } from '../../../values';
+import { ShowDecisionUnavailable } from '../../unavailable';
+
+type Props = ShowDecisionProps;
+
+const { store, d, size, ...rest } = Astro.props;
+
+const [, decision] = store.decision({ $name: d });
+const hueSet = decision && isColorOklabHueSetDecision(decision) ? decision.produce() : undefined;
+
+const items = hueSet?.get().items();
+
+const s = size || 's';
+---
+
+{
+    decision && (
+        <LayoutStack>
+            {items?.map(item => (
+                <ShowColorChannelValue channel="oklab-hue" v={item} size={s} {...rest} />
+            ))}
+        </LayoutStack>
+    )
+}
+{!decision && <ShowDecisionUnavailable d={d as string} />}
