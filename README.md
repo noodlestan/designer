@@ -97,7 +97,7 @@ Commit changes. Make sure `package-lock.json` is updated and included.
 ```
 git checkout -b v0-0-8
 npm install
-git commit -am 'v0.0.8'
+git commit -am 'Publish version v0.0.8'
 git push origin v0-0-8
 ```
 
