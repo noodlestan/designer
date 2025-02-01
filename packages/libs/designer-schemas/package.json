@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-schemas",
-  "version": "v0.0.10",
+  "version": "v0.0.11",
   "description": "A collection of JSON schemas to validate design decision inputs.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.10"
+    "@noodlestan/designer-decisions": "v0.0.11"
   },
   "peerDependencies": {},
   "devDependencies": {

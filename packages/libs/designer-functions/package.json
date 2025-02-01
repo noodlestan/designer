@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-functions",
-  "version": "v0.0.10",
+  "version": "v0.0.11",
   "description": "A library of functions to load, validate, and manipulate design decisions.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.10",
+    "@noodlestan/designer-decisions": "v0.0.11",
     "ajv": "8.17.1",
     "chroma-js": "3.1.2"
   },
