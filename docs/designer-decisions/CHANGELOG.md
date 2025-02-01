@@ -1,5 +1,18 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.10] - 2025-02-01
+
+### Added
+
+- Create oklch components #7
+- Add Layout\* components #105
+- Add starlight styles to astro integration #107
+
+### Docs
+
+- Improve code blocks in docs with expressive code collapse plugin #117 #115
+- Add "warning: experimental" banners to homepage and API index #124
+
 ## [0.0.9] - 2025-01-30
 
 ### Changed
