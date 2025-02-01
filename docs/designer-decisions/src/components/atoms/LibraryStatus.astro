@@ -1,0 +1,11 @@
+---
+import { Aside } from '@astrojs/starlight/components';
+import { PACKAGE_VERSION } from '../../constants';
+
+export const version = PACKAGE_VERSION;
+---
+
+<Aside type="caution" title={`Experimental ${version}`}>
+    Designer Decisions APIs are still in development and subject to change. Follow our progress on
+    the <a href="https://github.com/orgs/noodlestan/projects/3">GitHub project</a>.
+</Aside>

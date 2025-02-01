@@ -1,15 +1,20 @@
 ---
-title: Packages
+title: API Reference
 slug: api
 description: Overview of `noodlestan/designer=*` packages.
 sidebar:
     order: 0
-    label: All Packages
+    label: Index
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 
+import { LibraryStatus } from '../../../components/atoms';
 import { href } from '../../../mdx';
+
+<LibraryStatus />
+
+## Packages
 
 <LinkCard title="@noodlestan/designer-decisions" href={href('/api/designer-decisions')} />
 <LinkCard title="@noodlestan/designer-functions" href={href('/api/designer-functions')} />
