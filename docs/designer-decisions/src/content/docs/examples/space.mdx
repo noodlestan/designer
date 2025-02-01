@@ -5,8 +5,12 @@ sidebar:
     title: Space
 ---
 
-import { CardGrid } from '@astrojs/starlight/components';
-import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import {
+    LayoutCentered,
+    LayoutGrid,
+    ShowDecision,
+    ShowDecisionCard,
+} from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../decisions';
 
@@ -23,9 +27,9 @@ export const store = await decisionLoader();
 
 </details>
 
-<div>
+<LayoutCentered>
     <ShowDecision store={store} d="Space Unit" model />
-</div>
+</LayoutCentered>
 
 ## Space scales
 
@@ -38,9 +42,7 @@ export const store = await decisionLoader();
 
 </details>
 
-<CardGrid>
-    <ShowDecision store={store} d="Layout Space Scale" size="xs" />
-</CardGrid>
+<ShowDecision store={store} d="Layout Space Scale" size="xs" />
 
 <details>
 <summary>SpaceScale (vertical bar viz)</summary>
@@ -51,9 +53,7 @@ export const store = await decisionLoader();
 
 </details>
 
-<CardGrid>
-    <ShowDecision store={store} d="Layout Rhythm Scale" viz="circle" />
-</CardGrid>
+<ShowDecision store={store} d="Layout Rhythm Scale" viz="circle" />
 
 <details>
 <summary>SpaceScale (square viz vs circle viz)</summary>
@@ -65,10 +65,10 @@ export const store = await decisionLoader();
 
 </details>
 
-<CardGrid>
+<LayoutGrid>
     <ShowDecision store={store} d="Sizing Space Scale" viz="square" />
     <ShowDecision store={store} d="Sizing Space Scale" viz="circle" />
-</CardGrid>
+</LayoutGrid>
 
 ## Cards
 
@@ -81,6 +81,4 @@ export const store = await decisionLoader();
 
 </details>
 
-<div>
-    <ShowDecisionCard store={store} d="Space Unit" model params />
-</div>
+<ShowDecisionCard store={store} d="Space Unit" model params />

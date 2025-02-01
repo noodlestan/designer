@@ -1,0 +1,11 @@
+---
+import LayoutFlex, { LayoutFlexProps } from './LayoutFlex.astro';
+
+type Props = Omit<LayoutFlexProps, 'direction'>;
+
+const props = Astro.props;
+---
+
+<LayoutFlex {...props} direction="column">
+    <slot />
+</LayoutFlex>

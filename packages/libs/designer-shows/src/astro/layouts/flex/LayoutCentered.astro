@@ -1,0 +1,47 @@
+---
+type Props = {
+    align?: 'start' | 'center';
+    pad?: 's' | 'm' | 'l';
+    tag?: 'div' | 'ul' | 'li';
+};
+
+const { align = 'start', pad = 'm', tag: Element = 'div' } = Astro.props;
+---
+
+<Element class:list={['dd-layout-centered', align, `pad-${pad}`]}>
+    <slot />
+</Element>
+
+<style>
+    .dd-layout-centered {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: var(--_layout-centered-pad);
+        list-style: none;
+    }
+
+    .dd-layout-centered > :global(*) {
+        margin: 0 !important;
+    }
+
+    .center {
+        align-items: center;
+    }
+
+    .pad-s {
+        --_layout-centered-pad: var(--dd-pad-s);
+    }
+
+    .pad-m {
+        --_layout-centered-pad: var(--dd-pad-m);
+    }
+
+    .pad-l {
+        --_layout-centered-pad: var(--dd-pad-l);
+    }
+
+    .wrap {
+        flex-wrap: wrap;
+    }
+</style>

@@ -1,0 +1,18 @@
+---
+import LayoutFlex, { LayoutFlexProps } from '../flex/LayoutFlex.astro';
+import LayoutGrid, { LayoutGridProps } from '../grid/LayoutGrid.astro';
+
+type Props = Omit<LayoutFlexProps, 'direction'> &
+    LayoutGridProps & {
+        layout?: 'grid' | 'row' | 'column';
+    };
+
+const { layout = 'grid', ...rest } = Astro.props;
+const direction: LayoutFlexProps['direction'] = layout !== 'grid' ? layout : undefined;
+
+const Element = layout === 'grid' ? LayoutGrid : LayoutFlex;
+---
+
+<Element {...rest} direction={direction}>
+    <slot />
+</Element>

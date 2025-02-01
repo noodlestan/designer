@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { Badge } from '@astrojs/starlight/components';
+import { Code, Badge } from '@astrojs/starlight/components';
 import type { DecisionModelMeta } from '@noodlestan/designer-decisions';
-import { FlexStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { LayoutStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { sidebar } from '../../navigation/sidebar';
 import { decisionLoader } from '../../decisions';
@@ -79,10 +79,10 @@ const frontmatter = {
                 <h5 id="schema">🚧 Schema</h5>
                 {decisionByModel(m) && (
                     <h5 id="sample-data">Sample data</h5>
-                    <pre>{decisionDataByModel(m)}</pre>
-                    <FlexStack vpad>
+                    <Code lang="json" code={decisionDataByModel(m) || 'N/A'} />
+                    <LayoutStack>
                         <ShowDecisionCard store={store} d={decisionByModel(m).name} model params />
-                    </FlexStack>
+                    </LayoutStack>
                 )}
             </div>
         ))

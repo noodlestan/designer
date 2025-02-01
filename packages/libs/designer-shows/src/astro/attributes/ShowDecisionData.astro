@@ -1,6 +1,8 @@
 ---
 import { type ShowDataProps } from '../types';
 
+import { Code } from 'astro-expressive-code/components';
+
 type Props = ShowDataProps;
 
 const { store, d } = Astro.props;
@@ -10,12 +12,13 @@ const json = JSON.stringify(decision?.inputs()[0], null, 2); // WIP match contex
 ---
 
 <div class="dd-decision-data">
-    <pre><code>{json}</code></pre>
+    <pre class="pre"><Code lang="json" code={json} /></pre>
 </div>
 
 <style>
-    .dd-decision-data pre {
-        max-height: var(--dd-data-max-height);
+    .dd-decision-data .pre {
         overflow: auto;
+        max-height: var(--dd-data-max-height);
+        padding: 0;
     }
 </style>

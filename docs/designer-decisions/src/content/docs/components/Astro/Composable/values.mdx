@@ -7,7 +7,7 @@ sidebar:
     label: Decision Values
 ---
 
-import { CardGrid, Aside } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 import { ShowColorValue, ShowSpaceValue } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
@@ -68,9 +68,7 @@ export const colorValue = createColorValue(context, '#ff0000');
 <ShowColorValue size="s" v={colorValue} />
 ```
 
-<CardGrid>
-    <ShowColorValue size="s" v={colorValue} />
-</CardGrid>
+<ShowColorValue size="s" v={colorValue} />
 
 ### ShowColorChannel
 
@@ -93,6 +91,4 @@ export const spaceValue = createSpaceValue(context, 12);
 <ShowSpaceValue size="s" v={spaceValue} />
 ```
 
-<CardGrid>
-    <ShowSpaceValue size="s" v={spaceValue} />
-</CardGrid>
+<ShowSpaceValue size="s" v={spaceValue} />
