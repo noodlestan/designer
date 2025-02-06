@@ -11,7 +11,7 @@ describe('createSpaceScaleExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: SpaceScaleExplicitInput['params'] = {
-            values: [32, 64, 128],
+            values: [32.111, 64, 128],
         };
 
         it('should create a scale of the expected size', () => {

@@ -25,4 +25,5 @@ export type AnchoredColorListParams = {
         modifier: ColorModifier;
         steps: number;
     };
+    precision?: number;
 };

@@ -11,7 +11,7 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBHueSetExplicitInput['params'] = {
-            values: [330, 350, 370],
+            values: [330.111, 350, 370],
         };
 
         it('should create a scale of the expected size', () => {

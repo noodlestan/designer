@@ -15,7 +15,7 @@ describe('createSpaceScaleAnchoredModel()', () => {
             anchor: 50,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -10 },
+                modifier: { mode: 'linear', by: -0.04 },
             },
             after: {
                 steps: 3,
@@ -33,7 +33,7 @@ describe('createSpaceScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(30 + 'px');
+            expect(result.get().first()?.get()).toEqual(49.92 + 'px');
             expect(result.get().item(2)?.get()).toEqual(params.anchor + 'px');
             expect(result.get().last()?.get()).toEqual(110 + 'px');
         });

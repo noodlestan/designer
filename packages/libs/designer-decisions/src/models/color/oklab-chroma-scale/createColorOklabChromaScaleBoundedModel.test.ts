@@ -10,10 +10,10 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
 
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
-        const expectedLength = 9;
+        const expectedLength = 7;
         const params: ColorOklabChromaScaleBoundedInput['params'] = {
-            from: 0.1,
-            to: 0.9,
+            from: 0.11,
+            to: 0.99,
             steps: expectedLength - 2,
         };
 
@@ -28,7 +28,7 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(params.from);
-            expect(result.get().item(4)?.get()).toEqual(0.3);
+            expect(result.get().item(4)?.get()).toEqual(0.37);
             expect(result.get().last()?.get()).toEqual(0.5);
         });
     });

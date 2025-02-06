@@ -21,6 +21,7 @@ export type ColorSRGBSaturationScaleBoundedInput = InputRecord & {
         from: ColorSRGBSaturationInput;
         to: ColorSRGBSaturationInput;
         steps: number;
+        precision?: number;
     };
 };
 

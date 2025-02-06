@@ -21,6 +21,7 @@ export type SpaceScaleBoundedInput = InputRecord & {
         from: SpaceValueInput;
         to: SpaceValueInput;
         steps: number;
+        precision?: number;
     };
 };
 

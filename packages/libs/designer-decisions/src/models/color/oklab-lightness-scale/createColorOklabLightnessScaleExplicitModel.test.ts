@@ -11,7 +11,7 @@ describe('createColorOklabLightnessScaleExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabLightnessScaleExplicitInput['params'] = {
-            values: [0.1, 0.5, 1.1],
+            values: [0.111, 0.5, 1.1],
         };
 
         it('should create a scale of the expected size', () => {

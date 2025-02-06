@@ -21,6 +21,7 @@ export type ColorSRGBHueSetBoundedInput = InputRecord & {
         from: ColorSRGBHueInput;
         to: ColorSRGBHueInput;
         steps: number;
+        precision?: number;
     };
 };
 

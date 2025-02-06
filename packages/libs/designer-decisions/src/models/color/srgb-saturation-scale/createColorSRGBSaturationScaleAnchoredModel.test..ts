@@ -15,7 +15,7 @@ describe('createColorSRGBSaturationScaleAnchoredModel()', () => {
             anchor: 0.5,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -0.1 },
+                modifier: { mode: 'linear', by: -0.01 },
             },
             after: {
                 steps: 3,
@@ -33,7 +33,7 @@ describe('createColorSRGBSaturationScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(0.3);
+            expect(result.get().first()?.get()).toEqual(0.48);
             expect(result.get().item(2)?.get()).toEqual(params.anchor);
             expect(result.get().last()?.get()).toEqual(1);
         });

@@ -8,6 +8,7 @@ sidebar:
 
 import { Aside, Code, FileTree } from '@astrojs/starlight/components';
 import {
+    LayoutStack,
     LayoutCentered,
     LayoutGrid,
     ShowDecision,
@@ -174,10 +175,10 @@ In this example we are hiding the decision value and rendering its visualization
 <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
 ```
 
-<LayoutCentered>
+<LayoutStack>
     <label>Brand Blue</label>
     <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
-</LayoutCentered>
+</LayoutStack>
 
 ### Choosing a different visualization
 

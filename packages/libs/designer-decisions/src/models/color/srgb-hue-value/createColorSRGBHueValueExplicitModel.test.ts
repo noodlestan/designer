@@ -11,7 +11,7 @@ describe('createColorSRGBHueValueExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBHueValueExplicitInput['params'] = {
-            value: 330,
+            value: 330.111,
         };
 
         it('should create a value', () => {

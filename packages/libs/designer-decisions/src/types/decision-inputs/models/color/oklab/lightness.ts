@@ -21,6 +21,7 @@ export type ColorOklabLightnessScaleBoundedInput = InputRecord & {
         from: ColorOklabLightnessInput;
         to: ColorOklabLightnessInput;
         steps: number;
+        precision?: number;
     };
 };
 

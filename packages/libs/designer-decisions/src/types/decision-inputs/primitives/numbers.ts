@@ -22,6 +22,7 @@ export type AnchoredNumberSeriesParams = {
         steps: number;
         modifier: NumberModifier;
     };
+    precision?: number;
 };
 
 export type NormalNumber = number;

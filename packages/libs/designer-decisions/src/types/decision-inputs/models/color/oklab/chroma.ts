@@ -21,6 +21,7 @@ export type ColorOklabChromaScaleBoundedInput = InputRecord & {
         from: ColorOklabChromaInput;
         to: ColorOklabChromaInput;
         steps: number;
+        precision?: number;
     };
 };
 

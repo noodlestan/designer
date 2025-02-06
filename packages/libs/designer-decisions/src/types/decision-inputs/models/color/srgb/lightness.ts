@@ -21,6 +21,7 @@ export type ColorSRGBLightnessScaleBoundedInput = InputRecord & {
         from: ColorSRGBLightnessInput;
         to: ColorSRGBLightnessInput;
         steps: number;
+        precision?: number;
     };
 };
 

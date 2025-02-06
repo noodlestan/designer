@@ -11,7 +11,7 @@ describe('createColorOklabChromaScaleExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabChromaScaleExplicitInput['params'] = {
-            values: [0.1, 0.5, 0.9],
+            values: [0.111, 0.5, 0.9],
         };
 
         it('should create a scale of the expected size', () => {

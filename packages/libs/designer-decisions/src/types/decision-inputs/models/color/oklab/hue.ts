@@ -21,6 +21,7 @@ export type ColorOklabHueSetBoundedInput = InputRecord & {
         from: ColorOklabHueInput;
         to: ColorOklabHueInput;
         steps: number;
+        precision?: number;
     };
 };
 

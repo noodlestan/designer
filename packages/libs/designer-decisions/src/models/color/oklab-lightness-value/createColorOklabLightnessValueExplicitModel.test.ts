@@ -11,7 +11,7 @@ describe('createColorOklabLightnessValueExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabLightnessValueExplicitInput['params'] = {
-            value: 0.5,
+            value: 0.511,
         };
 
         it('should create a value', () => {

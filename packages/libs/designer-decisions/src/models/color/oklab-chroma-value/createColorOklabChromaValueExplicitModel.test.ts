@@ -11,7 +11,7 @@ describe('createColorOklabChromaValueExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabChromaValueExplicitInput['params'] = {
-            value: 0.3,
+            value: 0.311,
         };
 
         it('should create a value', () => {

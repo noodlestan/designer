@@ -15,7 +15,7 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
             anchor: 0.2,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -0.05 },
+                modifier: { mode: 'linear', by: -0.005 },
             },
             after: {
                 steps: 3,
@@ -33,7 +33,7 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(0.1);
+            expect(result.get().first()?.get()).toEqual(0.19);
             expect(result.get().item(2)?.get()).toEqual(params.anchor);
             expect(result.get().last()?.get()).toEqual(0.5);
         });

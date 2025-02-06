@@ -15,7 +15,7 @@ describe('createColorSRGBHueSetAnchoredModel()', () => {
             anchor: 330,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -10 },
+                modifier: { mode: 'linear', by: -0.01 },
             },
             after: {
                 steps: 3,
@@ -33,7 +33,7 @@ describe('createColorSRGBHueSetAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(310);
+            expect(result.get().first()?.get()).toEqual(329.98);
             expect(result.get().item(2)?.get()).toEqual(params.anchor);
             expect(result.get().last()?.get()).toEqual(360);
         });

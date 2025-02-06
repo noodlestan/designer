@@ -10,10 +10,10 @@ describe('createSpaceScaleBoundedModel()', () => {
 
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
-        const expectedLength = 9;
+        const expectedLength = 3;
         const params: SpaceScaleBoundedInput['params'] = {
             from: 10,
-            to: 90,
+            to: 12.25,
             steps: expectedLength - 2,
         };
 
@@ -28,7 +28,7 @@ describe('createSpaceScaleBoundedModel()', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(params.from + 'px');
-            expect(result.get().item(4)?.get()).toEqual('50px');
+            expect(result.get().item(1)?.get()).toEqual('11.125px');
             expect(result.get().last()?.get()).toEqual(params.to + 'px');
         });
     });

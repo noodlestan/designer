@@ -14,6 +14,7 @@ export type ColorSetBoundedInput = InputRecord & {
         from: ColorValueInput;
         to: ColorValueInput;
         steps: number;
+        precision?: number;
     };
 };
 
