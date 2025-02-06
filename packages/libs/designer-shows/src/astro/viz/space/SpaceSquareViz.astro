@@ -11,12 +11,14 @@ const vWithUnits = `${v}${units}`;
 
 <div class:list={['dd-space-square-viz']}><div class="square"></div></div>
 
-<style define:vars={{ size: vWithUnits }}>
+<style define:vars={{ __size: vWithUnits }}>
     .dd-space-square-viz {
-        min-width: var(--size);
-        max-width: var(--size);
-        min-height: var(--size);
-        max-height: var(--size);
+        width: var(--__size);
+        min-width: var(--__size);
+        max-width: var(--__size);
+        height: var(--__size);
+        min-height: var(--__size);
+        max-height: var(--__size);
     }
 
     .square {

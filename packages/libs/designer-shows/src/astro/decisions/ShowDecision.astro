@@ -1,9 +1,9 @@
 ---
-import { type ShowDecisionProps, type ShowValueProps, type ShowVizProps } from '../types';
+import { type DecisionTypeComponentProps } from '../types';
 import { getDecisionComponentMap } from '../meta';
 import { ShowDecisionTypeUnavailable, ShowDecisionUnavailable } from './unavailable';
 
-type Props = ShowDecisionProps & ShowValueProps & ShowVizProps;
+type Props = DecisionTypeComponentProps;
 
 const { store, d, ...rest } = Astro.props;
 

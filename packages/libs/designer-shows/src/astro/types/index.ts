@@ -1,9 +1,18 @@
 import type { ColorValue, SpaceValue } from '@noodlestan/designer-decisions';
 import type { StaticDecisionStore } from '@noodlestan/designer-functions';
 
+import type { LayoutDynamicProps } from '../layouts';
+
+export type ShowDecisionLayoutName = LayoutDynamicProps['layout'];
+
+export type ShowDecisionLayout =
+    | ShowDecisionLayoutName
+    | [ShowDecisionLayoutName, ShowDecisionLayoutName?];
+
 export type ShowDecisionProps = {
     d: string;
-    store: StaticDecisionStore; // WIP replace with ShowDecisionStore
+    store: StaticDecisionStore;
+    layout?: ShowDecisionLayout;
 };
 
 export type ShowVizSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
@@ -20,9 +29,11 @@ export type ShowValueProps = {
     v?: unknown;
 };
 
-export type DecisionTypeComponent = (
-    props: ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>,
-) => unknown;
+export type DecisionTypeComponentProps = ShowDecisionProps &
+    Omit<ShowValueProps, 'v'> &
+    Omit<ShowVizProps, 'v'>;
+
+export type DecisionTypeComponent = (props: DecisionTypeComponentProps) => unknown;
 export type DecisionValueComponent<T extends object = object> = (
     props: ShowValueProps & T,
 ) => unknown;

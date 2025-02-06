@@ -19,20 +19,18 @@ import { GetInvolved } from '../../../components/atoms';
 
 export const store = await decisionLoader();
 
-This guide explains how to document design decisions and tokens in your documentation
-using the [built-in components](/components) provided by the
-[@noodlestan/designer-shows](/api/designer-shows) package.
+This guide explains how to document design decisions and tokens in your documentation using the [built-in components](/components) provided by the [@noodlestan/designer-shows](/api/designer-shows) package.
 
 **Example:**
 
 ```mdx
-<ShowDecision store={store} d="Brand Color Set" size="xs" value="hsl" />
-<ShowDecision store={store} d="Sizing Space Scale" size="xs" />
+<ShowDecision store={store} d="Brand Color Set" layout="column" size="xs" value="oklch" />
+<ShowDecision store={store} d="Sizing Space Scale" layout="column" size="xs" />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Brand Color Set" size="xs" value="hsl" />
-    <ShowDecision store={store} d="Sizing Space Scale" size="xs" />
+    <ShowDecision store={store} d="Brand Color Set" layout="column" size="xs" value="oklch" />
+    <ShowDecision store={store} d="Sizing Space Scale" layout="column" size="xs" />
 </LayoutGrid>
 
 ## Setup
@@ -62,8 +60,7 @@ npm install @noodlestan/designer-decisions @noodlestan/designer-functions \
 
 Populate your design decisions data source.
 
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data)
-guide, you can simply create one or more JSON files anywhere in your project.
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can simply create one or more JSON files anywhere in your project.
 
 <FileTree>
 
@@ -79,13 +76,9 @@ guide, you can simply create one or more JSON files anywhere in your project.
 
 Create a file to declare the loader.
 
-We will use the _all-in-one_
-[createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader/),
-providing it with:
+We will use the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader/), providing it with:
 
--   The
-    schemas for the built-in decision models
-    https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts
+-   The [schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) for the built-in decision models.
 -   A directory to load decision data from.
 -   A function to resolve the physical location of node modules containing the schemas.
 
@@ -110,9 +103,7 @@ export const loader = createDecisionLoader(
     How to provide a package resolution default?
 </GetInvolved>
 
-The loader is an async function that returns a decision store. We will pass this
-store directly to our Astro components for them to retrieve decision data and
-resolve decision values.
+The loader is an async function that returns a decision store. We will pass this store directly to our Astro components for them to retrieve decision data and resolve decision values.
 
 ```ts
 const store = await loader();
@@ -123,9 +114,7 @@ const decision = store.decision('Action Color');
 
 Retrieve the decision `store` and pass it to the components along with the decision name.
 
-In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/ShowDecision/)
-component to render both a [ColorValueDecision](/decision-models/color-value) and a
-[ColorSetDecision](/decision-models/color-set).
+In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/ShowDecision/) component to render both a [ColorValueDecision](/decision-models/color-value) and a [ColorSetDecision](/decision-models/color-set).
 
 ```mdx
 // src/content/page.mdx
@@ -135,19 +124,17 @@ import { loader } from '../decisions';
 export const store = await loader();
 
 <ShowDecision store={store} d="Action Color" size="m" />
-<ShowDecision store={store} d="Pink Palette" size="xs" />
+<ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
 ```
 
 <LayoutGrid>
     <ShowDecision store={store} d="Action Color" size="m" />
-    <ShowDecision store={store} d="Pink Palette" size="xs" />
+    <ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
 </LayoutGrid>
 
-In the [Components reference](/components) you will find a comprehensive set of components
-for rendering decisions in different scenarios and layouts.
+In the [Components reference](/components) you will find a comprehensive set of components for rendering decisions in different scenarios and layouts.
 
-For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/)
-component composes decision visualization, value, and details in a single layout.
+For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/) component composes decision visualization, value, and details in a single layout.
 
 ```mdx
 // src/content/page.mdx
@@ -160,8 +147,7 @@ import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 ## Customizing value and visualization
 
-All decision components expose [common props](/components/Astro/Props/#valueprops) that
-provide a high degree of control over how the decisions are rendered:
+All decision components expose [common props](/components/Astro/Props/#valueprops) that provide a high degree of control over how the decisions are rendered:
 
 -   `value` - hide or format the decision value
 -   `viz` - hide or configure the visualization
@@ -169,11 +155,9 @@ provide a high degree of control over how the decisions are rendered:
 
 ### Formatting the decision value
 
-With some decision types, you may want to display their value in specific formats. The `value`
-prop is passed down to the specific decision component to control how the value is displayed.
+With some decision types, you may want to display their value in specific formats. The `value` prop is passed down to the specific decision component to control how the value is displayed.
 
-For instance, [Color Decisions](/components/Astro/color) components
-can display the color value in one or more color spaces.
+For instance, [Color Decisions](/components/Astro/color) components can display the color value in one or more color spaces.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
@@ -183,8 +167,7 @@ can display the color value in one or more color spaces.
 
 ### Hiding the decision value
 
-In this example we are hiding the decision value and rendering its visualization
-under a custom label.
+In this example we are hiding the decision value and rendering its visualization under a custom label.
 
 ```mdx
 <label>Brand Blue</label>
@@ -202,8 +185,7 @@ Some decision types can be rendered using different visualizations.
 
 The `viz` prop is passed down to value components to determine which visualization is used.
 
-For instance, [Space Decisions](/components/Astro/space) components
-can represent a space value with a few different shapes.
+For instance, [Space Decisions](/components/Astro/space) components can represent a space value with a few different shapes.
 
 ```mdx
 <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
@@ -221,11 +203,9 @@ can represent a space value with a few different shapes.
 
 Some visualization primitives expose also an `options` prop.
 
-In this example we are rendering the same color decision using two different
-modes: `fg` and `bg`.
+In this example we are rendering the same color decision using two different modes: `fg` and `bg`.
 
-In both cases we are providing a `contrast` color. We also set the
-custom `content` for the first one, and switch to `text` mode on the second.
+In both cases we are providing a `contrast` color. We also set the custom `content` for the first one, and switch to `text` mode on the second.
 
 ```mdx
 <ShowDecision ... viz="fg" options={{ contrast: '#000000', content: 'Hello' }} />
@@ -251,8 +231,7 @@ custom `content` for the first one, and switch to `text` mode on the second.
 
 ### Hiding the visualization
 
-In this example we are hiding the visualization and rendering its value
-next to a custom label.
+In this example we are hiding the visualization and rendering its value next to a custom label.
 
 ```mdx
 RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />

@@ -122,7 +122,9 @@ const items = domain ? types.filter(({ type }) => type.startsWith(domain)) : typ
                     </a>
                 </td>
                 <td>
-                    <a href={`/components/Astro/Composable/Viz#${viz.toLowerCase()}`}>{viz}</a>
+                    <a href={`/components/Astro/Composable/Visualizations#${viz.toLowerCase()}`}>
+                        {viz}
+                    </a>
                 </td>
             </TableRow>
         ))

@@ -11,35 +11,34 @@ const vWithUnits = `${v}${units}`;
 
 <div class:list={['dd-space-bar-v-viz', size]}><div class="block"></div></div>
 
-<style define:vars={{ height: vWithUnits }}>
+<style define:vars={{ __height: vWithUnits }}>
     .dd-space-bar-v-viz {
-        min-height: var(--height);
-        max-height: var(--height);
+        height: var(--__height);
+        min-height: var(--__height);
+        max-height: var(--__height);
+        width: var(--__width);
+        min-width: var(--__width);
+        max-width: var(--__width);
+    }
+
+    .xs {
+        --__width: var(--dd-viz-size-xs);
     }
 
     .s {
-        min-width: var(--dd-viz-size-xs);
-        max-width: var(--dd-viz-size-xs);
-    }
-
-    .s {
-        min-width: var(--dd-viz-size-s);
-        max-width: var(--dd-viz-size-s);
+        --__width: var(--dd-viz-size-s);
     }
 
     .m {
-        min-width: var(--dd-viz-size-m);
-        max-width: var(--dd-viz-size-m);
+        --__width: var(--dd-viz-size-m);
     }
 
     .l {
-        min-width: var(--dd-viz-size-l);
-        max-width: var(--dd-viz-size-l);
+        --__width: var(--dd-viz-size-l);
     }
 
     .xl {
-        min-width: var(--dd-viz-size-xl);
-        max-width: var(--dd-viz-size-xl);
+        --__width: var(--dd-viz-size-xl);
     }
 
     .block {
