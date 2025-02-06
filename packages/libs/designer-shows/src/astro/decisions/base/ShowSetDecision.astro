@@ -1,36 +1,48 @@
 ---
 import { isSetDecision } from '@noodlestan/designer-decisions';
 4;
-import type { ShowDecisionProps, ShowValueProps, ShowVizProps } from '../../types';
+import type {
+    ShowDecisionLayout,
+    ShowDecisionProps,
+    ShowValueProps,
+    ShowVizProps,
+} from '../../types';
 
-import { LayoutFlex, LayoutStack } from '../../layouts';
+import { LayoutDynamic } from '../../layouts';
 import { ShowDecisionUnavailable } from '../unavailable';
 import { getDecisionComponentMap } from '../../meta';
+import { resolveLayout } from '../../helpers/resolveLayout';
 
 type Props = ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>;
 
-const { store, d, size = 's', ...rest } = Astro.props;
+const { store, d, layout, size = 'm', ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
+
 const componentMap = decision && getDecisionComponentMap(decision);
-const { component: ValueComponent, props: valueFixedProps = {} } = componentMap?.value || {};
-const { component: VizComponent, props: vizFixedProps = {} } = componentMap?.viz || {};
+const { component: ValueComponent, props: valueProps = {} } = componentMap?.value || {};
+const { component: VizComponent, props: vizProps = {} } = componentMap?.viz || {};
 
 const set = decision && isSetDecision(decision) ? decision.produce() : undefined;
-
 const items = set?.get().items();
+
+const isSet = decision && isSetDecision(decision);
+const base = (Array.isArray(layout) ? layout[0] : layout) || 'row';
+const flipped = base === 'column' ? 'row' : 'column';
+const defaultLayout: ShowDecisionLayout = isSet ? [base, flipped] : [base];
+const [setLayout, itemLayout] = resolveLayout(layout, defaultLayout);
 ---
 
 {
     decision && (ValueComponent || VizComponent) && (
-        <LayoutStack>
+        <LayoutDynamic layout={setLayout}>
             {items?.map(item => (
-                <LayoutFlex>
-                    {VizComponent && <VizComponent {...rest} size={size} v={item} />}
-                    {ValueComponent && <ValueComponent {...rest} v={item} />}
-                </LayoutFlex>
+                <LayoutDynamic layout={itemLayout} gap="s">
+                    {VizComponent && <VizComponent {...rest} {...vizProps} size={size} v={item} />}
+                    {ValueComponent && <ValueComponent {...rest} {...valueProps} v={item} />}
+                </LayoutDynamic>
             ))}
-        </LayoutStack>
+        </LayoutDynamic>
     )
 }
 {!decision && <ShowDecisionUnavailable d={d} />}

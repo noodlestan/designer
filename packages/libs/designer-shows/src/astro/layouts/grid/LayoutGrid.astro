@@ -19,9 +19,9 @@ const {
     tag: Element = 'div',
 } = Astro.props;
 
-const gap = maybeGap || 's';
+const gap = maybeGap || 'm';
 const hGap = maybeHGap ?? gap;
-const vGap = maybeVGap ?? hGap
+const vGap = maybeVGap ?? hGap;
 
 const style = { '--columns': columns };
 ---
@@ -33,14 +33,11 @@ const style = { '--columns': columns };
 <style>
     .dd-layout-grid {
         display: grid;
+        grid-template-columns: repeat(var(--columns), 1fr);
+        align-items: start;
         row-gap: var(--_layout-grid-h-gap);
         column-gap: var(--_layout-grid-v-gap);
-        grid-template-columns: repeat(var(--columns), 1fr);
         list-style: none;
-    }
-
-    .dd-layout-grid > :global(*) {
-        margin: 0 !important;
     }
 
     .center {

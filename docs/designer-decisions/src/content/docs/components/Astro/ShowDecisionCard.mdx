@@ -33,29 +33,31 @@ This component composes:
 
 ## Props
 
-### ༶ [DecisionProps](/components/Astro/Props): `store` and `d`
+### ༶ [DecisionProps](/components/Astro/Props): `store`, `d` and `layout`
 
-These two **mandatory** props serve to identify and retrieve the decision.
+These two **mandatory** `store` and `d` props serve to identify and retrieve the decision.
 
-### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`, `viz`, and `options`
+The optional `layout` prop controls the flow of multiple items and the value/viz pair.
 
-You can use these props to control how the visualization and value are displayed.
+### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`
 
-<Aside type="note">
-    The common [size](/components/Astro/Props/#-size-auto-showvizsize) prop is not exposed by `
-    <ShowDecisionCard />` and the size is managed internally.
-</Aside>
+This prop control whether the value should be shown and how to format it.
 
-In this example we are rendering a [ColorValueDecision](/decision-models/color-value) and at the same time:
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
--   hiding the visualization;
--   displaying its value in `rgb` and `hsl` formats.
+### ༶ [VizProps](/components/Astro/Props#vizprops): `viz`, `size`, and `options`
+
+These props control whether the visualization should be shown, which specific visualization to show, and how to customize it.
+
+In this example we are rendering a [ColorValueDecision](/decision-models/color-value), hiding its value and increasing the size of the color swatch.
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
+<ShowDecisionCard store={store} d="Action Color" value={false} size="l" />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" viz={false} value={['rgb', 'oklch']} />
+<ShowDecisionCard store={store} d="Action Color" value={false} size="l" />
+
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) for details on available visualizations and options.
 
 ### ༶ `name` (true): boolean
 

@@ -16,13 +16,7 @@ export const store = await decisionLoader();
 <details>
 <summary>ColorSet (foreground viz)</summary>
 ```mdx
-<ShowDecision store={store} d="Brand Color Set" size="m"
-        value={false}
-        viz="fg"
-        options={{ contrast: '#ccc' }}
-
-/>
-
+<ShowDecision store={store} d="Brand Color Set" value={false} size="m"  viz="fg" options={{ contrast: '#ccc' }} />
 ````
 
 </details>
@@ -30,25 +24,25 @@ export const store = await decisionLoader();
 <ShowDecision
     store={store}
     d="Brand Color Set"
+    layout="row"
     size="m"
-    value={false}
     viz="fg"
     options={{ contrast: '#ccc' }}
 />
 
 <details>
-<summary>ColorSet (different color-channels shown)</summary>
+<summary>ColorSet (vertical layout / channels shown)</summary>
 
 ```mdx
-<ShowDecision store={store} d="Pink Palette" value="rgb" />
-<ShowDecision store={store} d="Heat Map Color Set" value="hsl" />
-````
+<ShowDecision store={store} d="Pink Palette" value="rgb" layout="column" />
+<ShowDecision store={store} d="Heat Map Color Set" value="hsl" layout="column" />
+```
 
 </details>
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Pink Palette" value="rgb" />
-    <ShowDecision store={store} d="Heat Map Color Set" value="hsl" />
+    <ShowDecision store={store} d="Pink Palette" value="rgb" layout="column" />
+    <ShowDecision store={store} d="Heat Map Color Set" value="hsl" layout="column" />
 </LayoutGrid>
 
 <details>
@@ -58,6 +52,7 @@ export const store = await decisionLoader();
 <ShowDecision
     store={store}
     d="Content Foreground Scale"
+    layout="column"
     size="m"
     viz="fg"
     options={{ contrast: 'oklch(17% 0 0deg)' }}
@@ -65,6 +60,7 @@ export const store = await decisionLoader();
 <ShowDecision
     store={store}
     d="Content Background Scale"
+    layout="column"
     size="m"
     viz="bg"
     options={{ contrast: 'oklch(83% 0.02 0deg)' }}
@@ -77,6 +73,7 @@ export const store = await decisionLoader();
     <ShowDecision
         store={store}
         d="Content Foreground Scale"
+        layout="column"
         size="m"
         viz="fg"
         options={{ contrast: 'oklch(17% 0 0deg)' }}
@@ -84,6 +81,7 @@ export const store = await decisionLoader();
     <ShowDecision
         store={store}
         d="Content Background Scale"
+        layout="column"
         size="m"
         viz="bg"
         options={{ contrast: 'oklch(83% 0.02 0deg)' }}
@@ -93,7 +91,7 @@ export const store = await decisionLoader();
 ## Color values
 
 <details>
-<summary>Color (foreground viz, different contrast color)</summary>
+<summary>ColorValue (fg viz / custom contrast color)</summary>
 
 ```mdx
 <ShowDecision
@@ -134,23 +132,23 @@ export const store = await decisionLoader();
 ## Cards
 
 <details>
-<summary>Color (DecisionCard)</summary>
+<summary>ColorValue (DecisionCard)</summary>
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" viz="bg" />
+<ShowDecisionCard store={store} d="Action Color" viz="bg" size="l" />
 ```
 
 </details>
 
-<ShowDecisionCard store={store} d="Action Color" viz="bg" />
+<ShowDecisionCard store={store} d="Action Color" viz="bg" size="l" />
 
 <details>
-<summary>ColorSet (DecisionCard, viz hidden, model and params shown)</summary>
+<summary>ColorSet (DecisionCard / column layout / s size / model and params shown)</summary>
 
 ```mdx
-<ShowDecisionCard store={store} d="Heat Map Color Set" viz={false} model params />
+<ShowDecisionCard store={store} d="Heat Map Color Set" layout="column" size="s" model params />
 ```
 
 </details>
 
-<ShowDecisionCard store={store} d="Heat Map Color Set" viz={false} model params />
+<ShowDecisionCard store={store} d="Heat Map Color Set" layout="column" size="s" model params />

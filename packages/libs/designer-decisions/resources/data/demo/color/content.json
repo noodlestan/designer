@@ -34,7 +34,7 @@
   {
     "model": "color-set/bounded",
     "name": "Content Foreground Scale",
-    "description": " scale for foreground elements",
+    "description": "Colot set for foreground elements",
     "params": {
       "from": {
         "l": { "$name": "Foreground Maximum Lightness" },
@@ -47,6 +47,14 @@
         "h": { "$name": "Content Primary Hue" }
       },
       "steps": 1
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Content Foreground Default Color",
+    "description": "Default color for foreground elements",
+    "params": {
+      "value": { "$name": "Content Foreground Scale", "index": 1 }
     }
   },
   {
@@ -74,6 +82,14 @@
           "l": { "mode": "linear", "by": 0.05 }
         }
       }
+    }
+  },
+  {
+    "model": "color-value/explicit",
+    "name": "Content Background Default Color",
+    "description": "Default color for background surfaces",
+    "params": {
+      "value": { "$name": "Content Background Scale", "index": 1 }
     }
   }
 ]

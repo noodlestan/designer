@@ -14,15 +14,20 @@ import {
     createValueContext,
     createSpaceValue,
 } from '@noodlestan/designer-decisions';
-import { ShowColorChannelViz, ShowColorViz, ShowSpaceViz } from '@noodlestan/designer-shows/astro';
+import {
+    LayoutGrid,
+    ShowColorChannelViz,
+    ShowColorViz,
+    ShowSpaceViz,
+} from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
-export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
+export const colorValue = createColorValue(store.createValueContext(), '#009955');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
-export const spaceValue = createSpaceValue(store.createValueContext(), 12);
+export const spaceValue = createSpaceValue(store.createValueContext(), 100);
 
 These components render a decision's visualization directly.
 
@@ -72,12 +77,16 @@ Options for color visualizations.
 #### Example
 
 ```mdx
-export const colorValue = createColorValue(context, '#ff0000');
+export const colorValue = createColorValue(context, '#009955');
 
-<ShowColorViz size="m" viz="fg" v={colorValue} />
+<ShowColorViz v={colorValue} viz="fg" />
+<ShowColorViz v={colorValue} viz="bg" />
 ```
 
-<ShowColorViz size="m" viz="fg" v={colorValue} />
+<LayoutGrid>
+    <ShowColorViz v={colorValue} viz="fg" />
+    <ShowColorViz v={colorValue} viz="bg" options={{ content: 'hello' }} />
+</LayoutGrid>
 
 ### ShowColorChannelViz
 
@@ -89,17 +98,9 @@ This prop has no effect on this component.
 
 It always renders the [Color Swatch](/api/designer-shows/Types/ColorVizName#swatch-default) visualization, providing defaults for the complimentary channels.
 
-#### ༶ `channel`: [ColorChannelName](/api/designer-decisions/Types/Primitives/ColorChannelName)
-
-This mandatory prop informs the visualization of the type of value.
-
-This is used to determine which complimentary channels are necessary to compose a color for the color swatch.
-
-🚧 expose this information in the component directly
-
 #### ༶ `options`: [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions)
 
-Options for [Color Swatch](/api/designer-shows/Types/ColorVizName#swatch-default).
+Options for [Color Swatch](/api/designer-shows/Types/ColorVizName#swatch-default) as in the `<ShowColorViz>` component above.
 
 #### Example
 
@@ -126,9 +127,17 @@ Which space visualization to show.
 #### Example
 
 ```mdx
-export const spaceValue = createSpaceValue(context, 12);
+export const spaceValue = createSpaceValue(context, 100);
 
-<ShowSpaceViz size="m" v={spaceValue} />
+<ShowSpaceViz size="m" v={spaceValue} viz="bar-h" />
+<ShowSpaceViz size="m" v={spaceValue} viz="square" />
+<ShowSpaceViz size="m" v={spaceValue} viz="bar-v" />
+<ShowSpaceViz size="m" v={spaceValue} viz="circle" />
 ```
 
-<ShowSpaceViz size="m" v={spaceValue} />
+<LayoutGrid>
+    <ShowSpaceViz size="xs" v={spaceValue} viz="bar-h" />
+    <ShowSpaceViz size="xs" v={spaceValue} viz="square" />
+    <ShowSpaceViz size="xs" v={spaceValue} viz="bar-v" />
+    <ShowSpaceViz size="xs" v={spaceValue} viz="circle" />
+</LayoutGrid>

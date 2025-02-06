@@ -2,27 +2,31 @@
 import type { ShowDecisionProps, ShowValueProps, ShowVizProps } from '../../types';
 
 import { ShowDecisionUnavailable } from '../unavailable';
-import { LayoutFlex } from '../../layouts';
+import { LayoutDynamic } from '../../layouts';
 import { getDecisionComponentMap } from '../../meta';
+import { resolveLayout } from '../../helpers';
 
 type Props = ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>;
 
-const { store, d, ...rest } = Astro.props;
+const { store, d, layout, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
+
 const componentMap = decision && getDecisionComponentMap(decision);
 const { component: ValueComponent, props: valueFixedProps = {} } = componentMap?.value || {};
 const { component: VizComponent, props: vizFixedProps = {} } = componentMap?.viz || {};
 
 const value = decision && decision.produce();
+
+const [itemLayout] = resolveLayout(layout, ['row']);
 ---
 
 {
     decision && (ValueComponent || VizComponent) && (
-        <LayoutFlex>
+        <LayoutDynamic layout={itemLayout}>
             {VizComponent && <VizComponent {...rest} {...vizFixedProps} v={value} />}
             {ValueComponent && <ValueComponent {...rest} {...valueFixedProps} v={value} />}
-        </LayoutFlex>
+        </LayoutDynamic>
     )
 }
 {!decision && <ShowDecisionUnavailable d={d} />}

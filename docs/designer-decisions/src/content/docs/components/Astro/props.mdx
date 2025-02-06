@@ -36,18 +36,44 @@ export const store = await loader();
 A `string` with the name of the decision to visualize.
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" size="m" />
+<ShowDecision store={store} d="Brand Color Set" />
 ```
 
-<ShowDecision store={store} d="Brand Pink" size="m" />
+<ShowDecision store={store} d="Brand Color Set" />
 
 If the decision does not exist, it renders a notice.
 
 ```mdx
-<ShowDecision store={store} d="Brand Green" size="m" />
+<ShowDecision store={store} d="Brand Green" />
 ```
 
-<ShowDecision store={store} d="Brand Green" size="m" />
+<ShowDecision store={store} d="Brand Green" />
+
+### ༶ `layout`: ShowDecisionLayout
+
+In case of the decision holding a single value, this prop determines how value and visualization sit next to each other.
+
+By default they show side by side but `column` layout will make values show under the visualization.
+
+```mdx
+<ShowDecision store={store} d="Brand Pink" layout="column" size="m" />
+```
+
+<ShowDecision store={store} d="Brand Pink" layout="column" size="m" />
+
+In case of set/scale decisions, this prop determines how items should be laid out.
+
+By default, they will show side by side, but providing `column` will result in a single stack. The layout for each items's value and viz will default to `row` in this case. But you can also provide an array with two items in order to have full control over both the item list and individual items.
+
+```mdx
+<ShowDecision store={store} d="Brand Color Set" layout="column" />
+<ShowDecision store={store} d="Brand Color Set" layout={['column', 'column']} />
+```
+
+<LayoutGrid>
+    <ShowDecision store={store} d="Brand Color Set" layout="column" />
+    <ShowDecision store={store} d="Brand Color Set" layout={['column', 'column']} />
+</LayoutGrid>
 
 ## ValueProps
 
@@ -55,13 +81,29 @@ All components that directly render a decision or a decision value also accept t
 
 ### ༶ `value` (true): boolean | string | object
 
-Provide this flag to customize how the value is formatted or to hide it.
+Provide this flag to hide the value or to customize how it is formatted.
 
 Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
+
+```mdx
+<ShowDecision store={store} d="Brand Pink" value={false} size="m" />
+<ShowDecision store={store} d="Brand Pink" value={['hsl', 'oklch']} size="m" />
+```
+
+<LayoutGrid>
+    <ShowDecision store={store} d="Brand Pink" value={false} size="m" />
+    <ShowDecision store={store} d="Brand Pink" value={['hsl', 'oklch']} size="m" />
+</LayoutGrid>
 
 ## VizProps
 
 All components that directly render a decision or a decision visualization also accept the following optional props.
+
+### ༶ `viz` (true): boolean | string
+
+Provide this flag to chose between available visualizations or to hide the decision visualization altogether, displaying only its value(s).
+
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ### ༶ `size` (auto): [ShowVizSize](/api/designer-shows/Types/ShowVizSize/)
 
@@ -74,16 +116,10 @@ Constrains the visualization to a specific size.
 
 <LayoutGrid>
     <ShowDecision store={store} d="Action Color" size={'s'} />
-    <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+    <ShowDecision store={store} d="Sizing Space Scale" size={'s'} />
 </LayoutGrid>
 
 Refer to [ShowVizSize](/api/designer-shows/Types/ShowVizSize) for available sizes.
-
-### ༶ `viz` (true): boolean | string
-
-Provide this flag to chose between available visualizations or to hide the decision visualization altogether, displaying only its value(s).
-
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ### ༶ `options` (optional): object
 

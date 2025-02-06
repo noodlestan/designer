@@ -34,7 +34,7 @@ export const store = await decisionLoader();
 ## Space scales
 
 <details>
-<summary>SpaceScale (default viz, xs size)</summary>
+<summary>SpaceScale (default viz / xs size)</summary>
 
 ```mdx
 <ShowDecision store={store} d="Layout Space Scale" size="xs" />
@@ -73,7 +73,7 @@ export const store = await decisionLoader();
 ## Cards
 
 <details>
-<summary>ColorSet (different color-channels shown)</summary>
+<summary>SpaceValue (DecisionCard / model and params shown)</summary>
 
 ```mdx
 <ShowDecisionCard store={store} d="Space Unit" model params>
@@ -82,3 +82,14 @@ export const store = await decisionLoader();
 </details>
 
 <ShowDecisionCard store={store} d="Space Unit" model params />
+
+<details>
+<summary>SpaceScale (DecisionCard / column layout)</summary>
+
+```mdx
+<ShowDecisionCard store={store} d="Sizing Space Scale" layout={["column","row"]}>
+```
+
+</details>
+
+<ShowDecisionCard store={store} d="Sizing Space Scale" layout={['column', 'row']} />

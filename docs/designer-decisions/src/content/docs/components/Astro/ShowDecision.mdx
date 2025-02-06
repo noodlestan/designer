@@ -6,7 +6,7 @@ sidebar:
     order: 10
 ---
 
-import { ShowDecision } from '@noodlestan/designer-shows/astro';
+import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { decisionLoader } from '../../../../decisions';
 
@@ -18,23 +18,14 @@ import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 Renders the appropriate visualization according to the decision type.
 
-In the following two examples we use the `<ShowDecision/>` to render two different
-decision types.
-
-A [color value](/decision-models/color-value) decision:
+In the following two examples we use the `<ShowDecision/>` to render both a [Color Value](/decision-models/color-value) decision and a [Space Scale](/decision-models/space-scale) decision.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
-```
-
-<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
-
-A [space scale](/decision-models/space-scale) decision:
-
-```mdx
 <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 ```
 
+<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
 <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 
 ## Composes
@@ -45,19 +36,37 @@ Refer to the table on [Composable Types](/components/Astro/Composable/Types) to 
 
 ## Props
 
-### ༶ [DecisionProps](/components/Astro/Props): `store` and `d`
+### ༶ [DecisionProps](/components/Astro/Props): `store`, `d` and `layout`
 
-These two **mandatory** props serve to identify and retrieve the decision.
+These two **mandatory** `store` and `d` props serve to identify and retrieve the decision.
+
+The optional `layout` prop controls the flow of multiple items and the value/viz pair.
 
 ### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`
 
 This prop control whether the value should be shown and how to format it.
 
-Refer to each [Value Component](/components/Astro/Composable/Values) for details on available formats.
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ### ༶ [VizProps](/components/Astro/Props#vizprops): `viz`, `size`, and `options`
 
 These props control whether the visualization should be shown, which specific visualization to show, and how to customize it.
 
-Refer to each [Visualization Component](/components/Astro/Composable/Visualizations) for details
-on available visualizations and options.
+In the examples below we are rendering a [ColorValueDecision](/decision-models/color-value) with, hiding the value and increasing the size of the color swatch.
+
+```mdx
+<ShowDecision store={store} d="Content Background Default Color" />
+<ShowDecision store={store} d="Content Foreground Default Color" />
+```
+
+<LayoutGrid>
+    <ShowDecision store={store} d="Content Background Default Color" />
+    <ShowDecision
+        store={store}
+        d="Content Foreground Default Color"
+        viz="fg"
+        options={{ mode: 'text' }}
+    />
+</LayoutGrid>
+
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) for details on available visualizations and options.

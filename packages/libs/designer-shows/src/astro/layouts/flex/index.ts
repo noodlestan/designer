@@ -2,3 +2,6 @@
 export { default as LayoutCentered } from './LayoutCentered.astro';
 export { default as LayoutFlex } from './LayoutFlex.astro';
 export { default as LayoutStack } from './LayoutStack.astro';
+// @endindex
+
+export { type LayoutFlexProps } from './LayoutFlex.astro';
