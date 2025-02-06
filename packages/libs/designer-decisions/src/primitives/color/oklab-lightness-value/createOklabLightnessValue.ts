@@ -2,6 +2,7 @@ import type { ColorOklabLightnessInput, OklabLightnessValue, ValueContext } from
 import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
+import { CHANNEL_NAME } from './private';
 import { resolveOklabLightnessValue } from './resolveOklabLightnessValue';
 
 export const createOklabLightnessValue = (
@@ -15,6 +16,7 @@ export const createOklabLightnessValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
+        name: () => CHANNEL_NAME,
         toColor: channels => {
             const { c, h } = channels;
             return createColorValue(context.outputContext(), { l: value, c, h });

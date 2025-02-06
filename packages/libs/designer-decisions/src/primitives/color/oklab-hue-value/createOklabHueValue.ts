@@ -2,6 +2,7 @@ import type { ColorOklabHueInput, OklabHueValue, ValueContext } from '../../../t
 import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
+import { CHANNEL_NAME } from './private';
 import { resolveOklabHueValue } from './resolveOklabHueValue';
 
 export const createOklabHueValue = (
@@ -15,6 +16,7 @@ export const createOklabHueValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
+        name: () => CHANNEL_NAME,
         toColor: channels => {
             const { l, c } = channels;
             return createColorValue(context.outputContext(), { l, c, h: value });

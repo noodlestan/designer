@@ -1,34 +1,34 @@
 import type { Degrees, NormalNumber } from '../../decision-inputs';
-import type { BaseSet, BaseValue } from '../base';
+import type { BaseSet } from '../base';
 
-import type { ColorValue } from './color';
+import type { ColorChannelBaseValue } from './channel';
 
 export type SRGBHueComplementaryChannels = {
     s: NormalNumber;
     l: NormalNumber;
 };
 
-export type SRGBHueValue = BaseValue<Degrees> & {
-    toColor: (channels: SRGBHueComplementaryChannels) => ColorValue;
-};
+export type SRGBHueValue = ColorChannelBaseValue<SRGBHueComplementaryChannels, Degrees>;
 
 export type SRGBSaturationComplementaryChannels = {
     h: Degrees;
     l: NormalNumber;
 };
 
-export type SRGBSaturationValue = BaseValue<NormalNumber> & {
-    toColor: (channels: SRGBSaturationComplementaryChannels) => ColorValue;
-};
+export type SRGBSaturationValue = ColorChannelBaseValue<
+    SRGBSaturationComplementaryChannels,
+    NormalNumber
+>;
 
 export type SRGBLightnessComplementaryChannels = {
     h: Degrees;
     s: NormalNumber;
 };
 
-export type SRGBLightnessValue = BaseValue<NormalNumber> & {
-    toColor: (channels: SRGBLightnessComplementaryChannels) => ColorValue;
-};
+export type SRGBLightnessValue = ColorChannelBaseValue<
+    SRGBLightnessComplementaryChannels,
+    NormalNumber
+>;
 
 export type SRGBHueSet = BaseSet<SRGBHueValue>;
 

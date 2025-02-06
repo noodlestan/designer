@@ -5,6 +5,7 @@ import type { ColorOklabHueInput, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
 
 import { createOklabHueValue } from './createOklabHueValue';
+import { CHANNEL_NAME } from './private';
 
 describe('createOklabHueValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
@@ -20,6 +21,12 @@ describe('createOklabHueValue()', () => {
         const result = createOklabHueValue(valueContext, mockInput);
 
         expect(result.context()).toBe(valueContext);
+    });
+
+    it('should have the expected name', () => {
+        const result = createOklabHueValue(valueContext, mockInput);
+
+        expect(result.name()).toBe(CHANNEL_NAME);
     });
 
     it('should consume the input', () => {

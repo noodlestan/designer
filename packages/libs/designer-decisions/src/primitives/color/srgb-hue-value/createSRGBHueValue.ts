@@ -2,6 +2,7 @@ import type { ColorSRGBHueInput, SRGBHueValue, ValueContext } from '../../../typ
 import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
+import { CHANNEL_NAME } from './private';
 import { resolveSRGBHueValue } from './resolveSRGBHueValue';
 
 export const createSRGBHueValue = (
@@ -15,6 +16,7 @@ export const createSRGBHueValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
+        name: () => CHANNEL_NAME,
         toColor: channels => {
             const { s, l } = channels;
             return createColorValue(context.outputContext(), { h: value, s, l });
