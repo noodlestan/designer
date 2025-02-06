@@ -1,6 +1,6 @@
-import type { ShowValueSize } from '../../types';
+import type { ShowVizSize } from '../../types';
 
-export const TYPEFACE_SIZE_TO_LENGTH: Record<ShowValueSize, number | undefined> = {
+export const TYPEFACE_SIZE_TO_LENGTH: Record<ShowVizSize, number | undefined> = {
     xs: 1,
     s: 2,
     m: 2,
@@ -11,7 +11,7 @@ export const TYPEFACE_SIZE_TO_LENGTH: Record<ShowValueSize, number | undefined> 
 
 export const TYPEFACE_STRING = 'GgAbTjqQfiRrwWmM!123;';
 
-export const TEXT_SIZE_TO_TEXT: Record<ShowValueSize, number | undefined> = {
+export const TEXT_SIZE_TO_TEXT: Record<ShowVizSize, number | undefined> = {
     xs: 50,
     s: 100,
     m: 200,

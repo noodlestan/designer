@@ -1,0 +1,13 @@
+---
+title: SpaceValue
+slug: api/designer-decisions/Types/Values/SpaceValue
+---
+
+Extends `BaseValue<string>`
+
+```ts
+export type SpaceValue = {
+    get: () => string;
+    getValueWithUnits(): SpaceWithUnits;
+};
+```

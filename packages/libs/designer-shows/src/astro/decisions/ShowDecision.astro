@@ -1,0 +1,19 @@
+---
+import { type ShowDecisionProps, type ShowValueProps, type ShowVizProps } from '../types';
+import { getDecisionComponentMap } from '../meta';
+import { ShowDecisionTypeUnavailable, ShowDecisionUnavailable } from './unavailable';
+
+type Props = ShowDecisionProps & ShowValueProps & ShowVizProps;
+
+const { store, d, ...rest } = Astro.props;
+
+const [, decision] = store.decision({ $name: d });
+const componentMap = decision && getDecisionComponentMap(decision);
+const { component: Comp, props: fixedProps = {} } = componentMap?.decision || {};
+
+const type = decision && decision.type();
+---
+
+{decision && Comp && <Comp store={store} d={d} {...rest} {...fixedProps} />}
+{decision && type && !Comp && <ShowDecisionTypeUnavailable type={type} />}
+{!decision && <ShowDecisionUnavailable d={d} />}

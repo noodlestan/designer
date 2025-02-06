@@ -1,9 +1,9 @@
-import type { ShowContent, ShowValueSize } from '../../types';
+import type { ShowContent, ShowVizSize } from '../../types';
 import { TEXT_SIZE_TO_TEXT, TYPEFACE_SIZE_TO_LENGTH } from '../private';
 
 export const resolveVizContentLength = (
     options: ShowContent = {},
-    size: ShowValueSize = 'auto',
+    size: ShowVizSize = 'auto',
 ): number | undefined => {
     const { mode } = options;
     if (mode === 'graphic' || mode === 'slot') {

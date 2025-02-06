@@ -1,0 +1,16 @@
+---
+import { type SpaceValue } from '@noodlestan/designer-decisions';
+
+import { getSpaceVizComponent } from '../../meta';
+import type { ShowVizProps } from '../../types';
+
+type Props = ShowVizProps & {
+    v?: SpaceValue;
+};
+
+const { v: spaceValue, viz = true, size, options } = Astro.props;
+
+const Viz = getSpaceVizComponent(viz);
+---
+
+{viz && <Viz value={spaceValue} size={size} options={options} />}

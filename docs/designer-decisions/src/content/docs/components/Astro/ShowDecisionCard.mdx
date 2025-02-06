@@ -17,8 +17,7 @@ export const store = await decisionLoader();
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 ```
 
-Renders a card layout with the appropriate visualization
-according to the decision type, along with any decision details you might want to display.
+Renders a card layout with the appropriate visualization according to the decision type, along with any decision details you might want to display.
 
 By default it renders only the decision **description** and **usage** guidelines.
 
@@ -43,12 +42,11 @@ These two **mandatory** props serve to identify and retrieve the decision.
 You can use these props to control how the visualization and value are displayed.
 
 <Aside type="note">
-    The common [size](/components/Astro/Props/#-size-auto-showvaluesize) prop is not exposed by `
+    The common [size](/components/Astro/Props/#-size-auto-showvizsize) prop is not exposed by `
     <ShowDecisionCard />` and the size is managed internally.
 </Aside>
 
-In this example we are rendering a [ColorValueDecision](/decision-models/color-value)
-and at the same time:
+In this example we are rendering a [ColorValueDecision](/decision-models/color-value) and at the same time:
 
 -   hiding the visualization;
 -   displaying its value in `rgb` and `hsl` formats.

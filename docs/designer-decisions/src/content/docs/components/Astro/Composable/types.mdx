@@ -1,0 +1,45 @@
+---
+title: Composable Types
+slug: components/Astro/Composable/Types
+description: Astro components that render design decision values and visualizations.
+sidebar:
+    order: 30
+    label: Composable Types
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import {
+    createColorValue,
+    createValueContext,
+    createSpaceValue,
+} from '@noodlestan/designer-decisions';
+import { ShowColorValue, ShowSpaceValue } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+import { TableDecisionComponents } from '../_partials';
+
+export const store = await decisionLoader();
+
+export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
+export const spaceValue = createSpaceValue(store.createValueContext(), 12);
+
+These components render a decision's visualization directly.
+
+<Aside type="tip">
+    You don't have to use these components directly in your docs. Using
+    [ShowDecision](/components/Astro/ShowDecision/) will select the appropriate one for you.
+</Aside>
+
+They are exposed so that anyone can [create custom visualizations](/guides/creating-custom-design-decision-visualizations/), composing values and visualizations directly in their custom components.
+
+## Composes
+
+The following table lists all decision types and which component is used internally to render the decision value and visualization.
+
+### Space
+
+<TableDecisionComponents domain="space" />
+
+### Color
+
+<TableDecisionComponents domain="color" />

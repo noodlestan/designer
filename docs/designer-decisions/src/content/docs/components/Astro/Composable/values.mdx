@@ -1,94 +1,112 @@
 ---
 title: Value Components
 slug: components/Astro/Composable/Values
-description: Astro components that render design decision viz and value together.
+description: Astro components that render design decision values.
 sidebar:
     order: 40
-    label: Decision Values
+    label: Values
 ---
 
 import { Aside } from '@astrojs/starlight/components';
-import { ShowColorValue, ShowSpaceValue } from '@noodlestan/designer-shows/astro';
-
-import { decisionLoader } from '../../../../../decisions';
 import {
     createColorValue,
+    createOklabHueValue,
     createValueContext,
     createSpaceValue,
 } from '@noodlestan/designer-decisions';
+import {
+    ShowColorChannelValue,
+    ShowColorValue,
+    ShowSpaceValue,
+} from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
 export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
+export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
 export const spaceValue = createSpaceValue(store.createValueContext(), 12);
 
-These components render a decision's visualization and value directly.
+These components render a decision's value directly.
 
 <Aside type="tip">
     You don't have to use these components directly in your docs. Using
     [ShowDecision](/components/Astro/ShowDecision/) will select the appropriate one for you.
 </Aside>
 
-They are exposed so that anyone can
-[create custom visualizations](/guides/creating-custom-design-decision-visualizations/),
-composing values and visualizations directly in their custom components.
+They are exposed so that anyone can [create custom visualizations](/guides/creating-custom-design-decision-visualizations/), composing values and visualizations directly in their custom components.
 
-In the [ShowDecision](/components/Astro/ShowDecision) reference,
-you will find all decision types and their corresponding value components.
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) for all decision types and their corresponding value components.
 
 ## Common Props
 
-All of these components share the same [common props](/components/Astro/Props/#valueprops) –
-`value`, `size`, `viz`, and `options` – to control how the visualization
-and value are displayed.
+### ༶ `v`: BaseValue&lt;unknown&gt;
 
-Decision components, such as `<ShowDecision/>` expose these props as well, so that you
-can have full control of the options.
+A decision value of the appropriate type.
 
-<Aside type="note">
-    props are not strongly typed in Decisions components, as they depend on decision type.
-</Aside>
+### ༶ `value`: string | string[]
+
+All of these components share the same [value prop](/components/Astro/Props/#valueprops) to control how the value should be formatted. The formats available depend on type of value are listed below for each component.
+
+Decision components, such as `<ShowDecision/>` expose this prop as well, so that you can have full control over format.
 
 ## Color
 
-Color related components used by
-[ShowDecision (color decisions)](/components/Astro/ShowDecision/#color).
+Color related components.
 
 ### ShowColorValue
 
-#### ༶ `viz`: [ColorVizName](/api/designer-shows/Types/ColorVizName)
+#### ༶ `v`: [ColorValue](/api/designer-decisions/Types/Values/ColorValue)
 
-#### ༶ `options`: [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions)
+#### ༶ `value`: [ColorFormat](/api/designer-decisions/Types/Primitives/ColorFormat) | [ColorFormat](/api/designer-decisions/Types/Primitives/ColorFormat)[]
 
 #### Example
 
 ```mdx
 export const colorValue = createColorValue(context, '#ff0000');
 
-<ShowColorValue size="s" v={colorValue} />
+<ShowColorValue v={colorValue} value={['rgb', 'hsl', 'oklch']} />
 ```
 
-<ShowColorValue size="s" v={colorValue} />
+<ShowColorValue v={colorValue} value={['rgb', 'hsl', 'oklch']} />
 
-### ShowColorChannel
+### ShowColorChannelValue
 
-🚧 https://github.com/noodlestan/designer/issues/14
+#### ༶ `v`: [ColorChannelValue](/api/designer-decisions/Types/Values/ColorChannelValue)
+
+#### ༶ `value`: -
+
+This prop has no effect on this component.
+
+#### Example
+
+```mdx
+export const colorChannelValue = createOklabHueValue(context, 123);
+
+<ShowColorChannelValue v={colorChannelValue} />
+```
+
+<ShowColorChannelValue v={colorChannelValue} />
 
 ## Space
 
-Space related components used by
-[ShowDecision (space decisions)](/components/Astro/ShowDecision/#space).
+Space related components.
 
 ### ShowSpaceValue
 
-#### ༶ `viz`: [SpaceVizName](/api/designer-shows/Types/SpaceVizName/)
+#### ༶ `v`: [SpaceValue](/api/designer-decisions/Types/Values/SpaceValue)
+
+#### ༶ `value`: -
+
+This prop has no effect on this component.
 
 #### Example
 
 ```mdx
 export const spaceValue = createSpaceValue(context, 12);
 
-<ShowSpaceValue size="s" v={spaceValue} />
+<ShowSpaceValue v={spaceValue} />
 ```
 
-<ShowSpaceValue size="s" v={spaceValue} />
+<ShowSpaceValue v={spaceValue} />
