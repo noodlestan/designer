@@ -5,6 +5,7 @@ import type { ColorSRGBSaturationInput, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
 
 import { createSRGBSaturationValue } from './createSRGBSaturationValue';
+import { CHANNEL_NAME } from './private';
 
 describe('createSRGBSaturationValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
@@ -20,6 +21,12 @@ describe('createSRGBSaturationValue()', () => {
         const result = createSRGBSaturationValue(valueContext, mockInput);
 
         expect(result.context()).toBe(valueContext);
+    });
+
+    it('should have the expected name', () => {
+        const result = createSRGBSaturationValue(valueContext, mockInput);
+
+        expect(result.name()).toBe(CHANNEL_NAME);
     });
 
     it('should consume the input', () => {

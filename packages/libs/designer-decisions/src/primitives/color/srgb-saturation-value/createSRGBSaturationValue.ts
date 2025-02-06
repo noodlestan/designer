@@ -2,6 +2,7 @@ import type { ColorSRGBSaturationInput, SRGBSaturationValue, ValueContext } from
 import { createBaseValue } from '../../base';
 import { createColorValue } from '../value';
 
+import { CHANNEL_NAME } from './private';
 import { resolveSRGBSaturationValue } from './resolveSRGBSaturationValue';
 
 export const createSRGBSaturationValue = (
@@ -15,6 +16,7 @@ export const createSRGBSaturationValue = (
     return {
         ...createBaseValue(context),
         get: () => value,
+        name: () => CHANNEL_NAME,
         toColor: channels => {
             const { h, l } = channels;
             return createColorValue(context.outputContext(), { h, s: value, l });

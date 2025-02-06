@@ -1,25 +1,25 @@
 import type { ColorOklabAxisLiteral, Degrees, NormalNumber } from '../../decision-inputs';
-import type { BaseSet, BaseValue } from '../base';
+import type { BaseSet } from '../base';
 
-import type { ColorValue } from './color';
+import type { ColorChannelBaseValue } from './channel';
 
 export type OklabLightnessComplementaryChannels = { c: ColorOklabAxisLiteral; h: Degrees };
 
-export type OklabLightnessValue = BaseValue<NormalNumber> & {
-    toColor: (channels: OklabLightnessComplementaryChannels) => ColorValue;
-};
+export type OklabLightnessValue = ColorChannelBaseValue<
+    OklabLightnessComplementaryChannels,
+    NormalNumber
+>;
 
 export type OklabChromaComplementaryChannels = { l: NormalNumber; h: Degrees };
 
-export type OklabChromaValue = BaseValue<ColorOklabAxisLiteral> & {
-    toColor: (channels: OklabChromaComplementaryChannels) => ColorValue;
-};
+export type OklabChromaValue = ColorChannelBaseValue<
+    OklabChromaComplementaryChannels,
+    ColorOklabAxisLiteral
+>;
 
 export type OklabHueComplementaryChannels = { l: NormalNumber; c: ColorOklabAxisLiteral };
 
-export type OklabHueValue = BaseValue<Degrees> & {
-    toColor: (channels: OklabHueComplementaryChannels) => ColorValue;
-};
+export type OklabHueValue = ColorChannelBaseValue<OklabHueComplementaryChannels, Degrees>;
 
 export type OklabLightnessScale = BaseSet<OklabLightnessValue>;
 
