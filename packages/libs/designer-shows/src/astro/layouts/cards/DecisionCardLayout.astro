@@ -50,7 +50,7 @@ const { layout = 'row' } = Astro.props;
         border: var(--dd-card-border);
     }
 
-    .dd-decision-card .dd-contents {
+    .dd-contents {
         display: flex;
         flex-direction: column;
         padding-top: var(--dd-card-v-space);
@@ -60,7 +60,7 @@ const { layout = 'row' } = Astro.props;
         border-radius: var(--dd-card-border-radius);
     }
 
-    .dd-decision-card .dd-header {
+    .dd-header {
         padding: 0 var(--dd-card-h-space);
         font-size: var(--dd-heading-size);
         font-weight: var(--dd-heading-weight);
@@ -68,7 +68,7 @@ const { layout = 'row' } = Astro.props;
         color: var(--dd-heading-color);
     }
 
-    .dd-decision-card .dd-main {
+    .dd-main {
         display: flex;
         align-items: start;
         gap: var(--dd-card-h-gutter);
@@ -86,7 +86,7 @@ const { layout = 'row' } = Astro.props;
         gap: var(--dd-card-v-gap);
     }
 
-    .dd-decision-card .dd-meta {
+    .dd-meta {
         display: flex;
         flex-direction: column;
         gap: var(--dd-card-v-gap);
