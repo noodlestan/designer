@@ -1,11 +1,17 @@
 ---
+type Props = {
+    layout?: 'row' | 'column';
+};
+
 const hasHeader = Astro.slots.has('header');
 const hasMain = Astro.slots.has('viz') || Astro.slots.has('desc') || Astro.slots.has('details');
 const hasContents = hasHeader || hasMain;
 const hasMeta = Astro.slots.has('meta');
+
+const { layout = 'row' } = Astro.props;
 ---
 
-<div class="dd-decision-card">
+<div class:list={['dd-decision-card', `dd-layout-${layout}`]}>
     {
         hasContents && (
             <div class="dd-contents">
@@ -44,7 +50,7 @@ const hasMeta = Astro.slots.has('meta');
         border: var(--dd-card-border);
     }
 
-    .dd-decision-card .dd-contents {
+    .dd-contents {
         display: flex;
         flex-direction: column;
         padding-top: var(--dd-card-v-space);
@@ -54,7 +60,7 @@ const hasMeta = Astro.slots.has('meta');
         border-radius: var(--dd-card-border-radius);
     }
 
-    .dd-decision-card .dd-header {
+    .dd-header {
         padding: 0 var(--dd-card-h-space);
         font-size: var(--dd-heading-size);
         font-weight: var(--dd-heading-weight);
@@ -62,19 +68,25 @@ const hasMeta = Astro.slots.has('meta');
         color: var(--dd-heading-color);
     }
 
-    .dd-decision-card .dd-main {
+    .dd-main {
         display: flex;
+        align-items: start;
         gap: var(--dd-card-h-gutter);
         padding: 0 var(--dd-card-h-space);
     }
 
-    .dd-decision-card .dd-details {
+    .dd-layout-column .dd-main {
+        flex-direction: column;
+        gap: var(--dd-card-v-gap);
+    }
+
+    .dd-details {
         display: flex;
         flex-direction: column;
         gap: var(--dd-card-v-gap);
     }
 
-    .dd-decision-card .dd-meta {
+    .dd-meta {
         display: flex;
         flex-direction: column;
         gap: var(--dd-card-v-gap);

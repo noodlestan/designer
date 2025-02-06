@@ -1,8 +1,8 @@
 ---
-import { type ShowDataProps } from '../types';
+import { type ShowDecisionProps } from '../types';
 import { LayoutFlex } from '../layouts';
 
-type Props = ShowDataProps;
+type Props = ShowDecisionProps;
 
 const { store, d } = Astro.props;
 
@@ -15,7 +15,7 @@ const { intendedFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // 
         intendedFor.length > 0 && (
             <LayoutFlex wrap={false}>
                 <h4 class="dd-group-header">Intended For:</h4>
-                <LayoutFlex tag="ul">
+                <LayoutFlex tag="ul" gap="s">
                     {intendedFor.map(item => (
                         <li class="dd-item">{item}</li>
                     ))}
@@ -27,7 +27,7 @@ const { intendedFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // 
         notFor.length > 0 && (
             <LayoutFlex>
                 <h4 class="dd-group-header">Not For:</h4>
-                <LayoutFlex tag="ul">
+                <LayoutFlex tag="ul" gap="s">
                     {notFor.map(item => (
                         <li class="dd-item">{item}</li>
                     ))}

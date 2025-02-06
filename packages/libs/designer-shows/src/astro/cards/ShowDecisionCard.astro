@@ -1,7 +1,9 @@
 ---
-import { type ShowDecisionProps } from '../types';
+import { isSetDecision } from '@noodlestan/designer-decisions';
+
+import { type DecisionTypeComponentProps, type ShowDecisionLayout } from '../types';
 import { ShowDecision } from '../decisions';
-import { DecisionCardLayout } from '../layouts';
+import { DecisionCardLayout, type LayoutDynamicProps } from '../layouts';
 import {
     ShowDecisionContexts,
     ShowDecisionData,
@@ -10,8 +12,9 @@ import {
     ShowDecisionParams,
     ShowDecisionUsage,
 } from '../attributes';
+import { resolveLayout } from '../helpers';
 
-type Props = ShowDecisionProps & {
+type Props = DecisionTypeComponentProps & {
     name?: boolean;
     description?: boolean;
     usage?: boolean;
@@ -24,8 +27,10 @@ type Props = ShowDecisionProps & {
 const {
     store,
     d,
+    layout,
     value: showValue = true,
     viz: showViz = true,
+    size = 'm',
     options: showOptions,
     name: showName = true,
     description: showDescription = true,
@@ -34,9 +39,29 @@ const {
     params: showParams,
     contexts: showContexts,
     data: showData,
+    ...rest
 } = Astro.props;
 
+function resolveCardLayout(
+    layout: ShowDecisionLayout,
+    isSet: boolean,
+    setLayout: LayoutDynamicProps['layout'],
+) {
+    if (isSet) {
+        if (layout) {
+            return setLayout === 'column' ? 'row' : 'column';
+        }
+        return 'column';
+    }
+    return 'row';
+}
+
 const [, decision] = store.decision({ $name: d });
+
+const isSet = Boolean(decision && isSetDecision(decision));
+const defaultLayout: ShowDecisionLayout = isSet ? ['row', 'column'] : ['column'];
+const [setLayout, itemLayout] = resolveLayout(layout, defaultLayout);
+const cardLayout = resolveCardLayout(layout, isSet, setLayout);
 
 const nameSlot = showName && 'header';
 
@@ -50,18 +75,20 @@ const showMeta = showModel || showParams || showContexts || showData;
 const metaSlot = showMeta && 'meta';
 ---
 
-<DecisionCardLayout>
+<DecisionCardLayout layout={cardLayout}>
     {decision && showName && <Fragment slot={nameSlot}>{decision.name()}</Fragment>}
     {
         showValueOrViz && (
             <Fragment slot={vizSlot}>
                 <ShowDecision
+                    {...rest}
                     store={store}
                     d={d}
+                    layout={[setLayout, itemLayout]}
                     value={showValue}
                     viz={showViz}
                     options={showOptions}
-                    size="m"
+                    size={size}
                 />
             </Fragment>
         )
