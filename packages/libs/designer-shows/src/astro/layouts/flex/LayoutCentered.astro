@@ -17,7 +17,7 @@ const { align = 'start', pad = 'm', tag: Element = 'div' } = Astro.props;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: var(--_layout-centered-pad);
+        padding: var(--__layout-centered-pad);
         list-style: none;
     }
 
@@ -26,15 +26,15 @@ const { align = 'start', pad = 'm', tag: Element = 'div' } = Astro.props;
     }
 
     .pad-s {
-        --_layout-centered-pad: var(--dd-pad-s);
+        --__layout-centered-pad: var(--dd-pad-s);
     }
 
     .pad-m {
-        --_layout-centered-pad: var(--dd-pad-m);
+        --__layout-centered-pad: var(--dd-pad-m);
     }
 
     .pad-l {
-        --_layout-centered-pad: var(--dd-pad-l);
+        --__layout-centered-pad: var(--dd-pad-l);
     }
 
     .wrap {

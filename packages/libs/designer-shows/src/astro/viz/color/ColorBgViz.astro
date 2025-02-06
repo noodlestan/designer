@@ -23,41 +23,41 @@ const content = resolveVizContent({ ...options, mode }, size);
         min-width: var(--dd-viz-min-width);
     }
     .xs {
-        --typeface-size: var(--dd-viz-typeface-size-xs);
-        --text-size: var(--dd-viz-text-size-xs);
+        --__typeface-size: var(--dd-viz-typeface-size-xs);
+        --__text-size: var(--dd-viz-text-size-xs);
         min-width: var(--dd-viz-size-xs);
         max-width: var(--dd-viz-size-xs);
     }
 
     .auto {
-        --typeface-size: var(--dd-viz-typeface-size-s);
-        --text-size: var(--dd-viz-text-size-s);
+        --__typeface-size: var(--dd-viz-typeface-size-s);
+        --__text-size: var(--dd-viz-text-size-s);
     }
 
     .s {
-        --typeface-size: var(--dd-viz-typeface-size-s);
-        --text-size: var(--dd-viz-text-size-s);
+        --__typeface-size: var(--dd-viz-typeface-size-s);
+        --__text-size: var(--dd-viz-text-size-s);
         min-width: var(--dd-viz-size-s);
         max-width: var(--dd-viz-size-s);
     }
 
     .m {
-        --typeface-size: var(--dd-viz-typeface-size-m);
-        --text-size: var(--dd-viz-text-size-m);
+        --__typeface-size: var(--dd-viz-typeface-size-m);
+        --__text-size: var(--dd-viz-text-size-m);
         min-width: var(--dd-viz-size-m);
         max-width: var(--dd-viz-size-m);
     }
 
     .l {
-        --typeface-size: var(--dd-viz-typeface-size-l);
-        --text-size: var(--dd-viz-text-size-l);
+        --__typeface-size: var(--dd-viz-typeface-size-l);
+        --__text-size: var(--dd-viz-text-size-l);
         min-width: var(--dd-viz-size-l);
         max-width: var(--dd-viz-size-l);
     }
 
     .xl {
-        --typeface-size: var(--dd-viz-typeface-size-xl);
-        --text-size: var(--dd-viz-text-size-xl);
+        --__typeface-size: var(--dd-viz-typeface-size-xl);
+        --__text-size: var(--dd-viz-text-size-xl);
         min-width: var(--dd-viz-size-xl);
         max-width: var(--dd-viz-size-xl);
     }
@@ -87,7 +87,7 @@ const content = resolveVizContent({ ...options, mode }, size);
 
     .typeface .content {
         font-family: var(--dd-typeface-family);
-        font-size: var(--typeface-size);
+        font-size: var(--__typeface-size);
         text-overflow: ellipsis;
     }
 
@@ -103,7 +103,7 @@ const content = resolveVizContent({ ...options, mode }, size);
         margin-top: -0.75rem;
         margin-left: -3rem;
         font-family: var(--dd-text-family);
-        font-size: var(--text-size);
+        font-size: var(--__text-size);
         line-height: var(--dd-text-line-height);
     }
 </style>
