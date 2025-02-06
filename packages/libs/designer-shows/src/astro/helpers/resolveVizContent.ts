@@ -1,4 +1,4 @@
-import type { ShowContent, ShowValueSize } from '../types';
+import type { ShowContent, ShowVizSize } from '../types';
 
 import { createShuffledText } from './createShuffledText';
 import { TEXT_SENTENCES, TYPEFACE_STRING, resolveVizContentLength } from './private';
@@ -13,7 +13,7 @@ const trimToMaxLength = (text: string, maxLength?: number): string => {
 
 export const resolveVizContent = (
     options: ShowContent = {},
-    size?: ShowValueSize,
+    size?: ShowVizSize,
     maxLength?: number,
 ): string => {
     const length = maxLength ?? resolveVizContentLength(options, size);

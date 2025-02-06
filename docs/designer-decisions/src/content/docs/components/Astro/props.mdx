@@ -15,18 +15,13 @@ export const store = await decisionLoader();
 
 ## DecisionProps
 
-All components that render a decision, such as the
-[&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/) component,
-**require** the following props.
+All components that render a decision, such as the [&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/) component, **require** the following props.
 
 ### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
 
-The `store` prop provides access to all decision input data so that components can
-retrieve decision objects and resolve values.
+The `store` prop provides access to all decision input data so that components can retrieve decision objects and resolve values.
 
-The simplest way to create a decision store is, as described in the
-[Rendering in Astro MDX](/guides/documenting-design-decisions-with-astro-and-mdx)
-guide, to create a decision loader and then retrieve the store in your pages.
+The simplest way to create a decision store is, as described in the [Rendering in Astro MDX](/guides/documenting-design-decisions-with-astro-and-mdx) guide, to create a decision loader and then retrieve the store in your pages.
 
 ```mdx
 import { loader } from '../decisions';
@@ -56,17 +51,19 @@ If the decision does not exist, it renders a notice.
 
 ## ValueProps
 
-All components that directly render a decision or a decision value also
-accept the following optional props.
+All components that directly render a decision or a decision value also accept the following optional props.
 
 ### ༶ `value` (true): boolean | string | object
 
-Provide this flag to customize how the value is displayed or to hide it.
+Provide this flag to customize how the value is formatted or to hide it.
 
-Refer to the documentation on [ShowDecision](/components/Astro/ShowDecision#composes)
-to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
-### ༶ `size` (auto): [ShowValueSize](/api/designer-shows/Types/ShowValueSize/)
+## VizProps
+
+All components that directly render a decision or a decision visualization also accept the following optional props.
+
+### ༶ `size` (auto): [ShowVizSize](/api/designer-shows/Types/ShowVizSize/)
 
 Constrains the visualization to a specific size.
 
@@ -80,19 +77,16 @@ Constrains the visualization to a specific size.
     <ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
 </LayoutGrid>
 
-Refer to [ShowValueSize](/api/designer-shows/Types/ShowValueSize) for available sizes.
+Refer to [ShowVizSize](/api/designer-shows/Types/ShowVizSize) for available sizes.
 
 ### ༶ `viz` (true): boolean | string
 
-Provide this flag to chose between available visualizations or to hide
-the decision visualization altogether, displaying only its value(s).
+Provide this flag to chose between available visualizations or to hide the decision visualization altogether, displaying only its value(s).
 
-Refer to the documentation on [ShowDecision](/components/Astro/ShowDecision#composes)
-to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ### ༶ `options` (optional): object
 
 Provide this prop to configure visualization options.
 
-Refer to the documentation on [ShowDecision](/components/Astro/ShowDecision#composes)
-to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.

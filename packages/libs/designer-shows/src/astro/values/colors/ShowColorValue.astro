@@ -3,45 +3,24 @@ import { type ColorFormat, type ColorValue } from '@noodlestan/designer-decision
 
 import { DecisionValueContainer } from '../../atoms';
 import { LayoutStack } from '../../layouts';
-import { getColorVizComponent } from '../../meta';
-import type { ColorVizOptions, ShowValueProps } from '../../types';
+import type { ShowValueProps } from '../../types';
+import { resolveColorFormats } from '../../helpers';
 
 type Props = ShowValueProps & {
     v?: ColorValue;
 };
 
-const { v: colorValue, value = true, viz = true, size = 'auto', options } = Astro.props;
+const { v: colorValue, value = true } = Astro.props;
 
-const formats: ColorFormat[] | null =
-    typeof value === 'boolean' && value
-        ? ['rgb']
-        : typeof value === 'string'
-          ? [value as ColorFormat]
-          : Array.isArray(value)
-            ? (value as ColorFormat[])
-            : null;
-
-const Viz = getColorVizComponent(viz);
-
-const opt = (options || {}) as ColorVizOptions;
+const formats = resolveColorFormats(value);
 ---
 
-<div class:list={['dd-show-color-value', { size }]}>
-    {viz && <Viz value={colorValue} size={size} options={opt} />}
-    {
-        value && colorValue !== undefined && (
-            <LayoutStack>
-                {formats?.map(format => (
-                    <DecisionValueContainer>{colorValue.toString(format)}</DecisionValueContainer>
-                ))}
-            </LayoutStack>
-        )
-    }
-</div>
-
-<style>
-    .dd-show-color-value {
-        display: flex;
-        gap: var(--dd-space-gap);
-    }
-</style>
+{
+    value && colorValue !== undefined && (
+        <LayoutStack>
+            {formats?.map(format => (
+                <DecisionValueContainer>{colorValue.toString(format)}</DecisionValueContainer>
+            ))}
+        </LayoutStack>
+    )
+}

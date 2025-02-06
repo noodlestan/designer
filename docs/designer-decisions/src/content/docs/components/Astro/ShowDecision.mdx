@@ -8,7 +8,6 @@ sidebar:
 
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { TableDecisionComponents } from './_partials';
 import { decisionLoader } from '../../../../decisions';
 
 export const store = await decisionLoader();
@@ -40,16 +39,9 @@ A [space scale](/decision-models/space-scale) decision:
 
 ## Composes
 
-The following table lists all decision types and which component
-is used internally to render the decision value and visualization.
+This component composes a different value and visualization component depending on the decision type.
 
-### Space
-
-<TableDecisionComponents domain="space" />
-
-### Color
-
-<TableDecisionComponents domain="color" />
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn about the options available.
 
 ## Props
 
@@ -57,12 +49,15 @@ is used internally to render the decision value and visualization.
 
 These two **mandatory** props serve to identify and retrieve the decision.
 
-### ༶ [ValueProps](/components/Astro/Props#valueprops): `size`, `value`, `viz`, and `options`
+### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`
 
-These props control how the visualization and value are displayed.
+This prop control whether the value should be shown and how to format it.
 
-The [Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx/) guide
-showcases these props in action.
+Refer to each [Value Component](/components/Astro/Composable/Values) for details on available formats.
 
-Refer to each [Value Component](/components/Astro/Composable/Values) for details
+### ༶ [VizProps](/components/Astro/Props#vizprops): `viz`, `size`, and `options`
+
+These props control whether the visualization should be shown, which specific visualization to show, and how to customize it.
+
+Refer to each [Visualization Component](/components/Astro/Composable/Visualizations) for details
 on available visualizations and options.

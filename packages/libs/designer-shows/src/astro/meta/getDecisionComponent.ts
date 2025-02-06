@@ -1,47 +1,79 @@
 import { type DecisionUnknown } from '@noodlestan/designer-decisions';
 
+import { ShowSetDecision, ShowValueDecision } from '../decisions';
+import type { DecisionTypeComponent, DecisionValueComponent, DecisionVizComponent } from '../types';
 import {
-    ShowColorOklabChromaScaleDecision,
-    ShowColorOklabChromaValueDecision,
-    ShowColorOklabHueSetDecision,
-    ShowColorOklabHueValueDecision,
-    ShowColorOklabLightnessScaleDecision,
-    ShowColorOklabLightnessValueDecision,
-    ShowColorSRGBHueSetDecision,
-    ShowColorSRGBHueValueDecision,
-    ShowColorSRGBLightnessScaleDecision,
-    ShowColorSRGBLightnessValueDecision,
-    ShowColorSRGBSaturationScaleDecision,
-    ShowColorSRGBSaturationValueDecision,
-    ShowColorSetDecision,
-    ShowColorValueDecision,
-    ShowSpaceScaleDecision,
-    ShowSpaceValueDecision,
-} from '../decisions';
-import type { DecisionTypeComponent } from '../types';
+    ShowColorChannelValue,
+    ShowColorChannelViz,
+    ShowColorValue,
+    ShowColorViz,
+    ShowSpaceValue,
+    ShowSpaceViz,
+} from '../values';
 
-export const getDecisionComponent = (
+import type { DecisionTypeComponents } from './types';
+
+function valueC<T extends object = object>(component: unknown): DecisionValueComponent<T> {
+    return component as unknown as DecisionValueComponent<T>;
+}
+
+function vizC<T extends object = object>(component: unknown): DecisionVizComponent<T> {
+    return component as unknown as DecisionVizComponent<T>;
+}
+
+function channelCs(decision: DecisionTypeComponent): DecisionTypeComponents {
+    return {
+        decision: {
+            component: decision,
+        },
+        value: {
+            component: valueC(ShowColorChannelValue),
+        },
+        viz: {
+            component: valueC(ShowColorChannelViz),
+        },
+    };
+}
+
+function defaultCs(
+    decision: DecisionTypeComponent,
+    value: DecisionValueComponent,
+    viz: DecisionVizComponent,
+): DecisionTypeComponents {
+    return {
+        decision: {
+            component: decision,
+        },
+        value: {
+            component: value,
+        },
+        viz: {
+            component: viz,
+        },
+    };
+}
+
+export const getDecisionComponentMap = (
     decision: DecisionUnknown,
-): DecisionTypeComponent | undefined => {
-    // WIP we would rather have this in a constants.ts file but it looks like
-    // component function references are not available in the unit scope
-    const DECISION_TYPE_COMPONENT_MAP: Record<string, DecisionTypeComponent> = {
-        'color-oklab-lightness-value': ShowColorOklabLightnessValueDecision,
-        'color-oklab-lightness-scale': ShowColorOklabLightnessScaleDecision,
-        'color-oklab-chroma-value': ShowColorOklabChromaValueDecision,
-        'color-oklab-chroma-scale': ShowColorOklabChromaScaleDecision,
-        'color-oklab-hue-value': ShowColorOklabHueValueDecision,
-        'color-oklab-hue-set': ShowColorOklabHueSetDecision,
-        'color-srgb-hue-value': ShowColorSRGBHueValueDecision,
-        'color-srgb-hue-set': ShowColorSRGBHueSetDecision,
-        'color-srgb-lightness-value': ShowColorSRGBLightnessValueDecision,
-        'color-srgb-lightness-scale': ShowColorSRGBLightnessScaleDecision,
-        'color-srgb-saturation-value': ShowColorSRGBSaturationValueDecision,
-        'color-srgb-saturation-scale': ShowColorSRGBSaturationScaleDecision,
-        'color-set': ShowColorSetDecision,
-        'color-value': ShowColorValueDecision,
-        'space-value': ShowSpaceValueDecision,
-        'space-scale': ShowSpaceScaleDecision,
+): DecisionTypeComponents | undefined => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const DECISION_TYPE_COMPONENT_MAP: Record<string, DecisionTypeComponents<any>> = {
+        'color-oklab-lightness-value': channelCs(ShowValueDecision),
+        'color-oklab-lightness-scale': channelCs(ShowSetDecision),
+        'color-oklab-chroma-value': channelCs(ShowValueDecision),
+        'color-oklab-chroma-scale': channelCs(ShowSetDecision),
+        'color-oklab-hue-value': channelCs(ShowValueDecision),
+        'color-oklab-hue-set': channelCs(ShowSetDecision),
+        'color-srgb-hue-value': channelCs(ShowValueDecision),
+        'color-srgb-hue-set': channelCs(ShowSetDecision),
+        'color-srgb-lightness-value': channelCs(ShowValueDecision),
+        'color-srgb-lightness-scale': channelCs(ShowSetDecision),
+        'color-srgb-saturation-value': channelCs(ShowValueDecision),
+        'color-srgb-saturation-scale': channelCs(ShowSetDecision),
+        'color-set': defaultCs(ShowSetDecision, valueC(ShowColorValue), vizC(ShowColorViz)),
+        'color-value': defaultCs(ShowValueDecision, valueC(ShowColorValue), vizC(ShowColorViz)),
+        'space-value': defaultCs(ShowValueDecision, valueC(ShowSpaceValue), vizC(ShowSpaceViz)),
+        'space-scale': defaultCs(ShowSetDecision, valueC(ShowSpaceValue), vizC(ShowSpaceViz)),
     };
 
     return DECISION_TYPE_COMPONENT_MAP[decision.type()];

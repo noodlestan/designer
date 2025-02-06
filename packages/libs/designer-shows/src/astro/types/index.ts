@@ -1,34 +1,44 @@
 import type { ColorValue, SpaceValue } from '@noodlestan/designer-decisions';
 import type { StaticDecisionStore } from '@noodlestan/designer-functions';
 
-export type ShowDataProps = {
+export type ShowDecisionProps = {
     d: string;
     store: StaticDecisionStore; // WIP replace with ShowDecisionStore
 };
 
-export type ShowValueSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
+export type ShowVizSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 
-export type VizProps = {
-    size?: ShowValueSize;
-    options?: object;
-};
-
-export type ShowValueProps = VizProps & {
-    value?: boolean | string | string[];
+export type ShowVizProps = {
     viz?: boolean | string;
+    size?: ShowVizSize;
+    options?: object;
+    v?: unknown;
 };
 
-export type ShowDecisionProps = ShowDataProps & ShowValueProps;
+export type ShowValueProps = {
+    value?: boolean | string | string[];
+    v?: unknown;
+};
 
-export type DecisionTypeComponent = (props: ShowDecisionProps) => unknown;
+export type DecisionTypeComponent = (
+    props: ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>,
+) => unknown;
+export type DecisionValueComponent<T extends object = object> = (
+    props: ShowValueProps & T,
+) => unknown;
+export type DecisionVizComponent<T extends object = object> = (props: ShowVizProps & T) => unknown;
+
+/* space */
 
 export type SpaceVizName = 'square' | 'circle' | 'bar-h' | 'bar-v';
 
-export type SpaceVizProps = VizProps & {
+export type SpaceVizProps = ShowVizProps & {
     viz?: boolean | SpaceVizName;
     value?: SpaceValue;
 };
 export type SpaceVizComponent = (props: SpaceVizProps) => unknown;
+
+/* color */
 
 export type ColorVizName = 'swatch' | 'fg' | 'bg';
 
@@ -41,7 +51,7 @@ export type ShowContent = {
 
 export type ColorVizOptions = ShowContent & { contrast?: string };
 
-export type ColorVizProps = VizProps & {
+export type ColorVizProps = ShowVizProps & {
     value?: ColorValue;
     options?: ColorVizOptions;
 };

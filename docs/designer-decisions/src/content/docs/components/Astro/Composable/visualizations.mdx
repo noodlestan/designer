@@ -1,0 +1,134 @@
+---
+title: Visualization Components
+slug: components/Astro/Composable/Visualizations
+description: Astro components that render design decision visualizations.
+sidebar:
+    order: 50
+    label: Visualizations
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import {
+    createColorValue,
+    createOklabHueValue,
+    createValueContext,
+    createSpaceValue,
+} from '@noodlestan/designer-decisions';
+import { ShowColorChannelViz, ShowColorViz, ShowSpaceViz } from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../../../decisions';
+
+export const store = await decisionLoader();
+
+export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
+export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
+export const spaceValue = createSpaceValue(store.createValueContext(), 12);
+
+These components render a decision's visualization directly.
+
+<Aside type="tip">
+    You don't have to use these components directly in your docs. Using
+    [ShowDecision](/components/Astro/ShowDecision/) will select the appropriate one for you.
+</Aside>
+
+They are exposed so that anyone can [create custom visualizations](/guides/creating-custom-design-decision-visualizations/), composing values and visualizations directly in their custom components.
+
+Refer to the table on [Composable Types](/components/Astro/Composable/Types) for all decision types and their corresponding visualizations.
+
+## Common Props
+
+### ༶ `v`: BaseValue&lt;unknown&gt;
+
+A decision value of the appropriate type.
+
+### ༶ [VizProps](/components/Astro/Props#vizprops): `viz`, `size`, and `options`
+
+These props control how the visualization should be displayed.
+
+Decision components, such as `<ShowDecision/>` expose them well, so that you can have full control over visualization options.
+
+<Aside type="note">
+    In the `<ShowDecision />` and `<ShowDecisionCard />` components the `viz` and `options` props
+    are typed to base types and will not auto-complete on your IDE. You can use the types listed
+    below to improve your experience and ensure type safety.
+</Aside>
+
+## Color
+
+Color related components.
+
+### ShowColorViz
+
+#### ༶ `v`: [ColorValue](/api/designer-decisions/Types/Values/ColorValue)
+
+#### ༶ `viz`: [ColorVizName](/api/designer-shows/Types/ColorVizName)
+
+Which color visualization to show.
+
+#### ༶ `options`: [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions)
+
+Options for color visualizations.
+
+#### Example
+
+```mdx
+export const colorValue = createColorValue(context, '#ff0000');
+
+<ShowColorViz size="m" viz="fg" v={colorValue} />
+```
+
+<ShowColorViz size="m" viz="fg" v={colorValue} />
+
+### ShowColorChannelViz
+
+#### ༶ `v`: [ColorChannelValue](/api/designer-decisions/Types/Values/ColorChannelValue)
+
+#### ༶ `viz`: -
+
+This prop has no effect on this component.
+
+It always renders the [Color Swatch](/api/designer-shows/Types/ColorVizName#swatch-default) visualization, providing defaults for the complimentary channels.
+
+#### ༶ `channel`: [ColorChannelName](/api/designer-decisions/Types/Primitives/ColorChannelName)
+
+This mandatory prop informs the visualization of the type of value.
+
+This is used to determine which complimentary channels are necessary to compose a color for the color swatch.
+
+🚧 expose this information in the component directly
+
+#### ༶ `options`: [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions)
+
+Options for [Color Swatch](/api/designer-shows/Types/ColorVizName#swatch-default).
+
+#### Example
+
+```mdx
+export const colorChannelValue = createOklabHueValue(context, 123);
+
+<ShowColorChannelViz size="m" v={colorChannelValue} channel="oklab-hue" />
+```
+
+<ShowColorChannelViz size="m" v={colorChannelValue} channel="oklab-hue" />
+
+## Space
+
+Space related components.
+
+### ShowSpaceViz
+
+#### ༶ `v`: [SpaceValue](/api/designer-decisions/Types/Values/SpaceValue)
+
+#### ༶ `viz`: [SpaceVizName](/api/designer-shows/Types/SpaceVizName/)
+
+Which space visualization to show.
+
+#### Example
+
+```mdx
+export const spaceValue = createSpaceValue(context, 12);
+
+<ShowSpaceViz size="m" v={spaceValue} />
+```
+
+<ShowSpaceViz size="m" v={spaceValue} />

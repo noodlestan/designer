@@ -1,0 +1,28 @@
+---
+import type { ShowDecisionProps, ShowValueProps, ShowVizProps } from '../../types';
+
+import { ShowDecisionUnavailable } from '../unavailable';
+import { LayoutFlex } from '../../layouts';
+import { getDecisionComponentMap } from '../../meta';
+
+type Props = ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>;
+
+const { store, d, ...rest } = Astro.props;
+
+const [, decision] = store.decision({ $name: d });
+const componentMap = decision && getDecisionComponentMap(decision);
+const { component: ValueComponent, props: valueFixedProps = {} } = componentMap?.value || {};
+const { component: VizComponent, props: vizFixedProps = {} } = componentMap?.viz || {};
+
+const value = decision && decision.produce();
+---
+
+{
+    decision && (ValueComponent || VizComponent) && (
+        <LayoutFlex>
+            {VizComponent && <VizComponent {...rest} {...vizFixedProps} v={value} />}
+            {ValueComponent && <ValueComponent {...rest} {...valueFixedProps} v={value} />}
+        </LayoutFlex>
+    )
+}
+{!decision && <ShowDecisionUnavailable d={d} />}

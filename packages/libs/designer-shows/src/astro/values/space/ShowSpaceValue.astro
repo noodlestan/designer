@@ -3,35 +3,22 @@ import { type SpaceValue } from '@noodlestan/designer-decisions';
 
 import { DecisionValueContainer } from '../../atoms';
 import { LayoutStack } from '../../layouts';
-import { getSpaceVizComponent } from '../../meta';
 import type { ShowValueProps } from '../../types';
 
 type Props = ShowValueProps & {
     v?: SpaceValue;
 };
 
-const { v: spaceValue, value = true, viz = true, size, options } = Astro.props;
+const { v: spaceValue, value = true } = Astro.props;
 
 const { value: v, units } = spaceValue?.getValueWithUnits() || {};
 const vWithUnits = `${v}${units}`;
-
-const Viz = getSpaceVizComponent(viz);
 ---
 
-<div class:list={['dd-show-space-value', { size }]}>
-    {viz && <Viz value={spaceValue} size={size} options={options} />}
-    {
-        value && spaceValue !== undefined && (
-            <DecisionValueContainer>
-                <LayoutStack>{vWithUnits}</LayoutStack>
-            </DecisionValueContainer>
-        )
-    }
-</div>
-
-<style>
-    .dd-show-space-value {
-        display: flex;
-        gap: var(--dd-space-gap);
-    }
-</style>
+{
+    value && spaceValue !== undefined && (
+        <LayoutStack>
+            <DecisionValueContainer>{vWithUnits}</DecisionValueContainer>
+        </LayoutStack>
+    )
+}
