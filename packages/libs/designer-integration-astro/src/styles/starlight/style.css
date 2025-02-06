@@ -4,8 +4,8 @@
  * guarantee top level dd-components are vertically separated from surrounding markdown content
  */
 .sl-markdown-content [class^='dd-'] {
-    margin-block-start: var(--st-dd-block-start);
-    margin-block-end: var(--st-dd-block-start);
+    margin-block-start: var(--dd-sl-block-start);
+    margin-block-end: var(--dd-sl-block-start);
 }
 .sl-markdown-content [class^='dd-'] [class^='dd-'] {
     margin: 0;
