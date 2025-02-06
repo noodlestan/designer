@@ -1,11 +1,17 @@
 ---
+type Props = {
+    layout?: 'row' | 'column';
+};
+
 const hasHeader = Astro.slots.has('header');
 const hasMain = Astro.slots.has('viz') || Astro.slots.has('desc') || Astro.slots.has('details');
 const hasContents = hasHeader || hasMain;
 const hasMeta = Astro.slots.has('meta');
+
+const { layout = 'row' } = Astro.props;
 ---
 
-<div class="dd-decision-card">
+<div class:list={['dd-decision-card', `dd-layout-${layout}`]}>
     {
         hasContents && (
             <div class="dd-contents">
@@ -64,11 +70,17 @@ const hasMeta = Astro.slots.has('meta');
 
     .dd-decision-card .dd-main {
         display: flex;
+        align-items: start;
         gap: var(--dd-card-h-gutter);
         padding: 0 var(--dd-card-h-space);
     }
 
-    .dd-decision-card .dd-details {
+    .dd-layout-column .dd-main {
+        flex-direction: column;
+        gap: var(--dd-card-v-gap);
+    }
+
+    .dd-details {
         display: flex;
         flex-direction: column;
         gap: var(--dd-card-v-gap);
