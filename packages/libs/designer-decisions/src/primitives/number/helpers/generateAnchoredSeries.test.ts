@@ -39,17 +39,44 @@ describe('generateAnchoredSeries()', () => {
         });
     });
 
-    describe('Given a precision parameter', () => {
+    describe('Given no precision parameter', () => {
+        const anchor = 5.111;
+        const before = { steps: 1, modifier: { mode: 'linear', by: -0.1 } };
+        const after = { steps: 1, modifier: { mode: 'linear', by: 1.33 } };
+        const params = { before, after } as AnchoredNumberSeriesParams;
+
+        it('should return an array with values not rounded', () => {
+            const result = generateAnchoredSeries(anchor, params);
+
+            expect(result).toEqual([5.011, 5.111, 6.441]);
+        });
+    });
+
+    describe('Given a precision of 2', () => {
+        const anchor = 33;
+        const before = { steps: 3, modifier: { mode: 'geometric', by: 0.75 } };
+        const after = { steps: 2, modifier: { mode: 'geometric', by: 2.33 } };
+        const params = { before, after } as AnchoredNumberSeriesParams;
+        const precision = 2;
+
+        it('should return a series with values rounded to the nearest 2', () => {
+            const result = generateAnchoredSeries(anchor, params, undefined, precision);
+
+            expect(result).toEqual([14, 18, 24, 34, 76, 180]);
+        });
+    });
+
+    describe('Given a precision parameter of 0.2', () => {
         const anchor = 5.1111;
         const before = { steps: 3, modifier: { mode: 'geometric', by: 0.66 } };
         const after = { steps: 2, modifier: { mode: 'geometric', by: 1.33 } };
         const params = { before, after } as AnchoredNumberSeriesParams;
-        const precision = 3;
+        const precision = 0.2;
 
-        it('should return an array with rounded values', () => {
+        it('should return a series with values rounded to the nearest 0.2', () => {
             const result = generateAnchoredSeries(anchor, params, undefined, precision);
 
-            expect(result).toEqual([1.469, 2.226, 3.373, 5.111, 6.798, 9.041]);
+            expect(result).toEqual([1.4, 2.2, 3.4, 5.2, 6.8, 9]);
         });
     });
 });
