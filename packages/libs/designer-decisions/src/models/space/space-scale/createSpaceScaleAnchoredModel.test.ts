@@ -15,7 +15,7 @@ describe('createSpaceScaleAnchoredModel()', () => {
             anchor: 50,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -10 },
+                modifier: { mode: 'linear', by: -0.04 },
             },
             after: {
                 steps: 3,
@@ -33,9 +33,31 @@ describe('createSpaceScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(30 + 'px');
-            expect(result.get().item(2)?.get()).toEqual(params.anchor + 'px');
-            expect(result.get().last()?.get()).toEqual(110 + 'px');
+            expect(result.get().first()?.toString()).toEqual(49.92 + 'px');
+            expect(result.get().item(2)?.toString()).toEqual(params.anchor + 'px');
+            expect(result.get().last()?.toString()).toEqual(110 + 'px');
+        });
+    });
+
+    describe('Given a quantize param', () => {
+        const [mockContext] = createValueContextMock();
+        const params: SpaceScaleAnchoredInput['params'] = {
+            anchor: 50,
+            before: {
+                steps: 2,
+                modifier: { mode: 'linear', by: -0.04 },
+            },
+            after: {
+                steps: 3,
+                modifier: { mode: 'linear', by: 20 },
+            },
+            quantize: 2,
+        };
+
+        it('should populate the set with quantized values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.toString()).toEqual('50px');
         });
     });
 });

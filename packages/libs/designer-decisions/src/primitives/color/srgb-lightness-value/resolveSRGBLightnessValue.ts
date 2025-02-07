@@ -1,7 +1,6 @@
 import type { ColorSRGBLightnessInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
-import { clampChannelValue } from '../helpers';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
 import { resolveSRGBLightnessValueRef } from './resolveSRGBLightnessValueRef';
@@ -19,5 +18,5 @@ export const resolveSRGBLightnessValue = (
         return fallback;
     }
 
-    return clampChannelValue(input, 'srgb-lightness');
+    return input;
 };

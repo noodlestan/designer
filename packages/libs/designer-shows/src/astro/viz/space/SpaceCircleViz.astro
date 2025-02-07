@@ -5,7 +5,7 @@ type Props = SpaceVizProps;
 
 const { value: space } = Astro.props;
 
-const { value: v, units } = space?.getValueWithUnits() || {};
+const { value: v, units } = space?.toObject() || {};
 const vWithUnits = `${v}${units}`;
 ---
 

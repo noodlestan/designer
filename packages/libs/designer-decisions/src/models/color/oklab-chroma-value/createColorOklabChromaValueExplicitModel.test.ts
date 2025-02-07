@@ -11,7 +11,7 @@ describe('createColorOklabChromaValueExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabChromaValueExplicitInput['params'] = {
-            value: 0.3,
+            value: 0.311,
         };
 
         it('should create a value', () => {
@@ -31,6 +31,20 @@ describe('createColorOklabChromaValueExplicitModel()', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get()).toEqual(0.5);
+        });
+    });
+
+    describe('Given a quantize param', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabChromaValueExplicitInput['params'] = {
+            value: 0.3137,
+            quantize: 2,
+        };
+
+        it('should create a quantized value', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get()).toEqual(0.32);
         });
     });
 });

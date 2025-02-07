@@ -5,6 +5,7 @@ export type SpaceValueExplicitInput = InputRecord & {
     model: 'space-value/explicit';
     params: {
         value: SpaceValueInput;
+        quantize?: number;
     };
 };
 
@@ -12,6 +13,7 @@ export type SpaceScaleExplicitInput = InputRecord & {
     model: 'space-scale/explicit';
     params: {
         values: SpaceValueInput[];
+        quantize?: number;
     };
 };
 
@@ -21,6 +23,7 @@ export type SpaceScaleBoundedInput = InputRecord & {
         from: SpaceValueInput;
         to: SpaceValueInput;
         steps: number;
+        quantize?: number;
     };
 };
 

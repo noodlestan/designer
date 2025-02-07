@@ -6,8 +6,22 @@ slug: api/designer-decisions/Types/Values/SpaceValue
 Extends `BaseValue<string>`
 
 ```ts
+export type SpaceUnits = 'px' | 'em' | 'rem';
+
+export type SpaceWithUnits = {
+    value: number;
+    units: SpaceUnits;
+};
+
+export type SpaceValueFormatOptions = {
+    quantize?: number;
+};
+
 export type SpaceValue = {
-    get: () => string;
-    getValueWithUnits(): SpaceWithUnits;
+    get: () => number;
+    raw: () => number;
+    quantized: (quantize?: number) => number;
+    toString: (options?: SpaceValueFormatOptions) => string;
+    toObject: (options?: SpaceValueFormatOptions) => SpaceWithUnits;
 };
 ```

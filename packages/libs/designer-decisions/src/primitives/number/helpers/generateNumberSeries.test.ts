@@ -13,22 +13,12 @@ describe('generateNumberSeries()', () => {
     });
 
     describe('Given an anchor and a number of items, but no modifier', () => {
-        const anchor = 5;
+        const anchor = 1.333;
         const items = 3;
 
-        it('should return an array with items elements, all equal to the anchor', () => {
+        it('should return array with the expected number of elements, all equal to the anchor', () => {
             const result = generateNumberSeries(anchor, items);
-            expect(result).toEqual([5, 5, 5]);
-        });
-    });
-
-    describe('Given an anchor of 1.3333 and a number of items, but no modifier', () => {
-        const anchor = 1.3333;
-        const items = 3;
-
-        it('should round the anchor to the default precision (2)', () => {
-            const result = generateNumberSeries(anchor, items);
-            expect(result).toEqual([1.33, 1.33, 1.33]);
+            expect(result).toEqual([1.333, 1.333, 1.333]);
         });
     });
 
@@ -47,47 +37,57 @@ describe('generateNumberSeries()', () => {
         const anchor = 10;
         const items = 4;
         const modifier: NumberModifier = { mode: 'linear', by: 5 };
-        const clamp: NumberClamp = [10, 20];
+        const clamp: NumberClamp = [15, 20];
 
         it('should return a series with values clamped within the range', () => {
             const result = generateNumberSeries(anchor, items, modifier, clamp);
-            expect(result).toEqual([10, 15, 20, 20]);
+            expect(result).toEqual([15, 15, 20, 20]);
         });
     });
 
-    describe('Given a precision of 0', () => {
+    describe('Given no quantize', () => {
+        const anchor = 1.111;
+        const items = 4;
+        const modifier: NumberModifier = { mode: 'linear', by: 0.552 };
+
+        it('should return a series with values not rounded', () => {
+            const result = generateNumberSeries(anchor, items, modifier, undefined);
+            expect(result).toEqual([1.111, 1.663, 2.215, 2.767]);
+        });
+    });
+
+    describe('Given a quantize of 2', () => {
         const anchor = 2.333;
         const items = 3;
         const modifier: NumberModifier = { mode: 'geometric', by: 2 };
-        const precision = 0;
+        const quantize = 2;
 
-        it('should return a series with integer values', () => {
-            const result = generateNumberSeries(anchor, items, modifier, undefined, precision);
-            expect(result).toEqual([2, 5, 9]);
+        it('should return a series with values rounded to the nearest 2', () => {
+            const result = generateNumberSeries(anchor, items, modifier, undefined, quantize);
+            expect(result).toEqual([2, 4, 10]);
         });
     });
 
-    describe('Given a precision of 1', () => {
+    describe('Given a quantize of 0.2', () => {
         const anchor = 1.111;
         const items = 4;
         const modifier: NumberModifier = { mode: 'linear', by: 0.555 };
-        const precision = 1;
+        const quantize = 0.2;
 
-        it('should return a series with values rounded to 3 decimal places', () => {
-            const result = generateNumberSeries(anchor, items, modifier, undefined, precision);
-            expect(result).toEqual([1.1, 1.7, 2.2, 2.8]);
+        it('should return a series with values rounded to the nearest 0.2', () => {
+            const result = generateNumberSeries(anchor, items, modifier, undefined, quantize);
+            expect(result).toEqual([1.2, 1.6, 2.2, 2.8]);
         });
     });
 
     describe('Given a non-integer number of items', () => {
-        const anchor = 1.111;
+        const anchor = 1;
         const items = 4.7;
-        const modifier: NumberModifier = { mode: 'linear', by: 0.555 };
-        const precision = 1;
+        const modifier: NumberModifier = { mode: 'linear', by: 1 };
 
-        it('should return a series with floored number of items', () => {
-            const result = generateNumberSeries(anchor, items, modifier, undefined, precision);
-            expect(result).toEqual([1.1, 1.7, 2.2, 2.8]);
+        it('should round the anchor to the default quantize (2)', () => {
+            const result = generateNumberSeries(anchor, items, modifier);
+            expect(result).toEqual([1, 2, 3, 4]);
         });
     });
 });

@@ -1,7 +1,6 @@
 import type { ColorSRGBSaturationInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
-import { clampChannelValue } from '../helpers';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
 import { resolveSRGBSaturationValueRef } from './resolveSRGBSaturationValueRef';
@@ -19,5 +18,5 @@ export const resolveSRGBSaturationValue = (
         return fallback;
     }
 
-    return clampChannelValue(input, 'srgb-saturation');
+    return input;
 };

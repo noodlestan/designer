@@ -5,6 +5,7 @@ export type ColorOklabChromaValueExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-value/explicit';
     params: {
         value: ColorOklabChromaInput;
+        quantize?: number;
     };
 };
 
@@ -12,6 +13,7 @@ export type ColorOklabChromaScaleExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-scale/explicit';
     params: {
         values: ColorOklabChromaInput[];
+        quantize?: number;
     };
 };
 
@@ -21,6 +23,7 @@ export type ColorOklabChromaScaleBoundedInput = InputRecord & {
         from: ColorOklabChromaInput;
         to: ColorOklabChromaInput;
         steps: number;
+        quantize?: number;
     };
 };
 

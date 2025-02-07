@@ -15,16 +15,24 @@ export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const fromValue = createOklabChromaValue(context.nestedContext(), params.from);
-            const toValue = createOklabChromaValue(context.nestedContext(), params.to);
+            const { quantize } = params;
+
+            const fromValue = createOklabChromaValue(context.nestedContext(), params.from, {
+                quantize,
+            });
+            const toValue = createOklabChromaValue(context.nestedContext(), params.to, {
+                quantize,
+            });
 
             const from = fromValue.get();
             const to = toValue.get();
 
             const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item => createOklabChromaValue(context.nestedContext(), item));
+            const values = series.slice(1, series.length - 1).map(item =>
+                createOklabChromaValue(context.nestedContext(), item, {
+                    quantize,
+                }),
+            );
             return createOklabChromaScale(context, [fromValue, ...values, toValue]);
         },
     };

@@ -19,9 +19,9 @@ describe('generateBoundedColorList()', () => {
             const result = generateBoundedColorList(fromColor, toColor, steps);
             expect(result).toHaveLength(4);
             expect(result[0]).toEqual({ l: 0, c: 0, h: 0 });
-            expect(result[1]).toEqual({ l: 0.33289031943146585, c: 0.000012927608413513169, h: 0 });
-            expect(result[2]).toEqual({ l: 0.6665487980815149, c: 0.000025885047858610596, h: 0 });
-            expect(result[3]).toEqual({ l: 1.000001007601285, c: 0.00003883447695786469, h: 0 });
+            expect(result[1]).toEqual({ l: 0.3329, c: 0, h: 0 });
+            expect(result[2]).toEqual({ l: 0.6665, c: 0, h: 0 });
+            expect(result[3]).toEqual({ l: 1, c: 0, h: 0 });
         });
     });
 
@@ -32,8 +32,8 @@ describe('generateBoundedColorList()', () => {
             const result = generateBoundedColorList(fromColor, toColor, steps, 'hsl');
             expect(result).toHaveLength(4);
             expect(result[0]).toEqual({ h: 0, s: 0, l: 0 });
-            expect(result[1]).toEqual({ h: 0, s: 0, l: 0.21176470588235294 });
-            expect(result[2]).toEqual({ h: 0, s: 0, l: 0.5803921568627451 });
+            expect(result[1]).toEqual({ h: 0, s: 0, l: 0.2118 });
+            expect(result[2]).toEqual({ h: 0, s: 0, l: 0.5804 });
             expect(result[3]).toEqual({ h: 0, s: 0, l: 1 });
         });
     });
@@ -45,7 +45,7 @@ describe('generateBoundedColorList()', () => {
             const result = generateBoundedColorList(fromColor, toColor, steps, 'hsl');
             expect(result).toHaveLength(2);
             expect(result[0]).toEqual({ h: 0, s: 0, l: 0 });
-            expect(result[1]).toEqual({ h: 0, s: 0, l: 1 });
+            expect(result[1]).toEqual({ h: 180, s: 1, l: 1 });
         });
     });
 

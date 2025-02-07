@@ -11,8 +11,10 @@ export const createColorSRGBSaturationScaleExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
+            const { quantize } = params;
+
             const values = params.values.map(value =>
-                createSRGBSaturationValue(context.nestedContext(), value),
+                createSRGBSaturationValue(context.nestedContext(), value, { quantize }),
             );
 
             return createSRGBSaturationScale(context, values);

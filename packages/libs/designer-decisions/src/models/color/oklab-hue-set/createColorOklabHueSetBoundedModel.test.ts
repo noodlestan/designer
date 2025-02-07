@@ -10,10 +10,10 @@ describe('createColorOklabHueSetBoundedModel()', () => {
 
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
-        const expectedLength = 9;
+        const expectedLength = 3;
         const params: ColorOklabChromaScaleBoundedInput['params'] = {
-            from: 300,
-            to: 400,
+            from: 350.725,
+            to: 370,
             steps: expectedLength - 2,
         };
 
@@ -28,7 +28,25 @@ describe('createColorOklabHueSetBoundedModel()', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(params.from);
-            expect(result.get().item(4)?.get()).toEqual(330);
+            expect(result.get().item(1)?.get()).toEqual(355.3625);
+            expect(result.get().last()?.get()).toEqual(360);
+        });
+    });
+
+    describe('Given a quantize param', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabChromaScaleBoundedInput['params'] = {
+            from: 351.725,
+            to: 370,
+            steps: 1,
+            quantize: 2,
+        };
+
+        it('should populate the set with quantized values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(352);
+            expect(result.get().item(1)?.get()).toEqual(356);
             expect(result.get().last()?.get()).toEqual(360);
         });
     });

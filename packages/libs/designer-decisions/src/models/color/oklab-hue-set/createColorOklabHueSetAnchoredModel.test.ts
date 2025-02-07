@@ -15,7 +15,7 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
             anchor: 330,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -10 },
+                modifier: { mode: 'linear', by: -0.01 },
             },
             after: {
                 steps: 3,
@@ -33,8 +33,32 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(310);
+            expect(result.get().first()?.get()).toEqual(329.98);
             expect(result.get().item(2)?.get()).toEqual(params.anchor);
+            expect(result.get().last()?.get()).toEqual(360);
+        });
+    });
+
+    describe('Given a quantize param', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabHueSetAnchoredInput['params'] = {
+            anchor: 333.001,
+            before: {
+                steps: 2,
+                modifier: { mode: 'linear', by: -0.1 },
+            },
+            after: {
+                steps: 3,
+                modifier: { mode: 'linear', by: 20 },
+            },
+            quantize: 2,
+        };
+
+        it('should populate the set with quantized values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(334);
+            expect(result.get().item(1)?.get()).toEqual(334);
             expect(result.get().last()?.get()).toEqual(360);
         });
     });

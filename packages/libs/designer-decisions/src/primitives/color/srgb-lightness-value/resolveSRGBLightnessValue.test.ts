@@ -48,12 +48,12 @@ describe('resolveSRGBLightnessValue()', () => {
         });
     });
 
-    describe('When input is an out bounds number', () => {
+    describe('When input is out bounds', () => {
         const mockInput = 999;
 
-        it('should return the clamped input value', () => {
+        it('should return not clamp the value', () => {
             const result = resolveSRGBLightnessValue(mockContext, mockInput);
-            expect(result).toEqual(1);
+            expect(result).toEqual(999);
         });
     });
 

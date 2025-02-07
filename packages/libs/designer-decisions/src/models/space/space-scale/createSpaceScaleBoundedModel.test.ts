@@ -10,10 +10,10 @@ describe('createSpaceScaleBoundedModel()', () => {
 
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
-        const expectedLength = 9;
+        const expectedLength = 3;
         const params: SpaceScaleBoundedInput['params'] = {
             from: 10,
-            to: 90,
+            to: 12.25,
             steps: expectedLength - 2,
         };
 
@@ -27,9 +27,25 @@ describe('createSpaceScaleBoundedModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(params.from + 'px');
-            expect(result.get().item(4)?.get()).toEqual('50px');
-            expect(result.get().last()?.get()).toEqual(params.to + 'px');
+            expect(result.get().first()?.toString()).toEqual(params.from + 'px');
+            expect(result.get().item(1)?.toString()).toEqual('11.125px');
+            expect(result.get().last()?.toString()).toEqual(params.to + 'px');
+        });
+    });
+
+    describe('Given a quantize param', () => {
+        const [mockContext] = createValueContextMock();
+        const params: SpaceScaleBoundedInput['params'] = {
+            from: 10,
+            to: 12.25,
+            steps: 1,
+            quantize: 2,
+        };
+
+        it('should populate the set with quantized values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().item(1)?.toString()).toEqual('12px');
         });
     });
 });

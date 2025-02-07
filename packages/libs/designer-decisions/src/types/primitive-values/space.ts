@@ -1,14 +1,15 @@
 import type { SpaceWithUnits } from '../decision-inputs';
 
-import type { BaseSet, BaseValue } from './base';
+import type { BaseSet } from './base';
+import type { BaseNumericValue, NumberValueOptions } from './number';
 
-export type SpaceValue = BaseValue<string> & {
-    getValueWithUnits(): SpaceWithUnits;
+export type SpaceValueOptions = NumberValueOptions;
+
+export type SpaceValueFormatOptions = SpaceValueOptions;
+
+export type SpaceValue = BaseNumericValue & {
+    toString(options?: SpaceValueFormatOptions): string;
+    toObject(options?: SpaceValueFormatOptions): SpaceWithUnits;
 };
 
 export type SpaceScale = BaseSet<SpaceValue>;
-
-// export type SpaceClampedValue = {
-//     getValueAtViewportWidth(vw: number): { value: number; units: string };
-//     getValueString(): string;
-// };

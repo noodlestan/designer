@@ -60,7 +60,7 @@ describe('resolveSRGBHueValueRef()', () => {
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
-        const mockColor = { h: 123, s: 0.7, l: 0.3 };
+        const mockColor = { h: 122, s: 0.7, l: 0.3 };
         const colorValue = createColorValue(createValueContextMock()[0], mockColor);
 
         beforeEach(() => {

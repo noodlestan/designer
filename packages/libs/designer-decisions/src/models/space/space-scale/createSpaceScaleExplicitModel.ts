@@ -7,9 +7,12 @@ export const createSpaceScaleExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
+            const { quantize } = params;
+
             const values = params.values.map(value =>
-                createSpaceValue(context.nestedContext(), value),
+                createSpaceValue(context.nestedContext(), value, { quantize }),
             );
+
             return createSpaceScale(context, values);
         },
     };

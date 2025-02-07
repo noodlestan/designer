@@ -1,51 +1,92 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { createDecisionContextMock } from '../../../mocks';
-import type { ValueContext } from '../../../types';
+import type { ColorSRGBHSLiteral, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
 
 import { createColorValue } from './createColorValue';
 
 describe('createColorValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = { h: 123, s: 0.3, l: 0.5 };
+    const input = { h: 231.433, s: 0.33587, l: 0.45128 };
 
     let valueContext: ValueContext;
 
     beforeEach(() => {
         valueContext = createValueContext(decisionContextMock);
     });
+    describe('Given a value', () => {
+        it('should have the provided context', () => {
+            const colorValue = createColorValue(valueContext, input);
 
-    it('should have the provided context', () => {
-        const colorValue = createColorValue(valueContext, mockInput);
+            expect(colorValue.context()).toBe(valueContext);
+        });
 
-        expect(colorValue.context()).toBe(valueContext);
+        it('should consume the input', () => {
+            createColorValue(valueContext, input);
+
+            expect(valueContext.valueInput()).toEqual(input);
+        });
+
+        it('should expose the resolved value via .get()', () => {
+            const colorValue = createColorValue(valueContext, input);
+
+            const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>('hsl');
+            expect(h).toBe(231.43);
+            expect(s).toBe(0.3359);
+            expect(l).toBe(0.4513);
+        });
+
+        it('should format toObject("rgb") correctly', () => {
+            const colorValue = createColorValue(valueContext, input);
+
+            expect(colorValue.toObject('rgb')).toEqual({ r: 76, g: 87, b: 154 });
+        });
+
+        it('should format toString("rgb") correctly', () => {
+            const colorValue = createColorValue(valueContext, input);
+
+            expect(colorValue.toString('rgb')).toBe('#4c579a');
+        });
     });
 
-    it('should consume the input', () => {
-        createColorValue(valueContext, mockInput);
+    describe('Given a quantize option', () => {
+        const options = { quantize: 2 };
 
-        expect(valueContext.valueInput()).toEqual(mockInput);
-    });
+        it('should expose the quantized value via .toObject()', () => {
+            const colorValue = createColorValue(valueContext, input, options);
 
-    it('should expose the resolved value and allow .get()', () => {
-        const colorValue = createColorValue(valueContext, mockInput);
+            const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>('hsl');
 
-        const [h, s, l] = colorValue.get().hsl();
-        expect(h).toBeCloseTo(mockInput.h);
-        expect(s).toBeCloseTo(mockInput.s);
-        expect(l).toBeCloseTo(mockInput.l);
-    });
+            expect(h).toBe(232);
+            expect(s).toBe(0.34);
+            expect(l).toBe(0.46);
+        });
 
-    it('should format toObject("rgb") correctly', () => {
-        const colorValue = createColorValue(valueContext, mockInput);
+        it('should expose the raw value via .get()', () => {
+            const result = createColorValue(valueContext, input, options);
 
-        expect(colorValue.toObject('rgb')).toEqual({ r: 89, g: 166, b: 93 });
-    });
+            const [h, s, l] = result.get().hsl();
 
-    it('should format toString("rgb") correctly', () => {
-        const colorValue = createColorValue(valueContext, mockInput);
+            expect(h).toBeCloseTo(input.h);
+            expect(s).toBeCloseTo(input.s);
+            expect(l).toBeCloseTo(input.l);
+        });
 
-        expect(colorValue.toString('rgb')).toBe('#59a65d');
+        it('should (re)quantize the value via toObject()', () => {
+            const result = createColorValue(valueContext, input, options);
+
+            const { h, s, l } = result.toObject<ColorSRGBHSLiteral>('hsl', { quantize: 5 });
+            expect(h).toBe(230);
+            expect(s).toBe(0.35);
+            expect(l).toBe(0.45);
+        });
+
+        it('should (re)quantize the value via toString()', () => {
+            const result = createColorValue(valueContext, input, options);
+
+            const hsl = result.toString('hsl', { quantize: 1 });
+            expect(hsl).toBe('hsl(231deg 34% 45%)');
+        });
     });
 });

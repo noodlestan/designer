@@ -15,11 +15,17 @@ export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const anchorValue = createOklabHueValue(context.nestedContext(), params.anchor);
+            const { quantize } = params;
+
+            const anchorValue = createOklabHueValue(context.nestedContext(), params.anchor, {
+                quantize,
+            });
             const anchor = anchorValue.get();
 
             const series = generateAnchoredSeries(anchor, params);
-            const values = series.map(item => createOklabHueValue(context.nestedContext(), item));
+            const values = series.map(item =>
+                createOklabHueValue(context.nestedContext(), item, { quantize }),
+            );
             return createOklabHueSet(context, values);
         },
     };

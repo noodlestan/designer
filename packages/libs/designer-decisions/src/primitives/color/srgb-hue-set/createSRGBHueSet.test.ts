@@ -24,7 +24,7 @@ describe('createSRGBHueSet()', () => {
         expect(result.context()).toBe(valueContext);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createSRGBHueSet(valueContext, [hueValue]);
 
         expect(result.get().items()).toHaveLength(1);

@@ -22,11 +22,11 @@ export const resolveSpaceValueRef = (context: ValueContext, ref: DecisionRef): S
 
     if (isSpaceScaleDecision(decision)) {
         const value = resolveSetRefDecision<SpaceValue>(decision, context, valueName, ref);
-        return value?.getValueWithUnits() ?? fallback;
+        return value?.toObject() ?? fallback;
     }
 
     if (isSpaceValueDecision(decision)) {
-        return decision.produce(context).getValueWithUnits();
+        return decision.produce(context).toObject();
     }
 
     handleRefMismatchError(context, decision, valueName, ref, accepted);

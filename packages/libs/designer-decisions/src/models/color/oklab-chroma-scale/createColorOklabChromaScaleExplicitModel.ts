@@ -11,8 +11,10 @@ export const createColorOklabChromaScaleExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (contex, params) => {
+            const { quantize } = params;
+
             const values = params.values.map(value =>
-                createOklabChromaValue(contex.nestedContext(), value),
+                createOklabChromaValue(contex.nestedContext(), value, { quantize }),
             );
 
             return createOklabChromaScale(contex, values);

@@ -16,3 +16,4 @@ export const REF_CHECKED_TYPES = [
 ];
 
 export const CHANNEL_NAME: ColorChannelName = 'srgb-lightness';
+export const NUMERIC_VALUE_BASE = 2;
