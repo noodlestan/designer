@@ -5,6 +5,7 @@ export type ColorOklabChromaValueExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-value/explicit';
     params: {
         value: ColorOklabChromaInput;
+        precision?: number;
     };
 };
 
@@ -12,6 +13,7 @@ export type ColorOklabChromaScaleExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-scale/explicit';
     params: {
         values: ColorOklabChromaInput[];
+        precision?: number;
     };
 };
 

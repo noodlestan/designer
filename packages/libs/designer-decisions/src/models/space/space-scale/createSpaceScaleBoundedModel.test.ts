@@ -32,4 +32,20 @@ describe('createSpaceScaleBoundedModel()', () => {
             expect(result.get().last()?.get()).toEqual(params.to + 'px');
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: SpaceScaleBoundedInput['params'] = {
+            from: 10,
+            to: 12.25,
+            steps: 1,
+            precision: 2,
+        };
+
+        it('should round the values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().item(1)?.get()).toEqual('12px');
+        });
+    });
 });

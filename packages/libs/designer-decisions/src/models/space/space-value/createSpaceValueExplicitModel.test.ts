@@ -20,4 +20,18 @@ describe('createSpaceValueExplicitModel()', () => {
             expect(result.get()).toEqual(params.value + 'px');
         });
     });
+
+    describe('Given a context precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: SpaceValueExplicitInput['params'] = {
+            value: 2.111,
+            precision: 4,
+        };
+
+        it('should round the value', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get()).toEqual('4px');
+        });
+    });
 });

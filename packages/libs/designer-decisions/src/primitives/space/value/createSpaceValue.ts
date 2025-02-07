@@ -1,16 +1,25 @@
-import type { SpaceValue, SpaceValueInput, ValueContext } from '../../../types';
+import type { SpaceValue, SpaceValueInput, SpaceValueOptions, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
+import { nearest } from '../../number';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
 
-export const createSpaceValue = (context: ValueContext, input: SpaceValueInput): SpaceValue => {
+export const createSpaceValue = (
+    context: ValueContext,
+    input: SpaceValueInput,
+    options: SpaceValueOptions = {},
+): SpaceValue => {
     context.consume(input);
 
+    const { precision } = options;
     const value = resolveSpaceValue(context, input);
 
     return {
         ...createBaseValue(context),
-        get: () => String(value.value) + value.units,
-        getValueWithUnits: () => value,
+        get: () => String(nearest(value.value, precision)) + value.units,
+        getValueWithUnits: () => ({
+            value: nearest(value.value, precision),
+            units: value.units,
+        }),
     };
 };

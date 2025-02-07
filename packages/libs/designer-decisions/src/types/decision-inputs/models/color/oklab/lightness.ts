@@ -5,6 +5,7 @@ export type ColorOklabLightnessValueExplicitInput = InputRecord & {
     model: 'color-oklab-lightness-value/explicit';
     params: {
         value: ColorOklabLightnessInput;
+        precision?: number;
     };
 };
 
@@ -12,6 +13,7 @@ export type ColorOklabLightnessScaleExplicitInput = InputRecord & {
     model: 'color-oklab-lightness-scale/explicit';
     params: {
         values: ColorOklabLightnessInput[];
+        precision?: number;
     };
 };
 

@@ -24,7 +24,7 @@ describe('createColorSet()', () => {
         expect(result.context()).toBe(valueContext);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createColorSet(valueContext, [colorValue]);
 
         expect(result.get().items()).toHaveLength(1);

@@ -24,7 +24,7 @@ describe('createSpaceScale()', () => {
         expect(result.context()).toBe(valueContext);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createSpaceScale(valueContext, [spaceValue]);
 
         expect(result.get().items()).toHaveLength(1);

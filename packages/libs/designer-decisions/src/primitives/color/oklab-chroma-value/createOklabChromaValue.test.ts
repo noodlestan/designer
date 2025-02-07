@@ -9,7 +9,7 @@ import { CHANNEL_NAME } from './private';
 
 describe('createOklabChromaValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput: ColorOklabChromaInput = 0.2;
+    const mockInput: ColorOklabChromaInput = 0.12;
 
     let valueContext: ValueContext;
 
@@ -35,10 +35,16 @@ describe('createOklabChromaValue()', () => {
         expect(valueContext.valueInput()).toEqual(mockInput);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createOklabChromaValue(valueContext, mockInput);
 
         expect(result.get()).toEqual(mockInput);
+    });
+
+    it('should expose value rounded to precision', () => {
+        const result = createOklabChromaValue(valueContext, mockInput, { precision: 0.2 });
+
+        expect(result.get()).toEqual(0.2);
     });
 
     it('should convert to a color with given channels', () => {
@@ -48,7 +54,7 @@ describe('createOklabChromaValue()', () => {
         const [l, c, h] = color.get().oklch();
 
         expect(h).toBeCloseTo(300);
-        expect(c).toBeCloseTo(0.2);
+        expect(c).toBeCloseTo(0.12);
         expect(l).toBeCloseTo(0.5);
     });
 });

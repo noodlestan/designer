@@ -24,7 +24,7 @@ describe('createSRGBLightnessScale()', () => {
         expect(result.context()).toBe(valueContext);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createSRGBLightnessScale(valueContext, [lightnessValue]);
 
         expect(result.get().items()).toHaveLength(1);

@@ -8,7 +8,7 @@ import { createSpaceValue } from './createSpaceValue';
 
 describe('createSpaceValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = { value: 123, units: 'rem' } as SpaceValueInput;
+    const mockInput = { value: 123.111, units: 'rem' } as SpaceValueInput;
 
     let valueContext: ValueContext;
 
@@ -28,15 +28,27 @@ describe('createSpaceValue()', () => {
         expect(valueContext.valueInput()).toEqual(mockInput);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createSpaceValue(valueContext, mockInput);
 
-        expect(result.get()).toEqual('123rem');
+        expect(result.get()).toEqual('123.111rem');
+    });
+
+    it('should expose value rounded to precision', () => {
+        const result = createSpaceValue(valueContext, mockInput, { precision: 2 });
+
+        expect(result.get()).toEqual('124rem');
     });
 
     it('should expose the value with units', () => {
         const result = createSpaceValue(valueContext, mockInput);
 
         expect(result.getValueWithUnits()).toEqual(mockInput);
+    });
+
+    it('should expose value with units rounded to precision', () => {
+        const result = createSpaceValue(valueContext, mockInput, { precision: 2 });
+
+        expect(result.getValueWithUnits().value).toEqual(124);
     });
 });

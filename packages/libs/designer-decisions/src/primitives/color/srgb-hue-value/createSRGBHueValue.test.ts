@@ -9,7 +9,7 @@ import { CHANNEL_NAME } from './private';
 
 describe('createSRGBHueValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput: ColorSRGBHueInput = 120;
+    const mockInput: ColorSRGBHueInput = 121.111;
 
     let valueContext: ValueContext;
 
@@ -35,10 +35,16 @@ describe('createSRGBHueValue()', () => {
         expect(valueContext.valueInput()).toEqual(mockInput);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createSRGBHueValue(valueContext, mockInput);
 
         expect(result.get()).toEqual(mockInput);
+    });
+
+    it('should expose value rounded to precision', () => {
+        const result = createSRGBHueValue(valueContext, mockInput, { precision: 2 });
+
+        expect(result.get()).toEqual(122);
     });
 
     it('should convert to a color with given channels', () => {
@@ -47,7 +53,7 @@ describe('createSRGBHueValue()', () => {
         const color = result.toColor({ s: 0.8, l: 0.6 });
         const [h, s, l] = color.get().hsl();
 
-        expect(h).toBeCloseTo(120);
+        expect(h).toBeCloseTo(121.111);
         expect(s).toBeCloseTo(0.8);
         expect(l).toBeCloseTo(0.6);
     });

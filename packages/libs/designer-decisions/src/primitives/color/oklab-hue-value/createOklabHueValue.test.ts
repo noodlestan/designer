@@ -35,7 +35,7 @@ describe('createOklabHueValue()', () => {
         expect(valueContext.valueInput()).toEqual(mockInput);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const result = createOklabHueValue(valueContext, mockInput);
 
         expect(result.get()).toEqual(mockInput);

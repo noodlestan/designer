@@ -5,6 +5,7 @@ export type SpaceValueExplicitInput = InputRecord & {
     model: 'space-value/explicit';
     params: {
         value: SpaceValueInput;
+        precision?: number;
     };
 };
 
@@ -12,6 +13,7 @@ export type SpaceScaleExplicitInput = InputRecord & {
     model: 'space-scale/explicit';
     params: {
         values: SpaceValueInput[];
+        precision?: number;
     };
 };
 

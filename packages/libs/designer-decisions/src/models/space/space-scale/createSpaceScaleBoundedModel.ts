@@ -7,8 +7,10 @@ export const createSpaceScaleBoundedModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const fromValue = createSpaceValue(context.nestedContext(), params.from);
-            const toValue = createSpaceValue(context.nestedContext(), params.to);
+            const { precision } = params;
+
+            const fromValue = createSpaceValue(context.nestedContext(), params.from, { precision });
+            const toValue = createSpaceValue(context.nestedContext(), params.to, { precision });
 
             const { value: from } = fromValue.getValueWithUnits();
             const { value: to } = toValue.getValueWithUnits();
@@ -16,7 +18,8 @@ export const createSpaceScaleBoundedModel: DecisionModelFactory<
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series
                 .slice(1, series.length - 1)
-                .map(item => createSpaceValue(context.nestedContext(), item));
+                .map(item => createSpaceValue(context.nestedContext(), item, { precision }));
+
             return createSpaceScale(context, [fromValue, ...values, toValue]);
         },
     };

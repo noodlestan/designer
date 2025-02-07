@@ -29,4 +29,20 @@ describe('createSpaceScaleExplicitModel()', () => {
             expect(result.get().last()?.get()).toEqual(params.values[2] + 'px');
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: SpaceScaleExplicitInput['params'] = {
+            values: [32.111, 64, 128],
+            precision: 2,
+        };
+
+        it('should round the value', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual('32px');
+            expect(result.get().item(1)?.get()).toEqual('64px');
+            expect(result.get().last()?.get()).toEqual('128px');
+        });
+    });
 });

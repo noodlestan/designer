@@ -28,7 +28,7 @@ describe('createColorValue()', () => {
         expect(valueContext.valueInput()).toEqual(mockInput);
     });
 
-    it('should expose the resolved value and allow .get()', () => {
+    it('should expose the resolved value via .get()', () => {
         const colorValue = createColorValue(valueContext, mockInput);
 
         const [h, s, l] = colorValue.get().hsl();

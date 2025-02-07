@@ -5,6 +5,7 @@ export type ColorSRGBHueValueExplicitInput = InputRecord & {
     model: 'color-srgb-hue-value/explicit';
     params: {
         value: ColorSRGBHueInput;
+        precision?: number;
     };
 };
 
@@ -12,6 +13,7 @@ export type ColorSRGBHueSetExplicitInput = InputRecord & {
     model: 'color-srgb-hue-set/explicit';
     params: {
         values: ColorSRGBHueInput[];
+        precision?: number;
     };
 };
 
