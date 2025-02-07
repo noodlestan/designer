@@ -9,7 +9,7 @@ import { CHANNEL_NAME } from './private';
 
 describe('createOklabHueValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput: ColorOklabHueInput = 275;
+    const mockInput: ColorOklabHueInput = 275.1211;
 
     let valueContext: ValueContext;
 
@@ -41,6 +41,24 @@ describe('createOklabHueValue()', () => {
         expect(result.get()).toEqual(mockInput);
     });
 
+    it('should expose value rounded to precision', () => {
+        const result = createOklabHueValue(valueContext, mockInput, { precision: 0.2 });
+
+        expect(result.get()).toEqual(275.2);
+    });
+
+    it('should clamp the input value', () => {
+        const result = createOklabHueValue(valueContext, 365);
+
+        expect(result.get()).toEqual(360);
+    });
+
+    it('should clamp the rounded value', () => {
+        const result = createOklabHueValue(valueContext, 360, { precision: 400 });
+
+        expect(result.get()).toEqual(360);
+    });
+
     it('should convert to a color with given channels', () => {
         const result = createOklabHueValue(valueContext, mockInput);
 
@@ -49,6 +67,6 @@ describe('createOklabHueValue()', () => {
 
         expect(l).toBeCloseTo(0.6);
         expect(c).toBeCloseTo(0.15);
-        expect(h).toBeCloseTo(275);
+        expect(h).toBeCloseTo(275.1211);
     });
 });

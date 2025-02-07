@@ -47,6 +47,18 @@ describe('createSRGBSaturationValue()', () => {
         expect(result.get()).toEqual(0.8);
     });
 
+    it('should clamp the input value', () => {
+        const result = createSRGBSaturationValue(valueContext, 2);
+
+        expect(result.get()).toEqual(1);
+    });
+
+    it('should clamp the rounded value', () => {
+        const result = createSRGBSaturationValue(valueContext, 1, { precision: 2 });
+
+        expect(result.get()).toEqual(1);
+    });
+
     it('should convert to a color with given channels', () => {
         const result = createSRGBSaturationValue(valueContext, mockInput);
 

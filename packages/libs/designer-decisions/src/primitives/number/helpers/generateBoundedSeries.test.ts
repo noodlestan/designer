@@ -52,7 +52,7 @@ describe('generateBoundedSeries()', () => {
         });
     });
 
-    describe.only('Given no precision parameter', () => {
+    describe('Given no precision parameter', () => {
         it('should return a series with values not rounded', () => {
             const result = generateBoundedSeries(1, 1.25, 1);
             expect(result).toEqual([1, 1.125, 1.25]);

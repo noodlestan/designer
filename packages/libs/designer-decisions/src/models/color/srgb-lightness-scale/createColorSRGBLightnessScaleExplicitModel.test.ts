@@ -29,4 +29,20 @@ describe('createColorSRGBLightnessScaleExplicitModel()', () => {
             expect(result.get().last()?.get()).toEqual(1);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorSRGBLightnessScaleExplicitInput['params'] = {
+            values: [0.111, 0.5, 1.1],
+            precision: 0.2,
+        };
+
+        it('should round the value', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(0.2);
+            expect(result.get().item(1)?.get()).toEqual(0.6);
+            expect(result.get().last()?.get()).toEqual(1);
+        });
+    });
 });

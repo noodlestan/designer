@@ -32,4 +32,22 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
             expect(result.get().last()?.get()).toEqual(0.5);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabChromaScaleBoundedInput['params'] = {
+            from: 0.11,
+            to: 0.99,
+            steps: 1,
+            precision: 0.2,
+        };
+
+        it('should round the values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(0.2);
+            expect(result.get().item(1)?.get()).toEqual(0.4);
+            expect(result.get().last()?.get()).toEqual(0.5);
+        });
+    });
 });

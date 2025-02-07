@@ -29,4 +29,20 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
             expect(result.get().last()?.get()).toEqual(360);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorSRGBHueSetExplicitInput['params'] = {
+            values: [331.111, 351, 371],
+            precision: 2,
+        };
+
+        it('should round the value', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(332);
+            expect(result.get().item(1)?.get()).toEqual(352);
+            expect(result.get().last()?.get()).toEqual(360);
+        });
+    });
 });

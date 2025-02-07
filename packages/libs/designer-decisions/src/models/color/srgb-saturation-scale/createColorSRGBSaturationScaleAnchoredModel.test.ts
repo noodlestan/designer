@@ -38,4 +38,28 @@ describe('createColorSRGBSaturationScaleAnchoredModel()', () => {
             expect(result.get().last()?.get()).toEqual(1);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorSRGBSaturationScaleAnchoredInput['params'] = {
+            anchor: 0.5,
+            before: {
+                steps: 1,
+                modifier: { mode: 'linear', by: -0.01 },
+            },
+            after: {
+                steps: 5,
+                modifier: { mode: 'linear', by: 0.15 },
+            },
+            precision: 0.2,
+        };
+
+        it('should round the values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(0.6);
+            expect(result.get().item(1)?.get()).toEqual(0.6);
+            expect(result.get().last()?.get()).toEqual(1);
+        });
+    });
 });

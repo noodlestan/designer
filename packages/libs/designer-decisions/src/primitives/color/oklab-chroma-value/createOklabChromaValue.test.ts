@@ -47,6 +47,18 @@ describe('createOklabChromaValue()', () => {
         expect(result.get()).toEqual(0.2);
     });
 
+    it('should clamp the input value', () => {
+        const result = createOklabChromaValue(valueContext, 5);
+
+        expect(result.get()).toEqual(0.5);
+    });
+
+    it('should clamp the rounded value', () => {
+        const result = createOklabChromaValue(valueContext, 0.5, { precision: 0.7 });
+
+        expect(result.get()).toEqual(0.5);
+    });
+
     it('should convert to a color with given channels', () => {
         const result = createOklabChromaValue(valueContext, mockInput);
 

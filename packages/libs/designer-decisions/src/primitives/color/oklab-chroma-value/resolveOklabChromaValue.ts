@@ -1,7 +1,6 @@
 import type { ColorOklabChromaInput, ValueContext } from '../../../types';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
-import { clampChannelValue } from '../helpers';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
 import { resolveOklabChromaValueRef } from './resolveOklabChromaValueRef';
@@ -19,5 +18,5 @@ export const resolveOklabChromaValue = (
         return fallback;
     }
 
-    return clampChannelValue(input, 'oklab-chroma');
+    return input;
 };

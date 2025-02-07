@@ -38,4 +38,28 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
             expect(result.get().last()?.get()).toEqual(360);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabHueSetAnchoredInput['params'] = {
+            anchor: 333.001,
+            before: {
+                steps: 2,
+                modifier: { mode: 'linear', by: -0.1 },
+            },
+            after: {
+                steps: 3,
+                modifier: { mode: 'linear', by: 20 },
+            },
+            precision: 2,
+        };
+
+        it('should round the values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(334);
+            expect(result.get().item(1)?.get()).toEqual(334);
+            expect(result.get().last()?.get()).toEqual(360);
+        });
+    });
 });

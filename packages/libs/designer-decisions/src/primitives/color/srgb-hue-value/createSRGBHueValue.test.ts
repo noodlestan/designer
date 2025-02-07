@@ -47,6 +47,18 @@ describe('createSRGBHueValue()', () => {
         expect(result.get()).toEqual(122);
     });
 
+    it('should clamp the input value', () => {
+        const result = createSRGBHueValue(valueContext, 365);
+
+        expect(result.get()).toEqual(360);
+    });
+
+    it('should clamp the rounded value', () => {
+        const result = createSRGBHueValue(valueContext, 360, { precision: 400 });
+
+        expect(result.get()).toEqual(360);
+    });
+
     it('should convert to a color with given channels', () => {
         const result = createSRGBHueValue(valueContext, mockInput);
 

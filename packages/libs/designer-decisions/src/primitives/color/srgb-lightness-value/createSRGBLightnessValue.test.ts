@@ -47,6 +47,18 @@ describe('createSRGBLightnessValue()', () => {
         expect(result.get()).toEqual(0.6);
     });
 
+    it('should clamp the input value', () => {
+        const result = createSRGBLightnessValue(valueContext, 2);
+
+        expect(result.get()).toEqual(1);
+    });
+
+    it('should clamp the rounded value', () => {
+        const result = createSRGBLightnessValue(valueContext, 1, { precision: 2 });
+
+        expect(result.get()).toEqual(1);
+    });
+
     it('should convert to a color with given channels', () => {
         const result = createSRGBLightnessValue(valueContext, mockInput);
 

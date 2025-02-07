@@ -11,8 +11,10 @@ export const createColorSRGBHueSetExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
+            const { precision } = params;
+
             const values = params.values.map(value =>
-                createSRGBHueValue(context.nestedContext(), value),
+                createSRGBHueValue(context.nestedContext(), value, { precision }),
             );
 
             return createSRGBHueSet(context, values);

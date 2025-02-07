@@ -6,6 +6,7 @@ import type {
 } from '../../../types';
 import { createBaseValue } from '../../base';
 import { nearest } from '../../number';
+import { clampChannelValue } from '../helpers';
 import { createColorValue } from '../value';
 
 import { CHANNEL_NAME } from './private';
@@ -21,9 +22,11 @@ export const createSRGBLightnessValue = (
     const { precision } = options;
     const value = resolveSRGBLightnessValue(context, input);
 
+    const normalised = () => clampChannelValue(nearest(value, precision), 'srgb-lightness');
+
     return {
         ...createBaseValue(context),
-        get: () => nearest(value, precision),
+        get: normalised,
         name: () => CHANNEL_NAME,
         toColor: channels => {
             const { h, s } = channels;

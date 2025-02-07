@@ -32,4 +32,22 @@ describe('createColorSRGBHueSetBoundedModel()', () => {
             expect(result.get().last()?.get()).toEqual(360);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabChromaScaleBoundedInput['params'] = {
+            from: 351.725,
+            to: 370,
+            steps: 1,
+            precision: 2,
+        };
+
+        it('should round the values', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get().first()?.get()).toEqual(352);
+            expect(result.get().item(1)?.get()).toEqual(356);
+            expect(result.get().last()?.get()).toEqual(360);
+        });
+    });
 });

@@ -11,7 +11,9 @@ export const createColorOklabHueValueExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            return createOklabHueValue(context, params.value);
+            const { precision } = params;
+
+            return createOklabHueValue(context, params.value, { precision });
         },
     };
 };

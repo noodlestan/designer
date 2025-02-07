@@ -41,9 +41,8 @@ describe('createColorOklabLightnessScaleAnchoredModel()', () => {
 
     describe('Given a precision', () => {
         const [mockContext] = createValueContextMock();
-        const expectedLength = 6;
         const params: ColorOklabLightnessScaleAnchoredInput['params'] = {
-            anchor: 0.5,
+            anchor: 0.499,
             before: {
                 steps: 2,
                 modifier: { mode: 'linear', by: -0.01 },
@@ -55,18 +54,11 @@ describe('createColorOklabLightnessScaleAnchoredModel()', () => {
             precision: 0.02,
         };
 
-        it('should create a set of the expected size', () => {
+        it('should round the values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(expectedLength);
-        });
-
-        it('should populate the set', () => {
-            const result = model.produce(mockContext, params);
-
-            expect(result.get().first()?.get()).toBeCloseTo(0.48);
-            expect(result.get().item(2)?.get()).toEqual(params.anchor);
+            expect(result.get().first()?.get()).toEqual(0.48);
+            expect(result.get().item(2)?.get()).toEqual(0.5);
             expect(result.get().last()?.get()).toEqual(1);
         });
     });

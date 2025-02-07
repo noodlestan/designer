@@ -21,7 +21,7 @@ describe('createSpaceValueExplicitModel()', () => {
         });
     });
 
-    describe('Given a context precision', () => {
+    describe('Given a precision', () => {
         const [mockContext] = createValueContextMock();
         const params: SpaceValueExplicitInput['params'] = {
             value: 2.111,

@@ -33,4 +33,18 @@ describe('createColorOklabHueValueExplicitModel()', () => {
             expect(result.get()).toEqual(360);
         });
     });
+
+    describe('Given a precision', () => {
+        const [mockContext] = createValueContextMock();
+        const params: ColorOklabHueValueExplicitInput['params'] = {
+            value: 333.111,
+            precision: 0.2,
+        };
+
+        it('should create a rounded value', () => {
+            const result = model.produce(mockContext, params);
+
+            expect(result.get()).toEqual(333.2);
+        });
+    });
 });
