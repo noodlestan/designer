@@ -33,15 +33,15 @@ describe('createColorSRGBLightnessScaleExplicitModel()', () => {
     describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBLightnessScaleExplicitInput['params'] = {
-            values: [0.111, 0.5, 1.1],
+            values: [0.1117, 0.5357, 1.132],
             quantize: 0.2,
         };
 
-        it('should round the value', () => {
+        it('should populate the scale with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(0.2);
-            expect(result.get().item(1)?.get()).toEqual(0.6);
+            expect(result.get().first()?.get()).toEqual(0.112);
+            expect(result.get().item(1)?.get()).toEqual(0.536);
             expect(result.get().last()?.get()).toEqual(1);
         });
     });

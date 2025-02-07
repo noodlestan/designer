@@ -41,7 +41,7 @@ describe('createColorSRGBHueValueExplicitModel()', () => {
             quantize: 0.2,
         };
 
-        it('should create a rounded value', () => {
+        it('should create a quantized value', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get()).toEqual(333.2);

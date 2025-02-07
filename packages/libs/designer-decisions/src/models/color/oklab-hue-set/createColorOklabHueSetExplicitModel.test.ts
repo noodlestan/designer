@@ -37,7 +37,7 @@ describe('createColorOklabHueSetExplicitModel()', () => {
             quantize: 2,
         };
 
-        it('should round the value', () => {
+        it('should populate the scale with quantized values', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(332);

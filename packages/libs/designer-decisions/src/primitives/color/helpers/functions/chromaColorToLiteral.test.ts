@@ -11,35 +11,79 @@ import type {
 import { chromaColorToLiteral } from './chromaColorToLiteral';
 
 describe('chromaColorToLiteral()', () => {
-    it('should convert to OKLCH format', () => {
-        const color = chroma.oklch(0.04, 0.01, 15);
-        const result = chromaColorToLiteral<ColorOkLCHLiteral>(color, 'oklch');
-        expect(result.l).toBeCloseTo(0.04);
-        expect(result.c).toBeCloseTo(0.01);
-        expect(result.h).toBeCloseTo(15);
+    describe('Given a color', () => {
+        it('should convert to "oklch" format', () => {
+            const color = chroma.oklch(0.51235, 0.03357, 310.327);
+            const result = chromaColorToLiteral<ColorOkLCHLiteral>(color, 'oklch');
+            expect(result).toEqual({
+                l: 0.5124,
+                c: 0.0336,
+                h: 310.33,
+            });
+        });
+
+        it('should convert to "oklab" format', () => {
+            const color = chroma.oklab(0.51235, 0.03357, -0.03357);
+            const result = chromaColorToLiteral<ColorOkLabLiteral>(color, 'oklab');
+            expect(result).toEqual({
+                l: 0.5124,
+                a: 0.0336,
+                b: -0.0336,
+            });
+        });
+
+        it('should convert to "hsl" format', () => {
+            const color = chroma.hsl(310.327, 0.51235, 0.41235);
+            const result = chromaColorToLiteral<ColorSRGBHSLiteral>(color, 'hsl');
+            expect(result).toEqual({
+                h: 310.33,
+                s: 0.5124,
+                l: 0.4124,
+            });
+        });
+
+        it('should convert to "rgb" hex format', () => {
+            const color = chroma.rgb(128.137, 64.137, 32.137);
+            const result = chromaColorToLiteral<ColorSRGBChannelsLiteral>(color, 'rgb');
+            expect(result).toEqual({
+                r: 128,
+                g: 64,
+                b: 32,
+            });
+        });
     });
 
-    it('should convert to OKLAB format', () => {
-        const color = chroma.oklab(0.5, 0.1, -0.2);
-        const result = chromaColorToLiteral<ColorOkLabLiteral>(color, 'oklab');
-        expect(result.l).toBeCloseTo(0.5);
-        expect(result.a).toBeCloseTo(0.1);
-        expect(result.b).toBeCloseTo(-0.2);
-    });
+    describe('Given a color and a quantize', () => {
+        const quantize = 1;
 
-    it('should convert to HSL format', () => {
-        const color = chroma.hsl(240, 0.5, 0.4);
-        const result = chromaColorToLiteral<ColorSRGBHSLiteral>(color, 'hsl');
-        expect(result.h).toBeCloseTo(240);
-        expect(result.s).toBeCloseTo(0.5);
-        expect(result.l).toBeCloseTo(0.4);
-    });
+        it('should convert to "oklch" format', () => {
+            const color = chroma.oklch(0.51235, 0.03357, 310.327);
+            const result = chromaColorToLiteral<ColorOkLCHLiteral>(color, 'oklch', quantize);
+            expect(result).toEqual({
+                l: 0.51,
+                c: 0.03,
+                h: 310,
+            });
+        });
 
-    it('should convert to SRGB format', () => {
-        const color = chroma.rgb(128, 64, 32);
-        const result = chromaColorToLiteral<ColorSRGBChannelsLiteral>(color, 'rgb');
-        expect(result.r).toEqual(128);
-        expect(result.g).toEqual(64);
-        expect(result.b).toEqual(32);
+        it('should convert to "oklab" format', () => {
+            const color = chroma.oklab(0.51235, 0.03357, -0.03357);
+            const result = chromaColorToLiteral<ColorOkLabLiteral>(color, 'oklab', quantize);
+            expect(result).toEqual({
+                l: 0.51,
+                a: 0.03,
+                b: -0.03,
+            });
+        });
+
+        it('should convert to "hsl" format', () => {
+            const color = chroma.hsl(310.327, 0.51235, 0.41235);
+            const result = chromaColorToLiteral<ColorSRGBHSLiteral>(color, 'hsl', quantize);
+            expect(result).toEqual({
+                h: 310,
+                s: 0.51,
+                l: 0.41,
+            });
+        });
     });
 });

@@ -16,3 +16,4 @@ export const REF_CHECKED_TYPES = [
 ];
 
 export const CHANNEL_NAME: ColorChannelName = 'srgb-hue';
+export const NUMERIC_VALUE_BASE = 0;

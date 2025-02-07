@@ -20,11 +20,11 @@ export const createNumericValue = (
         throw new Error(`Invalid paramter base. Must be integer, received "${base}"`);
     }
 
-    const normalized = normalize !== undefined ? normalize : (v: number) => v;
-
     return {
-        get: () => normalized(quantized(value, quantize, base)),
+        get: () => normalize(quantized(value, quantize, base)),
         raw: () => value,
-        quantized: (q?: number) => normalized(quantized(value, q ?? quantize, base)),
+        quantized: (q?: number) => {
+            return normalize(quantized(value, q ?? quantize, base));
+        },
     };
 };

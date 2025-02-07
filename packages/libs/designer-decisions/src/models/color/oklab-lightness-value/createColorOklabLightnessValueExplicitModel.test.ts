@@ -37,14 +37,14 @@ describe('createColorOklabLightnessValueExplicitModel()', () => {
     describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabLightnessValueExplicitInput['params'] = {
-            value: 0.31,
-            quantize: 0.2,
+            value: 0.3137,
+            quantize: 2,
         };
 
-        it('should create a rounded value', () => {
+        it('should create a quantized value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual(0.4);
+            expect(result.get()).toEqual(0.32);
         });
     });
 });

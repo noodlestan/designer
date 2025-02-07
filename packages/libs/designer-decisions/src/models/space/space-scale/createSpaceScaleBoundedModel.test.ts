@@ -27,9 +27,9 @@ describe('createSpaceScaleBoundedModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.getString()).toEqual(params.from + 'px');
-            expect(result.get().item(1)?.getString()).toEqual('11.125px');
-            expect(result.get().last()?.getString()).toEqual(params.to + 'px');
+            expect(result.get().first()?.toString()).toEqual(params.from + 'px');
+            expect(result.get().item(1)?.toString()).toEqual('11.125px');
+            expect(result.get().last()?.toString()).toEqual(params.to + 'px');
         });
     });
 
@@ -45,7 +45,7 @@ describe('createSpaceScaleBoundedModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().item(1)?.getString()).toEqual('12px');
+            expect(result.get().item(1)?.toString()).toEqual('12px');
         });
     });
 });

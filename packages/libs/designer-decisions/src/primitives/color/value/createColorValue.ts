@@ -1,12 +1,19 @@
-import type { ColorValue, ColorValueInput, ValueContext } from '../../../types';
+import type { ColorValue, ColorValueInput, ColorValueOptions, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
+import { createColor } from '../helpers';
 
 import { resolveColorValue } from './resolveColorValue';
 
-export const createColorValue = (context: ValueContext, input: ColorValueInput): ColorValue => {
+export const createColorValue = (
+    context: ValueContext,
+    input: ColorValueInput,
+    options: ColorValueOptions = {},
+): ColorValue => {
     context.consume(input);
 
-    const value = resolveColorValue(context, input);
+    const { quantize } = options;
+    const literal = resolveColorValue(context, input).toObject('oklch');
+    const value = createColor(literal, { quantize });
 
     return {
         ...createBaseValue(context),

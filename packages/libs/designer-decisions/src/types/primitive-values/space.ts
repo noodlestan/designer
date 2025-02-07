@@ -5,11 +5,11 @@ import type { BaseNumericValue, NumberValueOptions } from './number';
 
 export type SpaceValueOptions = NumberValueOptions;
 
-export type SpaceValueFormattingOptions = SpaceValueOptions;
+export type SpaceValueFormatOptions = SpaceValueOptions;
 
 export type SpaceValue = BaseNumericValue & {
-    getString(options?: SpaceValueFormattingOptions): string;
-    getObject(options?: SpaceValueFormattingOptions): SpaceWithUnits;
+    toString(options?: SpaceValueFormatOptions): string;
+    toObject(options?: SpaceValueFormatOptions): SpaceWithUnits;
 };
 
 export type SpaceScale = BaseSet<SpaceValue>;

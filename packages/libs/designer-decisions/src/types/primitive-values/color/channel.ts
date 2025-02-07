@@ -37,4 +37,4 @@ export type ColorComplementaryChannels =
     | ColorSRGBComplementaryChannels
     | ColorOklabComplementaryChannels;
 
-export type ColorchannelOptions = NumberValueOptions;
+export type ColorChannelValueOptions = NumberValueOptions;

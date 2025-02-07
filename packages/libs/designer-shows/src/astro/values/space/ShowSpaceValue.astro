@@ -11,7 +11,7 @@ type Props = ShowValueProps & {
 
 const { v: spaceValue, value = true } = Astro.props;
 
-const { value: v, units } = spaceValue?.getObject() || {};
+const { value: v, units } = spaceValue?.toObject() || {};
 const vWithUnits = `${v}${units}`;
 ---
 

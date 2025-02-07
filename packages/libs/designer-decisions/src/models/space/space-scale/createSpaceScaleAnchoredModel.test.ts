@@ -33,9 +33,9 @@ describe('createSpaceScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.getString()).toEqual(49.92 + 'px');
-            expect(result.get().item(2)?.getString()).toEqual(params.anchor + 'px');
-            expect(result.get().last()?.getString()).toEqual(110 + 'px');
+            expect(result.get().first()?.toString()).toEqual(49.92 + 'px');
+            expect(result.get().item(2)?.toString()).toEqual(params.anchor + 'px');
+            expect(result.get().last()?.toString()).toEqual(110 + 'px');
         });
     });
 
@@ -57,7 +57,7 @@ describe('createSpaceScaleAnchoredModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.getString()).toEqual('50px');
+            expect(result.get().first()?.toString()).toEqual('50px');
         });
     });
 });

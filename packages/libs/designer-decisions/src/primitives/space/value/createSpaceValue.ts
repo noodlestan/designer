@@ -1,6 +1,6 @@
 import type {
     SpaceValue,
-    SpaceValueFormattingOptions,
+    SpaceValueFormatOptions,
     SpaceValueInput,
     SpaceValueOptions,
     ValueContext,
@@ -27,11 +27,14 @@ export const createSpaceValue = (
         get,
         raw,
         quantized,
-        getString: ({ quantize: q }: SpaceValueFormattingOptions = {}) =>
-            String(quantized(q ?? quantize)) + units,
-        getObject: ({ quantize: q }: SpaceValueFormattingOptions = {}) => ({
-            value: quantized(q ?? quantize),
-            units,
-        }),
+        toString: ({ quantize: q }: SpaceValueFormatOptions = {}) => {
+            return String(quantized(q ?? quantize)) + units;
+        },
+        toObject: ({ quantize: q }: SpaceValueFormatOptions = {}) => {
+            return {
+                value: quantized(q ?? quantize),
+                units,
+            };
+        },
     };
 };

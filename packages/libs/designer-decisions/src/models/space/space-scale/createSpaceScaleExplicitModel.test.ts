@@ -24,9 +24,9 @@ describe('createSpaceScaleExplicitModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.getString()).toEqual(params.values[0] + 'px');
-            expect(result.get().item(1)?.getString()).toEqual(params.values[1] + 'px');
-            expect(result.get().last()?.getString()).toEqual(params.values[2] + 'px');
+            expect(result.get().first()?.toString()).toEqual(params.values[0] + 'px');
+            expect(result.get().item(1)?.toString()).toEqual(params.values[1] + 'px');
+            expect(result.get().last()?.toString()).toEqual(params.values[2] + 'px');
         });
     });
 
@@ -37,12 +37,12 @@ describe('createSpaceScaleExplicitModel()', () => {
             quantize: 2,
         };
 
-        it('should round the value', () => {
+        it('should populate the scale with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.getString()).toEqual('32px');
-            expect(result.get().item(1)?.getString()).toEqual('64px');
-            expect(result.get().last()?.getString()).toEqual('128px');
+            expect(result.get().first()?.toString()).toEqual('32px');
+            expect(result.get().item(1)?.toString()).toEqual('64px');
+            expect(result.get().last()?.toString()).toEqual('128px');
         });
     });
 });

@@ -57,13 +57,13 @@ describe('createSpaceValue()', () => {
         it('should expose the value as SpaceWithUnits ', () => {
             const result = createSpaceValue(valueContext, input);
 
-            expect(result.getObject()).toEqual(input);
+            expect(result.toObject()).toEqual(input);
         });
 
         it('should quantize the SpaceWithUnits ', () => {
             const result = createSpaceValue(valueContext, input);
 
-            expect(result.getObject({ quantize: 0.5 })).toEqual({
+            expect(result.toObject({ quantize: 0.5 })).toEqual({
                 value: 123.5,
                 units: 'rem',
             });
@@ -72,13 +72,13 @@ describe('createSpaceValue()', () => {
         it('should expose the value as a string', () => {
             const result = createSpaceValue(valueContext, input);
 
-            expect(result.getString()).toEqual('123.391rem');
+            expect(result.toString()).toEqual('123.391rem');
         });
 
         it('should quantize the string value', () => {
             const result = createSpaceValue(valueContext, input);
 
-            expect(result.getString({ quantize: 0.5 })).toEqual('123.5rem');
+            expect(result.toString({ quantize: 0.5 })).toEqual('123.5rem');
         });
     });
 
@@ -86,12 +86,6 @@ describe('createSpaceValue()', () => {
         const input = { value: 123.391, units: 'rem' } as SpaceValueInput;
 
         it('should expose the quantized value via .get()', () => {
-            const result = createSpaceValue(valueContext, input, { quantize: 2 });
-
-            expect(result.get()).toEqual(124);
-        });
-
-        it('should expose quantized value', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
             expect(result.get()).toEqual(124);
@@ -124,7 +118,7 @@ describe('createSpaceValue()', () => {
         it('should expose the quantized value as SpaceWithUnits ', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
-            expect(result.getObject()).toEqual({
+            expect(result.toObject()).toEqual({
                 value: 124,
                 units: 'rem',
             });
@@ -133,13 +127,13 @@ describe('createSpaceValue()', () => {
         it('should expose the (un)quantized value as SpaceWithUnits (given q is 0', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
-            expect(result.getObject({ quantize: 0 })).toEqual(input);
+            expect(result.toObject({ quantize: 0 })).toEqual(input);
         });
 
         it('should (re)quantize the SpaceWithUnits ', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
-            expect(result.getObject({ quantize: 5 })).toEqual({
+            expect(result.toObject({ quantize: 5 })).toEqual({
                 value: 125,
                 units: 'rem',
             });
@@ -148,19 +142,19 @@ describe('createSpaceValue()', () => {
         it('should expose the quantized value as a string', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
-            expect(result.getString()).toEqual('124rem');
+            expect(result.toString()).toEqual('124rem');
         });
 
         it('should expose the (un)quantized value as a string (given q is 0', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
-            expect(result.getString({ quantize: 0 })).toEqual('123.391rem');
+            expect(result.toString({ quantize: 0 })).toEqual('123.391rem');
         });
 
         it('should (re)quantize the string value', () => {
             const result = createSpaceValue(valueContext, input, { quantize: 2 });
 
-            expect(result.getString({ quantize: 0.5 })).toEqual('123.5rem');
+            expect(result.toString({ quantize: 0.5 })).toEqual('123.5rem');
         });
     });
 });

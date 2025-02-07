@@ -13,7 +13,7 @@ export type SpaceWithUnits = {
     units: SpaceUnits;
 };
 
-export type SpaceValueFormattingOptions = {
+export type SpaceValueFormatOptions = {
     quantize?: number;
 };
 
@@ -21,7 +21,7 @@ export type SpaceValue = {
     get: () => number;
     raw: () => number;
     quantized: (quantize?: number) => number;
-    getString: (options?: SpaceValueFormattingOptions) => string;
-    getObject: (options?: SpaceValueFormattingOptions) => SpaceWithUnits;
+    toString: (options?: SpaceValueFormatOptions) => string;
+    toObject: (options?: SpaceValueFormatOptions) => SpaceWithUnits;
 };
 ```

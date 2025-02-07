@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { createDecisionContextMock } from '../../../mocks';
-import type { ColorSRGBLightnessInput, ValueContext } from '../../../types';
+import type { ColorOklabLightnessInput, ColorSRGBHSLiteral, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
 
 import { createSRGBLightnessValue } from './createSRGBLightnessValue';
@@ -9,7 +9,7 @@ import { CHANNEL_NAME } from './private';
 
 describe('createSRGBLightnessValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const mockInput: ColorSRGBLightnessInput = 0.5;
+    const input: ColorOklabLightnessInput = 0.7776;
 
     let valueContext: ValueContext;
 
@@ -17,56 +17,90 @@ describe('createSRGBLightnessValue()', () => {
         valueContext = createValueContext(decisionContextMock);
     });
 
-    it('should have the provided context', () => {
-        const result = createSRGBLightnessValue(valueContext, mockInput);
+    describe('Given a value', () => {
+        it('should have the provided context', () => {
+            const result = createSRGBLightnessValue(valueContext, input);
 
-        expect(result.context()).toBe(valueContext);
+            expect(result.context()).toBe(valueContext);
+        });
+
+        it('should have the expected name', () => {
+            const result = createSRGBLightnessValue(valueContext, input);
+
+            expect(result.name()).toBe(CHANNEL_NAME);
+        });
+
+        it('should consume the input', () => {
+            createSRGBLightnessValue(valueContext, input);
+
+            expect(valueContext.valueInput()).toEqual(input);
+        });
+
+        it('should expose the resolved value via get(), raw(), and quantized()', () => {
+            const result = createSRGBLightnessValue(valueContext, input);
+
+            expect(result.get()).toEqual(input);
+            expect(result.raw()).toEqual(input);
+            expect(result.quantized()).toEqual(input);
+            expect(result.quantized(0)).toEqual(input);
+        });
+
+        it('should quantize the value', () => {
+            const result = createSRGBLightnessValue(valueContext, input);
+
+            expect(result.quantized(0.2)).toEqual(0.778);
+        });
+
+        it('should clamp the quantized value', () => {
+            const result = createSRGBLightnessValue(valueContext, input);
+
+            expect(result.quantized(101)).toEqual(1);
+        });
+
+        it('should convert to a color with given channels', () => {
+            const result = createSRGBLightnessValue(valueContext, input);
+
+            const color = result.toColor({ h: 301.1892, s: 0.0157 });
+            const { h, s, l } = color.toObject<ColorSRGBHSLiteral>('hsl');
+
+            expect(h).toBeCloseTo(301.1892);
+            expect(s).toBeCloseTo(0.0157);
+            expect(l).toBeCloseTo(0.7776);
+        });
     });
 
-    it('should have the expected name', () => {
-        const result = createSRGBLightnessValue(valueContext, mockInput);
+    describe('Given a quantize option', () => {
+        const options = { quantize: 2 };
 
-        expect(result.name()).toBe(CHANNEL_NAME);
-    });
+        it('should expose the quantized value via .get() and quantized()', () => {
+            const result = createSRGBLightnessValue(valueContext, input, options);
 
-    it('should consume the input', () => {
-        createSRGBLightnessValue(valueContext, mockInput);
+            expect(result.get()).toEqual(0.78);
+            expect(result.quantized()).toEqual(0.78);
+        });
 
-        expect(valueContext.valueInput()).toEqual(mockInput);
-    });
+        it('should expose the raw value via .raw() and quantized(0)', () => {
+            const result = createSRGBLightnessValue(valueContext, input, options);
 
-    it('should expose the resolved value via .get()', () => {
-        const result = createSRGBLightnessValue(valueContext, mockInput);
+            expect(result.raw()).toEqual(0.7776);
+            expect(result.quantized(0)).toEqual(0.7776);
+        });
 
-        expect(result.get()).toEqual(mockInput);
-    });
+        it('should (re)quantize the value', () => {
+            const result = createSRGBLightnessValue(valueContext, input, options);
 
-    it('should expose quantized value', () => {
-        const result = createSRGBLightnessValue(valueContext, mockInput, { quantize: 0.2 });
+            expect(result.quantized(0.05)).toEqual(0.7775);
+        });
 
-        expect(result.get()).toEqual(0.6);
-    });
+        it('should convert to a color with complimentary channels quantized', () => {
+            const result = createSRGBLightnessValue(valueContext, input, options);
 
-    it('should clamp the input value', () => {
-        const result = createSRGBLightnessValue(valueContext, 2);
+            const color = result.toColor({ h: 301.1533, s: 0.0157 });
+            const { h, s, l } = color.toObject<ColorSRGBHSLiteral>('hsl');
 
-        expect(result.get()).toEqual(1);
-    });
-
-    it('should clamp the rounded value', () => {
-        const result = createSRGBLightnessValue(valueContext, 1, { quantize: 2 });
-
-        expect(result.get()).toEqual(1);
-    });
-
-    it('should convert to a color with given channels', () => {
-        const result = createSRGBLightnessValue(valueContext, mockInput);
-
-        const color = result.toColor({ h: 210, s: 0.65 });
-        const [h, s, l] = color.get().hsl();
-
-        expect(h).toBeCloseTo(210);
-        expect(s).toBeCloseTo(0.65);
-        expect(l).toBeCloseTo(0.5);
+            expect(h).toEqual(302);
+            expect(s).toEqual(0.02);
+            expect(l).toEqual(0.78);
+        });
     });
 });

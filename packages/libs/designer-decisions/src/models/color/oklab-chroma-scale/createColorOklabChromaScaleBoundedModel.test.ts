@@ -36,7 +36,7 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
     describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabChromaScaleBoundedInput['params'] = {
-            from: 0.11,
+            from: 0.1347,
             to: 0.99,
             steps: 1,
             quantize: 0.2,
@@ -45,8 +45,8 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(0.2);
-            expect(result.get().item(1)?.get()).toEqual(0.4);
+            expect(result.get().first()?.get()).toEqual(0.134);
+            expect(result.get().item(1)?.get()).toEqual(0.318);
             expect(result.get().last()?.get()).toEqual(0.5);
         });
     });

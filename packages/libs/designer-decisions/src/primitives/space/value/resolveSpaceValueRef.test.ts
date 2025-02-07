@@ -115,7 +115,7 @@ describe('resolveSpaceValueRef()', () => {
             quantize: 5,
         });
         const [, mockDecision] = createStaticDecisionMock<SpaceValue>([mockInput], {
-            getObject: spaceValue.getObject,
+            toObject: spaceValue.toObject,
         });
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
