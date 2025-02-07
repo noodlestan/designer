@@ -17,7 +17,7 @@ describe('createSpaceValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual(params.value + 'px');
+            expect(result.getString()).toEqual(params.value + 'px');
         });
     });
 
@@ -31,7 +31,7 @@ describe('createSpaceValueExplicitModel()', () => {
         it('should round the value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual('4px');
+            expect(result.getString()).toEqual('4px');
         });
     });
 });

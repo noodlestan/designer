@@ -1,6 +1,12 @@
-import type { SpaceValue, SpaceValueInput, SpaceValueOptions, ValueContext } from '../../../types';
+import type {
+    SpaceValue,
+    SpaceValueFormattingOptions,
+    SpaceValueInput,
+    SpaceValueOptions,
+    ValueContext,
+} from '../../../types';
 import { createBaseValue } from '../../base';
-import { quantized } from '../../number';
+import { createNumericValue } from '../../number';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
 
@@ -12,16 +18,20 @@ export const createSpaceValue = (
     context.consume(input);
 
     const { quantize } = options;
-    const value = resolveSpaceValue(context, input);
+    const { value, units } = resolveSpaceValue(context, input);
 
-    const normalised = () => quantized(value.value, quantize);
+    const { get, raw, quantized } = createNumericValue(value, { quantize });
 
     return {
         ...createBaseValue(context),
-        get: () => String(normalised()) + value.units,
-        getValueWithUnits: () => ({
-            value: normalised(),
-            units: value.units,
+        get,
+        raw,
+        quantized,
+        getString: ({ quantize: q }: SpaceValueFormattingOptions = {}) =>
+            String(quantized(q ?? quantize)) + units,
+        getObject: ({ quantize: q }: SpaceValueFormattingOptions = {}) => ({
+            value: quantized(q ?? quantize),
+            units,
         }),
     };
 };

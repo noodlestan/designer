@@ -12,7 +12,7 @@ export const createSpaceScaleAnchoredModel: DecisionModelFactory<
             const anchorValue = createSpaceValue(context.nestedContext(), params.anchor, {
                 quantize,
             });
-            const { value: anchor } = anchorValue.getValueWithUnits();
+            const { value: anchor } = anchorValue.getObject();
 
             const series = generateAnchoredSeries(anchor, params);
             const values = series.map(space =>

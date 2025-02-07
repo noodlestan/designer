@@ -54,14 +54,16 @@ describe('resolveSpaceValueRef()', () => {
         });
     });
 
-    describe('When it resolves to a SpaceScale and the item is resolved', () => {
+    describe('When it resolves to a SpaceScale with a quantized value and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
         const mockInput = { model: 'space-scale' } as InputRecord;
         const [, mockDecision] = createStaticDecisionMock<SpaceScale>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
-        const spaceWithUnits: SpaceWithUnits = { value: 3, units: 'px' };
-        const spaceValue = createSpaceValue(createValueContextMock()[0], spaceWithUnits);
+        const spaceWithUnits: SpaceWithUnits = { value: 3.33, units: 'px' };
+        const spaceValue = createSpaceValue(createValueContextMock()[0], spaceWithUnits, {
+            quantize: 5,
+        });
 
         beforeEach(() => {
             vi.clearAllMocks();
@@ -79,9 +81,12 @@ describe('resolveSpaceValueRef()', () => {
             );
         });
 
-        it('should return the resolved SpaceValue', () => {
+        it('should return the resolved (quantized) SpaceValue', () => {
             const result = resolveSpaceValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(spaceWithUnits);
+            expect(result).toEqual({
+                value: 5,
+                units: 'px',
+            });
         });
     });
 
@@ -105,9 +110,12 @@ describe('resolveSpaceValueRef()', () => {
     describe('When it resolves to a SpaceValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
         const mockInput = { model: 'space-value' } as InputRecord;
-        const spaceWithUnits: SpaceWithUnits = { value: 3, units: 'px' };
+        const spaceWithUnits: SpaceWithUnits = { value: 3.33, units: 'px' };
+        const spaceValue = createSpaceValue(createValueContextMock()[0], spaceWithUnits, {
+            quantize: 5,
+        });
         const [, mockDecision] = createStaticDecisionMock<SpaceValue>([mockInput], {
-            getValueWithUnits: () => spaceWithUnits,
+            getObject: spaceValue.getObject,
         });
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -115,9 +123,12 @@ describe('resolveSpaceValueRef()', () => {
             vi.clearAllMocks();
         });
 
-        it('should return the SpaceValue produced by the decision', () => {
+        it('should return the (quantized) SpaceValue produced by the decision', () => {
             const result = resolveSpaceValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(spaceWithUnits);
+            expect(result).toEqual({
+                value: 5,
+                units: 'px',
+            });
         });
     });
 

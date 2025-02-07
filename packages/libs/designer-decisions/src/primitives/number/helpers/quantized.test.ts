@@ -33,10 +33,34 @@ describe('quantized()', () => {
         });
     });
 
-    describe('Given a number that results in floating point (in)quantize', () => {
+    describe('Given a number that results in floating point (in)precision', () => {
         it('should truncate to the same number of decimals as the quantize param', () => {
             expect(quantized(1, 0.03)).toBe(0.99);
             expect(quantized(1, 0.003)).toBe(0.999);
+        });
+    });
+
+    describe('Given a non-integer base', () => {
+        it('should throw an error', () => {
+            expect(() => quantized(42.678, 5, 1.5)).toThrow('Invalid parameter base');
+        });
+    });
+
+    describe('Given a positive base', () => {
+        it('should scale quantize factor by 10^base before rounding', () => {
+            expect(quantized(0.742833, 1, 2)).toBe(0.74);
+            expect(quantized(0.742833, 5, 2)).toBe(0.75);
+            expect(quantized(7.42833, 5, 1)).toBe(7.5);
+            expect(quantized(7.42833, 2, 0)).toBe(8);
+        });
+    });
+
+    describe('Given a negative base', () => {
+        it('should scale quantize factor by 10^base before rounding', () => {
+            expect(quantized(7428.33, 1, -1)).toBe(7430);
+            expect(quantized(7428.33, 4, -1)).toBe(7440);
+            expect(quantized(7428.33, 5, -1)).toBe(7450);
+            expect(quantized(7428.33, 5, -2)).toBe(7500);
         });
     });
 });

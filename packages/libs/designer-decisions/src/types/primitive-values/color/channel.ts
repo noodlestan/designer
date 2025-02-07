@@ -1,4 +1,4 @@
-import type { BaseValue } from '../base';
+import type { BaseNumericValue, NumberValueOptions } from '../number';
 
 import type { ColorValue } from './color';
 import type {
@@ -19,7 +19,7 @@ export type ColorChannelValue = ColorSRGBChannelValue | ColorOklabChannelValue;
 export type ColorChannelBaseValue<
     C extends ColorComplementaryChannels,
     T extends number = number,
-> = BaseValue<T> & {
+> = BaseNumericValue<T> & {
     name: () => ColorChannelName;
     toColor: (channels: C) => ColorValue;
 };
@@ -36,3 +36,5 @@ export type ColorChannelValueCommon = Omit<
 export type ColorComplementaryChannels =
     | ColorSRGBComplementaryChannels
     | ColorOklabComplementaryChannels;
+
+export type ColorchannelOptions = NumberValueOptions;

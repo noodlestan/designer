@@ -12,8 +12,8 @@ export const createSpaceScaleBoundedModel: DecisionModelFactory<
             const fromValue = createSpaceValue(context.nestedContext(), params.from, { quantize });
             const toValue = createSpaceValue(context.nestedContext(), params.to, { quantize });
 
-            const { value: from } = fromValue.getValueWithUnits();
-            const { value: to } = toValue.getValueWithUnits();
+            const { value: from } = fromValue.getObject();
+            const { value: to } = toValue.getObject();
 
             const series = generateBoundedSeries(from, to, params.steps);
             const values = series

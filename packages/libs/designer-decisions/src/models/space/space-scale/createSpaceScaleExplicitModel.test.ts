@@ -24,9 +24,9 @@ describe('createSpaceScaleExplicitModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(params.values[0] + 'px');
-            expect(result.get().item(1)?.get()).toEqual(params.values[1] + 'px');
-            expect(result.get().last()?.get()).toEqual(params.values[2] + 'px');
+            expect(result.get().first()?.getString()).toEqual(params.values[0] + 'px');
+            expect(result.get().item(1)?.getString()).toEqual(params.values[1] + 'px');
+            expect(result.get().last()?.getString()).toEqual(params.values[2] + 'px');
         });
     });
 
@@ -40,9 +40,9 @@ describe('createSpaceScaleExplicitModel()', () => {
         it('should round the value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual('32px');
-            expect(result.get().item(1)?.get()).toEqual('64px');
-            expect(result.get().last()?.get()).toEqual('128px');
+            expect(result.get().first()?.getString()).toEqual('32px');
+            expect(result.get().item(1)?.getString()).toEqual('64px');
+            expect(result.get().last()?.getString()).toEqual('128px');
         });
     });
 });
