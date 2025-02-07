@@ -22,7 +22,7 @@ export type AnchoredNumberSeriesParams = {
         steps: number;
         modifier: NumberModifier;
     };
-    precision?: number;
+    quantize?: number;
 };
 
 export type NormalNumber = number;

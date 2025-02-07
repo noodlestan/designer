@@ -39,7 +39,7 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabHueSetAnchoredInput['params'] = {
             anchor: 333.001,
@@ -51,10 +51,10 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
                 steps: 3,
                 modifier: { mode: 'linear', by: 20 },
             },
-            precision: 2,
+            quantize: 2,
         };
 
-        it('should round the values', () => {
+        it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(334);

@@ -33,16 +33,16 @@ describe('createColorOklabLightnessScaleBoundedModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabChromaScaleBoundedInput['params'] = {
             from: 0.5,
             to: 1.5,
             steps: 1,
-            precision: 0.2,
+            quantize: 0.2,
         };
 
-        it('should round the values', () => {
+        it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(0.6);

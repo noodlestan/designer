@@ -33,16 +33,16 @@ describe('createSpaceScaleBoundedModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: SpaceScaleBoundedInput['params'] = {
             from: 10,
             to: 12.25,
             steps: 1,
-            precision: 2,
+            quantize: 2,
         };
 
-        it('should round the values', () => {
+        it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().item(1)?.get()).toEqual('12px');

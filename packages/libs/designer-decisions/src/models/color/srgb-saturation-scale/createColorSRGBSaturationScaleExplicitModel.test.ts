@@ -30,14 +30,14 @@ describe('createColorSRGBSaturationScaleExplicitModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBSaturationScaleExplicitInput['params'] = {
             values: [0.111, 0.5, 1.1],
-            precision: 0.2,
+            quantize: 0.2,
         };
 
-        it('should round the values', () => {
+        it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(0.2);

@@ -11,10 +11,10 @@ export const createColorSRGBLightnessScaleExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
             const values = params.values.map(value =>
-                createSRGBLightnessValue(context.nestedContext(), value, { precision }),
+                createSRGBLightnessValue(context.nestedContext(), value, { quantize }),
             );
 
             return createSRGBLightnessScale(context, values);

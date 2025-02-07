@@ -5,7 +5,7 @@ import type {
     ValueContext,
 } from '../../../types';
 import { createBaseValue } from '../../base';
-import { nearest } from '../../number';
+import { quantized } from '../../number';
 import { clampChannelValue } from '../helpers';
 import { createColorValue } from '../value';
 
@@ -19,10 +19,10 @@ export const createSRGBHueValue = (
 ): SRGBHueValue => {
     context.consume(input);
 
-    const { precision } = options;
+    const { quantize } = options;
     const value = resolveSRGBHueValue(context, input);
 
-    const normalised = () => clampChannelValue(nearest(value, precision), 'srgb-hue');
+    const normalised = () => clampChannelValue(quantized(value, quantize), 'srgb-hue');
 
     return {
         ...createBaseValue(context),

@@ -11,10 +11,10 @@ export const createColorOklabHueSetExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
             const values = params.values.map(value =>
-                createOklabHueValue(context.nestedContext(), value, { precision }),
+                createOklabHueValue(context.nestedContext(), value, { quantize }),
             );
 
             return createOklabHueSet(context, values);

@@ -11,9 +11,9 @@ export const createColorOklabChromaValueExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
-            return createOklabChromaValue(context, params.value, { precision });
+            return createOklabChromaValue(context, params.value, { quantize });
         },
     };
 };

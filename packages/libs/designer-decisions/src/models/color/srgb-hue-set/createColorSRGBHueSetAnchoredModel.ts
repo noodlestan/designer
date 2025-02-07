@@ -11,16 +11,16 @@ export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
             const anchorValue = createSRGBHueValue(context.nestedContext(), params.anchor, {
-                precision,
+                quantize,
             });
             const anchor = anchorValue.get();
 
             const series = generateAnchoredSeries(anchor, params);
             const values = series.map(item =>
-                createSRGBHueValue(context.nestedContext(), item, { precision }),
+                createSRGBHueValue(context.nestedContext(), item, { quantize }),
             );
             return createSRGBHueSet(context, values);
         },

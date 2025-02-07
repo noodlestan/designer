@@ -3,4 +3,4 @@ export * from './clamped';
 export * from './generateAnchoredSeries';
 export * from './generateBoundedSeries';
 export * from './generateNumberSeries';
-export * from './nearest';
+export * from './quantized';

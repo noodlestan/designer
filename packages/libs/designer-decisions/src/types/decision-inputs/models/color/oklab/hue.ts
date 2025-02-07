@@ -5,7 +5,7 @@ export type ColorOklabHueValueExplicitInput = InputRecord & {
     model: 'color-oklab-hue-value/explicit';
     params: {
         value: ColorOklabHueInput;
-        precision?: number;
+        quantize?: number;
     };
 };
 
@@ -13,7 +13,7 @@ export type ColorOklabHueSetExplicitInput = InputRecord & {
     model: 'color-oklab-hue-set/explicit';
     params: {
         values: ColorOklabHueInput[];
-        precision?: number;
+        quantize?: number;
     };
 };
 
@@ -23,7 +23,7 @@ export type ColorOklabHueSetBoundedInput = InputRecord & {
         from: ColorOklabHueInput;
         to: ColorOklabHueInput;
         steps: number;
-        precision?: number;
+        quantize?: number;
     };
 };
 

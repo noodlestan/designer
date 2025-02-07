@@ -5,7 +5,7 @@ export type ColorSRGBSaturationValueExplicitInput = InputRecord & {
     model: 'color-srgb-saturation-value/explicit';
     params: {
         value: ColorSRGBSaturationInput;
-        precision?: number;
+        quantize?: number;
     };
 };
 
@@ -13,7 +13,7 @@ export type ColorSRGBSaturationScaleExplicitInput = InputRecord & {
     model: 'color-srgb-saturation-scale/explicit';
     params: {
         values: ColorSRGBSaturationInput[];
-        precision?: number;
+        quantize?: number;
     };
 };
 
@@ -23,7 +23,7 @@ export type ColorSRGBSaturationScaleBoundedInput = InputRecord & {
         from: ColorSRGBSaturationInput;
         to: ColorSRGBSaturationInput;
         steps: number;
-        precision?: number;
+        quantize?: number;
     };
 };
 

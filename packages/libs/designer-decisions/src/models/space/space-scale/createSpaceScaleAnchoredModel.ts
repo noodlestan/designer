@@ -7,16 +7,16 @@ export const createSpaceScaleAnchoredModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
             const anchorValue = createSpaceValue(context.nestedContext(), params.anchor, {
-                precision,
+                quantize,
             });
             const { value: anchor } = anchorValue.getValueWithUnits();
 
             const series = generateAnchoredSeries(anchor, params);
             const values = series.map(space =>
-                createSpaceValue(context.nestedContext(), space, { precision }),
+                createSpaceValue(context.nestedContext(), space, { quantize }),
             );
 
             return createSpaceScale(context, values);

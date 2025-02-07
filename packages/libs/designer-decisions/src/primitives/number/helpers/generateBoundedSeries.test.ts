@@ -52,24 +52,24 @@ describe('generateBoundedSeries()', () => {
         });
     });
 
-    describe('Given no precision parameter', () => {
+    describe('Given no quantize parameter', () => {
         it('should return a series with values not rounded', () => {
             const result = generateBoundedSeries(1, 1.25, 1);
             expect(result).toEqual([1, 1.125, 1.25]);
         });
     });
 
-    describe('Given a precision of 2', () => {
+    describe('Given a quantize of 2', () => {
         it('should return a series with values rounded to the nearest 2', () => {
             const result = generateBoundedSeries(0, 10, 3, 2);
-            expect(result).toEqual([0.0, 0.25, 0.5, 0.75, 1.0]);
+            expect(result).toEqual([0, 2, 6, 8, 10]);
         });
     });
 
-    describe('Given a precision parameter of 0.2', () => {
+    describe('Given a quantize parameter of 0.2', () => {
         it('should return a series with values rounded to the nearest 0.2', () => {
             const result = generateBoundedSeries(0, 10, 3, 0.2);
-            expect(result).toEqual([0.0, 0.2, 0.4, 0.8, 1]);
+            expect(result).toEqual([0, 2.6, 5, 7.6, 10]);
         });
     });
 });

@@ -34,11 +34,11 @@ describe('createColorOklabHueValueExplicitModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabHueValueExplicitInput['params'] = {
             value: 333.111,
-            precision: 0.2,
+            quantize: 0.2,
         };
 
         it('should create a rounded value', () => {

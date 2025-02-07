@@ -2,16 +2,16 @@ import type { NumberClamp, NumberModifier } from '../../../types';
 
 import { clamped } from './clamped';
 import { generateNumberSeriesStep } from './functions/generateNumberSeriesStep';
-import { nearest } from './nearest';
+import { quantized } from './quantized';
 
 export const generateNumberSeries = (
     start: number = 0,
     items: number = 0,
     modifier?: NumberModifier,
     clamp?: NumberClamp,
-    precision: number = 0,
+    quantize: number = 0,
 ): number[] => {
-    const roundedStart = nearest(start, precision);
+    const roundedStart = quantized(start, quantize);
 
     const count = Math.floor(items);
 
@@ -27,5 +27,5 @@ export const generateNumberSeries = (
         }
         series.push(next);
     }
-    return series.map(number => clamped(nearest(number, precision), clamp));
+    return series.map(number => clamped(quantized(number, quantize), clamp));
 };

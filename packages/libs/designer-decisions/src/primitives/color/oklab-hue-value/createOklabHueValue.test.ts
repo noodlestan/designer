@@ -41,8 +41,8 @@ describe('createOklabHueValue()', () => {
         expect(result.get()).toEqual(mockInput);
     });
 
-    it('should expose value rounded to precision', () => {
-        const result = createOklabHueValue(valueContext, mockInput, { precision: 0.2 });
+    it('should expose quantized value', () => {
+        const result = createOklabHueValue(valueContext, mockInput, { quantize: 0.2 });
 
         expect(result.get()).toEqual(275.2);
     });
@@ -54,7 +54,7 @@ describe('createOklabHueValue()', () => {
     });
 
     it('should clamp the rounded value', () => {
-        const result = createOklabHueValue(valueContext, 360, { precision: 400 });
+        const result = createOklabHueValue(valueContext, 360, { quantize: 400 });
 
         expect(result.get()).toEqual(360);
     });

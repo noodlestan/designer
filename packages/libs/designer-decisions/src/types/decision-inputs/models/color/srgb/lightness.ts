@@ -5,7 +5,7 @@ export type ColorSRGBLightnessValueExplicitInput = InputRecord & {
     model: 'color-srgb-lightness-value/explicit';
     params: {
         value: ColorSRGBLightnessInput;
-        precision?: number;
+        quantize?: number;
     };
 };
 
@@ -13,7 +13,7 @@ export type ColorSRGBLightnessScaleExplicitInput = InputRecord & {
     model: 'color-srgb-lightness-scale/explicit';
     params: {
         values: ColorSRGBLightnessInput[];
-        precision?: number;
+        quantize?: number;
     };
 };
 
@@ -23,7 +23,7 @@ export type ColorSRGBLightnessScaleBoundedInput = InputRecord & {
         from: ColorSRGBLightnessInput;
         to: ColorSRGBLightnessInput;
         steps: number;
-        precision?: number;
+        quantize?: number;
     };
 };
 

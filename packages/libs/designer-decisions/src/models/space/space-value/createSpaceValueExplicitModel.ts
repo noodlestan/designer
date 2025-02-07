@@ -11,8 +11,8 @@ export const createSpaceValueExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
-            return createSpaceValue(context, params.value, { precision });
+            const { quantize } = params;
+            return createSpaceValue(context, params.value, { quantize });
         },
     };
 };

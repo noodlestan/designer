@@ -41,8 +41,8 @@ describe('createOklabLightnessValue()', () => {
         expect(result.get()).toEqual(mockInput);
     });
 
-    it('should expose value rounded to precision', () => {
-        const result = createOklabLightnessValue(valueContext, mockInput, { precision: 0.2 });
+    it('should expose quantized value', () => {
+        const result = createOklabLightnessValue(valueContext, mockInput, { quantize: 0.2 });
 
         expect(result.get()).toEqual(0.8);
     });
@@ -54,7 +54,7 @@ describe('createOklabLightnessValue()', () => {
     });
 
     it('should clamp the rounded value', () => {
-        const result = createOklabLightnessValue(valueContext, 1, { precision: 2 });
+        const result = createOklabLightnessValue(valueContext, 1, { quantize: 2 });
 
         expect(result.get()).toEqual(1);
     });

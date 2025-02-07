@@ -41,8 +41,8 @@ describe('createOklabChromaValue()', () => {
         expect(result.get()).toEqual(mockInput);
     });
 
-    it('should expose value rounded to precision', () => {
-        const result = createOklabChromaValue(valueContext, mockInput, { precision: 0.2 });
+    it('should expose quantized value', () => {
+        const result = createOklabChromaValue(valueContext, mockInput, { quantize: 0.2 });
 
         expect(result.get()).toEqual(0.2);
     });
@@ -54,7 +54,7 @@ describe('createOklabChromaValue()', () => {
     });
 
     it('should clamp the rounded value', () => {
-        const result = createOklabChromaValue(valueContext, 0.5, { precision: 0.7 });
+        const result = createOklabChromaValue(valueContext, 0.5, { quantize: 0.7 });
 
         expect(result.get()).toEqual(0.5);
     });

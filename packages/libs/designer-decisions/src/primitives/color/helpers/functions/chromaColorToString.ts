@@ -4,17 +4,17 @@ import type { ColorFormat, ColorOkLCHLiteral, ColorOkLabLiteral } from '../../..
 
 import { chromaColorToLiteral } from './chromaColorToLiteral';
 
-const round = (value: number, precision: number): number => {
-    const factor = 10 ** precision;
+const round = (value: number, quantize: number): number => {
+    const factor = 10 ** quantize;
     return Math.round(value * factor) / factor;
 };
 
 export function chromaColorToString(
     color: ChromaColor,
     format: ColorFormat,
-    precision: number = 5,
+    quantize: number = 5,
 ): string {
-    const p = precision;
+    const p = quantize;
     if (format === 'oklch') {
         const object = chromaColorToLiteral<ColorOkLCHLiteral>(color, format);
         return `oklch(${round(object.l * 100, p)}% ${round(object.c, p)} ${round(object.h || 0, p)}deg)`;

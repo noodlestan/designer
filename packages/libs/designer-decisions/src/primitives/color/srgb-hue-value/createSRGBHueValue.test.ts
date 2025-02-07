@@ -41,8 +41,8 @@ describe('createSRGBHueValue()', () => {
         expect(result.get()).toEqual(mockInput);
     });
 
-    it('should expose value rounded to precision', () => {
-        const result = createSRGBHueValue(valueContext, mockInput, { precision: 2 });
+    it('should expose quantized value', () => {
+        const result = createSRGBHueValue(valueContext, mockInput, { quantize: 2 });
 
         expect(result.get()).toEqual(122);
     });
@@ -54,7 +54,7 @@ describe('createSRGBHueValue()', () => {
     });
 
     it('should clamp the rounded value', () => {
-        const result = createSRGBHueValue(valueContext, 360, { precision: 400 });
+        const result = createSRGBHueValue(valueContext, 360, { quantize: 400 });
 
         expect(result.get()).toEqual(360);
     });

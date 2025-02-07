@@ -1,5 +1,5 @@
 export type NumberValueOptions = {
-    precision?: number;
+    quantize?: number;
 };
 
 export type ColorchannelOptions = NumberValueOptions;

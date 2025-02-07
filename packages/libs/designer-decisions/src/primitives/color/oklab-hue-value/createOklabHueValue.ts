@@ -5,7 +5,7 @@ import type {
     ValueContext,
 } from '../../../types';
 import { createBaseValue } from '../../base';
-import { nearest } from '../../number';
+import { quantized } from '../../number';
 import { clampChannelValue } from '../helpers';
 import { createColorValue } from '../value';
 
@@ -19,10 +19,10 @@ export const createOklabHueValue = (
 ): OklabHueValue => {
     context.consume(input);
 
-    const { precision } = options;
+    const { quantize } = options;
     const value = resolveOklabHueValue(context, input);
 
-    const normalised = () => clampChannelValue(nearest(value, precision), 'oklab-hue');
+    const normalised = () => clampChannelValue(quantized(value, quantize), 'oklab-hue');
 
     return {
         ...createBaseValue(context),

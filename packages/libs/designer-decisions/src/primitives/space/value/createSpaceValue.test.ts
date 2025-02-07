@@ -34,8 +34,8 @@ describe('createSpaceValue()', () => {
         expect(result.get()).toEqual('123.111rem');
     });
 
-    it('should expose value rounded to precision', () => {
-        const result = createSpaceValue(valueContext, mockInput, { precision: 2 });
+    it('should expose quantized value', () => {
+        const result = createSpaceValue(valueContext, mockInput, { quantize: 2 });
 
         expect(result.get()).toEqual('124rem');
     });
@@ -46,8 +46,8 @@ describe('createSpaceValue()', () => {
         expect(result.getValueWithUnits()).toEqual(mockInput);
     });
 
-    it('should expose value with units rounded to precision', () => {
-        const result = createSpaceValue(valueContext, mockInput, { precision: 2 });
+    it('should expose quantized value with units', () => {
+        const result = createSpaceValue(valueContext, mockInput, { quantize: 2 });
 
         expect(result.getValueWithUnits().value).toEqual(124);
     });

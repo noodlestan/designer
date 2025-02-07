@@ -11,9 +11,9 @@ export const createColorSRGBLightnessValueExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
-            return createSRGBLightnessValue(context, params.value, { precision });
+            return createSRGBLightnessValue(context, params.value, { quantize });
         },
     };
 };

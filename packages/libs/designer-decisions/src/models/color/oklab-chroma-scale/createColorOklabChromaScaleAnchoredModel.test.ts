@@ -39,7 +39,7 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabChromaScaleAnchoredInput['params'] = {
             anchor: 0.2,
@@ -51,10 +51,10 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
                 steps: 5,
                 modifier: { mode: 'linear', by: 0.15 },
             },
-            precision: 0.15,
+            quantize: 0.15,
         };
 
-        it('should round the values', () => {
+        it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.get()).toEqual(0.15);

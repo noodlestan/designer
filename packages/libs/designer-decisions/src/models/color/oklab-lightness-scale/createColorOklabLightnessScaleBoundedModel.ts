@@ -15,13 +15,13 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
             const fromValue = createOklabLightnessValue(context.nestedContext(), params.from, {
-                precision,
+                quantize,
             });
             const toValue = createOklabLightnessValue(context.nestedContext(), params.to, {
-                precision,
+                quantize,
             });
 
             const from = fromValue.get();
@@ -31,7 +31,7 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
             const values = series
                 .slice(1, series.length - 1)
                 .map(item =>
-                    createOklabLightnessValue(context.nestedContext(), item, { precision }),
+                    createOklabLightnessValue(context.nestedContext(), item, { quantize }),
                 );
             return createOklabLightnessScale(context, [fromValue, ...values, toValue]);
         },

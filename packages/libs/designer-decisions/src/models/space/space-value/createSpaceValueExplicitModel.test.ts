@@ -21,11 +21,11 @@ describe('createSpaceValueExplicitModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: SpaceValueExplicitInput['params'] = {
             value: 2.111,
-            precision: 4,
+            quantize: 4,
         };
 
         it('should round the value', () => {

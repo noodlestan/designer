@@ -1,6 +1,6 @@
 import type { SpaceValue, SpaceValueInput, SpaceValueOptions, ValueContext } from '../../../types';
 import { createBaseValue } from '../../base';
-import { nearest } from '../../number';
+import { quantized } from '../../number';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
 
@@ -11,14 +11,16 @@ export const createSpaceValue = (
 ): SpaceValue => {
     context.consume(input);
 
-    const { precision } = options;
+    const { quantize } = options;
     const value = resolveSpaceValue(context, input);
+
+    const normalised = () => quantized(value.value, quantize);
 
     return {
         ...createBaseValue(context),
-        get: () => String(nearest(value.value, precision)) + value.units,
+        get: () => String(normalised()) + value.units,
         getValueWithUnits: () => ({
-            value: nearest(value.value, precision),
+            value: normalised(),
             units: value.units,
         }),
     };

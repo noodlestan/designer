@@ -45,7 +45,7 @@ describe('generateNumberSeries()', () => {
         });
     });
 
-    describe('Given no precision', () => {
+    describe('Given no quantize', () => {
         const anchor = 1.111;
         const items = 4;
         const modifier: NumberModifier = { mode: 'linear', by: 0.552 };
@@ -56,26 +56,26 @@ describe('generateNumberSeries()', () => {
         });
     });
 
-    describe('Given a precision of 2', () => {
+    describe('Given a quantize of 2', () => {
         const anchor = 2.333;
         const items = 3;
         const modifier: NumberModifier = { mode: 'geometric', by: 2 };
-        const precision = 2;
+        const quantize = 2;
 
         it('should return a series with values rounded to the nearest 2', () => {
-            const result = generateNumberSeries(anchor, items, modifier, undefined, precision);
+            const result = generateNumberSeries(anchor, items, modifier, undefined, quantize);
             expect(result).toEqual([2, 4, 10]);
         });
     });
 
-    describe('Given a precision of 0.2', () => {
+    describe('Given a quantize of 0.2', () => {
         const anchor = 1.111;
         const items = 4;
         const modifier: NumberModifier = { mode: 'linear', by: 0.555 };
-        const precision = 0.2;
+        const quantize = 0.2;
 
         it('should return a series with values rounded to the nearest 0.2', () => {
-            const result = generateNumberSeries(anchor, items, modifier, undefined, precision);
+            const result = generateNumberSeries(anchor, items, modifier, undefined, quantize);
             expect(result).toEqual([1.2, 1.6, 2.2, 2.8]);
         });
     });
@@ -85,7 +85,7 @@ describe('generateNumberSeries()', () => {
         const items = 4.7;
         const modifier: NumberModifier = { mode: 'linear', by: 1 };
 
-        it('should round the anchor to the default precision (2)', () => {
+        it('should round the anchor to the default quantize (2)', () => {
             const result = generateNumberSeries(anchor, items, modifier);
             expect(result).toEqual([1, 2, 3, 4]);
         });

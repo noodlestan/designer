@@ -30,11 +30,11 @@ describe('createColorSRGBLightnessScaleExplicitModel()', () => {
         });
     });
 
-    describe('Given a precision', () => {
+    describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBLightnessScaleExplicitInput['params'] = {
             values: [0.111, 0.5, 1.1],
-            precision: 0.2,
+            quantize: 0.2,
         };
 
         it('should round the value', () => {

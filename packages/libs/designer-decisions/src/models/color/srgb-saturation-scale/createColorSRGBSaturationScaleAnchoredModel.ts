@@ -15,16 +15,16 @@ export const createColorSRGBSaturationScaleAnchoredModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const { precision } = params;
+            const { quantize } = params;
 
             const anchorValue = createSRGBSaturationValue(context.nestedContext(), params.anchor, {
-                precision,
+                quantize,
             });
             const anchor = anchorValue.get();
 
             const series = generateAnchoredSeries(anchor, params);
             const values = series.map(item =>
-                createSRGBSaturationValue(context.nestedContext(), item, { precision }),
+                createSRGBSaturationValue(context.nestedContext(), item, { quantize }),
             );
             return createSRGBSaturationScale(context, values);
         },
