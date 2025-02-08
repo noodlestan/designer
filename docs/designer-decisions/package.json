@@ -28,7 +28,7 @@
     "@noodlestan/designer-integration-astro": "v0.0.11",
     "@noodlestan/designer-schemas": "v0.0.11",
     "@noodlestan/designer-shows": "v0.0.11",
-    "astro": "5.1.1",
+    "astro": "5.2.5",
     "mdast-util-to-string": "^4.0.0",
     "sharp": "0.32.5",
     "unist-util-visit": "^5.0.0"

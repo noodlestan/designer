@@ -39,13 +39,13 @@
     "@noodlestan/designer-functions": "v0.0.11"
   },
   "peerDependencies": {
-    "astro": "^5.0.0",
+    "astro": "^5.2.5",
     "solid-js": "^1.9.3"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",
-    "astro": "4.16.10",
-    "vite": "4.5.1",
+    "astro": "5.2.5",
+    "vite": "6.1.0",
     "vite-plugin-solid": "2.11.0",
     "vite-plugin-solid-svg": "0.6.1"
   }
