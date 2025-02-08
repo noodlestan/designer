@@ -13,11 +13,6 @@ export const staticSidebar = ({ decisionModels }) => [
         autogenerate: { directory: 'integrations' },
     },
     {
-        label: 'Components',
-        collapsed: true,
-        autogenerate: { directory: 'components', collapsed: true, depth: 1 },
-    },
-    {
         label: 'Schemas',
         collapsed: true,
         autogenerate: { directory: 'schemas', collapsed: true },

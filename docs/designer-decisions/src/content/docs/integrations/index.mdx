@@ -1,0 +1,46 @@
+---
+title: Designer Integrations
+slug: integrations
+description: Integrations with other design tools
+sidebar:
+    order: 0
+    label: Integrations Overview
+---
+
+import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
+
+import { href } from '../../../mdx';
+
+<CardGrid>
+    <Card title="Astro MDX" icon="astro">
+        <p>Components for Astro/Starlight based docs.</p>
+
+        <a href={href('/integrations/Astro')} variant="minimal">
+            Reference
+        </a>
+    </Card>
+
+</CardGrid>
+
+## Planning
+
+-   CSS: extract from codebase and code generation
+-   [Design Tokens Working Group: DTFM](https://tr.designtokens.org/format/)
+-   SolidJS: Reactive components for SolidJS apps
+-   Figma Plugin
+
+## Under Consideration
+
+-   [Style Dictionary](https://styledictionary.com/)
+-   [Storybook](https://storybook.js.org/)
+-   [Tokens Studio](https://tokens.studio/studio)
+-   [Knapsack](https://www.knapsack.cloud/)
+-   [Backlight](https://backlight.dev/)
+-   [Zero Height](https://zeroheight.com/) ([docs](https://shorturl.at/8odYV))
+
+---
+
+-   [Anima](https://www.animaapp.com/design-system-automation/design-token-automation) (no interoperability?)
+-   [Supernova.io](https://www.supernova.io/) (no interoperability?)
+-   [Diez.org](https://diez.org/) (stale?)
+-   [Specify: SDTF](https://specifyapp.com/design-token-format) (sunset)

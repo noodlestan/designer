@@ -20,7 +20,7 @@ import { GetInvolved } from '../../../components/atoms';
 
 export const store = await decisionLoader();
 
-This guide explains how to document design decisions and tokens in your documentation using the [built-in components](/components) provided by the [@noodlestan/designer-shows](/api/designer-shows) package.
+This guide explains how to document design decisions and tokens in your documentation using the [built-in Astro components](/integrations/Astro) provided by the [@noodlestan/designer-shows](/api/designer-shows) package.
 
 **Example:**
 
@@ -115,7 +115,7 @@ const decision = store.decision('Action Color');
 
 Retrieve the decision `store` and pass it to the components along with the decision name.
 
-In this example we are using the [&lt;ShowDecision/&gt;](/components/Astro/ShowDecision/) component to render both a [ColorValueDecision](/decision-models/color-value) and a [ColorSetDecision](/decision-models/color-set).
+In this example we are using the [&lt;ShowDecision/&gt;](/integrations/Astro/ShowDecision/) component to render both a [ColorValueDecision](/decision-models/color-value) and a [ColorSetDecision](/decision-models/color-set).
 
 ```mdx
 // src/content/page.mdx
@@ -133,9 +133,9 @@ export const store = await loader();
     <ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
 </LayoutGrid>
 
-In the [Components reference](/components) you will find a comprehensive set of components for rendering decisions in different scenarios and layouts.
+In the [Astro integration](/integrations/Astro) docs you can find a comprehensive set of components for rendering decisions in different scenarios and layouts.
 
-For instance, the [&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/) component composes decision visualization, value, and details in a single layout.
+For instance, the [&lt;ShowDecisionCard/&gt;](/integrations/Astro/ShowDecisionCard/) component composes decision visualization, value, and details in a single layout.
 
 ```mdx
 // src/content/page.mdx
@@ -148,7 +148,7 @@ import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 ## Customizing value and visualization
 
-All decision components expose [common props](/components/Astro/Props/#valueprops) that provide a high degree of control over how the decisions are rendered:
+All decision components expose [common props](/integrations/Astro/Props/#valueprops) that provide a high degree of control over how the decisions are rendered:
 
 -   `value` - hide or format the decision value
 -   `viz` - hide or configure the visualization
@@ -158,7 +158,7 @@ All decision components expose [common props](/components/Astro/Props/#valueprop
 
 With some decision types, you may want to display their value in specific formats. The `value` prop is passed down to the specific decision component to control how the value is displayed.
 
-For instance, [Color Decisions](/components/Astro/color) components can display the color value in one or more color spaces.
+For instance, the [ShowColorValue](/integrations/Astro/Composable/Values/#showcolorvalue) components can display the color value in one or more color spaces.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
@@ -186,7 +186,7 @@ Some decision types can be rendered using different visualizations.
 
 The `viz` prop is passed down to value components to determine which visualization is used.
 
-For instance, [Space Decisions](/components/Astro/space) components can represent a space value with a few different shapes.
+For instance, the [ShowSpaceViz](/integrations/Astro/Composable/Visualizations/#showspaceviz) component can represent a space value with a few different shapes.
 
 ```mdx
 <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
@@ -245,4 +245,4 @@ RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
 ## See Also
 
 -   [Examples](/examples)
--   [Components Reference](/components)
+-   [Astro integration](/integrations/Astro)

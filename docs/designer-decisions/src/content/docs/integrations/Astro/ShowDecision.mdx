@@ -1,6 +1,6 @@
 ---
 title: ShowDecision
-slug: components/Astro/ShowDecision
+slug: integrations/Astro/ShowDecision
 description: Astro component to visualize any decision.
 sidebar:
     order: 10
@@ -32,23 +32,23 @@ In the following two examples we use the `<ShowDecision/>` to render both a [Col
 
 This component composes a different value and visualization component depending on the decision type.
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn about the options available.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn about the options available.
 
 ## Props
 
-### ༶ [DecisionProps](/components/Astro/Props): `store`, `d` and `layout`
+### ༶ [DecisionProps](/integrations/Astro/Props): `store`, `d` and `layout`
 
 These two **mandatory** `store` and `d` props serve to identify and retrieve the decision.
 
 The optional `layout` prop controls the flow of items in set/scale decisions and the relative position of the value/viz pair.
 
-### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`
+### ༶ [ValueProps](/integrations/Astro/Props#valueprops): `value`
 
 This prop control whether the value should be shown and how to format it.
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
-### ༶ [VizProps](/components/Astro/Props#vizprops): `viz`, `size`, and `options`
+### ༶ [VizProps](/integrations/Astro/Props#vizprops): `viz`, `size`, and `options`
 
 These props control whether the visualization should be shown, which specific visualization to show, and how to customize it.
 
@@ -69,4 +69,4 @@ In the examples below we are rendering a [ColorValueDecision](/decision-models/c
     />
 </LayoutGrid>
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) for details on available visualizations and options.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) for details on available visualizations and options.

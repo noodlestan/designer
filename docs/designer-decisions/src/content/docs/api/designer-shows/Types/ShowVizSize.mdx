@@ -9,14 +9,13 @@ import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
-Available visualization sizes for [all value components](/components/Astro/Composable/Values).
+Available visualization sizes for [all value components](/integrations/Astro/Composable/Values).
 
 ```ts
 type ShowVizSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 ```
 
-When rendering decisions you can chose a different visualization size
-setting the `size` [prop](/components/Astro/Props#valueprops) to one of these.
+When rendering decisions you can chose a different visualization size setting the [size prop](/integrations/Astro/Props#valueprops) to one of these.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={...} />
@@ -74,8 +73,7 @@ Defaults to `auto` in which case it stretches to use all available space.
 
 <ShowDecision store={store} d="Action Color" />
 
-In these cases, consider adding an explicit `size` value, or composing the decisions within
-some sort of grid or list layout.
+In these cases, consider adding an explicit `size` value, or composing the decisions within some sort of grid or list layout.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" />

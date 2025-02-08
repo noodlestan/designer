@@ -9,14 +9,14 @@ import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
-Available visualizations for [Color Values](/components/Astro/Composable/Values/#showcolorvalue).
+Available visualizations for [Color Values](/integrations/Astro/Composable/Values/#showcolorvalue).
 
 ```ts
 export type ColorVizName = 'swatch' | 'fg' | 'bg';
 ```
 
 When rendering color decisions you can chose a different visualization by
-setting the `viz` [prop](/components/Astro/Props#-viz-true-boolean--string) to one of these.
+setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
 <ShowColorValueDecision store={store} d="Brand Black" viz="..." options={options} />
