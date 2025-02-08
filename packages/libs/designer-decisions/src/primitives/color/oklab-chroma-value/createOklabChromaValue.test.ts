@@ -3,13 +3,13 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createDecisionContextMock } from '../../../mocks';
 import type { ColorOkLCHLiteral, ColorOklabChromaInput, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
+import { COLOR_CHANNEL_OKLAB_CHROMA_NAME as name } from '../constants';
 
 import { createOklabChromaValue } from './createOklabChromaValue';
-import { CHANNEL_NAME } from './private';
 
 describe('createOklabChromaValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
-    const input: ColorOklabChromaInput = 0.277;
+    const input: ColorOklabChromaInput = 0.2773;
 
     let valueContext: ValueContext;
 
@@ -27,7 +27,7 @@ describe('createOklabChromaValue()', () => {
         it('should have the expected name', () => {
             const result = createOklabChromaValue(valueContext, input);
 
-            expect(result.name()).toBe(CHANNEL_NAME);
+            expect(result.name()).toBe(name);
         });
 
         it('should consume the input', () => {
@@ -36,12 +36,17 @@ describe('createOklabChromaValue()', () => {
             expect(valueContext.valueInput()).toEqual(input);
         });
 
-        it('should expose the resolved value via get(), raw(), and quantized()', () => {
+        it('should expose the quantized value via get() and quantized()', () => {
             const result = createOklabChromaValue(valueContext, input);
 
-            expect(result.get()).toEqual(input);
+            expect(result.get()).toEqual(0.277);
+            expect(result.quantized()).toEqual(0.277);
+        });
+
+        it('should expose the raw via raw() and quantized(0)', () => {
+            const result = createOklabChromaValue(valueContext, input);
+
             expect(result.raw()).toEqual(input);
-            expect(result.quantized()).toEqual(input);
             expect(result.quantized(0)).toEqual(input);
         });
 
@@ -60,12 +65,12 @@ describe('createOklabChromaValue()', () => {
         it('should convert to a color with given channels', () => {
             const result = createOklabChromaValue(valueContext, input);
 
-            const color = result.toColor({ l: 0.555, h: 301.1533 });
+            const color = result.toColor({ l: 0.5552, h: 301.1533 });
             const { l, c, h } = color.toObject<ColorOkLCHLiteral>('oklch');
 
-            expect(l).toBeCloseTo(0.555);
-            expect(c).toBeCloseTo(0.277);
-            expect(h).toBeCloseTo(301.1533);
+            expect(l).toEqual(0.555);
+            expect(c).toEqual(0.277);
+            expect(h).toEqual(301.1);
         });
     });
 

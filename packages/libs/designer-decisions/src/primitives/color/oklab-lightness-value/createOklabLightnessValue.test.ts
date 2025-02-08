@@ -3,9 +3,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createDecisionContextMock } from '../../../mocks';
 import type { ColorOkLCHLiteral, ColorOklabLightnessInput, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
+import { COLOR_CHANNEL_OKLAB_LIGHTNESS_NAME as name } from '../constants';
 
 import { createOklabLightnessValue } from './createOklabLightnessValue';
-import { CHANNEL_NAME } from './private';
 
 describe('createOklabLightnessValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
@@ -27,7 +27,7 @@ describe('createOklabLightnessValue()', () => {
         it('should have the expected name', () => {
             const result = createOklabLightnessValue(valueContext, input);
 
-            expect(result.name()).toBe(CHANNEL_NAME);
+            expect(result.name()).toBe(name);
         });
 
         it('should consume the input', () => {
@@ -36,12 +36,17 @@ describe('createOklabLightnessValue()', () => {
             expect(valueContext.valueInput()).toEqual(input);
         });
 
-        it('should expose the resolved value via get(), raw(), and quantized()', () => {
+        it('should expose the quantized value via get() and quantized()', () => {
             const result = createOklabLightnessValue(valueContext, input);
 
-            expect(result.get()).toEqual(input);
+            expect(result.get()).toEqual(0.778);
+            expect(result.quantized()).toEqual(0.778);
+        });
+
+        it('should expose the raw via raw() and quantized(0)', () => {
+            const result = createOklabLightnessValue(valueContext, input);
+
             expect(result.raw()).toEqual(input);
-            expect(result.quantized()).toEqual(input);
             expect(result.quantized(0)).toEqual(input);
         });
 
@@ -63,9 +68,9 @@ describe('createOklabLightnessValue()', () => {
             const color = result.toColor({ c: 0.0157, h: 301.1533 });
             const { l, c, h } = color.toObject<ColorOkLCHLiteral>('oklch');
 
-            expect(l).toBeCloseTo(0.7776);
-            expect(c).toBeCloseTo(0.0157);
-            expect(h).toBeCloseTo(301.1533);
+            expect(l).toBe(0.778);
+            expect(c).toBe(0.016);
+            expect(h).toBe(301.1);
         });
     });
 

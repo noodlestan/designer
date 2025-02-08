@@ -6,10 +6,14 @@ import type {
 } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import {
+    COLOR_CHANNEL_SRGB_SATURATION_BASE as base,
+    COLOR_CHANNEL_SRGB_SATURATION_NAME as name,
+    COLOR_CHANNEL_SRGB_SATURATION_QUANTIZE as quant,
+} from '../constants';
 import { clampChannelValue } from '../helpers';
 import { createColorValue } from '../value';
 
-import { CHANNEL_NAME, NUMERIC_VALUE_BASE as base } from './private';
 import { resolveSRGBSaturationValue } from './resolveSRGBSaturationValue';
 
 export const createSRGBSaturationValue = (
@@ -19,7 +23,7 @@ export const createSRGBSaturationValue = (
 ): SRGBSaturationValue => {
     context.consume(input);
 
-    const { quantize } = options;
+    const { quantize = quant } = options;
     const value = resolveSRGBSaturationValue(context, input);
 
     const normalize = (v: number) => clampChannelValue(v, 'srgb-saturation');
@@ -30,7 +34,7 @@ export const createSRGBSaturationValue = (
         get,
         raw,
         quantized,
-        name: () => CHANNEL_NAME,
+        name: () => name,
         toColor: channels => {
             const { h, l } = channels;
             return createColorValue(context.outputContext(), { h, s: value, l }, { quantize });

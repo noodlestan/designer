@@ -3,10 +3,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createDecisionContextMock } from '../../../mocks';
 import type { ColorSRGBHSLiteral, ColorSRGBSaturationInput, ValueContext } from '../../../types';
 import { createValueContext } from '../../../values';
+import { COLOR_CHANNEL_SRGB_SATURATION_NAME as name } from '../constants';
 
 import { createSRGBSaturationValue } from './createSRGBSaturationValue';
-import { CHANNEL_NAME } from './private';
-
 describe('createSRGBSaturationValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
     const input: ColorSRGBSaturationInput = 0.7776;
@@ -27,7 +26,7 @@ describe('createSRGBSaturationValue()', () => {
         it('should have the expected name', () => {
             const result = createSRGBSaturationValue(valueContext, input);
 
-            expect(result.name()).toBe(CHANNEL_NAME);
+            expect(result.name()).toBe(name);
         });
 
         it('should consume the input', () => {
@@ -36,19 +35,24 @@ describe('createSRGBSaturationValue()', () => {
             expect(valueContext.valueInput()).toEqual(input);
         });
 
-        it('should expose the resolved value via get(), raw(), and quantized()', () => {
+        it('should expose the quantized value via get() and quantized()', () => {
             const result = createSRGBSaturationValue(valueContext, input);
 
-            expect(result.get()).toEqual(input);
+            expect(result.get()).toEqual(0.778);
+            expect(result.quantized()).toEqual(0.778);
+        });
+
+        it('should expose the raw via raw() and quantized(0)', () => {
+            const result = createSRGBSaturationValue(valueContext, input);
+
             expect(result.raw()).toEqual(input);
-            expect(result.quantized()).toEqual(input);
             expect(result.quantized(0)).toEqual(input);
         });
 
         it('should quantize the value', () => {
             const result = createSRGBSaturationValue(valueContext, input);
 
-            expect(result.quantized(0.2)).toEqual(0.778);
+            expect(result.quantized(0.05)).toEqual(0.7775);
         });
 
         it('should clamp the quantized value', () => {
@@ -63,9 +67,9 @@ describe('createSRGBSaturationValue()', () => {
             const color = result.toColor({ h: 301.1533, l: 0.0157 });
             const { h, s, l } = color.toObject<ColorSRGBHSLiteral>('hsl');
 
-            expect(h).toBeCloseTo(301.1533);
-            expect(s).toBeCloseTo(0.7776);
-            expect(l).toBeCloseTo(0.0157);
+            expect(h).toEqual(301.2);
+            expect(s).toEqual(0.777);
+            expect(l).toEqual(0.016);
         });
     });
 

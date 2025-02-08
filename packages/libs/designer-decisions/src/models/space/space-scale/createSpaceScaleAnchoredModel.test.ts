@@ -33,7 +33,7 @@ describe('createSpaceScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.toString()).toEqual(49.92 + 'px');
+            expect(result.get().first()?.toString()).toEqual(49.9 + 'px');
             expect(result.get().item(2)?.toString()).toEqual(params.anchor + 'px');
             expect(result.get().last()?.toString()).toEqual(110 + 'px');
         });

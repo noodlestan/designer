@@ -15,7 +15,7 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
             anchor: 330,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -0.01 },
+                modifier: { mode: 'linear', by: -0.07 },
             },
             after: {
                 steps: 3,
@@ -33,7 +33,7 @@ describe('createColorOklabHueSetAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(329.98);
+            expect(result.get().first()?.get()).toEqual(329.9);
             expect(result.get().item(2)?.get()).toEqual(params.anchor);
             expect(result.get().last()?.get()).toEqual(360);
         });

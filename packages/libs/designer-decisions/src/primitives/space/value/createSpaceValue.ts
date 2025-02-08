@@ -7,6 +7,7 @@ import type {
 } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import { SPACE_VALUE_QUANTIZE } from '../constants';
 
 import { resolveSpaceValue } from './resolveSpaceValue';
 
@@ -17,7 +18,7 @@ export const createSpaceValue = (
 ): SpaceValue => {
     context.consume(input);
 
-    const { quantize } = options;
+    const { quantize = SPACE_VALUE_QUANTIZE } = options;
     const { value, units } = resolveSpaceValue(context, input);
 
     const { get, raw, quantized } = createNumericValue(value, { quantize });

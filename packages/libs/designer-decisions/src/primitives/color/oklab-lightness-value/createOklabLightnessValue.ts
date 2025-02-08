@@ -6,10 +6,14 @@ import type {
 } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import {
+    COLOR_CHANNEL_OKLAB_LIGHTNESS_BASE as base,
+    COLOR_CHANNEL_OKLAB_LIGHTNESS_NAME as name,
+    COLOR_CHANNEL_OKLAB_LIGHTNESS_QUANTIZE as quant,
+} from '../constants';
 import { clampChannelValue } from '../helpers';
 import { createColorValue } from '../value';
 
-import { CHANNEL_NAME, NUMERIC_VALUE_BASE as base } from './private';
 import { resolveOklabLightnessValue } from './resolveOklabLightnessValue';
 
 export const createOklabLightnessValue = (
@@ -19,7 +23,7 @@ export const createOklabLightnessValue = (
 ): OklabLightnessValue => {
     context.consume(input);
 
-    const { quantize } = options;
+    const { quantize = quant } = options;
     const value = resolveOklabLightnessValue(context, input);
 
     const normalize = (v: number) => clampChannelValue(v, 'oklab-lightness');
@@ -30,7 +34,7 @@ export const createOklabLightnessValue = (
         get,
         raw,
         quantized,
-        name: () => CHANNEL_NAME,
+        name: () => name,
         toColor: channels => {
             const { c, h } = channels;
             return createColorValue(context.outputContext(), { l: value, c, h }, { quantize });

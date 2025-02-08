@@ -17,7 +17,7 @@ describe('createColorSRGBHueValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual(params.value);
+            expect(result.get()).toEqual(330.1);
         });
     });
 
@@ -38,13 +38,13 @@ describe('createColorSRGBHueValueExplicitModel()', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBHueValueExplicitInput['params'] = {
             value: 333.111,
-            quantize: 0.2,
+            quantize: 5,
         };
 
         it('should create a quantized value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual(333.2);
+            expect(result.get()).toEqual(335);
         });
     });
 });

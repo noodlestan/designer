@@ -11,13 +11,13 @@ describe('createColorOklabHueValueExplicitModel()', () => {
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabHueValueExplicitInput['params'] = {
-            value: 330.111,
+            value: 333.111,
         };
 
         it('should create a value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual(params.value);
+            expect(result.get()).toEqual(333.1);
         });
     });
 
@@ -37,14 +37,14 @@ describe('createColorOklabHueValueExplicitModel()', () => {
     describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorOklabHueValueExplicitInput['params'] = {
-            value: 333.111,
-            quantize: 0.2,
+            value: 333.1,
+            quantize: 5,
         };
 
         it('should create a quantized value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get()).toEqual(333.2);
+            expect(result.get()).toEqual(335);
         });
     });
 });

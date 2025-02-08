@@ -11,7 +11,7 @@ export const createColorValue = (
 ): ColorValue => {
     context.consume(input);
 
-    const { quantize } = options;
+    const { quantize = 0.1 } = options;
     const literal = resolveColorValue(context, input).toObject('oklch');
     const value = createColor(literal, { quantize });
 

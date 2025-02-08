@@ -28,8 +28,8 @@ describe('createSpaceScaleBoundedModel()', () => {
             const result = model.produce(mockContext, params);
 
             expect(result.get().first()?.toString()).toEqual(params.from + 'px');
-            expect(result.get().item(1)?.toString()).toEqual('11.125px');
-            expect(result.get().last()?.toString()).toEqual(params.to + 'px');
+            expect(result.get().item(1)?.toString()).toEqual('11.2px');
+            expect(result.get().last()?.toString()).toEqual('12.3px');
         });
     });
 

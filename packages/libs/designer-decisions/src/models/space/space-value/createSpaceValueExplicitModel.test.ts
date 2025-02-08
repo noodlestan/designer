@@ -17,7 +17,7 @@ describe('createSpaceValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.toString()).toEqual(params.value + 'px');
+            expect(result.toString()).toEqual('2.1px');
         });
     });
 
