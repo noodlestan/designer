@@ -26,19 +26,11 @@ This guide explains how to create custom visualizations for your documentation.
 
 ## Creating custom components
 
-In the [Components reference](/components) you will also find a comprehensive set of primitives
-that render specific decision types and decision values, as well as a few helpful layouts
-and atoms.
+In the [Astro integration](/integrations/Astro) docs you can find a comprehensive set of primitives for rendering decisions in different scenarios and layouts, as well as a few helpful layouts and atoms.
 
-You can reuse these built-in components to create your own, composing any layout of your choice,
-with total control over styling. You can also merge data from
-other sources, add custom logic, and format values as you wish.
+You can reuse these built-in components to create your own, composing any layout of your choice, with total control over styling. You can also merge data from other sources, add custom logic, and format values as you wish.
 
-In this example, we compose the
-[&lt;ShowColorValue/&gt;](/components/Astro/Composable/Values/#showcolorvalue) and the
-[&lt;ShowDecisionUsage/&gt;](/components/Astro/Composable/Attributes/#showdecisionusage) atom
-within the standard
-[&lt;DecisionCard/&gt;](/components/Astro/ShowDecisionCard) layout.
+In this example, we compose the [&lt;ShowColorValue/&gt;](/integrations/Astro/Composable/Values/#showcolorvalue) and the [&lt;ShowDecisionUsage/&gt;](/integrations/Astro/Composable/Attributes/#showdecisionusage) atom within the standard [&lt;DecisionCard/&gt;](/integrations/Astro/ShowDecisionCard) layout.
 
 ```astro title="MyColorDecision.Astro"
 ---
@@ -111,4 +103,4 @@ const color = decision.produce().toString('oklch')
 ## See Also
 
 -   [Examples](/examples)
--   [Components Reference](/components)
+-   [Astro integration](/integrations/Astro)

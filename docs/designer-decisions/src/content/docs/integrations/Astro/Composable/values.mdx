@@ -1,6 +1,6 @@
 ---
 title: Value Components
-slug: components/Astro/Composable/Values
+slug: integrations/Astro/Composable/Values
 description: Astro components that render design decision values.
 sidebar:
     order: 40
@@ -32,12 +32,12 @@ These components render a decision's value directly.
 
 <Aside type="tip">
     You don't have to use these components directly in your docs. Using
-    [ShowDecision](/components/Astro/ShowDecision/) will select the appropriate one for you.
+    [ShowDecision](/integrations/Astro/ShowDecision/) will select the appropriate one for you.
 </Aside>
 
 They are exposed so that anyone can [create custom visualizations](/guides/creating-custom-design-decision-visualizations/), composing values and visualizations directly in their custom components.
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) for all decision types and their corresponding value components.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) for all decision types and their corresponding value components.
 
 ## Common Props
 
@@ -47,7 +47,7 @@ A decision value of the appropriate type.
 
 ### ༶ `value`: string | string[]
 
-All of these components share the same [value prop](/components/Astro/Props/#valueprops) to control how the value should be formatted. The formats available depend on type of value are listed below for each component.
+All of these components share the same [value prop](/integrations/Astro/Props/#valueprops) to control how the value should be formatted. The formats available depend on type of value are listed below for each component.
 
 Decision components, such as `<ShowDecision/>` expose this prop as well, so that you can have full control over format.
 

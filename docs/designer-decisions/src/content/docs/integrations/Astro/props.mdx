@@ -1,6 +1,6 @@
 ---
 title: Astro component props
-slug: components/Astro/Props
+slug: integrations/Astro/Props
 description: Common props for Astro design decision components.
 sidebar:
     order: 1
@@ -15,7 +15,7 @@ export const store = await decisionLoader();
 
 ## DecisionProps
 
-All components that render a decision, such as the [&lt;ShowDecisionCard/&gt;](/components/Astro/ShowDecisionCard/) component, **require** the following props.
+All components that render a decision, such as the [&lt;ShowDecisionCard/&gt;](/integrations/Astro/ShowDecisionCard/) component, **require** the following props.
 
 ### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
 
@@ -83,7 +83,7 @@ All components that directly render a decision or a decision value also accept t
 
 Provide this flag to hide the value or to customize how it is formatted.
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ```mdx
 <ShowDecision store={store} d="Brand Pink" value={false} size="m" />
@@ -103,7 +103,7 @@ All components that directly render a decision or a decision visualization also 
 
 Provide this flag to chose between available visualizations or to hide the decision visualization altogether, displaying only its value(s).
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ### ༶ `size` (auto): [ShowVizSize](/api/designer-shows/Types/ShowVizSize/)
 
@@ -125,4 +125,4 @@ Refer to [ShowVizSize](/api/designer-shows/Types/ShowVizSize) for available size
 
 Provide this prop to configure visualization options.
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn which `value` options are available for each decision type.

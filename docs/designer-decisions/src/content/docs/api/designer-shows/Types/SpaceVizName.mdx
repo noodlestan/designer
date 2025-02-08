@@ -9,14 +9,13 @@ import { decisionLoader } from '../../../../../decisions';
 
 export const store = await decisionLoader();
 
-Available visualizations for [Space Values](/components/Astro/Composable/Values/#showspacevalue)
+Available visualizations for [Space Values](/integrations/Astro/Composable/Values/#showspacevalue)
 
 ```ts
 type SpaceVizName = 'bar-h' | 'bar-v' | 'square' | 'circle';
 ```
 
-When rendering decisions you can chose a different visualization by
-setting the `viz` [prop](/components/Astro/Props#-viz-true-boolean--string) to one of these.
+When rendering decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
 <ShowSpaceValueDecision store={store} d="Space Unit" viz="..." />

@@ -1,6 +1,6 @@
 ---
 title: 'ShowDecisionCard'
-slug: components/Astro/ShowDecisionCard
+slug: integrations/Astro/ShowDecisionCard
 description: Astro component to visualize any decision along with its details in a card layout.
 sidebar:
     order: 20
@@ -27,17 +27,17 @@ By default it renders only the decision **description** and **usage** guidelines
 
 This component composes:
 
--   [ShowDecision](/components/Astro/ShowDecision) component (value and visualization)
+-   [ShowDecision](/integrations/Astro/ShowDecision) component (value and visualization)
 -   inside of `DecisionCardLayout` (🚧 link)
--   and one or more [Decision Attribute](/components/Astro/Composable/Attributes).
+-   and one or more [Decision Attribute](/integrations/Astro/Composable/Attributes).
 
 ## Props
 
-### ༶ [DecisionProps](/components/Astro/Props): `store` and `d`
+### ༶ [DecisionProps](/integrations/Astro/Props): `store` and `d`
 
 These two **mandatory** `store` and `d` props serve to identify and retrieve the decision.
 
-### ༶ [DecisionProps](/components/Astro/Props): `layout`
+### ༶ [DecisionProps](/integrations/Astro/Props): `layout`
 
 The optional `layout` prop controls the flow of items in set/scale decisions and the relative position of the value/viz pair.
 
@@ -54,13 +54,13 @@ The layout of the card adapts automatically to the layout of set/scale decisions
 
 The layout of the card is otherwise unaffected by the layout prop if the decision produces a single value.
 
-### ༶ [ValueProps](/components/Astro/Props#valueprops): `value`
+### ༶ [ValueProps](/integrations/Astro/Props#valueprops): `value`
 
 This prop control whether the value should be shown and how to format it.
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) to learn which `value` options are available for each decision type.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
-### ༶ [VizProps](/components/Astro/Props#vizprops): `viz`, `size`, and `options`
+### ༶ [VizProps](/integrations/Astro/Props#vizprops): `viz`, `size`, and `options`
 
 These props control whether the visualization should be shown, which specific visualization to show, and how to customize it.
 
@@ -72,7 +72,7 @@ In this example we are rendering a [ColorValueDecision](/decision-models/color-v
 
 <ShowDecisionCard store={store} d="Action Color" value={false} size="l" />
 
-Refer to the table on [Composable Types](/components/Astro/Composable/Types) for details on available visualizations and options.
+Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) for details on available visualizations and options.
 
 ### ༶ `name` (true): boolean
 

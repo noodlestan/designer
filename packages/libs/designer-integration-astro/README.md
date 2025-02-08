@@ -2,7 +2,7 @@
 
 ![](https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/docs/designer-decisions/public/designer-decisions-og-1280x640.png)
 
-This is an Astro integration that allows you to use [Designer Decisions components](https://designer-decisions.noodlestan.org/components/Astro/) in your MDX pages.
+This Astro integration allows you to use [Designer Decisions Astro components](https://designer-decisions.noodlestan.org/integrations/Astro/) in your MDX pages.
 
 📖 [Documentation](https://designer-decisions.noodlestan.org/)
 
