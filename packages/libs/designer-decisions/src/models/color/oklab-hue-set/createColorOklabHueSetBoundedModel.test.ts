@@ -27,8 +27,8 @@ describe('createColorOklabHueSetBoundedModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(params.from);
-            expect(result.get().item(1)?.get()).toEqual(355.3625);
+            expect(result.get().first()?.get()).toEqual(350.7);
+            expect(result.get().item(1)?.get()).toEqual(355.4);
             expect(result.get().last()?.get()).toEqual(360);
         });
     });
@@ -39,14 +39,14 @@ describe('createColorOklabHueSetBoundedModel()', () => {
             from: 351.725,
             to: 370,
             steps: 1,
-            quantize: 2,
+            quantize: 2.5,
         };
 
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(352);
-            expect(result.get().item(1)?.get()).toEqual(356);
+            expect(result.get().first()?.get()).toEqual(352.5);
+            expect(result.get().item(1)?.get()).toEqual(357.5);
             expect(result.get().last()?.get()).toEqual(360);
         });
     });

@@ -32,9 +32,9 @@ describe('createColorValue()', () => {
             const colorValue = createColorValue(valueContext, input);
 
             const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>('hsl');
-            expect(h).toBe(231.43);
-            expect(s).toBe(0.3359);
-            expect(l).toBe(0.4513);
+            expect(h).toBe(231.4);
+            expect(s).toBe(0.336);
+            expect(l).toBe(0.451);
         });
 
         it('should format toObject("rgb") correctly', () => {

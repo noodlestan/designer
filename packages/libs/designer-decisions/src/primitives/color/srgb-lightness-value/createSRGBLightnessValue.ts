@@ -6,10 +6,14 @@ import type {
 } from '../../../types';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import {
+    COLOR_CHANNEL_SRGB_LIGHTNESS_BASE as base,
+    COLOR_CHANNEL_SRGB_LIGHTNESS_NAME as name,
+    COLOR_CHANNEL_SRGB_LIGHTNESS_QUANTIZE as quant,
+} from '../constants';
 import { clampChannelValue } from '../helpers';
 import { createColorValue } from '../value';
 
-import { CHANNEL_NAME, NUMERIC_VALUE_BASE as base } from './private';
 import { resolveSRGBLightnessValue } from './resolveSRGBLightnessValue';
 
 export const createSRGBLightnessValue = (
@@ -19,7 +23,7 @@ export const createSRGBLightnessValue = (
 ): SRGBLightnessValue => {
     context.consume(input);
 
-    const { quantize } = options;
+    const { quantize = quant } = options;
     const value = resolveSRGBLightnessValue(context, input);
 
     const normalize = (v: number) => clampChannelValue(v, 'srgb-lightness');
@@ -30,7 +34,7 @@ export const createSRGBLightnessValue = (
         get,
         raw,
         quantized,
-        name: () => CHANNEL_NAME,
+        name: () => name,
         toColor: channels => {
             const { h, s } = channels;
             return createColorValue(context.outputContext(), { h, s, l: value }, { quantize });

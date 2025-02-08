@@ -2,13 +2,14 @@ import type { Color as ChromaColor } from 'chroma-js';
 
 import type { ColorFormat } from '../../../../types';
 import { quantized } from '../../../number';
-
-const OKLAB_LIGHTNESS_BASE = 2;
-const OKLAB_CHROMA_BASE = 2;
-const OKLAB_HUE_BASE = 0;
-const SRGB_HUE_BASE = 0;
-const SRGB_LIGHTNESS_BASE = 2;
-const SRGB_SATURATION_BASE = 2;
+import {
+    COLOR_CHANNEL_OKLAB_CHROMA_BASE as OKLAB_CHROMA_BASE,
+    COLOR_CHANNEL_OKLAB_HUE_BASE as OKLAB_HUE_BASE,
+    COLOR_CHANNEL_OKLAB_LIGHTNESS_BASE as OKLAB_LIGHTNESS_BASE,
+    COLOR_CHANNEL_SRGB_HUE_BASE as SRGB_HUE_BASE,
+    COLOR_CHANNEL_SRGB_LIGHTNESS_BASE as SRGB_LIGHTNESS_BASE,
+    COLOR_CHANNEL_SRGB_SATURATION_BASE as SRGB_SATURATION_BASE,
+} from '../../constants';
 
 export function chromaColorToString(
     color: ChromaColor,

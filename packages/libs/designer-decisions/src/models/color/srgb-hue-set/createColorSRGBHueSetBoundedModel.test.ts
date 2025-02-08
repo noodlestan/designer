@@ -27,8 +27,8 @@ describe('createColorSRGBHueSetBoundedModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(params.from);
-            expect(result.get().item(1)?.get()).toEqual(355.3625);
+            expect(result.get().first()?.get()).toEqual(350.7);
+            expect(result.get().item(1)?.get()).toEqual(355.4);
             expect(result.get().last()?.get()).toEqual(360);
         });
     });

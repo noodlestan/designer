@@ -24,7 +24,7 @@ describe('createSpaceScaleExplicitModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.toString()).toEqual(params.values[0] + 'px');
+            expect(result.get().first()?.toString()).toEqual('32.1px');
             expect(result.get().item(1)?.toString()).toEqual(params.values[1] + 'px');
             expect(result.get().last()?.toString()).toEqual(params.values[2] + 'px');
         });
@@ -33,7 +33,7 @@ describe('createSpaceScaleExplicitModel()', () => {
     describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: SpaceScaleExplicitInput['params'] = {
-            values: [32.111, 64, 128],
+            values: [32.111, 63, 127],
             quantize: 2,
         };
 

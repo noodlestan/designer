@@ -24,7 +24,7 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(params.values[0]);
+            expect(result.get().first()?.get()).toEqual(330.1);
             expect(result.get().item(1)?.get()).toEqual(params.values[1]);
             expect(result.get().last()?.get()).toEqual(360);
         });
@@ -33,15 +33,15 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
     describe('Given a quantize param', () => {
         const [mockContext] = createValueContextMock();
         const params: ColorSRGBHueSetExplicitInput['params'] = {
-            values: [331.111, 351, 371],
-            quantize: 2,
+            values: [333.311, 344, 371],
+            quantize: 5,
         };
 
         it('should populate the scale with quantized values', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.get()).toEqual(332);
-            expect(result.get().item(1)?.get()).toEqual(352);
+            expect(result.get().first()?.get()).toEqual(335);
+            expect(result.get().item(1)?.get()).toEqual(345);
             expect(result.get().last()?.get()).toEqual(360);
         });
     });

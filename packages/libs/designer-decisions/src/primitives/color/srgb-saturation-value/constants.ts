@@ -1,2 +1,0 @@
-export { CHANNEL_NAME as CHANNEL_COLOR_SRGB_SATURATION_NAME } from './private';
-export { NUMERIC_VALUE_BASE as CHANNEL_COLOR_SRGB_SATURATION_BASE } from './private';
