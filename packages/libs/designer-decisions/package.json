@@ -39,8 +39,8 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "11.1.1",
     "@types/chroma-js": "^2.4.5",
-    "@vitest/coverage-v8": "1.2.2",
+    "@vitest/coverage-v8": "3.0.5",
     "vite": "6.1.0",
-    "vitest": "1.6.0"
+    "vitest": "3.0.5"
   }
 }
