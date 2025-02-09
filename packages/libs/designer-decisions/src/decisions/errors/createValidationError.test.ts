@@ -37,7 +37,7 @@ describe('createValidationError()', () => {
             expect(result.error).toBeUndefined();
         });
 
-        it.only('should return a DecisionError object with the expected message', () => {
+        it('should return a DecisionError object with the expected message', () => {
             const result = createValidationError({ context: mockContext });
 
             expect(result.message()).toContain('Validation error in {"$uuid":"test-uuid"}');
