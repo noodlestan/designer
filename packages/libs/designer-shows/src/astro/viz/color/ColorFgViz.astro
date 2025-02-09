@@ -1,26 +1,38 @@
 ---
+import { ShowError } from '../../atoms';
 import { resolveVizContent } from '../../helpers';
 import type { ColorVizProps } from '../../types';
 
 type Props = ColorVizProps;
 
-const { value, size = 'auto', options } = Astro.props;
+const { value: color, size = 'auto', options, muteErrors } = Astro.props;
 
-const hsl = value?.toString('oklch');
+const hsl = color?.toString('oklch');
 
 const { contrast, mode = 'typeface' } = options || {};
 
 const content = resolveVizContent({ ...options, mode }, size);
+const showErrors = !muteErrors && color?.context().hasErrors();
 ---
 
 <div class:list={['dd-color-fg-viz', mode, size]}>
+    {showErrors && <ShowError size="s" position="block" />}
     <div class="swatch"><div class="content">{content}</div></div>
 </div>
 
 <style define:vars={{ color: hsl, contrast }}>
     .dd-color-fg-viz {
+        position: relative;
         width: 100%;
         min-width: var(--dd-viz-min-width);
+    }
+
+    .dd-color-fg-viz :global(.dd-show-Error) {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .xs {

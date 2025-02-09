@@ -22,11 +22,13 @@ export type ShowVizProps = {
     size?: ShowVizSize;
     options?: object;
     v?: unknown;
+    muteErrors?: boolean;
 };
 
 export type ShowValueProps = {
     value?: boolean | string | string[];
     v?: unknown;
+    muteErrors?: boolean;
 };
 
 export type DecisionTypeComponentProps = ShowDecisionProps &

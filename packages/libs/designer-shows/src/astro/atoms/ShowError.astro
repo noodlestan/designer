@@ -8,14 +8,14 @@ interface Props {
 const { size = 's', position = 'inline' } = Astro.props;
 ---
 
-<div class:list={['dd-warning', size, position]}>
-    <div class="dd-warning-icon">
+<div class:list={['dd-show-error', size, position]}>
+    <div class="dd-show-error-icon">
         <AlertTriangle />
     </div>
 </div>
 
 <style>
-    .dd-warning-icon {
+    .dd-show-error-icon {
         width: var(--__size);
         height: var(--__size);
         min-width: var(--__size);
@@ -25,7 +25,7 @@ const { size = 's', position = 'inline' } = Astro.props;
         color: var(--dd-error-fg-color);
     }
 
-    .block .dd-warning-icon {
+    .block .dd-show-error-icon {
         display: flex;
         align-items: center;
         justify-content: center;

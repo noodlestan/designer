@@ -1,19 +1,33 @@
 ---
+import { ShowError } from '../../atoms';
 import type { ColorVizProps } from '../../types';
 
 type Props = ColorVizProps;
 
-const { value, size = 'auto' } = Astro.props;
+const { value: color, size = 'auto', muteErrors } = Astro.props;
 
-const hsl = value?.toString('oklch');
+const hsl = color?.toString('oklch');
+const showErrors = !muteErrors && color?.context().hasErrors();
 ---
 
-<div class:list={['dd-color-swatch-viz', size]}><div class="swatch"></div></div>
+<div class:list={['dd-color-swatch-viz', size]}>
+    {showErrors && <ShowError size="s" position="block" />}
+    <div class="swatch"></div>
+</div>
 
 <style define:vars={{ color: hsl }}>
     .dd-color-swatch-viz {
+        position: relative;
         width: 100%;
         min-width: var(--dd-viz-min-width);
+    }
+
+    .dd-color-swatch-viz :global(.dd-show-Error) {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .xs {
