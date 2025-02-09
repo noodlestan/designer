@@ -1,12 +1,12 @@
 import type {
+    DecisionInputData,
+    DecisionRef,
     InputRecord,
     InputValidationError,
     StaticInputMap,
 } from '@noodlestan/designer-decisions';
 
 import type { DecisionValidator } from '../schemas';
-
-import type { DecisionInputData } from './createStaticDecisionStore';
 
 export const createStaticInputMap = (
     inputs: InputRecord[],
@@ -47,9 +47,14 @@ export const createStaticInputMap = (
         return filter ? items.filter(filter) : items;
     };
 
+    const findByRef = (ref: DecisionRef) => {
+        return data.filter(({ decision }) => '$name' in ref && decision.name === ref.$name);
+    };
+
     return {
         hasErrors,
         validationErrors,
         records,
+        findByRef,
     };
 };

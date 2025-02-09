@@ -1,9 +1,11 @@
+import type { ErrorObject } from 'ajv';
+
 import type { StaticDecisionMap, StaticInputMap } from '../decisions';
 import type { BaseValue, Decision, DecisionContext, DecisionRef, InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
-import { createInputNotFoundError, createUnexpectedError } from './errors';
+import { createInputNotFoundError, createUnexpectedError, createValidationError } from './errors';
 
 export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecisionMap => {
     const _createDecision = (context: DecisionContext, inputs: InputRecord[]) => {
@@ -18,9 +20,18 @@ export const createStaticDecisionMap = (inputStore: StaticInputMap): StaticDecis
     const resolver = <V extends BaseValue<unknown>>(
         ref: DecisionRef,
     ): [DecisionContext, Decision<V> | undefined] => {
-        const inputs = inputStore.records(r => '$name' in ref && r.name === ref.$name); // WIP ref matching
-        if (inputs.length) {
+        const record = inputStore.findByRef(ref);
+
+        if (record.length) {
+            const inputs = record.flatMap(({ decision }) => decision);
             const context = createDecisionContext(ref, resolver, inputs);
+
+            const errors = record
+                .filter(({ errors }) => Boolean(errors))
+                .flatMap(({ errors }) => errors) as ErrorObject[];
+
+            errors.forEach(error => context.addError(createValidationError({ error, context })));
+
             const decision = _createDecision(context, inputs);
             return [context, decision as Decision<V>];
         }
