@@ -8,6 +8,8 @@ Extends `BaseValue<number>`
 ```ts
 export type ColorChannelValue = {
     get: () => number;
+    raw(): number;
+    quantized: (quantize?: number) => number;
     name: () => ColorChannelValue;
     toColor: (channels: ComplementaryChannels) => ColorValue;
 };
