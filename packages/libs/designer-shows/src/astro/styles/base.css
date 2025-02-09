@@ -54,6 +54,12 @@
     --dd-value-line-height: 1.2;
     --dd-value-color: var(--sl-color-text);
 
+    --dd-error-size-xs: 1.2rem;
+    --dd-error-size-s: 2rem;
+    --dd-error-size-m: 3rem;
+    --dd-error-bg-color: #000000cc;
+    --dd-error-fg-color: #ff0000;
+
     --dd-card-v-space: var(--dd-space-m);
     --dd-card-h-space: var(--dd-space-l);
     --dd-card-v-gap: var(--dd-space-l);
