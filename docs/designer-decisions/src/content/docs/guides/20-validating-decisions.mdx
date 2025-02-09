@@ -170,7 +170,7 @@ The following 2 utility functions help with this:
 
 Add these 2 lines to the script:
 
-```js collapse={9-26,31-34} "formatDecisionStatus" "produceDecisions"
+```diff lang="js" collapse={9-21,31-34} "formatDecisionStatus" "produceDecisions"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
@@ -194,12 +194,12 @@ const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+-       store.validationErrors().forEach(error => console.error(formatValidationError(error)));
         throw new Error(`Validation errors.`);
     }
 
-    const produced = produceDecisions(store);
-    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
++   const produced = produceDecisions(store);
++   produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
     console.info(`🐘 ${records.length} records`);
 };
@@ -233,7 +233,7 @@ introducing two issues:
 If you wish to filter out decisions that produce valid values, and inspect only the errors,
 you can adjust your script to the following:
 
-```js collapse={2-28,34-37} "filter" "hasErrors"
+```js collapse={2-27,33-36} "filter" "hasErrors"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
@@ -257,7 +257,6 @@ const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
         throw new Error(`Validation errors.`);
     }
 
@@ -278,7 +277,7 @@ loadDecisions();
 The `produced` object reports counts for decision records, and different types of errors in
 a single string.
 
-```js collapse={2-29,33-35} "filter" "hasErrors"
+```js collapse={2-28,32-34} "filter" "hasErrors"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
@@ -302,12 +301,11 @@ const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
         throw new Error(`Validation errors.`);
     }
 
     const produced = produceDecisions(store);
-    produced.forEach(status => console.info(formatDecisionStatus(status)));
+    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
     console.info('🐘', produced.summary());
 };
@@ -325,7 +323,7 @@ You can use it to summarize all counts in one line.
 If you are running this as part of your build process you will probably want to exit the script
 with an error code.
 
-```js collapse={1-30} "throw" "catch" "exit(1)"
+```js collapse={1-29} "throw" "catch" "exit(1)"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
@@ -349,12 +347,11 @@ const loadDecisions = async () => {
     const store = await loader();
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
         throw new Error(`Validation errors.`);
     }
 
     const produced = produceDecisions(store);
-    produced.forEach(status => console.info(formatDecisionStatus(status)));
+    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info('🐘', produced.summary());
 
     if (produced.hasErrors()) {

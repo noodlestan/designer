@@ -3,7 +3,6 @@ import type {
     Decision,
     DecisionContext,
     DecisionRef,
-    InputRecord,
     LookupContexts,
     StaticInputMap,
 } from '@noodlestan/designer-decisions';
@@ -12,14 +11,8 @@ import {
     createStaticDecisionMap,
     createValueContext,
 } from '@noodlestan/designer-decisions';
-import type { ErrorObject } from 'ajv';
 
 import type { StaticDecisionStore, StaticDecisionStoreError } from './types';
-
-export type DecisionInputData = {
-    decision: InputRecord;
-    errors: ErrorObject[] | null | undefined;
-};
 
 export const createStaticDecisionStore = (
     inputStore: StaticInputMap,

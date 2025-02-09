@@ -3,8 +3,8 @@ import path from 'node:path';
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 import {
     createDecisionLoader,
-    formatStoreError,
-    formatValidationError,
+    formatDecisionStatus,
+    produceDecisions,
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
@@ -19,13 +19,14 @@ export const decisionLoader = createDecisionLoader(
 const loadDecisions = async () => {
     const store = await decisionLoader();
     if (store.hasErrors()) {
-        store.storeErrors()?.forEach(error => console.error(formatStoreError(error)));
-        store.validationErrors()?.forEach(error => console.error(formatValidationError(error)));
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        throw new Error(`Validation errors.`);
     }
-    const records = store.records().length;
-    const errors = store.storeErrors().length;
-    const validationErrors = store.validationErrors().length;
-    console.info(`🐘 ${records} records, ${errors} errors, ${validationErrors} warnings`);
+
+    const produced = produceDecisions(store);
+    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
+
+    console.info('🐘', produced.summary());
 };
 
 loadDecisions();
