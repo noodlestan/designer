@@ -1,9 +1,10 @@
 ---
-title: Rendering Decisions in Docs
-slug: guides/documenting-design-decisions-with-astro-and-mdx
-description: How to document design decisions and tokens for Astro/Starlight based docs
+title: Documenting with Astro/MDX
+slug: guides/generating-documentation/using-astro-components-in-mdx
+description: How to document design decisions and tokens in Astro/Starlight based docs
 sidebar:
-    order: 40
+    order: 42
+    label: Documenting with Astro/MDX
 ---
 
 import { Aside, Code, FileTree } from '@astrojs/starlight/components';
@@ -15,8 +16,8 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../decisions';
-import { GetInvolved } from '../../../components/atoms';
+import { decisionLoader } from '../../../../decisions';
+import { GetInvolved } from '../../../../components/atoms';
 
 export const store = await decisionLoader();
 
