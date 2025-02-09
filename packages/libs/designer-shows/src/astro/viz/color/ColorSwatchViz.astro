@@ -12,7 +12,7 @@ const showErrors = !muteErrors && color?.context().hasErrors();
 
 <div class:list={['dd-color-swatch-viz', size]}>
     {showErrors && <ShowError size="s" position="block" />}
-    <div class="swatch"></div>
+    <div class="dd-swatch"></div>
 </div>
 
 <style define:vars={{ color: hsl }}>
@@ -22,12 +22,13 @@ const showErrors = !muteErrors && color?.context().hasErrors();
         min-width: var(--dd-viz-min-width);
     }
 
-    .dd-color-swatch-viz :global(.dd-show-Error) {
+    .dd-color-swatch-viz :global(.dd-show-error) {
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 2;
     }
 
     .xs {
@@ -55,7 +56,7 @@ const showErrors = !muteErrors && color?.context().hasErrors();
         max-width: var(--dd-viz-size-xl);
     }
 
-    .swatch {
+    .dd-swatch {
         width: 100%;
         min-height: var(--dd-viz-min-width);
         aspect-ratio: 1 / 1;

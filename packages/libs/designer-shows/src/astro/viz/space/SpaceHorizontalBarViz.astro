@@ -4,15 +4,17 @@ import type { SpaceVizProps } from '../../types';
 
 type Props = SpaceVizProps;
 
-const { value: space, size = 'auto', muteErrors } = Astro.props;
+const { value: space, size = 'auto' } = Astro.props;
+const all = Astro.props;
 
 const { value: v, units } = space?.toObject() || {};
 const vWithUnits = `${v}${units}`;
-const showErrors = !muteErrors && space?.context().hasErrors();
+// const showErrors = !muteErrors && space?.context().hasErrors();
 ---
 
+Horizontal fff{Object.keys(all).join('g')}fff
 <div class:list={['dd-space-bar-h-viz', size]}>
-    {showErrors && <ShowError size="s" position="block" />}
+    <!-- {showErrors && <ShowError size="s" position="block" />} -->
     <div class="dd-block"></div>
 </div>
 
@@ -27,7 +29,7 @@ const showErrors = !muteErrors && space?.context().hasErrors();
         max-height: var(--__height);
     }
 
-    .dd-space-bar-h-viz :global(.dd-show-Error) {
+    .dd-space-bar-h-viz :global(.dd-show-error) {
         position: absolute;
         inset: 0;
         display: flex;

@@ -17,7 +17,7 @@ const showErrors = !muteErrors && color?.context().hasErrors();
 
 <div class:list={['dd-color-bg-viz', size, mode]}>
     {showErrors && <ShowError size="s" position="block" />}
-    <div class="swatch">
+    <div class="dd-swatch">
         <div class="content">{content}</div>
     </div>
 </div>
@@ -29,12 +29,13 @@ const showErrors = !muteErrors && color?.context().hasErrors();
         min-width: var(--dd-viz-min-width);
     }
 
-    .dd-color-bg-viz :global(.dd-ShowError) {
+    .dd-color-bg-viz :global(.dd-show-error) {
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 2;
     }
 
     .xs {
@@ -77,22 +78,19 @@ const showErrors = !muteErrors && color?.context().hasErrors();
         max-width: var(--dd-viz-size-xl);
     }
 
-    .swatch {
+    .dd-swatch {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
         width: 100%;
         min-height: var(--dd-viz-min-width);
+        padding: 5%;
         aspect-ratio: 1 / 1;
         background-color: var(--color);
         border: var(--dd-color-viz-border);
         border-radius: var(--dd-color-viz-border-radius);
-    }
-
-    .swatch {
-        padding: 5%;
-        position: relative;
     }
 
     .content {

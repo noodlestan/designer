@@ -15,7 +15,16 @@ import { resolveLayout } from '../../helpers/resolveLayout';
 
 type Props = ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>;
 
-const { store, d, layout, size = 'm', ...rest } = Astro.props;
+const {
+    store,
+    d,
+    layout,
+    value: showValue = true,
+    viz: showViz = true,
+    size = 'm',
+    muteErrors,
+    ...rest
+} = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
 
@@ -31,15 +40,32 @@ const base = (Array.isArray(layout) ? layout[0] : layout) || 'row';
 const flipped = base === 'column' ? 'row' : 'column';
 const defaultLayout: ShowDecisionLayout = isSet ? [base, flipped] : [base];
 const [setLayout, itemLayout] = resolveLayout(layout, defaultLayout);
+const muteValueErrors = showViz !== false;
+const muteVizErrors = false;
 ---
+
+999999 {muteErrors} aa
+{showViz !== false} bbb {muteVizErrors} fff
 
 {
     decision && (ValueComponent || VizComponent) && (
         <LayoutDynamic layout={setLayout}>
             {items?.map(item => (
                 <LayoutDynamic layout={itemLayout} gap="s">
-                    {VizComponent && <VizComponent {...rest} {...vizProps} size={size} v={item} />}
-                    {ValueComponent && <ValueComponent {...rest} {...valueProps} v={item} />}
+                    {VizComponent && (
+                        <>
+                            <VizComponent />
+                        </>
+                    )}
+                    {ValueComponent && (
+                        <ValueComponent
+                            {...rest}
+                            {...valueProps}
+                            v={item}
+                            value={showValue}
+                            muteErrors={muteValueErrors}
+                        />
+                    )}
                 </LayoutDynamic>
             ))}
         </LayoutDynamic>
