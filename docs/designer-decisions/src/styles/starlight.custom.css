@@ -73,12 +73,12 @@ a.site-title:hover {
     color: hsl(from var(--dd-color-max) h s calc(l + var(--__accent_2)));
 }
 
-a[variant='minimal'],
+a[data-variant='minimal'],
 .sl-link-button.minimal {
     color: hsl(from var(--sl-color-text-accent) h s calc(l + var(--__accent_2)));
 }
 
-a[variant='minimal']:hover,
+a[data-variant='minimal']:hover,
 .sl-link-button.minimal:hover {
     color: hsl(from var(--sl-color-text-accent) h s calc(l + var(--__accent_3)));
 }

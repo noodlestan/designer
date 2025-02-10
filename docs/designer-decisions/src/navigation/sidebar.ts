@@ -2,21 +2,18 @@ import { getCollection } from 'astro:content';
 
 import { staticSidebar } from '../../sidebar.static.mjs';
 
-const decisionTypes = await getCollection('decisionTypes');
+import { models } from './models';
 
-const index = {
-    label: 'Index',
-    link: 'decision-models',
+export const createSidebar = async (): Promise<unknown> => {
+    const decisionTypes = await getCollection('decisionTypes');
+
+    const types = decisionTypes.map(decisionType => ({
+        link: `/models/decision-types/${decisionType.id}`,
+        label: decisionType.data.name,
+    }));
+
+    const items = [...models.map(({ ...item }) => ({ ...item }))];
+    items[2].items = [...(items[2].items || []), ...types];
+
+    return staticSidebar({ models: items });
 };
-const items = decisionTypes.map(decisionType => ({
-    link: `decision-models/${decisionType.id}`,
-    label: decisionType.data.name,
-}));
-
-export const sidebar = staticSidebar({
-    decisionModels: {
-        label: 'Decision Models',
-        collapsed: true,
-        items: [index, ...items],
-    },
-});

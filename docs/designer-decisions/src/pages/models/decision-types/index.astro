@@ -2,9 +2,10 @@
 import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 
-import { href } from '../mdx';
-import { sidebar } from '../navigation/sidebar';
+import { href } from '../../../mdx';
+import { createSidebar } from '../../../navigation/sidebar';
 
+const sidebar = await createSidebar();
 const decisionTypes = await getCollection('decisionTypes');
 
 const domains = decisionTypes
@@ -20,6 +21,10 @@ const headings = [{
     text: 'color'
 }]
 
+function capitalize(str: string): string {
+    return str.charAt(0).toUpperCase() + str.substring(1)
+}
+
 
 // const headings = Array.from(domains).map(domain => ({
 //     depth: 2,
@@ -27,19 +32,19 @@ const headings = [{
 //     text: domain
 // }))
 
-const frontmatter={ title: 'Decision Models', headings }
+const frontmatter={ title: 'Decision Types', headings }
 ---
 
-<StarlightPage frontmatter={frontmatter} sidebar={sidebar}>
+<StarlightPage frontmatter={frontmatter} sidebar={sidebar as any}>
 {
     Array.from(domains).map(domain => (
-            <h2>{domain}</h2>
+            <h2>{capitalize(domain)}</h2>
             <ul>
                 {decisionTypes
                     .filter(type => type.data.domain === domain)
                     .map(decisionType => (
                         <li>
-                            <a href={href(`/decision-models/${decisionType.id}`)}>
+                            <a href={href(`/models/decision-types/${decisionType.id}`)}>
                                 {decisionType.data.name}
                             </a>
                         </li>

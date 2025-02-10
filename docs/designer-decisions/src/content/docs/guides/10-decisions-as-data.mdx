@@ -20,20 +20,20 @@ At a minimum, a decision record requires
 
 The following example defines two decisions:
 
--   a [color-value](/decision-models/color-value) decision and a
-    [color-set](/decision-models/color-set), both based on explicit values.
+-   a [color-value](/models/decision-types/color-value) decision and a
+    [color-set](/models/decision-types/color-set), both based on explicit values.
 
 ```json
 [
     {
-        "type": "color-value/explicit",
+        "model": "color-value/explicit",
         "name": "Primary Background",
         "params": {
             "value": "#090E0B"
         }
     },
     {
-        "type": "color-set/explicit",
+        "model": "color-set/explicit",
         "name": "Brand Color",
         "params": {
             "values": ["#FF0000", "#00FF00", "#0000FF"]
@@ -61,8 +61,8 @@ using directories and files.
 
 You can reuse decision values and avoid repetition by referencing them in other decisions.
 
-The following example defines an explicit [space-value](/decision-models/space-value)
-decision called "Space Unit" and a [space-scale](/decision-models/space-scale#anchored) anchored
+The following example defines an explicit [space-value](/models/decision-types/space-value)
+decision called "Space Unit" and a [space-scale](/models/decision-types/space-scale#anchored) anchored
 on the value of the first one.
 
 ```json
@@ -90,7 +90,7 @@ on the value of the first one.
 
 You can also reference items of a decision set set or scale by adding the index to the reference.
 
-In the following example we are creating a [space-value](/decision-models/space-value) decision
+In the following example we are creating a [space-value](/models/decision-types/space-value) decision
 based on the second element of the "Sizing Scale" declared before.
 
 ```json
@@ -118,5 +118,5 @@ validation errors.
 
 ## See Also
 
--   [Decision Models Reference](/decision-models)
--   [Schemas Reference](/schemas)
+-   [Decision Models Reference](/models/decision-types)
+-   [Schemas Reference](/models/schemas)

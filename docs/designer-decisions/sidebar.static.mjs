@@ -1,6 +1,7 @@
-export const staticSidebar = ({ decisionModels }) => [
+export const staticSidebar = ({ models }) => [
     {
         label: 'Guides',
+        collapsed: true,
         autogenerate: { directory: 'guides' },
     },
     {
@@ -13,11 +14,10 @@ export const staticSidebar = ({ decisionModels }) => [
         autogenerate: { directory: 'integrations' },
     },
     {
-        label: 'Schemas',
+        label: 'Models',
         collapsed: true,
-        autogenerate: { directory: 'schemas', collapsed: true },
+        items: models,
     },
-    decisionModels,
     {
         label: 'API',
         collapsed: true,
