@@ -23,9 +23,8 @@ export default defineConfig({
         starlight({
             title: 'Designer Decisions',
             logo: {
-                dark: './src/assets/DD-logo-dark.png',
-                light: './src/assets/DD-logo-light.png',
-                replacesTitle: true,
+                dark: './src/assets/DD-logomark.svg',
+                light: './src/assets/DD-logomark.svg',
             },
             social: {
                 github: 'https://github.com/noodlestan',

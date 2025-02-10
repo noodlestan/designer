@@ -3,14 +3,14 @@
     --sl-color-accent-low: #391723;
     --sl-color-accent: #b13267;
     --sl-color-accent-high: #e9bac7;
-    --sl-color-white: var(--dd-color-max: );
+    --sl-color-white: var(--dd-color-max);
     --sl-color-gray-1: #edeeee;
-    --sl-color-gray-2: #c1c2c2;
+    --sl-color-gray-2: #c3c4c4;
     --sl-color-gray-3: #8b8b8c;
     --sl-color-gray-4: #575858;
     --sl-color-gray-5: #383838;
     --sl-color-gray-6: #262727;
-    --sl-color-black: var(--dd-color-min: );
+    --sl-color-black: var(--dd-color-min);
 }
 
 /* Light mode colors. */
