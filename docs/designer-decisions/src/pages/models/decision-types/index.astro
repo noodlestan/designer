@@ -1,51 +1,37 @@
 ---
-import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { DECISION_TYPE_METAS } from '@noodlestan/designer-decisions';
 
 import { href } from '../../../mdx';
-import { createSidebar } from '../../../navigation/sidebar';
 
-const sidebar = await createSidebar();
-const decisionTypes = await getCollection('decisionTypes');
+const domains = DECISION_TYPE_METAS.reduce((acc, item) => {
+    acc.add(item.domain);
+    return acc;
+}, new Set<string>());
 
-const domains = decisionTypes
-    .reduce((acc, item) => {
-        acc.add(item.data.domain);
-        return acc;
-    }, new Set() as Set<string>)
-    .values();
-
-const headings = [{
-    depth: 2,
-    slug: 'color',
-    text: 'color'
-}]
-
-function capitalize(str: string): string {
+const capitalize = (str: string): string => {
     return str.charAt(0).toUpperCase() + str.substring(1)
 }
 
-
-// const headings = Array.from(domains).map(domain => ({
-//     depth: 2,
-//     slug: domain,
-//     text: domain
-// }))
-
-const frontmatter={ title: 'Decision Types', headings }
+const frontmatter = {title: 'Decision Types'}
+const headings = Array.from(domains).map(domain => ({
+    depth: 2,
+    slug: domain,
+    text: domain
+}))
 ---
 
-<StarlightPage frontmatter={frontmatter} sidebar={sidebar as any}>
+<StarlightPage frontmatter={frontmatter} headings={headings}>
 {
-    Array.from(domains).map(domain => (
+    Array.from(domains.values()).map(domain => (
             <h2>{capitalize(domain)}</h2>
             <ul>
-                {decisionTypes
-                    .filter(type => type.data.domain === domain)
-                    .map(decisionType => (
+                {DECISION_TYPE_METAS
+                    .filter(type => type.domain === domain)
+                    .map(type => (
                         <li>
-                            <a href={href(`/models/decision-types/${decisionType.id}`)}>
-                                {decisionType.data.name}
+                            <a href={href(`/models/decision-types/${type.type}`)}>
+                                {type.name}
                             </a>
                         </li>
                     ))}

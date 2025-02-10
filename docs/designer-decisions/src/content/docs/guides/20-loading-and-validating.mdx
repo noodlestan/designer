@@ -4,7 +4,7 @@ slug: guides/loading-and-validating-design-decisions
 description: How to validate design decisions with JSON schemas and validators
 sidebar:
     order: 20
-    label: Validating Decisions
+    label: Loading and Validating
 ---
 
 import { CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
@@ -31,8 +31,7 @@ npm install @noodlestan/designer-functions @noodlestan/designer-schemas
 
 Populate your design decisions data source.
 
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data)
-guide, you can simply create one or more JSON files anywhere in your project.
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can simply create one or more JSON files anywhere in your project.
 
 <FileTree>
 
@@ -55,12 +54,9 @@ Add a script to load decisions and print eventual validation errors.
 
 </FileTree>
 
-We will use the _all-in-one_
-[createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader),
-providing it with:
+We will use the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader), providing it with:
 
--   The [schema definition](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts)
-    for the built-in decision models.
+-   The [schema definition](/models/schemas) for the built-in decision models.
 -   A directory to load decision data from.
 -   A function to resolve the physical location of the `node_module` containing the schemas.
 
@@ -84,17 +80,13 @@ const loader = createDecisionLoader(
     How to provide a package resolution default?
 </GetInvolved>
 
-This loader returns a
-[pre-validated decision store](/api/designer-functions/Types/StaticDecisionStore)
-asynchronously.
+This loader returns a [pre-validated decision store](/api/designer-functions/Types/StaticDecisionStore) asynchronously.
 
-The store exposes all input records along with any errors that may have
-occurred while loading data and schemas or when validating input data.
+The store exposes all input records along with any errors that may have occurred while loading data and schemas or when validating input data.
 
 ## Validating input data
 
-We can format the errors using the `formatValidationError()` utility function and print all the
-validation errors so that we can inspect them.
+We can format the errors using the `formatValidationError()` utility function and print all the validation errors so that we can inspect them.
 
 ```js collapse={4-13,27-28} "formatValidationError"
 // scripts/validate-decisions.js
@@ -144,8 +136,7 @@ Avatar Sizes
 
 In case of validation errors these will be printed at the top.
 
-For instance, if we delete the `param` attribute from a couple of decision input records,
-the output should show something like:
+For instance, if we delete the `param` attribute from a couple of decision input records, the output should show something like:
 
 ```
 🟨 Decision Pink Palette (required) must have required property 'params'
@@ -155,18 +146,14 @@ Error: Validation errors.
 
 ## Inspecting and validating decision values
 
-So far, the script only validates the input data against the schemas, guaranteeing that
-all the required attributes are present and that they are of the correct type.
+So far, the script only validates the input data against the schemas, guaranteeing that all the required attributes are present and that they are of the correct type.
 
-Producing decision values may still result in errors if, for instance, a reference to another
-decision can not be resolved, or it resolves to a decision of the wrong type.
+Producing decision values may still result in errors if, for instance, a reference to another decision can not be resolved, or it resolves to a decision of the wrong type.
 
 The following 2 utility functions help with this:
 
--   [produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions): aggregates all
-    produced values, contexts, and errors.
--   [formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus): returns a
-    formatted decision, including its value and errors details.
+-   [produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions): aggregates all produced values, contexts, and errors.
+-   [formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus): returns a formatted decision, including its value and errors details.
 
 Add these 2 lines to the script:
 
@@ -213,12 +200,10 @@ The output will look something like this.
 🟩 | Layout Scale | space-scale/anchored | [8px, 16px, 32px, 64px, 128px, 256px] |
 ```
 
-The following example output was the result of changing the `Sizing Scale` decision,
-introducing two issues:
+The following example output was the result of changing the `Sizing Scale` decision, introducing two issues:
 
 -   the `Size Smallest` decision does not exist;
--   the `Brand Black` decision is a color decision but the model expected the reference to match a
-    [Space Value](/models/decision-types/space-value) or a [Space Scale](/models/decision-types/space-scale)
+-   the `Brand Black` decision is a color decision but the model expected the reference to match a [Space Value](/models/decision-types/space-value) or a [Space Scale](/models/decision-types/space-scale)
     decision.
 
 ```
@@ -230,8 +215,7 @@ introducing two issues:
 
 ## Filtering
 
-If you wish to filter out decisions that produce valid values, and inspect only the errors,
-you can adjust your script to the following:
+If you wish to filter out decisions that produce valid values, and inspect only the errors, you can adjust your script to the following:
 
 ```js collapse={2-27,33-36} "filter" "hasErrors"
 // scripts/validate-decisions.js
@@ -274,8 +258,7 @@ loadDecisions();
 
 ## Summarizing and catching errors
 
-The `produced` object reports counts for decision records, and different types of errors in
-a single string.
+The `produced` object reports counts for decision records, and different types of errors in a single string.
 
 ```js collapse={2-28,32-34} "filter" "hasErrors"
 // scripts/validate-decisions.js
@@ -320,8 +303,7 @@ You can use it to summarize all counts in one line.
 🐘 59 records, 0 errors, 1 warnings
 ```
 
-If you are running this as part of your build process you will probably want to exit the script
-with an error code.
+If you are running this as part of your build process you will probably want to exit the script with an error code.
 
 ```js collapse={1-29} "throw" "catch" "exit(1)"
 // scripts/validate-decisions.js

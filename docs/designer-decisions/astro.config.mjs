@@ -1,15 +1,17 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { staticSidebar } from './sidebar.static.mjs';
-import { processLinks } from './src/mdx/rehype/processLinks.ts';
 import designerDecisionsIntegration from '@noodlestan/designer-integration-astro';
-import { models } from './src/navigation/models.ts';
+
+import { processLinks } from './src/mdx';
+import { createSidebar } from './src/navigation/sidebar.ts';
 
 const remarkPlugins = [];
 const rehypePlugins = [processLinks];
 
 const site = process.env.ASTRO_SITE_URL || 'https://designer-decisions.noodlestan.org/';
 const base = process.env.ASTRO_BASE_PATH || '/';
+
+const sidebar = createSidebar();
 
 export default defineConfig({
     site,
@@ -34,7 +36,7 @@ export default defineConfig({
             components: {
                 Footer: './src/components/Starlight/Footer.astro',
             },
-            sidebar: staticSidebar({ models }),
+            sidebar,
         }),
         designerDecisionsIntegration({ applyStarlightStyles: true }),
     ],

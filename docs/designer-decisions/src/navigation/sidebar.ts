@@ -1,19 +1,54 @@
-import { getCollection } from 'astro:content';
+import { DECISION_TYPE_METAS } from '@noodlestan/designer-decisions';
 
-import { staticSidebar } from '../../sidebar.static.mjs';
-
-import { models } from './models';
-
-export const createSidebar = async (): Promise<unknown> => {
-    const decisionTypes = await getCollection('decisionTypes');
-
-    const types = decisionTypes.map(decisionType => ({
-        link: `/models/decision-types/${decisionType.id}`,
-        label: decisionType.data.name,
+export const createSidebar = (): unknown => {
+    const types = DECISION_TYPE_METAS.map(decisionType => ({
+        link: `/models/decision-types/${decisionType.type}`,
+        label: decisionType.name,
     }));
 
-    const items = [...models.map(({ ...item }) => ({ ...item }))];
-    items[2].items = [...(items[2].items || []), ...types];
-
-    return staticSidebar({ models: items });
+    return [
+        {
+            label: 'Guides',
+            autogenerate: { directory: 'guides' },
+        },
+        {
+            label: 'Examples',
+            autogenerate: { directory: 'examples' },
+        },
+        {
+            label: 'Integrations',
+            collapsed: true,
+            autogenerate: { directory: 'integrations' },
+        },
+        {
+            label: 'Models',
+            collapsed: true,
+            items: [
+                {
+                    label: 'Index',
+                    link: 'models',
+                },
+                {
+                    label: 'Schemas',
+                    link: 'models/schemas',
+                },
+                {
+                    label: 'Decision Types',
+                    collapsed: true,
+                    items: [
+                        {
+                            label: 'Index',
+                            link: 'models/decision-types',
+                        },
+                        ...types,
+                    ],
+                },
+            ],
+        },
+        {
+            label: 'API',
+            collapsed: true,
+            autogenerate: { directory: 'api', collapsed: true },
+        },
+    ];
 };

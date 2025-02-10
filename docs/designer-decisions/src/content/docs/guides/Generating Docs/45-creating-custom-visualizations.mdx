@@ -81,12 +81,11 @@ This code block demonstrates how you can use a decision value to build your own 
 
 ```astro
 ---
-import { getCollection } from 'astro:content';
 import { type ColorDecision } from '@noodlestan/designer-decisions';
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+import { loader } from '../decisions';
 
-const decisions = await getCollection('decisions');
-const store = createDecisionStaticStore(decisions);
+export const store = await loader();
 
 const { d } = Astro.props
 const [, decision] = store.decision<ColorDecision>(d);
