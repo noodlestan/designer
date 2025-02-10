@@ -9,3 +9,7 @@
 :root[data-theme='light'] {
     --sl-color-bg-nav: hsl(191, 76%, 90%);
 }
+
+.sl-container .hero {
+    padding-block: 3rem;
+}

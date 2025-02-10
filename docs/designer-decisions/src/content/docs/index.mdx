@@ -3,16 +3,27 @@ title: Designer Decisions
 description: Modeling design decisions. Schemas, transformations, visualizations, the works.
 template: splash
 hero:
-    tagline: Modeling and visualizing design decisions as data and code.
+    title: Tokens + Docs + Code
+    tagline: 'Open source tools for design systems. Generate design tokens, code, and beautiful documentation from a rich, schema-based, source of truth.'
     image:
-        file: ../../assets/cube.png
+        file: ../../assets/DD-logomark-300.png
+    actions:
+        - link: guides/welcome
+          text: Get Started
+          icon: right-arrow
+        - link: examples
+          text: Examples
+          variant: minimal
+          icon: magnifier
+        - link: integrations
+          text: Integrations
+          variant: minimal
+          icon: open-book
 ---
 
 import { Card, CardGrid, Icon, LinkButton } from '@astrojs/starlight/components';
 
 import { href } from '../../mdx';
-
-<LinkButton href={href('/guides/welcome')}>Get Started</LinkButton>
 
 &nbsp;
 
