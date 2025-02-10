@@ -1,15 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Aleo:wght@300');
 
 :root {
-    --sl-color-bg-nav: hsl(180, 6%, 6%);
+    --sl-color-bg-nav: hsl(from var(--dd-brand-blue) h s 40%);
     --sl-font: Archivo;
     --sl-font-mono: Consolas;
+    --__accent_1: 5;
+    --__accent_2: 10;
+    --__accent_3: 15;
 }
 
 :root[data-theme='light'] {
-    --sl-color-bg-nav: hsl(191, 76%, 90%);
+    --sl-color-bg-nav: hsl(from var(--dd-brand-blue) h s 80%);
+    --__accent_1: -5;
+    --__accent_2: -10;
+    --__accent_3: -15;
+}
+
+body {
+    font-size: 1.02rem;
+    letter-spacing: 0.02em;
+    font-weight: 400;
 }
 
 .sl-container .hero {
     padding-block: 3rem;
+}
+
+h1 {
+    font-weight: 100;
+}
+
+.sl-markdown-content h2 {
+    font-weight: 200;
+}
+
+.sl-markdown-content h3 {
+    font-weight: 300;
+}
+
+.sidebar-pane .large,
+.right-sidebar-panel h2,
+.card .title,
+.sl-markdown-content h4,
+.sl-markdown-content summary {
+    font-weight: 400;
+}
+
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+    font-weight: 500;
+}
+
+.sl-markdown-content summary {
+    color: var(--sl-color-text-accent);
+}
+
+.sl-markdown-content summary:hover {
+    color: hsl(from var(--sl-color-text-accent) h s calc(l + var(--__accent_1)));
+}
+
+.sl-link-button.primary:hover {
+    background-color: hsl(from var(--sl-color-text-accent) h s calc(l + var(--__accent_1)));
+}
+
+a.site-title {
+    gap: 0.5rem;
+    font-weight: 300;
+    color: hsl(from var(--dd-color-max) h s calc(l + var(--__accent_1)));
+}
+
+a.site-title:hover {
+    color: hsl(from var(--dd-color-max) h s calc(l + var(--__accent_2)));
+}
+
+a[variant='minimal'],
+.sl-link-button.minimal {
+    color: hsl(from var(--sl-color-text-accent) h s calc(l + var(--__accent_2)));
+}
+
+a[variant='minimal']:hover,
+.sl-link-button.minimal:hover {
+    color: hsl(from var(--sl-color-text-accent) h s calc(l + var(--__accent_3)));
+}
+
+.social-icons label,
+.social-icons a {
+    color: var(--dd-color-max);
+}
+
+.social-icons label:hover,
+.social-icons a:hover svg {
+    color: var(--dd-color-max);
 }
