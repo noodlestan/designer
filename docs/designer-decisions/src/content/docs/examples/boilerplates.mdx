@@ -1,0 +1,90 @@
+---
+title: Boilerplates
+description: Boilerplate repos to get started with Designer Decisions.
+sidebar:
+    title: Boilerplates
+    order: 90
+---
+
+import { LinkCard, LinkButton } from '@astrojs/starlight/components';
+import {
+    LayoutCentered,
+    LayoutFlex,
+    ShowDecision,
+    ShowDecisionCard,
+} from '@noodlestan/designer-shows/astro';
+
+import { decisionLoader } from '../../../decisions';
+
+export const store = await decisionLoader();
+
+## Minimal
+
+Boilerplate for setting up Designer Decisions data validations and transformations.
+
+Depends on:
+
+-   [@noodlestan/designer-decisions](/api/designer-decisions)
+-   [@noodlestan/designer-functions](/api/designer-functions)
+-   [@noodlestan/designer-schemas](/api/designer-schemas)
+
+Showcases:
+
+-   How to [load and validate decisions](guides/loading-and-validating-design-decisions) from multiple sources.
+
+![Screenshot of the boilerplate validation script](https://raw.githubusercontent.com/noodlestan/designer-boilerplate-minimal/refs/heads/main/resources/screenshot.png)
+
+<LayoutFlex flow="tight" align="center">
+
+    Get it on Github:
+    <LinkButton
+        href="https://github.com/noodlestan/designer-boilerplate-minimal"
+        icon="github"
+        iconPlacement="start"
+        variant="minimal"
+    >
+        @noodlestan/designer-boilerplate-minimal
+    </LinkButton>
+
+</LayoutFlex>
+
+## Astro/Starlight
+
+Boilerplate for building a Designer Decisions documentation website based on Astro/Starlight
+
+Depends on:
+
+-   [Astro/Starlight](https://starlight.astro.build/)
+-   [@noodlestan/designer-integration-astro](/integrations/Astro)
+-   [@noodlestan/designer-decisions](/api/designer-decisions)
+-   [@noodlestan/designer-functions](/api/designer-functions)
+-   [@noodlestan/designer-schemas](/api/designer-schemas)
+-   [@noodlestan/designer-shows](/api/designer-shows)
+
+Showcases:
+
+-   How to [load and validate decisions](guides/loading-and-validating-design-decisions) from multiple sources;
+-   How to [capture decisions as data](/guides/capturing-design-decisions-in-data) in JSON files;
+-   How to [document decisions in MDX pages](guides/generating-documentation/using-astro-components-in-mdx) using the built-in [Astro components](/integrations/Astro/#decisions).
+
+![Screenshot of the boilerplate website](https://raw.githubusercontent.com/noodlestan/designer-boilerplate-astro/refs/heads/main/resources/screenshot.png)
+
+<LayoutFlex align="center">
+
+    Get it on Github:
+    <LinkButton
+        href="https://github.com/noodlestan/designer-boilerplate-astro"
+        icon="github"
+        iconPlacement="start"
+        variant="minimal"
+    >
+        @noodlestan/designer-boilerplate-astro
+    </LinkButton>
+
+</LayoutFlex>
+
+## See Also
+
+-   [Integrations / Astro](/integrations/Astro)
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [Guides / Generating Docs / Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/)

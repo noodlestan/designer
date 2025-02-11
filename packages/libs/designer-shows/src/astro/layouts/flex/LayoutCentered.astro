@@ -1,14 +1,15 @@
 ---
 type Props = {
+    flow?: 'tight';
     align?: 'start' | 'center';
     pad?: 's' | 'm' | 'l';
     tag?: 'div' | 'ul' | 'li';
 };
 
-const { align = 'start', pad = 'm', tag: Element = 'div' } = Astro.props;
+const { flow, align = 'start', pad = 'm', tag: Element = 'div' } = Astro.props;
 ---
 
-<Element class:list={['dd-layout-centered', align, `pad-${pad}`]}>
+<Element class:list={['dd-layout-centered', flow, align, `pad-${pad}`]}>
     <slot />
 </Element>
 
@@ -19,6 +20,10 @@ const { align = 'start', pad = 'm', tag: Element = 'div' } = Astro.props;
         align-items: center;
         padding: var(--__layout-centered-pad);
         list-style: none;
+    }
+
+    .flow {
+        margin-block: 1rem;
     }
 
     .center {

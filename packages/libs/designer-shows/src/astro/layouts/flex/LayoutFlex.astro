@@ -1,5 +1,6 @@
 ---
 export type LayoutFlexProps = {
+    flow?: 'tight';
     align?: 'start' | 'center';
     direction?: 'row' | 'column';
     gap?: 's' | 'm' | 'l';
@@ -10,6 +11,7 @@ export type LayoutFlexProps = {
 type Props = LayoutFlexProps;
 
 const {
+    flow,
     align = 'start',
     direction = 'row',
     gap = 'm',
@@ -20,7 +22,9 @@ const {
 const shouldWrap = wrap && direction !== 'column';
 ---
 
-<Element class:list={['dd-layout-flex', align, direction, `gap-${gap}`, { wrap: shouldWrap }]}>
+<Element
+    class:list={['dd-layout-flex', flow, align, direction, `gap-${gap}`, { wrap: shouldWrap }]}
+>
     <slot />
 </Element>
 
@@ -31,6 +35,10 @@ const shouldWrap = wrap && direction !== 'column';
         padding: 0;
         gap: var(--__layout-flex-gap);
         list-style: none;
+    }
+
+    .dd-layout-flex.tight {
+        margin-block: 1rem;
     }
 
     .center {
