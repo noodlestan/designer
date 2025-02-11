@@ -8,7 +8,7 @@ sidebar:
 ---
 
 import { Aside, Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
-import { GetInvolved, LibraryStatus, WIP } from '../../../components/atoms';
+import { GetInvolved, LibraryStatus, WIP } from '../../../components';
 
 import { href } from '../../../mdx';
 
@@ -49,24 +49,24 @@ Learn more about the [key concepts](/guides/designer-decisions-concepts).
     title="Document design decisions and tokens with MDX components"
 />
 
-## Example repositories 🚧
+## Example repositories
 
-### Minimal example 🚧
+Get started in a matter of minutes.
 
-<WIP />
+In the [Example / Boilerplates](examples/boilerplates/) section you will find boilerplate repositories for different use cases.
 
--   Contains example data.
--   Command line script to load and validate decisions
--   Static HTML
+<CardGrid>
 
-Code available here:
+    <LinkCard
+        href={href('/examples/boilerplates/#minimal')}
+        title="Minimal"
+        description="Load, validate, and transform decisions."
+    />
 
-### Astro/Starlight docs 🚧
+    <LinkCard
+        href={href('examples/boilerplates/#astrostarlight')}
+        title="Astro/Starlight"
+        description="Design System documentation starter"
+    />
 
-<WIP />
-
--   Contains example data.
--   Loads decisions as an Astro collection
--   Visualizes decisions in MDX files
-
-Code available here:
+</CardGrid>

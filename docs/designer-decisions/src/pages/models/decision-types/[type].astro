@@ -4,7 +4,7 @@ import { Code, Badge } from '@astrojs/starlight/components';
 import { DECISION_MODEL_METAS, DECISION_TYPE_METAS, type DecisionModelMeta } from '@noodlestan/designer-decisions';
 import { LayoutStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { GetInvolved } from '../../../components/atoms';
+import { GetInvolved } from '../../../components';
 import { decisionLoader } from '../../../decisions';
 
 const store = await decisionLoader();

@@ -34,7 +34,7 @@ export default defineConfig({
                 './src/styles/starlight.custom.css',
             ],
             components: {
-                Footer: './src/components/Starlight/Footer.astro',
+                Footer: './src/components/page/Footer.astro',
             },
             sidebar,
         }),
