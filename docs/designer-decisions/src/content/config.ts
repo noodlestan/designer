@@ -1,13 +1,8 @@
-import {
-    DecisionCollection,
-    DecisionModelsCollection,
-    DecisionTypeCollection,
-    DocsCollection,
-} from '../collections';
+import { docsSchema } from '@astrojs/starlight/schema';
+import { defineCollection } from 'astro:content';
+
+const DocsCollection = defineCollection({ schema: docsSchema() });
 
 export const collections = {
     docs: DocsCollection,
-    decisionTypes: DecisionTypeCollection,
-    models: DecisionModelsCollection,
-    decisions: DecisionCollection,
 };

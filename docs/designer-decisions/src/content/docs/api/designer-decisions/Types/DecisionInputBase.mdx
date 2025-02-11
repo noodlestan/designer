@@ -22,11 +22,11 @@ All decision models named `color-set/*` produce a `Decision<ColorSet>` and expos
 `ColorSet` value, which contains a set of `ColorValue`s, and - when declared - tokens and
 token references.
 
-The specific [color-set/anchored](/decision-models/color-set#anchored) decision model determines
+The specific [color-set/anchored](/models/decision-types/color-set#anchored) decision model determines
 how the color scale is generated. In this case, the model starts with an `anchor` color and
 applies a `modifier` to create a number of color `steps` in either/both directions: `up` and `down`.
 
-See [Reference: Decision Models](/decision-models) for the full list of decision types,
+See [Reference: Decision Models](/models/decision-types) for the full list of decision types,
 their resulting values and available models, and respective parameters.
 
 ##### ༶ `name: string` (non unique)
@@ -53,12 +53,12 @@ The same decision name can be declared more than once, as long as
 ```json
 [
     {
-        "type": "color-value/explicit",
+        "model": "color-value/explicit",
         "name": "Green Foreground",
         "params": { "value": "#090E0B" }
     },
     {
-        "type": "color-value/explicit",
+        "model": "color-value/explicit",
         "name": "Green Foreground",
         "contexts": ["Colour Scheme: Light Mode"],
         "params": { "value": "#F6FDF8" }
@@ -136,7 +136,7 @@ Alternatively, a list of required contexts can be provided via an object:
 
 The shape of the parameters of each each decision is driven by the decision model.
 
-As an example, the [color-set/anchored](/decision-models/color-set#anchored) decision model
+As an example, the [color-set/anchored](/models/decision-types/color-set#anchored) decision model
 requires as input:
 
 -   a starting color (here provided as a reference to another decision)
@@ -147,7 +147,7 @@ requires as input:
 -   a number that specifies the total number of steps of the set
 
 ```json
-    "type": "color-set/anchored"
+    "model": "color-set/anchored"
     "params": {
         "anchor": { "$name": "Green Foreground" },
         "after": {
@@ -159,22 +159,22 @@ requires as input:
     }
 ```
 
-In turn, the [color-set/explicit](/decision-models/color-set#explicit) decision model,
+In turn, the [color-set/explicit](/models/decision-types/color-set#explicit) decision model,
 requires only a single parameter: the explicit list of colors (or references) in the set.
 
 ```json
-    "type": "color-set/explicit",
+    "model": "color-set/explicit",
     "params": {
         "values": ["#312506", "#564109", "#7D5E0A", "#A57B0A"]
     }
 ```
 
-As another example, the [color-value/explicit](/decision-models/color-value#explicit)
+As another example, the [color-value/explicit](/models/decision-types/color-value#explicit)
 
 The color value can be specified in a number of formats, according to the 🚧 schema.
 
 ```json
-    "type": "color-value/explicit",
+    "model": "color-value/explicit",
     "params": {
         "value": { "h": 144, "s": 0.22, "l": 0.05 }
     }
@@ -183,10 +183,10 @@ The color value can be specified in a number of formats, according to the 🚧 s
 As well as a decision reference.
 
 ```json
-    "type": "color-value/explicit",
+    "model": "color-value/explicit",
     "params": {
         "value": { "$name": "Green Foreground" }
     }
 ```
 
-See [Decision Models Reference](/decision-models) for each model's input parameter.
+See [Decision Models Reference](/models/decision-types) for each model's input parameter.

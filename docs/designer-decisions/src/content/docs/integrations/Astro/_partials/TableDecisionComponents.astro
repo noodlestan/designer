@@ -114,7 +114,7 @@ const items = domain ? types.filter(({ type }) => type.startsWith(domain)) : typ
         items.map(({ name, type, value, viz }) => (
             <TableRow>
                 <td>
-                    <a href={`/decision-models/${type}`}>{name}</a>
+                    <a href={`/models/decision-types/${type}`}>{name}</a>
                 </td>
                 <td>
                     <a href={`/integrations/Astro/Composable/Values#${value.toLowerCase()}`}>

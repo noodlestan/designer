@@ -1,26 +1,25 @@
 ---
-import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Code, Badge } from '@astrojs/starlight/components';
-import type { DecisionModelMeta } from '@noodlestan/designer-decisions';
+import { DECISION_MODEL_METAS, DECISION_TYPE_METAS, type DecisionModelMeta } from '@noodlestan/designer-decisions';
 import { LayoutStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { sidebar } from '../../navigation/sidebar';
-import { decisionLoader } from '../../decisions';
+import { GetInvolved } from '../../../components/atoms';
+import { decisionLoader } from '../../../decisions';
 
-export const store = await decisionLoader();
+const store = await decisionLoader();
 
 export async function getStaticPaths() {
-    const decisionTypes = await getCollection('decisionTypes');
-    return decisionTypes.map(decisionType => ({
-        params: { type: decisionType.data.type },
+    return DECISION_TYPE_METAS.map(decisionType => ({
+        params: { type: decisionType.type },
         props: { decisionType },
     }));
 }
 
-const { decisionType } = Astro.props;
-const { Content } = await render(decisionType);
 
+const { decisionType } = Astro.props;
+
+const models = DECISION_MODEL_METAS.filter(m => m.type === decisionType.type)
 const records = store.records();
 
 const decisionByModel = (meta: DecisionModelMeta) => {
@@ -45,7 +44,7 @@ const headings = [
         slug: 'models',
         text: 'Decision models',
     },
-    ...decisionType.data.models.map(m => ({
+    ...models.map(m => ({
         depth: 3,
         slug: decisionModelId(m),
         text: m.name,
@@ -53,42 +52,42 @@ const headings = [
 ];
 
 const frontmatter = {
-    ...decisionType.data,
-    title: decisionType.data.name,
+    title: decisionType.name,
+    slug: `/models/decision-types/${decisionType}`
 };
 ---
 
-<StarlightPage frontmatter={frontmatter} sidebar={sidebar} headings={headings}>
+<StarlightPage frontmatter={frontmatter} headings={headings}>
     <p>
-        <Badge variant="tip" text={decisionType.data.domain} />
-        <Badge variant="note" text={decisionType.data.category} />
+        <Badge variant="tip" text={decisionType.domain} />
+        <Badge variant="note" text={decisionType.category} />
     </p>
 
     <blockquote>
-        <p>type: <code>{decisionType.data.type}</code></p>
-        {decisionType.data.description}
+        <p>type: <code>{decisionType.type}</code></p>
+        {decisionType.description}
     </blockquote>
 
     <h2 id="models">Models</h2>
-    <p>The following models can be used to produce a {decisionType.data.name} decision.</p>
+    <p>The following models can be used to produce a {decisionType.name} decision.</p>
     {
-        decisionType.data.models.map((m: DecisionModelMeta) => (
+        models.map((m: DecisionModelMeta) => (
             <div>
                 <h3 id={decisionModelId(m)}>{m.name}</h3>
                 {m.description}
-                <h5 id="schema">🚧 Schema</h5>
                 {decisionByModel(m) && (
-                    <h5 id="sample-data">Sample data</h5>
-                    <Code lang="json" code={decisionDataByModel(m) || 'N/A'} />
+                    <h5 id="sample-data">Sample decision</h5>
                     <LayoutStack>
                         <ShowDecisionCard store={store} d={decisionByModel(m).name} model params />
                     </LayoutStack>
+                    <h5 id="sample-data">Sample data</h5>
+                    <Code lang="json" code={decisionDataByModel(m) || 'N/A'} />
                 )}
+                <h5 id="schema"><GetInvolved url='https://github.com/noodlestan/designer/issues/28' title="Help wanted">Documenting schemas</GetInvolved></h5>
             </div>
         ))
     }
 
-    <Content />
 </StarlightPage>
 
 <style>

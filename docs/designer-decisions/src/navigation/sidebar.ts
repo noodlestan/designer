@@ -1,22 +1,54 @@
-import { getCollection } from 'astro:content';
+import { DECISION_TYPE_METAS } from '@noodlestan/designer-decisions';
 
-import { staticSidebar } from '../../sidebar.static.mjs';
+export const createSidebar = (): unknown => {
+    const types = DECISION_TYPE_METAS.map(decisionType => ({
+        link: `/models/decision-types/${decisionType.type}`,
+        label: decisionType.name,
+    }));
 
-const decisionTypes = await getCollection('decisionTypes');
-
-const index = {
-    label: 'Index',
-    link: 'decision-models',
+    return [
+        {
+            label: 'Guides',
+            autogenerate: { directory: 'guides' },
+        },
+        {
+            label: 'Examples',
+            autogenerate: { directory: 'examples' },
+        },
+        {
+            label: 'Integrations',
+            collapsed: true,
+            autogenerate: { directory: 'integrations' },
+        },
+        {
+            label: 'Models',
+            collapsed: true,
+            items: [
+                {
+                    label: 'Index',
+                    link: 'models',
+                },
+                {
+                    label: 'Schemas',
+                    link: 'models/schemas',
+                },
+                {
+                    label: 'Decision Types',
+                    collapsed: true,
+                    items: [
+                        {
+                            label: 'Index',
+                            link: 'models/decision-types',
+                        },
+                        ...types,
+                    ],
+                },
+            ],
+        },
+        {
+            label: 'API',
+            collapsed: true,
+            autogenerate: { directory: 'api', collapsed: true },
+        },
+    ];
 };
-const items = decisionTypes.map(decisionType => ({
-    link: `decision-models/${decisionType.id}`,
-    label: decisionType.data.name,
-}));
-
-export const sidebar = staticSidebar({
-    decisionModels: {
-        label: 'Decision Models',
-        collapsed: true,
-        items: [index, ...items],
-    },
-});

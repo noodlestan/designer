@@ -80,7 +80,7 @@ Create a file to declare the loader.
 
 We will use the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader/), providing it with:
 
--   The [schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) for the built-in decision models.
+-   The [schemas](/models/schemas) for the built-in decision models.
 -   A directory to load decision data from.
 -   A function to resolve the physical location of node modules containing the schemas.
 
@@ -116,7 +116,7 @@ const decision = store.decision('Action Color');
 
 Retrieve the decision `store` and pass it to the components along with the decision name.
 
-In this example we are using the [&lt;ShowDecision/&gt;](/integrations/Astro/ShowDecision/) component to render both a [ColorValueDecision](/decision-models/color-value) and a [ColorSetDecision](/decision-models/color-set).
+In this example we are using the [&lt;ShowDecision/&gt;](/integrations/Astro/ShowDecision/) component to render both a [ColorValueDecision](/models/decision-types/color-value) and a [ColorSetDecision](/models/decision-types/color-set).
 
 ```mdx
 // src/content/page.mdx
