@@ -9,7 +9,6 @@ sidebar:
 
 import { CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
 
-import { GetInvolved } from '../../../components';
 import { href } from '../../../mdx';
 
 This guide explains how to load and validate decision records from a simple script.
@@ -58,7 +57,6 @@ We will use the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Lo
 
 -   The [schema definition](/models/schemas) for the built-in decision models.
 -   A directory to load decision data from.
--   A function to resolve the physical location of the `node_module` containing the schemas.
 
 ```js "createDecisionLoader"
 // scripts/validate-decisions.js
@@ -68,17 +66,8 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DATA_PATH = path.resolve('./data/decisions');
 
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async (moduleName: string) => `./node_modules/${moduleName}`
-);
+const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
 ```
-
-<GetInvolved url="https://github.com/noodlestan/designer/issues/80">
-    How to provide a package resolution default?
-</GetInvolved>
 
 This loader returns a [pre-validated decision store](/api/designer-functions/Types/StaticDecisionStore) asynchronously.
 
@@ -88,7 +77,7 @@ The store exposes all input records along with any errors that may have occurred
 
 We can format the errors using the `formatValidationError()` utility function and print all the validation errors so that we can inspect them.
 
-```js collapse={4-13,27-28} "formatValidationError"
+```js collapse={4-8,24-28} "formatValidationError"
 // scripts/validate-decisions.js
 import path from 'path';
 import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
@@ -96,12 +85,7 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DATA_PATH = path.resolve('./data/decisions');
 
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async (moduleName: string) => `./node_modules/${moduleName}`
-);
+const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -155,9 +139,9 @@ The following 2 utility functions help with this:
 -   [produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions): aggregates all produced values, contexts, and errors.
 -   [formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus): returns a formatted decision, including its value and errors details.
 
-Add these 2 lines to the script:
+Remove the `store.validationErrors().forEach()` iteration and add these 2 lines to the script:
 
-```diff lang="js" collapse={9-21,31-34} "formatDecisionStatus" "produceDecisions"
+```diff lang="js" collapse={9-16,26-34} "formatDecisionStatus" "produceDecisions"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
@@ -170,12 +154,7 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DATA_PATH = path.resolve('./data/decisions');
 
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async (moduleName: string) => `./node_modules/${moduleName}`
-);
+const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -217,25 +196,20 @@ The following example output was the result of changing the `Sizing Scale` decis
 
 If you wish to filter out decisions that produce valid values, and inspect only the errors, you can adjust your script to the following:
 
-```js collapse={2-27,33-36} "filter" "hasErrors"
+```js collapse={2-22,27-36} "filter" "hasErrors"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
     createDecisionLoader,
     formatValidationError,
     formatDecisionStatus,
-    produceDecisions
+    produceDecisions,
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DATA_PATH = path.resolve('./data/decisions');
 
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async (moduleName: string) => `./node_modules/${moduleName}`
-);
+const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -260,25 +234,20 @@ loadDecisions();
 
 The `produced` object reports counts for decision records, and different types of errors in a single string.
 
-```js collapse={2-28,32-34} "filter" "hasErrors"
+```js collapse={2-23,27-34} "filter" "hasErrors"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
     createDecisionLoader,
     formatValidationError,
     formatDecisionStatus,
-    produceDecisions
+    produceDecisions,
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DATA_PATH = path.resolve('./data/decisions');
 
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async (moduleName: string) => `./node_modules/${moduleName}`
-);
+const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -305,25 +274,20 @@ You can use it to summarize all counts in one line.
 
 If you are running this as part of your build process you will probably want to exit the script with an error code.
 
-```js collapse={1-29} "throw" "catch" "exit(1)"
+```js collapse={1-25} "throw" "catch" "exit(1)"
 // scripts/validate-decisions.js
 import path from 'path';
 import {
     createDecisionLoader,
     formatValidationError,
     formatDecisionStatus,
-    produceDecisions
+    produceDecisions,
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const DATA_PATH = path.resolve('./data/decisions');
 
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async (moduleName: string) => `./node_modules/${moduleName}`
-);
+const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
 
 const loadDecisions = async () => {
     const store = await loader();
@@ -334,6 +298,7 @@ const loadDecisions = async () => {
 
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
+
     console.info('🐘', produced.summary());
 
     if (produced.hasErrors()) {
@@ -365,7 +330,7 @@ The next guides provide step by step instructions on practical uses cases for yo
 
 ## See Also
 
--   [Decision Models Reference](/models/decision-types)
--   [Schemas Reference](/models/schemas)
--   [produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions)
--   [formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus)
+-   [Models / Decision Types](/models/decision-types)
+-   [Models / Schemas](/models/schemas)
+-   [API / designer-functions / produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions)
+-   [API / designer-functions / formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus)

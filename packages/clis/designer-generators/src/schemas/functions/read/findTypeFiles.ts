@@ -16,7 +16,7 @@ function isFile(entry: fs.Dirent, entryPAth: string) {
 export async function findTypeFiles(
     source: DataSource,
     paths: string[],
-    moduleResolver: (moduleName: string) => Promise<string>,
+    moduleResolver?: (moduleName: string) => Promise<string>,
 ): Promise<string[]> {
     const sourcePath = await resolveSourcePath(source, moduleResolver);
 

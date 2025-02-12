@@ -4,7 +4,7 @@ import { loadDecisionsFromSource } from './loadDecisionsFromSource';
 
 export const loadDecisionsFromSources = async (
     sources: (DecisionSource | string)[],
-    moduleResolver: (moduleName: string) => Promise<string>,
+    moduleResolver?: (moduleName: string) => Promise<string>,
 ): Promise<InputRecord[]> => {
     const decisions = await Promise.all(
         sources.map(source => loadDecisionsFromSource(source, moduleResolver)),

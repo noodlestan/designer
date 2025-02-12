@@ -1,4 +1,4 @@
-import type { SchemaConfig } from '@noodlestan/designer-decisions';
+import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { resolveSourcePath } from '../helpers';
@@ -27,7 +27,7 @@ const resolveSourcePathMocked = resolveSourcePathMock as unknown as (
     moduleName: string,
 ) => Promise<string>;
 
-const mockConfig: SchemaConfig = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
+const mockConfig: SchemaSource = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
 
 describe('loadSchemasFromConfig()', () => {
     const mockSchema: SchemaData = {

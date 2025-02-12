@@ -1,4 +1,4 @@
-import type { DecisionSource, SchemaConfig } from '@noodlestan/designer-decisions';
+import type { DecisionSource, SchemaSource } from '@noodlestan/designer-decisions';
 
 import { createDecisionValidator, loadSchemasFromConfigs, validateSchemaMap } from '../schemas';
 import { type StaticDecisionStore, createStaticDecisionStore } from '../store';
@@ -7,9 +7,9 @@ import { createStaticInputMap } from '../store';
 import { loadDecisionsFromSources } from './functions';
 
 export const createDecisionLoader = (
-    schemas: SchemaConfig[],
+    schemas: SchemaSource[],
     sources: (DecisionSource | string)[],
-    moduleResolver: (moduleName: string) => Promise<string>,
+    moduleResolver?: (moduleName: string) => Promise<string>,
 ): (() => Promise<StaticDecisionStore>) => {
     const loader = async () => {
         try {
@@ -30,13 +30,13 @@ export const createDecisionLoader = (
         }
     };
 
-    let promise: Promise<StaticDecisionStore>;
-    const load = () => {
-        if (!promise) {
-            promise = loader();
-        }
-        return promise;
-    };
+    // let promise: Promise<StaticDecisionStore>;
+    // const load = () => {
+    //     if (!promise) {
+    //         promise = loader();
+    //     }
+    //     return promise;
+    // };
 
-    return load;
+    return loader;
 };

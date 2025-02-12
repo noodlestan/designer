@@ -1,5 +1,5 @@
 ---
-title: Designer Decisions
+title: JSON Schemas
 slug: models/schemas
 description: Modeling design decisions. Schemas, transformations, visualizations, the works.
 ---
@@ -11,20 +11,18 @@ import { href } from '../../../../mdx';
 
 ## About
 
-Schemas are auto-generated from the types in the source code.
+Built-in schemas are auto-generated from the types in the source code.
 
 -   [designer-decisions/src/types/decision-inputs/models](https://github.com/noodlestan/designer/tree/main/packages/libs/designer-decisions/src/types/decision-inputs/models)
 -   [designer-decisions/src/types/decision-inputs/primitives](https://github.com/noodlestan/designer/tree/main/packages/libs/designer-decisions/src/types/decision-inputs/primitives)
 
 Schemas are not checked-in in any repository. After they are generated they are published to NPM in the [@noodlestan/designer-schemas](https://www.npmjs.com/package/@noodlestan/designer-schemas?activeTab=code) package.
 
-<GetInvolved url="https://github.com/noodlestan/designer/issues/28">
-    🚧 Document schemas
-</GetInvolved>
+<GetInvolved url="https://github.com/noodlestan/designer/issues/28">Document schemas</GetInvolved>
 
 ## Usage
 
-The built-in schemas can be loaded by providing the `DECISION_SCHEMAS: SchemaConfig` constant exported by [@noodlestan/designer-schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) to the [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) function.
+The built-in schemas can be loaded by providing the `DECISION_SCHEMAS: SchemaSource` constant exported by [@noodlestan/designer-schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) to the [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) function.
 
 ```ts
 import { createDecisionLoader } from '@noodlestan/designer-functions';
@@ -35,3 +33,9 @@ const store = await loader();
 ```
 
 Refer to the [Loading and Validating](/guides/loading-and-validating-design-decisions/) guide for detailed instructions on how to setup a decision store.
+
+## See Also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-functions / createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader)
+-   [API / designer-decision / SchemaSource](/api/designer-decisions/Types/Meta/SchemaSource)

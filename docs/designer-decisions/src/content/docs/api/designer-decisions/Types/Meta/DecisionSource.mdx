@@ -1,0 +1,46 @@
+---
+title: DecisionSource
+slug: api/designer-decisions/Types/Meta/DecisionSource
+---
+
+```ts
+export type DecisionSource = {
+    name: string;
+    source: DataSource;
+};
+```
+
+### Attributes
+
+### ༶ `name: string`
+
+The name of the decision source is carried over to the decision store and emitted along with validation errors so that authors can easily pinpoint issues.
+
+### ༶ `source`: [DataSource](/api/designer-decisions/Types/Meta/DataSource)
+
+The data source definition.
+
+## Usage
+
+If your data is going to be consumed in different packages you are encourage to export a constant from the package where the data resides so that consumers can easily configure loaders an processors.
+
+The [demo data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) in `@noodlestan/designer-decisions` is exposed like this:
+
+```ts
+const DEMO_DATA: DecisionSource = {
+    name: 'Designer Decisions Demo Data',
+    source: {
+        type: 'package',
+        package: '@noodlestan/designer-decisions',
+        path: 'resources/data/demo',
+    },
+};
+```
+
+Both the [minimal boilerplate](https://github.com/noodlestan/designer-boilerplate-minimal/blob/main/scripts/build-decisions.js) and the [Astro boilerplate](https://github.com/noodlestan/designer-boilerplate-astro/blob/main/scripts/validate-decisions.js) import this constant to configure the [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader).
+
+## See also
+
+-   [API / designer-decisions / DataSource](/api/designer-decisions/Types/Meta/DataSource)
+-   [API / designer-decisions / SchemaSource](/api/designer-decisions/Types/Meta/SchemaSource)
+-   [API / designer-functions / createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader)
