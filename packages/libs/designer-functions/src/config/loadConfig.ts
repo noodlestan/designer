@@ -19,7 +19,7 @@ export async function loadConfig(config?: DeepPartial<DesignerConfig>): Promise<
 
         if (existsSync(configPath)) {
             try {
-                const module = await import(configPath);
+                const module = await import(/* @vite-ignore */ configPath);
                 return exitOnConfigError(module.default);
             } catch (error) {
                 console.error(`🟥 Could not load config from "${configPath}".`);

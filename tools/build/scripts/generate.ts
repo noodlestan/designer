@@ -9,10 +9,7 @@ const SCHEMAS = [DESIGNER_DECISIONS_SCHEMA_GENERATOR_CONFIG];
 
 async function run() {
     try {
-        const resolver = async (moduleName: string) => {
-            return `../../node_modules/${moduleName}`;
-        };
-        const generator = createSchemaGenerator(TARGET_DIR, SCHEMAS, resolver);
+        const generator = createSchemaGenerator(TARGET_DIR, SCHEMAS);
         generator.on('event', event => {
             if (event.type === 'generated') {
                 console.info(' -', event.value);

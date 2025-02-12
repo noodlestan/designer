@@ -1,6 +1,6 @@
 import resolve from 'resolve';
 
-import { findPackageRoot } from './functions';
+import { findPackageRoot, getDirName } from './functions';
 
 export async function resolveNodeModule(
     name: string,
@@ -9,7 +9,7 @@ export async function resolveNodeModule(
     if (modulePathResolver) {
         return modulePathResolver(name);
     } else {
-        const path = resolve.sync(name);
+        const path = resolve.sync(name, { basedir: getDirName() });
 
         return findPackageRoot(path);
     }
