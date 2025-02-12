@@ -8,12 +8,11 @@ import {
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DECISION_DATA_PATH = path.resolve('./data/decisions');
+const LOCAL_DATA = path.resolve('./data/decisions');
 
 export const decisionLoader = createDecisionLoader(
     [DECISION_SCHEMAS],
-    [SAMPLE_DATA, DEMO_DATA, DECISION_DATA_PATH],
-    async (moduleName: string) => `../../node_modules/${moduleName}`,
+    [SAMPLE_DATA, DEMO_DATA, LOCAL_DATA],
 );
 
 const loadDecisions = async () => {

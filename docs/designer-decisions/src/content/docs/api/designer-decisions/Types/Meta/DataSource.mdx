@@ -1,0 +1,72 @@
+---
+title: DataSource
+slug: api/designer-decisions/Types/Meta/DataSource
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+```ts
+export type DataSourcePackage = { type: 'package'; package: string; path: string };
+
+export type DataSourcePath = { type: 'path'; path: string };
+
+export type DataSource = DataSourcePackage | DataSourcePath;
+```
+
+The `DataSource` data structure defines how to load [schemas](./SchemaSource) or [decisions](./DecisionSource).
+
+Currently, only file system source types are supported but plans include fetching from remote locations.
+
+## `DataSourcePath`
+
+Defines a relative or absolute path in the filesystem.
+
+**Example:**
+
+```ts
+const data: DataSource = { type: 'path', path: './data' };
+```
+
+The [minimal boilerplate](https://github.com/noodlestan/designer-boilerplate-minimal/blob/main/scripts/build-decisions.js) uses this format to declare the local data.
+
+### Attributes
+
+### ༶ `type: "path"`
+
+### ༶ `path: string`
+
+Either relative to the current working directory or absolute in the filesystem.
+
+## `DataSourcePackage`
+
+Defines a path relative to the root of a specific package.
+
+**Example:**
+
+```ts
+const data = { type: 'package', package: '@noodlestan/designer-schemas', path: './schemas' };
+```
+
+Both the [demo data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) in `@noodlestan/designer-decisions` and the [schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) in `@noodlestan/designer-decisions` are exposed this way.
+
+<Aside type="tip">
+    As long as the package name can be resolved to a path in the filesystem the loader will be able
+    to locate the data files. Regardless, it is advisable to list the dependency explicitly in the
+    project's `package.json`.
+</Aside>
+
+### ༶ `type: "package"`
+
+### ༶ `name: string`
+
+The name of the package as declared in its `package.json`.
+
+### ༶ `path: string`
+
+The path within the package.
+
+## See also
+
+-   [API / designer-decisions / SchemaSource](/api/designer-decisions/Types/Meta/SchemaSource)
+-   [API / designer-decisions / DecisionSource](/api/designer-decisions/Types/Meta/DecisionSource)
+-   [API / designer-functions / createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader)

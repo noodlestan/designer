@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-packages-tools",
-  "version": "v0.0.12",
+  "version": "0.0.12",
   "description": "Tools to support publishing public packages",
   "author": "Noodlestan Collective",
   "license": "MIT",

@@ -1,11 +1,11 @@
 import path from 'path';
 
-import { DESIGNER_DECISIONS_SCHEMA_CONFIG } from '@noodlestan/designer-decisions';
+import { DESIGNER_DECISIONS_SCHEMA_GENERATOR_CONFIG } from '@noodlestan/designer-decisions';
 import { createSchemaGenerator } from '@noodlestan/designer-generators';
 
 const TARGET_DIR = path.resolve('../../packages/libs/designer-schemas/schemas');
 
-const SCHEMAS = [DESIGNER_DECISIONS_SCHEMA_CONFIG];
+const SCHEMAS = [DESIGNER_DECISIONS_SCHEMA_GENERATOR_CONFIG];
 
 async function run() {
     try {

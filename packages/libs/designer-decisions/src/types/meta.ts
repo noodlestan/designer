@@ -38,20 +38,20 @@ export type DataSourcePackage = { type: 'package'; package: string; path: string
 
 export type DataSourcePath = { type: 'path'; path: string };
 
-export type SchemaSource = DataSourcePackage | DataSourcePath;
+export type SchemaDataSource = DataSourcePackage | DataSourcePath;
 
 export type SchemaGeneratorConfig = {
     urnBase: string;
-    source: SchemaSource;
+    source: SchemaDataSource;
     types: {
         primitives: string[];
         decisionModels: string[];
     };
 };
 
-export type SchemaConfig = {
+export type SchemaSource = {
     urnBase: string;
-    source: SchemaSource;
+    source: SchemaDataSource;
 };
 
 export type DataSource = DataSourcePackage | DataSourcePath;

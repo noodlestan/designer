@@ -3,26 +3,22 @@ title: StaticInputMap
 slug: api/designer-decisions/Types/StaticInputMap
 ---
 
-Holds all decision input data and provides an API to retrieve decision records
-and validation errors.
+Holds all decision input data and provides an API to retrieve decision records and validation errors.
 
 ## Methods
 
 ##### ༶ `record(ref, contexts)`
 
-**Return Value:** [InputRecord](/api/designer-decisions/Types/InputRecord)
-or `undefined` if not matched.
+**Return Value:** [InputRecord](/api/designer-decisions/Types/Inputs/InputRecord) or `undefined` if not matched.
 
 **Parameters:**
 
 -   `ref`: [DecisionRef](/api/designer-decisions/Types/DecisionRef)
--   `contexts`: [LookupContexts](/api/designer-decisions/Types/LookupContexts) -
-    When a decision `ref` matches more than one decision input and no `contexts`
-    were provided, it resolves to the decision with less (or higher) context.
+-   `contexts`: [LookupContexts](/api/designer-decisions/Types/Decisions/LookupContexts) - When a decision `ref` matches more than one decision input and no `contexts` were provided, it resolves to the decision with less (or higher) context.
 
 ##### ༶ `records(filter?)`
 
-**Return Value:** [InputRecord](/api/designer-decisions/Types/InputRecord)[]
+**Return Value:** [InputRecord](/api/designer-decisions/Types/Inputs/InputRecord)[]
 
 **Parameters:**
 
@@ -34,6 +30,4 @@ or `undefined` if not matched.
 
 ##### ༶ `validationErrors()`
 
-**Return Value:**
-[InputValidationError](/api/designer-decisions/Types/InputValidationError)[]
-or `null` if there were validation errors.
+**Return Value:** [InputValidationError](/api/designer-decisions/Types/InputValidationError)[] or `null` if there were validation errors.

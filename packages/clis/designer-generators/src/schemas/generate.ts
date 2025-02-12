@@ -20,7 +20,7 @@ import {
 export function createSchemaGenerator(
     targetDir: string,
     configs: SchemaGeneratorConfig[],
-    moduleResolver: (moduleName: string) => Promise<string>,
+    moduleResolver?: (moduleName: string) => Promise<string>,
 ): SchemaGenerator {
     const eventEmitter = new EventEmitter();
 

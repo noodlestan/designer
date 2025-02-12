@@ -1,6 +1,6 @@
-import type { SchemaConfig } from '@noodlestan/designer-decisions';
+import type { SchemaSource } from '@noodlestan/designer-decisions';
 
-const DECISION_SCHEMAS: SchemaConfig = {
+const DECISION_SCHEMAS: SchemaSource = {
     urnBase: 'urn:designer',
     source: {
         type: 'package',
