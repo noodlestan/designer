@@ -96,3 +96,4 @@ monorepos
 esbuild
 transpiled
 astrostarlight
+entrypoint

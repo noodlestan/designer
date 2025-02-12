@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-integration-astro",
-  "version": "v0.0.12",
+  "version": "0.0.12",
   "description": "Astro integration for Designer Decisions",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -16,6 +16,7 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
+    "./collections": "./src/collections/index.ts",
     "./styles/*": "./src/styles/"
   },
   "files": [
@@ -32,9 +33,13 @@
     "ci": "npm run build:clean && npm run build"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.12",
-    "@noodlestan/designer-functions": "v0.0.12",
-    "@noodlestan/designer-shows": "v0.0.12"
+    "@inox-tools/content-utils": "^0.9.0",
+    "@noodlestan/designer-decisions": "0.0.12",
+    "@noodlestan/designer-functions": "0.0.12",
+    "@noodlestan/designer-schemas": "0.0.12",
+    "@noodlestan/designer-shows": "0.0.12",
+    "astro": "^5.2.5",
+    "astro-integration-kit": "^0.18.0"
   },
   "peerDependencies": {
     "astro": "^5.2.5"
