@@ -12,6 +12,14 @@ if (!newVersion) {
     process.exit(1);
 }
 
+const parts = newVersion.split();
+
+if (parts.length !== 3 && parts.find(part => part)) {
+    console.error('Usage: ts-node bump-version.ts <new-version>');
+    console.error(`Invalid version, excepted "x.y.z", received "${newVersion}"`);
+    process.exit(1);
+}
+
 function updateVersion(data: PackageJson, version: string, dependencies: string[]): PackageJson {
     const updatedData = { ...data, version };
 

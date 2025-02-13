@@ -93,3 +93,5 @@ showcolorvalue
 logomark
 inox
 monorepos
+esbuild
+transpiled

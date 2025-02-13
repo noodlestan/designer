@@ -10,10 +10,10 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const LOCAL_DATA = path.resolve('./data/decisions');
 
-export const decisionLoader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [SAMPLE_DATA, DEMO_DATA, LOCAL_DATA],
-);
+export const decisionLoader = createDecisionLoader({
+    schemas: [DECISION_SCHEMAS],
+    decisions: [SAMPLE_DATA, DEMO_DATA, LOCAL_DATA],
+});
 
 const loadDecisions = async () => {
     const store = await decisionLoader();

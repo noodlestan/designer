@@ -45,7 +45,6 @@
   "devDependencies": {
     "@astrojs/check": "0.9.4",
     "astro": "5.2.5",
-    "vite": "6.1.0",
     "vite-plugin-solid": "2.11.0",
     "vite-plugin-solid-svg": "0.6.1"
   }

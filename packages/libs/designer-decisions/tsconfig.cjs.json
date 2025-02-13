@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.cjs.json",
   "compilerOptions": {
-    "skipLibCheck": true,
     "rootDir": "./src",
     "outDir": "./dist/cjs",
+    "emitDeclarationOnly": true,
     "types": ["node"]
   },
   "include": ["src/**/*"],
