@@ -1,7 +1,7 @@
 {
   "name": "@noodlestan/designer-decisions",
   "version": "0.0.12",
-  "description": "A library for modeling design decisions.",
+  "description": "A library for modeling design decisions and tokens.",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,
@@ -23,8 +23,9 @@
   ],
   "scripts": {
     "build:clean": "rm -rf dist",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build": "npm run build:cjs",
+    "build:types:esm": "tsc --project tsconfig.esm.json",
+    "build:types:cjs": "tsc --project tsconfig.cjs.json",
+    "build": "node scripts/build.mjs",
     "test": "vitest --run --coverage",
     "test:watch": "vitest",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
@@ -33,14 +34,13 @@
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "ajv": "8.17.1",
     "chroma-js": "3.1.2"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "11.1.1",
-    "@types/chroma-js": "^2.4.5",
+    "@noodlestan/designer-build-tools": "0.0.12",
+    "@types/chroma-js": "2.4.5",
     "@vitest/coverage-v8": "3.0.5",
-    "vite": "6.1.0",
+    "ajv": "8.17.1",
     "vitest": "3.0.5"
   }
 }

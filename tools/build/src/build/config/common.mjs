@@ -1,8 +1,6 @@
 export const commonConfig = {
     entryPoints: ['src/index.ts'],
-    platform: 'node',
+    platform: 'browser',
     target: ['node18'],
-    bundle: true,
-    sourcemap: true,
     logLevel: 'info',
 };

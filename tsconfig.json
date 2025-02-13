@@ -20,6 +20,7 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
 
+    // root specific
     "skipLibCheck": true, // problems in vitest, @vitest/utils, svgo
     "noEmit": true,
     "paths": {

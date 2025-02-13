@@ -1,7 +1,7 @@
 {
   "name": "@noodlestan/designer-generators",
   "version": "0.0.12",
-  "description": "Generate schemas for design decision, validators, and transformations.",
+  "description": "Generate design tokens, TS and CSS code, and schemas for input validation.",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,
@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/noodlestan/designer.git"
   },
+  "sideEffects": false,
   "module": "src/index.ts",
   "main": "dist/cjs/index.js",
   "files": [

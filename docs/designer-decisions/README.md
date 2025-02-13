@@ -2,6 +2,16 @@
 
 > The [Designer Decisions](https://designer-decisions.noodlestan.org/) website.
 
+![](https://raw.githubusercontent.com/noodlestan/designer/refs/heads/main/docs/designer-decisions/public/designer-decisions-docs.png)
+
+## How to use
+
+📖 [Documentation](https://designer-decisions.noodlestan.org/)
+
+If you're looking into how to setup a Design System Docs website based on Designer Decisions models and tokens, refer to our [Integrations / Astro](https://designer-decisions.noodlestan.org/integrations/Astro/) docs.
+
+You can also start from a fully working setup by using one of the [boilerplates](https://designer-decisions.noodlestan.org/examples/boilerplates/).
+
 ## Development
 
 ### Getting started

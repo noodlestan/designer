@@ -4,7 +4,12 @@
     "target": "ESNext",
     "moduleResolution": "NodeNext",
     "types": ["node"],
-    "lib": ["ES2022"]
+    "lib": ["ES2022"],
+    // strict
+    "strict": true,
+    "noImplicitAny": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["scripts/**/*"],
   "exclude": ["**/*.test.ts"]

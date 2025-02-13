@@ -4,18 +4,12 @@ import {
     createDecisionLoader,
     produceDecisions,
     formatDecisionStatus,
+    loadConfig,
 } from '@noodlestan/designer-functions';
-import path from 'path';
 
-import { SAMPLE_DATA, DEMO_DATA } from '@noodlestan/designer-decisions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+const { loader } = await loadConfig();
 
-const DECISION_DATA_PATH = path.resolve('./data/decisions');
-
-const decisionLoader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [SAMPLE_DATA, DEMO_DATA, DECISION_DATA_PATH],
-);
+const decisionLoader = createDecisionLoader(loader);
 
 const load = async () => {
     const store = await decisionLoader();
@@ -25,10 +19,7 @@ const load = async () => {
     }
 
     const produced = produceDecisions(store);
-    produced
-        .decisions()
-        // .filter(status => status.hasErrors)
-        .forEach(status => console.info(formatDecisionStatus(status)));
+    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
     console.info('🐘', produced.summary());
     if (produced.hasErrors()) {

@@ -6,7 +6,7 @@ export function generateTypes(target) {
     const process = exec(`npm run build:types:${target}`, (error, _stdout, stderr) => {
         if (error) {
             console.error(`🟥 TypeScript error (${target}):`, error.message);
-            return;
+            process.exitCode(1);
         }
         if (stderr) {
             console.error(`🟨 TypeScript warning (${target}):`, stderr);
