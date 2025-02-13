@@ -1,10 +1,10 @@
 {
   "extends": "../../tsconfig.cjs.json",
   "compilerOptions": {
-    "skipLibCheck": true,
     "rootDir": "./src",
     "outDir": "./dist/cjs",
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true // problems in vitest, @vitest/utils, svgo
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.test.ts"]

@@ -5,11 +5,22 @@
     "lib": ["es6"],
     "rootDir": ".",
     "allowJs": true,
+
+    // module
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    // emit
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // strict
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "skipLibCheck": true, // problems in vitest, @vitest/utils, svgo
     "noEmit": true,
     "paths": {
       "*": ["./node_modules/*"]

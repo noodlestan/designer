@@ -64,14 +64,14 @@ Documentation components and widgets are (for now) only available as [Astro](htt
 
 It uses:
 
-- [AJV]()
-- [typescript-json-schema]()
-- [json-schema-to-zod]()
+- [AJV](https://ajv.js.org/)
+- [typescript-json-schema](https://github.com/YousefED/typescript-json-schema)
 
 Documentation is built on top of [Astro](https://docs.astro.build) / [Starlight](https://starlight.astro.build/).
 
 ### Tools
 
+- [esbuild](https://esbuild.github.io/)
 - [Vite](https://vitejs.dev/) and [Vitest](https://vitest.dev/guide/)
 - [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config) - our style guide (ESLint + Prettier)
 - [Lefthook](https://evilmartians.com/chronicles/lefthook-knock-your-teams-code-back-into-shape) - manages the git hooks
