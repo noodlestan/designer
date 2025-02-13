@@ -8,7 +8,6 @@
 
 📖 [Documentation](https://designer-decisions.noodlestan.org/api/designer-functions)
 
-<<<<<<< HEAD
 This library provides APIs for loading and validating schemas and decisions inputs.,
 
 ### See Also
@@ -16,13 +15,7 @@ This library provides APIs for loading and validating schemas and decisions inpu
 - 📖 [Guides / Loading and Validating Decisions](https://designer-decisions.noodlestan.org/guides/loading-and-validating-design-decisions/)
 - 📖 [Models / Decision Types](https://designer-decisions.noodlestan.org/models/decision-types)
 - 📖 [Boilerplates](https://designer-decisions.noodlestan.org/examples/boilerplates/)
-- # 📖 [API / @noodlestan/designer-functions](https://designer-decisions.noodlestan.org/api/designer-functions)
-
-## Exposes
-
-This library exposes a collection of functions for use in Node environments.
-
-> > > > > > > baebda2 (wip)
+- 📖 [API / @noodlestan/designer-functions](https://designer-decisions.noodlestan.org/api/designer-functions)
 
 ## Development
 
