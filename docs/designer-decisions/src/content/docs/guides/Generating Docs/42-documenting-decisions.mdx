@@ -16,9 +16,9 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../decisions';
+import { loader } from '../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 This guide explains how to document design decisions and tokens in your documentation using the [built-in Astro components](/integrations/Astro) provided by the [@noodlestan/designer-shows](/api/designer-shows) package.
 
@@ -31,7 +31,7 @@ This guide explains how to document design decisions and tokens in your document
 
 <LayoutGrid>
     <ShowDecision store={store} d="Brand Color Set" layout="column" size="xs" value="oklch" />
-    <ShowDecision store={store} d="Foo" layout="column" size="xs" />
+    <ShowDecision store={store} d="Sizing Space Scale" layout="column" size="xs" />
 </LayoutGrid>
 
 ## Setup
@@ -57,46 +57,93 @@ npm install @noodlestan/designer-decisions @noodlestan/designer-functions \
   @noodlestan/designer-schemas @noodlestan/designer-shows
 ```
 
-### Decision data
+### Configuring Designer Decisions
 
-Populate your design decisions data source.
-
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can simply create one or more JSON files anywhere in your project.
+Create a directory to store your decision data and add a Designer Decisions configuration file in the root of your project.
 
 <FileTree>
-
--   data/
-    -   decisions/
-        -   color.json
-        -   space.json
-        -   ...
+- **data/**
+- src/
+- astro.config.mjs
+- **dd.config.mjs**
+- package.json
 
 </FileTree>
+
+The minimum required configuration specifies one or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) from which to load decision data ([InputRecord](/api/designer-decisions/Inputs/Types/InputRecord/)) and the corresponding [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource) definitions, to load the [schemas](/models/schemas) that validate the input data.
+
+```js "defineConfig"
+// dd.config.mjs
+import { defineConfig } from '@noodlestan/designer-functions';
+
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
+
+export default defineConfig({
+    loader: {
+        decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
+        schemas: [DECISION_SCHEMAS],
+    },
+});
+```
+
+In this example we configured the Designer Decisions [Sample and Demo Data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) decision sources, as well as a local `data/` directory for you to add more decisions.
+
+<Aside type="tip">
+    Be sure to check the [Loading and
+    Validating](/guides/loading-and-validating-design-decisions/#configuring-designer-decisions)
+    guide for more options, including how to store the decision data in another package.
+</Aside>
+
+In the [API / Configuration](/api/configuration) section you can find all configuration options and helpers.
+
+### Decision data
+
+Create some decision files in your local `./data` directory.
+
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can find sample data for all [Decision Types](/models/decision-types) that you can easily copy paste into your project.
+
+<FileTree>
+- data/
+  - decisions/
+    - **color.json**
+    - **space.json**
+    - ...
+-  astro.config.mjs
+-  package.json
+
+</FileTree>
+
+You can skip this step for now and use some of the decisions from the [Sample and Demo Data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) sources.
 
 ### Decision loader
 
 Create a file to declare the loader.
 
-We will use the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader/), providing it with:
+<FileTree>
+- data/
+- src/decisions/
+  - **index.ts**
+- astro.config.mjs
+- dd.config.mjs
+- package.json
 
--   The [schemas](/models/schemas) for the built-in decision models.
--   A directory to load decision data from.
+</FileTree>
 
-```ts
+We will use the [loadConfig()](/api/designer-functions/Loader/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) to load and validate the decision data.
+
+```ts "createDecisionLoader"
 // src/decisions/index.ts
-import path from 'node:path';
+import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
 
-import { createDecisionLoader } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+const config = await loadConfig();
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-export const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
+export const loader = createDecisionLoader(config.loader);
 ```
 
-The loader is an async function that returns a decision store. We will pass this store directly to our Astro components for them to retrieve decision data and resolve decision values.
+The loader is a function that returns a decision store asynchronously and has to be _awaited on_ before we can access the store to retrieve decisions.
 
-```ts
+```ts "await loader"
 const store = await loader();
 const decision = store.decision('Action Color');
 ```
@@ -105,7 +152,7 @@ const decision = store.decision('Action Color');
 
 Retrieve the decision `store` and pass it to the components along with the decision name.
 
-In this example we are using the [&lt;ShowDecision/&gt;](/integrations/Astro/ShowDecision/) component to render both a [ColorValueDecision](/models/decision-types/color-value) and a [ColorSetDecision](/models/decision-types/color-set).
+In this example we are using the [&lt;ShowDecision/&gt;](/integrations/Astro/ShowDecision/) component to render both a [ColorValueDecision](/models/decision-types/color-value) and a [ColorSetDecision](/models/decision-types/color-set), both from the `DEMO_DATA` source.
 
 ```mdx
 // src/content/page.mdx
@@ -232,7 +279,9 @@ RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
     RGB <ShowDecision store={store} d="Brand Pink" viz={false} />
 </LayoutCentered>
 
-## See Also
+## See also
 
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
 -   [Examples](/examples)
--   [Astro integration](/integrations/Astro)
+-   [Integrations / Astro](/integrations/Astro)
+-   [API / configuration](/api/configuration)

@@ -14,7 +14,7 @@ This collection of schemas validates inputs for all [built-in decision types and
 
 This exported constant defines where to locate the schema collection.
 
-[SchemaSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Types/Meta/SchemaSource/) are a way to pass schema collections _by reference_ to decision validators and loaders such as [createDecisionLoader()](https://designer-decisions.noodlestan.org/api/designer-functions/Loader/createDecisionLoader/).
+[SchemaSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/SchemaSource/) are a way to pass schema collections _by reference_ to decision validators and loaders such as [createDecisionLoader()](https://designer-decisions.noodlestan.org/api/designer-functions/Loader/createDecisionLoader/).
 
 ```ts
 import { DECISION_SCHEMAS } from '@noodlestsn/designer-schemas';
@@ -22,7 +22,7 @@ import { DECISION_SCHEMAS } from '@noodlestsn/designer-schemas';
 const loader = createDecisionLoader([DECISION_SCHEMAS], [DEMO_DATA, LOCAL_DATA]);
 ```
 
-### See Also
+### See also
 
 - 📖 [Models / Schemas](https://designer-decisions.noodlestan.org/models/schemas)
 - 📖 [API / @noodlestan/designer-schemas](https://designer-decisions.noodlestan.org/api/designer-schemas)
@@ -56,8 +56,8 @@ This library is packaged for use both in bundlers such as Vite and Astro, as wel
 
 ### Scripts
 
-- **$** `npm run build` - uses `esbuild` to build `dist/cjs` and `tsc` to emit declarations.
 - **$** `npm run dev` - uses `esbuild` to watch and `tsc` to emit declarations on rebuild.
+- **$** `npm run build` - uses `esbuild` to build `dist/cjs` and `tsc` to emit declarations.
 - **$** `npm run test` / `npm run test:watch` - 🚧 no tests.
 - **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config).
 

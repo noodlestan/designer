@@ -32,9 +32,9 @@ These docs are built with [Starlight](https://starlight.astro.build/) / [Astro](
 
 ### Scripts
 
+- **$** `npm run dev` - uses `astro/startlight` to launch dev server.
 - **$** `npm run build` - uses `astro/startlight` to generate a static site in `dist/`.
 - **$** `npm run start` - full build, served locally.
-- **$** `npm run dev` - uses `astro/startlight` to launch dev server.
 - **$** `npm run sync` - updates type definitions from Astro automagical zods.
 
 ### Troubleshooting

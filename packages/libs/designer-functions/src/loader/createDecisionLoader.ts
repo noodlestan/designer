@@ -8,7 +8,7 @@ import type { DecisionLoaderOptions } from './types';
 export const createDecisionLoader = (
     options: DecisionLoaderOptions,
 ): (() => Promise<StaticDecisionStore>) => {
-    const { schemas, decisions, moduleResolver } = options;
+    const { schemas, decisions, resolver: moduleResolver } = options;
 
     const loader = async () => {
         try {

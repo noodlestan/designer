@@ -1,1 +1,1 @@
-export { type DesignerDecisionsConfig } from './private';
+export { type DesignerConfig } from './private';

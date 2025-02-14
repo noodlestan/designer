@@ -10,7 +10,7 @@
 
 This library provides APIs for loading and validating schemas and decisions inputs.,
 
-### See Also
+### See also
 
 - 📖 [Guides / Loading and Validating Decisions](https://designer-decisions.noodlestan.org/guides/loading-and-validating-design-decisions/)
 - 📖 [Models / Decision Types](https://designer-decisions.noodlestan.org/models/decision-types)
@@ -18,6 +18,9 @@ This library provides APIs for loading and validating schemas and decisions inpu
 - 📖 [API / @noodlestan/designer-functions](https://designer-decisions.noodlestan.org/api/designer-functions)
 
 ## Development
+
+> [!IMPORTANT]
+> This library exports both `dist/cjs` and `dist/esm`. Do not remove `type: module` as this (still) breaks `ts-node` consumers.
 
 Make sure you [README](https://github.com/noodlestan/designer/blob/main/README.md) first.
 
@@ -37,8 +40,8 @@ This library is packaged for use both in bundlers such as Vite and Astro, as wel
 
 ### Scripts
 
-- **$** `npm run build` - uses `esbuild` to build `dist/cjs` and `tsc` to emit declarations.
 - **$** `npm run dev` - uses `esbuild` to watch and `tsc` to emit declarations on rebuild.
+- **$** `npm run build` - uses `esbuild` to build `dist/cjs` and `tsc` to emit declarations.
 - **$** `npm run test` / `npm run test:watch` - uses `vitest`.
 - **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config).
 

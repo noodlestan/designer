@@ -14,7 +14,7 @@ This core library models contextual design decisions of different types (colors,
 
 These exported constants defines where to locate the sample and demo data collections.
 
-[DecisionSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Types/Meta/DecisionSource/) are a way to pass decision inputs _by reference_ to decision validators and loaders such as [createDecisionLoader()](https://designer-decisions.noodlestan.org/api/designer-functions/Loader/createDecisionLoader/).
+[DecisionSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/DecisionSource/) are a way to pass decision inputs _by reference_ to decision validators and loaders such as [createDecisionLoader()](https://designer-decisions.noodlestan.org/api/designer-functions/Loader/createDecisionLoader/).
 
 ```ts
 import { createDecisionLoader } from '@noodlestsn/designer-functions';
@@ -25,7 +25,7 @@ const LOCAL_DATA = './data';
 const loader = createDecisionLoader([DECISION_SCHEMAS], [DEMO_DATA, LOCAL_DATA]);
 ```
 
-### See Also
+### See also
 
 - 📖 [Guides / Loading and Validating Decisions](https://designer-decisions.noodlestan.org/guides/loading-and-validating-design-decisions/)
 - 📖 [Models / Decision Types](https://designer-decisions.noodlestan.org/models/decision-types)
@@ -55,10 +55,10 @@ This library is packaged for use both in bundlers such as Vite and Astro, as wel
 
 ### Scripts
 
+- **$** `npm run dev` - uses `esbuild` to watch and `tsc` to emit declarations on rebuild.
 - **$** `npm run build` - uses `tsc` to build `dist/cjs`.
 - **$** `npm run test` / `npm run test:watch` - uses `vitest`.
 - **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config).
-- **$** `npm run dev` - uses `tsc --watch`.
 
 ## MIT License
 

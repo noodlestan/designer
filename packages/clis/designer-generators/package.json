@@ -21,6 +21,7 @@
     "LICENSE-MIT"
   ],
   "scripts": {
+    "dev": "tsc --watch --project tsconfig.cjs.json",
     "build:clean": "rm -rf dist",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build": "npm run build:cjs",
@@ -28,7 +29,6 @@
     "test:watch": "mocha -w -r ts-node/register ---watch-files 'src/**/*.ts' 'src/**/*.test.ts'",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "tsc --watch --project tsconfig.cjs.json",
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {

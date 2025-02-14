@@ -9,9 +9,9 @@ sidebar:
 import { LinkCard, LinkButton } from '@astrojs/starlight/components';
 import { LayoutFlex } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../decisions';
+import { loader } from '../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 ## Minimal
 
@@ -25,7 +25,7 @@ Depends on:
 
 Showcases:
 
--   How to [load and validate decisions](guides/loading-and-validating-design-decisions) from multiple sources.
+-   How to [load and validate decisions](/guides/loading-and-validating-design-decisions) from multiple sources.
 
 ![Screenshot of the boilerplate validation script](https://raw.githubusercontent.com/noodlestan/designer-boilerplate-minimal/refs/heads/main/resources/screenshot.png)
 
@@ -45,7 +45,7 @@ Showcases:
 
 ## Astro/Starlight
 
-Boilerplate for building a Designer Decisions documentation website based on Astro/Starlight
+Boilerplate for building a Designer Decisions documentation website based on [Astro/Starlight](https://starlight.astro.build/).
 
 Depends on:
 
@@ -58,9 +58,9 @@ Depends on:
 
 Showcases:
 
--   How to [load and validate decisions](guides/loading-and-validating-design-decisions) from multiple sources;
+-   How to [load and validate decisions](/guides/loading-and-validating-design-decisions) from multiple sources;
 -   How to [capture decisions as data](/guides/capturing-design-decisions-in-data) in JSON files;
--   How to [document decisions in MDX pages](guides/generating-documentation/using-astro-components-in-mdx) using the built-in [Astro components](/integrations/Astro/#decisions).
+-   How to [document decisions in MDX pages](/guides/generating-documentation/using-astro-components-in-mdx) using the built-in [Astro components](/integrations/Astro/#decisions).
 
 ![Screenshot of the boilerplate website](https://raw.githubusercontent.com/noodlestan/designer-boilerplate-astro/refs/heads/main/resources/screenshot.png)
 
@@ -78,7 +78,7 @@ Showcases:
 
 </LayoutFlex>
 
-## See Also
+## See also
 
 -   [Integrations / Astro](/integrations/Astro)
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)

@@ -6,16 +6,12 @@ sidebar:
 ---
 
 ```ts
-type createDecisionLoader = (
-    schemas: SchemaSource[],
-    sources: (DecisionSource | string)[],
-    moduleResolver?: (moduleName: string) => Promise<string>,
-) => () => Promise<StaticDecisionStore>;
+type createDecisionLoader = (options: DecisionLoaderOptions) => () => Promise<StaticDecisionStore>;
 ```
 
 ## Return value
 
-**() => Promise&lt;[StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)&gt;**
+**() => Promise&lt;[StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)&gt;**
 
 A loader function that resolves with a populated decision store.
 
@@ -28,56 +24,46 @@ Given a list of paths and schemas configs:
 -   Loads schemas from paths and creates a schema map.
 -   Validates the schema map and creates a validator.
 -   Loads all decisions files and merges all data.
--   Validates decision inputs and returns a [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore).
+-   Validates decision inputs and returns a [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore).
 
 ## Params
 
-##### ༶ `schemas`: [SchemaSource](/api/designer-decisions/Types/Meta/SchemaSource)[]
+#### ༶ `options`: [DecisionLoaderOptions](/api/designer-functions/Loader/Types/DecisionLoaderOptions)
 
-A list of schema configurations to load validation schemas from.
-
-The definition for the built-in schema types can be imported from `@noodlestan/designer-schemas`.
-
-```ts
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
-```
-
-##### ༶ `sources`: ([DecisionSource](/api/designer-decisions/Types/Meta/DecisionSource) | string)[]
-
-A list of data sources to load decision data from.
-
-Values of type `string` are treated as paths. Both relative paths (relative to the current working directory) and absolute paths are accepted.
-
-Values of type [DecisionSource](/api/designer-decisions/Types/Meta/DecisionSource).
-
-Designer Decisions sample data and demo data can be imported from `@noodlestan/designer-decisions`.
-
-```ts
-import { DEMO_DATA } from '@noodlestan/designer-decision';
-```
-
-##### ༶ `moduleResolver` (optional): (moduleName: string) => Promise&lt;string&gt;
-
-A function to resolve the physical location of node modules containing the schemas.
-
-If one isn't provided, the default will be used. It uses [resolve()](https://github.com/browserify/resolve) under the hood and is able to locate the package in most scenarios, including complex monorepos.
+It is recommended to create the options object directly in a `dd.config.mjs` file in the root of the project and then load it via [loadConfig()](/api/designer-functions/config/loadConfig).
 
 ## Usage
 
-```ts
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
-import { DEMO_DATA } from '@noodlestan/designer-decision';
+**Using `dd.config.mjs` file and `loadConfig()`:**
 
-const LOCAL_DATA = './data';
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DEMO_DATA, LOCAL_DATA]);
+```ts
+import { loadConfig, createDecisionLoader } from '@noodlestan/designer-functions';
+
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
 const store = await loader();
 ```
 
-## See Also
+**Building the options object:**
+
+```ts
+import { DEMO_DATA } from '@noodlestan/designer-decisions';
+import { createDecisionLoader } from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const options = {
+    decisions: [DEMO_DATA, './data'],
+    schemas: [DECISION_SCHEMAS],
+};
+const loader = createDecisionLoader(options);
+
+const store = await loader();
+```
+
+## See also
 
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
--   [Guides / Generating Docs / Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/)
 -   [Models / Schemas](/models/schemas/)
--   [API / designer-decisions / SchemaSource](/api/designer-decisions/Types/Meta/SchemaSource)
--   [API / designer-decisions / DecisionSource](/api/designer-decisions/Types/Meta/DecisionSource)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / DecisionLoaderOptions](/api/designer-functions/Loader/Types/DecisionLoaderOptions)

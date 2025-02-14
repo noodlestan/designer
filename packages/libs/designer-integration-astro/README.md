@@ -33,7 +33,7 @@ export default defineConfig({
 })
 ```
 
-### See Also
+### See also
 
 - 📖 [Integrations / Astro](https://designer-decisions.noodlestan.org/integrations/Astro) for more info on features and options.
 - 📖 [Examples](https://designer-decisions.noodlestan.org/examples/)

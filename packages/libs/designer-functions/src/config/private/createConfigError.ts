@@ -1,8 +1,8 @@
-import type { DesignerDecisionsConfigError } from './types';
+import type { DesignerConfigError } from './types';
 
-type Attributes = Omit<DesignerDecisionsConfigError, 'message'>;
+type Attributes = Omit<DesignerConfigError, 'message'>;
 
-export const createConfigError = (error: Attributes['error']): DesignerDecisionsConfigError => {
+export const createConfigError = (error: Attributes['error']): DesignerConfigError => {
     const message = () => `${error.instancePath} (${error.keyword}) ${error.message}`;
 
     return {

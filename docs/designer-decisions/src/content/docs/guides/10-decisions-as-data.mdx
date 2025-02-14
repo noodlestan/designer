@@ -6,7 +6,7 @@ sidebar:
     order: 10
 ---
 
-import { FileTree, LinkCard } from '@astrojs/starlight/components';
+import { Aside, FileTree, LinkCard } from '@astrojs/starlight/components';
 
 import { href } from '../../../mdx';
 
@@ -33,7 +33,7 @@ The following example defines two decisions:
     },
     {
         "model": "color-set/explicit",
-        "name": "Brand Color",
+        "name": "Brand Colors",
         "params": {
             "values": ["#FF0000", "#00FF00", "#0000FF"]
         }
@@ -41,17 +41,23 @@ The following example defines two decisions:
 ]
 ```
 
-If you are declaring decisions in JSON files you are encouraged to organize them in small groups using directories and files.
+<Aside type="tip">
+    In the [Models / Decision Types](/models/decision-types) reference you will find sample data for
+    each of the built-in decision models.
+</Aside>
+
+You are also free to create sub-directories and name the files as you wish.
+
+When declaring decisions in JSON files you are encouraged to organize them in small files. Grouping decisions by type or scope is a good starting point.
 
 <FileTree>
-
--   space/
--   typography/
--   colors/
-    -   base.json
-    -   palettes.json
-    -   ratios.json
--   contexts/
+- space/
+- typography/
+- colors/
+  - base.json
+  - palettes.json
+  - ratios.json
+- contexts/
 
 </FileTree>
 
@@ -109,7 +115,8 @@ Proceed to the next guide for step by step instructions on how to load all decis
     title="Loading and Validating"
 />
 
-## See Also
+## See also
 
+-   [Boilerplates / Minimal](/examples/boilerplates/#minimal)
 -   [Models / Decision Types](/models/decision-types)
 -   [Models / Schemas](/models/schemas)

@@ -20,9 +20,9 @@ import {
     ShowSpaceValue,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../../decisions';
+import { loader } from '../../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
@@ -57,9 +57,9 @@ Color related components.
 
 ### ShowColorValue
 
-#### ༶ `v`: [ColorValue](/api/designer-decisions/Types/Values/ColorValue)
+#### ༶ `v`: [ColorValue](/api/designer-decisions/Values/Types/ColorValue)
 
-#### ༶ `value`: [ColorFormat](/api/designer-decisions/Types/Primitives/ColorFormat) | [ColorFormat](/api/designer-decisions/Types/Primitives/ColorFormat)[]
+#### ༶ `value`: [ColorFormat](/api/designer-decisions/Primitives/Types/ColorFormat) | [ColorFormat](/api/designer-decisions/Primitives/Types/ColorFormat)[]
 
 #### Example
 
@@ -73,7 +73,7 @@ export const colorValue = createColorValue(context, '#ff0000');
 
 ### ShowColorChannelValue
 
-#### ༶ `v`: [ColorChannelValue](/api/designer-decisions/Types/Values/ColorChannelValue)
+#### ༶ `v`: [ColorChannelValue](/api/designer-decisions/Values/Types/ColorChannelValue)
 
 #### ༶ `value`: -
 
@@ -95,7 +95,7 @@ Space related components.
 
 ### ShowSpaceValue
 
-#### ༶ `v`: [SpaceValue](/api/designer-decisions/Types/Values/SpaceValue)
+#### ༶ `v`: [SpaceValue](/api/designer-decisions/Values/Types/SpaceValue)
 
 #### ༶ `value`: -
 

@@ -2,7 +2,7 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
 import { createConfigError } from './private';
-import type { DeepPartial, DesignerDecisionsConfig, ResolvedConfig } from './private';
+import type { DeepPartial, DesignerConfig, ResolvedConfig } from './private';
 import schema from './schema/designer-config.json';
 
 const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
@@ -27,17 +27,17 @@ ajv.addKeyword({
 const validate = ajv.compile(schema);
 
 export async function defineConfig(
-    options: DeepPartial<DesignerDecisionsConfig>,
-): Promise<ResolvedConfig<DesignerDecisionsConfig>> {
-    const valid = validate(options);
+    maybeConfig: DeepPartial<DesignerConfig>,
+): Promise<ResolvedConfig<DesignerConfig>> {
+    const valid = validate(maybeConfig);
 
     if (!valid) {
         return {
-            options,
+            config: maybeConfig,
             errors: validate.errors?.map(createConfigError) || [],
         };
     }
 
-    const config = options as DesignerDecisionsConfig;
-    return { options: config, errors: [] };
+    const config = maybeConfig as DesignerConfig;
+    return { config, errors: [] };
 }

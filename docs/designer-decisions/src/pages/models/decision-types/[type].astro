@@ -5,9 +5,9 @@ import { DECISION_MODEL_METAS, DECISION_TYPE_METAS, type DecisionModelMeta } fro
 import { LayoutStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 import { GetInvolved } from '../../../components';
-import { decisionLoader } from '../../../decisions';
+import { loader } from '../../../decisions';
 
-const store = await decisionLoader();
+const store = await loader();
 
 export async function getStaticPaths() {
     return DECISION_TYPE_METAS.map(decisionType => ({
