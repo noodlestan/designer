@@ -1,33 +1,26 @@
 import {
-    formatStoreError,
-    formatValidationError,
     createDecisionLoader,
+    loadConfig,
     produceDecisions,
     formatDecisionStatus,
-    loadConfig,
 } from '@noodlestan/designer-functions';
 
-const { loader } = await loadConfig();
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
-const decisionLoader = createDecisionLoader(loader);
+const loadDecisions = async () => {
+    const store = await loader();
 
-const load = async () => {
-    const store = await decisionLoader();
     if (store.hasErrors()) {
-        store.storeErrors()?.forEach(error => console.error(formatStoreError(error)));
-        store.validationErrors()?.forEach(error => console.error(formatValidationError(error)));
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        throw new Error(`Store has errors.`);
     }
 
+    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
-    console.info('🐘', produced.summary());
-    if (produced.hasErrors()) {
-        throw new Error(`Errors (${produced.errors.count()}) encountered producing decisions.`);
-    }
+    console.info(`🐘 ${records.length} records`);
 };
 
-load().catch(err => {
-    console.error(err);
-    process.exit(1);
-});
+loadDecisions();

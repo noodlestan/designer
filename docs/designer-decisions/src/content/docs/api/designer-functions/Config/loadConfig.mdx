@@ -1,0 +1,74 @@
+---
+title: loadConfig()
+slug: api/designer-functions/Config/loadConfig
+sidebar:
+    label: loadConfig
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Loads and validates the configuration in `dd.config.mjs` configuration file.
+
+```ts
+type loadConfig = loadConfig(
+    config?: DeepPartial<DesignerConfig>
+) => Promise<DesignerConfig>
+```
+
+<Aside type="note">
+    If the configuration is invalid, this function terminates the process !!🛑!!
+
+    In that case, configuration errors
+    are reported directly in the terminal.
+
+</Aside>
+
+## Return value
+
+**Note:** `loadConfig()` validates the configuration asynchronously. The return value must be _awaited_ on before it can be used.
+
+## Params
+
+#### ༶ `config`: (optional) [DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig)
+
+If you don't want to use the `dd.config.mjs` you can pass the configuration directly (not recommended).
+
+If you otherwise have to work with different scenarios and chose to not use `dd.config.mjs`, it is still recommended that you call `loadConfig(config)`. It will skip loading `dd.config.mjs` altogether but will still validate the provided object and exit 🛑 the process if the configuration is not valid.
+
+## Usage
+
+### Loading from `dd.config.mjs` (Recommended)
+
+```ts
+const config = loadConfig();
+const loader = createDecisionLoader(config.loader);
+
+const store = await loader();
+```
+
+### Creating an isolated config (Advanced)
+
+<Aside type="caution">This API is meant for advanced use cases only.</Aside>
+
+If you prefer not to use `dd.config.mjs` configuration file, you can expose your config by passing the options object directly to `loadConfig()`.
+
+```ts
+// src/config
+import { DEMO_DATA } from '@noodlestan/designer-decisions';
+import { createDecisionLoader } from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const loader = {
+    decisions: [DEMO_DATA, './data'],
+    schemas: [DECISION_SCHEMAS],
+};
+const config = { loader };
+
+export default () => loadConfig(config);
+```
+
+## See Also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig)

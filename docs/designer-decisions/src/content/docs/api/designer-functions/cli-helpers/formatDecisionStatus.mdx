@@ -12,9 +12,7 @@ type formatDecisionStatus = (
 ) => string;
 ```
 
-Given a produced decision status, as returned by
-[produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus)
-returns a string with the decision status, value, details, and errors.
+Given a produced decision status, as returned by [produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus) returns a string with the decision status, value, details, and errors.
 
 ## Return value
 
@@ -22,12 +20,11 @@ returns a string with the decision status, value, details, and errors.
 
 ## Params
 
-##### ༶ `status`: DecisionStatus
+#### ༶ `status`: DecisionStatus
 
-As returned by
-[produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus).
+As returned by [produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus).
 
-##### ༶ `show`: `ShowOptions[]`
+#### ༶ `show`: `ShowOptions[]`
 
 The following values are accepted:
 
@@ -38,8 +35,7 @@ The following values are accepted:
 -   `value`
 -   `error-count`
 
-Additionally, the following two items - when provided in whatever order - determine
-how status and errors are displayed:
+Additionally, the following two items - when provided in whatever order - determine how status and errors are displayed:
 
 -   `status-colors` - print 🟩, 🟨, or 🟥 (when absent, prints `-`, `!` or `X` instead)
 -   `error-details` - when present, eventual errors are shown in full after each decision
@@ -47,7 +43,7 @@ how status and errors are displayed:
 ## Usage
 
 ```js
-const store = await decisionLoader();
+const store = await loader();
 const produced = produceDecisions(store);
 produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 ```
@@ -73,3 +69,5 @@ Using `formatDecisionStatus(status, ['status-colors', 'name', 'value'])`
 ## See Also
 
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-decisions / produceDecisions()](/api/designer-decisions/cli-helpers/produceDecisions)
+-   [API / designer-decisions / produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus)

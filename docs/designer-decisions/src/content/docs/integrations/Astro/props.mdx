@@ -9,15 +9,15 @@ sidebar:
 
 import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../decisions';
+import { loader } from '../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 ## DecisionProps
 
 All components that render a decision, such as the [&lt;ShowDecisionCard/&gt;](/integrations/Astro/ShowDecisionCard/) component, **require** the following props.
 
-### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
 
 The `store` prop provides access to all decision input data so that components can retrieve decision objects and resolve values.
 
@@ -121,7 +121,7 @@ Constrains the visualization to a specific size.
 
 Refer to [ShowVizSize](/api/designer-shows/Types/ShowVizSize) for available sizes.
 
-### ༶ `options` (optional): object
+### ༶ `options`: (optional) object
 
 Provide this prop to configure visualization options.
 

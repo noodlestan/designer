@@ -1,18 +1,15 @@
 import { existsSync } from 'fs';
 import { dirname, resolve } from 'path';
 
-import type { DesignerDecisionsConfig, ResolvedConfig } from './private';
-import { validateConfig } from './validateConfig';
+import { defineConfig } from './defineConfig';
+import type { DeepPartial, DesignerConfig } from './private';
+import { exitOnConfigError } from './private/exitOnConfigError';
 
 const CONFIG_FILENAME = 'dd.config.mjs';
 
-export async function loadConfig(
-    partial?:
-        | ResolvedConfig<DesignerDecisionsConfig>
-        | Promise<ResolvedConfig<DesignerDecisionsConfig>>,
-): Promise<DesignerDecisionsConfig> {
-    if (partial) {
-        return validateConfig(partial);
+export async function loadConfig(config?: DeepPartial<DesignerConfig>): Promise<DesignerConfig> {
+    if (config) {
+        return exitOnConfigError(defineConfig(config));
     }
 
     let currentDir = process.cwd();
@@ -23,7 +20,7 @@ export async function loadConfig(
         if (existsSync(configPath)) {
             try {
                 const module = await import(configPath);
-                return validateConfig(module.default);
+                return exitOnConfigError(module.default);
             } catch (error) {
                 console.error(`🟥 Could not load config from "${configPath}".`);
                 console.error(error);

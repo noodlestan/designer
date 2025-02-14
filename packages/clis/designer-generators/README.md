@@ -52,8 +52,8 @@ This library is packaged for use both in bundlers such as Vite and Astro, as wel
 
 ### Scripts
 
-- **$** `npm run build` - uses `tsc` to build `dist/cjs`.
 - **$** `npm run dev` - uses `tsc --watch`.
+- **$** `npm run build` - uses `tsc` to build `dist/cjs`.
 - **$** `npm run test` / `npm run test:watch` - uses `mocha` + `ts-node/register`.
 - **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config).
 

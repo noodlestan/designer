@@ -1,22 +1,16 @@
-import path from 'node:path';
-
-import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 import {
     createDecisionLoader,
     formatDecisionStatus,
+    loadConfig,
     produceDecisions,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const LOCAL_DATA = path.resolve('./data/decisions');
+const config = await loadConfig();
 
-export const decisionLoader = createDecisionLoader({
-    schemas: [DECISION_SCHEMAS],
-    decisions: [SAMPLE_DATA, DEMO_DATA, LOCAL_DATA],
-});
+export const loader = createDecisionLoader(config.loader);
 
 const loadDecisions = async () => {
-    const store = await decisionLoader();
+    const store = await loader();
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
         throw new Error(`Validation errors.`);

@@ -22,6 +22,7 @@
     "LICENSE-MIT"
   ],
   "scripts": {
+    "dev": "node scripts/watch.mjs",
     "build:clean": "rm -rf dist",
     "build:types:esm": "tsc --project tsconfig.esm.json",
     "build:types:cjs": "tsc --project tsconfig.cjs.json",
@@ -30,7 +31,6 @@
     "test:watch": "echo nothing to test",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "node scripts/watch.mjs",
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {

@@ -26,84 +26,89 @@ The following packages are required:
 npm install @noodlestan/designer-functions @noodlestan/designer-schemas
 ```
 
-### Decision data
+## Configuring Designer Decisions
 
-Populate your design decisions data source.
-
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can simply create one or more JSON files anywhere in your project.
+Add a Designer Decisions configuration file in the root of your project.
 
 <FileTree>
-
--   data/
-    -   decisions/
-        -   color.json
-        -   space.json
-        -   ...
+- data/
+- src/
+- **dd.config.mjs**
+- package.json
 
 </FileTree>
+
+The minimum required configuration specifies:
+
+-   A list of [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) to load decision records from.
+-   A list of [schemas](/models/schemas) to validate the input data.
+
+In this example we will preload the "Designer Decisions Demo Data" decision source, as well as setup a local data source for you to add files in `./data`.
+
+```js
+// dd.config.mjs
+import { defineConfig } from '@noodlestan/designer-functions';
+
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
+
+export default defineConfig({
+    loader: {
+        schemas: [DECISION_SCHEMAS],
+        decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
+    },
+});
+```
 
 ## Loading input data
 
 Add a script to load decisions and print eventual validation errors.
 
 <FileTree>
--   data/
--   scripts
-    - **validate-decisions.js**
+- data/
+- src/
+- scripts/
+  - **validate-decisions.js**
+- dd.config.mjs
+- package.json
 
 </FileTree>
 
-We will use the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader), providing it with:
+We will use [loadConfig()](/api/designer-functions/Loader/loadConfig) to load and validate the `dd.config.mjs` configuration and the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader).
 
--   The [schema definition](/models/schemas) for the built-in decision models.
--   A directory to load decision data from.
-
-```js "createDecisionLoader"
+```js
 // scripts/validate-decisions.js
 import path from 'path';
-import { createDecisionLoader } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 ```
 
-This loader returns a [pre-validated decision store](/api/designer-functions/Types/StaticDecisionStore) asynchronously.
+This loader returns a [pre-validated decision store](/api/designer-functions/Store/Types/StaticDecisionStore) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
 
-The store exposes all input records along with any errors that may have occurred while loading data and schemas or when validating input data.
+Add the following code to execute the loader and list each records' `name` and `model`.
 
-## Validating input data
-
-We can format the errors using the `formatValidationError()` utility function and print all the validation errors so that we can inspect them.
-
-```js collapse={4-8,24-28} "formatValidationError"
+```js collapse={1-5}
 // scripts/validate-decisions.js
-import path from 'path';
-import { createDecisionLoader, formatValidationError } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
 const loadDecisions = async () => {
     const store = await loader();
-    if (store.hasErrors()) {
-        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
-        throw new Error(`Validation errors.`);
-    }
 
     const records = store.records();
-    records.forEach(record => console.info(record.name));
+    records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
+    store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
 };
 
 loadDecisions();
 ```
 
-You can run this directly from the command line:
+You can run the script directly from the command line:
 
 ```bash
 node scripts/validate-decisions.js
@@ -113,19 +118,138 @@ If no errors occur, the output should look something like:
 
 ```
 ...
-Avatar Minimum Size
-Avatar Sizes
-🐘 4 records
+Sizing Space Scale space-scale/anchored
+Card Thumb Minimum Size space-value/explicit
+Avatar Minimum Size space-value/explicit
+Avatar Sizes space-scale/anchored
+🐘 67 records
 ```
 
-In case of validation errors these will be printed at the top.
+### Adding more decision data
 
-For instance, if we delete the `param` attribute from a couple of decision input records, the output should show something like:
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can create as many JSON files as you wish.
+
+You can also name the files however you want. Grouping decisions by type or scope, is a good idea. Let's start by adding a single `color.json` file in `data/` to define color related decisions.
+
+<FileTree>
+- data/
+  -  **color.json**
+
+</FileTree>
+
+In the [Models / Decision Types](models/decision-types) reference you will find sample data for each of the built-in decision models.
+
+Here, we created a couple of [Color Value](/models/decision-types/color-value#sample-data) decisions based on the samples.
+
+```json
+// data/color.json
+[
+    {
+        "model": "color-value/explicit",
+        "name": "Warm Color",
+        "params": {
+            "value": "orange"
+        }
+    },
+    {
+        "model": "color-value/explicit",
+        "name": "Cold Color",
+        "params": {
+            "value": "aqua"
+        }
+    }
+]
+```
+
+If you run `node scripts/validate-decisions.js` again, you will see two new decisions at bottom of the list.
 
 ```
-🟨 Decision Pink Palette (required) must have required property 'params'
-🟨 Brand Pink Hue (required) must have required property 'params'
-Error: Validation errors.
+...
+Avatar Minimum Size space-value/explicit
+Avatar Sizes space-scale/anchored
+Warm Color color-value/explicit
+Cold Color color-value/explicit
+🐘 68 records
+```
+
+If your records aren't showing, lookout for error messages such as:
+
+```
+🟥 Error processing file "./data/color.json": Decision file does not contain an array.
+```
+
+If you see this, make sure your file contains an array of decisions `[{ ... }, { ... }]` as opposed to a single `{...}` decision record.
+
+The following error can also appear if your data has a syntax error. A single misplaced `}` or missing `:` will cause the JSON data to be unreadable. We recommend using an editor such as [VS Code](https://code.visualstudio.com/) for visual feedback and assistance.
+
+```
+🟥 Error processing file "./data/color.json": Failed to parse JSON. Expected ',' or '}' after property value in JSON at position 232
+```
+
+## Validating input data
+
+Decision data is automatically validated against [JSON schemas](/models/schemas) as soon as it is loaded.
+
+For instance, if the `params` are incomplete or don't match the expected data types for the decision `model`, the decision will be marked with validation errors. In these cases, the decision will likely produce unexpected values so it's good to know that there are issues in our data.
+
+To inspect the validation errors we can format messages using the `formatValidationError()` utility function.
+
+```diff lang="js" collapse={7-12} "hasErrors" "formatValidationError"
+// scripts/validate-decisions.js
+import {
+    createDecisionLoader,
++    formatValidationError,
+    loadConfig,
+} from '@noodlestan/designer-functions';
+
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
+
+const loadDecisions = async () => {
+    const store = await loader();
+
++    if (store.hasErrors()) {
++        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
++        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
++        throw new Error(`Store has errors.`);
++    }
+
+    const records = store.records();
+    records.forEach(({ name, model }) => console.info(name, model));
+    console.info(`🐘 ${records.length} records`);
+-    store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+};
+
+loadDecisions();
+```
+
+If we now introduce a couple of issues in or data, for instance deleting the `value` parameter from one color and set it to an invalid value in the second one...
+
+```diff lang="json"
+// data/color.json
+[
+    {
+        "model": "color-value/explicit",
+        "name": "Warm Color",
+        "params": {
+-           "value": "orange"
+        }
+    },
+    {
+        "model": "color-value/explicit",
+        "name": "Cold Color",
+        "params": {
++           "value": false
+        }
+    }
+]
+```
+
+... and run our script again, we will see the validation errors
+
+```
+🟨 Decision "Warm Color" /params (required) must have required property 'value'
+🟨 Decision "Cold Color" /params/value (type) must be object, string or number
 ```
 
 ## Inspecting and validating decision values
@@ -134,132 +258,97 @@ So far, the script only validates the input data against the schemas, guaranteei
 
 Producing decision values may still result in errors if, for instance, a reference to another decision can not be resolved, or it resolves to a decision of the wrong type.
 
-The following 2 utility functions help with this:
+The following two utility functions help with this:
 
 -   [produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions): aggregates all produced values, contexts, and errors.
 -   [formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus): returns a formatted decision, including its value and errors details.
 
-Remove the `store.validationErrors().forEach()` iteration and add these 2 lines to the script:
+Remove the `store.validationErrors().forEach(...)` line, as it will become redundant, and add these 2 lines to the script:
 
-```diff lang="js" collapse={9-16,26-34} "formatDecisionStatus" "produceDecisions"
+```diff lang="js" collapse={9-19}
 // scripts/validate-decisions.js
-import path from 'path';
 import {
     createDecisionLoader,
-    formatValidationError,
-    formatDecisionStatus,
-    produceDecisions
++    formatDecisionStatus,
+    loadConfig,
++    produceDecisions
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
 const loadDecisions = async () => {
     const store = await loader();
+
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
--       store.validationErrors().forEach(error => console.error(formatValidationError(error)));
-        throw new Error(`Validation errors.`);
+-        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+        throw new Error(`Store has errors.`);
     }
 
-+   const produced = produceDecisions(store);
-+   produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
-
+    const records = store.records();
++    const produced = produceDecisions(store);
++    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info(`🐘 ${records.length} records`);
 };
 
 loadDecisions();
 ```
 
-The output will look something like this.
+Without any errors, the output will now display the decision status, the name and model, and the value produced by the decision.
 
 ```
-🟩 | Layout Scale | space-scale/anchored | [8px, 16px, 32px, 64px, 128px, 256px] |
+...
+🟩 | Textarea Maximum Height | space-value/explicit | 300 |
+🟩 | Card Thumb Minimum Size | space-value/explicit | 175 |
+🟩 | Avatar Minimum Size | space-value/explicit | 50 |
+🟩 | Avatar Sizes | space-scale/anchored | [50, 100, 150, 200] |
 ```
 
-The following example output was the result of changing the `Sizing Scale` decision, introducing two issues:
-
--   the `Size Smallest` decision does not exist;
--   the `Brand Black` decision is a color decision but the model expected the reference to match a [Space Value](/models/decision-types/space-value) or a [Space Scale](/models/decision-types/space-scale)
-    decision.
+If we introduce errors in our decisions, as in the previous example, the output will also include details about the error.
 
 ```
-🟨 | Sizing Scale | space-scale/bounded | [0px, 0px, 0px, 0px, 0px, 0px] | 2 warnings
+...
+🟩 | Card Thumb Minimum Size | space-value/explicit | 175 |
+🟩 | Avatar Minimum Size | space-value/explicit | 50 |
+🟩 | Avatar Sizes | space-scale/anchored | [50, 100, 150, 200] |
+🟨 | Warm Color | color-value/explicit | #000000 | 1 warnings
+ > 🟨 Decision "Warm Color" /params (required) must have required property 'value'
 
- > 🟨 Ref (SpaceValue) {"$name":"Size Smallest"} not found.
- > 🟨 Ref (SpaceValue) {"$name":"Brand Black"} matched "color-value".
-```
-
-## Filtering
-
-If you wish to filter out decisions that produce valid values, and inspect only the errors, you can adjust your script to the following:
-
-```js collapse={2-22,27-36} "filter" "hasErrors"
-// scripts/validate-decisions.js
-import path from 'path';
-import {
-    createDecisionLoader,
-    formatValidationError,
-    formatDecisionStatus,
-    produceDecisions,
-} from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
-
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
-
-const loadDecisions = async () => {
-    const store = await loader();
-    if (store.hasErrors()) {
-        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        throw new Error(`Validation errors.`);
-    }
-
-    const produced = produceDecisions(store);
-    produced
-        .decisions()
-        .filter(status => status.hasErrors)
-        .forEach(status => console.info(formatDecisionStatus(status)));
-
-    console.info(`🐘 ${records.length} records`);
-};
-
-loadDecisions();
+🟨 | Cold Color | color-value/explicit | #000000 | 1 warnings
+ > 🟨 /params/value (type) must be object, string or number in {"$name":"Cold Color"}
 ```
 
 ## Summarizing and catching errors
 
 The `produced` object reports counts for decision records, and different types of errors in a single string.
 
-```js collapse={2-23,27-34} "filter" "hasErrors"
+```diff lang="js" collapse={1-22,27-34} "summary"
 // scripts/validate-decisions.js
-import path from 'path';
 import {
     createDecisionLoader,
-    formatValidationError,
     formatDecisionStatus,
+    loadConfig,
     produceDecisions,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
 const loadDecisions = async () => {
     const store = await loader();
+
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        throw new Error(`Validation errors.`);
+        throw new Error(`Store has errors.`);
     }
 
+    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
-    console.info('🐘', produced.summary());
+-    console.info(`🐘 ${records.length} records`);
++    console.info('🐘', produced.summary());
 };
 
 loadDecisions();
@@ -274,28 +363,27 @@ You can use it to summarize all counts in one line.
 
 If you are running this as part of your build process you will probably want to exit the script with an error code.
 
-```js collapse={1-25} "throw" "catch" "exit(1)"
+```diff lang="js" collapse={1-25} "filter" "hasErrors"
 // scripts/validate-decisions.js
-import path from 'path';
 import {
     createDecisionLoader,
-    formatValidationError,
     formatDecisionStatus,
+    loadConfig,
     produceDecisions,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DATA_PATH]);
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
 const loadDecisions = async () => {
     const store = await loader();
+
     if (store.hasErrors()) {
         store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
-        throw new Error(`Validation errors.`);
+        throw new Error(`Store has errors.`);
     }
 
+    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 

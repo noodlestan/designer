@@ -16,9 +16,9 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../decisions';
+import { loader } from '../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 This guide explains how to document design decisions and tokens in your documentation using the [built-in Astro components](/integrations/Astro) provided by the [@noodlestan/designer-shows](/api/designer-shows) package.
 

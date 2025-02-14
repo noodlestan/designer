@@ -9,9 +9,7 @@ sidebar:
 type produceDecisions = (store: StaticDecisionStore) => ProducedDecisionStore;
 ```
 
-Given a populated
-[StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
-produces all decision values and expose all decisions, contexts and aggregated errors.
+Given a populated [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore) produces all possible decision values and exposes all decision values, contexts and aggregated errors.
 
 ## Return Value
 
@@ -33,7 +31,7 @@ export type ProducedDecisionStore = {
 
 ## Params
 
-##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+#### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
 
 &nbsp;
 
@@ -48,3 +46,5 @@ console.log(produced.summary());
 ## See Also
 
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-decisions / produceDecisionStatus()](/api/designer-decisions/cli-helpers/produceDecisionStatus)
+-   [API / designer-decisions / formatDecisionStatus()](/api/designer-decisions/cli-helpers/formatDecisionStatus)

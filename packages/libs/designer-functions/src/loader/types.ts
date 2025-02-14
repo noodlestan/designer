@@ -3,5 +3,5 @@ import type { DecisionSource, SchemaSource } from '@noodlestan/designer-decision
 export type DecisionLoaderOptions = {
     schemas: SchemaSource[];
     decisions: (DecisionSource | string)[];
-    moduleResolver?: (moduleName: string) => Promise<string>;
+    resolver?: (moduleName: string) => Promise<string>;
 };

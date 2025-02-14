@@ -7,19 +7,19 @@ export type DeepPartial<T> = {
 };
 
 export type ResolvedConfig<T> = {
-    options: T;
-    errors: DesignerDecisionsConfigError[];
+    config: T;
+    errors: DesignerConfigError[];
 };
 
-export type DesignerDecisionsConfigError = {
+export type DesignerConfigError = {
     error: ErrorObject;
     message: () => string;
 };
 
-export type DesignerDecisionsConfig = {
+export type DesignerConfig = {
     loader: {
         schemas: DecisionLoaderOptions['schemas'];
         decisions: DecisionLoaderOptions['decisions'];
-        moduleResolver?: DecisionLoaderOptions['moduleResolver'];
+        moduleResolver?: DecisionLoaderOptions['resolver'];
     };
 };

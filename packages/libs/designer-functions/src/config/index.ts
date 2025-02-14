@@ -2,4 +2,4 @@
 export * from './defineConfig';
 export * from './loadConfig';
 export * from './types';
-export * from './validateConfig';
+export * from './private/exitOnConfigError';

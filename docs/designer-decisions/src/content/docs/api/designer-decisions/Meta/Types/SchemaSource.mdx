@@ -1,0 +1,49 @@
+---
+title: SchemaSource
+slug: api/designer-decisions/Meta/Types/SchemaSource
+sidebar:
+    order: 0
+---
+
+```ts
+export type SchemaSource = {
+    name: string;
+    source: DataSource;
+};
+```
+
+## Attributes
+
+### ༶ `name`: string
+
+The name of the schema source is emitted along with any errors that occur while setting up the validator so that schema authors and consumers can easily pinpoint issues.
+
+### ༶ `source`: [DataSource](/api/designer-decisions/Meta/Types/DataSource)
+
+The data source definition.
+
+## Usage
+
+If your schemas are going to be consumed in different packages you are encourage to export a constant from the package where the schemas reside so that consumers can easily configure loaders an processors.
+
+Designer Decisions [built-in schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) in `@noodlestan/designer-schemas` are exposed this way.
+
+```ts
+const DECISION_SCHEMAS: SchemaSource = {
+    urnBase: 'urn:designer',
+    source: {
+        type: 'package',
+        package: '@noodlestan/designer-schemas',
+        path: 'schemas/',
+    },
+};
+```
+
+Both the [minimal boilerplate](https://github.com/noodlestan/designer-boilerplate-minimal/blob/main/dd.config.mjs) and the [Astro boilerplate](https://github.com/noodlestan/designer-boilerplate-astro/blob/main/dd.config.mjs) import this constant to build and validate options for the [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) function.
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / Configuration](/api/configuration)
+-   [API / designer-decisions / DataSource](/api/designer-decisions/Meta/Types/DataSource)
+-   [API / designer-functions / createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader)
