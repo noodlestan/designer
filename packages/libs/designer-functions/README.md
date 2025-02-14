@@ -10,7 +10,7 @@
 
 This library provides APIs for loading and validating schemas and decisions inputs.,
 
-### See Also
+### See also
 
 - 📖 [Guides / Loading and Validating Decisions](https://designer-decisions.noodlestan.org/guides/loading-and-validating-design-decisions/)
 - 📖 [Models / Decision Types](https://designer-decisions.noodlestan.org/models/decision-types)

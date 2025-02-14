@@ -28,7 +28,7 @@ const files = await generator.generate();
 console.info(`🐘 Generated ${files.length} schemas`);
 ```
 
-### See Also
+### See also
 
 - 📖 [Guides / Loading and Validating Decisions](https://designer-decisions.noodlestan.org/guides/loading-and-validating-design-decisions/)
 - 📖 [Models / Schemas](https://designer-decisions.noodlestan.org/models/schemas)

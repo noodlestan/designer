@@ -15,9 +15,9 @@ export type DataSourcePath = { type: 'path'; path: string };
 export type DataSource = DataSourcePackage | DataSourcePath;
 ```
 
-The `DataSource` data structure defines how to load [schemas](./SchemaSource) or [decisions](./DecisionSource).
+The `DataSource` data structure defines how to load [schemas](/api/designer-decisions/Meta/Types/SchemaSource) and [decisions](/api/designer-decisions/Meta/Types/DecisionSource).
 
-Currently, only file system source types are supported but plans include fetching from remote locations.
+Currently, only file system based data source types are supported, but [our plans](https://github.com/orgs/noodlestan/projects/3) include the ability to fetch data from remote locations as well.
 
 ## `DataSourcePath`
 

@@ -16,7 +16,7 @@ import { ShowDecision } from '@noodlestan/designer-shows/astro';
 <ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
 ```
 
-### See Also
+### See also
 
 - 📖 [Examples](https://designer-decisions.noodlestan.org/examples/)
 - 📖 [Integrations / Astro](https://designer-decisions.noodlestan.org/integrations/Astro) for more info on features and options.

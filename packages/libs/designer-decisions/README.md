@@ -25,7 +25,7 @@ const LOCAL_DATA = './data';
 const loader = createDecisionLoader([DECISION_SCHEMAS], [DEMO_DATA, LOCAL_DATA]);
 ```
 
-### See Also
+### See also
 
 - 📖 [Guides / Loading and Validating Decisions](https://designer-decisions.noodlestan.org/guides/loading-and-validating-design-decisions/)
 - 📖 [Models / Decision Types](https://designer-decisions.noodlestan.org/models/decision-types)

@@ -22,7 +22,7 @@ Creating a `dd.config.mjs` in the root of the project allows the different movin
 
 As explained in the [Loading and Validating](/guides/loading-and-validating-design-decisions/) the minimum required configuration specifies:
 
--   A list of data sources ([DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource)) from which to load decision inputs ([InputRecord](api/designer-decisions/Inputs/Types/InputRecord/)).
+-   A list of data sources ([DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource)) from which to load decision inputs ([InputRecord](/api/designer-decisions/Inputs/Types/InputRecord/)).
 -   A list of schemas ([SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource)) to load the [schemas](/models/schemas) that validate the input data.
 
 ## Format
@@ -34,6 +34,7 @@ The full configuration options are detailed in [DesignerConfig](/api/designer-fu
 ### [defineConfig()](/api/designer-functions/Config/defineConfig)
 
 Used in the `dd.config.mjs` file.
+
 Normalizes options for key entry points, such as [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader).
 
 ### [loadConfig()](/api/designer-functions/Config/loadConfig)
@@ -64,13 +65,13 @@ import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 const LOCAL_DATA = './data';
 export default defineConfig({
     loader: {
-        schemas: [DECISION_SCHEMAS],
         decisions: [SAMPLE_DATA, DEMO_DATA, LOCAL_DATA],
+        schemas: [DECISION_SCHEMAS],
     },
 });
 ```
 
-## See Also
+## See also
 
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
 -   [Models / Schemas](/models/schemas/)

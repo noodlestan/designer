@@ -22,7 +22,7 @@ import { DECISION_SCHEMAS } from '@noodlestsn/designer-schemas';
 const loader = createDecisionLoader([DECISION_SCHEMAS], [DEMO_DATA, LOCAL_DATA]);
 ```
 
-### See Also
+### See also
 
 - 📖 [Models / Schemas](https://designer-decisions.noodlestan.org/models/schemas)
 - 📖 [API / @noodlestan/designer-schemas](https://designer-decisions.noodlestan.org/api/designer-schemas)

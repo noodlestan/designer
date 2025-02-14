@@ -1,7 +1,7 @@
 import type { DecisionSource, SchemaSource } from '@noodlestan/designer-decisions';
 
 export type DecisionLoaderOptions = {
-    schemas: SchemaSource[];
     decisions: (DecisionSource | string)[];
+    schemas: SchemaSource[];
     resolver?: (moduleName: string) => Promise<string>;
 };

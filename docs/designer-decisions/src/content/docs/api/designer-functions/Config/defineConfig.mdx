@@ -32,7 +32,7 @@ type defineConfig = (
 
 If you need to implement `loadConfig()` for a specific use case not covered by the built-in configuration loader, you can use the return value of `defineConfig()` (the default export of `dd.config.mjs`) to inspect errors and provide feedback to the user.
 
-**Note:** The default export of `dd.config.mjs` is the the return value of `defineConfig()` which is a promise. The value needs to be _awaited_ on before it can be used.
+**Note:** The default export of `dd.config.mjs` is the the return value of `defineConfig()` which is a promise. The value needs to be _awaited on_ before it can be used.
 
 The `ResolvedConfig` type contains both the validation errors and the [DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig) object with defaults applied.
 

@@ -7,7 +7,7 @@ sidebar:
     label: Loading and Validating
 ---
 
-import { CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { Aside, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
 
 import { href } from '../../../mdx';
 
@@ -40,12 +40,10 @@ Add a Designer Decisions configuration file in the root of your project.
 
 The minimum required configuration specifies:
 
--   A list of [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) to load decision records from.
--   A list of [schemas](/models/schemas) to validate the input data.
+-   One or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) - where to load decision data ([InputRecord](/api/designer-decisions/Inputs/Types/InputRecord/)) from.
+-   One or more [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource) - location of the [schemas](/models/schemas) that validate the input data.
 
-In this example we will preload the "Designer Decisions Demo Data" decision source, as well as setup a local data source for you to add files in `./data`.
-
-```js
+```js "defineConfig"
 // dd.config.mjs
 import { defineConfig } from '@noodlestan/designer-functions';
 
@@ -54,11 +52,22 @@ import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 
 export default defineConfig({
     loader: {
-        schemas: [DECISION_SCHEMAS],
         decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
+        schemas: [DECISION_SCHEMAS],
     },
 });
 ```
+
+In this example we configured the [Sample and Demo Data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) decision sources and a local `data/` directory for you to add more decisions, as well as the [built-in schemas](/models/schemas).
+
+<Aside type="tip">
+    If you want to load decision data from another source (e.g.: another package) you can define it
+    with a [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource). The loader will be
+    able to resolve the package location in most scenarios, including monorepos, as long as the
+    dependency is installed.
+</Aside>
+
+In the [API / Configuration](/api/configuration) section you can find all configuration options and helpers.
 
 ## Loading input data
 
@@ -74,9 +83,9 @@ Add a script to load decisions and print eventual validation errors.
 
 </FileTree>
 
-We will use [loadConfig()](/api/designer-functions/Loader/loadConfig) to load and validate the `dd.config.mjs` configuration and the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader).
+We will use the [loadConfig()](/api/designer-functions/Loader/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) to load and validate the decision data.
 
-```js
+```js "createDecisionLoader"
 // scripts/validate-decisions.js
 import path from 'path';
 import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
@@ -89,7 +98,7 @@ This loader returns a [pre-validated decision store](/api/designer-functions/Sto
 
 Add the following code to execute the loader and list each records' `name` and `model`.
 
-```js collapse={1-5}
+```js collapse={1-5} "store.records()" "store.storeErrors()"
 // scripts/validate-decisions.js
 import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
 
@@ -127,9 +136,9 @@ Avatar Sizes space-scale/anchored
 
 ### Adding more decision data
 
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can create as many JSON files as you wish.
+As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, when using JSON files as data source, you are free to create sub-directories and name the files as you wish. Grouping decisions by type or scope is a good starting point.
 
-You can also name the files however you want. Grouping decisions by type or scope, is a good idea. Let's start by adding a single `color.json` file in `data/` to define color related decisions.
+Let's start by adding a single `color.json` file in the `data/` directory, where we can define color related decisions.
 
 <FileTree>
 - data/
@@ -137,7 +146,7 @@ You can also name the files however you want. Grouping decisions by type or scop
 
 </FileTree>
 
-In the [Models / Decision Types](models/decision-types) reference you will find sample data for each of the built-in decision models.
+In the [Models / Decision Types](/models/decision-types) reference you will find sample data for each of the built-in decision models.
 
 Here, we created a couple of [Color Value](/models/decision-types/color-value#sample-data) decisions based on the samples.
 
@@ -252,7 +261,7 @@ If we now introduce a couple of issues in or data, for instance deleting the `va
 🟨 Decision "Cold Color" /params/value (type) must be object, string or number
 ```
 
-## Inspecting and validating decision values
+### Producing decision values
 
 So far, the script only validates the input data against the schemas, guaranteeing that all the required attributes are present and that they are of the correct type.
 
@@ -319,11 +328,11 @@ If we introduce errors in our decisions, as in the previous example, the output 
  > 🟨 /params/value (type) must be object, string or number in {"$name":"Cold Color"}
 ```
 
-## Summarizing and catching errors
+### Summarizing and catching errors
 
 The `produced` object reports counts for decision records, and different types of errors in a single string.
 
-```diff lang="js" collapse={1-22,27-34} "summary"
+```diff lang="js" collapse={1-22,27-34} "produced.summary()"
 // scripts/validate-decisions.js
 import {
     createDecisionLoader,
@@ -363,7 +372,7 @@ You can use it to summarize all counts in one line.
 
 If you are running this as part of your build process you will probably want to exit the script with an error code.
 
-```diff lang="js" collapse={1-25} "filter" "hasErrors"
+```diff lang="js" collapse={1-25} "filter" "produced.hasErrors()"
 // scripts/validate-decisions.js
 import {
     createDecisionLoader,
@@ -416,9 +425,11 @@ The next guides provide step by step instructions on practical uses cases for yo
 
 </CardGrid>
 
-## See Also
+## See also
 
+-   [Boilerplates / Astro/Starlight](/examples/boilerplates/#astrostarlight)
 -   [Models / Decision Types](/models/decision-types)
 -   [Models / Schemas](/models/schemas)
+-   [API / configuration](/api/configuration)
 -   [API / designer-functions / produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions)
 -   [API / designer-functions / formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus)

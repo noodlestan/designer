@@ -18,8 +18,8 @@ export type DesignerConfigError = {
 
 export type DesignerConfig = {
     loader: {
-        schemas: DecisionLoaderOptions['schemas'];
         decisions: DecisionLoaderOptions['decisions'];
+        schemas: DecisionLoaderOptions['schemas'];
         moduleResolver?: DecisionLoaderOptions['resolver'];
     };
 };
