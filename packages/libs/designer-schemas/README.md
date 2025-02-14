@@ -17,9 +17,14 @@ This exported constant defines where to locate the schema collection.
 [SchemaSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/SchemaSource/) are a way to pass schema collections _by reference_ to decision validators and loaders such as [createDecisionLoader()](https://designer-decisions.noodlestan.org/api/designer-functions/Loader/createDecisionLoader/).
 
 ```ts
+import { DEMO_DATA } from '@noodlestsn/designer-decisions';
+import { createDecisionLoader } from '@noodlestsn/designer-fucntions';
 import { DECISION_SCHEMAS } from '@noodlestsn/designer-schemas';
 
-const loader = createDecisionLoader([DECISION_SCHEMAS], [DEMO_DATA, LOCAL_DATA]);
+const loader = createDecisionLoader({
+  decisions: [DEMO_DATA, './data'],
+  schemas: [DECISION_SCHEMAS],
+});
 ```
 
 ### See also

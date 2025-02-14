@@ -1,5 +1,3 @@
-import { emitTypesPLugin } from '../plugins/emitTypesPlugin.mjs';
-
 import { commonConfig } from './common.mjs';
 
 export const cjsConfig = {
@@ -9,5 +7,5 @@ export const cjsConfig = {
     format: 'cjs',
     platform: 'node',
     outfile: 'dist/cjs/index.js',
-    plugins: [emitTypesPLugin('cjs')],
+    plugins: [],
 };
