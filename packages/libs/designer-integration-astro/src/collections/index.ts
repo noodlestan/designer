@@ -1,2 +1,5 @@
-// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}.js';`)
-export * from './decisions.js';
+import { collections as refresher } from './refresher.js';
+
+export const collections = {
+    ...refresher,
+};

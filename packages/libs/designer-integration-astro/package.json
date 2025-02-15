@@ -16,6 +16,7 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
+    "./content": "./src/content/index.ts",
     "./collections": "./src/collections/index.ts",
     "./styles/*": "./src/styles/"
   },
@@ -38,8 +39,17 @@
     "@noodlestan/designer-functions": "0.0.12",
     "@noodlestan/designer-schemas": "0.0.12",
     "@noodlestan/designer-shows": "0.0.12",
+    "acorn": "^8.14.0",
+    "acorn-jsx": "^5.3.2",
     "astro": "^5.2.5",
-    "astro-integration-kit": "^0.18.0"
+    "astro-integration-kit": "^0.18.0",
+    "mdast": "^3.0.0",
+    "mdast-util-mdx": "^3.0.0",
+    "mdast-util-mdxjs-esm": "^2.0.1",
+    "unified": "^11.0.5",
+    "unist-builder": "^4.0.0",
+    "unist-util-visit": "^5.0.0",
+    "vfile": "^6.0.3"
   },
   "peerDependencies": {
     "astro": "^5.2.5"

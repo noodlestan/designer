@@ -111,3 +111,7 @@
 
     --dd-card-contents-bg-color: hsl(333, 15%, 97%);
 }
+
+body {
+    background-color: pink;
+}

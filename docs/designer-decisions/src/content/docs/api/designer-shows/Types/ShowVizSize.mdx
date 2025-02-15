@@ -5,10 +5,6 @@ slug: api/designer-shows/Types/ShowVizSize
 
 import { LayoutFlex, ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../../decisions';
-
-export const store = await loader();
-
 Available visualization sizes for [all value components](/integrations/Astro/Composable/Values).
 
 ```ts
@@ -18,7 +14,7 @@ type ShowVizSize = 'xs' | 's' | 'm' | 'l' | 'xl' | 'auto';
 When rendering decisions you can chose a different visualization size setting the [size prop](/integrations/Astro/Props#valueprops) to one of these.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={...} />
+<ShowDecision d="Action Color" size={...} />
 ```
 
 ## Type Values
@@ -26,63 +22,63 @@ When rendering decisions you can chose a different visualization size setting th
 ### `xs`
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'xs'} />
+<ShowDecision d="Action Color" size={'xs'} />
 ```
 
-<ShowDecision store={store} d="Action Color" size={'xs'} />
+<ShowDecision d="Action Color" size={'xs'} />
 
 ### `s`
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'s'} />
+<ShowDecision d="Action Color" size={'s'} />
 ```
 
-<ShowDecision store={store} d="Action Color" size={'s'} />
+<ShowDecision d="Action Color" size={'s'} />
 
 ### `m`
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'m'} />
+<ShowDecision d="Action Color" size={'m'} />
 ```
 
-<ShowDecision store={store} d="Action Color" size={'m'} />
+<ShowDecision d="Action Color" size={'m'} />
 
 ### `l`
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'l'} />
+<ShowDecision d="Action Color" size={'l'} />
 ```
 
-<ShowDecision store={store} d="Action Color" size={'l'} />
+<ShowDecision d="Action Color" size={'l'} />
 
 ### `xl`
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'xl'} />
+<ShowDecision d="Action Color" size={'xl'} />
 ```
 
-<ShowDecision store={store} d="Action Color" size={'xl'} />
+<ShowDecision d="Action Color" size={'xl'} />
 
 ### `auto` (default)
 
 Defaults to `auto` in which case it stretches to use all available space.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" />
+<ShowDecision d="Action Color" />
 ```
 
-<ShowDecision store={store} d="Action Color" />
+<ShowDecision d="Action Color" />
 
 In these cases, consider adding an explicit `size` value, or composing the decisions within some sort of grid or list layout.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" />
-<ShowDecision store={store} d="Brand Blue" />
-<ShowDecision store={store} d="Brand Pink" />
+<ShowDecision d="Action Color" />
+<ShowDecision d="Brand Blue" />
+<ShowDecision d="Brand Pink" />
 ```
 
 <LayoutFlex>
-    <ShowDecision store={store} d="Action Color" />
-    <ShowDecision store={store} d="Brand Blue" />
-    <ShowDecision store={store} d="Brand Pink" />
+    <ShowDecision d="Action Color" />
+    <ShowDecision d="Brand Blue" />
+    <ShowDecision d="Brand Pink" />
 </LayoutFlex>

@@ -8,10 +8,6 @@ sidebar:
 
 import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../decisions';
-
-export const store = await loader();
-
 ```ts
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 ```
@@ -21,12 +17,12 @@ Renders the appropriate visualization according to the decision type.
 In the following two examples we use the `<ShowDecision/>` to render both a [Color Value](/models/decision-types/color-value) decision and a [Space Scale](/models/decision-types/space-scale) decision.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
-<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+<ShowDecision d="Action Color" size={'s'} viz="bg" />
+<ShowDecision d="Sizing Space Scale" size={'xs'} />
 ```
 
-<ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
-<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+<ShowDecision d="Action Color" size={'s'} viz="bg" />
+<ShowDecision d="Sizing Space Scale" size={'xs'} />
 
 ## Composes
 
@@ -55,18 +51,13 @@ These props control whether the visualization should be shown, which specific vi
 In the examples below we are rendering a [ColorValueDecision](/models/decision-types/color-value) with, hiding the value and increasing the size of the color swatch.
 
 ```mdx
-<ShowDecision store={store} d="Content Background Default Color" />
-<ShowDecision store={store} d="Content Foreground Default Color" />
+<ShowDecision d="Content Background Default Color" />
+<ShowDecision d="Content Foreground Default Color" />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Content Background Default Color" />
-    <ShowDecision
-        store={store}
-        d="Content Foreground Default Color"
-        viz="fg"
-        options={{ mode: 'text' }}
-    />
+    <ShowDecision d="Content Background Default Color" />
+    <ShowDecision d="Content Foreground Default Color" viz="fg" options={{ mode: 'text' }} />
 </LayoutGrid>
 
 Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) for details on available visualizations and options.

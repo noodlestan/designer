@@ -6,6 +6,10 @@ sidebar:
     order: 10
 ---
 
+import { integrationAPI } from '@noodlestan/designer-integration-astro';
+import { createDecisionLoader } from '@noodlestan/designer-functions';
+import { fetchAllPermalinks } from '@noodlestan/designer-integration-astro/content';
+
 import {
     LayoutCentered,
     LayoutGrid,
@@ -13,23 +17,21 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../decisions';
-
-export const store = await loader();
-
 ## Space values
+
+<ShowDecision d="Warm Color" />
 
 <details>
 <summary>SpaceValue</summary>
 
 ```mdx
-<ShowDecision store={store} d="Space Unit" />
+<ShowDecision d="Space Unit" viz="square" />
 ```
 
 </details>
 
 <LayoutCentered>
-    <ShowDecision store={store} d="Space Unit" model />
+    <ShowDecision d="Space Unit" viz="square" />
 </LayoutCentered>
 
 ## Space scales
@@ -38,37 +40,37 @@ export const store = await loader();
 <summary>SpaceScale (default viz / xs size)</summary>
 
 ```mdx
-<ShowDecision store={store} d="Layout Space Scale" size="xs" />
+<ShowDecision d="Layout Space Scale" size="xs" />
 ```
 
 </details>
 
-<ShowDecision store={store} d="Layout Space Scale" size="xs" />
+<ShowDecision d="Layout Space Scale" size="xs" />
 
 <details>
 <summary>SpaceScale (vertical bar viz)</summary>
 
 ```mdx
-<ShowDecision store={store} d="Layout Rhythm Scale" viz="v-bar" />
+<ShowDecision d="Layout Rhythm Scale" viz="bar-v" />
 ```
 
 </details>
 
-<ShowDecision store={store} d="Layout Rhythm Scale" viz="circle" />
+<ShowDecision d="Layout Rhythm Scale" viz="bar-v" />
 
 <details>
 <summary>SpaceScale (square viz vs circle viz)</summary>
 
 ```mdx
-<ShowDecision store={store} d="Sizing Space Scale" viz="square" />
-<ShowDecision store={store} d="Sizing Space Scale" viz="circle" />
+<ShowDecision d="Sizing Space Scale" viz="square" />
+<ShowDecision d="Sizing Space Scale" viz="circle" />
 ```
 
 </details>
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Sizing Space Scale" viz="square" />
-    <ShowDecision store={store} d="Sizing Space Scale" viz="circle" />
+    <ShowDecision d="Sizing Space Scale" viz="square" />
+    <ShowDecision d="Sizing Space Scale" viz="circle" />
 </LayoutGrid>
 
 ## Cards
@@ -77,23 +79,23 @@ export const store = await loader();
 <summary>SpaceValue (DecisionCard / model and params shown)</summary>
 
 ```mdx
-<ShowDecisionCard store={store} d="Space Unit" model params>
+<ShowDecisionCard d="Space Unit" model params>
 ```
 
 </details>
 
-<ShowDecisionCard store={store} d="Space Unit" model params />
+<ShowDecisionCard d="Space Unit" model params />
 
 <details>
 <summary>SpaceScale (DecisionCard / column layout)</summary>
 
 ```mdx
-<ShowDecisionCard store={store} d="Sizing Space Scale" layout={["column","row"]}>
+<ShowDecisionCard d="Sizing Space Scale" layout={["column","row"]}>
 ```
 
 </details>
 
-<ShowDecisionCard store={store} d="Sizing Space Scale" layout={['column', 'row']} />
+<ShowDecisionCard d="Sizing Space Scale" layout={['column', 'row']} />
 
 ## See also
 

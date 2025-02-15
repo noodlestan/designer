@@ -7,8 +7,6 @@ import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 import { loader } from '../../../../../decisions';
 
-export const store = await loader();
-
 Available visualizations for [Space Values](/integrations/Astro/Composable/Values/#showspacevalue)
 
 ```ts
@@ -18,23 +16,23 @@ type SpaceVizName = 'bar-h' | 'bar-v' | 'square' | 'circle';
 When rendering decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
-<ShowSpaceValueDecision store={store} d="Space Unit" viz="..." />
+<ShowSpaceValueDecision d="Space Unit" viz="..." />
 ```
 
 ## Type Values
 
 ### `bar-h` (default)
 
-<ShowDecision store={store} d="Space Unit" size="xs" viz="bar-h" />
+<ShowDecision d="Space Unit" size="xs" viz="bar-h" />
 
 ### `bar-v`
 
-<ShowDecision store={store} d="Textarea Maximum Height" size="s" viz="bar-v" />
+<ShowDecision d="Textarea Maximum Height" size="s" viz="bar-v" />
 
 ### `square`
 
-<ShowDecision store={store} d="Card Thumb Minimum Size" size="s" viz="square" />
+<ShowDecision d="Card Thumb Minimum Size" size="s" viz="square" />
 
 ### `circle`
 
-<ShowDecision store={store} d="Avatar Minimum Size" size="s" viz="circle" />
+<ShowDecision d="Avatar Minimum Size" size="s" viz="circle" />
