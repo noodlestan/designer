@@ -1,15 +1,20 @@
 ---
+import { ShowError } from '../../atoms';
 import type { SpaceVizProps } from '../../types';
 
 type Props = SpaceVizProps;
 
-const { value: space, size = 'auto' } = Astro.props;
+const { value: space, size = 'auto', muteErrors } = Astro.props;
 
 const { value: v, units } = space?.toObject() || {};
 const vWithUnits = `${v}${units}`;
+const showErrors = !muteErrors && space?.context().hasErrors();
 ---
 
-<div class:list={['dd-space-bar-v-viz', size]}><div class="block"></div></div>
+<div class:list={['dd-space-bar-v-viz', size]}>
+    {showErrors && <ShowError size="s" position="block" />}
+    <div class="block"></div>
+</div>
 
 <style define:vars={{ __height: vWithUnits }}>
     .dd-space-bar-v-viz {

@@ -1,0 +1,61 @@
+---
+import { AlertTriangle } from 'lucide-astro';
+interface Props {
+    size?: 'xs' | 's' | 'm';
+    position?: 'inline' | 'block';
+}
+
+const { size = 's', position = 'inline' } = Astro.props;
+---
+
+<div class:list={['dd-show-error', size, position]}>
+    <div class="dd-show-error-icon">
+        <AlertTriangle />
+    </div>
+</div>
+
+<style>
+    .dd-show-error-icon {
+        width: var(--__size);
+        height: var(--__size);
+        min-width: var(--__size);
+        max-width: var(--__size);
+        min-height: var(--__size);
+        max-height: var(--__size);
+        color: var(--dd-error-fg-color);
+    }
+
+    .block .dd-show-error-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dd-error-bg-color);
+        border-radius: 3px;
+    }
+
+    .block :global(svg) {
+        width: 70%;
+        height: 70%;
+    }
+
+    .inline {
+        display: inline-block;
+    }
+
+    .inline :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .xs {
+        --__size: var(--dd-error-size-xs);
+    }
+
+    .s {
+        --__size: var(--dd-error-size-s);
+    }
+
+    .m {
+        --__size: var(--dd-error-size-m);
+    }
+</style>
