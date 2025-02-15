@@ -5,7 +5,7 @@ import type {
     ColorChannelValueCommon,
 } from '@noodlestan/designer-decisions';
 
-import { DecisionValueContainer } from '../../atoms';
+import { DecisionValueContainer, ShowError } from '../../atoms';
 import { LayoutStack } from '../../layouts';
 import type { ShowValueProps } from '../../types';
 
@@ -13,16 +13,20 @@ type Props = ShowValueProps & {
     v?: ColorChannelValue;
 };
 
-const { v, value = true } = Astro.props;
+const { v, value = true, muteErrors } = Astro.props;
 
 const channelV = v as ColorChannelValueCommon;
 const channelValue = channelV?.get();
+const showErrors = !muteErrors && v?.context().hasErrors();
 ---
 
 {
     value && channelV !== undefined && (
         <LayoutStack>
-            <DecisionValueContainer>{channelValue}</DecisionValueContainer>
+            <DecisionValueContainer>
+                {showErrors && <ShowError size="xs" />}
+                {channelValue}
+            </DecisionValueContainer>
         </LayoutStack>
     )
 }
