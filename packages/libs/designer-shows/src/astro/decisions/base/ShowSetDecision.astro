@@ -41,11 +41,7 @@ const flipped = base === 'column' ? 'row' : 'column';
 const defaultLayout: ShowDecisionLayout = isSet ? [base, flipped] : [base];
 const [setLayout, itemLayout] = resolveLayout(layout, defaultLayout);
 const muteValueErrors = showViz !== false;
-const muteVizErrors = false;
 ---
-
-999999 {muteErrors} aa
-{showViz !== false} bbb {muteVizErrors} fff
 
 {
     decision && (ValueComponent || VizComponent) && (
@@ -54,7 +50,7 @@ const muteVizErrors = false;
                 <LayoutDynamic layout={itemLayout} gap="s">
                     {VizComponent && (
                         <>
-                            <VizComponent />
+                            <VizComponent {...rest} {...vizProps} size={size} v={item} />
                         </>
                     )}
                     {ValueComponent && (

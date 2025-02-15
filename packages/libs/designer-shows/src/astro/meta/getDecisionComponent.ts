@@ -30,7 +30,7 @@ function channelCs(decision: DecisionTypeComponent): DecisionTypeComponents {
             component: valueC(ShowColorChannelValue),
         },
         viz: {
-            component: valueC(ShowColorChannelViz),
+            component: vizC(ShowColorChannelViz),
         },
     };
 }

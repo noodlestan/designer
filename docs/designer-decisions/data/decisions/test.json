@@ -1,16 +1,16 @@
 [
   {
-    "model": "space-value/explicit",
+    "model": "color-value/explicit",
     "name": "Fooo",
     "params": {
       "value": "#090E0B"
     }
   },
   {
-    "model": "space-scale/explicit",
+    "model": "color-set/explicit",
     "name": "Bar",
     "params": {
-      "values": [{ "$name": "Foo" }, "#00FF00", 12]
+      "values": ["#4b6163", "#dad331", "#fb6746"]
     }
   }
 ]
