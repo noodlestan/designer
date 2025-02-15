@@ -13,6 +13,7 @@ import {
     ShowDecisionUsage,
 } from '../attributes';
 import { resolveLayout } from '../helpers';
+import { ShowError } from '../atoms';
 
 type Props = DecisionTypeComponentProps & {
     name?: boolean;
@@ -73,10 +74,20 @@ const detailsSlot = showDetails && 'details';
 
 const showMeta = showModel || showParams || showContexts || showData;
 const metaSlot = showMeta && 'meta';
+const hasErrors = decision?.produce().context().hasErrors();
 ---
 
 <DecisionCardLayout layout={cardLayout}>
-    {decision && showName && <Fragment slot={nameSlot}>{decision.name()}</Fragment>}
+    {
+        decision && showName && (
+            <Fragment slot={nameSlot}>
+                <div class="header">
+                    {hasErrors && <ShowError size="m" position="block" />}
+                    {decision.name()}
+                </div>
+            </Fragment>
+        )
+    }
     {
         showValueOrViz && (
             <Fragment slot={vizSlot}>
@@ -112,3 +123,10 @@ const metaSlot = showMeta && 'meta';
         )
     }
 </DecisionCardLayout>
+<style>
+    .header {
+        display: flex;
+        align-items: center;
+        gap: var(--dd-gap-s);
+    }
+</style>

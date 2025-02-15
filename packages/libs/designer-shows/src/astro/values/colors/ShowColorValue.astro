@@ -1,7 +1,7 @@
 ---
 import { type ColorFormat, type ColorValue } from '@noodlestan/designer-decisions';
 
-import { DecisionValueContainer } from '../../atoms';
+import { DecisionValueContainer, ShowError } from '../../atoms';
 import { LayoutStack } from '../../layouts';
 import type { ShowValueProps } from '../../types';
 import { resolveColorFormats } from '../../helpers';
@@ -10,16 +10,20 @@ type Props = ShowValueProps & {
     v?: ColorValue;
 };
 
-const { v: colorValue, value = true } = Astro.props;
+const { v: colorValue, value = true, muteErrors } = Astro.props;
 
 const formats = resolveColorFormats(value);
+const showErrors = !muteErrors && colorValue?.context().hasErrors();
 ---
 
 {
     value && colorValue !== undefined && (
         <LayoutStack>
             {formats?.map(format => (
-                <DecisionValueContainer>{colorValue.toString(format)}</DecisionValueContainer>
+                <DecisionValueContainer>
+                    {showErrors && <ShowError size="xs" />}
+                    {colorValue.toString(format)}
+                </DecisionValueContainer>
             ))}
         </LayoutStack>
     )

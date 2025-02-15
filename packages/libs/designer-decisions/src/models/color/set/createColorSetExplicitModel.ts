@@ -7,7 +7,7 @@ export const createColorSetExplicitModel: DecisionModelFactory<
 > = () => {
     return {
         produce: (context, params) => {
-            const values = params.values.map(value =>
+            const values = params.values?.map(value =>
                 createColorValue(context.nestedContext(), value),
             );
             return createColorSet(context, values);
