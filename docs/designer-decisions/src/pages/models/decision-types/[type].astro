@@ -1,0 +1,96 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Code, Badge } from '@astrojs/starlight/components';
+import { DECISION_MODEL_METAS, DECISION_TYPE_METAS, type DecisionModelMeta } from '@noodlestan/designer-decisions';
+import { LayoutStack, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+import { GetInvolved } from '../../../components';
+import { loader } from '../../../decisions';
+
+const store = await loader();
+
+export async function getStaticPaths() {
+    return DECISION_TYPE_METAS.map(decisionType => ({
+        params: { type: decisionType.type },
+        props: { decisionType },
+    }));
+}
+
+
+const { decisionType } = Astro.props;
+
+const models = DECISION_MODEL_METAS.filter(m => m.type === decisionType.type)
+const records = store.records();
+
+const decisionByModel = (meta: DecisionModelMeta) => {
+    // WIP make sure we use only decisions from the sample set (name includes "Sample")
+    return records.filter(record => record.model === meta.model)[0];
+}
+
+const decisionDataByModel = (m: DecisionModelMeta) => {
+    const d = decisionByModel(m)
+    const [, decision] = store.decision({ $name: d.name });
+    const json = JSON.stringify(decision?.inputs()[0], null, 2);
+    return json;
+}
+
+const decisionModelId = (m: DecisionModelMeta) => {
+    return m.model.split('/')[1];
+}
+
+const headings = [
+    {
+        depth: 2,
+        slug: 'models',
+        text: 'Decision models',
+    },
+    ...models.map(m => ({
+        depth: 3,
+        slug: decisionModelId(m),
+        text: m.name,
+    }))
+];
+
+const frontmatter = {
+    title: decisionType.name,
+    slug: `/models/decision-types/${decisionType}`
+};
+---
+
+<StarlightPage frontmatter={frontmatter} headings={headings}>
+    <p>
+        <Badge variant="tip" text={decisionType.domain} />
+        <Badge variant="note" text={decisionType.category} />
+    </p>
+
+    <blockquote>
+        <p>type: <code>{decisionType.type}</code></p>
+        {decisionType.description}
+    </blockquote>
+
+    <h2 id="models">Models</h2>
+    <p>The following models can be used to produce a {decisionType.name} decision.</p>
+    {
+        models.map((m: DecisionModelMeta) => (
+            <div>
+                <h3 id={decisionModelId(m)}>{m.name}</h3>
+                {m.description}
+                {decisionByModel(m) && (
+                    <h5 id="sample-data">Sample decision</h5>
+                    <LayoutStack>
+                        <ShowDecisionCard store={store} d={decisionByModel(m).name} model params />
+                    </LayoutStack>
+                    <h5 id="sample-data">Sample data</h5>
+                    <Code lang="json" code={decisionDataByModel(m) || 'N/A'} />
+                )}
+                <h5 id="schema"><GetInvolved url='https://github.com/noodlestan/designer/issues/28' title="Help wanted">Documenting schemas</GetInvolved></h5>
+            </div>
+        ))
+    }
+
+</StarlightPage>
+
+<style>
+    .dd-item {
+    }
+</style>

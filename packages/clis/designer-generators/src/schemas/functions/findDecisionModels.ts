@@ -11,7 +11,7 @@ import {
 
 export async function findDecisionModels(
     config: SchemaGeneratorConfig,
-    moduleResolver: (moduleName: string) => Promise<string>,
+    moduleResolver?: (moduleName: string) => Promise<string>,
 ): Promise<SymbolInfo[]> {
     const { urnBase, source, types } = config;
     const files = await findTypeFiles(source, types.decisionModels, moduleResolver);

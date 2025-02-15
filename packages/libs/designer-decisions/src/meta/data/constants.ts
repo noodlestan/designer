@@ -8,6 +8,7 @@ const SAMPLE_DATA: DecisionSource = {
         path: 'resources/data/samples',
     },
 };
+
 const DEMO_DATA: DecisionSource = {
     name: 'Designer Decisions Demo Data',
     source: {

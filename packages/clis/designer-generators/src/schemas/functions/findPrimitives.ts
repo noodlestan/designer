@@ -11,7 +11,7 @@ import {
 
 export async function findPrimitives(
     config: SchemaGeneratorConfig,
-    moduleResolver: (moduleName: string) => Promise<string>,
+    moduleResolver?: (moduleName: string) => Promise<string>,
 ): Promise<SymbolInfo[]> {
     const { urnBase, source, types } = config;
 

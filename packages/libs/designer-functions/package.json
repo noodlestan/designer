@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-functions",
-  "version": "v0.0.11",
+  "version": "0.0.12",
   "description": "A library of functions to load, validate, and manipulate design decisions.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -21,26 +21,28 @@
     "LICENSE-MIT"
   ],
   "scripts": {
+    "dev": "node scripts/watch.mjs",
     "build:clean": "rm -rf dist",
-    "build:cjs": "tsc --project tsconfig.cjs.json",
-    "build": "npm run build:cjs",
+    "build:types:esm": "tsc --project tsconfig.esm.json",
+    "build:types:cjs": "tsc --project tsconfig.cjs.json",
+    "build": "node scripts/build.mjs",
     "test": "vitest --run --coverage",
     "test:watch": "vitest",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "tsc --watch --project tsconfig.cjs.json",
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.11",
+    "@noodlestan/designer-decisions": "0.0.12",
     "ajv": "8.17.1",
-    "chroma-js": "3.1.2"
+    "ajv-formats": "^3.0.1",
+    "resolve": "^1.22.10"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "11.1.1",
-    "@types/chroma-js": "^2.4.5",
+    "@noodlestan/designer-build-tools": "0.0.12",
+    "@types/resolve": "^1.20.6",
     "@vitest/coverage-v8": "3.0.5",
-    "vite": "6.1.0",
+    "esbuild": "0.25.0",
     "vitest": "3.0.5"
   }
 }

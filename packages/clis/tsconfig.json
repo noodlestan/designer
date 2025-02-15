@@ -5,6 +5,7 @@
     "esModuleInterop": true,
     "noEmitOnError": true,
     "strict": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "isolatedModules": true
   }
 }

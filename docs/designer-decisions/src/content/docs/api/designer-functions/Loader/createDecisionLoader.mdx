@@ -5,25 +5,17 @@ sidebar:
     label: createDecisionLoader
 ---
 
-import { GetInvolved } from '../../../../../components/atoms';
-
 ```ts
-type createDecisionLoader = (
-    schemas: SchemaConfig[],
-    sources: (DecisionSource | string)[],
-    moduleResolver: (moduleName: string) => Promise<string>,
-) => () => Promise<StaticDecisionStore>;
+type createDecisionLoader = (options: DecisionLoaderOptions) => () => Promise<StaticDecisionStore>;
 ```
 
 ## Return value
 
-**() => Promise&lt;
-[StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)&gt;**
+**() => Promise&lt;[StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)&gt;**
 
 A loader function that resolves with a populated decision store.
 
-This loader caches the promise on the first call. Any subsequent calls do not result
-in any schemas or input files being reloaded, yielding the same result as the first one.
+This loader caches the promise on the first call. Any subsequent calls do not result in any schemas or input files being reloaded, yielding the same result as the first one.
 
 #### Loader implementation
 
@@ -32,69 +24,46 @@ Given a list of paths and schemas configs:
 -   Loads schemas from paths and creates a schema map.
 -   Validates the schema map and creates a validator.
 -   Loads all decisions files and merges all data.
--   Validates decision inputs and returns a
-    [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore).
+-   Validates decision inputs and returns a [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore).
 
 ## Params
 
-##### ༶ `schemas`: SchemaConfig[]
+#### ༶ `options`: [DecisionLoaderOptions](/api/designer-functions/Loader/Types/DecisionLoaderOptions)
 
-A list of schema configurations to load validation schemas from.
-
-##### ༶ `sources`: (DecisionSource | string)[]
-
-A list of data sources to load decision data from.
-
-Values of type `string` are treated as absolute paths, or relative to the current working
-directory.
-
-You can also specify data sources in the following format:
-
-```ts
-export type DecisionSource = {
-    name: string;
-    source: DataSourcePackage | DataSourcePath;
-};
-```
-
-Where `DataSourcePackage` defines a path in a package installed in the current project.
-
-```ts
-const data = { type: 'package'; package: 'my-package'; path: '/data' };
-```
-
-And `DataSourcePath` defines any path in the file system.
-
-```ts
-const data = { type: 'path'; path: './data' };
-```
-
-##### ༶ `moduleResolver`: (moduleName: string) => Promise&lt;string&gt;
-
-A function to resolve the physical location of node modules containing the schemas.
-
-<GetInvolved url="https://github.com/noodlestan/designer/issues/80">
-    How to provide a package resolution default?
-</GetInvolved>
+It is recommended to create the options object directly in a `dd.config.mjs` file in the root of the project and then load it via [loadConfig()](/api/designer-functions/config/loadConfig).
 
 ## Usage
 
+**Using `dd.config.mjs` file and `loadConfig()`:**
+
 ```ts
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { loadConfig, createDecisionLoader } from '@noodlestan/designer-functions';
 
-const DATA_PATH = path.resolve('./data/decisions');
-
-const loader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [DATA_PATH],
-    // NOTE: you might need to adjust the path according to your repository setup
-    async moduleName => `./node_modules/${moduleName}`,
-);
+const config = await loadConfig();
+const loader = createDecisionLoader(config.loader);
 
 const store = await loader();
 ```
 
-## Related
+**Building the options object:**
 
--   [Guides / Loading and Validating Decisions](/guides/validating-design-decisions-with-schemas/)
--   [Guides / Rendering Decisions in Docs](/guides/documenting-design-decisions-with-astro-and-mdx/)
+```ts
+import { DEMO_DATA } from '@noodlestan/designer-decisions';
+import { createDecisionLoader } from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const options = {
+    decisions: [DEMO_DATA, './data'],
+    schemas: [DECISION_SCHEMAS],
+};
+const loader = createDecisionLoader(options);
+
+const store = await loader();
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [Models / Schemas](/models/schemas/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / DecisionLoaderOptions](/api/designer-functions/Loader/Types/DecisionLoaderOptions)

@@ -8,9 +8,9 @@ sidebar:
 
 import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../decisions';
+import { loader } from '../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 ```ts
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
@@ -18,7 +18,7 @@ import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
 Renders the appropriate visualization according to the decision type.
 
-In the following two examples we use the `<ShowDecision/>` to render both a [Color Value](/decision-models/color-value) decision and a [Space Scale](/decision-models/space-scale) decision.
+In the following two examples we use the `<ShowDecision/>` to render both a [Color Value](/models/decision-types/color-value) decision and a [Space Scale](/models/decision-types/space-scale) decision.
 
 ```mdx
 <ShowDecision store={store} d="Action Color" size={'s'} viz="bg" />
@@ -52,7 +52,7 @@ Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) t
 
 These props control whether the visualization should be shown, which specific visualization to show, and how to customize it.
 
-In the examples below we are rendering a [ColorValueDecision](/decision-models/color-value) with, hiding the value and increasing the size of the color swatch.
+In the examples below we are rendering a [ColorValueDecision](/models/decision-types/color-value) with, hiding the value and increasing the size of the color swatch.
 
 ```mdx
 <ShowDecision store={store} d="Content Background Default Color" />

@@ -1,9 +1,11 @@
 :root {
-    --dd-brand-pink-hue: oklch(61.9% 0.172 359deg);
-    --dd-brand-blue-hue: hsl(192, 95%, 45%);
+    --dd-brand-white: hsl(212deg 0% 96%);
+    --dd-brand-black: hsl(212deg 0% 6%);
+    --dd-brand-pink: hsl(336deg 60% 57%);
+    --dd-brand-blue: hsl(193deg 81% 47%);
 
-    --dd-color-max: #ffffff;
-    --dd-color-min: #020d0d;
+    --dd-color-max: hsl(192deg 95% 95%);
+    --dd-color-min: hsl(192deg 73% 3%);
 
     --dd-space-xs: 5px;
     --dd-space-s: 10px;

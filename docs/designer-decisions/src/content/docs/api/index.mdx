@@ -1,7 +1,7 @@
 ---
 title: API Reference
 slug: api
-description: Overview of `noodlestan/designer=*` packages.
+description: Overview of Designer Decisions packages and APIs.
 sidebar:
     order: 0
     label: Index
@@ -9,10 +9,18 @@ sidebar:
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-import { LibraryStatus } from '../../../components/atoms';
+import { LibraryStatus } from '../../../components';
 import { href } from '../../../mdx';
 
 <LibraryStatus />
+
+## Configuration
+
+<LinkCard
+    title="Configuration (optional, but recomended)"
+    href={href('/api/configuration')}
+    description="Creating configuration files and using helper functions."
+/>
 
 ## Packages
 

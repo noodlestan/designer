@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-shows",
-  "version": "v0.0.11",
+  "version": "0.0.12",
   "description": "Visualizing design decisions and tokens: Astro and SolidJS components",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -23,6 +23,7 @@
     "src/"
   ],
   "scripts": {
+    "dev": "tsc --watch --noEmit --project src/solidjs/tsconfig.json",
     "build:clean": "rm -rf dist",
     "build:solidjs": "tsc --noEmit --project src/solidjs/tsconfig.json",
     "build:astro": "astro check --tsconfig src/astro/tsconfig.json",
@@ -31,13 +32,11 @@
     "test:watch": "echo nothing to test",
     "lint": "prettier . -c && eslint .",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "tsc --watch --noEmit --project src/solidjs/tsconfig.json",
     "ci": "npm run build:clean && npm run build"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.11",
-    "@noodlestan/designer-functions": "v0.0.11",
-    "lucide-astro": "^0.473.0"
+    "@noodlestan/designer-decisions": "0.0.12",
+    "@noodlestan/designer-functions": "0.0.12"
   },
   "peerDependencies": {
     "astro": "^5.2.5",
@@ -46,7 +45,6 @@
   "devDependencies": {
     "@astrojs/check": "0.9.4",
     "astro": "5.2.5",
-    "vite": "6.1.0",
     "vite-plugin-solid": "2.11.0",
     "vite-plugin-solid-svg": "0.6.1"
   }

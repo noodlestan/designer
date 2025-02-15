@@ -20,9 +20,9 @@ import {
     ShowSpaceValue,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../../decisions';
+import { loader } from '../../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
@@ -35,7 +35,7 @@ These components render a decision's value directly.
     [ShowDecision](/integrations/Astro/ShowDecision/) will select the appropriate one for you.
 </Aside>
 
-They are exposed so that anyone can [create custom visualizations](/guides/creating-custom-design-decision-visualizations/), composing values and visualizations directly in their custom components.
+They are exposed so that anyone can [create custom visualizations](/guides/generating-documentation/creating-custom-visualizations/), composing values and visualizations directly in their custom components.
 
 Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) for all decision types and their corresponding value components.
 
@@ -57,9 +57,9 @@ Color related components.
 
 ### ShowColorValue
 
-#### ༶ `v`: [ColorValue](/api/designer-decisions/Types/Values/ColorValue)
+#### ༶ `v`: [ColorValue](/api/designer-decisions/Values/Types/ColorValue)
 
-#### ༶ `value`: [ColorFormat](/api/designer-decisions/Types/Primitives/ColorFormat) | [ColorFormat](/api/designer-decisions/Types/Primitives/ColorFormat)[]
+#### ༶ `value`: [ColorFormat](/api/designer-decisions/Primitives/Types/ColorFormat) | [ColorFormat](/api/designer-decisions/Primitives/Types/ColorFormat)[]
 
 #### Example
 
@@ -73,7 +73,7 @@ export const colorValue = createColorValue(context, '#ff0000');
 
 ### ShowColorChannelValue
 
-#### ༶ `v`: [ColorChannelValue](/api/designer-decisions/Types/Values/ColorChannelValue)
+#### ༶ `v`: [ColorChannelValue](/api/designer-decisions/Values/Types/ColorChannelValue)
 
 #### ༶ `value`: -
 
@@ -95,7 +95,7 @@ Space related components.
 
 ### ShowSpaceValue
 
-#### ༶ `v`: [SpaceValue](/api/designer-decisions/Types/Values/SpaceValue)
+#### ༶ `v`: [SpaceValue](/api/designer-decisions/Values/Types/SpaceValue)
 
 #### ༶ `value`: -
 

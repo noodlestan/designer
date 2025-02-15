@@ -3,6 +3,7 @@ title: Space Examples
 description: Examples of space decisions documented with designer components.
 sidebar:
     title: Space
+    order: 10
 ---
 
 import {
@@ -12,9 +13,9 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../decisions';
+import { loader } from '../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 ## Space values
 
@@ -93,3 +94,9 @@ export const store = await decisionLoader();
 </details>
 
 <ShowDecisionCard store={store} d="Sizing Space Scale" layout={['column', 'row']} />
+
+## See also
+
+-   [Integrations / Astro / ShowDecision](/integrations/Astro/ShowDecision)
+-   [Integrations / Astro / ShowDecisionCard](/integrations/Astro/ShowDecisionCard)
+-   [Guides / Generating Docs / Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/)

@@ -1,31 +1,25 @@
-import path from 'node:path';
-
-import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 import {
     createDecisionLoader,
-    formatStoreError,
-    formatValidationError,
+    formatDecisionStatus,
+    loadConfig,
+    produceDecisions,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const DECISION_DATA_PATH = path.resolve('./data/decisions');
+const config = await loadConfig();
 
-export const decisionLoader = createDecisionLoader(
-    [DECISION_SCHEMAS],
-    [SAMPLE_DATA, DEMO_DATA, DECISION_DATA_PATH],
-    async (moduleName: string) => `../../node_modules/${moduleName}`,
-);
+export const loader = createDecisionLoader(config.loader);
 
 const loadDecisions = async () => {
-    const store = await decisionLoader();
+    const store = await loader();
     if (store.hasErrors()) {
-        store.storeErrors()?.forEach(error => console.error(formatStoreError(error)));
-        store.validationErrors()?.forEach(error => console.error(formatValidationError(error)));
+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        throw new Error(`Validation errors.`);
     }
-    const records = store.records().length;
-    const errors = store.storeErrors().length;
-    const validationErrors = store.validationErrors().length;
-    console.info(`🐘 ${records} records, ${errors} errors, ${validationErrors} warnings`);
+
+    const produced = produceDecisions(store);
+    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
+
+    console.info('🐘', produced.summary());
 };
 
 loadDecisions();

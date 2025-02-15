@@ -5,5 +5,5 @@
     "jsx": "preserve",
     "types": ["astro/client"]
   },
-  "include": ["./**/*.ts", "./**/*.tsx"]
+  "include": ["./**/*.ts"]
 }

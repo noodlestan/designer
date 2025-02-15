@@ -1,21 +1,27 @@
 {
   "name": "@noodlestan/designer-build-tools",
-  "version": "v0.0.11",
-  "description": "Build tools for designer schemas.",
+  "version": "0.0.12",
+  "description": "Internal tools used to build Designer Decisions packages and generate code.",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": true,
+  "module": "src/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./src/index.mjs"
+    }
+  },
   "scripts": {
     "build:schemas": "ts-node scripts/generate.ts",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.11",
-    "@noodlestan/designer-generators": "v0.0.11"
+    "@noodlestan/designer-decisions": "0.0.12",
+    "@noodlestan/designer-generators": "0.0.12"
   },
-  "peerDependencies": {},
   "devDependencies": {
+    "esbuild-plugin-file-path-extensions": "^2.1.4",
     "ts-node": "10.9.2"
   }
 }

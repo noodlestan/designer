@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-integration-astro",
-  "version": "v0.0.11",
+  "version": "v0.0.12",
   "description": "Astro integration for Designer Decisions",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -29,20 +29,18 @@
     "test:watch": "echo nothing to test",
     "lint": "prettier . -c && eslint .",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "tsc --watch --noEmit --project src/solidjs/tsconfig.json",
     "ci": "npm run build:clean && npm run build"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.11",
-    "@noodlestan/designer-functions": "v0.0.11",
-    "@noodlestan/designer-shows": "v0.0.11"
+    "@noodlestan/designer-decisions": "v0.0.12",
+    "@noodlestan/designer-functions": "v0.0.12",
+    "@noodlestan/designer-shows": "v0.0.12"
   },
   "peerDependencies": {
     "astro": "^5.2.5"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",
-    "astro": "5.2.5",
-    "vite": "6.1.0"
+    "astro": "5.2.5"
   }
 }

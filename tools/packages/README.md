@@ -8,8 +8,8 @@ Make sure you [README](https://github.com/noodlestan/designer/blob/main/README.m
 
 ### Scripts
 
-- **$** `npm run bump-version` - updates `version` and `*dependencies` in all `package.json`
-- **$** `npm run publih-version` - executes `npm publish` on all public packages
+- **$** `npm run bump-version` - updates `version` and `*dependencies` in all `package.json`.
+- **$** `npm run publih-version` - executes `npm publish` on all public packages.
 
 ## MIT License
 

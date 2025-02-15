@@ -1,0 +1,57 @@
+---
+title: defineConfig()
+slug: api/designer-functions/Config/defineConfig
+sidebar:
+    label: defineConfig
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Defines a [configuration object](/api/designer-functions/Config/Types/DesignerConfig) that can be used across different parts of the same system.
+
+```ts
+type defineConfig = (
+    maybeConfig: DeepPartial<DesignerConfig>,
+) => Promise<ResolvedConfig<DesignerConfig>>;
+```
+
+<Aside type="tip">
+    This helper function is meant to be used in `dd.Config.mjs` configuration file.
+
+    The available options are listed in [DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig).
+
+    You can also find some examples in [API / configuration](/api/configuration#examples).
+
+</Aside>
+
+## Return value
+
+**Promise&lt;ResolvedConfig&lt;[DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig)&gt;&gt;**
+
+<Aside type="caution">This API is meant for advanced use cases only.</Aside>
+
+If you need to implement `loadConfig()` for a specific use case not covered by the built-in configuration loader, you can use the return value of `defineConfig()` (the default export of `dd.config.mjs`) to inspect errors and provide feedback to the user.
+
+**Note:** The default export of `dd.config.mjs` is the the return value of `defineConfig()` which is a promise. The value needs to be _awaited on_ before it can be used.
+
+The `ResolvedConfig` type contains both the validation errors and the [DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig) object with defaults applied.
+
+```ts
+import resolved from 'dd.config.mjs';
+const resolved = await resolved;
+console.log(resolved.config);
+console.error(resolved.errors);
+```
+
+## Params
+
+#### ༶ `config`: [DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig)
+
+## Usage
+
+Refer to the examples in [API / configuration](/api/configuration#examples).
+
+## See also
+
+-   [API / designer-functions / DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig)
+-   [API / designer-functions / loadConfig()](/api/designer-functions/Config/loadConfig)

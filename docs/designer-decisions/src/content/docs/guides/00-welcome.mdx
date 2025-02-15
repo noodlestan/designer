@@ -1,0 +1,72 @@
+---
+title: Welcome
+slug: guides/welcome
+description: Introduction and step by step guides per use case
+sidebar:
+    order: 1
+    label: Welcome
+---
+
+import { Aside, Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
+import { GetInvolved, LibraryStatus, WIP } from '../../../components';
+
+import { href } from '../../../mdx';
+
+<LibraryStatus />
+
+#### Your contribution is welcome!
+
+<GetInvolved url="https://github.com/orgs/noodlestan/projects/3">
+    Follow our progress on the GitHub project
+</GetInvolved>
+
+If would like to share your ideas, report a bug, ask for improvements – or simply say hi! 👋 - don't hesitate to join us on [Noodlestan's Discord](https://discord.gg/b8DkbJSF9z) or to drop us a line at `hello@noodlestan.org`.
+
+### Design Decisions?
+
+-   How are designer decisions different from design tokens?
+-   What are design contexts and how are they resolved and applied?
+-   What's the architecture of this system and how open and extensible is it?
+
+Learn more about the [key concepts](/guides/designer-decisions-concepts).
+
+## Setup guides
+
+<LinkCard
+    href={href('/guides/capturing-design-decisions-in-data')}
+    title="Capturing design decisions in data"
+/>
+<LinkCard
+    href={href('/guides/loading-and-validating-design-decisions')}
+    title="Validate decisions using JSON schema and validators"
+/>
+<LinkCard
+    href={href('/guides/generating-css-variables-from-design-decisions-and-tokens')}
+    title="Generate CSS variables from design decisions and design tokens"
+/>
+<LinkCard
+    href={href('/guides/documenting-design-decisions-with-mdx')}
+    title="Document design decisions and tokens with MDX components"
+/>
+
+## Example repositories
+
+Get started in a matter of minutes.
+
+In the [Example / Boilerplates](/examples/boilerplates/) section you will find boilerplate repositories for different use cases.
+
+<CardGrid>
+
+    <LinkCard
+        href={href('/examples/boilerplates/#minimal')}
+        title="Minimal"
+        description="Load, validate, and transform decisions."
+    />
+
+    <LinkCard
+        href={href('/examples/boilerplates/#astrostarlight')}
+        title="Astro/Starlight"
+        description="Design System documentation starter"
+    />
+
+</CardGrid>

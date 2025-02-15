@@ -1,3 +1,5 @@
+import type { ErrorObject } from 'ajv';
+
 import type { DecisionId, DecisionName, InputRecord } from '../decision-inputs';
 import type { BaseValue } from '../primitive-values';
 
@@ -11,6 +13,10 @@ export type Params = object;
 export type DecisionError = {
     context: DecisionContext;
     message: () => string;
+};
+
+export type DecisionValidationError = DecisionError & {
+    error?: ErrorObject;
 };
 
 export type DecisionUnexpectedError = DecisionError & {

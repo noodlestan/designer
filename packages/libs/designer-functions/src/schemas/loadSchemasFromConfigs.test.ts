@@ -1,4 +1,4 @@
-import type { SchemaConfig } from '@noodlestan/designer-decisions';
+import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { loadSchemasFromConfig } from './loadSchemasFromConfig';
@@ -11,8 +11,8 @@ vi.mock('./loadSchemasFromConfig', () => ({
 
 const loadSchemasFromConfigMock = vi.mocked(loadSchemasFromConfig);
 
-const mockConfig1: SchemaConfig = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
-const mockConfig2: SchemaConfig = {
+const mockConfig1: SchemaSource = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
+const mockConfig2: SchemaSource = {
     urnBase: 'bar',
     source: { type: 'package', package: '@', path: '/foo' },
 };
@@ -33,7 +33,7 @@ describe('loadSchemasFromConfigs()', () => {
     });
 
     it('should load and aggregate schemas from multiple configs', async () => {
-        const mockConfigs: SchemaConfig[] = [mockConfig1, mockConfig2];
+        const mockConfigs: SchemaSource[] = [mockConfig1, mockConfig2];
 
         loadSchemasFromConfigMock.mockImplementationOnce(async (schemaMap: SchemaMap) => {
             schemaMap.set('schema1', mockSchema1);
@@ -51,7 +51,7 @@ describe('loadSchemasFromConfigs()', () => {
     });
 
     it('should throw an error if one of the configs fails', async () => {
-        const mockConfigs: SchemaConfig[] = [mockConfig1, mockConfig2];
+        const mockConfigs: SchemaSource[] = [mockConfig1, mockConfig2];
 
         loadSchemasFromConfigMock.mockImplementationOnce(async (schemaMap: SchemaMap) => {
             schemaMap.set('schema1', mockSchema1);

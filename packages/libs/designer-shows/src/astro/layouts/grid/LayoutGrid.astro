@@ -1,5 +1,6 @@
 ---
 export type LayoutGridProps = {
+    flow?: 'tight';
     columns?: number;
     align?: 'start' | 'center';
     gap?: 's' | 'm' | 'l';
@@ -11,6 +12,7 @@ export type LayoutGridProps = {
 type Props = LayoutGridProps;
 
 const {
+    flow,
     align = 'start',
     columns = 2,
     gap: maybeGap,
@@ -26,7 +28,10 @@ const vGap = maybeVGap ?? hGap;
 const style = { '--columns': columns };
 ---
 
-<Element class:list={['dd-layout-grid', align, `h-gap-${hGap}`, `v-gap-${vGap}`]} style={style}>
+<Element
+    class:list={['dd-layout-grid', flow, align, `h-gap-${hGap}`, `v-gap-${vGap}`]}
+    style={style}
+>
     <slot />
 </Element>
 
@@ -38,6 +43,14 @@ const style = { '--columns': columns };
         row-gap: var(--__layout-grid-h-gap);
         column-gap: var(--__layout-grid-v-gap);
         list-style: none;
+    }
+
+    .flow {
+        margin-block: 1rem;
+    }
+
+    .wrap {
+        flex-wrap: wrap;
     }
 
     .center {
@@ -70,9 +83,5 @@ const style = { '--columns': columns };
 
     .h-gap-l {
         --__layout-grid-v-gap: var(--dd-gap-l);
-    }
-
-    .wrap {
-        flex-wrap: wrap;
     }
 </style>

@@ -3,3 +3,6 @@ export * from './findJsonFiles';
 export * from './loadDecisionFile';
 export * from './loadDecisionsFromSource';
 export * from './loadDecisionsFromSources';
+export * from './resolveDecisionSource';
+export * from './resolveDecisionSourcePaths';
+export * from './resolveSource';

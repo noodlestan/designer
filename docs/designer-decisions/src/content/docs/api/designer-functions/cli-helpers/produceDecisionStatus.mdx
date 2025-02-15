@@ -33,20 +33,22 @@ type ProducedDecisionStatus = {
 
 ## Params
 
-##### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Types/StaticDecisionStore)
+#### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
 
-##### ༶ `input`: [InputRecord](/api/designer-decisions/Types/InputRecord)
+#### ༶ `input`: [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord)
 
 &nbsp;
 
 ## Usage
 
 ```js
-const store = await decisionLoader();
+const store = await loader();
 const statuses = store.records().map(record => produceDecisionStatus(store, record));
 statuses.forEach(status => console.info(formatDecisionStatus(status)));
 ```
 
-## Related
+## See also
 
--   [Guides / Loading and Validating Decisions](/guides/validating-design-decisions-with-schemas/)
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-decisions / produceDecisions()](/api/designer-decisions/cli-helpers/produceDecisions)
+-   [API / designer-decisions / formatDecisionStatus()](/api/designer-decisions/cli-helpers/formatDecisionStatus)

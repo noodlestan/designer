@@ -1,0 +1,78 @@
+---
+title: Configuration Reference
+slug: api/configuration
+description: Designer Decisions shared configuration schema and helpers.
+sidebar:
+    order: 0
+    label: Configuration
+---
+
+import { Aside, FileTree } from '@astrojs/starlight/components';
+
+import { LibraryStatus } from '../../../components';
+import { href } from '../../../mdx';
+
+<LibraryStatus />
+
+## Configuration
+
+A configuration file is optional, but recommended.
+
+Creating a `dd.config.mjs` in the root of the project allows the different moving parts to read from the same (validated) source of truth.
+
+As explained in the [Loading and Validating](/guides/loading-and-validating-design-decisions/) the minimum required configuration specifies:
+
+-   A list of data sources ([DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource)) from which to load decision inputs ([InputRecord](/api/designer-decisions/Inputs/Types/InputRecord/)).
+-   A list of schemas ([SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource)) to load the [schemas](/models/schemas) that validate the input data.
+
+## Format
+
+The full configuration options are detailed in [DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig).
+
+## Helpers
+
+### [defineConfig()](/api/designer-functions/Config/defineConfig)
+
+Used in the `dd.config.mjs` file.
+
+Normalizes options for key entry points, such as [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader).
+
+### [loadConfig()](/api/designer-functions/Config/loadConfig)
+
+Used by some built-in modules, such as the [Astro integration](/integrations/Astro), and any place where access to the configuration is required.
+
+## Examples
+
+Both the [minimal boilerplate](/examples/boilerplates/#minimal) and the [Astro boilerplate](/examples/boilerplates/#astrostarlight), as well as this documentation website, use a `dd.config.mjs` in the root of the project.
+
+<FileTree>
+- data/
+- src/
+- **dd.config.mjs**
+- package.json
+
+</FileTree>
+
+The following example configures the loader with the [schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) for the built-in decision models and adds three data sources: the [demo and sample data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) from `@noodlestan/designer-decisions` and the local `data/` directory.
+
+```js
+// dd.config.mjs
+import { defineConfig } from '@noodlestan/designer-functions';
+
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
+
+const LOCAL_DATA = './data';
+export default defineConfig({
+    loader: {
+        decisions: [SAMPLE_DATA, DEMO_DATA, LOCAL_DATA],
+        schemas: [DECISION_SCHEMAS],
+    },
+});
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [Models / Schemas](/models/schemas/)
+-   [API / designer-functions / DesignerConfig](/api/designer-functions/Config/Types/DesignerConfig)

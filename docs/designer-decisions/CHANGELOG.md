@@ -1,17 +1,46 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.12] - 2025-02-10
+
+### Added
+
+- Expose channel `name()` in color channel Values ([#131](https://github.com/noodlestan/designer/issues/131))
+- Create separate components for value and viz ([#132](https://github.com/noodlestan/designer/issues/132))
+- Add `layout` prop to decision components ([#134](https://github.com/noodlestan/designer/issues/134))
+- Add `layout` prop to decision card ([#136](https://github.com/noodlestan/designer/issues/136))
+- Add `quantize`feature to Values and Models ([#140](https://github.com/noodlestan/designer/issues/140))
+- Add default quantize to all Values ([#142](https://github.com/noodlestan/designer/issues/142))
+- Handle errors when loading and validating decisions ([#148](https://github.com/noodlestan/designer/issues/148))
+
+### Changed
+
+- Prefix local CSS vars with `__` in Astro components ([#137](https://github.com/noodlestan/designer/issues/137))
+
+### Upgrade dependencies
+
+- Update Vite - `4.5` to `6.1.0` ([#145](https://github.com/noodlestan/designer/issues/145))
+- Upgrade Vitest - `1.6` to `3.0.5` ([#145](https://github.com/noodlestan/designer/issues/145))
+- Upgrade Astro - `4/5` to `5.2.5` ([#145](https://github.com/noodlestan/designer/issues/145))
+
+### Docs
+
+- Move Astro component reference to "Integrations" ([#144](https://github.com/noodlestan/designer/issues/144))
+- Create and use WIP component ([#146](https://github.com/noodlestan/designer/issues/146))
+- Streamline guide names ([#150](https://github.com/noodlestan/designer/issues/150))
+- Update logos, type styles, and homepage copy ([#152](https://github.com/noodlestan/designer/issues/152))
+
 ## [0.0.10] - 2025-02-01
 
 ### Added
 
-- Create oklch components #7
-- Add Layout\* components #105
-- Add starlight styles to astro integration #107
+- Create Oklch components [#7](https://github.com/noodlestan/designer/issues/7)
+- Add Layout components [105](https://github.com/noodlestan/designer/issues/105)
+- Add starlight styles to astro integration [#107](https://github.com/noodlestan/designer/issues/107)
 
 ### Docs
 
-- Improve code blocks in docs with expressive code collapse plugin #117 #115
-- Add "warning: experimental" banners to homepage and API index #124
+- Improve code blocks in docs with expressive code collapse plugin [#117](https://github.com/noodlestan/designer/issues/117) [#115](https://github.com/noodlestan/designer/issues/115)
+- Add "warning: experimental" banners to homepage and API index [#124](https://github.com/noodlestan/designer/issues/124)
 
 ## [0.0.9] - 2025-01-30
 

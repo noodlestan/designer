@@ -33,18 +33,30 @@ export default defineConfig({
 })
 ```
 
-📖 Refer to the [Designer Decisions Documentation](https://designer-decisions.noodlestan.org/integrations/Astro) for more info on features and options.
+### See also
+
+- 📖 [Integrations / Astro](https://designer-decisions.noodlestan.org/integrations/Astro) for more info on features and options.
+- 📖 [Examples](https://designer-decisions.noodlestan.org/examples/)
+- 📖 [Boilerplates](https://designer-decisions.noodlestan.org/examples/boilerplates/)
 
 ## Development
 
 Make sure you [README](https://github.com/noodlestan/designer/blob/main/README.md) first.
 
+### Build Targets
+
+This library is packaged for use in Astro, both during config time (e.g., in `astro.config.mjs`) and at build time.
+
+| Entry Point                                                          | Description       |
+| -------------------------------------------------------------------- | ----------------- |
+| `import integration from '@noodlestan/designer-integrations-astro';` | Astro integration |
+| `import '@noodlestan/designer-integrations-astro/styles/...';`       | CSS               |
+
 ### Scripts
 
-- **$** `npm run build` - uses `astro check` and `tsc --noEmit` to type check Astro and SolidJS sources (does not produce any `dist/`)
+- **$** `npm run build` - uses `astro check` and `tsc --noEmit` to type check Astro and SolidJS sources (does not produce any `dist/`).
 - **$** `npm run test` / `npm run test:watch` - 🚧 no tests.
-- **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config)
-- **$** `npm run dev` - uses `tsc --watch` (SolidJS sources only)
+- **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config).
 
 ## MIT License
 

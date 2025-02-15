@@ -3,13 +3,14 @@ title: Color Examples
 description: Examples of color decisions documented with designer components.
 sidebar:
     title: Color
+    order: 20
 ---
 
 import { LayoutGrid, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../decisions';
+import { loader } from '../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 <ShowDecision store={store} d="Bar" size="m" />
 
@@ -154,3 +155,9 @@ export const store = await decisionLoader();
 </details>
 
 <ShowDecisionCard store={store} d="Heat Map Color Set" layout="column" size="s" model params />
+
+## See also
+
+-   [Integrations / Astro / ShowDecision](/integrations/Astro/ShowDecision)
+-   [Integrations / Astro / ShowDecisionCard](/integrations/Astro/ShowDecisionCard)
+-   [Guides / Generating Docs / Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/)

@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-schemas",
-  "version": "v0.0.11",
+  "version": "0.0.12",
   "description": "A collection of JSON schemas to validate design decision inputs.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -12,17 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/noodlestan/designer.git"
   },
-  "type": "module",
   "sideEffects": false,
-  "module": "dist/esm/index.js",
+  "module": "src/index.ts",
   "main": "dist/cjs/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    },
-    "./schemas": "./schemas"
-  },
   "files": [
     "dist",
     "src",
@@ -30,24 +22,23 @@
     "LICENSE-MIT"
   ],
   "scripts": {
+    "dev": "node scripts/watch.mjs",
     "build:clean": "rm -rf dist",
-    "build:lib": "vite build",
     "build:types:esm": "tsc --project tsconfig.esm.json",
     "build:types:cjs": "tsc --project tsconfig.cjs.json",
-    "build": "npm run build:lib && npm run build:types:esm && npm run build:types:cjs",
+    "build": "node scripts/build.mjs",
     "test": "echo nothing to test",
     "test:watch": "echo nothing to test",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "vite build --watch",
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.11"
+    "@noodlestan/designer-decisions": "0.0.12"
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@rollup/plugin-typescript": "11.1.1",
-    "vite": "6.1.0"
+    "@noodlestan/designer-build-tools": "0.0.12",
+    "esbuild": "0.25.0"
   }
 }

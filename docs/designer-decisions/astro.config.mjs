@@ -1,19 +1,17 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import { staticSidebar } from './sidebar.static.mjs';
-import { processLinks } from './src/mdx/rehype/processLinks.ts';
 import designerDecisionsIntegration from '@noodlestan/designer-integration-astro';
+
+import { processLinks } from './src/mdx';
+import { createSidebar } from './src/navigation/sidebar.ts';
 
 const remarkPlugins = [];
 const rehypePlugins = [processLinks];
 
-const decisionModels = {
-    label: 'Decision Models',
-    items: [{ label: 'Index', link: 'decision-models' }],
-};
-
 const site = process.env.ASTRO_SITE_URL || 'https://designer-decisions.noodlestan.org/';
 const base = process.env.ASTRO_BASE_PATH || '/';
+
+const sidebar = createSidebar();
 
 export default defineConfig({
     site,
@@ -23,9 +21,8 @@ export default defineConfig({
         starlight({
             title: 'Designer Decisions',
             logo: {
-                dark: './src/assets/DD-logo-dark.png',
-                light: './src/assets/DD-logo-light.png',
-                replacesTitle: true,
+                dark: './src/assets/DD-logomark.svg',
+                light: './src/assets/DD-logomark.svg',
             },
             social: {
                 github: 'https://github.com/noodlestan',
@@ -37,9 +34,9 @@ export default defineConfig({
                 './src/styles/starlight.custom.css',
             ],
             components: {
-                Footer: './src/components/Starlight/Footer.astro',
+                Footer: './src/components/page/Footer.astro',
             },
-            sidebar: staticSidebar({ decisionModels }),
+            sidebar,
         }),
         designerDecisionsIntegration({ applyStarlightStyles: true }),
     ],

@@ -1,7 +1,7 @@
 {
   "name": "@noodlestan/designer-generators",
-  "version": "v0.0.11",
-  "description": "Generate schemas for design decision, validators, and transformations.",
+  "version": "0.0.12",
+  "description": "Generate design tokens, TS and CSS code, and schemas for input validation.",
   "author": "Noodlestan Collective",
   "license": "MIT",
   "private": false,
@@ -12,14 +12,16 @@
     "type": "git",
     "url": "git+https://github.com/noodlestan/designer.git"
   },
-  "main": "dist/index.js",
+  "sideEffects": false,
   "module": "src/index.ts",
+  "main": "dist/cjs/index.js",
   "files": [
     "dist",
     "src",
     "LICENSE-MIT"
   ],
   "scripts": {
+    "dev": "tsc --watch --project tsconfig.cjs.json",
     "build:clean": "rm -rf dist",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build": "npm run build:cjs",
@@ -27,17 +29,15 @@
     "test:watch": "mocha -w -r ts-node/register ---watch-files 'src/**/*.ts' 'src/**/*.test.ts'",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
-    "dev": "tsc --watch --project tsconfig.cjs.json",
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "v0.0.11",
-    "@noodlestan/designer-functions": "v0.0.11",
-    "@noodlestan/designer-schemas": "v0.0.11",
+    "@noodlestan/designer-decisions": "0.0.12",
+    "@noodlestan/designer-functions": "0.0.12",
+    "@noodlestan/designer-schemas": "0.0.12",
     "rimraf": "6.0.1",
     "ts-deepmerge": "7.0.0",
-    "typescript-json-schema": "0.65.1",
-    "json-schema-to-zod": "2.5.0"
+    "typescript-json-schema": "0.65.1"
   },
   "devDependencies": {
     "@types/mocha": "10.0.10",

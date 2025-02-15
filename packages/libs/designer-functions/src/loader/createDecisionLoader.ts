@@ -1,23 +1,22 @@
-import type { DecisionSource, SchemaConfig } from '@noodlestan/designer-decisions';
-
 import { createDecisionValidator, loadSchemasFromConfigs, validateSchemaMap } from '../schemas';
 import { type StaticDecisionStore, createStaticDecisionStore } from '../store';
 import { createStaticInputMap } from '../store';
 
 import { loadDecisionsFromSources } from './functions';
+import type { DecisionLoaderOptions } from './types';
 
 export const createDecisionLoader = (
-    schemas: SchemaConfig[],
-    sources: (DecisionSource | string)[],
-    moduleResolver: (moduleName: string) => Promise<string>,
+    options: DecisionLoaderOptions,
 ): (() => Promise<StaticDecisionStore>) => {
+    const { schemas, decisions, resolver: moduleResolver } = options;
+
     const loader = async () => {
         try {
             const rawSchemaMap = await loadSchemasFromConfigs(schemas, moduleResolver);
             const schemaMap = validateSchemaMap(rawSchemaMap);
             const validator = createDecisionValidator(schemaMap);
 
-            const inputData = await loadDecisionsFromSources(sources, moduleResolver);
+            const inputData = await loadDecisionsFromSources(decisions, moduleResolver);
             const inputMap = createStaticInputMap(inputData, validator);
             return createStaticDecisionStore(inputMap);
         } catch (error) {
@@ -30,13 +29,13 @@ export const createDecisionLoader = (
         }
     };
 
-    let promise: Promise<StaticDecisionStore>;
-    const load = () => {
-        if (!promise) {
-            promise = loader();
-        }
-        return promise;
-    };
+    // let promise: Promise<StaticDecisionStore>;
+    // const load = () => {
+    //     if (!promise) {
+    //         promise = loader();
+    //     }
+    //     return promise;
+    // };
 
-    return load;
+    return loader;
 };

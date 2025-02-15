@@ -17,9 +17,9 @@ import {
     ShowDecisionUsage,
 } from '@noodlestan/designer-shows/astro';
 
-import { decisionLoader } from '../../../../../decisions';
+import { loader } from '../../../../../decisions';
 
-export const store = await decisionLoader();
+export const store = await loader();
 
 These components render decision details and metadata.
 
@@ -28,7 +28,7 @@ These components render decision details and metadata.
     [ShowDecision](/integrations/Astro/ShowDecision/) will select the appropriate one for you.
 </Aside>
 
-They are exposed so that anyone can [create custom visualizations](/guides/creating-custom-design-decision-visualizations/), composing these directly in their custom components.
+They are exposed so that anyone can [create custom visualizations](/guides/generating-documentation/creating-custom-visualizations/), composing these directly in their custom components.
 
 ## Common Props
 
@@ -62,7 +62,7 @@ Renders the decision's usage guidelines.
 
 ### ShowDecisionModel
 
-Renders the [model](/decision-models) used in the decision.
+Renders the [model](/models/decision-types) used in the decision.
 
 #### Example
 

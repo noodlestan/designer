@@ -1,0 +1,16 @@
+---
+title: ColorValue
+slug: api/designer-decisions/Values/Types/ColorValue
+sidebar:
+    order: 0
+---
+
+Extends `BaseValue<ChromaColor>`
+
+```ts
+export type ColorValue = {
+    get: () => ChromaColor;
+    toObject<T extends ColorObjectLiteral = ColorObjectLiteral>(format: ColorFormat): T;
+    toString(format: ColorFormat): string;
+};
+```
