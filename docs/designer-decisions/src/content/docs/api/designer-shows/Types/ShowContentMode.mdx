@@ -5,10 +5,6 @@ slug: api/designer-shows/Types/ShowContentMode
 
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../../decisions';
-
-export const store = await loader();
-
 Available options for custom content rendered via
 [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions).
 
@@ -17,7 +13,7 @@ export type ShowContentMode = 'typeface' | 'text';
 ```
 
 ```mdx
-<ShowColorValueDecision store={store} d="Brand Black" size="m" viz="..." options={options} />
+<ShowColorValueDecision d="Brand Black" size="m" viz="..." options={options} />
 ```
 
 ## Type Values
@@ -35,10 +31,10 @@ You can override the content via
 [options.content](/api/designer-shows/Types/ColorVizOptions#-content).
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
+<ShowDecision d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
 ```
 
-<ShowDecision store={store} d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
+<ShowDecision d="Brand Pink" size="m" viz="fg" options={{ mode: 'typeface' }} />
 
 ### `text`
 
@@ -48,7 +44,7 @@ You can override the content via
 [options.content](/api/designer-shows/Types/ColorVizOptions#-content).
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
+<ShowDecision d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
 ```
 
-<ShowDecision store={store} d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />
+<ShowDecision d="Brand Pink" size="xl" viz="fg" options={{ mode: 'text' }} />

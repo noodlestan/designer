@@ -2,7 +2,7 @@ import { createDecisionValidator, loadSchemasFromConfigs, validateSchemaMap } fr
 import { type StaticDecisionStore, createStaticDecisionStore } from '../store';
 import { createStaticInputMap } from '../store';
 
-import { loadDecisionsFromSources } from './functions';
+import { loadDecisionsFromSources, normalizeSources } from './functions';
 import type { DecisionLoaderOptions } from './types';
 
 export const createDecisionLoader = (
@@ -16,7 +16,8 @@ export const createDecisionLoader = (
             const schemaMap = validateSchemaMap(rawSchemaMap);
             const validator = createDecisionValidator(schemaMap);
 
-            const inputData = await loadDecisionsFromSources(decisions, moduleResolver);
+            const sources = normalizeSources(decisions);
+            const inputData = await loadDecisionsFromSources(sources, moduleResolver);
             const inputMap = createStaticInputMap(inputData, validator);
             return createStaticDecisionStore(inputMap);
         } catch (error) {

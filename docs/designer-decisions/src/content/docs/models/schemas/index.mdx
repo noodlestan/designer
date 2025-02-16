@@ -25,10 +25,14 @@ Schemas are not checked-in in any repository. After they are generated they are 
 The built-in schemas can be loaded by providing the `DECISION_SCHEMAS: SchemaSource` constant exported by [@noodlestan/designer-schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) to the [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) function.
 
 ```ts
-import { createDecisionLoader } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+import { DEMO_DATA } from '@noodlestsn/designer-decisions';
+import { createDecisionLoader } from '@noodlestsn/designer-fucntions';
+import { DECISION_SCHEMAS } from '@noodlestsn/designer-schemas';
 
-const loader = createDecisionLoader([DECISION_SCHEMAS], ...);
+const loader = createDecisionLoader({
+    decisions: [DEMO_DATA, './data'],
+    schemas: [DECISION_SCHEMAS],
+});
 const store = await loader();
 ```
 

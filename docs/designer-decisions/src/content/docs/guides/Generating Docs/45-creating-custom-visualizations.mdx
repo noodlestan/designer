@@ -10,10 +10,6 @@ sidebar:
 import { Code, FileTree, Aside } from '@astrojs/starlight/components';
 import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../decisions';
-
-export const store = await loader();
-
 This guide explains how to create custom visualizations for your documentation.
 
 ## Setup
@@ -54,10 +50,10 @@ const [decision] = store.decision(d)
 
 <DecisionCardLayout>
     <h2 slot="header">{decision.name}</h2>
-    <ShowDecision slot="viz" store={store} d={d} value={['rgb', 'oklch']} />
+    <ShowDecision slot="viz" d={d} value={['rgb', 'oklch']} />
     <div slot="details">
         <h3>Usage</h3>
-        <ShowDecisionUsage store={store} d={d} />
+        <ShowDecisionUsage d={d} />
     </div>
 </DecisionCardLayout>
 ```
@@ -68,7 +64,7 @@ Use the new component directly in your MDX files.
 // src/content/page.mdx
 import MyColorDecision from '../components/';
 
-<MyColorDecision store={store} d="Action Color" />
+<MyColorDecision d="Action Color" />
 ```
 
 ## Resolve decision values
@@ -85,9 +81,7 @@ import { type ColorDecision } from '@noodlestan/designer-decisions';
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 import { loader } from '../decisions';
 
-export const store = await loader();
-
-const { d } = Astro.props
+const { d, store } = Astro.props
 const [, decision] = store.decision<ColorDecision>(d);
 
 const color = decision.produce().toString('oklch')

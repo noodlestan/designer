@@ -9,10 +9,6 @@ sidebar:
 import { Aside } from '@astrojs/starlight/components';
 import { ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../decisions';
-
-export const store = await loader();
-
 ```ts
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 ```
@@ -21,7 +17,7 @@ Renders a card layout with the appropriate visualization according to the decisi
 
 By default it renders only the decision **description** and **usage** guidelines.
 
-<ShowDecisionCard store={store} d="Action Color" />
+<ShowDecisionCard d="Action Color" />
 
 ## Composes
 
@@ -33,9 +29,9 @@ This component composes:
 
 ## Props
 
-### ༶ [DecisionProps](/integrations/Astro/Props): `store` and `d`
+### ༶ [DecisionProps](/integrations/Astro/Props): `d`
 
-These two **mandatory** `store` and `d` props serve to identify and retrieve the decision.
+The **mandatory** prop `d` serves to identify and retrieve the decision.
 
 ### ༶ [DecisionProps](/integrations/Astro/Props): `layout`
 
@@ -47,10 +43,10 @@ The layout of the card adapts automatically to the layout of set/scale decisions
 -   `column` - card uses `row` layout, rendering visualization and details side by side.
 
 ```mdx
-<ShowDecisionCard store={store} d="Pink Palette" value={false} size="m" />
+<ShowDecisionCard d="Pink Palette" value={false} size="m" />
 ```
 
-<ShowDecisionCard store={store} d="Pink Palette" value={false} size="m" />
+<ShowDecisionCard d="Pink Palette" value={false} size="m" />
 
 The layout of the card is otherwise unaffected by the layout prop if the decision produces a single value.
 
@@ -67,10 +63,10 @@ These props control whether the visualization should be shown, which specific vi
 In this example we are rendering a [ColorValueDecision](/models/decision-types/color-value), hiding its value and increasing the size of the color swatch.
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" value={false} size="l" />
+<ShowDecisionCard d="Action Color" value={false} size="l" />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" value={false} size="l" />
+<ShowDecisionCard d="Action Color" value={false} size="l" />
 
 Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) for details on available visualizations and options.
 
@@ -79,27 +75,27 @@ Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) f
 Provide this flag to hide the decision's name.
 
 ```mdx
-<ShowDecisionCard store={store} d="Space Unit" name={false} />
+<ShowDecisionCard d="Space Unit" name={false} />
 ```
 
-<ShowDecisionCard store={store} d="Space Unit" name={false} />
+<ShowDecisionCard d="Space Unit" name={false} />
 
 ### ༶ `description` (true): boolean
 
 Provide this flag to hide the decision's description.
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" description={false} />
+<ShowDecisionCard d="Action Color" description={false} />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" description={false} />
+<ShowDecisionCard d="Action Color" description={false} />
 
 ### ༶ `usage` (true): boolean
 
 Provide this flag to hide the decision usage guidelines.
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" usage={false} />
+<ShowDecisionCard d="Action Color" usage={false} />
 ```
 
 ### ༶ `model`: (optional) boolean
@@ -109,27 +105,27 @@ Provide this flag to hide the decision usage guidelines.
 Provide these flag to display the decision model and input params at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" model params />
+<ShowDecisionCard d="Action Color" model params />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" model params />
+<ShowDecisionCard d="Action Color" model params />
 
 ### ༶ `contexts`: (optional) boolean
 
 Provide this flag to display the decision's contexts at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" contexts />
+<ShowDecisionCard d="Action Color" contexts />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" contexts />
+<ShowDecisionCard d="Action Color" contexts />
 
 ### ༶ `data`: (optional) boolean
 
 Provide this flag to display the decision's raw data at the bottom of the card
 
 ```mdx
-<ShowDecisionCard store={store} d="Action Color" data />
+<ShowDecisionCard d="Action Color" data />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" data />
+<ShowDecisionCard d="Action Color" data />

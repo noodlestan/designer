@@ -5,10 +5,10 @@ import { resolveSourcePath } from '../../helpers';
 import { resolveSource } from './resolveSource';
 
 export const resolveDecisionSource = async (
-    sourceOrPath: DecisionSource | string,
+    source: DecisionSource,
     moduleResolver?: (moduleName: string) => Promise<string>,
 ): Promise<string> => {
-    const resolved = resolveSource(sourceOrPath);
+    const resolved = resolveSource(source);
     const resolvedPath = await resolveSourcePath(resolved.source, moduleResolver);
 
     return resolvedPath;

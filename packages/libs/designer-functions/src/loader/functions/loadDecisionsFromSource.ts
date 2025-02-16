@@ -5,10 +5,10 @@ import { loadDecisionFile } from './loadDecisionFile';
 import { resolveDecisionSource } from './resolveDecisionSource';
 
 export const loadDecisionsFromSource = async (
-    sourceOrPath: DecisionSource | string,
+    source: DecisionSource,
     moduleResolver?: (moduleName: string) => Promise<string>,
 ): Promise<InputRecord[]> => {
-    const resolvedPath = await resolveDecisionSource(sourceOrPath, moduleResolver);
+    const resolvedPath = await resolveDecisionSource(source, moduleResolver);
     const files = await findJsonFiles(resolvedPath);
     const allFiles = files.flat();
 

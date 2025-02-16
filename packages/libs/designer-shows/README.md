@@ -13,7 +13,7 @@ This library provides Astro components for building design system documentation 
 ```mdx
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
-<ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
+<ShowDecision d="Brand Color Set" layout="column" size="s" />
 ```
 
 ### See also

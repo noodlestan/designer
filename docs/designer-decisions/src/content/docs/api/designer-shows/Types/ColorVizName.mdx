@@ -5,10 +5,6 @@ slug: api/designer-shows/Types/ColorVizName
 
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../../decisions';
-
-export const store = await loader();
-
 Available visualizations for [Color Values](/integrations/Astro/Composable/Values/#showcolorvalue).
 
 ```ts
@@ -19,7 +15,7 @@ When rendering color decisions you can chose a different visualization by
 setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
-<ShowColorValueDecision store={store} d="Brand Black" viz="..." options={options} />
+<ShowColorValueDecision d="Brand Black" viz="..." options={options} />
 ```
 
 ## Type Values
@@ -31,32 +27,20 @@ Flat color surface.
 No options.
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
+<ShowDecision d="Brand Pink" size="m" viz="swatch" />
 ```
 
-<ShowDecision store={store} d="Brand Pink" size="m" viz="swatch" />
+<ShowDecision d="Brand Pink" size="m" viz="swatch" />
 
 ### `fg`
 
 Render the decision value as the foreground content color.
 
 ```mdx
-<ShowDecision
-    store={store}
-    d="Brand Pink"
-    size="m"
-    viz="fg"
-    options={{ contrast: 'oklch(24% 0.08 257)' }}
-/>
+<ShowDecision d="Brand Pink" size="m" viz="fg" options={{ contrast: 'oklch(24% 0.08 257)' }} />
 ```
 
-<ShowDecision
-    store={store}
-    d="Brand Pink"
-    size="m"
-    viz="fg"
-    options={{ contrast: 'oklch(24% 0.08 257)' }}
-/>
+<ShowDecision d="Brand Pink" size="m" viz="fg" options={{ contrast: 'oklch(24% 0.08 257)' }} />
 
 Refer to [ColorVizOptions](/api/designer-shows/Types/ColorVizOptions/) for details on options.
 
@@ -66,7 +50,6 @@ Render the decision value as the background with custom element(s) on top.
 
 ```mdx
 <ShowDecision
-    store={store}
     d="Action Color"
     size="m"
     viz="bg"
@@ -75,7 +58,6 @@ Render the decision value as the background with custom element(s) on top.
 ```
 
 <ShowDecision
-    store={store}
     d="Action Color"
     size="m"
     viz="bg"

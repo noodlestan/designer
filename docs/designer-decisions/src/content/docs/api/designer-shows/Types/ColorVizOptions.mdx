@@ -5,10 +5,6 @@ slug: api/designer-shows/Types/ColorVizOptions
 
 import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../../decisions';
-
-export const store = await loader();
-
 Available options for [Color Visualizations](/api/designer-shows/Types/ColorVizName).
 
 ```ts
@@ -25,7 +21,7 @@ When rendering color decisions you can configure visualization by
 providing the [options prop](/integrations/Astro/Props#-options-optional-object).
 
 ```mdx
-<ShowColorValueDecision store={store} d="Brand Black" viz="..." options={options} />
+<ShowColorValueDecision d="Brand Black" viz="..." options={options} />
 ```
 
 ## ༶ `contrast`
@@ -33,22 +29,10 @@ providing the [options prop](/integrations/Astro/Props#-options-optional-object)
 Define the color applied to the opposite layer.
 
 ```mdx
-<ShowDecision
-    store={store}
-    d="Action Contrast Color"
-    size="m"
-    viz="fg"
-    options={{ contrast: '#000000' }}
-/>
+<ShowDecision d="Action Contrast Color" size="m" viz="fg" options={{ contrast: '#000000' }} />
 ```
 
-<ShowDecision
-    store={store}
-    d="Action Contrast Color"
-    size="m"
-    viz="fg"
-    options={{ contrast: '#000000' }}
-/>
+<ShowDecision d="Action Contrast Color" size="m" viz="fg" options={{ contrast: '#000000' }} />
 
 ## ༶ `mode`
 
@@ -59,7 +43,6 @@ either the decision value as `fg` or ` bg`.
 
 ```mdx
 <ShowDecision
-    store={store}
     d="Action Contrast Color"
     size="m"
     viz="fg"
@@ -68,7 +51,6 @@ either the decision value as `fg` or ` bg`.
 ```
 
 <ShowDecision
-    store={store}
     d="Action Contrast Color"
     size="m"
     viz="fg"
@@ -85,15 +67,8 @@ Available only when [viz](/api/designer-shows/Types/ColorVizName) is set to visu
 either the decision value as `fg` or ` bg`.
 
 ```mdx
+<ShowDecision d="Brand Blue" size="s" viz="fg" options={{ mode: 'text', contrast: '#000000' }} />
 <ShowDecision
-    store={store}
-    d="Brand Blue"
-    size="s"
-    viz="fg"
-    options={{ mode: 'text', contrast: '#000000' }}
-/>
-<ShowDecision
-    store={store}
     d="Action Contrast Color"
     size="s"
     viz="fg"
@@ -103,14 +78,12 @@ either the decision value as `fg` or ` bg`.
 
 <LayoutGrid>
     <ShowDecision
-        store={store}
         d="Brand Blue"
         size="s"
         viz="fg"
         options={{ mode: 'typeface', contrast: '#000000', content: 'Aa' }}
     />
     <ShowDecision
-        store={store}
         d="Action Contrast Color"
         size="s"
         viz="fg"

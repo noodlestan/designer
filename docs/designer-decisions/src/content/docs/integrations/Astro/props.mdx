@@ -7,47 +7,52 @@ sidebar:
     label: Common Props
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import { LayoutGrid, ShowDecision } from '@noodlestan/designer-shows/astro';
-
-import { loader } from '../../../../decisions';
-
-export const store = await loader();
 
 ## DecisionProps
 
 All components that render a decision, such as the [&lt;ShowDecisionCard/&gt;](/integrations/Astro/ShowDecisionCard/) component, **require** the following props.
-
-### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
-
-The `store` prop provides access to all decision input data so that components can retrieve decision objects and resolve values.
-
-The simplest way to create a decision store is, as described in the - [Generating Docs / Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/) guide, to create a decision loader and then retrieve the store in your pages.
-
-```mdx
-import { loader } from '../decisions';
-
-export const store = await loader();
-
-<ShowDecision store={store} ... />
-```
 
 ### ༶ `d`: string
 
 A `string` with the name of the decision to visualize.
 
 ```mdx
-<ShowDecision store={store} d="Brand Color Set" />
+<ShowDecision d="Brand Color Set" />
 ```
 
-<ShowDecision store={store} d="Brand Color Set" />
+<ShowDecision d="Brand Color Set" />
 
 If the decision does not exist, it renders a notice.
 
 ```mdx
-<ShowDecision store={store} d="Brand Green" />
+<ShowDecision d="Brand Green" />
 ```
 
-<ShowDecision store={store} d="Brand Green" />
+<ShowDecision d="Brand Green" />
+
+### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
+
+The `store` prop provides access to all decision input data so that components can retrieve decision objects and resolve values.
+
+<Aside type="tip" title="Advanced API">
+    This prop is only required in special cases, such as rendering from within Astro custom
+    components. If you are just rendering decisions in MDX pages, the [Astro
+    integration](/integrations/Astro) takes care of that for you.
+</Aside>
+
+The store can be retrieved from the Astro integration.
+
+```mdx
+import { integrationAPI } from '@noodlestan/designer-integration-astro';
+
+export const store = await integrationAPI.loader();
+
+<div class="custom-component">
+    <ShowDecision store={store} d="Brand Blue" />
+</div>
+```
 
 ### ༶ `layout`: ShowDecisionLayout
 
@@ -56,23 +61,23 @@ In case of the decision holding a single value, this prop determines how value a
 By default they show side by side but `column` layout will make values show under the visualization.
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" layout="column" size="m" />
+<ShowDecision d="Brand Pink" layout="column" size="m" />
 ```
 
-<ShowDecision store={store} d="Brand Pink" layout="column" size="m" />
+<ShowDecision d="Brand Pink" layout="column" size="m" />
 
 In case of set/scale decisions, this prop determines how items should be laid out.
 
 By default, they will show side by side, but providing `column` will result in a single stack. The layout for each items's value and viz will default to `row` in this case. But you can also provide an array with two items in order to have full control over both the item list and individual items.
 
 ```mdx
-<ShowDecision store={store} d="Brand Color Set" layout="column" />
-<ShowDecision store={store} d="Brand Color Set" layout={['column', 'column']} />
+<ShowDecision d="Brand Color Set" layout="column" />
+<ShowDecision d="Brand Color Set" layout={['column', 'column']} />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Brand Color Set" layout="column" />
-    <ShowDecision store={store} d="Brand Color Set" layout={['column', 'column']} />
+    <ShowDecision d="Brand Color Set" layout="column" />
+    <ShowDecision d="Brand Color Set" layout={['column', 'column']} />
 </LayoutGrid>
 
 ## ValueProps
@@ -86,13 +91,13 @@ Provide this flag to hide the value or to customize how it is formatted.
 Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) to learn which `value` options are available for each decision type.
 
 ```mdx
-<ShowDecision store={store} d="Brand Pink" value={false} size="m" />
-<ShowDecision store={store} d="Brand Pink" value={['hsl', 'oklch']} size="m" />
+<ShowDecision d="Brand Pink" value={false} size="m" />
+<ShowDecision d="Brand Pink" value={['hsl', 'oklch']} size="m" />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Brand Pink" value={false} size="m" />
-    <ShowDecision store={store} d="Brand Pink" value={['hsl', 'oklch']} size="m" />
+    <ShowDecision d="Brand Pink" value={false} size="m" />
+    <ShowDecision d="Brand Pink" value={['hsl', 'oklch']} size="m" />
 </LayoutGrid>
 
 ## VizProps
@@ -110,13 +115,13 @@ Refer to the table on [Composable Types](/integrations/Astro/Composable/Types) t
 Constrains the visualization to a specific size.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" size={'s'} />
-<ShowDecision store={store} d="Sizing Space Scale" size={'xs'} />
+<ShowDecision d="Action Color" size={'s'} />
+<ShowDecision d="Sizing Space Scale" size={'xs'} />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Action Color" size={'s'} />
-    <ShowDecision store={store} d="Sizing Space Scale" size={'s'} />
+    <ShowDecision d="Action Color" size={'s'} />
+    <ShowDecision d="Sizing Space Scale" size={'s'} />
 </LayoutGrid>
 
 Refer to [ShowVizSize](/api/designer-shows/Types/ShowVizSize) for available sizes.
