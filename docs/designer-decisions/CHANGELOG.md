@@ -1,5 +1,25 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.13] - 2025-02-16
+
+### Added
+
+- Add watcher feature to Astro integration ([#25](https://github.com/noodlestan/designer/issues/25))
+- Display decision value warnings in components ([#21](https://github.com/noodlestan/designer/issues/21))
+- Create `dd.config` entry point and helpers ([#161](https://github.com/noodlestan/designer/issues/161))
+- Switch from Vite to esbuild where possible ([#163](https://github.com/noodlestan/designer/issues/163))
+- Make package resolution param optional in createDecisionLoader() ([#80](https://github.com/noodlestan/designer/issues/80))
+
+### Upgrade dependencies
+
+- Update Sharp - `0.32.5` to `0.33.3` ([#168](https://github.com/noodlestan/designer/pull/168))
+
+### Docs
+
+- Add "Boilerplates" page ([#27](https://github.com/noodlestan/designer/issues/27))
+- Add "API / Configuration" page ([#161](https://github.com/noodlestan/designer/issues/161))
+- Group "Decision Models" and "Schemas" under "Models" ([#156](https://github.com/noodlestan/designer/issues/156))
+
 ## [0.0.12] - 2025-02-10
 
 ### Added

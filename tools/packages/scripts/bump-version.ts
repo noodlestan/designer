@@ -12,9 +12,9 @@ if (!newVersion) {
     process.exit(1);
 }
 
-const parts = newVersion.split();
+const parts = newVersion.split('.');
 
-if (parts.length !== 3 && parts.find(part => part)) {
+if (parts.length !== 3 || parts.filter(part => !part || isNaN(Number(part))).length) {
     console.error('Usage: ts-node bump-version.ts <new-version>');
     console.error(`Invalid version, excepted "x.y.z", received "${newVersion}"`);
     process.exit(1);
