@@ -6,10 +6,10 @@ sidebar:
 ---
 
 ```ts
-type produceDecisions = (store: StaticDecisionStore) => ProducedDecisionStore;
+type produceDecisions = (store: StaticStore) => ProducedDecisionStore;
 ```
 
-Given a populated [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore) produces all possible decision values and exposes all decision values, contexts and aggregated errors.
+Given a populated [StaticStore](/api/designer-functions/Store/Types/StaticStore) produces all possible decision values and exposes all decision values, contexts and aggregated errors.
 
 ## Return Value
 
@@ -21,7 +21,7 @@ export type ProducedDecisionStore = {
     hasErrors: () => boolean;
     errors: {
         count: () => number;
-        store: () => StaticDecisionStoreError[];
+        store: () => StaticStoreError[];
         validation: () => InputValidationError[];
         value: () => (DecisionError | DecisionValueError)[];
     };
@@ -31,7 +31,7 @@ export type ProducedDecisionStore = {
 
 ## Params
 
-#### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
+#### ༶ `store`: [StaticStore](/api/designer-functions/Store/Types/StaticStore)
 
 &nbsp;
 

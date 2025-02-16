@@ -6,10 +6,7 @@ sidebar:
 ---
 
 ```ts
-type produceDecisionStatus = (
-    store: StaticDecisionStore,
-    input: InputRecord,
-) => ProducedDecisionStatus;
+type produceDecisionStatus = (store: StaticStore, input: InputRecord) => ProducedDecisionStatus;
 ```
 
 Given a populated `store` and an input record, produces the decision value and returns
@@ -33,7 +30,7 @@ type ProducedDecisionStatus = {
 
 ## Params
 
-#### ༶ `store`: [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)
+#### ༶ `store`: [StaticStore](/api/designer-functions/Store/Types/StaticStore)
 
 #### ༶ `input`: [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord)
 

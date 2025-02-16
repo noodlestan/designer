@@ -1,4 +1,4 @@
-import type { DesignerConfig, StaticDecisionStore } from '@noodlestan/designer-functions';
+import type { DesignerConfig, StaticStore } from '@noodlestan/designer-functions';
 
 import type { DesignerDocPermalink } from '../content';
 
@@ -8,5 +8,5 @@ export type DesignerPermalink = DesignerDocPermalink & {
 
 export type DesignerAstroIntegrationAPI = {
     config: DesignerConfig;
-    loader: () => Promise<StaticDecisionStore>;
+    loader: () => Promise<StaticStore>;
 };

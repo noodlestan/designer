@@ -12,12 +12,12 @@ import {
     createValueContext,
 } from '@noodlestan/designer-decisions';
 
-import type { StaticDecisionStore, StaticDecisionStoreError } from './types';
+import type { StaticStore, StoreError } from './types';
 
-export const createStaticDecisionStore = (
+export const createStaticStore = (
     inputStore: StaticInputMap,
-    errors: StaticDecisionStoreError[] = [],
-): StaticDecisionStore => {
+    errors: StoreError[] = [],
+): StaticStore => {
     const decisionMap = createStaticDecisionMap(inputStore);
 
     const decision = <V extends BaseValue<unknown> = BaseValue<unknown>>(
