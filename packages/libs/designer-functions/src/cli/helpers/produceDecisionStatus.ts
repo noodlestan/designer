@@ -1,11 +1,11 @@
 import { type InputRecord, createLookupContexts } from '@noodlestan/designer-decisions';
 
-import type { StaticDecisionStore } from '../../store';
+import type { StaticStore } from '../../store';
 
 import type { ProducedDecisionStatus } from './types';
 
 export const produceDecisionStatus = (
-    store: StaticDecisionStore,
+    store: StaticStore,
     input: InputRecord,
 ): ProducedDecisionStatus => {
     const contexts = createLookupContexts(input.contexts);

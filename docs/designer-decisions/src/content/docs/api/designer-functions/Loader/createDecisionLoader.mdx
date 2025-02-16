@@ -6,12 +6,12 @@ sidebar:
 ---
 
 ```ts
-type createDecisionLoader = (options: DecisionLoaderOptions) => () => Promise<StaticDecisionStore>;
+type createDecisionLoader = (options: DecisionLoaderOptions) => () => Promise<StaticStore>;
 ```
 
 ## Return value
 
-**() => Promise&lt;[StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore)&gt;**
+**() => Promise&lt;[StaticStore](/api/designer-functions/Store/Types/StaticStore)&gt;**
 
 A loader function that resolves with a populated decision store.
 
@@ -24,7 +24,7 @@ Given a list of paths and schemas configs:
 -   Loads schemas from paths and creates a schema map.
 -   Validates the schema map and creates a validator.
 -   Loads all decisions files and merges all data.
--   Validates decision inputs and returns a [StaticDecisionStore](/api/designer-functions/Store/Types/StaticDecisionStore).
+-   Validates decision inputs and returns a [StaticStore](/api/designer-functions/Store/Types/StaticStore).
 
 ## Params
 

@@ -32,7 +32,7 @@ In this example, we compose the [&lt;ShowColorValue/&gt;](/integrations/Astro/Co
 ```astro title="MyColorDecision.Astro"
 ---
 import { type Decision } from '@noodlestan/designer-decisions';
-import { type StaticDecisionStore } from '@noodlestan/designer-functions';
+import { type StaticStore } from '@noodlestan/designer-functions';
 import {
     DecisionCardLayout,
     ShowDecision,
@@ -41,7 +41,7 @@ import {
 
 type Props = {
     d: string;
-    store: StaticDecisionStore;
+    store: StaticStore;
 };
 
 const { d, store } = Astro.props;

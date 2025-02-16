@@ -7,7 +7,7 @@ import type {
     InputValidationError,
 } from '@noodlestan/designer-decisions';
 
-import type { StaticDecisionStoreError } from '../../store';
+import type { StoreError } from '../../store';
 
 export type ProducedDecisionStatus = {
     uuid?: string;
@@ -24,7 +24,7 @@ export type ProducedDecisionStore = {
     hasErrors: () => boolean;
     errors: {
         count: () => number;
-        store: () => StaticDecisionStoreError[];
+        store: () => StoreError[];
         validation: () => InputValidationError[];
         value: () => (DecisionError | DecisionValueError)[];
     };

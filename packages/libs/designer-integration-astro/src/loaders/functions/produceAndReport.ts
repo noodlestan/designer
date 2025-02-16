@@ -1,5 +1,5 @@
 import {
-    type StaticDecisionStore,
+    type StaticStore,
     formatDecisionStatus,
     formatStoreError,
     produceDecisions,
@@ -8,8 +8,8 @@ import type { LoaderContext } from 'astro/loaders';
 
 export async function produceAndReport(
     context: LoaderContext,
-    loader: () => Promise<StaticDecisionStore>,
-): Promise<StaticDecisionStore> {
+    loader: () => Promise<StaticStore>,
+): Promise<StaticStore> {
     const { logger } = context;
     const store = await loader();
 

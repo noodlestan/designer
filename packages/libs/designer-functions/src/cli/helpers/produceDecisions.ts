@@ -1,9 +1,9 @@
-import type { StaticDecisionStore } from '../../store';
+import type { StaticStore } from '../../store';
 
 import { produceDecisionStatus } from './produceDecisionStatus';
 import type { ProducedDecisionStore } from './types';
 
-export const produceDecisions = (store: StaticDecisionStore): ProducedDecisionStore => {
+export const produceDecisions = (store: StaticStore): ProducedDecisionStore => {
     const decisions = store.records().map(record => produceDecisionStatus(store, record));
 
     const errors = store.storeErrors();

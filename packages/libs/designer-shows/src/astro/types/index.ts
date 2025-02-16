@@ -1,5 +1,5 @@
 import type { ColorValue, SpaceValue } from '@noodlestan/designer-decisions';
-import type { StaticDecisionStore } from '@noodlestan/designer-functions';
+import type { StaticStore } from '@noodlestan/designer-functions';
 
 import type { LayoutDynamicProps } from '../layouts';
 
@@ -11,7 +11,7 @@ export type ShowDecisionLayout =
 
 export type ShowDecisionProps = {
     d: string;
-    store: StaticDecisionStore;
+    store: StaticStore;
     layout?: ShowDecisionLayout;
 };
 

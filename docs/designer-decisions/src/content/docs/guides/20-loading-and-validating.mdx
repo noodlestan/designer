@@ -94,7 +94,7 @@ const config = await loadConfig();
 const loader = createDecisionLoader(config.loader);
 ```
 
-This loader returns a [pre-validated decision store](/api/designer-functions/Store/Types/StaticDecisionStore) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
+This loader returns a [pre-validated decision store](/api/designer-functions/Store/Types/StaticStore) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
 
 Add the following code to execute the loader and list each records' `name` and `model`.
 

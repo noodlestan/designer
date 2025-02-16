@@ -9,14 +9,14 @@ import type {
     ValueContext,
 } from '@noodlestan/designer-decisions';
 
-export type StaticDecisionStoreError = {
+export type StoreError = {
     msg: string;
     error: Error;
 };
 
-export type StaticDecisionStore = {
+export type StaticStore = {
     hasErrors: StaticInputMap['hasErrors'];
-    storeErrors: () => StaticDecisionStoreError[];
+    storeErrors: () => StoreError[];
     validationErrors: StaticInputMap['validationErrors'];
     records: StaticInputMap['records'];
     decision: <V extends BaseValue<unknown> = BaseValue<unknown>>(

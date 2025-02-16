@@ -1,5 +1,5 @@
 import { createDecisionValidator, loadSchemasFromConfigs, validateSchemaMap } from '../schemas';
-import { type StaticDecisionStore, createStaticDecisionStore } from '../store';
+import { type StaticStore, createStaticStore } from '../store';
 import { createStaticInputMap } from '../store';
 
 import { loadDecisionsFromSources, normalizeSources } from './functions';
@@ -7,7 +7,7 @@ import type { DecisionLoaderOptions } from './types';
 
 export const createDecisionLoader = (
     options: DecisionLoaderOptions,
-): (() => Promise<StaticDecisionStore>) => {
+): (() => Promise<StaticStore>) => {
     const { schemas, decisions, resolver: moduleResolver } = options;
 
     const loader = async () => {
@@ -19,18 +19,18 @@ export const createDecisionLoader = (
             const sources = normalizeSources(decisions);
             const inputData = await loadDecisionsFromSources(sources, moduleResolver);
             const inputMap = createStaticInputMap(inputData, validator);
-            return createStaticDecisionStore(inputMap);
+            return createStaticStore(inputMap);
         } catch (error) {
             const inputMap = createStaticInputMap([]);
             const err = {
                 msg: 'Unexpected error creating store',
                 error: error as Error,
             };
-            return createStaticDecisionStore(inputMap, [err]);
+            return createStaticStore(inputMap, [err]);
         }
     };
 
-    // let promise: Promise<StaticDecisionStore>;
+    // let promise: Promise<StaticStore>;
     // const load = () => {
     //     if (!promise) {
     //         promise = loader();
