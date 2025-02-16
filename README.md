@@ -103,7 +103,7 @@ Bump version and publish to npm
 
 ```
 npm login
-npm run release:prepare v0.0.8
+npm run release:prepare 0.0.8
 npm run release:publish
 ```
 
