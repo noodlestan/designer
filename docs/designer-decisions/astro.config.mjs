@@ -2,10 +2,10 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import designerDecisionsIntegration from '@noodlestan/designer-integration-astro';
 
-import { processLinks } from './src/mdx';
+import { processHeros, processLinks } from './src/mdx';
 import { createSidebar } from './src/navigation/sidebar.ts';
 
-const remarkPlugins = [];
+const remarkPlugins = [processHeros];
 const rehypePlugins = [processLinks];
 
 const site = process.env.ASTRO_SITE_URL || 'https://designer-decisions.noodlestan.org/';
@@ -38,6 +38,6 @@ export default defineConfig({
             },
             sidebar,
         }),
-        designerDecisionsIntegration({ applyStarlightStyles: true }),
+        designerDecisionsIntegration({ styles: { applyStarlight: true } }),
     ],
 });

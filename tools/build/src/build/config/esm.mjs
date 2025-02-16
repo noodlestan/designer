@@ -1,5 +1,4 @@
 import { esbuildPluginFilePathExtensions } from 'esbuild-plugin-file-path-extensions';
-import { emitTypesPLugin } from '../plugins/emitTypesPlugin.mjs';
 import { copyStaticFilesPlugin } from '../plugins/copyStaticFiles.mjs';
 
 export const esmConfig = {
@@ -12,9 +11,5 @@ export const esmConfig = {
     platform: 'node',
     target: 'esnext',
     logLevel: 'info',
-    plugins: [
-        emitTypesPLugin('esm'),
-        esbuildPluginFilePathExtensions(),
-        copyStaticFilesPlugin('dist/esm'),
-    ],
+    plugins: [esbuildPluginFilePathExtensions(), copyStaticFilesPlugin('dist/esm')],
 };

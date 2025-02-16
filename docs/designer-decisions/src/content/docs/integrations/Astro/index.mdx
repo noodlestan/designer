@@ -17,7 +17,19 @@ import { href } from '../../../../mdx';
     Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/) guide.
 </Aside>
 
-## Common Props
+## What it does
+
+Our [Astro integration](/integrations/Astro) provides a single entry point to setting up the Designer Decisions MDX authoring experience.
+
+The integration uses the [Designer Decisions configuration](/api/configuration) to automatically load decisions from all available sources. Not only it makes the decision data available to all our components, it also auto-refreshes the page when decision data changes.
+
+### Customization
+
+The integration injecting the Designer Decision base styles and tokens in the page, as well as a Starlight customization layer, so that styles for the Design System work seamlessly on top of Starlights default content styling.
+
+## Components
+
+### Common Props
 
 All components that render a decision, such as the [ShowDecisionCard](/integrations/Astro/ShowDecisionCard/) component, share the same common props:
 
@@ -27,14 +39,14 @@ All components that render a decision, such as the [ShowDecisionCard](/integrati
 
 Refer to [Common Props](/integrations/Astro/Props) for more details on these props.
 
-## Decisions
+### Decisions
 
 These components render the decision visualization and value.
 
 <LinkCard href={href('/integrations/Astro/ShowDecision')} title="ShowDecision" />
 <LinkCard href={href('/integrations/Astro/ShowDecisionCard')} title="ShowDecisionCard" />
 
-## Composable
+### Composable
 
 These components render values, visualizations and decision details individually.
 

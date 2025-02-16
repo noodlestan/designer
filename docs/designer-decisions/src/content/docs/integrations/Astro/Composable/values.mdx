@@ -14,16 +14,14 @@ import {
     createValueContext,
     createSpaceValue,
 } from '@noodlestan/designer-decisions';
+import { integrationAPI } from '@noodlestan/designer-integration-astro';
 import {
     ShowColorChannelValue,
     ShowColorValue,
     ShowSpaceValue,
 } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../../decisions';
-
-export const store = await loader();
-
+export const store = await integrationAPI.loader();
 export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
 export const spaceValue = createSpaceValue(store.createValueContext(), 12);

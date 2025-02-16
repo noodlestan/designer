@@ -1,32 +1,57 @@
-import type { AstroIntegration } from 'astro';
+import { injectCollections } from '@inox-tools/content-utils';
+import { z } from 'astro/zod';
+import { defineIntegration } from 'astro-integration-kit';
 
-export type DesignerDecisionsIntegrationOptions = {
-    applyBaseStyles?: boolean;
-    applyStarlightStyles?: boolean;
-};
+import { integrationAPI } from '../api';
+import { DESIGNER_INTEGRATION } from '../private';
+import { remarkCollectPermalinks, remarkInjectStore } from '../remark';
 
-export function designerDecisionsIntegration(
-    options?: DesignerDecisionsIntegrationOptions,
-): AstroIntegration {
-    const { applyBaseStyles = true, applyStarlightStyles = false } = options || {};
-    return {
-        name: '@noodlestan/designer-decisions',
-        hooks: {
-            'astro:config:setup': async ({ injectScript }) => {
-                if (applyBaseStyles) {
-                    injectScript(
-                        'page-ssr',
-                        `import '@noodlestan/designer-shows/astro/styles/base.css';`,
-                    );
-                }
+import {
+    injectStylesIntegration,
+    injectStylesOptionsSchema,
+    validateIntegrationsConfig,
+} from './private';
 
-                if (applyStarlightStyles) {
-                    injectScript(
-                        'page-ssr',
-                        `import '@noodlestan/designer-integration-astro/styles/starlight/style.css';`,
-                    );
-                }
+const optionsSchema = z
+    .object({
+        styles: injectStylesOptionsSchema,
+    })
+    .optional()
+    .default({});
+
+export const designerDecisionsIntegration = defineIntegration({
+    name: DESIGNER_INTEGRATION,
+    optionsSchema,
+    setup({ options }) {
+        const { config: designerConfig } = integrationAPI;
+        const { styles } = options || {};
+
+        return {
+            hooks: {
+                'astro:config:setup': async params => {
+                    const { command, addWatchFile, logger, config } = params;
+
+                    validateIntegrationsConfig(config.integrations);
+                    addWatchFile('./dd.config.mjs');
+
+                    logger.debug('config: ' + JSON.stringify(designerConfig, undefined, 2));
+                    logger.info('options: ' + JSON.stringify(options, undefined, 2));
+
+                    config.integrations = config.integrations || [];
+                    config.integrations.push(injectStylesIntegration(styles));
+
+                    config.markdown = config.markdown || {};
+                    config.markdown.remarkPlugins = config.markdown.remarkPlugins || [];
+                    config.markdown.remarkPlugins.push(remarkInjectStore);
+                    config.markdown.remarkPlugins.push([remarkCollectPermalinks, integrationAPI]);
+
+                    if (command === 'dev') {
+                        injectCollections(params, {
+                            entrypoint: '@noodlestan/designer-integration-astro/collections',
+                        });
+                    }
+                },
             },
-        },
-    };
-}
+        };
+    },
+});

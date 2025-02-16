@@ -1,7 +1,7 @@
 {
-  "extends": "../../tsconfig.esm.json",
+  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "types": ["vite/client"]
+    "jsx": "preserve"
   },
-  "include": ["src/**/*", "*config.ts"]
+  "exclude": ["dist"]
 }

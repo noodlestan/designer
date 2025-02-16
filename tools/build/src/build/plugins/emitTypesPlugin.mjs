@@ -1,12 +1,14 @@
 import { exec } from 'child_process';
 
-export function generateTypes(target) {
+export function generateTypes(target, exitOnError = true) {
     console.info(`Emitting TypeScript declarations for ${target} target...`);
 
-    const process = exec(`npm run build:types:${target}`, (error, _stdout, stderr) => {
+    const child = exec(`npm run build:types:${target}`, (error, _stdout, stderr) => {
         if (error) {
             console.error(`🟥 TypeScript error (${target}):`, error.message);
-            process.exitCode(1);
+            if (exitOnError) {
+                process.exit(1);
+            }
         }
         if (stderr) {
             console.error(`🟨 TypeScript warning (${target}):`, stderr);
@@ -14,11 +16,11 @@ export function generateTypes(target) {
         console.info(`🟩 TypeScript declarations emitted for ${target} target.`);
     });
 
-    process.stdout.on('data', data => console.info(data.toString()));
-    process.stderr.on('data', data => console.error(data.toString()));
+    child.stdout.on('data', data => console.info(data.toString()));
+    child.stderr.on('data', data => console.error(data.toString()));
 }
 
-export function emitTypesPLugin(target) {
+export function emitTypesPLugin(target, exitOnError = true) {
     return {
         name: 'emitTypes',
         setup(build) {
@@ -28,7 +30,7 @@ export function emitTypesPLugin(target) {
                         `🟨 Skipping type declarations for ${target} target due to build errors.`,
                     );
                 } else {
-                    generateTypes(target);
+                    generateTypes(target, exitOnError);
                 }
             });
         },

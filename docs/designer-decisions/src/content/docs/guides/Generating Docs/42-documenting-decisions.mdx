@@ -16,22 +16,18 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../decisions';
-
-export const store = await loader();
-
 This guide explains how to document design decisions and tokens in your documentation using the [built-in Astro components](/integrations/Astro) provided by the [@noodlestan/designer-shows](/api/designer-shows) package.
 
 **Example:**
 
 ```mdx
-<ShowDecision store={store} d="Brand Color Set" layout="column" size="xs" value="oklch" />
-<ShowDecision store={store} d="Sizing Space Scale" layout="column" size="xs" />
+<ShowDecision d="Brand Color Set" layout="column" size="xs" value="oklch" />
+<ShowDecision d="Sizing Space Scale" layout="column" size="xs" />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Brand Color Set" layout="column" size="xs" value="oklch" />
-    <ShowDecision store={store} d="Sizing Space Scale" layout="column" size="xs" />
+    <ShowDecision d="Brand Color Set" layout="column" size="xs" value="oklch" />
+    <ShowDecision d="Sizing Space Scale" layout="column" size="xs" />
 </LayoutGrid>
 
 ## Setup
@@ -49,12 +45,14 @@ The following packages are required:
 
 -   [@noodlestan/designer-decisions](/api/designer-decisions)
 -   [@noodlestan/designer-functions](/api/designer-functions)
+-   [@noodlestan/designer-integration-astro](/api/designer-integration-astro)
 -   [@noodlestan/designer-schemas](/api/designer-schemas)
 -   [@noodlestan/designer-shows](/api/designer-shows)
 
 ```bash
 npm install @noodlestan/designer-decisions @noodlestan/designer-functions \
-  @noodlestan/designer-schemas @noodlestan/designer-shows
+  @noodlestan/designer-integration-astro \ @noodlestan/designer-schemas \
+  @noodlestan/designer-shows
 ```
 
 ### Configuring Designer Decisions
@@ -97,6 +95,41 @@ In this example we configured the Designer Decisions [Sample and Demo Data](http
 
 In the [API / Configuration](/api/configuration) section you can find all configuration options and helpers.
 
+### Add the Astro Integration
+
+Our [Astro integration](/integrations/Astro) provides:
+
+-   Connects our `<Show*/>` components to the decision store;
+-   Injecting Designer Decision styles into the page;
+-   Auto-refresh of the page when decision data changes;
+-   An entry point to configuring visualizations.
+
+Add to your Astro config configuration, preferably after other integrations.
+
+```js "designerDecisionsIntegration"
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+import designerDecisionsIntegration from '@noodlestan/designer-integration-astro';
+
+export default defineConfig({
+    ...
+    integrations: [
+        starlight({
+            title: ...
+            ...
+        }),
+        designerDecisionsIntegration(),
+    ],
+});
+```
+
+<Aside type="tip">
+    If your Astro site in based on [Starlight](), like we do in our [Astro
+    Boilerplates](/examples/boilerplates/#astrostarlight), the `designerDecisionsIntegration` needs
+    to be added after `starlight()` to make sure our Starlight customizations are applied correctly.
+</Aside>
+
 ### Decision data
 
 Create some decision files in your local `./data` directory.
@@ -116,58 +149,23 @@ As illustrated in the [Capturing Design Decisions](/guides/capturing-design-deci
 
 You can skip this step for now and use some of the decisions from the [Sample and Demo Data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) sources.
 
-### Decision loader
-
-Create a file to declare the loader.
-
-<FileTree>
-- data/
-- src/decisions/
-  - **index.ts**
-- astro.config.mjs
-- dd.config.mjs
-- package.json
-
-</FileTree>
-
-We will use the [loadConfig()](/api/designer-functions/Loader/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) to load and validate the decision data.
-
-```ts "createDecisionLoader"
-// src/decisions/index.ts
-import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
-
-const config = await loadConfig();
-
-export const loader = createDecisionLoader(config.loader);
-```
-
-The loader is a function that returns a decision store asynchronously and has to be _awaited on_ before we can access the store to retrieve decisions.
-
-```ts "await loader"
-const store = await loader();
-const decision = store.decision('Action Color');
-```
-
 ## Rendering decisions in MDX
 
-Retrieve the decision `store` and pass it to the components along with the decision name.
+Import the components you want to use and provide them with the decision name.
 
 In this example we are using the [&lt;ShowDecision/&gt;](/integrations/Astro/ShowDecision/) component to render both a [ColorValueDecision](/models/decision-types/color-value) and a [ColorSetDecision](/models/decision-types/color-set), both from the `DEMO_DATA` source.
 
 ```mdx
 // src/content/page.mdx
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
-import { loader } from '../decisions';
 
-export const store = await loader();
-
-<ShowDecision store={store} d="Action Color" size="m" />
-<ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
+<ShowDecision d="Action Color" size="m" />
+<ShowDecision d="Brand Color Set" layout="column" size="s" />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Action Color" size="m" />
-    <ShowDecision store={store} d="Brand Color Set" layout="column" size="s" />
+    <ShowDecision d="Action Color" size="m" />
+    <ShowDecision d="Brand Color Set" layout="column" size="s" />
 </LayoutGrid>
 
 In the [Astro integration](/integrations/Astro) docs you can find a comprehensive set of components for rendering decisions in different scenarios and layouts.
@@ -178,10 +176,10 @@ For instance, the [&lt;ShowDecisionCard/&gt;](/integrations/Astro/ShowDecisionCa
 // src/content/page.mdx
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
-<ShowDecisionCard store={store} d="Action Color" />
+<ShowDecisionCard d="Action Color" />
 ```
 
-<ShowDecisionCard store={store} d="Action Color" />
+<ShowDecisionCard d="Action Color" />
 
 ## Customizing value and visualization
 
@@ -198,10 +196,10 @@ With some decision types, you may want to display their value in specific format
 For instance, the [ShowColorValue](/integrations/Astro/Composable/Values/#showcolorvalue) components can display the color value in one or more color spaces.
 
 ```mdx
-<ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
+<ShowDecision d="Action Color" value={['rgb', 'oklch']} size="m" />
 ```
 
-<ShowDecision store={store} d="Action Color" value={['rgb', 'oklch']} size="m" />
+<ShowDecision d="Action Color" value={['rgb', 'oklch']} size="m" />
 
 ### Hiding the decision value
 
@@ -209,12 +207,12 @@ In this example we are hiding the decision value and rendering its visualization
 
 ```mdx
 <label>Brand Blue</label>
-<ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+<ShowDecision d="Brand Blue" value={false} size="l" />
 ```
 
 <LayoutStack>
     <label>Brand Blue</label>
-    <ShowDecision store={store} d="Brand Blue" value={false} size="l" />
+    <ShowDecision d="Brand Blue" value={false} size="l" />
 </LayoutStack>
 
 ### Choosing a different visualization
@@ -226,13 +224,13 @@ The `viz` prop is passed down to value components to determine which visualizati
 For instance, the [ShowSpaceViz](/integrations/Astro/Composable/Visualizations/#showspaceviz) component can represent a space value with a few different shapes.
 
 ```mdx
-<ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
-<ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
+<ShowDecision d="Avatar Minimum Size" viz="circle" />
+<ShowDecision d="Card Thumb Minimum Size" viz="square" />
 ```
 
 <LayoutGrid>
-    <ShowDecision store={store} d="Avatar Minimum Size" viz="circle" />
-    <ShowDecision store={store} d="Card Thumb Minimum Size" viz="square" />
+    <ShowDecision d="Avatar Minimum Size" viz="circle" />
+    <ShowDecision d="Card Thumb Minimum Size" viz="square" />
 </LayoutGrid>
 
 ### Configuring visualization options
@@ -252,14 +250,12 @@ In both cases we are providing a `contrast` color. We also set the custom `conte
 
 <LayoutGrid>
     <ShowDecision
-        store={store}
         d="Action Color"
         value={false}
         viz="fg"
         options={{ contrast: '#000000', content: 'Hello' }}
     />
     <ShowDecision
-        store={store}
         d="Action Color"
         value={false}
         viz="bg"
@@ -272,16 +268,17 @@ In both cases we are providing a `contrast` color. We also set the custom `conte
 In this example we are hiding the visualization and rendering its value next to a custom label.
 
 ```mdx
-RGB: <ShowDecision store={store} d="Brand Pink" viz={false} value="hsl" />
+RGB: <ShowDecision d="Brand Pink" viz={false} value="hsl" />
 ```
 
 <LayoutCentered pad="l">
-    RGB <ShowDecision store={store} d="Brand Pink" viz={false} />
+    <ShowDecision d="Brand Pink" viz={false} />
+    <p>RGB</p>
 </LayoutCentered>
 
 ## See also
 
--   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
 -   [Examples](/examples)
+-   [Boilerplates / Astro/Starlight](/examples/boilerplates/#astrostarlight)
 -   [Integrations / Astro](/integrations/Astro)
 -   [API / configuration](/api/configuration)

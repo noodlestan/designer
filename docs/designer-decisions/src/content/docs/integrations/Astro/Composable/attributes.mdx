@@ -17,10 +17,6 @@ import {
     ShowDecisionUsage,
 } from '@noodlestan/designer-shows/astro';
 
-import { loader } from '../../../../../decisions';
-
-export const store = await loader();
-
 These components render decision details and metadata.
 
 <Aside type="tip">
@@ -43,10 +39,10 @@ Renders the decision's description.
 #### Example
 
 ```mdx
-<ShowDecisionDescription store={store} d="Pink Palette" />
+<ShowDecisionDescription d="Pink Palette" />
 ```
 
-<ShowDecisionDescription store={store} d="Pink Palette" />
+<ShowDecisionDescription d="Pink Palette" />
 
 ### ShowDecisionUsage
 
@@ -55,10 +51,10 @@ Renders the decision's usage guidelines.
 #### Example
 
 ```mdx
-<ShowDecisionUsage store={store} d="Pink Palette" />
+<ShowDecisionUsage d="Pink Palette" />
 ```
 
-<ShowDecisionUsage store={store} d="Pink Palette" />
+<ShowDecisionUsage d="Pink Palette" />
 
 ### ShowDecisionModel
 
@@ -67,10 +63,10 @@ Renders the [model](/models/decision-types) used in the decision.
 #### Example
 
 ```mdx
-<ShowDecisionModel store={store} d="Pink Palette" />
+<ShowDecisionModel d="Pink Palette" />
 ```
 
-<ShowDecisionModel store={store} d="Pink Palette" />
+<ShowDecisionModel d="Pink Palette" />
 
 ### ShowDecisionParams
 
@@ -79,10 +75,10 @@ Renders the decision parameters.
 #### Example
 
 ```mdx
-<ShowDecisionParams store={store} d="Pink Palette" />
+<ShowDecisionParams d="Pink Palette" />
 ```
 
-<ShowDecisionParams store={store} d="Pink Palette" />
+<ShowDecisionParams d="Pink Palette" />
 
 ### ShowDecisionContexts
 
@@ -91,10 +87,10 @@ Renders the decision contexts.
 #### Example
 
 ```mdx
-<ShowDecisionContexts store={store} d="Pink Palette" />
+<ShowDecisionContexts d="Pink Palette" />
 ```
 
-<ShowDecisionContexts store={store} d="Pink Palette" />
+<ShowDecisionContexts d="Pink Palette" />
 
 ## Metadata
 
@@ -105,7 +101,7 @@ Renders the decision raw data.
 #### Example
 
 ```mdx
-<ShowDecisionData store={store} d="Pink Palette" />
+<ShowDecisionData d="Pink Palette" />
 ```
 
-<ShowDecisionData store={store} d="Pink Palette" />
+<ShowDecisionData d="Pink Palette" />
