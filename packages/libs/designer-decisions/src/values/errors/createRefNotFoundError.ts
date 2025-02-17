@@ -1,4 +1,4 @@
-import type { DecisionValueRefNotFoundError } from '../../types';
+import type { DecisionValueRefNotFoundError } from '../types';
 
 type Attributes = Omit<DecisionValueRefNotFoundError, 'message'>;
 

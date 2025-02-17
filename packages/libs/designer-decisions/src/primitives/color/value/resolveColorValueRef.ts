@@ -1,10 +1,12 @@
 import { isColorSetDecision, isColorValueDecision } from '../../../decisions';
-import type { Color, ColorValue, DecisionRef, ValueContext } from '../../../types';
+import type { DecisionRef } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../functions';
+import type { Color, ColorValue } from '../../types';
 
 import {
     REF_CHECKED_TYPES as accepted,

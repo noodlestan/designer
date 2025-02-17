@@ -1,8 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import type { DecisionRef } from '../../inputs';
 import { createStaticDecisionMock, createValueContextMock } from '../../mocks';
-import type { BaseSet, DecisionRef, DecisionValueInputError } from '../../types';
+import { DecisionValueInputError } from '../../values';
 import { createItemSet } from '../set';
+import { BaseSet } from '../types';
 
 import { resolveSetRefDecision } from './resolveSetRefDecision';
 

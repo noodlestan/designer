@@ -1,6 +1,7 @@
-import type { SRGBSaturationScale, SRGBSaturationValue, ValueContext } from '../../../types';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
+import type { SRGBSaturationScale, SRGBSaturationValue } from '../../types';
 
 export const createSRGBSaturationScale = (
     context: ValueContext,

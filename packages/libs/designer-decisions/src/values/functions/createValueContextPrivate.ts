@@ -1,16 +1,8 @@
-import { isLookupContext } from '../../context';
-import type {
-    BaseValue,
-    Decision,
-    DecisionContext,
-    DecisionLookup,
-    DecisionRef,
-    DecisionValueError,
-    InputRecord,
-    LinkedValueContext,
-    LookupContexts,
-    ValueContext,
-} from '../../types';
+import type { Decision, DecisionContext, DecisionLookup } from '../../decisions';
+import type { DecisionRef, InputRecord } from '../../inputs';
+import { type LookupContexts, isLookupContext } from '../../lookup';
+import type { BaseValue } from '../../primitives';
+import type { DecisionValueError, LinkedValueContext, ValueContext } from '../types';
 
 type State = {
     valueInput?: unknown;

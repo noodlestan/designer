@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import type { ColorOkLCHLiteral, ColorOklabHueInput } from '../../../inputs';
 import { createDecisionContextMock } from '../../../mocks';
-import type { ColorOkLCHLiteral, ColorOklabHueInput, ValueContext } from '../../../types';
-import { createValueContext } from '../../../values';
+import { type ValueContext, createValueContext } from '../../../values';
 import { COLOR_CHANNEL_OKLAB_HUE_NAME as name } from '../constants';
 
 import { createOklabHueValue } from './createOklabHueValue';

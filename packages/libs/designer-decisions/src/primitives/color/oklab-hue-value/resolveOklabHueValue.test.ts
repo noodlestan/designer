@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createValueContextMock } from '../../../mocks';
-import type { DecisionValueInputError } from '../../../types';
+import type { DecisionValueInputError } from '../../../values';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveOklabHueValue } from './resolveOklabHueValue';

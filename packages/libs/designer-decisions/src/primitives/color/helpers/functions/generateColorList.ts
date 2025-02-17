@@ -4,9 +4,9 @@ import type {
     ColorObjectLiteral,
     ColorOkLCHLiteral,
     ColorSRGBHSLiteral,
-    ColorValue,
-} from '../../../../types';
+} from '../../../../inputs';
 import { generateNumberSeries } from '../../../number';
+import type { ColorValue } from '../../../types';
 import { createColor } from '../createColor';
 
 export const generateColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(

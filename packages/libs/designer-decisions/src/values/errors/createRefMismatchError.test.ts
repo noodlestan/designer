@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionRef, DecisionUnknown, ValueContext } from '../../types';
+import { DecisionUnknown } from '../../decisions';
+import { DecisionRef } from '../../inputs';
+import { type ValueContext } from '../types';
 
 import { createRefMismatchError } from './createRefMismatchError';
 

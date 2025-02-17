@@ -1,5 +1,5 @@
-import type { SpaceValueInput, SpaceWithUnits, ValueContext } from '../../../types';
-import { createInvalidInputError } from '../../../values';
+import type { SpaceValueInput, SpaceWithUnits } from '../../../inputs';
+import { type ValueContext, createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { isValidSpaceWithUnits } from '../helpers';
 

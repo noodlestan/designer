@@ -1,5 +1,11 @@
-import { createSpaceScale, createSpaceValue, generateBoundedSeries } from '../../../primitives';
-import type { DecisionModelFactory, SpaceScale, SpaceScaleBoundedInput } from '../../../types';
+import type { SpaceScaleBoundedInput } from '../../../inputs';
+import {
+    type SpaceScale,
+    createSpaceScale,
+    createSpaceValue,
+    generateBoundedSeries,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createSpaceScaleBoundedModel: DecisionModelFactory<
     SpaceScale,

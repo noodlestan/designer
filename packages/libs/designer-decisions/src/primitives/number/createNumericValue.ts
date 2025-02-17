@@ -1,4 +1,4 @@
-import type { AbstractNumericValue } from '../../types';
+import type { AbstractNumericValue } from '../types';
 
 import { quantized } from './helpers';
 

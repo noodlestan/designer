@@ -1,9 +1,6 @@
-import { createSpaceValue } from '../../../primitives';
-import {
-    type DecisionModelFactory,
-    type SpaceValue,
-    type SpaceValueExplicitInput,
-} from '../../../types';
+import type { SpaceValueExplicitInput } from '../../../inputs';
+import { type SpaceValue, createSpaceValue } from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createSpaceValueExplicitModel: DecisionModelFactory<
     SpaceValue,

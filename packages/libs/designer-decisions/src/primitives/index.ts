@@ -5,3 +5,4 @@ export * from './number';
 export * from './ref';
 export * from './set';
 export * from './space';
+export * from './types';

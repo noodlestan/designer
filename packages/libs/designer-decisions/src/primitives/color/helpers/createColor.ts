@@ -1,10 +1,5 @@
-import type {
-    Color,
-    ColorFormat,
-    ColorLiteral,
-    ColorValueFormatOptions,
-    ColorValueOptions,
-} from '../../../types';
+import type { ColorFormat, ColorLiteral } from '../../../inputs';
+import type { Color, ColorValueFormatOptions, ColorValueOptions } from '../../types';
 
 import { chromaColorFromLiteral, chromaColorToLiteral, chromaColorToString } from './functions';
 

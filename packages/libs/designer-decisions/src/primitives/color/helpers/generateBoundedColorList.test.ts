@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { ValueContext } from '../../../types';
+import { type ValueContext } from '../../../values';
 import { createColorValue } from '../value';
 
 import { generateBoundedColorList } from './generateBoundedColorList';

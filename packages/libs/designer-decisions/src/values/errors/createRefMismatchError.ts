@@ -1,4 +1,4 @@
-import type { DecisionValueRefMismatchError } from '../../types';
+import type { DecisionValueRefMismatchError } from '../types';
 
 type Attributes = Omit<DecisionValueRefMismatchError, 'message'>;
 

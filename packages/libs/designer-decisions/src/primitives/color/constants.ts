@@ -1,4 +1,4 @@
-import type { ColorChannelName } from '../../types';
+import type { ColorChannelName } from '../types';
 
 export const COLOR_CHANNEL_OKLAB_CHROMA_NAME: ColorChannelName = 'oklab-chroma';
 export const COLOR_CHANNEL_OKLAB_CHROMA_BASE = 2;

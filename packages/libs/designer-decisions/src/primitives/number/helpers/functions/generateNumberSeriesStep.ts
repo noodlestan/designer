@@ -1,4 +1,4 @@
-import type { NumberModifier } from '../../../../types';
+import type { NumberModifier } from '../../../../inputs';
 
 export const generateNumberSeriesStep = (
     series: number[],

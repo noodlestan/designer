@@ -1,5 +1,5 @@
-import type { ColorOklabLightnessInput, ValueContext } from '../../../types';
-import { createInvalidInputError } from '../../../values';
+import type { ColorOklabLightnessInput } from '../../../inputs';
+import { type ValueContext, createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';

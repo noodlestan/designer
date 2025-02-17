@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { DecisionContext, DecisionUnknown, DecisionValueError } from '../../types';
+import { DecisionContext, DecisionUnknown } from '../../decisions';
+import { DecisionValueError } from '../types';
 
 import { createValueContextPrivate } from './createValueContextPrivate';
 

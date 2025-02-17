@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createValueContextMock } from '../../../mocks';
-import type { DecisionValueInputError } from '../../../types';
+import { DecisionValueInputError } from '../../../values';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveSRGBHueValue } from './resolveSRGBHueValue';

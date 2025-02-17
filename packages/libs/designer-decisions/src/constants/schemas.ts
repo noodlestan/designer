@@ -1,7 +1,7 @@
-import type { SchemaGeneratorConfig } from '../types';
+import type { SchemaGeneratorConfig } from '../meta';
 
-const PATH_PRIMITIVES = './types/decision-inputs/primitives';
-const PATH_DECISION_TYPES = './types/decision-inputs/models';
+const PATH_PRIMITIVES = './inputs/types/primitives';
+const PATH_DECISION_TYPES = './inputs/types/models';
 
 const DESIGNER_DECISIONS_SCHEMA_GENERATOR_CONFIG: SchemaGeneratorConfig = {
     urnBase: 'urn:designer',

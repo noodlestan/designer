@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { ColorFormat, ColorSRGBHSLiteral } from '../../../types';
+import { ColorFormat, ColorSRGBHSLiteral } from '../../../inputs';
 
 import { createColor } from './createColor';
 

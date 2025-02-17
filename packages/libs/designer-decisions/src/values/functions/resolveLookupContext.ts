@@ -1,5 +1,5 @@
-import { isLookupContext } from '../../context';
-import type { LookupContexts, ParentValueContext } from '../../types';
+import { type LookupContexts, isLookupContext } from '../../lookup';
+import type { ParentValueContext } from '../types';
 
 export function resolveLookupContext(
     context: LookupContexts | ParentValueContext | undefined,

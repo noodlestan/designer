@@ -1,13 +1,11 @@
+import type { ColorSRGBLightnessScaleBoundedInput } from '../../../inputs';
 import {
+    type SRGBLightnessScale,
     createSRGBLightnessScale,
     createSRGBLightnessValue,
     generateBoundedSeries,
 } from '../../../primitives';
-import {
-    type ColorSRGBLightnessScaleBoundedInput,
-    type DecisionModelFactory,
-    type SRGBLightnessScale,
-} from '../../../types';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBLightnessScaleBoundedModel: DecisionModelFactory<
     SRGBLightnessScale,

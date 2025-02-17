@@ -1,11 +1,7 @@
-import type {
-    DecisionContext,
-    DecisionUnknown,
-    InputRecord,
-    LookupContexts,
-    ParentValueContext,
-} from '../types';
-import { createValueContext } from '../values';
+import type { DecisionContext, DecisionUnknown } from '../decisions';
+import type { InputRecord } from '../inputs';
+import type { LookupContexts } from '../lookup';
+import { type ParentValueContext, createValueContext } from '../values';
 
 export const createStaticDecisionMockImplementation = (
     mockMethods: Record<string, () => unknown> = {},

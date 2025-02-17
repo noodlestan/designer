@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { ColorOklabChromaScaleExplicitInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { ColorOklabChromaScaleExplicitInput } from '../../../types';
 
 import { createColorOklabChromaScaleExplicitModel } from './createColorOklabChromaScaleExplicitModel';
 

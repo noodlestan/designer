@@ -1,9 +1,6 @@
-import { createSRGBHueSet, createSRGBHueValue } from '../../../primitives';
-import type {
-    ColorSRGBHueSetExplicitInput,
-    DecisionModelFactory,
-    SRGBHueSet,
-} from '../../../types';
+import type { ColorSRGBHueSetExplicitInput } from '../../../inputs';
+import { type SRGBHueSet, createSRGBHueSet, createSRGBHueValue } from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBHueSetExplicitModel: DecisionModelFactory<
     SRGBHueSet,

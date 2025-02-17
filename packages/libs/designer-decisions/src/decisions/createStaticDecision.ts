@@ -1,14 +1,10 @@
-import type {
-    BaseValue,
-    Decision,
-    DecisionContext,
-    InputRecord,
-    LookupContexts,
-    ParentValueContext,
-} from '../types';
-import { createValueContext } from '../values';
+import type { InputRecord } from '../inputs';
+import type { LookupContexts } from '../lookup';
+import type { BaseValue } from '../primitives';
+import { type ParentValueContext, createValueContext } from '../values';
 
 import { getDecisionModelFactory } from './getDecisionModelFactory';
+import type { Decision, DecisionContext } from './types';
 
 export const createStaticDecision = <T = unknown>(
     decisionContext: DecisionContext,

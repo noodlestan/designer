@@ -1,4 +1,4 @@
-import type { DecisionValueInputError } from '../../types';
+import type { DecisionValueInputError } from '../types';
 
 type Attributes = Omit<DecisionValueInputError, 'message'>;
 

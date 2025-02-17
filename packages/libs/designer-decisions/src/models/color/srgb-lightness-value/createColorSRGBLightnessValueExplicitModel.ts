@@ -1,9 +1,6 @@
-import { createSRGBLightnessValue } from '../../../primitives';
-import {
-    type ColorSRGBLightnessValueExplicitInput,
-    type DecisionModelFactory,
-    type SRGBLightnessValue,
-} from '../../../types';
+import type { ColorSRGBLightnessValueExplicitInput } from '../../../inputs';
+import { type SRGBLightnessValue, createSRGBLightnessValue } from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBLightnessValueExplicitModel: DecisionModelFactory<
     SRGBLightnessValue,

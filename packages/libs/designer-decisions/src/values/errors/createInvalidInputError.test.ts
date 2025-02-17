@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { ValueContext } from '../../types';
+import { type ValueContext } from '../types';
 
 import { createInvalidInputError } from './createInvalidInputError';
 

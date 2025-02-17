@@ -1,4 +1,4 @@
-import type { DecisionModelFactory } from '../types';
+import type { DecisionModelFactory } from '../models';
 
 import { getDecisionModelMeta } from './functions';
 

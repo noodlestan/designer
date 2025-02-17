@@ -1,11 +1,8 @@
-import type {
-    ColorChannelValueOptions,
-    ColorSRGBSaturationInput,
-    SRGBSaturationValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorSRGBSaturationInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import type { ColorChannelValueOptions, SRGBSaturationValue } from '../../types';
 import {
     COLOR_CHANNEL_SRGB_SATURATION_BASE as base,
     COLOR_CHANNEL_SRGB_SATURATION_NAME as name,

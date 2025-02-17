@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { createDecisionContextMock, createValueContextMock } from '../../../mocks';
-import type { ValueContext } from '../../../types';
-import { createValueContext } from '../../../values';
+import { type ValueContext, createValueContext } from '../../../values';
 import { createOklabHueValue } from '../oklab-hue-value';
 
 import { createOklabHueSet } from './createOklabHueSet';

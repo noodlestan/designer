@@ -1,13 +1,11 @@
+import type { ColorSRGBLightnessScaleAnchoredInput } from '../../../inputs';
 import {
+    type SRGBLightnessScale,
     createSRGBLightnessScale,
     createSRGBLightnessValue,
     generateAnchoredSeries,
 } from '../../../primitives';
-import type {
-    ColorSRGBLightnessScaleAnchoredInput,
-    DecisionModelFactory,
-    SRGBLightnessScale,
-} from '../../../types';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBLightnessScaleAnchoredModel: DecisionModelFactory<
     SRGBLightnessScale,

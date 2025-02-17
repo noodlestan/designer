@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { ColorSRGBHSLiteral } from '../../../inputs';
 import { createDecisionContextMock } from '../../../mocks';
-import type { ColorSRGBHSLiteral, ValueContext } from '../../../types';
-import { createValueContext } from '../../../values';
+import { type ValueContext, createValueContext } from '../../../values';
 
 import { createColorValue } from './createColorValue';
 

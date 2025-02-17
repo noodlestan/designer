@@ -1,13 +1,11 @@
+import type { ColorOklabChromaScaleBoundedInput } from '../../../inputs';
 import {
+    type OklabChromaScale,
     createOklabChromaScale,
     createOklabChromaValue,
     generateBoundedSeries,
 } from '../../../primitives';
-import {
-    type ColorOklabChromaScaleBoundedInput,
-    type DecisionModelFactory,
-    type OklabChromaScale,
-} from '../../../types';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<
     OklabChromaScale,

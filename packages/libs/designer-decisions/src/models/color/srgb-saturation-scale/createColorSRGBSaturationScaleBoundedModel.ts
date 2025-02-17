@@ -1,13 +1,11 @@
+import type { ColorSRGBSaturationScaleBoundedInput } from '../../../inputs';
 import {
+    type SRGBSaturationScale,
     createSRGBSaturationScale,
     createSRGBSaturationValue,
     generateBoundedSeries,
 } from '../../../primitives';
-import {
-    type ColorSRGBSaturationScaleBoundedInput,
-    type DecisionModelFactory,
-    type SRGBSaturationScale,
-} from '../../../types';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
     SRGBSaturationScale,

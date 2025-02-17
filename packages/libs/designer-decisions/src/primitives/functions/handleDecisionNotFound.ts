@@ -1,5 +1,5 @@
-import type { DecisionRef, ValueContext } from '../../types';
-import { createRefNotFoundError } from '../../values';
+import type { DecisionRef } from '../../inputs';
+import { type ValueContext, createRefNotFoundError } from '../../values';
 
 export const handleDecisionNotFound = (
     context: ValueContext,

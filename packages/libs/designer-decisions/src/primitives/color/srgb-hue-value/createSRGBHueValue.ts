@@ -1,11 +1,8 @@
-import type {
-    ColorChannelValueOptions,
-    ColorSRGBHueInput,
-    SRGBHueValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorSRGBHueInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import type { ColorChannelValueOptions, SRGBHueValue } from '../../types';
 import {
     COLOR_CHANNEL_SRGB_HUE_BASE as base,
     COLOR_CHANNEL_SRGB_HUE_NAME as name,

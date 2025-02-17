@@ -4,18 +4,14 @@ import {
     isColorSetDecision,
     isColorValueDecision,
 } from '../../../decisions';
-import type {
-    ColorOkLCHLiteral,
-    ColorValue,
-    DecisionRef,
-    OklabHueValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorOkLCHLiteral, DecisionRef } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../functions';
+import type { ColorValue, OklabHueValue } from '../../types';
 
 import {
     REF_CHECKED_TYPES as accepted,

@@ -1,5 +1,7 @@
-import type { ColorValue, ColorValueInput, ColorValueOptions, ValueContext } from '../../../types';
+import type { ColorValueInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
+import type { ColorValue, ColorValueOptions } from '../../types';
 import { createColor } from '../helpers';
 
 import { resolveColorValue } from './resolveColorValue';

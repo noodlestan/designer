@@ -1,5 +1,6 @@
 import { DECISION_COLOR_SRGB_HUE_SET } from '../../../constants';
-import type { ColorSRGBHueSetDecision, DecisionUnknown } from '../../../types';
+import type { ColorSRGBHueSetDecision } from '../../../decisions';
+import type { DecisionUnknown } from '../../types';
 
 export const isColorSRGBHueSetDecision = (
     decision: DecisionUnknown,

@@ -1,5 +1,6 @@
 import { DECISION_COLOR_SRGB_LIGHTNESS_SCALE } from '../../../constants';
-import type { ColorSRGBLightnessScaleDecision, DecisionUnknown } from '../../../types';
+import type { ColorSRGBLightnessScaleDecision } from '../../../decisions';
+import type { DecisionUnknown } from '../../types';
 
 export const isColorSRGBLightnessScaleDecision = (
     decision: DecisionUnknown,

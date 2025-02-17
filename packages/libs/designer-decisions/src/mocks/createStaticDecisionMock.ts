@@ -1,4 +1,6 @@
-import type { BaseValue, Decision, DecisionContext, InputRecord } from '../types';
+import type { Decision, DecisionContext } from '../decisions';
+import type { InputRecord } from '../inputs';
+import type { BaseValue } from '../primitives';
 
 import { createStaticDecisionMockImplementation } from './createStaticDecisionMockImplementation';
 

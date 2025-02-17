@@ -1,9 +1,6 @@
-import { createSRGBSaturationValue } from '../../../primitives';
-import {
-    type ColorSRGBSaturationValueExplicitInput,
-    type DecisionModelFactory,
-    type SRGBSaturationValue,
-} from '../../../types';
+import type { ColorSRGBSaturationValueExplicitInput } from '../../../inputs';
+import { type SRGBSaturationValue, createSRGBSaturationValue } from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBSaturationValueExplicitModel: DecisionModelFactory<
     SRGBSaturationValue,

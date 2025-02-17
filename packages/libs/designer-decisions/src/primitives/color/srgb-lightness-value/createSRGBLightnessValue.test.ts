@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { ColorOklabLightnessInput, ColorSRGBHSLiteral } from '../../../inputs';
 import { createDecisionContextMock } from '../../../mocks';
-import type { ColorOklabLightnessInput, ColorSRGBHSLiteral, ValueContext } from '../../../types';
-import { createValueContext } from '../../../values';
+import { type ValueContext, createValueContext } from '../../../values';
 import { COLOR_CHANNEL_SRGB_LIGHTNESS_NAME as name } from '../constants';
 
 import { createSRGBLightnessValue } from './createSRGBLightnessValue';

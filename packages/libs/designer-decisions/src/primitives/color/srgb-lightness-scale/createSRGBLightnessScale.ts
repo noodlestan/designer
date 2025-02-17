@@ -1,6 +1,7 @@
-import type { SRGBLightnessScale, SRGBLightnessValue, ValueContext } from '../../../types';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
+import type { SRGBLightnessScale, SRGBLightnessValue } from '../../types';
 
 export const createSRGBLightnessScale = (
     context: ValueContext,

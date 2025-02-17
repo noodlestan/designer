@@ -1,4 +1,4 @@
-import type { DecisionValidationError } from '../../types';
+import type { DecisionValidationError } from '../types';
 
 type Attributes = Omit<DecisionValidationError, 'message'>;
 

@@ -1,4 +1,4 @@
-import type { DecisionType, DecisionTypeMeta } from '../../types';
+import type { DecisionType, DecisionTypeMeta } from '../types';
 
 export const createDecisionTypeMeta = (decisionType: DecisionType): DecisionTypeMeta => {
     const { type, name, category, domain, models, ...rest } = decisionType;

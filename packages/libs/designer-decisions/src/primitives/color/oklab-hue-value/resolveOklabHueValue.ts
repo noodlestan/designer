@@ -1,4 +1,5 @@
-import type { ColorOklabHueInput, ValueContext } from '../../../types';
+import type { ColorOklabHueInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 

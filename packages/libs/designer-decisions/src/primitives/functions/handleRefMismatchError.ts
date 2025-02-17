@@ -1,5 +1,6 @@
-import type { DecisionRef, DecisionUnknown, ValueContext } from '../../types';
-import { createRefMismatchError } from '../../values';
+import type { DecisionUnknown } from '../../decisions';
+import type { DecisionRef } from '../../inputs';
+import { type ValueContext, createRefMismatchError } from '../../values';
 
 export const handleRefMismatchError = (
     context: ValueContext,

@@ -1,12 +1,8 @@
-import type {
-    SpaceValue,
-    SpaceValueFormatOptions,
-    SpaceValueInput,
-    SpaceValueOptions,
-    ValueContext,
-} from '../../../types';
+import type { SpaceValueInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import type { SpaceValue, SpaceValueFormatOptions, SpaceValueOptions } from '../../types';
 import { SPACE_VALUE_QUANTIZE } from '../constants';
 
 import { resolveSpaceValue } from './resolveSpaceValue';

@@ -1,13 +1,11 @@
+import type { ColorOklabHueSetAnchoredInput } from '../../../inputs';
 import {
+    type OklabHueSet,
     createOklabHueSet,
     createOklabHueValue,
     generateAnchoredSeries,
 } from '../../../primitives';
-import type {
-    ColorOklabHueSetAnchoredInput,
-    DecisionModelFactory,
-    OklabHueSet,
-} from '../../../types';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<
     OklabHueSet,

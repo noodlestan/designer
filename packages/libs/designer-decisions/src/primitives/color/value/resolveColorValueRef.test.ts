@@ -1,19 +1,15 @@
 import chroma from 'chroma-js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { DecisionRef, InputRecord } from '../../../inputs';
 import {
     createStaticDecisionMock,
     createValueContextMock,
     createValueContextWithResolveMock,
 } from '../../../mocks';
-import type {
-    ColorSet,
-    ColorValue,
-    DecisionRef,
-    DecisionValueRefNotFoundError,
-    InputRecord,
-} from '../../../types';
+import { DecisionValueRefNotFoundError } from '../../../values';
 import { resolveSetRefDecision } from '../../functions';
+import { ColorSet, ColorValue } from '../../types';
 
 import { createColorValue } from './createColorValue';
 import { FALLBACK_VALUE } from './private';

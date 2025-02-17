@@ -1,13 +1,11 @@
+import type { ColorOklabChromaScaleAnchoredInput } from '../../../inputs';
 import {
+    type OklabChromaScale,
     createOklabChromaScale,
     createOklabChromaValue,
     generateAnchoredSeries,
 } from '../../../primitives';
-import type {
-    ColorOklabChromaScaleAnchoredInput,
-    DecisionModelFactory,
-    OklabChromaScale,
-} from '../../../types';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabChromaScaleAnchoredModel: DecisionModelFactory<
     OklabChromaScale,

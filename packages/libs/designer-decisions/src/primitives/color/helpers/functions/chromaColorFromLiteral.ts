@@ -1,6 +1,6 @@
 import chroma, { type Color as ChromaColor } from 'chroma-js';
 
-import type { ColorLiteral } from '../../../../types';
+import type { ColorLiteral } from '../../../../inputs';
 
 export function chromaColorFromLiteral(input: ColorLiteral): ChromaColor {
     if (typeof input === 'object') {

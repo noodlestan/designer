@@ -1,6 +1,7 @@
 import chroma from 'chroma-js';
 
-import type { ColorFormat, ColorObjectLiteral, ColorValue } from '../../../types';
+import type { ColorFormat, ColorObjectLiteral } from '../../../inputs';
+import type { ColorValue } from '../../types';
 
 import { chromaColorToLiteral } from './functions';
 

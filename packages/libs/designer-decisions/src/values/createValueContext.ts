@@ -1,13 +1,9 @@
-import { isLookupContext } from '../context';
-import type {
-    DecisionContext,
-    InputRecord,
-    LookupContexts,
-    ParentValueContext,
-    ValueContext,
-} from '../types';
+import type { DecisionContext } from '../decisions';
+import type { InputRecord } from '../inputs';
+import { type LookupContexts, isLookupContext } from '../lookup';
 
 import { createValueContextPrivate, resolveLookupContext } from './functions';
+import type { ParentValueContext, ValueContext } from './types';
 
 export const createValueContext = (
     decisionContext: DecisionContext,

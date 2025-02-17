@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import type { InputRecord } from '../inputs';
 import { createDecisionModelMock } from '../mocks';
-import type { InputRecord } from '../types';
 
 import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
