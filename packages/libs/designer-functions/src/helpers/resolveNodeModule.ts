@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import resolve from 'resolve';
 
 import { findPackageRoot, getDirName } from './functions';
@@ -5,12 +6,16 @@ import { findPackageRoot, getDirName } from './functions';
 export async function resolveNodeModule(
     name: string,
     modulePathResolver?: (moduleName: string) => Promise<string>,
-): Promise<string> {
+): Promise<string | undefined> {
     if (modulePathResolver) {
-        return modulePathResolver(name);
+        try {
+            return modulePathResolver(name);
+        } catch (error) {}
     } else {
-        const path = resolve.sync(name, { basedir: getDirName() });
+        try {
+            const path = resolve.sync(name, { basedir: getDirName() });
 
-        return findPackageRoot(path);
+            return findPackageRoot(path);
+        } catch (error) {}
     }
 }

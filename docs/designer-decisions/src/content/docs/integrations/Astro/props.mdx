@@ -32,7 +32,7 @@ If the decision does not exist, it renders a notice.
 
 <ShowDecision d="Brand Green" />
 
-### ༶ `store`: [StaticStore](/api/designer-functions/Store/Types/StaticStore)
+### ༶ `store`: [Store](/api/designer-functions/Store/Types/Store)
 
 The `store` prop provides access to all decision input data so that components can retrieve decision objects and resolve values.
 
@@ -47,7 +47,7 @@ The store can be retrieved from the Astro integration.
 ```mdx
 import { integrationAPI } from '@noodlestan/designer-integration-astro';
 
-export const store = await integrationAPI.loader();
+export const store = await integrationAPI.build();
 
 <div class="custom-component">
     <ShowDecision store={store} d="Brand Blue" />

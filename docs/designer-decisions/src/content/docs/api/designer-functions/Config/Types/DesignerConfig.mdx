@@ -9,15 +9,15 @@ import { Aside } from '@astrojs/starlight/components';
 
 ```ts
 export type DesignerConfig = {
-    loader: DecisionLoaderOptions;
+    store: StoreOptions;
 };
 ```
 
 ## Attributes
 
-### ༶ `loader`: [DecisionLoaderOptions](/api/designer-functions/Loader/Types/DecisionLoaderOptions)
+### ༶ `store`: [StoreOptions](/api/designer-functions/Store/Types/StoreOptions)
 
-Options for `createDecisionLoader()`, an all-in-one, loader and validator for [schemas](/models/schemas) and decision [input records](/api/designer-decisions/Inputs/Types/InputRecord).
+Options for `staticStoreBuilder()`, an all-in-one, decision loader and validator for [schemas](/models/schemas) and decision [input records](/api/designer-decisions/Inputs/Types/InputRecord).
 
 ## See also
 

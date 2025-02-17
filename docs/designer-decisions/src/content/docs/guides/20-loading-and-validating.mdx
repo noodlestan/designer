@@ -51,7 +51,7 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 
 export default defineConfig({
-    loader: {
+    store: {
         decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
         schemas: [DECISION_SCHEMAS],
     },
@@ -62,9 +62,9 @@ In this example we configured the [Sample and Demo Data](https://github.com/nood
 
 <Aside type="tip">
     If you want to load decision data from another source (e.g.: another package) you can define it
-    with a [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource). The loader will be
-    able to resolve the package location in most scenarios, including monorepos, as long as the
-    dependency is installed.
+    with a [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource). The decision store
+    builder will be able to resolve the package location in most scenarios, including monorepos, as
+    long as the dependency is installed.
 </Aside>
 
 In the [API / Configuration](/api/configuration) section you can find all configuration options and helpers.
@@ -83,35 +83,37 @@ Add a script to load decisions and print eventual validation errors.
 
 </FileTree>
 
-We will use the [loadConfig()](/api/designer-functions/Loader/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [createDecisionLoader()](/api/designer-functions/Loader/createDecisionLoader) to load and validate the decision data.
+We will use the [loadConfig()](/api/designer-functions/Config/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder) to load and validate the decision data.
 
-```js "createDecisionLoader"
+```js "staticStoreBuilder"
 // scripts/validate-decisions.js
 import path from 'path';
-import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
+import { staticStoreBuilder, loadConfig } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const loader = createDecisionLoader(config.loader);
+const build = staticStoreBuilder(config.store);
 ```
 
-This loader returns a [pre-validated decision store](/api/designer-functions/Store/Types/StaticStore) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
+The `build()` functions returns a [pre-validated decision store](/api/designer-functions/Store/Types/Store) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
 
-Add the following code to execute the loader and list each records' `name` and `model`.
+Add the following code to execute the builder and list each records' `name` and `model`.
 
-```js collapse={1-5} "store.records()" "store.storeErrors()"
+```js collapse={1-5} "store.records()" "context().errors()"
 // scripts/validate-decisions.js
-import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
+import { staticStoreBuilder, loadConfig } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const loader = createDecisionLoader(config.loader);
+const build = staticStoreBuilder(config.store);
 
 const loadDecisions = async () => {
-    const store = await loader();
+    const store = await build();
 
     const records = store.records();
     records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
-    store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+    context()
+        .errors()
+        .forEach(({ msg, error }) => console.error(msg, error));
 };
 
 loadDecisions();
@@ -206,19 +208,19 @@ To inspect the validation errors we can format messages using the `formatValidat
 ```diff lang="js" collapse={7-12} "hasErrors" "formatValidationError"
 // scripts/validate-decisions.js
 import {
-    createDecisionLoader,
+    staticStoreBuilder,
 +    formatValidationError,
     loadConfig,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const loader = createDecisionLoader(config.loader);
+const build = staticStoreBuilder(config.store);
 
 const loadDecisions = async () => {
-    const store = await loader();
+    const store = await build();
 
 +    if (store.hasErrors()) {
-+        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
++        context().errors().forEach(({ msg, error }) => console.error(msg, error));
 +        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
 +        throw new Error(`Store has errors.`);
 +    }
@@ -226,7 +228,7 @@ const loadDecisions = async () => {
     const records = store.records();
     records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
--    store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+-    context().errors().forEach(({ msg, error }) => console.error(msg, error));
 };
 
 loadDecisions();
@@ -277,20 +279,20 @@ Remove the `store.validationErrors().forEach(...)` line, as it will become redun
 ```diff lang="js" collapse={9-19}
 // scripts/validate-decisions.js
 import {
-    createDecisionLoader,
+    staticStoreBuilder,
 +    formatDecisionStatus,
     loadConfig,
 +    produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const loader = createDecisionLoader(config.loader);
+const build = staticStoreBuilder(config.store);
 
 const loadDecisions = async () => {
-    const store = await loader();
+    const store = await build();
 
     if (store.hasErrors()) {
-        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        context().errors().forEach(({ msg, error }) => console.error(msg, error));
 -        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
         throw new Error(`Store has errors.`);
     }
@@ -335,24 +337,24 @@ The `produced` object reports counts for decision records, and different types o
 ```diff lang="js" collapse={1-22,27-34} "produced.summary()"
 // scripts/validate-decisions.js
 import {
-    createDecisionLoader,
+    staticStoreBuilder,
     formatDecisionStatus,
     loadConfig,
     produceDecisions,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const loader = createDecisionLoader(config.loader);
+const build = staticStoreBuilder(config.store);
 
 const loadDecisions = async () => {
-    const store = await loader();
+    const store = await build();
 
     if (store.hasErrors()) {
-        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        context().errors().forEach(({ msg, error }) => console.error(msg, error));
         throw new Error(`Store has errors.`);
     }
 
-    const records = store.records();
+-    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
@@ -375,20 +377,20 @@ If you are running this as part of your build process you will probably want to 
 ```diff lang="js" collapse={1-25} "filter" "produced.hasErrors()"
 // scripts/validate-decisions.js
 import {
-    createDecisionLoader,
+    staticStoreBuilder,
     formatDecisionStatus,
     loadConfig,
     produceDecisions,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const loader = createDecisionLoader(config.loader);
+const build = staticStoreBuilder(config.store);
 
 const loadDecisions = async () => {
-    const store = await loader();
+    const store = await build();
 
     if (store.hasErrors()) {
-        store.storeErrors().forEach(({ msg, error }) => console.error(msg, error));
+        context().errors().forEach(({ msg, error }) => console.error(msg, error));
         throw new Error(`Store has errors.`);
     }
 

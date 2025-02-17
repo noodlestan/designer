@@ -1,25 +1,67 @@
 import fs from 'fs/promises';
 
+import type { SchemaSource } from '@noodlestan/designer-decisions';
+
+import { isNonEmptyString, maybeErrorMessage } from '../../private';
+import { type StoreContext, createStoreSourceError } from '../../store';
 import type { SchemaData, SchemaMap } from '../types';
 
-export const loadSchemaFromFile = async (schemas: SchemaMap, filePath: string): Promise<void> => {
-    const errorPrefix = `Error loading schema from "${filePath}"`;
+export const loadSchemaFromFile = async (
+    context: StoreContext,
+    source: SchemaSource,
+    schemas: SchemaMap,
+    filePath: string,
+): Promise<void> => {
+    const attrs = {
+        type: 'SchemaSource',
+        id: source.urnBase,
+        source: source.source,
+        path: filePath,
+    };
 
+    let fileContents;
     let schemaData;
+
     try {
-        const fileContent = await fs.readFile(filePath, 'utf-8');
-        schemaData = JSON.parse(fileContent) as SchemaData;
+        fileContents = await fs.readFile(filePath, 'utf-8');
     } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        throw new Error(`${errorPrefix}: ${message}.`);
+        const message = maybeErrorMessage(error, ' {}');
+        const err = createStoreSourceError({
+            ...attrs,
+            reason: `Could not read schema file. ${message}.`,
+        });
+        context.addError(err);
+        return;
     }
 
-    if (typeof schemaData.$id !== 'string' || !schemaData.$id) {
-        throw new Error(`${errorPrefix}: missing a valid "$id" property.`);
+    try {
+        schemaData = JSON.parse(fileContents) as SchemaData;
+    } catch (error) {
+        const message = maybeErrorMessage(error, ' {}');
+        const err = createStoreSourceError({
+            ...attrs,
+            reason: `Could not parse schema file. ${message}.`,
+        });
+        context.addError(err);
+        return;
+    }
+
+    if (!isNonEmptyString(schemaData.$id)) {
+        const err = createStoreSourceError({
+            ...attrs,
+            reason: 'Schema is missing a valid "$id" property.',
+        });
+        context.addError(err);
+        return;
     }
 
     if (schemas.has(schemaData.$id)) {
-        throw new Error(`${errorPrefix}: duplicate schema id "${schemaData.$id}".`);
+        const err = createStoreSourceError({
+            ...attrs,
+            reason: `Duplicate Schema $id "${schemaData.$id}".`,
+        });
+        context.addError(err);
+        return;
     }
 
     schemas.set(schemaData.$id, schemaData);

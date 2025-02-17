@@ -5,4 +5,18 @@ sidebar:
     order: 0
 ---
 
-🚧
+Identifies a decision by either `name` or `uuid`, optionally specifying an index to retrieve a specific value from set/scale decisions.
+
+```ts
+export type DecisionNameRef = {
+    $name: DecisionName;
+    index?: number;
+};
+
+export type DecisionUuidRef = {
+    $uuid: DecisionId;
+    index?: number;
+};
+
+export type DecisionRef = DecisionNameRef | DecisionUuidRef;
+```

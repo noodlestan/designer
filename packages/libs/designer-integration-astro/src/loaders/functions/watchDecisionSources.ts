@@ -1,4 +1,4 @@
-import { createDecisionLoader, resolveDecisionWatchPaths } from '@noodlestan/designer-functions';
+import { resolveDecisionWatchPaths } from '@noodlestan/designer-functions';
 import type { LoaderContext } from 'astro/loaders';
 
 import { integrationAPI } from '../../api';
@@ -29,17 +29,16 @@ type LoaderState = {
  *   page depends on the content layer. For that we rely on the remarkInjectStore()
  *   remark plugin which injects the `import 'astro:content'`
  */
-export async function watchDecisionSources(context: LoaderContext): Promise<void> {
-    const { config } = integrationAPI;
-    const loader = createDecisionLoader(config.loader);
+export async function watchDecisionSources(loaderCtx: LoaderContext): Promise<void> {
+    const { config, build } = integrationAPI;
 
     const state: LoaderState = {
         count: 0,
         paths: [],
     };
-    const { logger, watcher, store: contentStore } = context;
+    const { logger, watcher, store: contentStore } = loaderCtx;
 
-    state.paths = await resolveDecisionWatchPaths(config.loader.decisions);
+    state.paths = await resolveDecisionWatchPaths(config.store);
 
     state.paths.forEach(path => {
         logger.debug('watching: ' + path);
@@ -48,7 +47,7 @@ export async function watchDecisionSources(context: LoaderContext): Promise<void
 
     watcher?.on('change', updated => {
         if (updated.endsWith('.json') && !updated.includes('.astro')) {
-            produceAndReport(context, loader);
+            produceAndReport(loaderCtx, build);
             contentStore.set({ id: '1', data: { count: state.count++ } });
             logger.info('Updated:' + updated);
         }

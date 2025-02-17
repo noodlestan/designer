@@ -5,7 +5,23 @@ sidebar:
     order: 0
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
 Holds all decision input data and provides an API to retrieve decision records and validation errors.
+
+```ts
+export type StaticInputMap = {
+    hasErrors: () => boolean;
+    validationErrors: () => InputValidationError[];
+    records: (filter?: (item: InputRecord) => boolean) => InputRecord[];
+    findByRef: (ref: DecisionRef) => DecisionInputData[];
+};
+```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [staticStoreBuilder()](api/designer-functions/Builder/staticStoreBuilder).
+</Aside>
 
 ## Methods
 
@@ -20,7 +36,7 @@ Holds all decision input data and provides an API to retrieve decision records a
 
 #### ༶ `records(filter?)`
 
-**Return Value:** [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord)[]
+Return Value: [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord)[]
 
 **Parameters:**
 
@@ -32,4 +48,4 @@ Holds all decision input data and provides an API to retrieve decision records a
 
 #### ༶ `validationErrors()`
 
-**Return Value:** [InputValidationError](/api/designer-decisions/Inputs/Types/InputValidationError)[] or `null` if there were validation errors.
+**Return Value:** [InputValidationError](/api/designer-decisions/Inputs/Types/InputValidationError)[] with all validation errors.

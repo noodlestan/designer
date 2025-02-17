@@ -1,23 +1,25 @@
-import { exec } from 'child_process';
+import { spawnSync } from 'child_process';
 
 export function generateTypes(target, exitOnError = true) {
     console.info(`Emitting TypeScript declarations for ${target} target...`);
 
-    const child = exec(`npm run build:types:${target}`, (error, _stdout, stderr) => {
-        if (error) {
-            console.error(`🟥 TypeScript error (${target}):`, error.message);
-            if (exitOnError) {
-                process.exit(1);
-            }
-        }
-        if (stderr) {
-            console.error(`🟨 TypeScript warning (${target}):`, stderr);
-        }
-        console.info(`🟩 TypeScript declarations emitted for ${target} target.`);
+    const result = spawnSync('npm', ['run', `build:types:${target}`], {
+        stdio: 'inherit', // Inherit stdio for proper logging
+        env: process.env, // Pass full environment
+        shell: true, // Use shell for compatibility
     });
 
-    child.stdout.on('data', data => console.info(data.toString()));
-    child.stderr.on('data', data => console.error(data.toString()));
+    if (result.error) {
+        console.error(`🟥 TypeScript error (${target}):`, result.error.message);
+        if (exitOnError) process.exit(1);
+    }
+
+    if (result.status !== 0) {
+        console.error(`🟥 TypeScript process failed (${target}) with exit code ${result.status}`);
+        if (exitOnError) process.exit(result.status);
+    } else {
+        console.info(`🟩 TypeScript declarations emitted for ${target} target.`);
+    }
 }
 
 export function emitTypesPLugin(target, exitOnError = true) {

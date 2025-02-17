@@ -6,10 +6,10 @@ sidebar:
 ---
 
 ```ts
-type produceDecisions = (store: StaticStore) => ProducedDecisionStore;
+type produceDecisions = (store: Store) => ProducedDecisionStore;
 ```
 
-Given a populated [StaticStore](/api/designer-functions/Store/Types/StaticStore) produces all possible decision values and exposes all decision values, contexts and aggregated errors.
+Given a populated [Store](/api/designer-functions/Store/Types/Store) produces all possible decision values and exposes all decision values, contexts and aggregated errors.
 
 ## Return Value
 
@@ -31,14 +31,14 @@ export type ProducedDecisionStore = {
 
 ## Params
 
-#### ༶ `store`: [StaticStore](/api/designer-functions/Store/Types/StaticStore)
+#### ༶ `store`: [Store](/api/designer-functions/Store/Types/Store)
 
 &nbsp;
 
 ## Usage
 
 ```js
-const store = await loader();
+const store = await build();
 const produced = produceDecisions(store);
 console.info(produced.summary());
 ```

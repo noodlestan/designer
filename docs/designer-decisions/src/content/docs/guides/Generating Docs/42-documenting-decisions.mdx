@@ -78,7 +78,7 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 
 export default defineConfig({
-    loader: {
+    store: {
         decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
         schemas: [DECISION_SCHEMAS],
     },

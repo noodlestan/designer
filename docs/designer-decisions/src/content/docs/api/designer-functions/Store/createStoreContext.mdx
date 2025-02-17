@@ -1,0 +1,39 @@
+---
+title: createStoreContext()
+slug: api/designer-functions/Store/createStoreContext
+sidebar:
+    label: createStoreContext
+---
+
+Creates a [StoreContext](/api/designer-functions/Store/Types/StoreContext) with an optional configuration.
+
+```ts
+type createStoreContext = (context: StoreContext, inputStore: StaticInputMap) => Store;
+```
+
+## Return value
+
+Returns a [StoreContext](/api/designer-functions/Store/Types/StoreContext), required to create both for [staticStoreBuilder()](api/designer-functions/Builder/staticStoreBuilder) and [createStaticStore()](/api/designer-functions/Store/createStaticStore)
+
+## Params
+
+#### ༶ `options` (optional): [StoreOptions](/api/designer-functions/Store/Types/StoreOptions)
+
+&nbsp;
+
+## Usage
+
+Create a context with configuration and provide to the `staticStoreBuilder()`.
+
+```ts
+const config = await loadConfig();
+const context = createStoreContext(config.store);
+const builder = staticStoreBuilder(context);
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-functions / staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder)
+-   [API / designer-functions / StoreContext()](/api/designer-functions/Store/Types/StoreContext)
+-   [API / designer-functions / createStaticStore()](/api/designer-functions/Store/createStaticStore)

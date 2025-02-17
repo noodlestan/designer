@@ -1,17 +1,17 @@
 import {
-    type StaticStore,
+    type Store,
     formatDecisionStatus,
-    formatStoreError,
+    formatError,
     produceDecisions,
 } from '@noodlestan/designer-functions';
 import type { LoaderContext } from 'astro/loaders';
 
 export async function produceAndReport(
     context: LoaderContext,
-    loader: () => Promise<StaticStore>,
-): Promise<StaticStore> {
+    build: () => Promise<Store>,
+): Promise<Store> {
     const { logger } = context;
-    const store = await loader();
+    const store = await build();
 
     const produced = produceDecisions(store);
     produced
@@ -19,9 +19,10 @@ export async function produceAndReport(
         .filter(status => status.hasErrors)
         .forEach(status => logger.info(formatDecisionStatus(status)));
 
-    if (store.hasErrors()) {
-        store.storeErrors()?.forEach(error => logger.error(formatStoreError(error)));
-    }
+    store
+        .context()
+        .errors()
+        ?.forEach(error => logger.error(formatError(error)));
 
     logger.info('🐘 ' + produced.summary());
 

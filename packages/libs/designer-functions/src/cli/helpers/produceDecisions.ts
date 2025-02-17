@@ -1,12 +1,12 @@
-import type { StaticStore } from '../../store';
+import type { Store } from '../../store';
 
 import { produceDecisionStatus } from './produceDecisionStatus';
 import type { ProducedDecisionStore } from './types';
 
-export const produceDecisions = (store: StaticStore): ProducedDecisionStore => {
+export const produceDecisions = (store: Store): ProducedDecisionStore => {
     const decisions = store.records().map(record => produceDecisionStatus(store, record));
 
-    const errors = store.storeErrors();
+    const errors = store.context().errors();
     const validationErrors = store.validationErrors();
     const valueErrorsCount = decisions.reduce((acc, status) => acc + Number(status.hasErrors), 0);
 
@@ -42,7 +42,7 @@ export const produceDecisions = (store: StaticStore): ProducedDecisionStore => {
         hasErrors: () => Boolean(errors.length + validationErrors.length + valueErrorsCount),
         errors: {
             count: errorCount,
-            store: () => store.storeErrors(),
+            store: () => store.context().errors(),
             validation: () => store.validationErrors(),
             value: valueErrors,
         },

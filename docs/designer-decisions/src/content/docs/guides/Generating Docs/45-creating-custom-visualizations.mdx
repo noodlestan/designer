@@ -32,7 +32,7 @@ In this example, we compose the [&lt;ShowColorValue/&gt;](/integrations/Astro/Co
 ```astro title="MyColorDecision.Astro"
 ---
 import { type Decision } from '@noodlestan/designer-decisions';
-import { type StaticStore } from '@noodlestan/designer-functions';
+import { type Store } from '@noodlestan/designer-functions';
 import {
     DecisionCardLayout,
     ShowDecision,
@@ -41,7 +41,7 @@ import {
 
 type Props = {
     d: string;
-    store: StaticStore;
+    store: Store;
 };
 
 const { d, store } = Astro.props;
@@ -79,7 +79,6 @@ This code block demonstrates how you can use a decision value to build your own 
 ---
 import { type ColorDecision } from '@noodlestan/designer-decisions';
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
-import { loader } from '../decisions';
 
 const { d, store } = Astro.props
 const [, decision] = store.decision<ColorDecision>(d);

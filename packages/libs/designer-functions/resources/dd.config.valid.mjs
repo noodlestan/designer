@@ -1,7 +1,7 @@
 import { defineConfig } from '@noodlestan/designer-functions';
 
 const { options, errors } = await defineConfig({
-    loader: {
+    store: {
         decisions: [],
         schemas: [],
         moduleResolver: () => 'foo',

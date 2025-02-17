@@ -1,0 +1,23 @@
+---
+title: Store
+slug: api/designer-functions/Store/Types/Store
+sidebar:
+    order: 0
+---
+
+Provides an API to retrieve decisions and resolve their values.
+
+```ts
+export type Store = {
+    context: () => StoreContext;
+    validationErrors: StaticInputMap['validationErrors'];
+    records: StaticInputMap['records'];
+    decision: <V extends BaseValue<unknown> = BaseValue<unknown>>(
+        ref: DecisionRef,
+        contexts?: LookupContexts,
+    ) => [DecisionContext, Decision<V> | undefined];
+    resolver: DecisionRefResolver;
+    createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
+    createValueContext: (lookupContexts?: LookupContexts) => ValueContext;
+};
+```

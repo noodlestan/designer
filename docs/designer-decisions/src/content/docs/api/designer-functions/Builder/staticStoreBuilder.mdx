@@ -1,0 +1,77 @@
+---
+title: staticStoreBuilder()
+slug: api/designer-functions/Builder/staticStoreBuilder
+sidebar:
+    label: staticStoreBuilder
+---
+
+```ts
+type staticStoreBuilder = (options: StoreOptions) => () => Promise<Store>;
+```
+
+## Return value
+
+**() => Promise&lt;[Store](/api/designer-functions/Store/Types/Store)&gt;**
+
+A builder function that resolves with a populated decision store.
+
+#### Loader implementation
+
+Given a list of paths and schemas configs:
+
+-   Loads schemas from paths and creates a schema map.
+-   Validates the schema map and creates a validator.
+-   Loads all decisions files and merges all data.
+-   Validates decision inputs.
+-   Populates and returns a decision [Store](/api/designer-functions/Store/Types/Store).
+
+## Params
+
+#### ༶ `context`: [StoreContext](/api/designer-functions/Store/Types/StoreContext)
+
+A context object that exposes the [StoreOptions](/api/designer-functions/Store/Types/StoreOptions) and collects eventual errors produced building the store.
+
+It is recommended to declare the options object directly in a `dd.config.mjs` file in the root of the project and then load it via [loadConfig()](/api/designer-functions/config/loadConfig).
+
+## Usage
+
+**Using `dd.config.mjs` file and `loadConfig()`:**
+
+```ts
+import { loadConfig, createStoreContext, staticStoreBuilder } from '@noodlestan/designer-functions';
+
+const config = await loadConfig();
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
+
+const store = await build();
+```
+
+**Building the options object:**
+
+```ts
+import { DEMO_DATA } from '@noodlestan/designer-decisions';
+import {
+    type StoreOptions,
+    createStoreContext,
+    staticStoreBuilder,
+} from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const options: StoreOptions = {
+    decisions: [DEMO_DATA, './data'],
+    schemas: [DECISION_SCHEMAS],
+};
+const context = createStoreContext(options);
+const build = staticStoreBuilder(options);
+
+const store = await build();
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [Models / Schemas](/models/schemas/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / createStaticStore()](/api/designer-functions/Store/createStaticStore)
+-   [API / designer-functions / StoreOptions](/api/designer-functions/Store/Types/StoreOptions)

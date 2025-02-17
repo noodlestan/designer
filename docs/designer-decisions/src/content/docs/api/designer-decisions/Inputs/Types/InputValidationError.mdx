@@ -5,4 +5,16 @@ sidebar:
     order: 0
 ---
 
-🚧
+Describes an error on an [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord).
+
+Provides access to underlying [AJV](https://ajv.js.org/) error object.
+
+```ts
+import type { ErrorObject } from 'ajv';
+
+export type InputValidationError = {
+    decision: InputRecord;
+    error: ErrorObject;
+    message: () => string;
+};
+```

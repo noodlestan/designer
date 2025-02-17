@@ -1,6 +1,6 @@
 export function quantized(num: number, quantize: number = 0, base: number = 0): number {
     if (!Number.isInteger(base)) {
-        throw new Error(`Invalid parameter base. Must be integer, received "${base}"`);
+        throw new Error(`Invalid parameter base. Must be an integer, received "${base}"`);
     }
 
     if (!quantize || quantize < 0) {

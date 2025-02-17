@@ -3,9 +3,9 @@
   "$id": "urn:designer:config",
   "additionalProperties": false,
   "type": "object",
-  "required": ["loader"],
+  "required": ["store"],
   "properties": {
-    "loader": {
+    "store": {
       "type": "object",
       "properties": {
         "schemas": {

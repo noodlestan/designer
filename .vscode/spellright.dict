@@ -103,3 +103,8 @@ micromark
 ast
 frontmatter
 Heros
+storeunexpectederror
+storeoptionserror
+storesourceerror
+qux
+baz
