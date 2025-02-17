@@ -1,6 +1,7 @@
-import type { Color, ColorValueInput, ValueContext } from '../../../types';
-import { createInvalidInputError } from '../../../values';
+import type { ColorValueInput } from '../../../inputs';
+import { type ValueContext, createInvalidInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
+import type { Color } from '../../types';
 import { createColor } from '../helpers';
 
 import { FALLBACK_VALUE as fallback, resolveColorObject, VALUE_NAME as valueName } from './private';

@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { AnchoredColorListParams, ColorOkLCHLiteral, ValueContext } from '../../../types';
+import { AnchoredColorListParams, ColorOkLCHLiteral } from '../../../inputs';
+import { type ValueContext } from '../../../values';
 import { createColorValue } from '../value';
 
 import { generateAnchoredColorList } from './generateAnchoredColorList';

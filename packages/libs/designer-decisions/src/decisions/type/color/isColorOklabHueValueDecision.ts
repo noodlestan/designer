@@ -1,5 +1,6 @@
 import { DECISION_COLOR_OKLAB_HUE_VALUE } from '../../../constants';
-import type { ColorOklabHueValueDecision, DecisionUnknown } from '../../../types';
+import type { ColorOklabHueValueDecision } from '../../../decisions';
+import type { DecisionUnknown } from '../../types';
 
 export const isColorOklabHueValueDecision = (
     decision: DecisionUnknown,

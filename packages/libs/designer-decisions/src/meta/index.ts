@@ -3,6 +3,7 @@ import { createDecisionModelMetas, createDecisionTypeMeta } from './functions';
 import { SpaceDecisionTypes } from './space';
 
 export * from './data';
+export * from './types';
 
 export const DECISION_TYPES = [...ColorDecisionTypes, ...SpaceDecisionTypes];
 

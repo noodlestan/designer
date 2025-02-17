@@ -1,5 +1,11 @@
-import { createSpaceScale, createSpaceValue, generateAnchoredSeries } from '../../../primitives';
-import type { DecisionModelFactory, SpaceScale, SpaceScaleAnchoredInput } from '../../../types';
+import type { SpaceScaleAnchoredInput } from '../../../inputs';
+import {
+    type SpaceScale,
+    createSpaceScale,
+    createSpaceValue,
+    generateAnchoredSeries,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createSpaceScaleAnchoredModel: DecisionModelFactory<
     SpaceScale,

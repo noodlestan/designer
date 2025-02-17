@@ -1,5 +1,11 @@
-import { createColorSet, createColorValue, generateAnchoredColorList } from '../../../primitives';
-import type { ColorSet, ColorSetAnchoredInput, DecisionModelFactory } from '../../../types';
+import type { ColorSetAnchoredInput } from '../../../inputs';
+import {
+    type ColorSet,
+    createColorSet,
+    createColorValue,
+    generateAnchoredColorList,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSetAnchoredModel: DecisionModelFactory<
     ColorSet,

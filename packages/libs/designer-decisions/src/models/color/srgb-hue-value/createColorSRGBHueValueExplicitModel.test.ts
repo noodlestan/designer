@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { ColorSRGBHueValueExplicitInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { ColorSRGBHueValueExplicitInput } from '../../../types';
 
 import { createColorSRGBHueValueExplicitModel } from './createColorSRGBHueValueExplicitModel';
 

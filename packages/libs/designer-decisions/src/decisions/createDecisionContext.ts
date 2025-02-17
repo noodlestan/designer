@@ -1,10 +1,6 @@
-import type {
-    DecisionContext,
-    DecisionError,
-    DecisionRef,
-    DecisionRefResolver,
-    InputRecord,
-} from '../types';
+import type { DecisionRef, DecisionRefResolver, InputRecord } from '../inputs';
+
+import type { DecisionContext, DecisionError } from './types';
 
 export const createDecisionContext = (
     ref: DecisionRef,

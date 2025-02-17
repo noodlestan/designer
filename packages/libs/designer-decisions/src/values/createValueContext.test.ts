@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createDecisionContext } from '../decisions';
-import type { ValueContext } from '../types';
 
 import { createValueContext } from './createValueContext';
 import * as functionsModule from './functions';
 import { createValueContextPrivate } from './functions/createValueContextPrivate';
+import { type ValueContext } from './types';
 
 vi.mock('./functions/createValueContextPrivate', () => ({
     createValueContextPrivate: vi.fn(),

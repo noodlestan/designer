@@ -1,4 +1,4 @@
-import type { NumberClamp, NumberModifier } from '../../../types';
+import type { NumberClamp, NumberModifier } from '../../../inputs';
 
 import { clamped } from './clamped';
 import { generateNumberSeriesStep } from './functions/generateNumberSeriesStep';

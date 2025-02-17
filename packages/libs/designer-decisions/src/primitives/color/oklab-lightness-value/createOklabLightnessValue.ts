@@ -1,11 +1,8 @@
-import type {
-    ColorChannelValueOptions,
-    ColorOklabLightnessInput,
-    OklabLightnessValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorOklabLightnessInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import type { ColorChannelValueOptions, OklabLightnessValue } from '../../types';
 import {
     COLOR_CHANNEL_OKLAB_LIGHTNESS_BASE as base,
     COLOR_CHANNEL_OKLAB_LIGHTNESS_NAME as name,

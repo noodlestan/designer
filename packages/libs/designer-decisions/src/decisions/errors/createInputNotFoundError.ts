@@ -1,4 +1,4 @@
-import type { DecisionNotFoundError } from '../../types';
+import type { DecisionNotFoundError } from '../types';
 
 type Attributes = Omit<DecisionNotFoundError, 'message'>;
 

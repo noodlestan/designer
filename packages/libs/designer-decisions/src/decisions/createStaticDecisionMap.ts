@@ -1,7 +1,8 @@
 import type { ErrorObject } from 'ajv';
 
-import type { StaticDecisionMap, StaticInputMap } from '../decisions';
-import type { BaseValue, Decision, DecisionContext, DecisionRef, InputRecord } from '../types';
+import type { Decision, DecisionContext } from '../decisions';
+import type { DecisionRef, InputRecord, StaticDecisionMap, StaticInputMap } from '../inputs';
+import type { BaseValue } from '../primitives';
 
 import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';

@@ -1,9 +1,11 @@
-import { createSRGBHueSet, createSRGBHueValue, generateAnchoredSeries } from '../../../primitives';
-import type {
-    ColorSRGBHueSetAnchoredInput,
-    DecisionModelFactory,
-    SRGBHueSet,
-} from '../../../types';
+import type { ColorSRGBHueSetAnchoredInput } from '../../../inputs';
+import {
+    type SRGBHueSet,
+    createSRGBHueSet,
+    createSRGBHueValue,
+    generateAnchoredSeries,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
     SRGBHueSet,

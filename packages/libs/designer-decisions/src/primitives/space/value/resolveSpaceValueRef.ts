@@ -1,10 +1,12 @@
 import { isSpaceScaleDecision, isSpaceValueDecision } from '../../../decisions';
-import type { DecisionRef, SpaceValue, SpaceWithUnits, ValueContext } from '../../../types';
+import type { DecisionRef, SpaceWithUnits } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../functions';
+import type { SpaceValue } from '../../types';
 
 import {
     REF_CHECKED_TYPES as accepted,

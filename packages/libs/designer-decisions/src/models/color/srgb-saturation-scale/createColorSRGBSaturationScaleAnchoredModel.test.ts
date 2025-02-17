@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { ColorSRGBSaturationScaleAnchoredInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { ColorSRGBSaturationScaleAnchoredInput } from '../../../types';
 
 import { createColorSRGBSaturationScaleAnchoredModel } from './createColorSRGBSaturationScaleAnchoredModel';
 

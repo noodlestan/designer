@@ -1,5 +1,4 @@
-import { DECISION_TYPES } from '../../meta';
-import type { DecisionType, DecisionTypeModel } from '../../types';
+import { DECISION_TYPES, type DecisionType, type DecisionTypeModel } from '../../meta';
 
 type DecisionTypeAndModelByModel = Record<string, [DecisionType, DecisionTypeModel]>;
 

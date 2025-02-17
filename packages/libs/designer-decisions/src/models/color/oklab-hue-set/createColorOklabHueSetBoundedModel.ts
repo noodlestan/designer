@@ -1,9 +1,11 @@
-import { createOklabHueSet, createOklabHueValue, generateBoundedSeries } from '../../../primitives';
+import type { ColorOklabHueSetBoundedInput } from '../../../inputs';
 import {
-    type ColorOklabHueSetBoundedInput,
-    type DecisionModelFactory,
     type OklabHueSet,
-} from '../../../types';
+    createOklabHueSet,
+    createOklabHueValue,
+    generateBoundedSeries,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
     OklabHueSet,

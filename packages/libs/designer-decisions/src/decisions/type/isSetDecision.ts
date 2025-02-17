@@ -1,5 +1,6 @@
 import { SET_DECISION_TYPES } from '../../constants';
-import type { BaseSet, Decision, DecisionUnknown } from '../../types';
+import type { BaseSet } from '../../primitives';
+import type { Decision, DecisionUnknown } from '../types';
 
 export const isSetDecision = (
     decision: DecisionUnknown,

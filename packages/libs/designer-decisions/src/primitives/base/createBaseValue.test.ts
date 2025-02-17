@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { ValueContext } from '../../types';
+import { type ValueContext } from '../../values';
 
 import { createBaseValue } from './createBaseValue';
 

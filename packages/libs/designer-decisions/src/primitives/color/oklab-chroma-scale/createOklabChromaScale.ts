@@ -1,6 +1,7 @@
-import type { OklabChromaScale, OklabChromaValue, ValueContext } from '../../../types';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
+import type { OklabChromaScale, OklabChromaValue } from '../../types';
 
 export const createOklabChromaScale = (
     context: ValueContext,

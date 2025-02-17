@@ -1,11 +1,8 @@
-import type {
-    ColorChannelValueOptions,
-    ColorSRGBLightnessInput,
-    SRGBLightnessValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorSRGBLightnessInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import type { ColorChannelValueOptions, SRGBLightnessValue } from '../../types';
 import {
     COLOR_CHANNEL_SRGB_LIGHTNESS_BASE as base,
     COLOR_CHANNEL_SRGB_LIGHTNESS_NAME as name,

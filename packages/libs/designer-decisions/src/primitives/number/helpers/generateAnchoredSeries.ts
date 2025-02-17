@@ -1,4 +1,4 @@
-import type { AnchoredNumberSeriesParams, NumberClamp } from '../../../types';
+import type { AnchoredNumberSeriesParams, NumberClamp } from '../../../inputs';
 
 import { generateNumberSeries } from './generateNumberSeries';
 import { quantized } from './quantized';

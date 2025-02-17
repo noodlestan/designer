@@ -1,4 +1,4 @@
-import type { DecisionValueRefIndexError } from '../../types';
+import type { DecisionValueRefIndexError } from '../types';
 
 type Attributes = Omit<DecisionValueRefIndexError, 'message'>;
 

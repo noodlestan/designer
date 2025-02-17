@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import type { LookupContexts, ParentValueContext } from '../../types';
+import { LookupContexts } from '../../lookup';
+import { ParentValueContext } from '../types';
 
 import { resolveLookupContext } from './resolveLookupContext';
 

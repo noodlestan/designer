@@ -4,18 +4,14 @@ import {
     isColorSetDecision,
     isColorValueDecision,
 } from '../../../decisions';
-import type {
-    ColorSRGBHSLiteral,
-    ColorValue,
-    DecisionRef,
-    SRGBHueValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorSRGBHSLiteral, DecisionRef } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../functions';
+import type { ColorValue, SRGBHueValue } from '../../types';
 
 import {
     REF_CHECKED_TYPES as accepted,

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { AnchoredNumberSeriesParams, NumberClamp } from '../../../types';
+import type { AnchoredNumberSeriesParams, NumberClamp } from '../../../inputs';
 
 import { generateAnchoredSeries } from './generateAnchoredSeries';
 

@@ -1,5 +1,6 @@
 import { DECISION_COLOR_SRGB_SATURATION_VALUE } from '../../../constants';
-import type { ColorSRGBSaturationValueDecision, DecisionUnknown } from '../../../types';
+import type { ColorSRGBSaturationValueDecision } from '../../../decisions';
+import type { DecisionUnknown } from '../../types';
 
 export const isColorSRGBSaturationValueDecision = (
     decision: DecisionUnknown,

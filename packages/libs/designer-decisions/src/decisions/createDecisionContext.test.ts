@@ -1,14 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type {
-    DecisionContext,
-    DecisionError,
-    DecisionRef,
-    DecisionRefResolver,
-    InputRecord,
-} from '../types';
+import type { DecisionRef, DecisionRefResolver, InputRecord } from '../inputs';
 
 import { createDecisionContext } from './createDecisionContext';
+import { DecisionContext, DecisionError } from './types';
 
 describe('createDecisionContext()', () => {
     const mockRef: DecisionRef = { $uuid: 'decision-1' };

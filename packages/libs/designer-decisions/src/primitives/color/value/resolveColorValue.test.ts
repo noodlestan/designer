@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ColorValueInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { ColorValueInput } from '../../../types';
 import { createColor } from '../helpers';
 
 import { FALLBACK_VALUE, VALUE_NAME, resolveColorObject } from './private';

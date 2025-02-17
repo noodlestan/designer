@@ -1,4 +1,4 @@
-import type { DecisionUnexpectedError } from '../../types';
+import type { DecisionUnexpectedError } from '../types';
 
 type Attributes = Omit<DecisionUnexpectedError, 'message'>;
 

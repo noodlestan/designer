@@ -1,12 +1,11 @@
 import type { ErrorObject } from 'ajv';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import type { InputRecord, StaticInputMap } from '../inputs/types';
 import { createStaticDecisionMockImplementation, createStaticInputMapMock } from '../mocks';
-import type { InputRecord } from '../types';
 
 import { createStaticDecision } from './createStaticDecision';
 import { createStaticDecisionMap } from './createStaticDecisionMap';
-import type { StaticInputMap } from './types';
 
 vi.mock('./createStaticDecision', () => ({
     createStaticDecision: vi.fn(),

@@ -1,6 +1,8 @@
 import { vi } from 'vitest';
 
-import type { BaseValue, DecisionModel, ValueContext } from '../types';
+import type { DecisionModel } from '../models';
+import type { BaseValue } from '../primitives';
+import type { ValueContext } from '../values';
 
 export function createDecisionModelMock(mockValue: string): DecisionModel<string, object> {
     return {

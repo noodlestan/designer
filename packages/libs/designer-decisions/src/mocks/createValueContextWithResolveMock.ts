@@ -1,6 +1,7 @@
 import { type Mock, vi } from 'vitest';
 
-import type { DecisionContext, DecisionUnknown, ValueContext } from '../types';
+import type { DecisionContext, DecisionUnknown } from '../decisions';
+import type { ValueContext } from '../values';
 
 import { createValueContextMock } from './createValueContextMock';
 

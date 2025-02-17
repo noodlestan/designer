@@ -1,6 +1,7 @@
 import { type Mock, vi } from 'vitest';
 
-import type { DecisionContext, ValueContext } from '../types';
+import type { DecisionContext } from '../decisions';
+import type { ValueContext } from '../values';
 
 type Mocks = {
     resolveSpy: Mock;

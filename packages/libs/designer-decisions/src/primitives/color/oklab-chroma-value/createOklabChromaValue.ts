@@ -1,11 +1,8 @@
-import type {
-    ColorChannelValueOptions,
-    ColorOklabChromaInput,
-    OklabChromaValue,
-    ValueContext,
-} from '../../../types';
+import type { ColorOklabChromaInput } from '../../../inputs';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createNumericValue } from '../../number';
+import type { ColorChannelValueOptions, OklabChromaValue } from '../../types';
 import {
     COLOR_CHANNEL_OKLAB_CHROMA_BASE as base,
     COLOR_CHANNEL_OKLAB_CHROMA_NAME as name,

@@ -1,5 +1,6 @@
-import type { Color, ColorObjectInput, ValueContext } from '../../../../types';
-import { createInvalidInputError } from '../../../../values';
+import type { ColorObjectInput } from '../../../../inputs';
+import { type ValueContext, createInvalidInputError } from '../../../../values';
+import type { Color } from '../../../types';
 import { createColor } from '../../helpers';
 import { resolveOklabChromaValue } from '../../oklab-chroma-value';
 import { resolveOklabHueValue } from '../../oklab-hue-value';

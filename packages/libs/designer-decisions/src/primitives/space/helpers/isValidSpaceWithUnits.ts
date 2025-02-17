@@ -1,4 +1,4 @@
-import type { SpaceWithUnits } from '../../../types';
+import type { SpaceWithUnits } from '../../../inputs';
 
 import { VALID_UNITS } from './constants';
 

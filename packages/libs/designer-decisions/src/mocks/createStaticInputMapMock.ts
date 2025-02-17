@@ -1,8 +1,7 @@
 import type { ErrorObject } from 'ajv';
 import { vi } from 'vitest';
 
-import type { StaticInputMap } from '../decisions';
-import type { InputRecord } from '../types';
+import type { InputRecord, StaticInputMap } from '../inputs';
 
 export function createStaticInputMapMock(
     inputs?: InputRecord[],

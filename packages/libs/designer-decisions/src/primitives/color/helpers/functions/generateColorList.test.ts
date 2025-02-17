@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type {
+import {
     ColorModifierHSL,
     ColorModifierLCH,
     ColorOkLCHLiteral,
     ColorSRGBHSLiteral,
-    ValueContext,
-} from '../../../../types';
+} from '../../../../inputs';
+import { type ValueContext } from '../../../../values';
 import { createColorValue } from '../../value';
 
 import { generateColorList } from './generateColorList';

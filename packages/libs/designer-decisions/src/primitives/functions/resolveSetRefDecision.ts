@@ -1,5 +1,7 @@
-import type { BaseSet, Decision, DecisionRef, ValueContext } from '../../types';
-import { createRefIndexError } from '../../values';
+import type { Decision } from '../../decisions';
+import type { DecisionRef } from '../../inputs';
+import { type ValueContext, createRefIndexError } from '../../values';
+import type { BaseSet } from '../types';
 
 export const resolveSetRefDecision = <
     V = unknown,

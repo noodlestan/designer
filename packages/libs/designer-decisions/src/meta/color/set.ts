@@ -3,8 +3,8 @@ import {
     createColorSetBoundedModel,
     createColorSetExplicitModel,
 } from '../../models';
-import type { DecisionType } from '../../types';
 import { castFactory } from '../functions';
+import type { DecisionType } from '../types';
 
 export const ColorSetDecisionTypes: DecisionType[] = [
     {

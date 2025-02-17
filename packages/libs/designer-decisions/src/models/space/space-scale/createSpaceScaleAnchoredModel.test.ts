@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { SpaceScaleAnchoredInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { SpaceScaleAnchoredInput } from '../../../types';
 
 import { createSpaceScaleAnchoredModel } from './createSpaceScaleAnchoredModel';
 

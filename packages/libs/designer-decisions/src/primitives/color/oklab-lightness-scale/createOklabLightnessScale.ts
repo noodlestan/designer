@@ -1,6 +1,7 @@
-import type { OklabLightnessScale, OklabLightnessValue, ValueContext } from '../../../types';
+import type { ValueContext } from '../../../values';
 import { createBaseValue } from '../../base';
 import { createItemSet } from '../../set';
+import type { OklabLightnessScale, OklabLightnessValue } from '../../types';
 
 export const createOklabLightnessScale = (
     context: ValueContext,

@@ -1,9 +1,10 @@
-import { createOklabChromaScale, createOklabChromaValue } from '../../../primitives';
-import type {
-    ColorOklabChromaScaleExplicitInput,
-    DecisionModelFactory,
-    OklabChromaScale,
-} from '../../../types';
+import type { ColorOklabChromaScaleExplicitInput } from '../../../inputs';
+import {
+    type OklabChromaScale,
+    createOklabChromaScale,
+    createOklabChromaValue,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabChromaScaleExplicitModel: DecisionModelFactory<
     OklabChromaScale,

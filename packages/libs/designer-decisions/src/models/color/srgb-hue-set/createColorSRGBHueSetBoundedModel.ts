@@ -1,9 +1,11 @@
-import { createSRGBHueSet, createSRGBHueValue, generateBoundedSeries } from '../../../primitives';
+import type { ColorSRGBHueSetBoundedInput } from '../../../inputs';
 import {
-    type ColorSRGBHueSetBoundedInput,
-    type DecisionModelFactory,
     type SRGBHueSet,
-} from '../../../types';
+    createSRGBHueSet,
+    createSRGBHueValue,
+    generateBoundedSeries,
+} from '../../../primitives';
+import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
     SRGBHueSet,

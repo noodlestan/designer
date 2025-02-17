@@ -1,4 +1,4 @@
-import type { ColorChannelName } from '../../../types';
+import type { ColorChannelName } from '../../types';
 
 export const clampChannelValue = (rawValue: number, channel: ColorChannelName): number => {
     switch (channel) {

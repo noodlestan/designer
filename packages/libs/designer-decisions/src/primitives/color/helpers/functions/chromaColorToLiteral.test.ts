@@ -1,12 +1,12 @@
 import chroma from 'chroma-js';
 import { describe, expect, it } from 'vitest';
 
-import type {
+import {
     ColorOkLCHLiteral,
     ColorOkLabLiteral,
     ColorSRGBChannelsLiteral,
     ColorSRGBHSLiteral,
-} from '../../../../types';
+} from '../../../../inputs';
 
 import { chromaColorToLiteral } from './chromaColorToLiteral';
 

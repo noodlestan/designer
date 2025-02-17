@@ -1,4 +1,4 @@
-import type { NumberClamp } from '../../../types';
+import type { NumberClamp } from '../../../inputs';
 
 export function clamped(num: number, clamp?: NumberClamp): number {
     if (clamp) {

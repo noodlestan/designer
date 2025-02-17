@@ -1,9 +1,5 @@
-import type {
-    AnchoredColorListParams,
-    ColorFormat,
-    ColorObjectLiteral,
-    ColorValue,
-} from '../../../types';
+import type { AnchoredColorListParams, ColorFormat, ColorObjectLiteral } from '../../../inputs';
+import type { ColorValue } from '../../types';
 
 import { generateColorList } from './functions';
 

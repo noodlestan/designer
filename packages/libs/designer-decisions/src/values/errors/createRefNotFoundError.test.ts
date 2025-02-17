@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionRef, ValueContext } from '../../types';
+import { DecisionRef } from '../../inputs';
+import { type ValueContext } from '../types';
 
 import { createRefNotFoundError } from './createRefNotFoundError';
 

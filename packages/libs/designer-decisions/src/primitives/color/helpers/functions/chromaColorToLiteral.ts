@@ -1,6 +1,6 @@
 import type { Color as ChromaColor } from 'chroma-js';
 
-import type { ColorFormat, ColorObjectLiteral } from '../../../../types';
+import type { ColorFormat, ColorObjectLiteral } from '../../../../inputs';
 import { quantized } from '../../../number';
 import {
     COLOR_CHANNEL_OKLAB_CHROMA_BASE as OKLAB_CHROMA_BASE,
