@@ -43,7 +43,7 @@ Additionally, the following two items - when provided in whatever order - determ
 ## Usage
 
 ```js
-const store = await loader();
+const store = await build();
 const produced = produceDecisions(store);
 produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 ```

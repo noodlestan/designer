@@ -1,16 +1,15 @@
-import type { SchemaSource } from '@noodlestan/designer-decisions';
+import type { StoreContext } from '../store';
 
-import { loadSchemasFromConfig } from './loadSchemasFromConfig';
+import { loadSchemasFromSource } from './loadSchemasFromSource';
 import type { SchemaData, SchemaId, SchemaMap } from './types';
 
-export const loadSchemasFromConfigs = async (
-    configs: SchemaSource[],
-    moduleResolver?: (moduleName: string) => Promise<string>,
-): Promise<SchemaMap> => {
+export const loadSchemasFromConfigs = async (context: StoreContext): Promise<SchemaMap> => {
+    const { schemas: schemaSources } = context.options();
+
     const schemas = new Map<SchemaId, SchemaData>();
 
-    for (const config of configs) {
-        await loadSchemasFromConfig(schemas, config, moduleResolver);
+    for (const source of schemaSources) {
+        await loadSchemasFromSource(context, schemas, source);
     }
     return schemas;
 };

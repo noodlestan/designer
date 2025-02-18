@@ -10,7 +10,7 @@ type HeroAction = {
 };
 
 export function processHeros() {
-    return function (tree: Root, file: VFile): void {
+    return function (_tree: Root, file: VFile): void {
         const { frontmatter } = file.data.astro;
 
         if (typeof frontmatter.hero === 'object') {

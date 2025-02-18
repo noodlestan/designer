@@ -1,10 +1,6 @@
 import type { ErrorObject } from 'ajv';
 
-import type { DecisionLoaderOptions } from '../../loader';
-
-export type DeepPartial<T> = {
-    [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
-};
+import type { StoreOptions } from '../../store';
 
 export type ResolvedConfig<T> = {
     config: T;
@@ -17,9 +13,9 @@ export type DesignerConfigError = {
 };
 
 export type DesignerConfig = {
-    loader: {
-        decisions: DecisionLoaderOptions['decisions'];
-        schemas: DecisionLoaderOptions['schemas'];
-        moduleResolver?: DecisionLoaderOptions['resolver'];
+    store: {
+        decisions: StoreOptions['decisions'];
+        schemas: StoreOptions['schemas'];
+        moduleResolver?: StoreOptions['resolver'];
     };
 };

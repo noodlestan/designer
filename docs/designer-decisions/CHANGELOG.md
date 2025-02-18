@@ -8,7 +8,7 @@
 - Display decision value warnings in components ([#21](https://github.com/noodlestan/designer/issues/21))
 - Create `dd.config` entry point and helpers ([#161](https://github.com/noodlestan/designer/issues/161))
 - Switch from Vite to esbuild where possible ([#163](https://github.com/noodlestan/designer/issues/163))
-- Make package resolution param optional in createDecisionLoader() ([#80](https://github.com/noodlestan/designer/issues/80))
+- Make package resolution param optional in staticStoreBuilder() ([#80](https://github.com/noodlestan/designer/issues/80))
 
 ### Upgrade dependencies
 
@@ -172,7 +172,7 @@
 - Some error handling for contexts and factories.
 - Color and space visualization components, including `Space*Viz` and `color viz options`.
 - Components for N/A states: `ShowDecisionUnavailable`, `ShowDecisionTypeUnavailable`.
-- `createDecisionLoader()` now supports specifying "package" data sources.
+- `staticStoreBuilder()` now supports specifying "package" data sources.
 
 ### Changed
 

@@ -1,0 +1,38 @@
+---
+title: StoreError
+slug: api/designer-functions/Store/Types/StoreError
+sidebar:
+    order: 0
+---
+
+Captures an error produced while building a decision [Store](/api/designer-functions/Store/Types/Store).
+
+```ts
+export type StoreError = {
+    name: string;
+    error?: unknown;
+    message: () => string;
+};
+```
+
+## Errors
+
+### StoreUnexpectedError
+
+An unexpected error occurred while building the store.
+
+### StoreOptionsError
+
+The [StoreOptions](/api/designer-functions/Store/Types/StoreOptions), either provided to `createStoreContext()` or expressed in the [configuration](/api/configuration), are invalid.
+
+### StoreSourceError
+
+One of the [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) or [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource), provided to `createStoreContext()` or expressed in the [configuration](/api/configuration), is invalid.
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / StoreOptions](/api/designer-functions/Store/Types/StoreOptions)
+-   [API / designer-functions / createStoreContext()](/api/designer-functions/Store/createStoreContext)
+-   [API / designer-functions / createStaticStore()](/api/designer-functions/Store/createStaticStore)

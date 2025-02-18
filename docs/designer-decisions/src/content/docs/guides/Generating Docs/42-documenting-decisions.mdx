@@ -78,7 +78,7 @@ import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 
 export default defineConfig({
-    loader: {
+    store: {
         decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
         schemas: [DECISION_SCHEMAS],
     },
@@ -90,14 +90,14 @@ In this example we configured the Designer Decisions [Sample and Demo Data](http
 <Aside type="tip">
     Be sure to check the [Loading and
     Validating](/guides/loading-and-validating-design-decisions/#configuring-designer-decisions)
-    guide for more options, including how to store the decision data in another package.
+    guide for more options.
 </Aside>
 
 In the [API / Configuration](/api/configuration) section you can find all configuration options and helpers.
 
 ### Add the Astro Integration
 
-Our [Astro integration](/integrations/Astro) provides:
+What our [Astro integration](/integrations/Astro) does:
 
 -   Connects our `<Show*/>` components to the decision store;
 -   Injecting Designer Decision styles into the page;
@@ -124,17 +124,20 @@ export default defineConfig({
 });
 ```
 
-<Aside type="tip">
-    If your Astro site in based on [Starlight](), like we do in our [Astro
-    Boilerplates](/examples/boilerplates/#astrostarlight), the `designerDecisionsIntegration` needs
-    to be added after `starlight()` to make sure our Starlight customizations are applied correctly.
+<Aside type="note">
+    If your Astro site is based on [Starlight](https://starlight.astro.build/), like we do in our
+    [Astro Boilerplates](/examples/boilerplates/#astrostarlight), the `designerDecisionsIntegration`
+    must be added after `starlight()` to make sure Designer Decisions customizations are applied.
 </Aside>
 
 ### Decision data
 
 Create some decision files in your local `./data` directory.
 
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, you can find sample data for all [Decision Types](/models/decision-types) that you can easily copy paste into your project.
+<Aside type="tip">
+    In the [Models / Decision Types](/models/decision-types) reference you will find sample data for
+    each of the built-in decision models.
+</Aside>
 
 <FileTree>
 - data/

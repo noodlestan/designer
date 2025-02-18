@@ -1,18 +1,20 @@
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { loadSchemasFromConfig } from './loadSchemasFromConfig';
+import { type StoreContext, type StoreOptions, createStoreContext } from '../store';
+
 import { loadSchemasFromConfigs } from './loadSchemasFromConfigs';
+import { loadSchemasFromSource } from './loadSchemasFromSource';
 import type { SchemaData, SchemaMap } from './types';
 
-vi.mock('./loadSchemasFromConfig', () => ({
-    loadSchemasFromConfig: vi.fn(),
+vi.mock('./loadSchemasFromSource', () => ({
+    loadSchemasFromSource: vi.fn(),
 }));
 
-const loadSchemasFromConfigMock = vi.mocked(loadSchemasFromConfig);
+const loadSchemasFromSourceMock = vi.mocked(loadSchemasFromSource);
 
-const mockConfig1: SchemaSource = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
-const mockConfig2: SchemaSource = {
+const mockSource1: SchemaSource = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
+const mockSource2: SchemaSource = {
     urnBase: 'bar',
     source: { type: 'package', package: '@', path: '/foo' },
 };
@@ -28,40 +30,34 @@ const mockSchema2: SchemaData = {
 };
 
 describe('loadSchemasFromConfigs()', () => {
+    const options: StoreOptions = {
+        schemas: [mockSource1, mockSource2],
+        decisions: ['path'],
+    };
+    let context: StoreContext;
+
     beforeEach(() => {
+        context = createStoreContext(options);
         vi.clearAllMocks();
     });
 
     it('should load and aggregate schemas from multiple configs', async () => {
-        const mockConfigs: SchemaSource[] = [mockConfig1, mockConfig2];
-
-        loadSchemasFromConfigMock.mockImplementationOnce(async (schemaMap: SchemaMap) => {
-            schemaMap.set('schema1', mockSchema1);
-        });
-        loadSchemasFromConfigMock.mockImplementationOnce(async (schemaMap: SchemaMap) => {
-            schemaMap.set('schema2', mockSchema2);
-        });
-
-        const result = await loadSchemasFromConfigs(mockConfigs, vi.fn());
-
-        expect(result.size).toBe(2);
-        expect(result.get('schema1')).toEqual(mockSchema1);
-        expect(result.get('schema2')).toEqual(mockSchema2);
-        expect(loadSchemasFromConfig).toHaveBeenCalledTimes(2);
-    });
-
-    it('should throw an error if one of the configs fails', async () => {
-        const mockConfigs: SchemaSource[] = [mockConfig1, mockConfig2];
-
-        loadSchemasFromConfigMock.mockImplementationOnce(async (schemaMap: SchemaMap) => {
-            schemaMap.set('schema1', mockSchema1);
-        });
-        loadSchemasFromConfigMock.mockRejectedValueOnce(new Error('Failed to load config'));
-
-        await expect(loadSchemasFromConfigs(mockConfigs, vi.fn())).rejects.toThrow(
-            'Failed to load config',
+        loadSchemasFromSourceMock.mockImplementationOnce(
+            async (context: StoreContext, schemaMap: SchemaMap) => {
+                schemaMap.set('schema1', mockSchema1);
+            },
+        );
+        loadSchemasFromSourceMock.mockImplementationOnce(
+            async (context: StoreContext, schemaMap: SchemaMap) => {
+                schemaMap.set('schema2', mockSchema2);
+            },
         );
 
-        expect(loadSchemasFromConfig).toHaveBeenCalledTimes(2);
+        const result = await loadSchemasFromConfigs(context);
+
+        expect(result.size).toEqual(2);
+        expect(result.get('schema1')).toEqual(mockSchema1);
+        expect(result.get('schema2')).toEqual(mockSchema2);
+        expect(loadSchemasFromSource).toHaveBeenCalledTimes(2);
     });
 });

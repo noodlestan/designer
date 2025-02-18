@@ -5,4 +5,18 @@ sidebar:
     order: 0
 ---
 
-🚧
+Provides an API to produce decision values and access to underlying data.
+
+```ts
+export type Decision<V extends BaseValue<unknown>> = {
+    type: () => string;
+    uuid: () => string | undefined;
+    name: () => string;
+    description: () => string | undefined;
+    inputs: () => InputRecord[];
+    input: () => InputRecord;
+    model: () => string;
+    params: () => object;
+    produce: (context?: LookupContexts | ParentValueContext) => V;
+};
+```

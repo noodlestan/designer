@@ -41,9 +41,10 @@ If you otherwise have to work with different scenarios and chose to not use `dd.
 
 ```ts
 const config = loadConfig();
-const loader = createDecisionLoader(config.loader);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 
-const store = await loader();
+const store = await build();
 ```
 
 ### Creating an isolated config (Advanced)
@@ -55,14 +56,14 @@ If you prefer not to use `dd.config.mjs` configuration file, you can expose your
 ```ts
 // src/config
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
-import { createDecisionLoader } from '@noodlestan/designer-functions';
+import { staticStoreBuilder } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
-const loader = {
+const store = {
     decisions: [DEMO_DATA, './data'],
     schemas: [DECISION_SCHEMAS],
 };
-const config = { loader };
+const config = { store };
 
 export default () => loadConfig(config);
 ```

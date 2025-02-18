@@ -2,6 +2,6 @@
 export * from './cli';
 export * from './config';
 export * from './helpers';
-export * from './loader';
+export * from './builder';
 export * from './schemas';
 export * from './store';

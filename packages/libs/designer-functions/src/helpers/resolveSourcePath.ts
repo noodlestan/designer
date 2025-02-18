@@ -7,26 +7,28 @@ import { resolveNodeModule } from './resolveNodeModule';
 
 export async function resolveSourcePath(
     source: DataSource,
-    modulePathResolver?: (moduleName: string) => Promise<string>,
+    moduleResolver?: (packageName: string) => Promise<string>,
 ): Promise<string> {
     if (source.type === 'package') {
         const packageSource = source as DataSourcePackage;
-        const packagePath = await resolveNodeModule(packageSource.package, modulePathResolver);
-        const resolvedPath = path.join(packagePath, source.path);
+        const packageName = packageSource.package;
+        const packagePath = await resolveNodeModule(packageName, moduleResolver);
+        if (!packagePath) {
+            throw new Error(`Package not found: "${packageName}".`);
+        }
 
+        const resolvedPath = path.join(packagePath, source.path);
         if (!fs.existsSync(resolvedPath)) {
-            throw new Error(
-                `Package directory not found for "${packageSource.package}" at "${resolvedPath}".`,
-            );
+            throw new Error(`Package directory not found: "${resolvedPath}".`);
         }
         return resolvedPath;
     } else if (source.type === 'path') {
         const resolvedPath = path.resolve(source.path);
         if (!fs.existsSync(resolvedPath)) {
-            throw new Error(`Path not found for "${source.path}" at "${resolvedPath}".`);
+            throw new Error(`Path not found: "${resolvedPath}".`);
         }
         return resolvedPath;
     } else {
-        throw new Error(`Invalid source: "${JSON.stringify(source)}".`);
+        throw new Error(`Invalid data source: "${JSON.stringify(source)}".`);
     }
 }

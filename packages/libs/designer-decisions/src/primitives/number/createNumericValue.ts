@@ -17,7 +17,7 @@ export const createNumericValue = (
     const { base, quantize, normalize = noop } = options;
 
     if (base !== undefined && !Number.isInteger(base)) {
-        throw new Error(`Invalid paramter base. Must be integer, received "${base}"`);
+        throw new Error(`Invalid parameter base. Must be an integer, received "${base}"`);
     }
 
     return {

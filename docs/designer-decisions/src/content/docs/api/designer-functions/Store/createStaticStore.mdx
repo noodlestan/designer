@@ -5,25 +5,44 @@ sidebar:
     label: createStaticStore
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
+Creates a [Store](/api/designer-functions/Store/Types/Store) from a pre-validated [StaticInputMap](/api/designer-decisions/Inputs/Types/StaticInputMap).
+
 ```ts
-type createStaticStore = (
-    inputStore: StaticInputMap, //
-) => StaticStore;
+type createStaticStore = (context: StoreContext, inputStore: StaticInputMap) => Store;
 ```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [staticStoreBuilder()](api/designer-functions/Builder/staticStoreBuilder).
+</Aside>
 
 ## Return value
 
-Returns a [StaticStore](/api/designer-functions/Store/Types/StaticStore) that can be used to retrieve decision and resolve decision values.
+Returns a [Store](/api/designer-functions/Store/Types/Store) that can be used to retrieve decision and resolve decision values.
 
 ## Params
 
+#### ༶ `context`: [StoreContext](/api/designer-functions/Store/Types/StoreContext)
+
+A context object that exposes the [StoreOptions](/api/designer-functions/Store/Types/StoreOptions) and collects eventual errors produced building the store.
+
 #### ༶ `inputStore`: [StaticInputMap](/api/designer-decisions/Inputs/Types/StaticInputMap)
+
+Holds all decision input data and provides an API to retrieve decision records and validation errors.
 
 &nbsp;
 
 ## Usage
 
 ```ts
-const inputMap = createStaticInputMap(inputData, validator);
-const store = createStaticStore(inputMap);
+const context = createStoreContext();
+const inputMap = createStaticInputMap(contexty, inputData, validator);
+const store = createStaticStore(context, inputMap);
 ```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-functions / staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder)

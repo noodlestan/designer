@@ -1,15 +1,19 @@
 import { existsSync } from 'fs';
 import { dirname, resolve } from 'path';
 
+import type { DeepPartial } from '../private';
+
 import { defineConfig } from './defineConfig';
-import type { DeepPartial, DesignerConfig } from './private';
+import type { DesignerConfig } from './private';
 import { exitOnConfigError } from './private/exitOnConfigError';
 
 const CONFIG_FILENAME = 'dd.config.mjs';
 
-export async function loadConfig(config?: DeepPartial<DesignerConfig>): Promise<DesignerConfig> {
-    if (config) {
-        return exitOnConfigError(defineConfig(config));
+export async function loadConfig(
+    maybeConfig?: DeepPartial<DesignerConfig>,
+): Promise<DesignerConfig> {
+    if (maybeConfig) {
+        return exitOnConfigError(defineConfig(maybeConfig));
     }
 
     let currentDir = process.cwd();

@@ -1,8 +1,10 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
+import type { DeepPartial } from '../private';
+
 import { createConfigError } from './private';
-import type { DeepPartial, DesignerConfig, ResolvedConfig } from './private';
+import type { DesignerConfig, ResolvedConfig } from './private';
 import schema from './schema/designer-config.json';
 
 const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
@@ -20,7 +22,7 @@ ajv.addKeyword({
     errors: true,
     error: {
         message:
-            'must be a valid ModuleResolverFunction. See https://designer-decisions.noodlestan.org/api/designer-functions/Loader/createDecisionLoader/ for details.',
+            'must be a valid ModuleResolverFunction. See https://designer-decisions.noodlestan.org/api/designer-functions/Builder/staticStoreBuilder/ for details.',
     },
 });
 

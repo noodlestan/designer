@@ -30,7 +30,7 @@ function injectStoreDeclaration(tree: MdxEsmRoot): void {
     if (hasExport(tree, 'store')) {
         return;
     }
-    const storeDeclaration = createMdxjsEsm('export const store = await integrationAPI.loader();');
+    const storeDeclaration = createMdxjsEsm('export const store = await integrationAPI.build();');
     const lastImportIndex = [...tree.children]
         .reverse()
         .findIndex(node => node.type === 'mdxjsEsm');
@@ -51,7 +51,7 @@ function injectStoreProp(node: MdxJsxFlowElement): void {
  *  - Inject two imports at the top:
  *      - import 'astro:content';
  *      - import { integrationAPI } from '@noodlestan/designer-integration-astro';
- *  - Add `export const store = await integrationAPI.loader();` after all the imports.
+ *  - Add `export const store = await integrationAPI.build();` after all the imports.
  *  - Inject the `store={store}` prop in all components that start with <Show... />.
  */
 export const remarkInjectStore: Plugin<[], Root> = function () {

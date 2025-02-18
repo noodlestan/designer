@@ -23,7 +23,7 @@ import {
 
 import { integrationAPI } from '@noodlestan/designer-integration-astro';
 
-export const store = await integrationAPI.loader();
+export const store = await integrationAPI.build();
 export const colorValue = createColorValue(store.createValueContext(), '#009955');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
 export const spaceValue = createSpaceValue(store.createValueContext(), 100);

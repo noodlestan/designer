@@ -1,14 +1,15 @@
-import { createDecisionLoader, loadConfig } from '@noodlestan/designer-functions';
+import { createStoreContext, loadConfig, staticStoreBuilder } from '@noodlestan/designer-functions';
 
 import type { DesignerAstroIntegrationAPI } from './types';
 
 async function createDesignerIntegrationAPI(): Promise<DesignerAstroIntegrationAPI> {
     const config = await loadConfig();
-    const loader = createDecisionLoader(config.loader);
+    const context = createStoreContext(config.store);
+    const build = staticStoreBuilder(context);
 
     return {
         config,
-        loader,
+        build,
     };
 }
 

@@ -6,7 +6,7 @@ sidebar:
 ---
 
 ```ts
-type produceDecisionStatus = (store: StaticStore, input: InputRecord) => ProducedDecisionStatus;
+type produceDecisionStatus = (store: Store, input: InputRecord) => ProducedDecisionStatus;
 ```
 
 Given a populated `store` and an input record, produces the decision value and returns
@@ -30,7 +30,7 @@ type ProducedDecisionStatus = {
 
 ## Params
 
-#### ༶ `store`: [StaticStore](/api/designer-functions/Store/Types/StaticStore)
+#### ༶ `store`: [Store](/api/designer-functions/Store/Types/Store)
 
 #### ༶ `input`: [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord)
 
@@ -39,7 +39,7 @@ type ProducedDecisionStatus = {
 ## Usage
 
 ```js
-const store = await loader();
+const store = await build();
 const statuses = store.records().map(record => produceDecisionStatus(store, record));
 statuses.forEach(status => console.info(formatDecisionStatus(status)));
 ```
