@@ -1,2 +1,3 @@
-// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}.js';`)
-export * from './watchDecisionSources.js';
+// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
+export * from './produceAndReport';
+export * from './watchDecisionSources';
