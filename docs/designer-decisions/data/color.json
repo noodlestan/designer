@@ -2,13 +2,13 @@
   {
     "model": "color-value/explicit",
     "name": "Warm Color",
-    "params": {}
+    "params": { "value": "yellow" }
   },
   {
     "model": "color-value/explicit",
     "name": "Cold Color",
     "params": {
-      "value": { "h": 162, "s": 0.5, "l": null }
+      "value": { "h": 162, "s": 0.5, "l": 0.33 }
     }
   }
 ]

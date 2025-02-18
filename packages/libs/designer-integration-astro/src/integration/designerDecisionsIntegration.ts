@@ -4,7 +4,7 @@ import { defineIntegration } from 'astro-integration-kit';
 
 import { integrationAPI } from '../api';
 import { DESIGNER_INTEGRATION } from '../private';
-import { remarkCollectPermalinks, remarkInjectStore } from '../remark';
+import { remarkInjectStore } from '../remark';
 
 import {
     injectStylesIntegration,
@@ -43,7 +43,7 @@ export const designerDecisionsIntegration = defineIntegration({
                     config.markdown = config.markdown || {};
                     config.markdown.remarkPlugins = config.markdown.remarkPlugins || [];
                     config.markdown.remarkPlugins.push(remarkInjectStore);
-                    config.markdown.remarkPlugins.push([remarkCollectPermalinks, integrationAPI]);
+                    // config.markdown.remarkPlugins.push(remarkCollectPermalinks);
 
                     if (command === 'dev') {
                         injectCollections(params, {

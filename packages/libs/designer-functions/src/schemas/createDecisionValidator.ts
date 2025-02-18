@@ -4,7 +4,7 @@ import Ajv, { type ErrorObject } from 'ajv';
 import type { DecisionValidator, SchemaMap } from './types';
 
 export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator => {
-    const ajv = new Ajv({ verbose: true, allowUnionTypes: true });
+    const ajv = new Ajv({ verbose: true, allowUnionTypes: true, allErrors: false });
 
     Array.from(schemaMap.values()).forEach(schema => {
         ajv.addSchema(schema);

@@ -1,5 +1,5 @@
 import type { AnchoredNumberSeriesParams, ColorOklabLightnessInput } from '../../../primitives';
-import type { InputRecord } from '../../../record';
+import type { InputRecord } from '../../../primitives/record';
 
 export type ColorOklabLightnessValueExplicitInput = InputRecord & {
     model: 'color-oklab-lightness-value/explicit';

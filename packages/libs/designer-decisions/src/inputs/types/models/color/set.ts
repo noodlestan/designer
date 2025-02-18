@@ -1,5 +1,5 @@
 import type { AnchoredColorListParams, ColorValueInput } from '../../primitives';
-import type { InputRecord } from '../../record';
+import type { InputRecord } from '../../primitives/record';
 
 export type ColorSetExplicitInput = InputRecord & {
     model: 'color-set/explicit';

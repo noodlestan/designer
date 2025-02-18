@@ -1,5 +1,5 @@
 import type { AnchoredNumberSeriesParams, ColorOklabChromaInput } from '../../../primitives';
-import type { InputRecord } from '../../../record';
+import type { InputRecord } from '../../../primitives/record';
 
 export type ColorOklabChromaValueExplicitInput = InputRecord & {
     model: 'color-oklab-chroma-value/explicit';

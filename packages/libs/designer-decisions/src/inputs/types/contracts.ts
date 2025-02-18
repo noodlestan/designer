@@ -4,7 +4,7 @@ import type { Decision, DecisionContext } from '../../decisions';
 import type { BaseValue } from '../../primitives';
 
 import type { DecisionRef } from './primitives';
-import type { InputRecord } from './record';
+import type { InputRecord } from './primitives/record';
 import type { InputValidationError } from './validation';
 
 export type DecisionInputData = {

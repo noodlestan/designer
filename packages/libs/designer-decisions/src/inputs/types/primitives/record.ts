@@ -1,4 +1,5 @@
-import type { DecisionContextsInput, DecisionUsageInput } from './primitives';
+import type { DecisionContextsInput } from './contexts';
+import type { DecisionUsageInput } from './usage';
 
 export type DecisionId = string;
 export type DecisionName = string;

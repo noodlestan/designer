@@ -1,5 +1,5 @@
 import type { AnchoredNumberSeriesParams, ColorSRGBHueInput } from '../../../primitives';
-import type { InputRecord } from '../../../record';
+import type { InputRecord } from '../../../primitives/record';
 
 export type ColorSRGBHueValueExplicitInput = InputRecord & {
     model: 'color-srgb-hue-value/explicit';

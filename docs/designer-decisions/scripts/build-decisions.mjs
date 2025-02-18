@@ -1,6 +1,7 @@
 import {
     createStoreContext,
     formatDecisionStatus,
+    formatError,
     loadConfig,
     staticStoreBuilder,
     produceDecisions,
@@ -13,11 +14,17 @@ const build = staticStoreBuilder(context);
 const loadDecisions = async () => {
     const store = await build();
 
-    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
-    console.info(`🐘 ${records.length} records`);
-    context.errors().forEach(error => console.error('🙈 ' + error.message()));
+    console.info('🐘', produced.summary());
+
+    context.errors().forEach(error => console.error(formatError(error)));
+    if (produced.hasErrors()) {
+        throw new Error(`Errors encountered producing decisions.`);
+    }
 };
 
-loadDecisions();
+loadDecisions().catch(err => {
+    console.error(err);
+    process.exit(1);
+});
