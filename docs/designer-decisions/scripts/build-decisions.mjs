@@ -1,28 +1,23 @@
 import {
     createStoreContext,
     formatDecisionStatus,
-    formatError,
     loadConfig,
-    produceDecisions,
     staticStoreBuilder,
+    produceDecisions,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
 const context = createStoreContext(config.store);
-const builder = staticStoreBuilder(context);
+const build = staticStoreBuilder(context);
 
 const loadDecisions = async () => {
-    const store = await builder();
-    context.errors().forEach(error => console.error(formatError(error)));
+    const store = await build();
 
+    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
-
-    console.info(`🐘 ${produced.summary()}`);
-
-    if (context.hasErrors()) {
-        throw new Error(`Store has errors.`);
-    }
+    console.info(`🐘 ${records.length} records`);
+    context.errors().forEach(error => console.error('🙈 ' + error.message()));
 };
 
 loadDecisions();

@@ -88,22 +88,31 @@ We will use the [loadConfig()](/api/designer-functions/Config/loadConfig) helper
 ```js "staticStoreBuilder"
 // scripts/validate-decisions.js
 import path from 'path';
-import { staticStoreBuilder, loadConfig } from '@noodlestan/designer-functions';
+import { createStoreContext, staticStoreBuilder, loadConfig } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const build = staticStoreBuilder(config.store);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 ```
 
 The `build()` functions returns a [pre-validated decision store](/api/designer-functions/Store/Types/Store) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
 
 Add the following code to execute the builder and list each records' `name` and `model`.
 
-```js collapse={1-5} "store.records()" "context().errors()"
+We will also format any eventual errors to better assist us if something goes wrong.
+
+```diff lang="js" collapse={8-12} "formatError" "store.records()" "context.errors()"
 // scripts/validate-decisions.js
-import { staticStoreBuilder, loadConfig } from '@noodlestan/designer-functions';
+import {
+    createStoreContext,
++  formatError,
+    loadConfig,
+    staticStoreBuilder,
+} from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const build = staticStoreBuilder(config.store);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 
 const loadDecisions = async () => {
     const store = await build();
@@ -111,9 +120,7 @@ const loadDecisions = async () => {
     const records = store.records();
     records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
-    context()
-        .errors()
-        .forEach(({ msg, error }) => console.error(msg, error));
+    context.errors().forEach(error => console.error(formatError(error)));
 };
 
 loadDecisions();
@@ -148,9 +155,13 @@ Let's start by adding a single `color.json` file in the `data/` directory, where
 
 </FileTree>
 
-In the [Models / Decision Types](/models/decision-types) reference you will find sample data for each of the built-in decision models.
+<Aside type="tip">
+    In the [Models / Decision Types](/models/decision-types) reference you will find sample data for
+    each of the built-in decision models.
+</Aside>
 
-Here, we created a couple of [Color Value](/models/decision-types/color-value#sample-data) decisions based on the samples.
+Here, we created a couple of [Color Value](/models/decision-types/color-value#sample-data) decisions
+based on the samples.
 
 ```json
 // data/color.json
@@ -186,7 +197,7 @@ Cold Color color-value/explicit
 If your records aren't showing, lookout for error messages such as:
 
 ```
-🟥 Error processing file "./data/color.json": Decision file does not contain an array.
+🙈 Invalid DecisionSource "./data". Decision file does not contain an array.Path: "./data/color.json"
 ```
 
 If you see this, make sure your file contains an array of decisions `[{ ... }, { ... }]` as opposed to a single `{...}` decision record.
@@ -194,7 +205,7 @@ If you see this, make sure your file contains an array of decisions `[{ ... }, {
 The following error can also appear if your data has a syntax error. A single misplaced `}` or missing `:` will cause the JSON data to be unreadable. We recommend using an editor such as [VS Code](https://code.visualstudio.com/) for visual feedback and assistance.
 
 ```
-🟥 Error processing file "./data/color.json": Failed to parse JSON. Expected ',' or '}' after property value in JSON at position 232
+🙈  Invalid DecisionSource "./data". Could not parse decision file.  Expected ',' or ']' after array element in JSON at position 233. Path: "./data/color.json"
 ```
 
 ## Validating input data
@@ -205,30 +216,28 @@ For instance, if the `params` are incomplete or don't match the expected data ty
 
 To inspect the validation errors we can format messages using the `formatValidationError()` utility function.
 
-```diff lang="js" collapse={7-12} "hasErrors" "formatValidationError"
+```diff lang="js" collapse={9-13} "formatValidationError"
 // scripts/validate-decisions.js
 import {
-    staticStoreBuilder,
+    createStoreContext,
+    formatError,
 +    formatValidationError,
     loadConfig,
+    staticStoreBuilder,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const build = staticStoreBuilder(config.store);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 
 const loadDecisions = async () => {
     const store = await build();
 
-+    if (store.hasErrors()) {
-+        context().errors().forEach(({ msg, error }) => console.error(msg, error));
-+        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
-+        throw new Error(`Store has errors.`);
-+    }
-
     const records = store.records();
     records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
--    context().errors().forEach(({ msg, error }) => console.error(msg, error));
++   store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+    context.errors().forEach(error => console.error(formatError(error)));
 };
 
 loadDecisions();
@@ -276,31 +285,31 @@ The following two utility functions help with this:
 
 Remove the `store.validationErrors().forEach(...)` line, as it will become redundant, and add these 2 lines to the script:
 
-```diff lang="js" collapse={9-19}
+```diff lang="js" collapse={10-16,25-28}
 // scripts/validate-decisions.js
 import {
-    staticStoreBuilder,
+    createStoreContext,
 +    formatDecisionStatus,
+    formatError,
     loadConfig,
+    staticStoreBuilder,
 +    produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const build = staticStoreBuilder(config.store);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 
 const loadDecisions = async () => {
     const store = await build();
-
-    if (store.hasErrors()) {
-        context().errors().forEach(({ msg, error }) => console.error(msg, error));
--        store.validationErrors().forEach(error => console.error(formatValidationError(error)));
-        throw new Error(`Store has errors.`);
-    }
 
     const records = store.records();
 +    const produced = produceDecisions(store);
 +    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info(`🐘 ${records.length} records`);
+-    store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+    context.errors().forEach(error => console.error(formatError(error)));
+
 };
 
 loadDecisions();
@@ -316,43 +325,40 @@ Without any errors, the output will now display the decision status, the name an
 🟩 | Avatar Sizes | space-scale/anchored | [50, 100, 150, 200] |
 ```
 
-If we introduce errors in our decisions, as in the previous example, the output will also include details about the error.
+If we introduce a validation issue in one of the items, as in the previous example, the output will also include details about the error.
 
 ```
 ...
 🟩 | Card Thumb Minimum Size | space-value/explicit | 175 |
 🟩 | Avatar Minimum Size | space-value/explicit | 50 |
 🟩 | Avatar Sizes | space-scale/anchored | [50, 100, 150, 200] |
-🟨 | Warm Color | color-value/explicit | #000000 | 1 warnings
+🟨 | Warm Color | color-value/explicit | #000000 | 1 errors, 1 warnings
  > 🟨 Decision "Warm Color" /params (required) must have required property 'value'
+ > 🟨 Invalid input data for a ColorValue in {"$name":"Warm Color"}: undefined
 
-🟨 | Cold Color | color-value/explicit | #000000 | 1 warnings
- > 🟨 /params/value (type) must be object, string or number in {"$name":"Cold Color"}
 ```
 
 ### Summarizing and catching errors
 
 The `produced` object reports counts for decision records, and different types of errors in a single string.
 
-```diff lang="js" collapse={1-22,27-34} "produced.summary()"
+```diff lang="js" collapse={1-20,25-28}
 // scripts/validate-decisions.js
 import {
-    staticStoreBuilder,
+    createStoreContext,
     formatDecisionStatus,
+    formatError,
     loadConfig,
-    produceDecisions,
+    staticStoreBuilder,
+    produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const build = staticStoreBuilder(config.store);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 
 const loadDecisions = async () => {
     const store = await build();
-
-    if (store.hasErrors()) {
-        context().errors().forEach(({ msg, error }) => console.error(msg, error));
-        throw new Error(`Store has errors.`);
-    }
 
 -    const records = store.records();
     const produced = produceDecisions(store);
@@ -360,6 +366,8 @@ const loadDecisions = async () => {
 
 -    console.info(`🐘 ${records.length} records`);
 +    console.info('🐘', produced.summary());
+
+    context.errors().forEach(error => console.error(formatError(error)));
 };
 
 loadDecisions();
@@ -374,32 +382,29 @@ You can use it to summarize all counts in one line.
 
 If you are running this as part of your build process you will probably want to exit the script with an error code.
 
-```diff lang="js" collapse={1-25} "filter" "produced.hasErrors()"
+```diff lang="js" collapse={1-21}
 // scripts/validate-decisions.js
 import {
-    staticStoreBuilder,
+    createStoreContext,
     formatDecisionStatus,
+    formatError,
     loadConfig,
-    produceDecisions,
+    staticStoreBuilder,
+    produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const build = staticStoreBuilder(config.store);
+const context = createStoreContext(config.store);
+const build = staticStoreBuilder(context);
 
 const loadDecisions = async () => {
     const store = await build();
 
-    if (store.hasErrors()) {
-        context().errors().forEach(({ msg, error }) => console.error(msg, error));
-        throw new Error(`Store has errors.`);
-    }
-
-    const records = store.records();
     const produced = produceDecisions(store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
-
     console.info('🐘', produced.summary());
 
+    context.errors().forEach(error => console.error(formatError(error)));
     if (produced.hasErrors()) {
         throw new Error(`Errors encountered producing decisions.`);
     }
