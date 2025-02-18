@@ -1,4 +1,5 @@
-export * from './fetchAllNodes.js';
-export * from './fetchAllPermalinks.js';
-export * from './frontmatter/index.js';
-export * from './types.js';
+// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
+export * from './fetchAllNodes';
+export * from './fetchAllPermalinks';
+export * from './frontmatter';
+export * from './types';

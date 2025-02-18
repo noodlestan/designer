@@ -1,4 +1,4 @@
-import { designerDecisionsIntegration } from './integration/designerDecisionsIntegration.ts';
-export { integrationAPI } from './api/index.ts';
+import { designerDecisionsIntegration } from './integration/designerDecisionsIntegration';
+export { integrationAPI } from './api';
 
 export default designerDecisionsIntegration;

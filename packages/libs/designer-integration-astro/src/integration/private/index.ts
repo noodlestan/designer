@@ -1,3 +1,3 @@
-// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}.js';`)
-export * from './injectStylesIntegration.js';
-export * from './validateIntegrationsConfig.js';
+// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
+export * from './injectStylesIntegration';
+export * from './validateIntegrationsConfig';
