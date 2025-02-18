@@ -1,5 +1,5 @@
 import type { SpaceValueInput, SpaceWithUnits } from '../../../inputs';
-import { type ValueContext, createInvalidInputError } from '../../../values';
+import { type ValueContext, createValueInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import { isValidSpaceWithUnits } from '../helpers';
 
@@ -17,7 +17,7 @@ export const resolveSpaceValue = (
     if (typeof input === 'string') {
         const value = Number(input);
         if (isNaN(value)) {
-            context.addError(createInvalidInputError({ context, valueName, input }));
+            context.addError(createValueInputError({ context, valueName, input }));
             return fallback;
         }
         return { value, units: 'px' };
@@ -28,7 +28,7 @@ export const resolveSpaceValue = (
     }
 
     if (!isValidSpaceWithUnits(input)) {
-        context.addError(createInvalidInputError({ context, valueName, input }));
+        context.addError(createValueInputError({ context, valueName, input }));
         return fallback;
     }
 

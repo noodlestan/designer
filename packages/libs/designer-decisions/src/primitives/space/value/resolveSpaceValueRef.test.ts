@@ -6,12 +6,12 @@ import {
     createValueContextWithResolveMock,
 } from '../../../mocks';
 import type {
+    DecisionInput,
     DecisionRef,
-    DecisionValueRefNotFoundError,
-    InputRecord,
     SpaceScale,
     SpaceValue,
     SpaceWithUnits,
+    ValueRefNotFoundError,
 } from '../../../types';
 import { resolveSetRefDecision } from '../../functions';
 
@@ -46,7 +46,7 @@ describe('resolveSpaceValueRef()', () => {
             resolveSpaceValueRef(mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as DecisionValueRefNotFoundError;
+            const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
             expect(error.message()).toContain('not found');
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
@@ -56,7 +56,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When it resolves to a SpaceScale with a quantized value and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'space-scale' } as InputRecord;
+        const mockInput = { model: 'space-scale' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<SpaceScale>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -92,7 +92,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When it resolves to a SpaceScale decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'space-scale' } as InputRecord;
+        const mockInput = { model: 'space-scale' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<SpaceScale>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -109,7 +109,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When it resolves to a SpaceValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'space-value' } as InputRecord;
+        const mockInput = { model: 'space-value' } as DecisionInput;
         const spaceWithUnits: SpaceWithUnits = { value: 3.33, units: 'px' };
         const spaceValue = createSpaceValue(createValueContextMock()[0], spaceWithUnits, {
             quantize: 5,
@@ -134,7 +134,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'decision-model' } as InputRecord;
+        const mockInput = { model: 'decision-model' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock([mockInput]);
         const [mockValueContext, { addErrorSpy }] = createValueContextWithResolveMock([
             undefined,
@@ -154,7 +154,7 @@ describe('resolveSpaceValueRef()', () => {
             resolveSpaceValueRef(mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as DecisionValueRefNotFoundError;
+            const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
             expect(error.message()).toContain('matched "decision-model", expected space-value');
         });
     });

@@ -24,14 +24,14 @@ const { decisionType } = Astro.props;
 const models = DECISION_MODEL_METAS.filter(m => m.type === decisionType.type)
 const records = store.records();
 
-const decisionByModel = (meta: DecisionModelMeta) => {
+const recordsByModel = (meta: DecisionModelMeta) => {
     // WIP make sure we use only decisions from the sample set (name includes "Sample")
-    return records.filter(record => record.model === meta.model)[0];
+    return records.filter(record => record.input.model === meta.model)[0];
 }
 
 const decisionDataByModel = (m: DecisionModelMeta) => {
-    const d = decisionByModel(m)
-    const [, decision] = store.decision({ $name: d.name });
+    const rec = recordsByModel(m)
+    const [, decision] = store.decision({ $name: rec.input.name });
     const json = JSON.stringify(decision?.inputs()[0], null, 2);
     return json;
 }
@@ -77,10 +77,10 @@ const frontmatter = {
             <div>
                 <h3 id={decisionModelId(m)}>{m.name}</h3>
                 {m.description}
-                {decisionByModel(m) && (
+                {recordsByModel(m) && (
                     <h5 id="sample-data">Sample decision</h5>
                     <LayoutStack>
-                        <ShowDecisionCard store={store} d={decisionByModel(m).name} model params />
+                        <ShowDecisionCard store={store} d={recordsByModel(m).input.name} model params />
                     </LayoutStack>
                     <h5 id="sample-data">Sample data</h5>
                     <Code lang="json" code={decisionDataByModel(m) || 'N/A'} />

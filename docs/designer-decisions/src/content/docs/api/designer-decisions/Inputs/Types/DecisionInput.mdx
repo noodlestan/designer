@@ -1,0 +1,55 @@
+---
+title: DecisionInput
+slug: api/designer-decisions/Inputs/Types/DecisionInput
+sidebar:
+    order: 0
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Defines a decision input record.
+
+.
+
+```ts
+export type DecisionInput = {
+    uuid?: DecisionId;
+    model: DecisionModelName;
+    name: DecisionName;
+    description?: string;
+    contexts?: DecisionContextsInput;
+    usage?: DecisionUsageInput;
+    params: object;
+};
+```
+
+## Attributes
+
+<Aside title="This type is validated by a Schema">
+    This API is documented under [Models / Schemas / DecisionInput](/models/schemas/DecisionInput).
+</Aside>
+
+## Usage
+
+Refer to the [Decisions as Data](/guides/design-decisions-as-data) and [Loading and Validating](/guides/loading-and-validating-design-decisions) for a streamlined walkthrough on setting up and configuring your data sources.
+
+Simple example:
+
+```json
+{
+    "model": "color-value/explicit",
+    "name": "Primary Background",
+    "params": {
+        "value": "#090E0B"
+    }
+}
+```
+
+### More examples
+
+Examples of decision inputs for all built-in decision types are provided in [Models / Decision Types](https://designer-decisions.noodlestan.org/models/decision-types).
+
+## See also
+
+-   [Models / Schemas](/models/schemas)
+-   [Models / Decision Types](/models/decision-types)

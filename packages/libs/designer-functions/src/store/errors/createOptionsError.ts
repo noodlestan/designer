@@ -1,4 +1,5 @@
-import { type DesignerErrorParams, serializeErrorData } from '../../private';
+import { type DesignerErrorParams, serializeErrorData } from '@noodlestan/designer-decisions';
+
 import type { StoreOptionsError } from '../types';
 
 import { ERROR_STORE_OPTIONS } from './constants';

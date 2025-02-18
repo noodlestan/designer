@@ -1,4 +1,5 @@
-import { type DesignerErrorParams, serializeErrorData } from '../../private';
+import { type DesignerErrorParams } from '@noodlestan/designer-decisions';
+
 import type { StoreSourceError } from '../types';
 
 import { ERROR_STORE_SOURCE } from './constants';
@@ -10,7 +11,7 @@ export const createStoreSourceError = (attributes: Attributes): StoreSourceError
 
     const message = () => {
         const pathStr = path ? ` Path: "${path}"` : '';
-        const errorData = ' Data Source: ' + serializeErrorData(source);
+        const errorData = ` Data Source: "${JSON.stringify(source)}"`;
         return `Invalid ${type} "${id}". ${reason}${pathStr}${errorData}`;
     };
 

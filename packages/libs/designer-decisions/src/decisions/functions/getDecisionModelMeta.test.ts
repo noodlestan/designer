@@ -33,9 +33,9 @@ describe('getDecisionModelMeta()', () => {
     describe('Given an invalid model name', () => {
         const invalidModel = 'nonexistent-type/nonexistent-model';
 
-        it('should throw a "Unknown decision" error', () => {
+        it('should throw a "Unknown decision model" error', () => {
             expect(() => getDecisionModelMeta(invalidModel)).toThrowError(
-                `Unknow decision type "${invalidModel}".`,
+                `Unknown decision model "${invalidModel}".`,
             );
         });
     });

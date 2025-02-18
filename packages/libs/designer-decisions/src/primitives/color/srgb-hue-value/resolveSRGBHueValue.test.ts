@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createValueContextMock } from '../../../mocks';
-import { DecisionValueInputError } from '../../../values';
+import { ValueInputError } from '../../../values';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveSRGBHueValue } from './resolveSRGBHueValue';
@@ -73,7 +73,7 @@ describe('resolveSRGBHueValue()', () => {
                 resolveSRGBHueValue(mockContext, invalidInput as number);
 
                 expect(addErrorSpy).toHaveBeenCalledOnce();
-                const error = addErrorSpy.mock.calls[0][0] as DecisionValueInputError;
+                const error = addErrorSpy.mock.calls[0][0] as ValueInputError;
                 expect(error.message()).toContain('Invalid input data');
                 expect(error.input).toEqual(invalidInput);
             },

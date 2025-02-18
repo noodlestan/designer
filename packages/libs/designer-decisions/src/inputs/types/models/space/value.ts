@@ -1,7 +1,7 @@
 import type { SpaceValueInput } from '../../primitives';
-import type { InputRecord } from '../../primitives/record';
+import type { DecisionInput } from '../../primitives/record';
 
-export type SpaceValueExplicitInput = InputRecord & {
+export type SpaceValueExplicitInput = DecisionInput & {
     model: 'space-value/explicit';
     params: {
         value: SpaceValueInput;

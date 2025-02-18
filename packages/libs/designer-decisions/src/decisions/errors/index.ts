@@ -1,4 +1,5 @@
 // @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './createInputNotFoundError';
+export * from './createDecisionNotFoundError';
 export * from './createUnexpectedError';
-export * from './createValidationError';
+export * from './UnknownDecisionModelError';
+export * from './UnknownDecisionTypeError';

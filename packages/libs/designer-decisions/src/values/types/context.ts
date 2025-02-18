@@ -1,25 +1,25 @@
 import type { DecisionContext, DecisionLookup } from '../../decisions';
-import type { DecisionRefResolver, InputRecord } from '../../inputs';
+import type { DecisionInput, DecisionRefResolver } from '../../inputs';
 import type { LookupContexts } from '../../lookup';
 
-import type { DecisionValueError } from './errors';
+import type { ValueError } from './errors';
 
 export type ValueContext = {
     decisionContext: () => DecisionContext;
     parent: () => LinkedValueContext | undefined;
     lookupContexts: () => LookupContexts;
-    decisionInput: () => InputRecord | undefined;
+    decisionInput: () => DecisionInput | undefined;
     resolve: DecisionRefResolver;
     valueInput: () => unknown | undefined;
     lookups: () => DecisionLookup[];
     nested: () => LinkedValueContext[];
     children: () => LinkedValueContext[];
-    ownErrors: () => DecisionValueError[];
-    allErrors: () => DecisionValueError[];
+    ownErrors: () => ValueError[];
+    allErrors: () => ValueError[];
     hasErrors: () => boolean;
     consume: (input: unknown) => void;
-    addError: (error: DecisionValueError) => void;
-    childContext: (input?: InputRecord) => ValueContext;
+    addError: (error: ValueError) => void;
+    childContext: (input?: DecisionInput) => ValueContext;
     nestedContext: () => ValueContext;
     outputContext: () => ValueContext;
 };

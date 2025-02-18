@@ -6,7 +6,7 @@
 
 ## How to use
 
-📖 [Documentation](https://designer-decisions.noodlestan.org/guides/capturing-design-decisions-in-data/)
+📖 [Documentation](https://designer-decisions.noodlestan.org/guides/design-decisions-as-data/)
 
 This core library models contextual design decisions of different types (colors, spaces, typography, ...), providing an API to produce values (or tokens) based on parametric inputs.
 

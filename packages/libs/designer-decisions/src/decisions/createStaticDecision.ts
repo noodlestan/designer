@@ -1,4 +1,3 @@
-import type { InputRecord } from '../inputs';
 import type { LookupContexts } from '../lookup';
 import type { BaseValue } from '../primitives';
 import { type ParentValueContext, createValueContext } from '../values';
@@ -8,11 +7,13 @@ import type { Decision, DecisionContext } from './types';
 
 export const createStaticDecision = <T = unknown>(
     decisionContext: DecisionContext,
-    inputs: InputRecord[],
 ): Decision<BaseValue<T>> => {
+    const inputs = decisionContext.inputs();
+
+    const modelFactory = getDecisionModelFactory<T>(inputs[0].model);
+
     const produce = (context?: LookupContexts | ParentValueContext): BaseValue<T> => {
         const input = inputs[0]; // WIP match context
-        const modelFactory = getDecisionModelFactory<T>(input.model);
         const model = modelFactory();
 
         const valueContext = createValueContext(decisionContext, context, input);

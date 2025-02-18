@@ -6,6 +6,6 @@ export const cjsConfig = {
     bundle: true,
     format: 'cjs',
     platform: 'node',
-    outfile: 'dist/cjs/index.js',
+    outdir: 'dist/cjs',
     plugins: [],
 };

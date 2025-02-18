@@ -121,7 +121,7 @@
   - `chromaColorToString()`
   - `generateColorList()`
 - Specific types for each error that extends `DecisionError` and `ValueError`
-- New errors `DecisionValueRefIndexError`
+- New errors `ValueRefIndexError`
 - helpers for `cli` code
   - `produceDecisions()`
   - `produceDecisionStatus()`
@@ -132,8 +132,8 @@
 - Renamed `DecisionValueContext` to `ValueContext`
 - Separated public and private constructors for `ValueContext`
 - Renamed `StaticStoreDecision` to `StaticDecision`
-- Renamed `DecisionValueError` to `ValueError`
-- Renamed `DecisionInputBase` to `InputRecord`
+- Renamed `ValueError` to `ValueError`
+- Renamed `DecisionInputBase` to `DecisionInput`
 - Renamed `DecisionInputError` to `ValidationError`
 - Renamed `createRefMatchError`() `to createRefMismatchError()`
 - Decisions `StaticStoreDecision` now created with `input[]` (all matching inputs, across all contexts)

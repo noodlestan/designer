@@ -1,6 +1,5 @@
 // @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './createDecisionValidator';
-export * from './loadSchemasFromConfigs';
-export * from './loadSchemasFromSource';
+export * from './loadSchemasFromSources';
+export * from './functions/loadSchemasFromSource';
 export * from './types';
-export * from './validateSchemaMap';
+export * from './functions/validateSchemaMap';

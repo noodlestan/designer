@@ -2,6 +2,7 @@
 export * from './color';
 export * from './contexts';
 export * from './numbers';
+export * from './record';
 export * from './ref';
 export * from './space';
 export * from './usage';

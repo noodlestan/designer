@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DecisionContext, DecisionUnknown } from '../../decisions';
-import { DecisionValueError } from '../types';
+import { ValueError } from '../types';
 
 import { createValueContextPrivate } from './createValueContextPrivate';
 
@@ -209,7 +209,7 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockError = {} as DecisionValueError;
+        const mockError = {} as ValueError;
         mockError.valueName = 'ValueName';
 
         it('should return true for hasErrors()', () => {
@@ -308,7 +308,7 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockError = {} as DecisionValueError;
+        const mockError = {} as ValueError;
         mockError.valueName = 'ValueName';
 
         it('should return true for hasErrors()', () => {
@@ -341,7 +341,7 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockError = {} as DecisionValueError;
+        const mockError = {} as ValueError;
         mockError.valueName = 'ValueName';
 
         it('should return true for hasErrors()', () => {

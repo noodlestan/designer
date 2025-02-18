@@ -1,24 +1,22 @@
-import { createDecisionValidator, loadSchemasFromConfigs, validateSchemaMap } from '../schemas';
+import { loadDecisionsFromSources } from '../loader';
+import { loadSchemasFromSources } from '../schemas';
 import { type Store, type StoreContext, createStaticStore, createUnexpectedError } from '../store';
-import { createStaticInputMap } from '../store';
-
-import { loadDecisionsFromSources } from './functions';
+import { createDecisionValidator, createStaticValidatedMap } from '../validator';
 
 export const staticStoreBuilder = (context: StoreContext): (() => Promise<Store>) => {
     const build = async () => {
         try {
-            const rawSchemaMap = await loadSchemasFromConfigs(context);
-            const schemaMap = validateSchemaMap(rawSchemaMap);
-            const validator = createDecisionValidator(schemaMap);
+            const schemaMap = await loadSchemasFromSources(context);
+            const validator = createDecisionValidator(context, schemaMap);
 
-            const inputData = await loadDecisionsFromSources(context);
-            const inputMap = createStaticInputMap(context, inputData, validator);
-            return createStaticStore(context, inputMap);
+            const loadedRecords = await loadDecisionsFromSources(context);
+            const validatedMap = createStaticValidatedMap(context, loadedRecords, validator);
+            return createStaticStore(context, validatedMap);
         } catch (error) {
-            const inputMap = createStaticInputMap(context, []);
+            const validatedMap = createStaticValidatedMap(context, []);
             const err = createUnexpectedError({ error });
             context.addError(err);
-            return createStaticStore(context, inputMap);
+            return createStaticStore(context, validatedMap);
         }
     };
 

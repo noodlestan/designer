@@ -5,7 +5,7 @@ export type DecisionId = string;
 export type DecisionName = string;
 export type DecisionModelName = string;
 
-export type InputRecord = {
+export type DecisionInput = {
     uuid?: DecisionId;
     model: DecisionModelName;
     name: DecisionName;

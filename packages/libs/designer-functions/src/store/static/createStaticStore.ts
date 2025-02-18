@@ -4,27 +4,28 @@ import type {
     DecisionContext,
     DecisionRef,
     LookupContexts,
-    StaticInputMap,
+    StaticValidatedMap,
 } from '@noodlestan/designer-decisions';
-import {
-    createDecisionContext,
-    createStaticDecisionMap,
-    createValueContext,
-} from '@noodlestan/designer-decisions';
+import { createDecisionContext, createValueContext } from '@noodlestan/designer-decisions';
 
 import type { Store, StoreContext } from '../types';
 
-export const createStaticStore = (context: StoreContext, inputStore: StaticInputMap): Store => {
-    const decisionMap = createStaticDecisionMap(inputStore);
+import { createStaticResolver } from './private';
+
+export const createStaticStore = (
+    context: StoreContext,
+    validatedMap: StaticValidatedMap,
+): Store => {
+    const resolver = createStaticResolver(validatedMap);
 
     const decision = <V extends BaseValue<unknown> = BaseValue<unknown>>(
         ref: DecisionRef,
     ): [DecisionContext, Decision<V> | undefined] => {
-        return decisionMap.resolve(ref);
+        return resolver.resolve(ref);
     };
 
     const _createDecisionContext = () => {
-        return createDecisionContext({ $name: '<unknown>' }, decisionMap.resolve, []); // WIP
+        return createDecisionContext({ $name: '<unknown>' }, resolver.resolve, []); // WIP
     };
 
     const _createValueContext = (lookupContexts?: LookupContexts) => {
@@ -34,10 +35,9 @@ export const createStaticStore = (context: StoreContext, inputStore: StaticInput
 
     return {
         context: () => context,
-        validationErrors: inputStore.validationErrors,
-        records: inputStore.records,
+        inputErrors: validatedMap.inputErrors,
+        records: validatedMap.records,
         decision,
-        resolver: decisionMap.resolve,
         createDecisionContext: _createDecisionContext,
         createValueContext: _createValueContext,
     };

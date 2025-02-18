@@ -1,4 +1,5 @@
 import { DECISION_TYPES, type DecisionType, type DecisionTypeModel } from '../../meta';
+import { UnknownDecisionModelError } from '../errors';
 
 type DecisionTypeAndModelByModel = Record<string, [DecisionType, DecisionTypeModel]>;
 
@@ -12,7 +13,7 @@ const byModel = DECISION_TYPES.reduce((acc, item) => {
 
 export const getDecisionModelMeta = (model: string): [DecisionType, DecisionTypeModel] => {
     if (!byModel[model]) {
-        throw new Error(`Unknow decision type "${model}".`);
+        throw new UnknownDecisionModelError(model);
     }
     return byModel[model];
 };

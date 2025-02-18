@@ -1,6 +1,6 @@
 import type { ColorOklabHueInput } from '../../../inputs';
 import type { ValueContext } from '../../../values';
-import { createInvalidInputError } from '../../../values';
+import { createValueInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
@@ -12,7 +12,7 @@ export const resolveOklabHueValue = (context: ValueContext, input: ColorOklabHue
     }
 
     if (typeof input !== 'number') {
-        context.addError(createInvalidInputError({ context, valueName, input }));
+        context.addError(createValueInputError({ context, valueName, input }));
         return fallback;
     }
 

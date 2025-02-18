@@ -1,5 +1,5 @@
 import type { ColorObjectInput } from '../../../../inputs';
-import { type ValueContext, createInvalidInputError } from '../../../../values';
+import { type ValueContext, createValueInputError } from '../../../../values';
 import type { Color } from '../../../types';
 import { createColor } from '../../helpers';
 import { resolveOklabChromaValue } from '../../oklab-chroma-value';
@@ -31,6 +31,6 @@ export function resolveColorObject(input: ColorObjectInput, context: ValueContex
             h: resolveOklabHueValue(context, input.h),
         });
     }
-    context.addError(createInvalidInputError({ context, valueName, input }));
+    context.addError(createValueInputError({ context, valueName, input }));
     return fallback;
 }

@@ -29,7 +29,7 @@ import { DEMO_DATA } from '@noodlestan/designer-decisions';
 import {
     type StoreOptions,
     createStoreContext,
-    formatValidationError,
+    formatDecisionInputError,
     staticStoreBuilder,
 } from '@noodlestan/designer-functions';
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
@@ -41,7 +41,7 @@ const options: StoreOptions = {
 const context = createStoreContext(options);
 const build = staticStoreBuilder(context);
 const store = await build();
-store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+store.inputErrors().forEach(error => console.error(formatDecisionInputError(error)));
 ```
 
 Refer to the [Loading and Validating](/guides/loading-and-validating-design-decisions/) guide for detailed instructions on how to setup a decision store.

@@ -1,5 +1,5 @@
 import type { ColorValueInput } from '../../../inputs';
-import { type ValueContext, createInvalidInputError } from '../../../values';
+import { type ValueContext, createValueInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 import type { Color } from '../../types';
 import { createColor } from '../helpers';
@@ -17,11 +17,11 @@ export const resolveColorValue = (context: ValueContext, input: ColorValueInput)
             const value = createColor(input);
             return value;
         } catch (error) {
-            context.addError(createInvalidInputError({ context, valueName, input, error }));
+            context.addError(createValueInputError({ context, valueName, input, error }));
             return fallback;
         }
     }
 
-    context.addError(createInvalidInputError({ context, valueName, input }));
+    context.addError(createValueInputError({ context, valueName, input }));
     return fallback;
 };

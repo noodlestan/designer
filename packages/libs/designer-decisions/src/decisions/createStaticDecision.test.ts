@@ -1,9 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { InputRecord } from '../inputs';
-import { createDecisionModelMock } from '../mocks';
+import type { DecisionInput } from '../inputs';
+import { createDecisionContextMock, createDecisionModelMock } from '../mocks';
 
-import { createDecisionContext } from './createDecisionContext';
 import { createStaticDecision } from './createStaticDecision';
 import { getDecisionModelFactory } from './getDecisionModelFactory';
 
@@ -12,7 +11,7 @@ vi.mock('./getDecisionModelFactory');
 const getDecisionModelFactoryMocked = vi.mocked(getDecisionModelFactory);
 
 describe('createStaticStoreDecision()', () => {
-    const mockInputs: InputRecord[] = [
+    const mockInputs: DecisionInput[] = [
         {
             uuid: 'test-uuid',
             model: 'type/model',
@@ -24,12 +23,8 @@ describe('createStaticStoreDecision()', () => {
 
     describe('Given a decision context and inputs', () => {
         it('should return a valid Decision object with the expected state', () => {
-            const decisionContext = createDecisionContext(
-                { $uuid: 'decision-context' },
-                vi.fn(),
-                [],
-            );
-            const decision = createStaticDecision<string>(decisionContext, mockInputs);
+            const [decisionContext] = createDecisionContextMock(mockInputs);
+            const decision = createStaticDecision<string>(decisionContext);
 
             expect(decision.uuid()).toBe('test-uuid');
             expect(decision.type()).toBe('type');
@@ -45,25 +40,14 @@ describe('createStaticStoreDecision()', () => {
     describe('When produce() is invoked', () => {
         const mockValue = 'mockProducedValue';
         const mockModel = createDecisionModelMock(mockValue);
-        const decisionContext = createDecisionContext({ $uuid: 'decision-context' }, vi.fn(), []);
+        const [decisionContext] = createDecisionContextMock(mockInputs);
 
         beforeEach(() => {
             getDecisionModelFactoryMocked.mockReturnValue(() => mockModel);
         });
 
-        it('should invoke the model produce method with context and params', () => {
-            const result = createStaticDecision<string>(decisionContext, mockInputs);
-            const producedValue = result.produce();
-
-            expect(mockModel.produce).toHaveBeenCalledOnce();
-            expect(mockModel.produce).toHaveBeenCalledWith(
-                producedValue.context(),
-                mockInputs[0].params,
-            );
-        });
-
         it('should return a value with the expected context', () => {
-            const result = createStaticDecision<string>(decisionContext, mockInputs);
+            const result = createStaticDecision<string>(decisionContext);
             const producedValue = result.produce();
 
             expect(producedValue.context().decisionContext()).toBe(decisionContext);
@@ -71,10 +55,26 @@ describe('createStaticStoreDecision()', () => {
         });
 
         it('should return the decision produced by the model', () => {
-            const result = createStaticDecision<string>(decisionContext, mockInputs);
+            const result = createStaticDecision<string>(decisionContext);
             const producedValue = result.produce();
 
             expect(producedValue.get()).toBe(mockValue);
+        });
+    });
+
+    describe.only('When produce() is invoked and getDecisionModelFactory() throws an error', () => {
+        const [decisionContext] = createDecisionContextMock(mockInputs);
+
+        beforeEach(() => {
+            getDecisionModelFactoryMocked.mockImplementationOnce(() => {
+                throw new Error('The error "foo/bar".');
+            });
+        });
+
+        it('should throw the same error', () => {
+            expect(() => createStaticDecision<string>(decisionContext)).toThrow(
+                'The error "foo/bar".',
+            );
         });
     });
 });

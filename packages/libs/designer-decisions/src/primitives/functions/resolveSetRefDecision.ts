@@ -1,6 +1,6 @@
 import type { Decision } from '../../decisions';
 import type { DecisionRef } from '../../inputs';
-import { type ValueContext, createRefIndexError } from '../../values';
+import { type ValueContext, createValueRefIndexError } from '../../values';
 import type { BaseSet } from '../types';
 
 export const resolveSetRefDecision = <
@@ -15,7 +15,7 @@ export const resolveSetRefDecision = <
     const scale = decision.produce(context);
     const v = scale.get().item(ref.index || 0);
     if (!v) {
-        const error = createRefIndexError({ context, valueName, ref });
+        const error = createValueRefIndexError({ context, valueName, ref });
         context.addError(error);
     }
     return v as V;

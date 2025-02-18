@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { DecisionRef } from '../../inputs';
 import { createStaticDecisionMock, createValueContextMock } from '../../mocks';
-import { DecisionValueInputError } from '../../values';
+import { ValueInputError } from '../../values';
 import { createItemSet } from '../set';
 import { BaseSet } from '../types';
 
@@ -45,7 +45,7 @@ describe('resolveSetRefDecision()', () => {
             resolveSetRefDecision(decisionMock, mockContext, mockValueName, ref);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as DecisionValueInputError;
+            const error = addErrorSpy.mock.calls[0][0] as ValueInputError;
             expect(error.message()).toContain('out of bounds');
         });
     });

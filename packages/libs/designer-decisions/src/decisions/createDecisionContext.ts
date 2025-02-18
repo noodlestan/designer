@@ -1,11 +1,11 @@
-import type { DecisionRef, DecisionRefResolver, InputRecord } from '../inputs';
+import type { DecisionRef, DecisionRefResolver, ValidatedRecord } from '../inputs';
 
 import type { DecisionContext, DecisionError } from './types';
 
 export const createDecisionContext = (
     ref: DecisionRef,
     resolver: DecisionRefResolver,
-    inputs: InputRecord[],
+    records: ValidatedRecord[],
 ): DecisionContext => {
     const errors: DecisionError[] = [];
 
@@ -13,12 +13,17 @@ export const createDecisionContext = (
         errors.push(error);
     };
 
+    const inputErrors = () => records.flatMap(({ errors }) => errors);
+    const getInputs = () => records.map(({ input: record }) => record);
+    const getErrors = () => [...errors, ...inputErrors()];
+    const hasErrors = () => Boolean(getErrors().length);
+
     return {
         ref: () => ref,
         resolve: resolver,
-        inputs: () => inputs,
-        errors: () => errors,
-        hasErrors: () => Boolean(errors.length),
+        inputs: getInputs,
+        errors: getErrors,
+        hasErrors,
         addError,
     };
 };

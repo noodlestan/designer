@@ -1,14 +1,14 @@
 import type { AnchoredColorListParams, ColorValueInput } from '../../primitives';
-import type { InputRecord } from '../../primitives/record';
+import type { DecisionInput } from '../../primitives/record';
 
-export type ColorSetExplicitInput = InputRecord & {
+export type ColorSetExplicitInput = DecisionInput & {
     model: 'color-set/explicit';
     params: {
         values: ColorValueInput[];
     };
 };
 
-export type ColorSetBoundedInput = InputRecord & {
+export type ColorSetBoundedInput = DecisionInput & {
     model: 'color-set/bounded';
     params: {
         from: ColorValueInput;
@@ -18,7 +18,7 @@ export type ColorSetBoundedInput = InputRecord & {
     };
 };
 
-export type ColorSetAnchoredInput = InputRecord & {
+export type ColorSetAnchoredInput = DecisionInput & {
     model: 'color-set/anchored';
     params: {
         anchor: ColorValueInput;

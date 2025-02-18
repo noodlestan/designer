@@ -1,7 +1,7 @@
 import type { AnchoredNumberSeriesParams, ColorSRGBSaturationInput } from '../../../primitives';
-import type { InputRecord } from '../../../primitives/record';
+import type { DecisionInput } from '../../../primitives/record';
 
-export type ColorSRGBSaturationValueExplicitInput = InputRecord & {
+export type ColorSRGBSaturationValueExplicitInput = DecisionInput & {
     model: 'color-srgb-saturation-value/explicit';
     params: {
         value: ColorSRGBSaturationInput;
@@ -9,7 +9,7 @@ export type ColorSRGBSaturationValueExplicitInput = InputRecord & {
     };
 };
 
-export type ColorSRGBSaturationScaleExplicitInput = InputRecord & {
+export type ColorSRGBSaturationScaleExplicitInput = DecisionInput & {
     model: 'color-srgb-saturation-scale/explicit';
     params: {
         values: ColorSRGBSaturationInput[];
@@ -17,7 +17,7 @@ export type ColorSRGBSaturationScaleExplicitInput = InputRecord & {
     };
 };
 
-export type ColorSRGBSaturationScaleBoundedInput = InputRecord & {
+export type ColorSRGBSaturationScaleBoundedInput = DecisionInput & {
     model: 'color-srgb-saturation-scale/bounded';
     params: {
         from: ColorSRGBSaturationInput;
@@ -27,7 +27,7 @@ export type ColorSRGBSaturationScaleBoundedInput = InputRecord & {
     };
 };
 
-export type ColorSRGBSaturationScaleAnchoredInput = InputRecord & {
+export type ColorSRGBSaturationScaleAnchoredInput = DecisionInput & {
     model: 'color-srgb-saturation-scale/anchored';
     params: {
         anchor: ColorSRGBSaturationInput;

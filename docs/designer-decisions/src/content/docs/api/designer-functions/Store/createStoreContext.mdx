@@ -8,16 +8,26 @@ sidebar:
 Creates a [StoreContext](/api/designer-functions/Store/Types/StoreContext) with an optional configuration.
 
 ```ts
-type createStoreContext = (context: StoreContext, inputStore: StaticInputMap) => Store;
+type createStoreContext = (context: StoreContext, validatedMap: StaticValidatedMap) => Store;
 ```
 
 ## Return value
 
-Returns a [StoreContext](/api/designer-functions/Store/Types/StoreContext), required to create both for [staticStoreBuilder()](api/designer-functions/Builder/staticStoreBuilder) and [createStaticStore()](/api/designer-functions/Store/createStaticStore)
+Returns a [StoreContext](/api/designer-functions/Store/Types/StoreContext), required to create both for [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder) and [createStaticStore()](/api/designer-functions/Store/createStaticStore)
 
 ## Params
 
-#### ༶ `options` (optional): [StoreOptions](/api/designer-functions/Store/Types/StoreOptions)
+#### ༶ `context`: [StoreContext](/api/designer-functions/Store/Types/StoreContext)
+
+A context object that exposes the [StoreOptions](/api/designer-functions/Store/Types/StoreOptions) and collects eventual errors produced building the store.
+
+It is recommended to declare the options object directly in a `dd.config.mjs` file in the root of the project and then load it via [loadConfig()](/api/designer-functions/config/loadConfig).
+
+## Params
+
+#### ༶ `validatedMap`: [StaticValidatedMap](/api/designer-decisions/Inputs/Types/StaticValidatedMap)
+
+Holds all decision input data and provides an API to retrieve decision records and validation errors.
 
 &nbsp;
 

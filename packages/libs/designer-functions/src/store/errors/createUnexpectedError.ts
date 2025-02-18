@@ -1,4 +1,5 @@
-import type { DesignerErrorParams } from '../../private';
+import type { DesignerErrorParams } from '@noodlestan/designer-decisions';
+
 import type { StoreUnexpectedError } from '../types';
 
 import { ERROR_STORE_UNEXPECTED } from './constants';
