@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "@noodlestan/designer-decisions": "0.0.13",
-    "@noodlestan/designer-functions": "0.0.13",
-    "lucide-astro": "^0.473.0"
+    "@noodlestan/designer-functions": "0.0.13"
   },
   "peerDependencies": {
     "astro": "^5.2.5",
