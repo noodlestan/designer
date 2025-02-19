@@ -1,5 +1,4 @@
 export type DecisionUsageInput = {
-    intendedFor?: string[];
+    isFor?: string[];
     notFor?: string[];
-    foo?: string;
 };

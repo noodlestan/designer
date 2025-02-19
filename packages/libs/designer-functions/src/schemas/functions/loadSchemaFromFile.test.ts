@@ -63,7 +63,7 @@ describe('loadSchemaFromFile()', () => {
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Could not read');
         expect(context.errors()[0].message()).toContain(filePath);
-        expect(context.errors()[0].message()).toContain('"path": "bar/"');
+        expect(context.errors()[0].message()).toContain('"path":"bar/"');
     });
 
     it('should add error to the context if the file content is not valid JSON', async () => {

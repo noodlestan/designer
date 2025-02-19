@@ -14,13 +14,14 @@ export function applyNameFallback(
     loaded: LoadedRecord,
     errors: DecisionInputError[],
     maybeName: unknown | undefined,
+    fallback: { model?: string },
 ): string {
     const errorAttributes = {
         loaded,
         path: '/name',
         schema: 'DecisionInput#-name',
         value: maybeName,
-        model: FALLBACK_MODEL,
+        model: fallback.model || FALLBACK_MODEL,
     };
 
     if (!isNonEmptyString(maybeName)) {

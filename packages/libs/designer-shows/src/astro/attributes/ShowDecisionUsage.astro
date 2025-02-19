@@ -7,16 +7,16 @@ type Props = ShowDecisionProps;
 const { store, d } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
-const { intendedFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP match context (and encapsulate)
+const { isFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP match context (and encapsulate)
 ---
 
 <div class="dd-decision-usage">
     {
-        intendedFor.length > 0 && (
+        isFor.length > 0 && (
             <LayoutFlex wrap={false}>
                 <h4 class="dd-group-header">Intended For:</h4>
                 <LayoutFlex tag="ul" gap="s">
-                    {intendedFor.map(item => (
+                    {isFor.map(item => (
                         <li class="dd-item">{item}</li>
                     ))}
                 </LayoutFlex>

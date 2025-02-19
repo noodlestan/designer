@@ -4,7 +4,7 @@
     "name": "Pink Palette",
     "description": "Wide range shades of Pink",
     "usage": {
-      "intendedFor": ["Icons", "Backgrounds"],
+      "isFor": ["Icons", "Backgrounds"],
       "notFor": ["Typography"]
     },
     "params": {
@@ -32,7 +32,7 @@
     "name": "Blue Palette",
     "description": "Wide range shades of Blue",
     "usage": {
-      "intendedFor": ["Icons", "Backgrounds"],
+      "isFor": ["Icons", "Backgrounds"],
       "notFor": ["Typography"]
     },
     "params": {
@@ -60,7 +60,7 @@
     "name": "Heat Map Color Set",
     "description": "A 7 step color set ranging from hot to cold",
     "usage": {
-      "intendedFor": ["Heat maps"],
+      "isFor": ["Heat maps"],
       "notFor": ["Typography", "Icons", "Backgrounds", "Foregrounds"]
     },
     "params": {

@@ -21,17 +21,21 @@ export function normalizeRecord(loadedRecord: LoadedRecord): ValidatedRecord {
 
     const partial = isObject(loaded) ? loaded : ({} as DeepPartial<DecisionInput>);
 
-    const name = applyNameFallback(loadedRecord, errors, partial.name);
+    const name = applyNameFallback(loadedRecord, errors, partial.name, { model: partial.model });
     const model = applyModelFallback(loadedRecord, errors, partial.model, { name });
-
     const uuid = applyUuidFallback(loadedRecord, errors, partial.uuid, { name, model });
     const params = applyParamsFallback(loadedRecord, errors, partial.params, { name, model });
+
+    const { description, usage, contexts } = partial;
 
     const input = {
         uuid,
         name,
         model,
         params,
+        description,
+        usage,
+        contexts,
     };
 
     return {

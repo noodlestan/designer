@@ -92,7 +92,7 @@ describe('loadSchemasFromSource()', () => {
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Could not resolve path');
         expect(context.errors()[0].message()).toContain('Module resolution failed.');
-        expect(context.errors()[0].message()).toContain('"path": "/foo"');
+        expect(context.errors()[0].message()).toContain('"path":"/foo"');
 
         expect(loadSchemasFromDirectory).not.toHaveBeenCalled();
         expect(loadSchemaFromFile).not.toHaveBeenCalled();

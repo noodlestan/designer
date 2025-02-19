@@ -32,8 +32,9 @@ export const formatDecisionStatus = (
     const color = Boolean(show.find(s => s === 'status-colors'));
     const showDetails = Boolean(show.find(s => s === 'error-details'));
     const showSource = Boolean(show.find(s => s === 'error-sources'));
+    const columns = show.filter(s => s !== 'error-details' && s !== 'error-sources');
     // eslint-disable-next-line array-callback-return
-    const columns = show.map(s => {
+    const cells = columns.map(s => {
         switch (s) {
             case 'status-colors':
             case 'status':
@@ -70,5 +71,5 @@ export const formatDecisionStatus = (
         details.push('');
     }
 
-    return columns.join(' | ') + details.join('\n');
+    return cells.join(' | ') + details.join('\n');
 };

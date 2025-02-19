@@ -62,7 +62,7 @@ describe('createStaticStoreDecision()', () => {
         });
     });
 
-    describe.only('When produce() is invoked and getDecisionModelFactory() throws an error', () => {
+    describe('When produce() is invoked and getDecisionModelFactory() throws an error', () => {
         const [decisionContext] = createDecisionContextMock(mockInputs);
 
         beforeEach(() => {

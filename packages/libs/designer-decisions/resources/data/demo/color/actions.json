@@ -4,7 +4,7 @@
     "name": "Action Color",
     "description": "Used for buttons, links and navigation",
     "usage": {
-      "intendedFor": [
+      "isFor": [
         "Link Foreground",
         "Action Background",
         "Action Foreground",
@@ -26,7 +26,7 @@
     "name": "Action Constrast Color",
     "description": "Used for buttons, links and navigation",
     "usage": {
-      "intendedFor": ["Action Foreground", "Navigation Item Background"],
+      "isFor": ["Action Foreground", "Navigation Item Background"],
       "notFor": ["Non-interactive elements"]
     },
     "params": {
@@ -42,7 +42,7 @@
     "name": "Action Contrast Color",
     "description": "Used as the constrast color in buttons and navigation items that use Action Color",
     "usage": {
-      "intendedFor": ["Action Background", "Action Foreground", "Navigation Item Foreground"],
+      "isFor": ["Action Background", "Action Foreground", "Navigation Item Foreground"],
       "notFor": ["Non-interactive elements"]
     },
     "params": {
