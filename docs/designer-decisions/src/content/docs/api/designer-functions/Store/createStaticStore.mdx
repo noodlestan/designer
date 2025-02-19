@@ -7,15 +7,15 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-Creates a [Store](/api/designer-functions/Store/Types/Store) from a pre-validated [StaticInputMap](/api/designer-decisions/Inputs/Types/StaticInputMap).
+Creates a [Store](/api/designer-functions/Store/Types/Store) from a pre-validated [StaticValidatedMap](/api/designer-decisions/Inputs/Types/StaticValidatedMap).
 
 ```ts
-type createStaticStore = (context: StoreContext, inputStore: StaticInputMap) => Store;
+type createStaticStore = (context: StoreContext, validatedMap: StaticValidatedMap) => Store;
 ```
 
 <Aside type="tip" title="Advanced API">
     Access to this API is only required in advanced use cases. In most scenarios you should be using
-    [staticStoreBuilder()](api/designer-functions/Builder/staticStoreBuilder).
+    [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder).
 </Aside>
 
 ## Return value
@@ -28,21 +28,46 @@ Returns a [Store](/api/designer-functions/Store/Types/Store) that can be used to
 
 A context object that exposes the [StoreOptions](/api/designer-functions/Store/Types/StoreOptions) and collects eventual errors produced building the store.
 
-#### ༶ `inputStore`: [StaticInputMap](/api/designer-decisions/Inputs/Types/StaticInputMap)
+#### ༶ `validatedMap`: [StaticValidatedMap](/api/designer-decisions/Inputs/Types/StaticValidatedMap)
 
-Holds all decision input data and provides an API to retrieve decision records and validation errors.
+Holds all decision input data and provides an API to retrieve validated records and validation errors.
 
 &nbsp;
 
 ## Usage
 
-```ts
-const context = createStoreContext();
-const inputMap = createStaticInputMap(contexty, inputData, validator);
-const store = createStaticStore(context, inputMap);
+The following is taken from the [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder) implementation.
+
+```ts "createStaticStore" collapse={1-16}
+import { DEMO_DATA } from '@noodlestan/designer-decisions';
+import {
+    type StoreOptions,
+    createStoreContext,
+    createDecisionValidator,
+    createStaticValidatedMap
+    loadDecisionsFromSources,
+    loadSchemasFromSources,
+    createStaticStore,
+} from '@noodlestan/designer-functions';
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
+const options: StoreOptions = {
+    decisions: [DEMO_DATA, './data'],
+    schemas: [DECISION_SCHEMAS],
+};
+
+const context = createStoreContext(options);
+const schemaMap = await loadSchemasFromSources(context);
+const validator = createDecisionValidator(context, schemaMap);
+
+const loadedRecords = await loadDecisionsFromSources(context);
+const validatedMap = createStaticValidatedMap(context, loadedRecords, validator);
 ```
 
 ## See also
 
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / Store](/api/designer-functions/Store/Types/Store) and [StoreContext](/api/designer-functions/Store/Types/StoreContext)
 -   [API / designer-functions / staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder)
+-   [API / designer-functions / StaticValidatedMap](/api/designer-decisions/Inputs/Types/StaticValidatedMap)

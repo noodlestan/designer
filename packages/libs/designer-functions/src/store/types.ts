@@ -1,18 +1,14 @@
 import type {
-    BaseValue,
     DataSource,
-    Decision,
     DecisionContext,
-    DecisionRef,
     DecisionRefResolver,
     DecisionSource,
+    DesignerError,
     LookupContexts,
     SchemaSource,
-    StaticInputMap,
+    StaticValidatedMap,
     ValueContext,
 } from '@noodlestan/designer-decisions';
-
-import type { DesignerError } from '../private';
 
 export type StoreOptions = {
     decisions: (DecisionSource | string)[];
@@ -23,22 +19,31 @@ export type StoreOptions = {
 export type StoreUnexpectedError = DesignerError & { name: 'StoreUnexpectedError' };
 
 export type StoreOptionsError = DesignerError & {
+    name: 'StoreOptionsError';
     path: string;
     reason: string;
     options: unknown;
-    name: 'StoreOptionsError';
 };
 
 export type StoreSourceError = DesignerError & {
+    name: 'StoreSourceError';
     type: string;
     id: string;
     source: DataSource;
     path?: string;
     reason: string;
-    name: 'StoreSourceError';
 };
 
-export type StoreError = StoreOptionsError | StoreUnexpectedError | StoreSourceError;
+export type StoreSchemaError = DesignerError & {
+    id: string;
+    reason: string;
+};
+
+export type StoreError =
+    | StoreOptionsError
+    | StoreUnexpectedError
+    | StoreSourceError
+    | StoreSchemaError;
 
 export type StoreContext = {
     options: () => StoreOptions;
@@ -49,13 +54,9 @@ export type StoreContext = {
 
 export type Store = {
     context: () => StoreContext;
-    validationErrors: StaticInputMap['validationErrors'];
-    records: StaticInputMap['records'];
-    decision: <V extends BaseValue<unknown> = BaseValue<unknown>>(
-        ref: DecisionRef,
-        contexts?: LookupContexts,
-    ) => [DecisionContext, Decision<V> | undefined];
-    resolver: DecisionRefResolver;
+    inputErrors: StaticValidatedMap['inputErrors'];
+    records: StaticValidatedMap['records'];
+    decision: DecisionRefResolver;
     createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
     createValueContext: (lookupContexts?: LookupContexts) => ValueContext;
 };

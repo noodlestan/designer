@@ -3,27 +3,27 @@ import type { DecisionRef } from '../../inputs';
 
 import type { ValueContext } from './context';
 
-export type DecisionValueError = {
+export type ValueError = {
     context: ValueContext;
     valueName: string;
     message: () => string;
 };
 
-export type DecisionValueInputError = DecisionValueError & {
+export type ValueInputError = ValueError & {
     input: unknown;
     error?: unknown;
 };
 
-export type DecisionValueRefNotFoundError = DecisionValueError & {
+export type ValueRefNotFoundError = ValueError & {
     ref: DecisionRef;
 };
 
-export type DecisionValueRefMismatchError = DecisionValueError & {
+export type ValueRefMismatchError = ValueError & {
     ref: DecisionRef;
     decision: DecisionUnknown;
     accepted: string[];
 };
 
-export type DecisionValueRefIndexError = DecisionValueError & {
+export type ValueRefIndexError = ValueError & {
     ref: DecisionRef;
 };

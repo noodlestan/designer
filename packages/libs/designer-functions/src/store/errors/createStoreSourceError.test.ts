@@ -44,8 +44,7 @@ describe('createStoreSourceError()', () => {
             expect(result.message()).toContain('Invalid SchemaSource');
             expect(result.message()).toContain('/foo');
             expect(result.message()).toContain('because bar');
-            expect(result.message()).toContain('[object]');
-            expect(result.message()).toContain('"path": "data/"');
+            expect(result.message()).toContain('"path":"data/"');
         });
     });
 });

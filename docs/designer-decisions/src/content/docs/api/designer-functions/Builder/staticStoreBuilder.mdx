@@ -15,7 +15,7 @@ type staticStoreBuilder = (options: StoreOptions) => () => Promise<Store>;
 
 A builder function that resolves with a populated decision store.
 
-#### Loader implementation
+#### Builder implementation
 
 Given a list of paths and schemas configs:
 
@@ -35,9 +35,11 @@ It is recommended to declare the options object directly in a `dd.config.mjs` fi
 
 ## Usage
 
-**Using `dd.config.mjs` file and `loadConfig()`:**
+**Recommended:**
 
-```ts
+Using the `dd.config.mjs` [configuration file](/api/configuration) and [loadConfig()](/api/designer-functions/Config/loadConfig).
+
+```ts "staticStoreBuilder"
 import { loadConfig, createStoreContext, staticStoreBuilder } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
@@ -47,9 +49,9 @@ const build = staticStoreBuilder(context);
 const store = await build();
 ```
 
-**Building the options object:**
+**Building the options object manually:**
 
-```ts
+```ts "StoreOptions" collapse={1-8}
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
 import {
     type StoreOptions,
@@ -63,7 +65,7 @@ const options: StoreOptions = {
     schemas: [DECISION_SCHEMAS],
 };
 const context = createStoreContext(options);
-const build = staticStoreBuilder(options);
+const build = staticStoreBuilder(context);
 
 const store = await build();
 ```

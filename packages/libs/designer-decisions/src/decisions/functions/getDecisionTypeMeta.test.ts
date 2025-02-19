@@ -24,9 +24,9 @@ describe('getDecisionTypeMeta()', () => {
     describe('Given an invalid decision type', () => {
         const invalidType = 'nonexistent-type';
 
-        it('should throw an "Unknown decision" error', () => {
+        it('should throw an "Unknown decision type" error', () => {
             expect(() => getDecisionTypeMeta(invalidType)).toThrowError(
-                `Unknow decision type "${invalidType}".`,
+                `Unknown decision type "${invalidType}".`,
             );
         });
     });

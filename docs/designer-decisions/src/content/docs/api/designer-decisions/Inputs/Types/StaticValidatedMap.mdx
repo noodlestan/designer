@@ -1,0 +1,61 @@
+---
+title: StaticValidatedMap
+slug: api/designer-decisions/Inputs/Types/StaticValidatedMap
+sidebar:
+    order: 0
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Holds all decision input data and provides an API to retrieve decision records and validation errors.
+
+```ts
+export type StaticValidatedMap = {
+    hasErrors: () => boolean;
+    inputErrors: () => DecisionInputError[];
+    records: (filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[];
+    findByRef: (ref: DecisionRef) => ValidatedRecord[];
+};
+```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder).
+</Aside>
+
+## Implementation
+
+You can create a `StaticValidatedMap` with [createStaticValidatedMap()](/api/designer-functions/Validator/createStaticValidatedMap).
+
+## Methods
+
+#### ༶ `hasErrors()`
+
+**Return Value:** `boolean` indicating if there were validation errors.
+
+#### ༶ `inputErrors()`
+
+**Return Value:** [DecisionInputError](/api/designer-decisions/Inputs/Types/DecisionInputError)[] with all validation errors.
+
+#### ༶ `records(filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[])`
+
+Return Value: [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord)[]
+
+**Parameters:**
+
+-   `filter`: (optional) A filter function `(item: ValidatedRecord) => boolean`
+
+#### ༶ `findByRef: (ref: DecisionRef) => ValidatedRecord[]`
+
+**Return Value:** [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord)[] with all records matched.
+
+**Parameters:**
+
+-   `ref`: [DecisionRef](/api/designer-decisions/Decisions/Types/DecisionRef)
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-decisions / ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord) and [DecisionInputError](/api/designer-decisions/Inputs/Types/DecisionInputError)[]
+-   [API / designer-functions / createStaticValidatedMap()](/api/designer-functions/Validator/createStaticValidatedMap).

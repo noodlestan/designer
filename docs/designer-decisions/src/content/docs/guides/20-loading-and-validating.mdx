@@ -40,7 +40,7 @@ Add a Designer Decisions configuration file in the root of your project.
 
 The minimum required configuration specifies:
 
--   One or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) - where to load decision data ([InputRecord](/api/designer-decisions/Inputs/Types/InputRecord/)) from.
+-   One or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) - where to load decision data ([DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput/)) from.
 -   One or more [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource) - location of the [schemas](/models/schemas) that validate the input data.
 
 ```js "defineConfig"
@@ -145,7 +145,7 @@ Avatar Sizes space-scale/anchored
 
 ### Adding more decision data
 
-As illustrated in the [Capturing Design Decisions](/guides/capturing-design-decisions-in-data) guide, when using JSON files as data source, you are free to create sub-directories and name the files as you wish. Grouping decisions by type or scope is a good starting point.
+As illustrated in the [Decisions as Data](/guides/design-decisions-as-data) guide, when using JSON files as data source, you are free to create sub-directories and name the files as you wish. Grouping decisions by type or scope is a good starting point.
 
 Let's start by adding a single `color.json` file in the `data/` directory, where we can define color related decisions.
 
@@ -214,14 +214,14 @@ Decision data is automatically validated against [JSON schemas](/models/schemas)
 
 For instance, if the `params` are incomplete or don't match the expected data types for the decision `model`, the decision will be marked with validation errors. In these cases, the decision will likely produce unexpected values so it's good to know that there are issues in our data.
 
-To inspect the validation errors we can format messages using the `formatValidationError()` utility function.
+To inspect the validation errors we can format messages using the `formatDecisionInputError()` utility function.
 
-```diff lang="js" collapse={9-13} "formatValidationError"
+```diff lang="js" collapse={9-13} "formatDecisionInputError"
 // scripts/validate-decisions.js
 import {
     createStoreContext,
     formatError,
-+    formatValidationError,
++    formatDecisionInputError,
     loadConfig,
     staticStoreBuilder,
 } from '@noodlestan/designer-functions';
@@ -236,7 +236,7 @@ const loadDecisions = async () => {
     const records = store.records();
     records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
-+   store.validationErrors().forEach(error => console.error(formatValidationError(error)));
++   store.inputErrors().forEach(error => console.error(formatDecisionInputError(error)));
     context.errors().forEach(error => console.error(formatError(error)));
 };
 
@@ -283,7 +283,7 @@ The following two utility functions help with this:
 -   [produceDecisions()](/api/designer-functions/cli-helpers/produceDecisions): aggregates all produced values, contexts, and errors.
 -   [formatDecisionStatus()](/api/designer-functions/cli-helpers/formatDecisionStatus): returns a formatted decision, including its value and errors details.
 
-Remove the `store.validationErrors().forEach(...)` line, as it will become redundant, and add these 2 lines to the script:
+Remove the `store.inputErrors().forEach(...)` line, as it will become redundant, and add these 2 lines to the script:
 
 ```diff lang="js" collapse={10-16,25-28}
 // scripts/validate-decisions.js
@@ -307,7 +307,7 @@ const loadDecisions = async () => {
 +    const produced = produceDecisions(store);
 +    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info(`🐘 ${records.length} records`);
--    store.validationErrors().forEach(error => console.error(formatValidationError(error)));
+-    store.inputErrors().forEach(error => console.error(formatDecisionInputError(error)));
     context.errors().forEach(error => console.error(formatError(error)));
 
 };

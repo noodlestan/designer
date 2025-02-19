@@ -6,7 +6,7 @@ sidebar:
 ---
 
 ```ts
-type produceDecisionStatus = (store: Store, input: InputRecord) => ProducedDecisionStatus;
+type produceDecisionStatus = (store: Store, input: DecisionInput) => ProducedDecisionStatus;
 ```
 
 Given a populated `store` and an input record, produces the decision value and returns
@@ -22,7 +22,7 @@ type ProducedDecisionStatus = {
     name: string;
     model: string;
     hasErrors: boolean;
-    input: InputRecord;
+    input: DecisionInput;
     context: DecisionContext;
     value?: BaseValue<unknown>;
 };
@@ -32,7 +32,7 @@ type ProducedDecisionStatus = {
 
 #### ༶ `store`: [Store](/api/designer-functions/Store/Types/Store)
 
-#### ༶ `input`: [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord)
+#### ༶ `input`: [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput)
 
 &nbsp;
 

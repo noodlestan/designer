@@ -7,16 +7,16 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-Provides an API to validate a decision [InputRecord](/api/designer-decisions/Inputs/Types/InputRecord).
+Provides an API to validate a decision [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput).
 
 ```ts
 export type DecisionValidator = {
     schemas: () => SchemaData[];
-    validate: (decision: InputRecord) => ErrorObject[] | null;
+    validate: (decision: DecisionInput) => ErrorObject[] | null;
 };
 ```
 
 <Aside type="tip" title="Advanced API">
     Access to this API is only required in advanced use cases. In most scenarios you should be using
-    [staticStoreBuilder()](api/designer-functions/Builder/staticStoreBuilder).
+    [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder).
 </Aside>

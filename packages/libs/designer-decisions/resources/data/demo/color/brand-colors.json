@@ -4,7 +4,7 @@
     "name": "Brand Pink",
     "description": "Brand Pink color",
     "usage": {
-      "intendedFor": ["Branded elements"],
+      "isFor": ["Branded elements"],
       "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
     },
     "params": {
@@ -20,7 +20,7 @@
     "name": "Brand Blue",
     "description": "Brand Blue color",
     "usage": {
-      "intendedFor": ["Branded elements"],
+      "isFor": ["Branded elements"],
       "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
     },
     "params": {
@@ -36,7 +36,7 @@
     "name": "Brand Black",
     "description": "Brand Black color",
     "usage": {
-      "intendedFor": ["Branded elements"],
+      "isFor": ["Branded elements"],
       "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
     },
     "params": {
@@ -48,7 +48,7 @@
     "name": "Brand White",
     "description": "Brand White color",
     "usage": {
-      "intendedFor": ["Branded elements"],
+      "isFor": ["Branded elements"],
       "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
     },
     "params": {
@@ -60,7 +60,7 @@
     "name": "Brand Color Set",
     "description": "Set of colors used in Logomark",
     "usage": {
-      "intendedFor": ["Branded elements"],
+      "isFor": ["Branded elements"],
       "notFor": ["Typography", "Foregrounds", "Backgrounds", "Interactions"]
     },
     "params": {

@@ -1,4 +1,4 @@
-import type { InputRecord } from '../inputs';
+import type { DecisionInput } from '../inputs';
 import type { BaseValue } from '../primitives';
 import type { ValueContext } from '../values';
 
@@ -8,5 +8,5 @@ export type DecisionModel<V = BaseValue<unknown>, P = object> = {
 
 export type DecisionModelFactory<
     V = BaseValue<unknown>,
-    I extends InputRecord = InputRecord,
+    I extends DecisionInput = DecisionInput,
 > = () => DecisionModel<V, I['params']>;

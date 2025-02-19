@@ -1,7 +1,7 @@
 import type { AnchoredNumberSeriesParams, SpaceValueInput } from '../../primitives';
-import type { InputRecord } from '../../record';
+import type { DecisionInput } from '../../primitives/record';
 
-export type SpaceScaleExplicitInput = InputRecord & {
+export type SpaceScaleExplicitInput = DecisionInput & {
     model: 'space-scale/explicit';
     params: {
         values: SpaceValueInput[];
@@ -9,7 +9,7 @@ export type SpaceScaleExplicitInput = InputRecord & {
     };
 };
 
-export type SpaceScaleBoundedInput = InputRecord & {
+export type SpaceScaleBoundedInput = DecisionInput & {
     model: 'space-scale/bounded';
     params: {
         from: SpaceValueInput;
@@ -19,7 +19,7 @@ export type SpaceScaleBoundedInput = InputRecord & {
     };
 };
 
-export type SpaceScaleAnchoredInput = InputRecord & {
+export type SpaceScaleAnchoredInput = DecisionInput & {
     model: 'space-scale/anchored';
     params: {
         anchor: SpaceValueInput;

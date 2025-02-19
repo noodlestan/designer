@@ -1,7 +1,7 @@
 import type { AnchoredNumberSeriesParams, ColorOklabChromaInput } from '../../../primitives';
-import type { InputRecord } from '../../../record';
+import type { DecisionInput } from '../../../primitives/record';
 
-export type ColorOklabChromaValueExplicitInput = InputRecord & {
+export type ColorOklabChromaValueExplicitInput = DecisionInput & {
     model: 'color-oklab-chroma-value/explicit';
     params: {
         value: ColorOklabChromaInput;
@@ -9,7 +9,7 @@ export type ColorOklabChromaValueExplicitInput = InputRecord & {
     };
 };
 
-export type ColorOklabChromaScaleExplicitInput = InputRecord & {
+export type ColorOklabChromaScaleExplicitInput = DecisionInput & {
     model: 'color-oklab-chroma-scale/explicit';
     params: {
         values: ColorOklabChromaInput[];
@@ -17,7 +17,7 @@ export type ColorOklabChromaScaleExplicitInput = InputRecord & {
     };
 };
 
-export type ColorOklabChromaScaleBoundedInput = InputRecord & {
+export type ColorOklabChromaScaleBoundedInput = DecisionInput & {
     model: 'color-oklab-chroma-scale/bounded';
     params: {
         from: ColorOklabChromaInput;
@@ -27,7 +27,7 @@ export type ColorOklabChromaScaleBoundedInput = InputRecord & {
     };
 };
 
-export type ColorOklabChromaScaleAnchoredInput = InputRecord & {
+export type ColorOklabChromaScaleAnchoredInput = DecisionInput & {
     model: 'color-oklab-chroma-scale/anchored';
     params: {
         anchor: ColorOklabChromaInput;

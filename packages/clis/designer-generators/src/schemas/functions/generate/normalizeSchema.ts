@@ -6,7 +6,11 @@ function kebabCase(str: string): string {
     return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
-function updateRefs(obj: TJS.Definition, symbolToSchemaIdMap: Map<string, string>) {
+function updateRefs(
+    obj: TJS.Definition,
+    symbolToSchemaIdMap: Map<string, string>,
+    path: string = '/',
+) {
     if (typeof obj !== 'object' || obj === null) return;
 
     Object.entries(obj).forEach(([key, value]) => {
@@ -24,7 +28,7 @@ function updateRefs(obj: TJS.Definition, symbolToSchemaIdMap: Map<string, string
 
             obj[key] = schemaId;
         } else if (typeof value === 'object' && value !== null) {
-            updateRefs(value, symbolToSchemaIdMap);
+            updateRefs(value, symbolToSchemaIdMap, path + key + '/');
         }
     });
 }

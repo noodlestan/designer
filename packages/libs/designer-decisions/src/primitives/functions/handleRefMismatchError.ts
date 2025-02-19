@@ -1,6 +1,6 @@
 import type { DecisionUnknown } from '../../decisions';
 import type { DecisionRef } from '../../inputs';
-import { type ValueContext, createRefMismatchError } from '../../values';
+import { type ValueContext, createValueRefMismatchError } from '../../values';
 
 export const handleRefMismatchError = (
     context: ValueContext,
@@ -9,6 +9,12 @@ export const handleRefMismatchError = (
     ref: DecisionRef,
     accepted: string[],
 ): void => {
-    const error = createRefMismatchError({ context, decision, valueName: name, ref, accepted });
+    const error = createValueRefMismatchError({
+        context,
+        decision,
+        valueName: name,
+        ref,
+        accepted,
+    });
     context.addError(error);
 };

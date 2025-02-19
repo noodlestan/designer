@@ -1,0 +1,22 @@
+---
+title: DecisionInputError
+slug: api/designer-decisions/Inputs/Types/DecisionInputError
+sidebar:
+    order: 0
+---
+
+Describes an error on an [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput).
+
+```ts
+import type { ErrorObject } from 'ajv';
+
+export type DecisionInputError = {
+    source: DecisionSource;
+    record: DecisionInput;
+    path: string;
+    schema: string;
+    value: unknown;
+    error: ErrorObject;
+    message: () => string;
+};
+```

@@ -1,5 +1,5 @@
 import type { ColorSRGBHueInput } from '../../../inputs';
-import { type ValueContext, createInvalidInputError } from '../../../values';
+import { type ValueContext, createValueInputError } from '../../../values';
 import { isDecisionRef } from '../../ref';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
@@ -11,7 +11,7 @@ export const resolveSRGBHueValue = (context: ValueContext, input: ColorSRGBHueIn
     }
 
     if (typeof input !== 'number') {
-        context.addError(createInvalidInputError({ context, valueName, input }));
+        context.addError(createValueInputError({ context, valueName, input }));
         return fallback;
     }
 

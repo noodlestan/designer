@@ -1,8 +1,8 @@
 import type { Decision, DecisionContext, DecisionLookup } from '../../decisions';
-import type { DecisionRef, InputRecord } from '../../inputs';
+import type { DecisionInput, DecisionRef } from '../../inputs';
 import { type LookupContexts, isLookupContext } from '../../lookup';
 import type { BaseValue } from '../../primitives';
-import type { DecisionValueError, LinkedValueContext, ValueContext } from '../types';
+import type { LinkedValueContext, ValueContext, ValueError } from '../types';
 
 type State = {
     valueInput?: unknown;
@@ -11,7 +11,7 @@ type State = {
 export const createValueContextPrivate = (
     decisionContext: DecisionContext,
     parentContext?: LookupContexts | LinkedValueContext,
-    input?: InputRecord,
+    input?: DecisionInput,
 ): ValueContext => {
     const state: State = {};
 
@@ -24,7 +24,7 @@ export const createValueContextPrivate = (
     const childContexts: LinkedValueContext[] = [];
     const nestedContexts: LinkedValueContext[] = [];
     const lookups: DecisionLookup[] = [];
-    const errors: DecisionValueError[] = [];
+    const errors: ValueError[] = [];
 
     const resolve = <V extends BaseValue<unknown> = BaseValue<unknown>>(
         ref: DecisionRef,
@@ -66,11 +66,11 @@ export const createValueContextPrivate = (
         state.valueInput = input;
     };
 
-    const addError = (error: DecisionValueError) => {
+    const addError = (error: ValueError) => {
         errors.push(error);
     };
 
-    const childContext = (input?: InputRecord) => {
+    const childContext = (input?: DecisionInput) => {
         const child = createValueContextPrivate(decisionContext, baseContext, input);
         childContexts.push(child);
         return child;

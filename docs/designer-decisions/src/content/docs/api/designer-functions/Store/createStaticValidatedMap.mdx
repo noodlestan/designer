@@ -1,0 +1,71 @@
+---
+title: createStaticValidatedMap()
+slug: api/designer-functions/Store/createStaticValidatedMap
+sidebar:
+    label: createStaticValidatedMap
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Constructs a [StaticValidatedMap](/api/designer-functions/Inputs/Types/StaticValidatedMap) from a collection of [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput) immediately applying all validations via the provided [DecisionValidator](/api/designer-functions/Validation/Types/DecisionValidator).
+
+```ts
+type createStaticValidatedMap = (
+    context: StoreContext,
+    loadedRecords: LoadedRecord[],
+    validator?: DecisionValidator,
+) => StaticValidatedMap;
+```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder).
+</Aside>
+
+## Return value
+
+Returns a [StaticValidatedMap](/api/designer-functions/Inputs/Types/StaticValidatedMap)
+that can be used to query for [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord) and retrieve validation errors.
+
+## Params
+
+#### ༶ `context`: [StoreContext](/api/designer-functions/Store/Types/StoreContext)
+
+A context object that exposes the [StoreOptions](/api/designer-functions/Store/Types/StoreOptions) and collects eventual errors produced building the store.
+
+## Params
+
+#### ༶ `loadedRecords`: [LoadedRecord](/api/designer-decisions/Inputs/Types/LoadedRecord)[]
+
+An array of loaded records as provided by [loadDecisionsFromSources()](/api/designer-functions/wip).
+
+#### ༶ `validator`: [DecisionValidator](/api/designer-functions/Validation/Types/DecisionValidator)
+
+An optional validator.
+
+If no validator is provided, data is assumed to be valid. This is useful
+in scenarios where the data is guaranteed to have been validated in a different process.
+
+## Usage
+
+The following snippet is taken from the [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder) implementation.
+
+```ts "createStaticValidatedMap"
+const context = createStoreContext(options);
+const schemaMap = await loadSchemasFromSources(context);
+const validator = createDecisionValidator(context, schemaMap);
+
+const loadedRecords = await loadDecisionsFromSources(context);
+const validatedMap = createStaticValidatedMap(context, loadedRecords, validator);
+const store = createStaticStore(context, validatedMap);
+```
+
+Refer []()
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-decisions / LoadedRecord](/api/designer-decisions/Inputs/Types/LoadedRecord) and [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord)
+-   [API / designer-functions / StoreContext](/api/designer-functions/Store/Types/StoreContext)
+-   [API / designer-functions / DecisionValidator](/api/designer-functions/Validation/Types/DecisionValidator)
+-   [API / designer-functions / createStaticStore()](/api/designer-functions/Store/createStaticStore) and [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder)

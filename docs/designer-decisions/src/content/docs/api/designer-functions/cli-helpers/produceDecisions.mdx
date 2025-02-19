@@ -19,12 +19,6 @@ Returns a `ProducedDecisionStore` object.
 export type ProducedDecisionStore = {
     decisions: () => ProducedDecisionStatus[];
     hasErrors: () => boolean;
-    errors: {
-        count: () => number;
-        store: () => StaticStoreError[];
-        validation: () => InputValidationError[];
-        value: () => (DecisionError | DecisionValueError)[];
-    };
     summary: () => string;
 };
 ```
@@ -37,10 +31,21 @@ export type ProducedDecisionStore = {
 
 ## Usage
 
-```js
+```js "produceDecisions" "decisions()" "summary()" "hasErrors()"
+const context = createStoreContext(options);
+const build = staticStoreBuilder(context);
 const store = await build();
+
 const produced = produceDecisions(store);
-console.info(produced.summary());
+const decisionStatuses = produced.decisions();
+const summary = produced.summary();
+
+decisionStatuses.forEach(status => console.info(formatDecisionStatus(status)));
+console.info(summary);
+
+if (produced.hasErrors()) {
+    throw new Error(`Errors encountered producing decisions.`);
+}
 ```
 
 ## See also

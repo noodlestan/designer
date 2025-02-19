@@ -1,7 +1,6 @@
-import { NEW_LINE, serializeMaybeError } from '../../private';
-import type { DesignerError } from '../../private';
+import { type DesignerError, serializeMaybeError } from '@noodlestan/designer-decisions';
 
-import { ERROR_DOCS_BASE_URL, ERROR_DOCS_PATH } from './constants';
+import { ERROR_DOCS_BASE_URL, ERROR_DOCS_PATH, NEW_LINE } from './constants';
 
 export const formatError = (err: DesignerError): string => {
     const { error, message } = err;

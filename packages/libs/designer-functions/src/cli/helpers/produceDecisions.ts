@@ -4,16 +4,22 @@ import { produceDecisionStatus } from './produceDecisionStatus';
 import type { ProducedDecisionStore } from './types';
 
 export const produceDecisions = (store: Store): ProducedDecisionStore => {
-    const decisions = store.records().map(record => produceDecisionStatus(store, record));
+    const decisions = store.records().map(record => produceDecisionStatus(store, record.input));
 
     const errors = store.context().errors();
-    const validationErrors = store.validationErrors();
-    const valueErrorsCount = decisions.reduce((acc, status) => acc + Number(status.hasErrors), 0);
+    const decisionErrorsCount = decisions.reduce(
+        (acc, status) => acc + Number(status.hasDecisionErrors),
+        0,
+    );
+    const valueErrorsCount = decisions.reduce(
+        (acc, status) => acc + Number(status.hasValueErrors),
+        0,
+    );
 
     const counts: () => [string, number][] = () => [
         ['records', decisions.length],
-        ['errors', errors.length],
-        ['validation errors', validationErrors.length],
+        ['store errors', errors.length],
+        ['decision errors', decisionErrorsCount],
         ['value errors', valueErrorsCount],
     ];
 
@@ -21,13 +27,6 @@ export const produceDecisions = (store: Store): ProducedDecisionStore => {
         return counts()
             .slice(1)
             .reduce((acc, [, c]) => acc + c, 0);
-    };
-
-    const valueErrors = () => {
-        return decisions.flatMap(status => [
-            ...status.context.errors(),
-            ...(status.value?.context().allErrors() || []),
-        ]);
     };
 
     const summary = () => {
@@ -39,13 +38,7 @@ export const produceDecisions = (store: Store): ProducedDecisionStore => {
 
     return {
         decisions: () => decisions,
-        hasErrors: () => Boolean(errors.length + validationErrors.length + valueErrorsCount),
-        errors: {
-            count: errorCount,
-            store: () => store.context().errors(),
-            validation: () => store.validationErrors(),
-            value: valueErrors,
-        },
+        hasErrors: () => errorCount() > 0,
         summary,
     };
 };

@@ -17,6 +17,9 @@ export function generateModelSchemas(
             const schema = TJS.generateSchema(program, info.symbolName, {
                 required: true,
                 noExtraProps: true,
+                ref: true,
+                aliasRef: true,
+                titles: true,
             });
 
             if (!schema) return null;

@@ -1,7 +1,7 @@
 import type { AnchoredNumberSeriesParams, ColorSRGBHueInput } from '../../../primitives';
-import type { InputRecord } from '../../../record';
+import type { DecisionInput } from '../../../primitives/record';
 
-export type ColorSRGBHueValueExplicitInput = InputRecord & {
+export type ColorSRGBHueValueExplicitInput = DecisionInput & {
     model: 'color-srgb-hue-value/explicit';
     params: {
         value: ColorSRGBHueInput;
@@ -9,7 +9,7 @@ export type ColorSRGBHueValueExplicitInput = InputRecord & {
     };
 };
 
-export type ColorSRGBHueSetExplicitInput = InputRecord & {
+export type ColorSRGBHueSetExplicitInput = DecisionInput & {
     model: 'color-srgb-hue-set/explicit';
     params: {
         values: ColorSRGBHueInput[];
@@ -17,7 +17,7 @@ export type ColorSRGBHueSetExplicitInput = InputRecord & {
     };
 };
 
-export type ColorSRGBHueSetBoundedInput = InputRecord & {
+export type ColorSRGBHueSetBoundedInput = DecisionInput & {
     model: 'color-srgb-hue-set/bounded';
     params: {
         from: ColorSRGBHueInput;
@@ -27,7 +27,7 @@ export type ColorSRGBHueSetBoundedInput = InputRecord & {
     };
 };
 
-export type ColorSRGBHueSetAnchoredInput = InputRecord & {
+export type ColorSRGBHueSetAnchoredInput = DecisionInput & {
     model: 'color-srgb-hue-set/anchored';
     params: {
         anchor: ColorSRGBHueInput;
