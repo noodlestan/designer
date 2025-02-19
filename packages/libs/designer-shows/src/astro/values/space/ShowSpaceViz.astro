@@ -8,9 +8,11 @@ type Props = ShowVizProps & {
     v?: SpaceValue;
 };
 
-const { viz = true, ...rest } = Astro.props;
+const { v: spaceValue, viz = true, size = 'auto', options } = Astro.props;
 
 const Viz = getSpaceVizComponent(viz);
+
+const opt = options || {};
 ---
 
-{viz && <Viz {...rest} />}
+{viz && <Viz v={spaceValue} size={size} options={opt} />}

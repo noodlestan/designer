@@ -47,7 +47,7 @@ export type SpaceVizName = 'square' | 'circle' | 'bar-h' | 'bar-v';
 
 export type SpaceVizProps = ShowVizProps & {
     viz?: boolean | SpaceVizName;
-    value?: SpaceValue;
+    v?: SpaceValue;
 };
 export type SpaceVizComponent = (props: SpaceVizProps) => unknown;
 
@@ -65,7 +65,7 @@ export type ShowContent = {
 export type ColorVizOptions = ShowContent & { contrast?: string };
 
 export type ColorVizProps = ShowVizProps & {
-    value?: ColorValue;
+    v?: ColorValue;
     options?: ColorVizOptions;
 };
 export type ColorVizComponent = (props: ColorVizProps) => unknown;

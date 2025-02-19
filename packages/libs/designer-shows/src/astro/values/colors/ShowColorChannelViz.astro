@@ -27,6 +27,8 @@ const channelToColors: Record<ColorChannelName, ColorComplementaryChannels> = {
 const channelV = v as ColorChannelValueCommon;
 const channel = channelV.name();
 const channelColor = channelV?.toColor(channelToColors[channel]);
+
+const opt = options || {};
 ---
 
-{viz && channelColor && <ColorSwatchViz value={channelColor} size={size} options={options} />}
+{viz && channelColor && <ColorSwatchViz v={channelColor} size={size} options={opt} />}

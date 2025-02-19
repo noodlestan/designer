@@ -4,7 +4,7 @@ import type { SpaceVizProps } from '../../types';
 
 type Props = SpaceVizProps;
 
-const { value: space, size = 'auto', muteErrors } = Astro.props;
+const { v: space, size = 'auto', muteErrors } = Astro.props;
 
 const { value: v, units } = space?.toObject() || {};
 const vWithUnits = `${v}${units}`;

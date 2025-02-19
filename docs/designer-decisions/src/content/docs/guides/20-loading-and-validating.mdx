@@ -197,7 +197,8 @@ Cold Color color-value/explicit
 If your records aren't showing, lookout for error messages such as:
 
 ```
-🙈 Invalid DecisionSource "./data". Decision file does not contain an array.Path: "./data/color.json"
+🐘 66 records
+🟥 Invalid DecisionSource "./data". Decision file does not contain an array.Path: "./data/color.json"
 ```
 
 If you see this, make sure your file contains an array of decisions `[{ ... }, { ... }]` as opposed to a single `{...}` decision record.
@@ -205,7 +206,8 @@ If you see this, make sure your file contains an array of decisions `[{ ... }, {
 The following error can also appear if your data has a syntax error. A single misplaced `}` or missing `:` will cause the JSON data to be unreadable. We recommend using an editor such as [VS Code](https://code.visualstudio.com/) for visual feedback and assistance.
 
 ```
-🙈  Invalid DecisionSource "./data". Could not parse decision file.  Expected ',' or ']' after array element in JSON at position 233. Path: "./data/color.json"
+🐘 66 records
+🟥 Invalid DecisionSource "./data". Could not parse decision file.  Expected ',' or ']' after array element in JSON at position 233. Path: "./data/color.json"
 ```
 
 ## Validating input data
@@ -265,11 +267,12 @@ If we now introduce a couple of issues in or data, for instance deleting the `va
 ]
 ```
 
-... and run our script again, we will see the validation errors
+... and run our script again, the validation errors will be displayed at the bottom.
 
 ```
-🟨 Decision "Warm Color" /params (required) must have required property 'value'
-🟨 Decision "Cold Color" /params/value (type) must be object, string or number
+🐘 68 records
+🟥 Decision "Warm Color" /params (required) must have required property 'value'
+🟥 Decision "Cold Color" /params/value (type) must be object, string or number
 ```
 
 ### Producing decision values

@@ -5,7 +5,7 @@ import type { ColorVizProps } from '../../types';
 
 type Props = ColorVizProps;
 
-const { value: color, size = 'auto', options, muteErrors } = Astro.props;
+const { v: color, size = 'auto', options, muteErrors } = Astro.props;
 
 const hsl = color?.toString('oklch');
 

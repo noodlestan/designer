@@ -4,13 +4,14 @@ import type { SpaceVizProps } from '../../types';
 
 type Props = SpaceVizProps;
 
-const { value: space, size = 'auto', muteErrors } = Astro.props;
-const all = Astro.props;
+const { v: space, size = 'auto', muteErrors } = Astro.props;
 
 const { value: v, units } = space?.toObject() || {};
 const vWithUnits = `${v}${units}`;
 const showErrors = !muteErrors && space?.context().hasErrors();
 ---
+
+{typeof Astro.props.v}
 
 <div class:list={['dd-space-bar-h-viz', size]}>
     {showErrors && <ShowError size="s" position="block" />}
