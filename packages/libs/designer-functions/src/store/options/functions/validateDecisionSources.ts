@@ -7,6 +7,7 @@ import { createOptionsError } from '../../errors';
 import type { StoreError } from '../../types';
 
 import { validateDataSource } from './validateDataSource';
+import { validateSchemaSources } from './validateSchemaSources';
 
 export const validateDecisionSources = (
     _path: string,
@@ -49,6 +50,10 @@ export const validateDecisionSources = (
         }
 
         const validSource = validateDataSource(`${path}.source`, addError, decision.source);
-        return validSource ? { name, source: validSource } : [];
+        const validSchemas = decision.schemas
+            ? validateSchemaSources(`${path}.schemas`, addError, decision.schemas)
+            : undefined;
+
+        return validSource ? { name, source: validSource, schemas: validSchemas } : [];
     });
 };

@@ -20,7 +20,7 @@
           "isResolverFunction": true
         }
       },
-      "required": ["schemas", "decisions"]
+      "required": ["decisions"]
     }
   },
   "$defs": {

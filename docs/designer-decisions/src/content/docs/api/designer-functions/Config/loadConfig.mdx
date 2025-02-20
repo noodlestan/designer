@@ -57,11 +57,9 @@ If you prefer not to use `dd.config.mjs` configuration file, you can expose your
 // src/config
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
 import { staticStoreBuilder } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const store = {
     decisions: [DEMO_DATA, './data'],
-    schemas: [DECISION_SCHEMAS],
 };
 const config = { store };
 

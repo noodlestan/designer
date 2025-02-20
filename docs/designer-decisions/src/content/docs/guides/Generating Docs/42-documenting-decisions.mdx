@@ -46,13 +46,11 @@ The following packages are required:
 -   [@noodlestan/designer-decisions](/api/designer-decisions)
 -   [@noodlestan/designer-functions](/api/designer-functions)
 -   [@noodlestan/designer-integration-astro](/api/designer-integration-astro)
--   [@noodlestan/designer-schemas](/api/designer-schemas)
 -   [@noodlestan/designer-shows](/api/designer-shows)
 
 ```bash
 npm install @noodlestan/designer-decisions @noodlestan/designer-functions \
-  @noodlestan/designer-integration-astro \ @noodlestan/designer-schemas \
-  @noodlestan/designer-shows
+  @noodlestan/designer-integration-astro \ @noodlestan/designer-shows
 ```
 
 ### Configuring Designer Decisions
@@ -68,19 +66,17 @@ Create a directory to store your decision data and add a Designer Decisions conf
 
 </FileTree>
 
-The minimum required configuration specifies one or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) from which to load decision data ([DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput/)) and the corresponding [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource) definitions, to load the [schemas](/models/schemas) that validate the input data.
+The minimum required configuration specifies one or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) from which to load decision data ([DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput/)).
 
 ```js "defineConfig"
 // dd.config.mjs
 import { defineConfig } from '@noodlestan/designer-functions';
 
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 
 export default defineConfig({
     store: {
         decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
-        schemas: [DECISION_SCHEMAS],
     },
 });
 ```

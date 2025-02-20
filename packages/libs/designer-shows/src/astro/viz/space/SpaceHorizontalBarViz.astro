@@ -11,8 +11,6 @@ const vWithUnits = `${v}${units}`;
 const showErrors = !muteErrors && space?.context().hasErrors();
 ---
 
-{typeof Astro.props.v}
-
 <div class:list={['dd-space-bar-h-viz', size]}>
     {showErrors && <ShowError size="s" position="block" />}
     <div class="dd-block"></div>

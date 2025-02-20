@@ -1,8 +1,9 @@
 import glob from 'fast-glob';
 
+import { type DeepPartial, normalizeDecisionSource } from '../private';
 import { type StoreOptions, createStoreContext } from '../store';
 
-import { normalizeSource, resolveDecisionSourcePaths } from './functions';
+import { resolveDecisionSourcePaths } from './functions';
 
 const findDataFilesInPath = async (path: string): Promise<string[]> => {
     if (path.includes('node_modules')) {
@@ -12,11 +13,13 @@ const findDataFilesInPath = async (path: string): Promise<string[]> => {
     return [`${path}/**/*.json`];
 };
 
-export const resolveDecisionWatchPaths = async (options: StoreOptions): Promise<string[]> => {
-    const context = createStoreContext(options);
+export const resolveDecisionWatchPaths = async (
+    options: DeepPartial<StoreOptions>,
+): Promise<string[]> => {
+    const context = createStoreContext(options as StoreOptions);
 
     const { decisions } = context.options();
-    const normalized = decisions.map(normalizeSource);
+    const normalized = decisions.map(normalizeDecisionSource);
     const paths = await resolveDecisionSourcePaths(context, normalized);
 
     const promises = paths.map(findDataFilesInPath);

@@ -1,9 +1,8 @@
 import type { DecisionSource } from '@noodlestan/designer-decisions';
 
 import { resolveSourcePath } from '../../helpers';
+import { normalizeDecisionSource } from '../../private/normalizeDecisionSource';
 import type { StoreContext } from '../../store';
-
-import { normalizeSource } from './normalizeSource';
 
 const isFileSystemSource = ({ source }: DecisionSource) => {
     return source.type === 'package' || source.type === 'path';
@@ -16,7 +15,7 @@ export const resolveDecisionSourcePaths = async (
     const { resolver } = context.options();
     const maybePaths = await Promise.all(
         sources
-            .map(normalizeSource)
+            .map(normalizeDecisionSource)
             .filter(isFileSystemSource)
             .map(source => {
                 try {

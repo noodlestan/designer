@@ -22,6 +22,12 @@ The name of the decision source is carried over to the decision store and emitte
 
 The data source definition.
 
+### ༶ `schemas`: (optional) [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource)
+
+A list of schemas definitions that the decision source relies on.
+
+It is recommended to list all schemas explicitly, including the built-in ones, to make sure that they are loaded even when configuration in the target system does not reference them.
+
 ## Usage
 
 If your data is going to be consumed in different packages you are encourage to export a constant from the package where the data resides so that consumers can easily configure loaders an processors.
@@ -29,6 +35,8 @@ If your data is going to be consumed in different packages you are encourage to 
 The [demo data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) in `@noodlestan/designer-decisions` is exposed like this:
 
 ```ts
+import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
+
 const DEMO_DATA: DecisionSource = {
     name: 'Designer Decisions Demo Data',
     source: {
@@ -36,6 +44,7 @@ const DEMO_DATA: DecisionSource = {
         package: '@noodlestan/designer-decisions',
         path: 'resources/data/demo',
     },
+    schemas: [DECISION_SCHEMAS],
 };
 ```
 

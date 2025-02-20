@@ -40,19 +40,10 @@ export const validateStoreOptions = (
         addError(error);
         return EMPTY_OPTIONS;
     }
-    if (!Array.isArray(maybeSchemas)) {
+    if (maybeSchemas !== undefined && !Array.isArray(maybeSchemas)) {
         const error = createOptionsError({
             path: 'options.schemas',
             reason: 'Not an array.',
-            options,
-        });
-        addError(error);
-        return EMPTY_OPTIONS;
-    }
-    if (!maybeSchemas.length) {
-        const error = createOptionsError({
-            path: 'options.schemas',
-            reason: 'Must have at least one schema definition.',
             options,
         });
         addError(error);
@@ -64,7 +55,9 @@ export const validateStoreOptions = (
         addError,
         maybeDecisionsSources,
     );
-    const validatedSchemas = validateSchemaSources('options.schemas', addError, maybeSchemas);
+    const validatedSchemas = maybeSchemas
+        ? validateSchemaSources('options.schemas', addError, maybeSchemas)
+        : [];
 
     return { decisions: validatedDecisionSources, schemas: validatedSchemas };
 };

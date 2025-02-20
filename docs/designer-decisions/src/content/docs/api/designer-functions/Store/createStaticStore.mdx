@@ -38,7 +38,7 @@ Holds all decision input data and provides an API to retrieve validated records 
 
 The following is taken from the [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder) implementation.
 
-```ts "createStaticStore" collapse={1-16}
+```ts "createStaticStore" collapse={1-14}
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
 import {
     type StoreOptions,
@@ -49,11 +49,9 @@ import {
     loadSchemasFromSources,
     createStaticStore,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const options: StoreOptions = {
     decisions: [DEMO_DATA, './data'],
-    schemas: [DECISION_SCHEMAS],
 };
 
 const context = createStoreContext(options);
