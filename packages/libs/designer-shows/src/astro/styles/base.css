@@ -19,6 +19,7 @@
     --dd-size-l: 175px;
     --dd-size-xl: 300px;
 
+    --dd-gap-xs: var(--dd-space-xs);
     --dd-gap-s: var(--dd-space-s);
     --dd-gap-m: var(--dd-space-m);
     --dd-gap-l: var(--dd-space-l);
@@ -64,7 +65,7 @@
 
     --dd-card-v-space: var(--dd-space-m);
     --dd-card-h-space: var(--dd-space-l);
-    --dd-card-v-gap: var(--dd-space-l);
+    --dd-card-col-gap: var(--dd-space-l);
     --dd-card-h-gutter: var(--dd-space-xl);
 
     --dd-card-border: 1px solid var(--sl-color-gray-5);

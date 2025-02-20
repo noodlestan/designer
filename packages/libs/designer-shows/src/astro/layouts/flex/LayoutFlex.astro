@@ -3,7 +3,7 @@ export type LayoutFlexProps = {
     flow?: 'tight';
     align?: 'start' | 'center';
     direction?: 'row' | 'column';
-    gap?: 's' | 'm' | 'l';
+    gap?: 'xs' | 's' | 'm' | 'l';
     wrap?: boolean;
     tag?: 'div' | 'ul' | 'li';
 };
@@ -47,6 +47,10 @@ const shouldWrap = wrap && direction !== 'column';
 
     .column {
         flex-direction: column;
+    }
+
+    .gap-xs {
+        --__layout-flex-gap: var(--dd-gap-xs);
     }
 
     .gap-s {
