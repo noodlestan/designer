@@ -95,20 +95,13 @@ import { LayoutGrid, ShowDecision, ShowDecisionCard } from '@noodlestan/designer
 <summary>ColorValue (fg viz / custom contrast color)</summary>
 
 ```mdx
-<ShowDecision
-    d="Action Color"
-    size="l"
-    viz="fg"
-    options={{ contrast: 'oklch(17% 0 0deg)' }}
-
-/>
+<ShowDecision d="Action Color" size="l" viz="fg" options={{ contrast: 'oklch(17% 0 0deg)' }} />
 
 <ShowDecision
     d="Action Constrast Color"
     size="l"
-    viz="fg"
+    viz="bg"
     options={{ contrast: 'oklch(48% 0.15 0deg) ' }}
-
 />
 ```
 
@@ -124,8 +117,8 @@ import { LayoutGrid, ShowDecision, ShowDecisionCard } from '@noodlestan/designer
     <ShowDecision
         d="Action Constrast Color"
         size="l"
-        viz="fg"
-        options={{ contrast: 'oklch(48% 0.15 0deg) ' }}
+        viz="bg"
+        options={{ contrast: '#181011' }}
     />
 
 </LayoutGrid>
@@ -136,12 +129,12 @@ import { LayoutGrid, ShowDecision, ShowDecisionCard } from '@noodlestan/designer
 <summary>ColorValue (DecisionCard)</summary>
 
 ```mdx
-<ShowDecisionCard d="Action Color" viz="bg" size="l" />
+<ShowDecisionCard d="Action Color" viz="bg" size="l" options={{ contrast: '#fff0f4' }} />
 ```
 
 </details>
 
-<ShowDecisionCard d="Action Color" viz="bg" size="l" />
+<ShowDecisionCard d="Action Color" viz="bg" size="l" options={{ contrast: '#fff0f4' }} />
 
 <details>
 <summary>ColorSet (DecisionCard / column layout / s size / model and params shown)</summary>

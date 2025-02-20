@@ -75,11 +75,11 @@
         "c": { "$name": "Content Primary Chroma" },
         "h": { "$name": "Content Primary Hue" }
       },
-      "after": {
+      "before": {
         "steps": 3,
         "modifier": {
           "space": "oklch",
-          "l": { "mode": "linear", "by": 0.05 }
+          "l": { "mode": "linear", "by": 0.12 }
         }
       }
     }

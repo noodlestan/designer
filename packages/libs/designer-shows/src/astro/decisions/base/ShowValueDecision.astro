@@ -8,7 +8,7 @@ import { resolveLayout } from '../../helpers';
 
 type Props = ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 'v'>;
 
-const { store, d, layout, value: showValue = true, viz: showViz = true, ...rest } = Astro.props;
+const { store, d, layout, value = true, viz = true, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
 
@@ -16,22 +16,24 @@ const componentMap = decision && getDecisionComponentMap(decision);
 const { component: ValueComponent, props: valueFixedProps = {} } = componentMap?.value || {};
 const { component: VizComponent, props: vizFixedProps = {} } = componentMap?.viz || {};
 
-const value = decision && decision.produce();
+const decisionValue = decision && decision.produce();
 
 const [itemLayout] = resolveLayout(layout, ['row']);
-const muteValueErrors = showViz !== false;
+const muteValueErrors = viz !== false;
 ---
 
 {
     decision && (ValueComponent || VizComponent) && (
         <LayoutDynamic layout={itemLayout}>
-            {VizComponent && <VizComponent {...rest} {...vizFixedProps} v={value} viz={showViz} />}
+            {VizComponent && (
+                <VizComponent {...rest} {...vizFixedProps} v={decisionValue} viz={viz} />
+            )}
             {ValueComponent && (
                 <ValueComponent
                     {...rest}
                     {...valueFixedProps}
-                    v={value}
-                    value={showValue}
+                    v={decisionValue}
+                    value={value}
                     muteErrors={muteValueErrors}
                 />
             )}
