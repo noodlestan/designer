@@ -1,3 +1,4 @@
+import type { SchemaSource } from '@noodlestan/designer-decisions';
 import type { ErrorObject } from 'ajv';
 
 import type { StoreOptions } from '../../store';
@@ -15,7 +16,7 @@ export type DesignerConfigError = {
 export type DesignerConfig = {
     store: {
         decisions: StoreOptions['decisions'];
-        schemas: StoreOptions['schemas'];
+        schemas?: SchemaSource[];
         moduleResolver?: StoreOptions['resolver'];
     };
 };

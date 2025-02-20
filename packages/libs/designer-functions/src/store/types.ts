@@ -12,7 +12,7 @@ import type {
 
 export type StoreOptions = {
     decisions: (DecisionSource | string)[];
-    schemas: SchemaSource[];
+    schemas?: SchemaSource[];
     resolver?: (moduleName: string) => Promise<string>;
 };
 

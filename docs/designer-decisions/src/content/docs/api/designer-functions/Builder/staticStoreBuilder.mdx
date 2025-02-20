@@ -51,18 +51,16 @@ const store = await build();
 
 **Building the options object manually:**
 
-```ts "StoreOptions" collapse={1-8}
+```ts "StoreOptions" collapse={1-7}
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
 import {
     type StoreOptions,
     createStoreContext,
     staticStoreBuilder,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const options: StoreOptions = {
     decisions: [DEMO_DATA, './data'],
-    schemas: [DECISION_SCHEMAS],
 };
 const context = createStoreContext(options);
 const build = staticStoreBuilder(context);

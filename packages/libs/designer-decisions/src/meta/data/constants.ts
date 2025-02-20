@@ -1,3 +1,4 @@
+import { DECISION_SCHEMAS } from '../schemas';
 import type { DecisionSource } from '../types';
 
 const SAMPLE_DATA: DecisionSource = {
@@ -7,6 +8,7 @@ const SAMPLE_DATA: DecisionSource = {
         package: '@noodlestan/designer-decisions',
         path: 'resources/data/samples',
     },
+    schemas: [DECISION_SCHEMAS],
 };
 
 const DEMO_DATA: DecisionSource = {
@@ -16,6 +18,7 @@ const DEMO_DATA: DecisionSource = {
         package: '@noodlestan/designer-decisions',
         path: 'resources/data/demo',
     },
+    schemas: [DECISION_SCHEMAS],
 };
 
 export { SAMPLE_DATA, DEMO_DATA };

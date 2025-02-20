@@ -5,12 +5,22 @@ sidebar:
     order: 0
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
+Defines a source of schemas
+
 ```ts
 export type SchemaSource = {
     name: string;
     source: DataSource;
 };
 ```
+
+<Aside type="tip" title="Advanced API">
+    This API is useful for advanced uses cases, namely to extend the system with your own schemas.
+    In most scenarios you do not need to reference any schemas in your [configuration
+    file](/api/configuration).
+</Aside>
 
 ## Attributes
 

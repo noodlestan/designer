@@ -7,6 +7,8 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
+The `DataSource` data structure defines how to load [schemas](/api/designer-decisions/Meta/Types/SchemaSource) and [decisions](/api/designer-decisions/Meta/Types/DecisionSource).
+
 ```ts
 export type DataSourcePackage = { type: 'package'; package: string; path: string };
 
@@ -15,11 +17,11 @@ export type DataSourcePath = { type: 'path'; path: string };
 export type DataSource = DataSourcePackage | DataSourcePath;
 ```
 
-The `DataSource` data structure defines how to load [schemas](/api/designer-decisions/Meta/Types/SchemaSource) and [decisions](/api/designer-decisions/Meta/Types/DecisionSource).
+## Data Source Types
 
 Currently, only file system based data source types are supported, but [our plans](https://github.com/orgs/noodlestan/projects/3) include the ability to fetch data from remote locations as well.
 
-## `DataSourcePath`
+### `DataSourcePath`
 
 Defines a relative or absolute path in the filesystem.
 
@@ -31,13 +33,13 @@ const data: DataSource = { type: 'path', path: './data' };
 
 The [minimal boilerplate](https://github.com/noodlestan/designer-boilerplate-minimal/blob/main/dd.config.mjs) uses this format to declare the local data.
 
-### ༶ `type: "path"`
+#### ༶ `type: "path"`
 
-### ༶ `path: string`
+#### ༶ `path: string`
 
 Either relative to the current working directory or absolute in the filesystem.
 
-## `DataSourcePackage`
+### `DataSourcePackage`
 
 Defines a path relative to the root of a specific package.
 
@@ -55,13 +57,13 @@ Both the [demo data](https://github.com/noodlestan/designer/blob/main/packages/l
     dependency explicitly in the project's `package.json`.
 </Aside>
 
-### ༶ `type`: "package"
+#### ༶ `type`: "package"
 
-### ༶ `name`: string
+#### ༶ `name`: string
 
 The name of the package as declared in its `package.json`.
 
-### ༶ `path`: string
+#### ༶ `path`: string
 
 The path within the package.
 

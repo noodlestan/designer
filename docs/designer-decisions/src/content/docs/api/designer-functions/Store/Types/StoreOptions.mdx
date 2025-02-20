@@ -29,11 +29,11 @@ Values of type [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSourc
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decision';
 ```
 
-#### ༶ `schemas`: [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource)[]
+#### ༶ `schemas`: (optional) [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource)[]
 
 A list of schema configurations to load JSON schemas from.
 
-The definition for the [built-in schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) can be imported from `@noodlestan/designer-schemas`.
+The definition for the [built-in schemas](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-schemas/src/constants.ts) are always loaded automatically.
 
 ```ts
 import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';

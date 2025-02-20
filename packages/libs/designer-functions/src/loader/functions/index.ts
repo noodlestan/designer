@@ -2,5 +2,4 @@
 export * from './findJsonFiles';
 export * from './loadDecisionFile';
 export * from './loadDecisionsFromSource';
-export * from './normalizeSource';
 export * from './resolveDecisionSourcePaths';

@@ -38,27 +38,22 @@ Add a Designer Decisions configuration file in the root of your project.
 
 </FileTree>
 
-The minimum required configuration specifies:
+The minimum required configuration specifies only one or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) from where to load decision data ([DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput/)).
 
--   One or more [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) - where to load decision data ([DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput/)) from.
--   One or more [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource) - location of the [schemas](/models/schemas) that validate the input data.
+In this example we configured the [Sample and Demo Data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) decision sources and a local `data/` directory for you to add more decisions, as well as the [built-in schemas](/models/schemas).
 
 ```js "defineConfig"
 // dd.config.mjs
 import { defineConfig } from '@noodlestan/designer-functions';
 
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 import { DEMO_DATA, SAMPLE_DATA } from '@noodlestan/designer-decisions';
 
 export default defineConfig({
     store: {
         decisions: [SAMPLE_DATA, DEMO_DATA, './data'],
-        schemas: [DECISION_SCHEMAS],
     },
 });
 ```
-
-In this example we configured the [Sample and Demo Data](https://github.com/noodlestan/designer/blob/main/packages/libs/designer-decisions/src/meta/data/constants.ts) decision sources and a local `data/` directory for you to add more decisions, as well as the [built-in schemas](/models/schemas).
 
 <Aside type="tip">
     If you want to load decision data from another source (e.g.: another package) you can define it

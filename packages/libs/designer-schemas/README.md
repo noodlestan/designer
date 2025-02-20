@@ -25,11 +25,9 @@ import {
   produceDecisions,
   staticStoreBuilder,
 } from '@noodlestan/designer-functions';
-import { DECISION_SCHEMAS } from '@noodlestan/designer-schemas';
 
 const options: StoreOptions = {
   decisions: [DEMO_DATA, './data'],
-  schemas: [DECISION_SCHEMAS],
 };
 const context = createStoreContext(options);
 const build = staticStoreBuilder(context);

@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@noodlestan/designer-decisions": "0.0.13",
+    "@noodlestan/designer-schemas": "0.0.13",
     "ajv": "8.17.1",
     "ajv-formats": "^3.0.1",
     "fast-glob": "^3.3.3",

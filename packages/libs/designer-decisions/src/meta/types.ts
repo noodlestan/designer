@@ -54,9 +54,14 @@ export type SchemaSource = {
     source: SchemaDataSource;
 };
 
+export type NestedSchemaSource = SchemaSource & {
+    decisionSourceName?: string;
+};
+
 export type DataSource = DataSourcePackage | DataSourcePath;
 
 export type DecisionSource = {
     name: string;
     source: DataSource;
+    schemas?: SchemaSource[];
 };
