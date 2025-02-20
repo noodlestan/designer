@@ -55,7 +55,7 @@ const { layout = 'row' } = Astro.props;
         flex-direction: column;
         padding-top: var(--dd-card-v-space);
         padding-bottom: var(--dd-card-v-space);
-        gap: var(--dd-card-v-gap);
+        gap: var(--dd-card-col-gap);
         background-color: var(--dd-card-contents-bg-color);
         border-radius: var(--dd-card-border-radius);
     }
@@ -77,19 +77,23 @@ const { layout = 'row' } = Astro.props;
 
     .dd-layout-column .dd-main {
         flex-direction: column;
-        gap: var(--dd-card-v-gap);
+        gap: var(--dd-card-col-gap);
     }
 
     .dd-details {
         display: flex;
         flex-direction: column;
-        gap: var(--dd-card-v-gap);
+        gap: var(--dd-card-col-gap);
+    }
+
+    .dd-details > :global(:first-child) {
+        margin-block-start: calc(var(--dd-text-line-height) * var(--dd-text-size-m) * -0.25);
     }
 
     .dd-meta {
         display: flex;
         flex-direction: column;
-        gap: var(--dd-card-v-gap);
+        gap: var(--dd-card-col-gap);
         padding: var(--dd-card-v-space) var(--dd-card-h-space);
         background-color: var(--dd-card-meta-bg-color);
         border-radius: var(--dd-card-border-radius);

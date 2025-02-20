@@ -1,11 +1,11 @@
 ---
 export type LayoutGridProps = {
     flow?: 'tight';
-    columns?: number;
+    columns?: number | string;
     align?: 'start' | 'center';
-    gap?: 's' | 'm' | 'l';
-    hGap?: 's' | 'm' | 'l';
-    vGap?: 's' | 'm' | 'l';
+    gap?: 'xs' | 's' | 'm' | 'l';
+    rowGap?: 'xs' | 's' | 'm' | 'l';
+    colGap?: 'xs' | 's' | 'm' | 'l';
     tag?: 'div' | 'ul' | 'li';
 };
 
@@ -16,22 +16,27 @@ const {
     align = 'start',
     columns = 2,
     gap: maybeGap,
-    hGap: maybeHGap,
-    vGap: maybeVGap,
+    rowGap: mayberowGap,
+    colGap: maybecolGap,
     tag: Element = 'div',
 } = Astro.props;
 
 const gap = maybeGap || 'm';
-const hGap = maybeHGap ?? gap;
-const vGap = maybeVGap ?? hGap;
+const rowGap = mayberowGap ?? gap;
+const colGap = maybecolGap ?? rowGap;
 
-const style = { '--columns': columns };
+const classList = [
+    'dd-layout-grid',
+    flow,
+    align,
+    `row-gap-${rowGap}`,
+    `col-gap-${colGap}`,
+    { template: typeof columns === 'string' },
+];
+const style = typeof columns === 'number' ? { '--columns': columns } : { '--template': columns };
 ---
 
-<Element
-    class:list={['dd-layout-grid', flow, align, `h-gap-${hGap}`, `v-gap-${vGap}`]}
-    style={style}
->
+<Element class:list={classList} style={style}>
     <slot />
 </Element>
 
@@ -40,9 +45,13 @@ const style = { '--columns': columns };
         display: grid;
         grid-template-columns: repeat(var(--columns), 1fr);
         align-items: start;
-        row-gap: var(--__layout-grid-h-gap);
-        column-gap: var(--__layout-grid-v-gap);
+        row-gap: var(--__layout-grid-row-gap);
+        column-gap: var(--__layout-grid-col-gap);
         list-style: none;
+    }
+
+    .template {
+        grid-template-columns: var(--template);
     }
 
     .flow {
@@ -61,27 +70,35 @@ const style = { '--columns': columns };
         flex-direction: column;
     }
 
-    .h-gap-s {
-        --__layout-grid-h-gap: var(--dd-gap-s);
+    .row-gap-xs {
+        --__layout-grid-row-gap: var(--dd-gap-xs);
     }
 
-    .h-gap-m {
-        --__layout-grid-h-gap: var(--dd-gap-m);
+    .row-gap-s {
+        --__layout-grid-row-gap: var(--dd-gap-s);
     }
 
-    .h-gap-l {
-        --__layout-grid-h-gap: var(--dd-gap-l);
+    .row-gap-m {
+        --__layout-grid-row-gap: var(--dd-gap-m);
     }
 
-    .h-gap-s {
-        --__layout-grid-v-gap: var(--dd-gap-s);
+    .row-gap-l {
+        --__layout-grid-row-gap: var(--dd-gap-l);
     }
 
-    .h-gap-m {
-        --__layout-grid-v-gap: var(--dd-gap-m);
+    .col-gap-xs {
+        --__layout-grid-col-gap: var(--dd-gap-xs);
     }
 
-    .h-gap-l {
-        --__layout-grid-v-gap: var(--dd-gap-l);
+    .col-gap-s {
+        --__layout-grid-col-gap: var(--dd-gap-s);
+    }
+
+    .col-gap-m {
+        --__layout-grid-col-gap: var(--dd-gap-m);
+    }
+
+    .col-gap-l {
+        --__layout-grid-col-gap: var(--dd-gap-l);
     }
 </style>
