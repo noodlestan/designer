@@ -46,7 +46,11 @@ describe('resolveTypefaceValue()', () => {
 
         it('should return the fallback value', () => {
             const result = resolveTypefaceValue(mockContext, mockInput);
-            expect(result).toEqual(FALLBACK_VALUE);
+            expect(result.toString()).toEqual(FALLBACK_VALUE.fontName);
+            expect(result.capabilities).toEqual([]);
+            expect(result.source).toEqual(undefined);
+            expect(result.ranges).toEqual([]);
+            expect(result.styles).toEqual([]);
         });
     });
 
@@ -57,23 +61,31 @@ describe('resolveTypefaceValue()', () => {
 
         it('should return a complete object', () => {
             const result = resolveTypefaceValue(mockContext, mockInput);
-            expect(result).toEqual({ ...FALLBACK_VALUE, ...mockInput });
+            expect(result.toString()).toEqual('Foo');
+            expect(result.capabilities).toEqual([]);
+            expect(result.source).toEqual(undefined);
+            expect(result.ranges).toEqual([]);
+            expect(result.styles).toEqual([]);
         });
     });
 
     describe('When input is a complete value', () => {
         const input = {
-            fontName: 'Foo',
+            fontName: 'Bar',
             source: { type: 'import', value: '@foo/bar/style.css' },
             capabilities: ['variable'],
-            styles: [],
-            ranges: [],
+            styles: [{ italic: true, weight: 300 }],
+            ranges: [{ tag: 'ital', min: 0, max: 1, defaultValue: 0 }],
         } as TypefaceValueAttributesInput;
 
         it('should expose the resolved value via .get()', () => {
             const result = resolveTypefaceValue(mockContext, input);
 
-            expect(result).toEqual(input);
+            expect(result.toString()).toEqual('Bar');
+            expect(result.capabilities).toEqual(input.capabilities);
+            expect(result.source).toEqual(input.source);
+            expect(result.styles).toEqual(input.styles);
+            expect(result.ranges).toEqual(input.ranges);
         });
     });
 
