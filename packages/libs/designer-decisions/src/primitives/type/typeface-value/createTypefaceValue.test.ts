@@ -5,7 +5,6 @@ import { createDecisionContextMock } from '../../../mocks';
 import { ValueContext, createValueContext } from '../../../values';
 
 import { createTypefaceValue } from './createTypefaceValue';
-import { FALLBACK_VALUE } from './private';
 
 describe('createTypefaceValue()', () => {
     const [decisionContextMock] = createDecisionContextMock();
