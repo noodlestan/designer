@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { TypefaceValueExplicitInput, TypefaceValueInput } from '../../../inputs';
+import { TypefaceValueAttributesInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
 
 import { createTypefaceValueExplicitModel } from './createTypefaceValueExplicitModel';
@@ -12,16 +12,15 @@ describe('createTypefaceValueExplicitModel()', () => {
         capabilities: [],
         source: { type: 'import', value: '@foo/bar/style.css' },
         styles: [],
-    } as TypefaceValueInput;
+    } as TypefaceValueAttributesInput;
 
     describe('Given a context and params', () => {
         const [mockContext] = createValueContextMock();
-        const params: TypefaceValueExplicitInput['params'] = input;
 
         it('should create a value', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockContext, input);
 
-            expect(result.toString()).toEqual(params.fontName);
+            expect(result.get().toString()).toEqual(input.fontName);
         });
     });
 });
