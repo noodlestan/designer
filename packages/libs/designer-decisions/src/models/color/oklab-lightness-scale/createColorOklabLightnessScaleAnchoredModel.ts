@@ -4,7 +4,7 @@ import {
     createOklabLightnessScale,
     createOklabLightnessValue,
     generateAnchoredSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabLightnessScaleAnchoredModel: DecisionModelFactory<

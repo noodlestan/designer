@@ -1,5 +1,5 @@
 import type { SpaceScaleExplicitInput } from '../../../inputs';
-import { type SpaceScale, createSpaceScale, createSpaceValue } from '../../../primitives';
+import { type SpaceScale, createSpaceScale, createSpaceValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createSpaceScaleExplicitModel: DecisionModelFactory<

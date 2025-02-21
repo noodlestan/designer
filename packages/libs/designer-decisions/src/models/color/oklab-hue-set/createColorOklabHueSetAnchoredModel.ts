@@ -4,7 +4,7 @@ import {
     createOklabHueSet,
     createOklabHueValue,
     generateAnchoredSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<

@@ -1,6 +1,6 @@
 import type { DecisionInput } from '../inputs';
-import type { BaseValue } from '../primitives';
-import type { ValueContext } from '../values';
+import type { ValueContext } from '../value';
+import type { BaseValue } from '../values';
 
 export type DecisionModel<V = BaseValue<unknown>, P = object> = {
     produce: (context: ValueContext, params: P) => V;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ColorSRGBLightnessScaleBoundedInput } from '../../../inputs';
+import type { ColorSRGBLightnessScaleBoundedInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
 
 import { createColorSRGBLightnessScaleBoundedModel } from './createColorSRGBLightnessScaleBoundedModel';

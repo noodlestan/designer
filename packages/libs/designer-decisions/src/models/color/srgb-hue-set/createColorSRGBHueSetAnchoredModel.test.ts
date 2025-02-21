@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ColorSRGBHueSetAnchoredInput } from '../../../inputs';
+import type { ColorSRGBHueSetAnchoredInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
 
 import { createColorSRGBHueSetAnchoredModel } from './createColorSRGBHueSetAnchoredModel';

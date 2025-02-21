@@ -17,7 +17,6 @@ vi.mock(import('@noodlestan/designer-decisions'), async importOriginal => {
     const actual = await importOriginal();
     return {
         ...actual,
-        // your mocked methods
         createStaticDecision: vi.fn(),
     };
 });

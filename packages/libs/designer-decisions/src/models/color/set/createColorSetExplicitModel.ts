@@ -1,5 +1,5 @@
 import type { ColorSetExplicitInput } from '../../../inputs';
-import { type ColorSet, createColorSet, createColorValue } from '../../../primitives';
+import { type ColorSet, createColorSet, createColorValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSetExplicitModel: DecisionModelFactory<

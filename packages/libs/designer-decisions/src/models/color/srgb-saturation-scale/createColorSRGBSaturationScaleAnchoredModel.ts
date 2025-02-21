@@ -4,7 +4,7 @@ import {
     createSRGBSaturationScale,
     createSRGBSaturationValue,
     generateAnchoredSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBSaturationScaleAnchoredModel: DecisionModelFactory<

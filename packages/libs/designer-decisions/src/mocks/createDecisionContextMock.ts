@@ -1,6 +1,6 @@
 import { type Mock, vi } from 'vitest';
 
-import type { DecisionContext } from '../decisions';
+import type { DecisionContext } from '../decision';
 import type { DecisionInput } from '../inputs';
 
 type Mocks = {
