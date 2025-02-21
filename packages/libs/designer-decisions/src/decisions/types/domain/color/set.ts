@@ -1,5 +1,5 @@
 /* ColorSet */
-import type { Decision } from '../../../../decisions';
 import type { ColorSet } from '../../../../primitives';
+import type { Decision } from '../../decision';
 
 export type ColorSetDecision = Decision<ColorSet>;

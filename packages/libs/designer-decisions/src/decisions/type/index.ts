@@ -2,3 +2,4 @@
 export * from './color';
 export * from './isSetDecision';
 export * from './space';
+export * from './type';

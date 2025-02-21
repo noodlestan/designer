@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import type { SpaceValueInput, SpaceWithUnits } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { SpaceValueInput, SpaceWithUnits, ValueInputError } from '../../../types';
+import { ValueInputError } from '../../../values';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveSpaceValue } from './resolveSpaceValue';

@@ -1,7 +1,12 @@
 import { type DecisionUnknown } from '@noodlestan/designer-decisions';
 
 import { ShowSetDecision, ShowValueDecision } from '../decisions';
-import type { DecisionTypeComponent, DecisionValueComponent, DecisionVizComponent } from '../types';
+import type {
+    DecisionTypeComponent,
+    DecisionValueComponent,
+    DecisionVizComponent,
+    ShowDecisionLayoutName,
+} from '../types';
 import {
     ShowColorChannelValue,
     ShowColorChannelViz,
@@ -9,6 +14,8 @@ import {
     ShowColorViz,
     ShowSpaceValue,
     ShowSpaceViz,
+    ShowTypefaceValue,
+    ShowTypefaceViz,
 } from '../values';
 
 import type { DecisionTypeComponents } from './types';
@@ -39,6 +46,7 @@ function defaultCs(
     decision: DecisionTypeComponent,
     value: DecisionValueComponent,
     viz: DecisionVizComponent,
+    layout?: ShowDecisionLayoutName,
 ): DecisionTypeComponents {
     return {
         decision: {
@@ -50,6 +58,7 @@ function defaultCs(
         viz: {
             component: viz,
         },
+        layout,
     };
 }
 
@@ -74,6 +83,12 @@ export const getDecisionComponentMap = (
         'color-value': defaultCs(ShowValueDecision, valueC(ShowColorValue), vizC(ShowColorViz)),
         'space-value': defaultCs(ShowValueDecision, valueC(ShowSpaceValue), vizC(ShowSpaceViz)),
         'space-scale': defaultCs(ShowSetDecision, valueC(ShowSpaceValue), vizC(ShowSpaceViz)),
+        'typeface-value': defaultCs(
+            ShowValueDecision,
+            valueC(ShowTypefaceValue),
+            vizC(ShowTypefaceViz),
+            'column',
+        ),
     };
 
     return DECISION_TYPE_COMPONENT_MAP[decision.type()];

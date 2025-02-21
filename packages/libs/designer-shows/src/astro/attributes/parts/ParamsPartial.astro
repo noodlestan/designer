@@ -1,0 +1,59 @@
+---
+import ParamsPartialSnake from './ParamsPartialSnake.astro';
+
+type Props = {
+    params: object;
+};
+
+const { params } = Astro.props;
+
+const entries = Object.entries(params);
+---
+
+<div class="dd-params-partial">
+    <ul class="dd-list">
+        {
+            entries.map(([key, value]) => (
+                <li class="dd-item">
+                    <p class="dd-key">{key}</p>
+                    <p class="dd-value">
+                        {typeof value === 'object' ? <ParamsPartialSnake params={value} /> : value}
+                    </p>
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .dd-params-partial .dd-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0;
+        list-style: none;
+    }
+
+    .dd-params-partial .dd-list .dd-item {
+        display: flex;
+        gap: 5px;
+        padding: 0;
+        font-size: var(--dd-text-size);
+        font-weight: var(--dd-text-weight);
+        line-height: var(--dd-text-line-height);
+        color: var(--dd-text-color);
+    }
+
+    .dd-params-partial .dd-item .dd-key {
+        min-width: fit-content;
+    }
+
+    .dd-params-partial .dd-item .dd-key,
+    .dd-params-partial .dd-item .dd-value {
+        margin: 0;
+    }
+
+    .dd-params-partial .dd-item .dd-key {
+        /* font-weight: var(--dd-label-weight); */
+    }
+</style>

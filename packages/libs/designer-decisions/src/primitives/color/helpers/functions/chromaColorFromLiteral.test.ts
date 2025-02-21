@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { ColorLiteral } from '../../../../types';
+import { ColorLiteral } from '../../../../inputs';
 
 import { chromaColorFromLiteral } from './chromaColorFromLiteral';
 

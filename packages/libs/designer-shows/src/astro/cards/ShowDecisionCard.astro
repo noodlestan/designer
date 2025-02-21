@@ -14,6 +14,7 @@ import {
 } from '../attributes';
 import { resolveLayout } from '../helpers';
 import { ShowError } from '../atoms';
+import { getDecisionComponentMap } from '../meta';
 
 type Props = DecisionTypeComponentProps & {
     name?: boolean;
@@ -44,10 +45,15 @@ const {
 } = Astro.props;
 
 function resolveCardLayout(
-    layout: ShowDecisionLayout,
+    maybeLayout: ShowDecisionLayout,
     isSet: boolean,
     setLayout: LayoutDynamicProps['layout'],
 ) {
+    const componentMap = decision && getDecisionComponentMap(decision);
+    const { layout: componentDefaultLayout } = componentMap || {};
+
+    const layout = maybeLayout || componentDefaultLayout;
+
     if (isSet) {
         if (layout) {
             return setLayout === 'column' ? 'row' : 'column';

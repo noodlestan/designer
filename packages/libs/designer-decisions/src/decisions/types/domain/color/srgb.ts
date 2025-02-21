@@ -1,4 +1,3 @@
-import type { Decision } from '../../../../decisions';
 import type {
     SRGBHueSet,
     SRGBHueValue,
@@ -7,6 +6,7 @@ import type {
     SRGBSaturationScale,
     SRGBSaturationValue,
 } from '../../../../primitives';
+import type { Decision } from '../../decision';
 
 export type ColorSRGBHueValueDecision = Decision<SRGBHueValue>;
 

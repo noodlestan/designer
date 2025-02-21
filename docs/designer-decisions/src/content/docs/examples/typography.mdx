@@ -1,0 +1,41 @@
+---
+title: Typography Examples
+description: Examples of typography decisions documented with designer components.
+sidebar:
+    label: Typography
+    order: 30
+---
+
+import { LayoutGrid, ShowDecision, ShowDecisionCard } from '@noodlestan/designer-shows/astro';
+
+## Typeface
+
+<details>
+<summary>TypefaceValue</summary>
+```mdx
+<ShowDecision d="Typeface Value Explicit Sample" value={false} size="m"  viz="fg" options={{ contrast: '#ccc' }} />
+````
+
+</details>
+
+<ShowDecision d="Typeface Value Explicit Sample" />
+
+## Cards
+
+<details>
+<summary>TypefaceValue (DecisionCard)</summary>
+
+```mdx
+<ShowDecisionCard d="Typeface Value Explicit Sample" />
+```
+
+</details>
+
+<ShowDecisionCard d="Typeface Value Explicit Sample" />
+
+## See also
+
+-   [Integrations / Astro / ShowDecision](/integrations/Astro/ShowDecision)
+-   [Integrations / Astro / ShowDecisionCard](/integrations/Astro/ShowDecisionCard)
+-   [Models / Decision Types / Typography](/models/decision-types#typography)
+-   [Guides / Generating Docs / Astro/MDX](/guides/generating-documentation/using-astro-components-in-mdx/)

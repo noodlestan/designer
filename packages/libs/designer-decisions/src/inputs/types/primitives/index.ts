@@ -5,4 +5,5 @@ export * from './numbers';
 export * from './record';
 export * from './ref';
 export * from './space';
+export * from './type';
 export * from './usage';

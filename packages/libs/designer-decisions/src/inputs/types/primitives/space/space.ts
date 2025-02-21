@@ -1,6 +1,6 @@
 /** space */
 
-import type { DecisionRef } from './ref';
+import type { DecisionRef } from '../ref';
 
 export type SpaceScaleRef = DecisionRef & {
     $subset:

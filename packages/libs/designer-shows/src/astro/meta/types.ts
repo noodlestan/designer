@@ -1,4 +1,9 @@
-import type { DecisionTypeComponent, DecisionValueComponent, DecisionVizComponent } from '../types';
+import type {
+    DecisionTypeComponent,
+    DecisionValueComponent,
+    DecisionVizComponent,
+    ShowDecisionLayoutName,
+} from '../types';
 
 export type DecisionTypeComponents<
     ValueProps extends object = object,
@@ -16,4 +21,5 @@ export type DecisionTypeComponents<
         component: DecisionVizComponent<VizProps>;
         props?: VizProps;
     };
+    layout?: ShowDecisionLayoutName;
 };

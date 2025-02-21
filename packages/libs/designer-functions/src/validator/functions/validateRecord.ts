@@ -4,6 +4,7 @@ import type { ErrorObject, ValidateFunction } from 'ajv';
 import type { SchemaMap } from '../../schemas';
 import { createDecisionInputError } from '../errors';
 
+import { deleteValue } from './deleteValue';
 import { extractErrorAttributes } from './extractErrorAttributes';
 
 export function validateRecord(
@@ -17,7 +18,7 @@ export function validateRecord(
     if (valid) {
         return preValidatedRecord;
     }
-    const reduced = (validateFn.errors || []).reduce(
+    const reducedErrors = (validateFn.errors || []).reduce(
         (acc, item) => {
             const path = item.instancePath;
             const paths = Object.keys(acc);
@@ -31,12 +32,13 @@ export function validateRecord(
     );
 
     const inputErrors: DecisionInputError[] = [];
-    Object.entries(reduced).forEach(([path, errors]) => {
+    Object.entries(reducedErrors).forEach(([path, errors]) => {
         const attributes = extractErrorAttributes(preValidatedRecord, path, errors);
         const error = createDecisionInputError({
             normalized: { loaded, input, source, file },
             ...attributes,
         });
+        deleteValue(input, path);
         inputErrors.push(error);
     });
 

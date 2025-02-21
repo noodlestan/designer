@@ -11,9 +11,9 @@ import {
     createColorSRGBSaturationScaleBoundedModel,
     createColorSRGBSaturationScaleExplicitModel,
     createColorSRGBSaturationValueExplicitModel,
-} from '../../models';
-import { castFactory } from '../functions';
-import type { DecisionType } from '../types';
+} from '../../../models';
+import { castFactory } from '../../functions';
+import type { DecisionType } from '../../types';
 
 export const ColorSRGBDecisionTypes: DecisionType[] = [
     {
