@@ -4,7 +4,7 @@ import {
     createSRGBLightnessScale,
     createSRGBLightnessValue,
     generateAnchoredSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBLightnessScaleAnchoredModel: DecisionModelFactory<

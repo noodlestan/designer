@@ -3,7 +3,7 @@ import {
     type SRGBLightnessScale,
     createSRGBLightnessScale,
     createSRGBLightnessValue,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBLightnessScaleExplicitModel: DecisionModelFactory<

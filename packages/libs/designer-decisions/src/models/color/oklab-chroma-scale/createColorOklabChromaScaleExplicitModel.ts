@@ -3,7 +3,7 @@ import {
     type OklabChromaScale,
     createOklabChromaScale,
     createOklabChromaValue,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabChromaScaleExplicitModel: DecisionModelFactory<

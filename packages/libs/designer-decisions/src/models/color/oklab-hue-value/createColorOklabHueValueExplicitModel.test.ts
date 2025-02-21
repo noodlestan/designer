@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ColorOklabHueValueExplicitInput } from '../../../inputs';
+import type { ColorOklabHueValueExplicitInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
 
 import { createColorOklabHueValueExplicitModel } from './createColorOklabHueValueExplicitModel';

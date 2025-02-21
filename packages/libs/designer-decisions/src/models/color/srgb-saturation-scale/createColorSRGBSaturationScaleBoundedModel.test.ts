@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import type { ColorOklabChromaScaleBoundedInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { ColorOklabChromaScaleBoundedInput } from '../../../types';
 
 import { createColorSRGBSaturationScaleBoundedModel } from './createColorSRGBSaturationScaleBoundedModel';
 

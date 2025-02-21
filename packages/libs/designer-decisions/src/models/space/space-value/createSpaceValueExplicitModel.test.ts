@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import type { SpaceValueExplicitInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
-import type { SpaceValueExplicitInput } from '../../../types';
 
 import { createSpaceValueExplicitModel } from './createSpaceValueExplicitModel';
 

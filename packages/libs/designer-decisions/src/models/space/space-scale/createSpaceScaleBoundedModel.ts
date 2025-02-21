@@ -4,7 +4,7 @@ import {
     createSpaceScale,
     createSpaceValue,
     generateBoundedSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createSpaceScaleBoundedModel: DecisionModelFactory<

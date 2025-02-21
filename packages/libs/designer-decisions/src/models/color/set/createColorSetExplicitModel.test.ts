@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ColorOkLCHLiteral, ColorSetBoundedInput } from '../../../inputs';
+import type { ColorOkLCHLiteral, ColorSetBoundedInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
 
 import { createColorSetBoundedModel } from './createColorSetBoundedModel';

@@ -4,7 +4,7 @@ import {
     createColorSet,
     createColorValue,
     generateAnchoredColorList,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSetAnchoredModel: DecisionModelFactory<

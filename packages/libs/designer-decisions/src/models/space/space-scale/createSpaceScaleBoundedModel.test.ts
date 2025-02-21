@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { SpaceScaleBoundedInput } from '../../../inputs';
+import type { SpaceScaleBoundedInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
 
 import { createSpaceScaleBoundedModel } from './createSpaceScaleBoundedModel';

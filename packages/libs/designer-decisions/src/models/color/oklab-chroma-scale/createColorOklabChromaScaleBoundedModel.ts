@@ -4,7 +4,7 @@ import {
     createOklabChromaScale,
     createOklabChromaValue,
     generateBoundedSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<

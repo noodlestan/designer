@@ -4,7 +4,7 @@ import {
     createSRGBHueSet,
     createSRGBHueValue,
     generateAnchoredSeries,
-} from '../../../primitives';
+} from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<

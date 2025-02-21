@@ -1,7 +1,7 @@
-import type { Decision, DecisionContext } from '../../decisions';
+import type { Decision, DecisionContext } from '../../decision';
 import type { DecisionSource } from '../../meta';
-import type { BaseValue } from '../../primitives';
 import type { DeepPartial } from '../../private';
+import type { BaseValue } from '../../values';
 
 import type { DecisionRef } from './primitives';
 import type { DecisionInput } from './primitives/record';

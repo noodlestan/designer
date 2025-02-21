@@ -1,5 +1,5 @@
 import type { ColorOklabHueSetExplicitInput } from '../../../inputs';
-import { type OklabHueSet, createOklabHueSet, createOklabHueValue } from '../../../primitives';
+import { type OklabHueSet, createOklabHueSet, createOklabHueValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabHueSetExplicitModel: DecisionModelFactory<

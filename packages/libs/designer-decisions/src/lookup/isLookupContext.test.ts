@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import type { LookupContexts } from '../types';
-
 import { isLookupContext } from './isLookupContext';
+import type { LookupContexts } from './types';
 
 describe('isLookupContext()', () => {
     describe('Given LookupContexts', () => {
