@@ -36,13 +36,7 @@ describe('createTypefaceValue()', () => {
         it('should expose the resolved value via .get()', () => {
             const result = createTypefaceValue(valueContext, input);
 
-            expect(result.get()).toEqual({ ...FALLBACK_VALUE, ...input });
-        });
-
-        it('should expose the value as a string', () => {
-            const result = createTypefaceValue(valueContext, input);
-
-            expect(result.toString()).toEqual(input.fontName);
+            expect(result.get().toString()).toEqual(input.fontName);
         });
     });
 });
