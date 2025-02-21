@@ -5,15 +5,16 @@ import { ShowDecisionTypeUnavailable, ShowDecisionUnavailable } from './unavaila
 
 type Props = DecisionTypeComponentProps;
 
-const { store, d, ...rest } = Astro.props;
+const { store, d, layout: maybeLayout, ...rest } = Astro.props;
 
 const [, decision] = store.decision({ $name: d });
 const componentMap = decision && getDecisionComponentMap(decision);
 const { component: Comp, props: fixedProps = {} } = componentMap?.decision || {};
 
 const type = decision && decision.type();
+const layout = maybeLayout || componentMap?.layout;
 ---
 
-{decision && Comp && <Comp store={store} d={d} {...rest} {...fixedProps} />}
+{decision && Comp && <Comp store={store} d={d} layout={layout} {...rest} {...fixedProps} />}
 {decision && type && !Comp && <ShowDecisionTypeUnavailable type={type} />}
 {!decision && <ShowDecisionUnavailable d={d} />}

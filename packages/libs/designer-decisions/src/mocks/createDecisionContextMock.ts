@@ -15,6 +15,7 @@ export function createDecisionContextMock(inputs: DecisionInput[] = []): [Decisi
     mockDecisionContext.ref = vi.fn().mockReturnValue({ $uuid: 'decision-uuid' });
 
     const mockValueContext = {
+        ref: () => ({ $name: 'Name' }),
         inputs: () => inputs,
     } as DecisionContext;
     mockValueContext.resolve = resolveSpy;

@@ -2,9 +2,9 @@ import {
     createColorSetAnchoredModel,
     createColorSetBoundedModel,
     createColorSetExplicitModel,
-} from '../../models';
-import { castFactory } from '../functions';
-import type { DecisionType } from '../types';
+} from '../../../models';
+import { castFactory } from '../../functions';
+import type { DecisionType } from '../../types';
 
 export const ColorSetDecisionTypes: DecisionType[] = [
     {

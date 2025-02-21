@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { SpaceWithUnits } from '../../../types';
+import type { SpaceWithUnits } from '../../../inputs';
 
 import { isValidSpaceWithUnits } from './isValidSpaceWithUnits';
 

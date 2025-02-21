@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import type { SpaceValueInput } from '../../../inputs';
 import { createDecisionContextMock, createValueContextMock } from '../../../mocks';
-import type { SpaceValueInput, ValueContext } from '../../../types';
-import { createValueContext } from '../../../values';
+import { ValueContext, createValueContext } from '../../../values';
 import { createSpaceValue } from '../value';
 
 import { createSpaceScale } from './createSpaceScale';

@@ -1,0 +1,19 @@
+---
+import { type TypefaceValue } from '@noodlestan/designer-decisions';
+
+import type { ShowVizProps } from '../../types';
+import { getTypeVizComponent } from '../../meta/getTypeVizComponent';
+
+type Props = ShowVizProps & {
+    v?: TypefaceValue;
+};
+
+const { v: typefaceValue, viz = true, size = 'auto', options } = Astro.props;
+
+const Viz = getTypeVizComponent(viz);
+
+const opt = options || {};
+const t = typefaceValue?.get();
+---
+
+{viz && <Viz v={typefaceValue} size={size} options={opt} />}

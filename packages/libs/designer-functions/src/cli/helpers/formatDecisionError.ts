@@ -1,4 +1,8 @@
-import type { DecisionError, DecisionInputError } from '@noodlestan/designer-decisions';
+import {
+    type DecisionError,
+    type DecisionInputError,
+    serializeMaybeError,
+} from '@noodlestan/designer-decisions';
 
 import { formatDecisionInputError } from './formatDecisionInputError';
 
@@ -16,5 +20,10 @@ export const formatDecisionError = (
     const symbol = useColor ? '🟥' : 'X';
     const prefix = name ? `Decision "${name}" ` : '';
 
-    return `${symbol} ${prefix}${error.message()}`;
+    const isUnexpectedError = 'error' in error;
+    const errStr = isUnexpectedError
+        ? serializeMaybeError(error.error, ' Reason: {}')
+        : error.message();
+
+    return `${symbol} ${prefix}${errStr}`;
 };

@@ -1,0 +1,11 @@
+---
+import ParamsPartial from './ParamsPartial.astro';
+
+type Props = {
+    params: object;
+};
+
+const { params } = Astro.props;
+---
+
+<ParamsPartial params={params} />

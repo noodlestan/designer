@@ -1,4 +1,4 @@
-import type { ColorValue, SpaceValue } from '@noodlestan/designer-decisions';
+import type { ColorValue, SpaceValue, TypefaceValue } from '@noodlestan/designer-decisions';
 import type { Store } from '@noodlestan/designer-functions';
 
 import type { LayoutDynamicProps } from '../layouts';
@@ -50,6 +50,16 @@ export type SpaceVizProps = ShowVizProps & {
     v?: SpaceValue;
 };
 export type SpaceVizComponent = (props: SpaceVizProps) => unknown;
+
+/* space */
+
+export type TypeVizName = 'short-text';
+
+export type TypeVizProps = ShowVizProps & {
+    viz?: boolean | TypeVizName;
+    v?: TypefaceValue; // WIP : this will have to be a TypeStyleValue
+};
+export type TypeVizComponent = (props: TypeVizProps) => unknown;
 
 /* color */
 

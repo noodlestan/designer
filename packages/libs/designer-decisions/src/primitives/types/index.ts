@@ -3,3 +3,4 @@ export * from './base';
 export * from './color';
 export * from './number';
 export * from './space';
+export * from './type';

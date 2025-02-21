@@ -1,4 +1,3 @@
-import type { Decision } from '../../../../decisions';
 import type {
     OklabChromaScale,
     OklabChromaValue,
@@ -7,6 +6,7 @@ import type {
     OklabLightnessScale,
     OklabLightnessValue,
 } from '../../../../primitives';
+import type { Decision } from '../../decision';
 
 export type ColorOklabLightnessValueDecision = Decision<OklabLightnessValue>;
 

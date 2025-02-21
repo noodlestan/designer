@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createDecisionContext } from '../decisions';
+import { DecisionSource } from '../meta';
 
 import { createValueContext } from './createValueContext';
 import * as functionsModule from './functions';
@@ -17,7 +18,13 @@ describe('createValueContext()', () => {
     describe('Given no context', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];
-        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
+        const mockRecords = mockInputs?.map(input => ({
+            input,
+            source: {} as DecisionSource,
+            loaded: input,
+            errors: [],
+        }));
+        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockRecords);
 
         const valueContextMock = {} as ValueContext;
         createValueContextMocked.mockReturnValue(valueContextMock);
@@ -53,8 +60,14 @@ describe('createValueContext()', () => {
     describe('Given a LookupContext and an input', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];
+        const mockRecords = mockInputs?.map(input => ({
+            input,
+            source: {} as DecisionSource,
+            loaded: input,
+            errors: [],
+        }));
 
-        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
+        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockRecords);
         const mockLookupContext = { all: ['Context A'] };
 
         const valueContextMock = {} as ValueContext;
@@ -95,8 +108,14 @@ describe('createValueContext()', () => {
     describe('Given a ParentValueContext and an input', () => {
         const mockRef = { $uuid: 'test-uuid' };
         const mockInputs = [{ model: 'model', name: 'value-1', params: {} }];
+        const mockRecords = mockInputs?.map(input => ({
+            input,
+            source: {} as DecisionSource,
+            loaded: input,
+            errors: [],
+        }));
 
-        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockInputs);
+        const decisionContext = createDecisionContext(mockRef, vi.fn(), mockRecords);
 
         const valueContextMock = {} as ValueContext;
         createValueContextMocked.mockReturnValue(valueContextMock);

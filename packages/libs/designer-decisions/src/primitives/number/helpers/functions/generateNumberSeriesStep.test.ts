@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import type { NumberModifier } from '../../../../types';
+import { NumberModifier } from '../../../../inputs';
 
 import { generateNumberSeriesStep } from './generateNumberSeriesStep';
 

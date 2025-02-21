@@ -1,0 +1,40 @@
+---
+import { type TypefaceValue } from '@noodlestan/designer-decisions';
+
+import { DecisionValueContainer, ShowError } from '../../atoms';
+import { LayoutFlex } from '../../layouts';
+import type { ShowValueProps } from '../../types';
+
+type Props = ShowValueProps & {
+    v?: TypefaceValue;
+};
+
+const { v: typefaceValue, value = true, muteErrors } = Astro.props;
+
+const { fontName, capabilities, styles, ranges } = typefaceValue?.get() || {};
+const showErrors = !muteErrors && typefaceValue?.context().hasErrors();
+---
+
+{
+    value && typefaceValue !== undefined && (
+        <LayoutFlex>
+            <DecisionValueContainer>
+                {showErrors && <ShowError size="xs" />}
+                {fontName}
+            </DecisionValueContainer>
+            {capabilities?.includes('variable') && (
+                <DecisionValueContainer>Variable</DecisionValueContainer>
+            )}
+            {styles && styles.length ? (
+                <DecisionValueContainer>{styles.length} Styles</DecisionValueContainer>
+            ) : (
+                ''
+            )}
+            {ranges && ranges.length ? (
+                <DecisionValueContainer>{ranges.length} Axis</DecisionValueContainer>
+            ) : (
+                ''
+            )}
+        </LayoutFlex>
+    )
+}

@@ -1,5 +1,5 @@
 /* ColorValue */
-import type { Decision } from '../../../../decisions';
 import type { ColorValue } from '../../../../primitives';
+import type { Decision } from '../../decision';
 
 export type ColorValueDecision = Decision<ColorValue>;
