@@ -9,4 +9,4 @@ export type BaseNumericValue<T extends number = number> = BaseValue<T> & {
     quantized: (quantize?: number) => T;
 };
 
-export type AbstractNumericValue = Omit<BaseNumericValue, 'context'>;
+export type AbstractNumericValue = Omit<BaseNumericValue, 'type' | 'context'>;

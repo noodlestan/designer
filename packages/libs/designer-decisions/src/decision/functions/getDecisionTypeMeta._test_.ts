@@ -1,23 +1,17 @@
-import { describe, expect, it, vi } from 'vitest';
-
-import { MOCK_DECISION_TYPES } from '../../mocks';
+import { describe, expect, it } from 'vitest';
 
 import { getDecisionTypeMeta } from './getDecisionTypeMeta';
 
-vi.mock('../../meta', () => {
-    return {
-        DECISION_TYPES: MOCK_DECISION_TYPES,
-    };
-});
-
 describe('getDecisionTypeMeta()', () => {
     describe('Given a valid decision type', () => {
-        const type = 'type';
+        const type = 'color-oklab-hue-value';
 
         it('should return the matching decision type', () => {
             const result = getDecisionTypeMeta(type);
 
-            expect(result).toBe(MOCK_DECISION_TYPES[0]);
+            expect(result.type).toBe('color-oklab-hue-value');
+            expect(result.category).toBe('color');
+            expect(result.name).toBe('Oklab Hue Value');
         });
     });
 

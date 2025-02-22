@@ -1,7 +1,9 @@
 import { type Mock, vi } from 'vitest';
 
-import type { DecisionContext } from '../decision';
+import { type DecisionContext } from '../decision';
 import type { DecisionInput } from '../inputs';
+
+import { decisionTypeFromModel } from './functions';
 
 type Mocks = {
     resolveSpy: Mock;
@@ -15,6 +17,7 @@ export function createDecisionContextMock(inputs: DecisionInput[] = []): [Decisi
     mockDecisionContext.ref = vi.fn().mockReturnValue({ $uuid: 'decision-uuid' });
 
     const mockValueContext = {
+        decisionType: () => decisionTypeFromModel(inputs[0].model),
         ref: () => ({ $name: 'Name' }),
         inputs: () => inputs,
     } as DecisionContext;

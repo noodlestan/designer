@@ -22,7 +22,7 @@ export const createStaticDecision = <T = unknown>(
 
     const api: Decision<BaseValue<T>> = {
         uuid: () => inputs[0].uuid,
-        type: () => inputs[0].model.split('/')[0],
+        type: () => decisionContext.decisionType(),
         name: () => inputs[0].name,
         description: () => inputs[0].description,
         inputs: () => inputs,

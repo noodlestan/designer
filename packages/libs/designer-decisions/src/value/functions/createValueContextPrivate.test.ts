@@ -65,7 +65,7 @@ describe('createValueContextPrivate()', () => {
             ref: vi.fn(),
         } as unknown as DecisionContext;
         const mockLookupContexts = { all: ['Context A'] };
-        const mockInput = { model: 'model', name: 'value-1', params: {} };
+        const mockInput = { model: 'foo/bar', name: 'value-1', params: {} };
 
         const context = mockDecisionContext;
 
@@ -183,7 +183,7 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockInput = { model: 'model', name: 'value-1', params: {} };
+        const mockInput = { model: 'foo/bar', name: 'value-1', params: {} };
 
         it('should set the valueInput state', () => {
             const result = createValueContextPrivate(mockDecisionContext);
@@ -198,7 +198,7 @@ describe('createValueContextPrivate()', () => {
                 result.consume(mockInput);
 
                 expect(() => result.consume(mockInput)).toThrowError(
-                    `Value for "{"$uuid":"test-uuid"}" has already consumed input ({"model":"model","name":"value-1","params":{}}).`,
+                    `Value for "{"$uuid":"test-uuid"}" has already consumed input ({"model":"foo/bar","name":"value-1","params":{}}).`,
                 );
             });
         });
@@ -285,7 +285,7 @@ describe('createValueContextPrivate()', () => {
             resolve: vi.fn(),
             ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as DecisionContext;
-        const mockInput = { model: 'model', name: 'value-1', params: {} };
+        const mockInput = { model: 'foo/bar', name: 'value-1', params: {} };
 
         it('should add the child context to the list', () => {
             const result = createValueContextPrivate(mockDecisionContext);
