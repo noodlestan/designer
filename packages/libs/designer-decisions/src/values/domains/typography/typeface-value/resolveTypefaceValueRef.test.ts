@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { DECISION_TYPEFACE_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef } from '../../../../inputs';
 import { createStaticDecisionMock, createValueContextWithResolveMock } from '../../../../mocks';
 import type { ValueRefNotFoundError } from '../../../../value';
@@ -37,7 +38,7 @@ describe('resolveTypefaceValueRef()', () => {
             expect(error.message()).toContain('not found');
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe('TypefaceValue');
+            expect(error.valueName).toBe(DECISION_TYPEFACE_VALUE);
         });
     });
 

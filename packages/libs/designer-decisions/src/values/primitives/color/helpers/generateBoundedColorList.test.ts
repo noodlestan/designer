@@ -2,6 +2,7 @@ import chroma from 'chroma-js';
 import { describe, expect, it, vi } from 'vitest';
 
 import type { ValueContext } from '../../../../value';
+import { COLOR_FORMAT_HSL } from '../constants';
 import { ColorValue } from '../types';
 
 import { generateBoundedColorList } from './generateBoundedColorList';
@@ -36,7 +37,7 @@ describe('generateBoundedColorList()', () => {
         const steps = 2;
 
         it('should return an array with expected items in the requested format', () => {
-            const result = generateBoundedColorList(fromMock, toMock, steps, 'hsl');
+            const result = generateBoundedColorList(fromMock, toMock, steps, COLOR_FORMAT_HSL);
             expect(result).toHaveLength(4);
             expect(result[0]).toEqual({ h: 0, s: 0, l: 0 });
             expect(result[1]).toEqual({ h: 0, s: 0, l: 0.2118 });
@@ -49,7 +50,7 @@ describe('generateBoundedColorList()', () => {
         const steps = 0;
 
         it('should return an array with the from and to color only', () => {
-            const result = generateBoundedColorList(fromMock, toMock, steps, 'hsl');
+            const result = generateBoundedColorList(fromMock, toMock, steps, COLOR_FORMAT_HSL);
             expect(result).toHaveLength(2);
             expect(result[0]).toEqual({ h: 0, s: 0, l: 0 });
             expect(result[1]).toEqual({ h: 0, s: 0, l: 1 });

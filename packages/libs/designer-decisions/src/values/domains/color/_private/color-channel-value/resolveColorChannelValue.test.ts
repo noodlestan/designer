@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createValueContextMock } from '../../../../../mocks';
 import type { ValueInputError } from '../../../../../value';
 
-import { FALLBACK_VALUE } from './private';
+import { mockChannelAttributes } from './mocks';
 import { resolveColorChannelValue } from './resolveColorChannelValue';
 import { resolveColorChannelValueRef } from './resolveColorChannelValueRef';
 
@@ -11,7 +11,8 @@ vi.mock('./resolveColorChannelValueRef');
 
 const resolveColorChannelValueRefMock = vi.mocked(resolveColorChannelValueRef);
 
-describe('resolveColorChannelValue()', () => {
+describe('resolveColorChannelValue(channelAttributes, )', () => {
+    const mockChannel = mockChannelAttributes;
     const [mockContext, { addErrorSpy }] = createValueContextMock();
 
     beforeEach(() => {
@@ -27,14 +28,18 @@ describe('resolveColorChannelValue()', () => {
         });
 
         it('should call resolveColorChannelValueRef with the correct arguments', () => {
-            resolveColorChannelValue(mockContext, mockInput);
+            resolveColorChannelValue(mockChannel, mockContext, mockInput);
 
             expect(resolveColorChannelValueRefMock).toHaveBeenCalledOnce();
-            expect(resolveColorChannelValueRefMock).toHaveBeenCalledWith(mockContext, mockInput);
+            expect(resolveColorChannelValueRefMock).toHaveBeenCalledWith(
+                mockChannel,
+                mockContext,
+                mockInput,
+            );
         });
 
         it('should return the value resolved by resolveColorChannelValueRef', () => {
-            const result = resolveColorChannelValue(mockContext, mockInput);
+            const result = resolveColorChannelValue(mockChannel, mockContext, mockInput);
             expect(result).toEqual(resolvedValue);
         });
     });
@@ -43,7 +48,7 @@ describe('resolveColorChannelValue()', () => {
         const mockInput = 0.3;
 
         it('should return the input value', () => {
-            const result = resolveColorChannelValue(mockContext, mockInput);
+            const result = resolveColorChannelValue(mockChannel, mockContext, mockInput);
             expect(result).toEqual(0.3);
         });
     });
@@ -52,7 +57,7 @@ describe('resolveColorChannelValue()', () => {
         const mockInput = 999;
 
         it('should return not clamp the value', () => {
-            const result = resolveColorChannelValue(mockContext, mockInput);
+            const result = resolveColorChannelValue(mockChannel, mockContext, mockInput);
             expect(result).toEqual(999);
         });
     });
@@ -63,14 +68,18 @@ describe('resolveColorChannelValue()', () => {
         it.each(invalidInputs)(
             'should return the fallback value for invalid input: %s',
             invalidInput => {
-                const result = resolveColorChannelValue(mockContext, invalidInput as number);
-                expect(result).toEqual(FALLBACK_VALUE);
+                const result = resolveColorChannelValue(
+                    mockChannel,
+                    mockContext,
+                    invalidInput as number,
+                );
+                expect(result).toEqual(mockChannel.fallback);
             },
         );
         it.each(invalidInputs)(
             'should add an error to the context for invalid input: %s',
             invalidInput => {
-                resolveColorChannelValue(mockContext, invalidInput as number);
+                resolveColorChannelValue(mockChannel, mockContext, invalidInput as number);
 
                 expect(addErrorSpy).toHaveBeenCalledOnce();
                 const error = addErrorSpy.mock.calls[0][0] as ValueInputError;

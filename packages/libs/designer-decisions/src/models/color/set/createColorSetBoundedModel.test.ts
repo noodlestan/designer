@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { ColorOkLCHLiteral, ColorSetBoundedInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
+import { COLOR_FORMAT_OKLCH } from '../../../values';
 
 import { createColorSetBoundedModel } from './createColorSetBoundedModel';
 
@@ -29,9 +30,15 @@ describe('createColorSetBoundedModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.toObject<ColorOkLCHLiteral>('oklch').l).toEqual(fromL);
-            expect(result.get().item(4)?.toObject<ColorOkLCHLiteral>('oklch').l).toBeCloseTo(0.75);
-            expect(result.get().last()?.toObject<ColorOkLCHLiteral>('oklch').l).toBeCloseTo(toL);
+            expect(result.get().first()?.toObject<ColorOkLCHLiteral>(COLOR_FORMAT_OKLCH).l).toEqual(
+                fromL,
+            );
+            expect(
+                result.get().item(4)?.toObject<ColorOkLCHLiteral>(COLOR_FORMAT_OKLCH).l,
+            ).toBeCloseTo(0.75);
+            expect(
+                result.get().last()?.toObject<ColorOkLCHLiteral>(COLOR_FORMAT_OKLCH).l,
+            ).toBeCloseTo(toL);
         });
     });
 });

@@ -3,17 +3,18 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import type { ColorSRGBHSLiteral } from '../../../../inputs';
 import { createDecisionContextMock } from '../../../../mocks';
 import { type ValueContext, createValueContext } from '../../../../value';
+import { COLOR_FORMAT_HSL, COLOR_FORMAT_RGB } from '../../../primitives';
 
 import { createColorValue } from './createColorValue';
 
 describe('createColorValue()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
+    const [mockDecisionContext] = createDecisionContextMock();
     const input = { h: 231.433, s: 0.33587, l: 0.45128 };
 
     let valueContext: ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        valueContext = createValueContext(mockDecisionContext);
     });
     describe('Given a value', () => {
         it('should have the provided context', () => {
@@ -31,7 +32,7 @@ describe('createColorValue()', () => {
         it('should expose the resolved value via .get()', () => {
             const colorValue = createColorValue(valueContext, input);
 
-            const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>('hsl');
+            const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>(COLOR_FORMAT_HSL);
             expect(h).toBe(231.4);
             expect(s).toBe(0.336);
             expect(l).toBe(0.451);
@@ -40,13 +41,13 @@ describe('createColorValue()', () => {
         it('should format toObject("rgb") correctly', () => {
             const colorValue = createColorValue(valueContext, input);
 
-            expect(colorValue.toObject('rgb')).toEqual({ r: 76, g: 87, b: 154 });
+            expect(colorValue.toObject(COLOR_FORMAT_RGB)).toEqual({ r: 76, g: 87, b: 154 });
         });
 
         it('should format toString("rgb") correctly', () => {
             const colorValue = createColorValue(valueContext, input);
 
-            expect(colorValue.toString('rgb')).toBe('#4c579a');
+            expect(colorValue.toString(COLOR_FORMAT_RGB)).toBe('#4c579a');
         });
     });
 
@@ -56,7 +57,7 @@ describe('createColorValue()', () => {
         it('should expose the quantized value via .toObject()', () => {
             const colorValue = createColorValue(valueContext, input, options);
 
-            const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>('hsl');
+            const { h, s, l } = colorValue.toObject<ColorSRGBHSLiteral>(COLOR_FORMAT_HSL);
 
             expect(h).toBe(232);
             expect(s).toBe(0.34);
@@ -76,7 +77,9 @@ describe('createColorValue()', () => {
         it('should (re)quantize the value via toObject()', () => {
             const result = createColorValue(valueContext, input, options);
 
-            const { h, s, l } = result.toObject<ColorSRGBHSLiteral>('hsl', { quantize: 5 });
+            const { h, s, l } = result.toObject<ColorSRGBHSLiteral>(COLOR_FORMAT_HSL, {
+                quantize: 5,
+            });
             expect(h).toBe(230);
             expect(s).toBe(0.35);
             expect(l).toBe(0.45);
@@ -85,7 +88,7 @@ describe('createColorValue()', () => {
         it('should (re)quantize the value via toString()', () => {
             const result = createColorValue(valueContext, input, options);
 
-            const hsl = result.toString('hsl', { quantize: 1 });
+            const hsl = result.toString(COLOR_FORMAT_HSL, { quantize: 1 });
             expect(hsl).toBe('hsl(231deg 34% 45%)');
         });
     });

@@ -1,18 +1,8 @@
-import { type ColorSRGBHueInput, isDecisionRef } from '../../../../inputs';
-import { type ValueContext, createValueInputError } from '../../../../value';
+import { type ColorSRGBHueInput } from '../../../../inputs';
+import { type ValueContext } from '../../../../value';
+import { resolveColorChannelValue } from '../_private';
 
-import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
-import { resolveSRGBHueValueRef } from './resolveSRGBHueValueRef';
+import { CHANNEL_ATTRIBUTES } from './private';
 
-export const resolveSRGBHueValue = (context: ValueContext, input: ColorSRGBHueInput): number => {
-    if (isDecisionRef(input)) {
-        return resolveSRGBHueValueRef(context, input);
-    }
-
-    if (typeof input !== 'number') {
-        context.addError(createValueInputError({ context, valueName, input }));
-        return fallback;
-    }
-
-    return input;
-};
+export const resolveSRGBHueValue = (context: ValueContext, input: ColorSRGBHueInput): number =>
+    resolveColorChannelValue(CHANNEL_ATTRIBUTES, context, input);

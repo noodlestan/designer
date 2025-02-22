@@ -1,111 +1,54 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { ColorOkLCHLiteral, ColorOklabLightnessInput } from '../../../../inputs';
+import type { ColorOklabLightnessInput } from '../../../../inputs';
 import { createDecisionContextMock } from '../../../../mocks';
 import { type ValueContext, createValueContext } from '../../../../value';
-import { COLOR_CHANNEL_OKLAB_LIGHTNESS_NAME as name } from '../../../primitives/color/constants';
+import {
+    ColorChannelBaseValue,
+    ColorChannelValueOptions,
+    ColorComplementaryChannels,
+} from '../../../primitives';
+import { createColorChannelValue } from '../_private';
 
 import { createOklabLightnessValue } from './createOklabLightnessValue';
+import { CHANNEL_ATTRIBUTES } from './private';
+
+vi.mock('../_private', () => ({
+    createColorChannelValue: vi.fn(),
+}));
+
+const createColorChannelValueMocked = vi.mocked(createColorChannelValue);
 
 describe('createOklabLightnessValue()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const input: ColorOklabLightnessInput = 0.7776;
+    const [mockDecisionContext] = createDecisionContextMock();
+    const mockInput: ColorOklabLightnessInput = 0.2773;
+    const mockValue = {} as ColorChannelBaseValue<ColorComplementaryChannels>;
+    const mockOptions: ColorChannelValueOptions = {};
 
-    let valueContext: ValueContext;
+    let mockContext: ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        mockContext = createValueContext(mockDecisionContext);
+        vi.clearAllMocks();
+        createColorChannelValueMocked.mockReturnValue(mockValue);
     });
 
     describe('Given a value', () => {
-        it('should have the provided context', () => {
-            const result = createOklabLightnessValue(valueContext, input);
+        it('should call createColorChannelValue()', () => {
+            createOklabLightnessValue(mockContext, mockInput);
 
-            expect(result.context()).toBe(valueContext);
+            expect(createColorChannelValueMocked).toHaveBeenCalledWith(
+                CHANNEL_ATTRIBUTES,
+                mockContext,
+                mockInput,
+                mockOptions,
+            );
         });
 
-        it('should have the expected name', () => {
-            const result = createOklabLightnessValue(valueContext, input);
+        it('should return the resolved value', () => {
+            const result = createOklabLightnessValue(mockContext, mockInput);
 
-            expect(result.name()).toBe(name);
-        });
-
-        it('should consume the input', () => {
-            createOklabLightnessValue(valueContext, input);
-
-            expect(valueContext.valueInput()).toEqual(input);
-        });
-
-        it('should expose the quantized value via get() and quantized()', () => {
-            const result = createOklabLightnessValue(valueContext, input);
-
-            expect(result.get()).toEqual(0.778);
-            expect(result.quantized()).toEqual(0.778);
-        });
-
-        it('should expose the raw via raw() and quantized(0)', () => {
-            const result = createOklabLightnessValue(valueContext, input);
-
-            expect(result.raw()).toEqual(input);
-            expect(result.quantized(0)).toEqual(input);
-        });
-
-        it('should quantize the value', () => {
-            const result = createOklabLightnessValue(valueContext, input);
-
-            expect(result.quantized(0.2)).toEqual(0.778);
-        });
-
-        it('should clamp the quantized value', () => {
-            const result = createOklabLightnessValue(valueContext, input);
-
-            expect(result.quantized(101)).toEqual(1);
-        });
-
-        it('should convert to a color with given channels', () => {
-            const result = createOklabLightnessValue(valueContext, input);
-
-            const color = result.toColor({ c: 0.0157, h: 301.1533 });
-            const { l, c, h } = color.toObject<ColorOkLCHLiteral>('oklch');
-
-            expect(l).toBe(0.778);
-            expect(c).toBe(0.016);
-            expect(h).toBe(301.1);
-        });
-    });
-
-    describe('Given a quantize option', () => {
-        const options = { quantize: 2 };
-
-        it('should expose the quantized value via .get() and quantized()', () => {
-            const result = createOklabLightnessValue(valueContext, input, options);
-
-            expect(result.get()).toEqual(0.78);
-            expect(result.quantized()).toEqual(0.78);
-        });
-
-        it('should expose the raw value via .raw() and quantized(0)', () => {
-            const result = createOklabLightnessValue(valueContext, input, options);
-
-            expect(result.raw()).toEqual(0.7776);
-            expect(result.quantized(0)).toEqual(0.7776);
-        });
-
-        it('should (re)quantize the value', () => {
-            const result = createOklabLightnessValue(valueContext, input, options);
-
-            expect(result.quantized(0.05)).toEqual(0.7775);
-        });
-
-        it('should convert to a color with complimentary channels quantized', () => {
-            const result = createOklabLightnessValue(valueContext, input, options);
-
-            const color = result.toColor({ c: 0.0157, h: 301.1533 });
-            const { l, c, h } = color.toObject<ColorOkLCHLiteral>('oklch');
-
-            expect(l).toEqual(0.78);
-            expect(c).toEqual(0.02);
-            expect(h).toEqual(302);
+            expect(result).toBe(mockValue);
         });
     });
 });

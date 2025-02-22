@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { DECISION_COLOR_OKLAB_HUE_VALUE } from '../../../../../constants';
 import type { DecisionInput, DecisionRef } from '../../../../../inputs';
 import {
     createStaticDecisionMock,
@@ -8,11 +9,11 @@ import {
 } from '../../../../../mocks';
 import type { ValueRefNotFoundError } from '../../../../../value';
 import { resolveSetRefDecision } from '../../../../functions';
-import type { ColorSet, ColorValue } from '../../../../primitives';
+import { type ColorSet, type ColorValue } from '../../../../primitives';
 import { createColorValue } from '../../color-value';
 
-import { createOklabChromaValue } from './createColorChannelValue';
-import { FALLBACK_VALUE } from './private';
+import { createColorChannelValue } from './createColorChannelValue';
+import { mockChannelAttributes } from './mocks';
 import { resolveColorChannelValueRef } from './resolveColorChannelValueRef';
 
 vi.mock('../../../../functions', async importOriginal => {
@@ -25,6 +26,8 @@ vi.mock('../../../../functions', async importOriginal => {
 const resolveSetRefDecisionMocked = vi.mocked(resolveSetRefDecision);
 
 describe('resolveColorChannelValueRef()', () => {
+    const mockChannel = mockChannelAttributes;
+
     describe('When the decision cannot be resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
         const [mockValueContext, { addErrorSpy }] = createValueContextWithResolveMock();
@@ -34,19 +37,19 @@ describe('resolveColorChannelValueRef()', () => {
         });
 
         it('should return the fallback value', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(FALLBACK_VALUE);
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toEqual(mockChannel.fallback);
         });
 
         it('should add an error to the context', () => {
-            resolveColorChannelValueRef(mockValueContext, mockRef);
+            resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
             expect(error.message()).toContain('not found');
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe('OklabChromaValue');
+            expect(error.valueName).toBe('color-oklab-hue-value');
         });
     });
 
@@ -65,19 +68,19 @@ describe('resolveColorChannelValueRef()', () => {
         });
 
         it('should call resolveSetRefDecision() with the correct arguments', () => {
-            resolveColorChannelValueRef(mockValueContext, mockRef);
+            resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledOnce();
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
-                'OklabChromaValue',
+                DECISION_COLOR_OKLAB_HUE_VALUE,
                 mockRef,
             );
         });
 
-        it('should return the OklabChromaValue channel of the resolved ColorValue', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toBeCloseTo(mockColor.c);
+        it('should return the correct channel of the resolved ColorValue', () => {
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toBeCloseTo(mockColor.h);
         });
     });
 
@@ -93,8 +96,8 @@ describe('resolveColorChannelValueRef()', () => {
         });
 
         it('should return the fallback value', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(FALLBACK_VALUE);
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toEqual(mockChannel.fallback);
         });
     });
 
@@ -111,20 +114,24 @@ describe('resolveColorChannelValueRef()', () => {
             vi.clearAllMocks();
         });
 
-        it('should return the OklabChromaValue channel of the ColorValue', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toBeCloseTo(mockColor.c);
+        it('should return the correct channel of the ColorValue', () => {
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toBeCloseTo(mockColor.h);
         });
     });
 
-    describe('When it resolves to a ColorOklabChromaScale decision and the item is resolved', () => {
+    describe('When it resolves to a ColorOklabHueSet decision and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-oklab-chroma-scale' } as DecisionInput;
+        const mockInput = { model: 'color-oklab-hue-set' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
         const mockColor = { l: 0.1, c: 0.01, h: 333 };
-        const colorValue = createOklabChromaValue(createValueContextMock()[0], mockColor.c);
+        const colorValue = createColorChannelValue(
+            mockChannel,
+            createValueContextMock()[0],
+            mockColor.h,
+        );
 
         beforeEach(() => {
             vi.clearAllMocks();
@@ -132,25 +139,25 @@ describe('resolveColorChannelValueRef()', () => {
         });
 
         it('should call resolveSetRefDecision() with the correct arguments', () => {
-            resolveColorChannelValueRef(mockValueContext, mockRef);
+            resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledOnce();
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
-                'OklabChromaValue',
+                DECISION_COLOR_OKLAB_HUE_VALUE,
                 mockRef,
             );
         });
 
-        it('should return the resolved OklabChromaValue', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(mockColor.c);
+        it('should return the resolved OklabHueValue', () => {
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toEqual(mockColor.h);
         });
     });
 
-    describe('When it resolves to a ColorOklabChromaScale decision and the item is not resolved', () => {
+    describe('When it resolves to a ColorOklabHueSet decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-oklab-chroma-scale' } as DecisionInput;
+        const mockInput = { model: 'color-oklab-hue-set' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -160,17 +167,17 @@ describe('resolveColorChannelValueRef()', () => {
         });
 
         it('should return the fallback value', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(FALLBACK_VALUE);
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toEqual(mockChannel.fallback);
         });
     });
 
-    describe('When it resolves to a ColorOklabChromaValue decision', () => {
+    describe('When it resolves to a ColorOklabHueValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'color-oklab-chroma-value' } as DecisionInput;
+        const mockInput = { model: 'color-oklab-hue-value' } as DecisionInput;
         const mockColor = { l: 0.1, c: 0.01, h: 333 };
         const [, mockDecision] = createStaticDecisionMock<ColorValue>([mockInput], {
-            get: () => mockColor.c,
+            get: () => mockColor.h,
         });
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -178,9 +185,9 @@ describe('resolveColorChannelValueRef()', () => {
             vi.clearAllMocks();
         });
 
-        it('should return the resolved ColorOklabChromaValue', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(mockColor.c);
+        it('should return the resolved ColorOklabHueValue', () => {
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toEqual(mockColor.h);
         });
     });
 
@@ -198,12 +205,12 @@ describe('resolveColorChannelValueRef()', () => {
         });
 
         it('should return the fallback value', () => {
-            const result = resolveColorChannelValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(FALLBACK_VALUE);
+            const result = resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
+            expect(result).toEqual(mockChannel.fallback);
         });
 
         it('should add an error to the context', () => {
-            resolveColorChannelValueRef(mockValueContext, mockRef);
+            resolveColorChannelValueRef(mockChannel, mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;

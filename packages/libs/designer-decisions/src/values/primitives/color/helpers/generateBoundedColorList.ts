@@ -1,6 +1,7 @@
 import chroma from 'chroma-js';
 
 import type { ColorFormat, ColorObjectLiteral } from '../../../../inputs';
+import { COLOR_FORMAT_OKLCH } from '../constants';
 import { chromaColorToLiteral } from '../functions';
 import type { ColorValue } from '../types';
 
@@ -8,7 +9,7 @@ export const generateBoundedColorList = <T extends ColorObjectLiteral = ColorObj
     fromValue: ColorValue,
     toValue: ColorValue,
     steps: number = 0,
-    format: ColorFormat = 'oklch',
+    format: ColorFormat = COLOR_FORMAT_OKLCH,
 ): T[] => {
     const from = fromValue.get();
     const to = toValue.get();
@@ -20,7 +21,7 @@ export const generateBoundedColorList = <T extends ColorObjectLiteral = ColorObj
     const s = Math.floor(steps);
     const colors = chroma
         .scale([from, to])
-        .mode('oklab')
+        .mode(COLOR_FORMAT_OKLCH)
         .colors(s + 2);
 
     return colors.map(color => chromaColorToLiteral(chroma(color), format));

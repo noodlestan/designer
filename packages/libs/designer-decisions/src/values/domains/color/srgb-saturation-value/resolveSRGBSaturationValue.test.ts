@@ -1,82 +1,46 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createValueContextMock } from '../../../../mocks';
-import type { ValueInputError } from '../../../../value';
+import type { ColorSRGBSaturationInput } from '../../../../inputs';
+import { createDecisionContextMock } from '../../../../mocks';
+import { type ValueContext, createValueContext } from '../../../../value';
+import { resolveColorChannelValue } from '../_private';
 
-import { FALLBACK_VALUE } from './private';
+import { CHANNEL_ATTRIBUTES } from './private';
 import { resolveSRGBSaturationValue } from './resolveSRGBSaturationValue';
-import { resolveSRGBSaturationValueRef } from './resolveSRGBSaturationValueRef';
 
-vi.mock('./resolveSRGBSaturationValueRef');
+vi.mock('../_private', () => ({
+    resolveColorChannelValue: vi.fn(),
+}));
 
-const resolveSRGBSaturationValueRefMock = vi.mocked(resolveSRGBSaturationValueRef);
+const resolveColorChannelValueMocked = vi.mocked(resolveColorChannelValue);
 
 describe('resolveSRGBSaturationValue()', () => {
-    const [mockContext, { addErrorSpy }] = createValueContextMock();
+    const [mockDecisionContext] = createDecisionContextMock();
+    const mockInput: ColorSRGBSaturationInput = 0.2773;
+
+    let mockContext: ValueContext;
 
     beforeEach(() => {
+        mockContext = createValueContext(mockDecisionContext);
         vi.clearAllMocks();
+        resolveColorChannelValueMocked.mockReturnValue(mockInput);
     });
 
-    describe('When input is a DecisionRef', () => {
-        const mockInput = { $uuid: 'mock-uuid' };
-        const resolvedValue = 0.3;
-
-        beforeEach(() => {
-            resolveSRGBSaturationValueRefMock.mockReturnValue(resolvedValue);
-        });
-
-        it('should call resolveSRGBSaturationValueRef with the correct arguments', () => {
+    describe('Given a value', () => {
+        it('should call resolveColorChannelValue()', () => {
             resolveSRGBSaturationValue(mockContext, mockInput);
 
-            expect(resolveSRGBSaturationValueRefMock).toHaveBeenCalledOnce();
-            expect(resolveSRGBSaturationValueRefMock).toHaveBeenCalledWith(mockContext, mockInput);
+            expect(resolveColorChannelValueMocked).toHaveBeenCalledWith(
+                CHANNEL_ATTRIBUTES,
+                mockContext,
+                mockInput,
+            );
         });
 
-        it('should return the value resolved by resolveSRGBSaturationValueRef', () => {
+        it('should return the resolved value', () => {
             const result = resolveSRGBSaturationValue(mockContext, mockInput);
-            expect(result).toEqual(resolvedValue);
+
+            expect(result).toBe(mockInput);
         });
-    });
-
-    describe('When input is a normal number', () => {
-        const mockInput = 0.3;
-
-        it('should return the input value', () => {
-            const result = resolveSRGBSaturationValue(mockContext, mockInput);
-            expect(result).toEqual(0.3);
-        });
-    });
-
-    describe('When input is out bounds', () => {
-        const mockInput = 999;
-
-        it('should return not clamp the value', () => {
-            const result = resolveSRGBSaturationValue(mockContext, mockInput);
-            expect(result).toEqual(999);
-        });
-    });
-
-    describe('When input is invalid', () => {
-        const invalidInputs = [null, undefined, true, false, { value: 10 }, '24'] as unknown[];
-
-        it.each(invalidInputs)(
-            'should return the fallback value for invalid input: %s',
-            invalidInput => {
-                const result = resolveSRGBSaturationValue(mockContext, invalidInput as number);
-                expect(result).toEqual(FALLBACK_VALUE);
-            },
-        );
-        it.each(invalidInputs)(
-            'should add an error to the context for invalid input: %s',
-            invalidInput => {
-                resolveSRGBSaturationValue(mockContext, invalidInput as number);
-
-                expect(addErrorSpy).toHaveBeenCalledOnce();
-                const error = addErrorSpy.mock.calls[0][0] as ValueInputError;
-                expect(error.message()).toContain('Invalid input data');
-                expect(error.input).toEqual(invalidInput);
-            },
-        );
     });
 });

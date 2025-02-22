@@ -1,21 +1,10 @@
-import { type ColorSRGBLightnessInput, isDecisionRef } from '../../../../inputs';
-import { type ValueContext, createValueInputError } from '../../../../value';
+import { type ColorSRGBLightnessInput } from '../../../../inputs';
+import { type ValueContext } from '../../../../value';
+import { resolveColorChannelValue } from '../_private';
 
-import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
-import { resolveSRGBLightnessValueRef } from './resolveSRGBLightnessValueRef';
+import { CHANNEL_ATTRIBUTES } from './private';
 
 export const resolveSRGBLightnessValue = (
     context: ValueContext,
     input: ColorSRGBLightnessInput,
-): number => {
-    if (isDecisionRef(input)) {
-        return resolveSRGBLightnessValueRef(context, input);
-    }
-
-    if (typeof input !== 'number') {
-        context.addError(createValueInputError({ context, valueName, input }));
-        return fallback;
-    }
-
-    return input;
-};
+): number => resolveColorChannelValue(CHANNEL_ATTRIBUTES, context, input);

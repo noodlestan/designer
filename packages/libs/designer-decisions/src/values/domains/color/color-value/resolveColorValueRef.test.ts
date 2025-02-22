@@ -1,6 +1,7 @@
 import chroma from 'chroma-js';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { DECISION_COLOR_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef } from '../../../../inputs';
 import {
     createStaticDecisionMock,
@@ -46,7 +47,7 @@ describe('resolveColorValueRef()', () => {
             expect(error.message()).toContain('not found');
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe('ColorValue');
+            expect(error.valueName).toBe(DECISION_COLOR_VALUE);
         });
     });
 
@@ -70,7 +71,7 @@ describe('resolveColorValueRef()', () => {
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
-                'ColorValue',
+                DECISION_COLOR_VALUE,
                 mockRef,
             );
         });

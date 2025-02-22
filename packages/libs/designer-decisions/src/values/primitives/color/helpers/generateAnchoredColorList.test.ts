@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import type { AnchoredColorListParams, ColorOkLCHLiteral } from '../../../../inputs';
 import { type ValueContext } from '../../../../value';
+import { COLOR_FORMAT_OKLCH } from '../constants';
 import type { ColorValue } from '../types';
 
 import { generateAnchoredColorList } from './generateAnchoredColorList';
@@ -17,14 +18,14 @@ describe('generateAnchoredColorList()', () => {
             before: {
                 steps: 1,
                 modifier: {
-                    space: 'oklch',
+                    space: COLOR_FORMAT_OKLCH,
                     l: { mode: 'linear', by: -0.2 },
                 },
             },
             after: {
                 steps: 2,
                 modifier: {
-                    space: 'oklch',
+                    space: COLOR_FORMAT_OKLCH,
                     l: { mode: 'linear', by: 0.2 },
                 },
             },
@@ -58,7 +59,7 @@ describe('generateAnchoredColorList()', () => {
             const result = generateAnchoredColorList<ColorOkLCHLiteral>(
                 anchorMock,
                 params,
-                'oklch',
+                COLOR_FORMAT_OKLCH,
             );
             expect(result[0].l).toBeCloseTo(0.5);
             expect(result[0].c).toBeCloseTo(0.01);
@@ -70,11 +71,11 @@ describe('generateAnchoredColorList()', () => {
         const params: AnchoredColorListParams = {
             before: {
                 steps: 0,
-                modifier: { space: 'oklch', l: { mode: 'linear', by: -0.2 } },
+                modifier: { space: COLOR_FORMAT_OKLCH, l: { mode: 'linear', by: -0.2 } },
             },
             after: {
                 steps: 0,
-                modifier: { space: 'oklch', l: { mode: 'linear', by: 0.2 } },
+                modifier: { space: COLOR_FORMAT_OKLCH, l: { mode: 'linear', by: 0.2 } },
             },
         };
 
@@ -82,7 +83,7 @@ describe('generateAnchoredColorList()', () => {
             const result = generateAnchoredColorList<ColorOkLCHLiteral>(
                 anchorMock,
                 params,
-                'oklch',
+                COLOR_FORMAT_OKLCH,
             );
             expect(result).toHaveLength(1);
             expect(result[0].l).toBeCloseTo(0.5);
@@ -96,21 +97,21 @@ describe('generateAnchoredColorList()', () => {
             before: {
                 steps: 2.7,
                 modifier: {
-                    space: 'oklch',
+                    space: COLOR_FORMAT_OKLCH,
                     l: { mode: 'linear', by: -0.2 },
                 },
             },
             after: {
                 steps: 2.7,
                 modifier: {
-                    space: 'oklch',
+                    space: COLOR_FORMAT_OKLCH,
                     l: { mode: 'linear', by: 0.2 },
                 },
             },
         };
 
         it('should floor the number of steps', () => {
-            const result = generateAnchoredColorList(anchorMock, params, 'oklch');
+            const result = generateAnchoredColorList(anchorMock, params, COLOR_FORMAT_OKLCH);
             expect(result).toHaveLength(5);
         });
     });

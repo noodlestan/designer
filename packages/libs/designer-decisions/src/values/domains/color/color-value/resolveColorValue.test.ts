@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { type ColorValueInput } from '../../../../inputs';
 import { createValueContextMock } from '../../../../mocks';
-import { createColor } from '../../../primitives';
+import { COLOR_FORMAT_HSL, createColor } from '../../../primitives';
 
 import { FALLBACK_VALUE, VALUE_NAME, resolveColorObject } from './private';
 import { resolveColorValue } from './resolveColorValue';
@@ -75,7 +75,9 @@ describe('resolveColorValue()', () => {
 
         it('should return the value created by createColor', () => {
             const result = resolveColorValue(mockContext, mockInput);
-            expect(result.toString('hsl')).toEqual(resolvedValue.toString('hsl'));
+            expect(result.toString(COLOR_FORMAT_HSL)).toEqual(
+                resolvedValue.toString(COLOR_FORMAT_HSL),
+            );
         });
 
         it('should not add an error to the context', () => {
@@ -90,7 +92,9 @@ describe('resolveColorValue()', () => {
 
         it('should return the value created by createColor', () => {
             const result = resolveColorValue(mockContext, mockInput);
-            expect(result.toString('hsl')).toEqual(resolvedValue.toString('hsl'));
+            expect(result.toString(COLOR_FORMAT_HSL)).toEqual(
+                resolvedValue.toString(COLOR_FORMAT_HSL),
+            );
         });
 
         it('should not add an error to the context', () => {

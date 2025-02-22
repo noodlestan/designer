@@ -2,3 +2,4 @@
 export * from './createColorChannelValue';
 export * from './resolveColorChannelValue';
 export * from './resolveColorChannelValueRef';
+export * from './types';

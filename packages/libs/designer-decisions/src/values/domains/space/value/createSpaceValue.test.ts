@@ -7,12 +7,12 @@ import { type ValueContext, createValueContext } from '../../../../value';
 import { createSpaceValue } from './createSpaceValue';
 
 describe('createSpaceValue()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
+    const [mockDecisionContext] = createDecisionContextMock();
 
     let valueContext: ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        valueContext = createValueContext(mockDecisionContext);
     });
 
     describe('Given a value', () => {

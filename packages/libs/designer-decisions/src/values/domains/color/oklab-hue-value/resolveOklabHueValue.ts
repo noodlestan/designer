@@ -1,19 +1,8 @@
-import { type ColorOklabHueInput, isDecisionRef } from '../../../../inputs';
-import type { ValueContext } from '../../../../value';
-import { createValueInputError } from '../../../../value';
+import { type ColorOklabHueInput } from '../../../../inputs';
+import { type ValueContext } from '../../../../value';
+import { resolveColorChannelValue } from '../_private';
 
-import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
-import { resolveOklabHueValueRef } from './resolveOklabHueValueRef';
+import { CHANNEL_ATTRIBUTES } from './private';
 
-export const resolveOklabHueValue = (context: ValueContext, input: ColorOklabHueInput): number => {
-    if (isDecisionRef(input)) {
-        return resolveOklabHueValueRef(context, input);
-    }
-
-    if (typeof input !== 'number') {
-        context.addError(createValueInputError({ context, valueName, input }));
-        return fallback;
-    }
-
-    return input;
-};
+export const resolveOklabHueValue = (context: ValueContext, input: ColorOklabHueInput): number =>
+    resolveColorChannelValue(CHANNEL_ATTRIBUTES, context, input);

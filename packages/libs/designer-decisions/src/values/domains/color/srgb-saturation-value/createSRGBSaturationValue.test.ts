@@ -1,111 +1,54 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { ColorSRGBHSLiteral, ColorSRGBSaturationInput } from '../../../../inputs';
+import type { ColorSRGBSaturationInput } from '../../../../inputs';
 import { createDecisionContextMock } from '../../../../mocks';
 import { type ValueContext, createValueContext } from '../../../../value';
-import { COLOR_CHANNEL_SRGB_SATURATION_NAME as name } from '../../../primitives/color/constants';
+import {
+    ColorChannelBaseValue,
+    ColorChannelValueOptions,
+    ColorComplementaryChannels,
+} from '../../../primitives';
+import { createColorChannelValue } from '../_private';
 
 import { createSRGBSaturationValue } from './createSRGBSaturationValue';
+import { CHANNEL_ATTRIBUTES } from './private';
+
+vi.mock('../_private', () => ({
+    createColorChannelValue: vi.fn(),
+}));
+
+const createColorChannelValueMocked = vi.mocked(createColorChannelValue);
 
 describe('createSRGBSaturationValue()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const input: ColorSRGBSaturationInput = 0.7776;
+    const [mockDecisionContext] = createDecisionContextMock();
+    const mockInput: ColorSRGBSaturationInput = 0.2773;
+    const mockValue = {} as ColorChannelBaseValue<ColorComplementaryChannels>;
+    const mockOptions: ColorChannelValueOptions = {};
 
-    let valueContext: ValueContext;
+    let mockContext: ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        mockContext = createValueContext(mockDecisionContext);
+        vi.clearAllMocks();
+        createColorChannelValueMocked.mockReturnValue(mockValue);
     });
 
     describe('Given a value', () => {
-        it('should have the provided context', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
+        it('should call createColorChannelValue()', () => {
+            createSRGBSaturationValue(mockContext, mockInput);
 
-            expect(result.context()).toBe(valueContext);
+            expect(createColorChannelValueMocked).toHaveBeenCalledWith(
+                CHANNEL_ATTRIBUTES,
+                mockContext,
+                mockInput,
+                mockOptions,
+            );
         });
 
-        it('should have the expected name', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
+        it('should return the resolved value', () => {
+            const result = createSRGBSaturationValue(mockContext, mockInput);
 
-            expect(result.name()).toBe(name);
-        });
-
-        it('should consume the input', () => {
-            createSRGBSaturationValue(valueContext, input);
-
-            expect(valueContext.valueInput()).toEqual(input);
-        });
-
-        it('should expose the quantized value via get() and quantized()', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
-
-            expect(result.get()).toEqual(0.778);
-            expect(result.quantized()).toEqual(0.778);
-        });
-
-        it('should expose the raw via raw() and quantized(0)', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
-
-            expect(result.raw()).toEqual(input);
-            expect(result.quantized(0)).toEqual(input);
-        });
-
-        it('should quantize the value', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
-
-            expect(result.quantized(0.05)).toEqual(0.7775);
-        });
-
-        it('should clamp the quantized value', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
-
-            expect(result.quantized(101)).toEqual(1);
-        });
-
-        it('should convert to a color with given channels', () => {
-            const result = createSRGBSaturationValue(valueContext, input);
-
-            const color = result.toColor({ h: 301.1533, l: 0.0157 });
-            const { h, s, l } = color.toObject<ColorSRGBHSLiteral>('hsl');
-
-            expect(h).toEqual(301.2);
-            expect(s).toEqual(0.777);
-            expect(l).toEqual(0.016);
-        });
-    });
-
-    describe('Given a quantize option', () => {
-        const options = { quantize: 2 };
-
-        it('should expose the quantized value via .get() and quantized()', () => {
-            const result = createSRGBSaturationValue(valueContext, input, options);
-
-            expect(result.get()).toEqual(0.78);
-            expect(result.quantized()).toEqual(0.78);
-        });
-
-        it('should expose the raw value via .raw() and quantized(0)', () => {
-            const result = createSRGBSaturationValue(valueContext, input, options);
-
-            expect(result.raw()).toEqual(0.7776);
-            expect(result.quantized(0)).toEqual(0.7776);
-        });
-
-        it('should (re)quantize the value', () => {
-            const result = createSRGBSaturationValue(valueContext, input, options);
-
-            expect(result.quantized(0.05)).toEqual(0.7775);
-        });
-
-        it('should convert to a color with complimentary channels quantized', () => {
-            const result = createSRGBSaturationValue(valueContext, input, options);
-
-            const color = result.toColor({ h: 301.1533, l: 0.0157 });
-            const { h, s, l } = color.toObject<ColorSRGBHSLiteral>('hsl');
-
-            expect(h).toEqual(302);
-            expect(s).toEqual(0.78);
-            expect(l).toEqual(0.02);
+            expect(result).toBe(mockValue);
         });
     });
 });

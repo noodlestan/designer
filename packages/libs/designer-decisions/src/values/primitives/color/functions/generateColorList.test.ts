@@ -6,6 +6,7 @@ import type {
     ColorOkLCHLiteral,
     ColorSRGBHSLiteral,
 } from '../../../../inputs';
+import { COLOR_FORMAT_HSL, COLOR_FORMAT_OKLCH } from '../constants';
 import { ColorValue } from '../types';
 
 import { generateColorList } from './generateColorList';
@@ -26,7 +27,7 @@ describe('generateColorList()', () => {
 
         it('should return an array with the anchor value repeated', () => {
             const result = generateColorList(anchorMock, steps);
-            expect(result).toEqual(Array(steps).fill(anchorMock.toObject('oklch')));
+            expect(result).toEqual(Array(steps).fill(anchorMock.toObject(COLOR_FORMAT_OKLCH)));
         });
     });
 
@@ -36,7 +37,7 @@ describe('generateColorList()', () => {
         } as unknown as ColorValue;
         const steps = 3;
         const modifier: ColorModifierLCH = {
-            space: 'oklch',
+            space: COLOR_FORMAT_OKLCH,
             l: { mode: 'linear', by: 0.3 },
             c: { mode: 'linear', by: 0.01 },
             h: { mode: 'linear', by: 20 },
@@ -64,7 +65,7 @@ describe('generateColorList()', () => {
         } as unknown as ColorValue;
         const steps = 3;
         const modifier: ColorModifierHSL = {
-            space: 'hsl',
+            space: COLOR_FORMAT_HSL,
             h: { mode: 'linear', by: 30 },
             s: { mode: 'linear', by: -0.1 },
             l: { mode: 'linear', by: 0.2 },
@@ -75,7 +76,7 @@ describe('generateColorList()', () => {
                 anchorMock,
                 steps,
                 modifier,
-                'hsl',
+                COLOR_FORMAT_HSL,
             );
             expect(result).toHaveLength(3);
             expect(result[0].h).toBeCloseTo(180);
@@ -96,7 +97,7 @@ describe('generateColorList()', () => {
         } as unknown as ColorValue;
         const steps = 3.9;
         const modifier: ColorModifierHSL = {
-            space: 'hsl',
+            space: COLOR_FORMAT_HSL,
             h: { mode: 'linear', by: 30 },
         };
 

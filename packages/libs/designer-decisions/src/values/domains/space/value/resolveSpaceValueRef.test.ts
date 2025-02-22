@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { DECISION_SPACE_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef, SpaceWithUnits } from '../../../../inputs';
 import {
     createStaticDecisionMock,
@@ -45,7 +46,7 @@ describe('resolveSpaceValueRef()', () => {
             expect(error.message()).toContain('not found');
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe('SpaceValue');
+            expect(error.valueName).toBe(DECISION_SPACE_VALUE);
         });
     });
 
@@ -71,7 +72,7 @@ describe('resolveSpaceValueRef()', () => {
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockDecision,
                 mockValueContext,
-                'SpaceValue',
+                DECISION_SPACE_VALUE,
                 mockRef,
             );
         });

@@ -1,7 +1,12 @@
 import type { ColorValueInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
 import { createBaseValue } from '../../../base';
-import { type ColorValue, type ColorValueOptions, createColor } from '../../../primitives';
+import {
+    COLOR_FORMAT_OKLCH,
+    type ColorValue,
+    type ColorValueOptions,
+    createColor,
+} from '../../../primitives';
 
 import { resolveColorValue } from './resolveColorValue';
 
@@ -13,7 +18,7 @@ export const createColorValue = (
     const baseValue = createBaseValue(context, input);
 
     const { quantize = 0.1 } = options;
-    const literal = resolveColorValue(context, input).toObject('oklch');
+    const literal = resolveColorValue(context, input).toObject(COLOR_FORMAT_OKLCH);
     const value = createColor(literal, { quantize });
 
     return {

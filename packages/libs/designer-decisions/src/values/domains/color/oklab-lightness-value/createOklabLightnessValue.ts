@@ -1,41 +1,12 @@
 import type { ColorOklabLightnessInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
-import { createBaseValue } from '../../../base';
-import {
-    type ColorChannelValueOptions,
-    type OklabLightnessValue,
-    COLOR_CHANNEL_OKLAB_LIGHTNESS_BASE as base,
-    clampChannelValue,
-    createNumericValue,
-    COLOR_CHANNEL_OKLAB_LIGHTNESS_NAME as name,
-    COLOR_CHANNEL_OKLAB_LIGHTNESS_QUANTIZE as quant,
-} from '../../../primitives';
-import { createColorValue } from '../color-value';
+import { type ColorChannelValueOptions, type OklabLightnessValue } from '../../../primitives';
+import { createColorChannelValue } from '../_private';
 
-import { resolveOklabLightnessValue } from './resolveOklabLightnessValue';
+import { CHANNEL_ATTRIBUTES } from './private';
 
 export const createOklabLightnessValue = (
     context: ValueContext,
     input: ColorOklabLightnessInput,
     options: ColorChannelValueOptions = {},
-): OklabLightnessValue => {
-    const baseValue = createBaseValue(context, input);
-
-    const { quantize = quant } = options;
-    const value = resolveOklabLightnessValue(context, input);
-
-    const normalize = (v: number) => clampChannelValue(v, 'oklab-lightness');
-    const { get, raw, quantized } = createNumericValue(value, { base, quantize, normalize });
-
-    return {
-        ...baseValue,
-        get,
-        raw,
-        quantized,
-        name: () => name,
-        toColor: channels => {
-            const { c, h } = channels;
-            return createColorValue(context.outputContext(), { l: value, c, h }, { quantize });
-        },
-    };
-};
+): OklabLightnessValue => createColorChannelValue(CHANNEL_ATTRIBUTES, context, input, options);

@@ -1,21 +1,10 @@
-import { type ColorOklabLightnessInput, isDecisionRef } from '../../../../inputs';
-import { type ValueContext, createValueInputError } from '../../../../value';
+import { type ColorOklabLightnessInput } from '../../../../inputs';
+import { type ValueContext } from '../../../../value';
+import { resolveColorChannelValue } from '../_private';
 
-import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
-import { resolveOklabLightnessValueRef } from './resolveOklabLightnessValueRef';
+import { CHANNEL_ATTRIBUTES } from './private';
 
 export const resolveOklabLightnessValue = (
     context: ValueContext,
     input: ColorOklabLightnessInput,
-): number => {
-    if (isDecisionRef(input)) {
-        return resolveOklabLightnessValueRef(context, input);
-    }
-
-    if (typeof input !== 'number') {
-        context.addError(createValueInputError({ context, valueName, input }));
-        return fallback;
-    }
-
-    return input;
-};
+): number => resolveColorChannelValue(CHANNEL_ATTRIBUTES, context, input);

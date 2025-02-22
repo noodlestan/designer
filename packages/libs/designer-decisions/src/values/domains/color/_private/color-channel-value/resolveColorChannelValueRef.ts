@@ -1,26 +1,37 @@
+import { DECISION_COLOR_SET, DECISION_COLOR_VALUE } from '../../../../../constants';
 import {
-    isColorOklabChromaScaleDecision,
-    isColorOklabChromaValueDecision,
+    type Decision,
     isColorSetDecision,
     isColorValueDecision,
+    isSetDecision,
 } from '../../../../../decision';
-import type { ColorOkLCHLiteral, DecisionRef } from '../../../../../inputs';
+import type { ColorObjectLiteral, DecisionRef } from '../../../../../inputs';
 import type { ValueContext } from '../../../../../value';
+import type { BaseSet } from '../../../../base';
 import {
     handleDecisionNotFound,
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../../../functions';
-import type { ColorValue, OklabChromaValue } from '../../../../primitives';
+import type { ColorChannelValue, ColorValue } from '../../../../primitives';
 
-import {
-    REF_CHECKED_TYPES as accepted,
-    FALLBACK_VALUE as fallback,
-    VALUE_NAME as valueName,
-} from './private';
+import type { ColorChannelDefinition } from './types';
 
-export const resolveColorChannelValueRef = (context: ValueContext, ref: DecisionRef): number => {
+export const resolveColorChannelValueRef = (
+    channel: ColorChannelDefinition,
+    context: ValueContext,
+    ref: DecisionRef,
+): number => {
+    const { valueName, colorFormat, channelKey, fallback, decisionTypes } = channel;
+
     const [, decision] = context.resolve(ref);
+
+    const accepted = [
+        DECISION_COLOR_SET,
+        DECISION_COLOR_VALUE,
+        decisionTypes.set,
+        decisionTypes.value,
+    ];
 
     if (!decision) {
         handleDecisionNotFound(context, valueName, ref);
@@ -29,20 +40,25 @@ export const resolveColorChannelValueRef = (context: ValueContext, ref: Decision
 
     if (isColorSetDecision(decision)) {
         const value = resolveSetRefDecision<ColorValue>(decision, context, valueName, ref);
-        return value?.toObject<ColorOkLCHLiteral>('oklch').c ?? fallback;
+        return value?.toObject(colorFormat)[channelKey] ?? fallback;
     }
 
     if (isColorValueDecision(decision)) {
-        return decision.produce(context).toObject<ColorOkLCHLiteral>('oklch').c;
+        return decision.produce(context).toObject<ColorObjectLiteral>(colorFormat)[channelKey];
     }
 
-    if (isColorOklabChromaScaleDecision(decision)) {
-        const value = resolveSetRefDecision<OklabChromaValue>(decision, context, valueName, ref);
-        return value?.get() ?? fallback;
+    if (isSetDecision(decision) && decision.type() === decisionTypes.set) {
+        const value = resolveSetRefDecision<ColorChannelValue>(
+            decision as Decision<BaseSet<ColorChannelValue>>,
+            context,
+            valueName,
+            ref,
+        );
+        return (value?.get() as number) ?? fallback;
     }
 
-    if (isColorOklabChromaValueDecision(decision)) {
-        return decision.produce(context).get();
+    if (decision.type() === decisionTypes.value) {
+        return decision.produce(context).get() as number;
     }
 
     handleRefMismatchError(context, decision, valueName, ref, accepted);
