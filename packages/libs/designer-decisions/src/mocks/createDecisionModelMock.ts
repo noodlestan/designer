@@ -8,6 +8,7 @@ export function createDecisionModelMock(mockValue: string): DecisionModel<string
     return {
         produce: vi.fn().mockImplementation((context: ValueContext): BaseValue<string> => {
             return {
+                type: () => 'foo',
                 context: () => context,
                 get: () => mockValue,
             };

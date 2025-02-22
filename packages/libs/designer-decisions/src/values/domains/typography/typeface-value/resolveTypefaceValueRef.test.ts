@@ -44,7 +44,7 @@ describe('resolveTypefaceValueRef()', () => {
 
     describe('When it resolves to a TypefaceValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'typeface-value' } as DecisionInput;
+        const mockInput = { model: 'typeface-value/foo' } as DecisionInput;
         const typeface = FALLBACK_VALUE;
         const [, mockDecision] = createStaticDecisionMock<TypefaceValue>([mockInput], {
             get: () => typeface,
@@ -63,7 +63,7 @@ describe('resolveTypefaceValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'decision-model' } as DecisionInput;
+        const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock([mockInput]);
         const [mockValueContext, { addErrorSpy }] = createValueContextWithResolveMock([
             undefined,
@@ -84,7 +84,7 @@ describe('resolveTypefaceValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('matched "decision-model", expected typeface-value');
+            expect(error.message()).toContain('matched "unexpected-type", expected typeface-value');
         });
     });
 });

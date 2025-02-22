@@ -55,7 +55,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When it resolves to a ColorSet decision and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-set' } as DecisionInput;
+        const mockInput = { model: 'color-set/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -86,7 +86,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When it resolves to a ColorSet decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-set' } as DecisionInput;
+        const mockInput = { model: 'color-set/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -103,7 +103,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When it resolves to a ColorValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'color-value' } as DecisionInput;
+        const mockInput = { model: 'color-value/foo' } as DecisionInput;
         const mockColor = { l: 0.1, c: 0.01, h: 333 };
         const [, mockDecision] = createStaticDecisionMock<ColorValue>([mockInput], {
             toObject: () => mockColor,
@@ -122,7 +122,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When it resolves to a ColorOklabHueSet decision and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-oklab-hue-set' } as DecisionInput;
+        const mockInput = { model: 'color-oklab-hue-set/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -157,7 +157,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When it resolves to a ColorOklabHueSet decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-oklab-hue-set' } as DecisionInput;
+        const mockInput = { model: 'color-oklab-hue-set/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -174,7 +174,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When it resolves to a ColorOklabHueValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'color-oklab-hue-value' } as DecisionInput;
+        const mockInput = { model: 'color-oklab-hue-value/foo' } as DecisionInput;
         const mockColor = { l: 0.1, c: 0.01, h: 333 };
         const [, mockDecision] = createStaticDecisionMock<ColorValue>([mockInput], {
             get: () => mockColor.h,
@@ -193,7 +193,7 @@ describe('resolveColorChannelValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'unexpected-model' } as DecisionInput;
+        const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock([mockInput]);
         const [mockValueContext, { addErrorSpy }] = createValueContextWithResolveMock([
             undefined,
@@ -214,7 +214,7 @@ describe('resolveColorChannelValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('unexpected-model');
+            expect(error.message()).toContain('unexpected-type');
         });
     });
 });

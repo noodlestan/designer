@@ -1,5 +1,6 @@
 import type { DecisionRef, DecisionRefResolver, ValidatedRecord } from '../inputs';
 
+import { decisionTypeFromModel } from './functions';
 import type { DecisionContext, DecisionError } from './types';
 
 export const createDecisionContext = (
@@ -19,8 +20,9 @@ export const createDecisionContext = (
     const hasErrors = () => Boolean(getErrors().length);
 
     return {
-        ref: () => ref,
         resolve: resolver,
+        decisionType: () => decisionTypeFromModel(records[0].input.model),
+        ref: () => ref,
         inputs: getInputs,
         errors: getErrors,
         hasErrors,

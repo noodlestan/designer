@@ -53,7 +53,7 @@ describe('resolveColorValueRef()', () => {
 
     describe('When it resolves to a ColorSet decision and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-set' } as DecisionInput;
+        const mockInput = { model: 'color-set/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -84,7 +84,7 @@ describe('resolveColorValueRef()', () => {
 
     describe('When it resolves to a ColorSet decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-set' } as DecisionInput;
+        const mockInput = { model: 'color-set/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<ColorSet>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -101,7 +101,7 @@ describe('resolveColorValueRef()', () => {
 
     describe('When it resolves to a ColorValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'color-value' } as DecisionInput;
+        const mockInput = { model: 'color-value/foo' } as DecisionInput;
         const mockColor = chroma('#ff0000');
         const [, mockDecision] = createStaticDecisionMock<ColorValue>([mockInput], {
             get: () => mockColor,
@@ -120,7 +120,7 @@ describe('resolveColorValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'unexpected-model' } as DecisionInput;
+        const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock([mockInput]);
         const [mockValueContext, { addErrorSpy }] = createValueContextWithResolveMock([
             undefined,
@@ -141,7 +141,7 @@ describe('resolveColorValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('unexpected-model');
+            expect(error.message()).toContain('unexpected-type');
         });
     });
 });

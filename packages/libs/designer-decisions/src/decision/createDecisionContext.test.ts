@@ -9,7 +9,7 @@ import type { DecisionContext, DecisionError } from './types';
 describe('createDecisionContext()', () => {
     const mockRef: DecisionRef = { $uuid: 'decision-1' };
     const mockResolver: DecisionRefResolver = vi.fn();
-    const mockInputs: DecisionInput[] = [{ model: 'model', name: 'value-1', params: {} }];
+    const mockInputs: DecisionInput[] = [{ model: 'foo/bar', name: 'value-1', params: {} }];
     const mockRecords = mockInputs?.map(input => ({
         input,
         source: {} as DecisionSource,
@@ -18,9 +18,10 @@ describe('createDecisionContext()', () => {
     }));
 
     describe('Given a an array of inputs', () => {
-        it('should create a context with the expected ref, resolver, and inputs', () => {
+        it('should create a context with the expected decisionType, ref, resolver, and inputs', () => {
             const result = createDecisionContext(mockRef, mockResolver, mockRecords);
 
+            expect(result.decisionType()).toBe('foo');
             expect(result.ref()).toBe(mockRef);
             expect(result.resolve).toBe(mockResolver);
             expect(result.inputs()).toEqual(mockInputs);

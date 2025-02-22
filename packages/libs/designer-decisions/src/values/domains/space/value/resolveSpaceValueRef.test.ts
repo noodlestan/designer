@@ -52,7 +52,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When it resolves to a SpaceScale with a quantized value and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'space-scale' } as DecisionInput;
+        const mockInput = { model: 'space-scale/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<SpaceScale>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -88,7 +88,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When it resolves to a SpaceScale decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'space-scale' } as DecisionInput;
+        const mockInput = { model: 'space-scale/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock<SpaceScale>([mockInput]);
         const [mockValueContext] = createValueContextWithResolveMock([undefined, mockDecision]);
 
@@ -105,7 +105,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When it resolves to a SpaceValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'space-value' } as DecisionInput;
+        const mockInput = { model: 'space-value/foo' } as DecisionInput;
         const spaceWithUnits: SpaceWithUnits = { value: 3.33, units: 'px' };
         const spaceValue = createSpaceValue(createValueContextMock()[0], spaceWithUnits, {
             quantize: 5,
@@ -130,7 +130,7 @@ describe('resolveSpaceValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const mockInput = { model: 'decision-model' } as DecisionInput;
+        const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createStaticDecisionMock([mockInput]);
         const [mockValueContext, { addErrorSpy }] = createValueContextWithResolveMock([
             undefined,
@@ -151,7 +151,7 @@ describe('resolveSpaceValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('matched "decision-model", expected space-value');
+            expect(error.message()).toContain('matched "unexpected-type", expected space-value');
         });
     });
 });
