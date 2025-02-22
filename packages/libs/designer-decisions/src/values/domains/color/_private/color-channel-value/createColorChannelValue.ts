@@ -38,7 +38,7 @@ export const createColorChannelValue = <C extends ColorComplementaryChannels>(
         get,
         raw,
         quantized,
-        name: () => channelName,
+        channelName: () => channelName,
         toColor,
     } as ColorChannelBaseValue<C>;
 };

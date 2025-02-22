@@ -29,7 +29,7 @@ describe('createColorChannelValue()', () => {
         it('should have the expected name', () => {
             const result = createColorChannelValue(mockChannel, mockContext, mockInput);
 
-            expect(result.name()).toBe(mockChannel.channelName);
+            expect(result.channelName()).toBe(mockChannel.channelName);
         });
 
         it('should consume the input', () => {
