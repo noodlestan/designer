@@ -1,32 +1,23 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createDecisionContextMock, createValueContextMock } from '../../../../mocks';
-import { type ValueContext, createValueContext } from '../../../../value';
-import { createSRGBHueValue } from '../srgb-hue-value';
+import { type ValueContext } from '../../../../value';
+import { createBaseSet } from '../../../base';
+import { SRGBHueValue } from '../../../primitives';
 
 import { createSRGBHueSet } from './createSRGBHueSet';
 
-describe('createSRGBHueSet()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = 33;
-    const hueValue = createSRGBHueValue(createValueContextMock()[0], mockInput);
+vi.mock('../../../base');
 
-    let valueContext: ValueContext;
+describe('createSRGBChromaScale()', () => {
+    const mockInputs: SRGBHueValue[] = [];
+    const mockContext = {} as ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        vi.clearAllMocks();
     });
 
-    it('should have the provided context', () => {
-        const result = createSRGBHueSet(valueContext, [hueValue]);
-
-        expect(result.context()).toBe(valueContext);
-    });
-
-    it('should expose the resolved value via .get()', () => {
-        const result = createSRGBHueSet(valueContext, [hueValue]);
-
-        expect(result.get().items()).toHaveLength(1);
-        expect(result.get().item(0)).toEqual(hueValue);
+    it('should call createBaseSet() with the correct arguments', () => {
+        createSRGBHueSet(mockContext, mockInputs);
+        expect(createBaseSet).toHaveBeenCalledWith(mockContext, mockInputs);
     });
 });

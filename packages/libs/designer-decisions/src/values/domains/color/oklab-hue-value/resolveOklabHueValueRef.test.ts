@@ -8,7 +8,7 @@ import {
 } from '../../../../mocks';
 import type { ValueRefNotFoundError } from '../../../../value';
 import { resolveSetRefDecision } from '../../../functions';
-import type { ColorSet, ColorValue } from '../../../primitives/color/types';
+import type { ColorSet, ColorValue } from '../../../primitives';
 import { createColorValue } from '../color-value';
 
 import { createOklabHueValue } from './createOklabHueValue';

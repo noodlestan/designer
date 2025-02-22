@@ -1,11 +1,11 @@
 import type { ColorSRGBSaturationInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
+import { createBaseValue } from '../../../base';
 import {
     type ColorChannelValueOptions,
     type SRGBSaturationValue,
     COLOR_CHANNEL_SRGB_SATURATION_BASE as base,
     clampChannelValue,
-    createBaseValue,
     createNumericValue,
     COLOR_CHANNEL_SRGB_SATURATION_NAME as name,
     COLOR_CHANNEL_SRGB_SATURATION_QUANTIZE as quant,
@@ -19,7 +19,7 @@ export const createSRGBSaturationValue = (
     input: ColorSRGBSaturationInput,
     options: ColorChannelValueOptions = {},
 ): SRGBSaturationValue => {
-    context.consume(input);
+    const baseValue = createBaseValue(context, input);
 
     const { quantize = quant } = options;
     const value = resolveSRGBSaturationValue(context, input);
@@ -28,7 +28,7 @@ export const createSRGBSaturationValue = (
     const { get, raw, quantized } = createNumericValue(value, { base, quantize, normalize });
 
     return {
-        ...createBaseValue(context),
+        ...baseValue,
         get,
         raw,
         quantized,

@@ -1,5 +1,5 @@
 import type { TypefaceRangeInput, TypefaceSourceInput, TypefaceStyleInput } from '../../../inputs';
-import type { BaseValue } from '../../primitives';
+import type { BaseValue } from '../../base';
 
 export type Typeface = {
     fontName: string;

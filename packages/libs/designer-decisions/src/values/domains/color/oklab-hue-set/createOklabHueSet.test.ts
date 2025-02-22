@@ -1,32 +1,23 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createDecisionContextMock, createValueContextMock } from '../../../../mocks';
-import { type ValueContext, createValueContext } from '../../../../value';
-import { createOklabHueValue } from '../oklab-hue-value';
+import { type ValueContext } from '../../../../value';
+import { createBaseSet } from '../../../base';
+import { OklabHueValue } from '../../../primitives';
 
 import { createOklabHueSet } from './createOklabHueSet';
 
-describe('createOklabHueSet()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = 33;
-    const hueValue = createOklabHueValue(createValueContextMock()[0], mockInput);
+vi.mock('../../../base');
 
-    let valueContext: ValueContext;
+describe('createOklabChromaScale()', () => {
+    const mockInputs: OklabHueValue[] = [];
+    const mockContext = {} as ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        vi.clearAllMocks();
     });
 
-    it('should have the provided context', () => {
-        const result = createOklabHueSet(valueContext, [hueValue]);
-
-        expect(result.context()).toBe(valueContext);
-    });
-
-    it('should expose the resolved value via .get()', () => {
-        const result = createOklabHueSet(valueContext, [hueValue]);
-
-        expect(result.get().items()).toHaveLength(1);
-        expect(result.get().item(0)).toEqual(hueValue);
+    it('should call createBaseSet() with the correct arguments', () => {
+        createOklabHueSet(mockContext, mockInputs);
+        expect(createBaseSet).toHaveBeenCalledWith(mockContext, mockInputs);
     });
 });

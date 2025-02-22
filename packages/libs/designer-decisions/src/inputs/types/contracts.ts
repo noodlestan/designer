@@ -3,8 +3,7 @@ import type { DecisionSource } from '../../meta';
 import type { DeepPartial } from '../../private';
 import type { BaseValue } from '../../values';
 
-import type { DecisionRef } from './primitives';
-import type { DecisionInput } from './primitives/record';
+import type { DecisionInput, DecisionRef } from './primitives';
 
 export type LoadedRecord = {
     input: DeepPartial<DecisionInput>;

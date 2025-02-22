@@ -1,5 +1,4 @@
-import type { AnchoredColorListParams, ColorValueInput } from '../../primitives';
-import type { DecisionInput } from '../../primitives/record';
+import type { AnchoredColorListParams, ColorValueInput, DecisionInput } from '../../primitives';
 
 export type ColorSetExplicitInput = DecisionInput & {
     model: 'color-set/explicit';

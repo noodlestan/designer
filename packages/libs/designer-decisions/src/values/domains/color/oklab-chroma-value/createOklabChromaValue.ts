@@ -1,11 +1,11 @@
 import type { ColorOklabChromaInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
+import { createBaseValue } from '../../../base';
 import {
     type ColorChannelValueOptions,
     type OklabChromaValue,
     COLOR_CHANNEL_OKLAB_CHROMA_BASE as base,
     clampChannelValue,
-    createBaseValue,
     createNumericValue,
     COLOR_CHANNEL_OKLAB_CHROMA_NAME as name,
     COLOR_CHANNEL_OKLAB_CHROMA_QUANTIZE as quant,
@@ -19,7 +19,7 @@ export const createOklabChromaValue = (
     input: ColorOklabChromaInput,
     options: ColorChannelValueOptions = {},
 ): OklabChromaValue => {
-    context.consume(input);
+    const baseValue = createBaseValue(context, input);
 
     const { quantize = quant } = options;
     const value = resolveOklabChromaValue(context, input);
@@ -28,7 +28,7 @@ export const createOklabChromaValue = (
     const { get, raw, quantized } = createNumericValue(value, { base, quantize, normalize });
 
     return {
-        ...createBaseValue(context),
+        ...baseValue,
         get,
         raw,
         quantized,

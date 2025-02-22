@@ -11,7 +11,7 @@ import {
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../../functions';
-import type { ColorValue, SRGBSaturationValue } from '../../../primitives/color/types';
+import type { ColorValue, SRGBSaturationValue } from '../../../primitives';
 
 import {
     REF_CHECKED_TYPES as accepted,

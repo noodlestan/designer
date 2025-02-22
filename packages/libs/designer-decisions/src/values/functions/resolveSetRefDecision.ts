@@ -1,7 +1,7 @@
 import type { Decision } from '../../decision';
 import type { DecisionRef } from '../../inputs';
 import { type ValueContext, createValueRefIndexError } from '../../value';
-import type { BaseSet } from '../primitives/set';
+import type { BaseSet } from '../base';
 
 export const resolveSetRefDecision = <
     V = unknown,

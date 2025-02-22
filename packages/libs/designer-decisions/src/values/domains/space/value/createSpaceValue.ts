@@ -1,6 +1,7 @@
 import type { SpaceValueInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
-import { createBaseValue, createNumericValue } from '../../../primitives';
+import { createBaseValue } from '../../../base';
+import { createNumericValue } from '../../../primitives';
 import { SPACE_VALUE_QUANTIZE } from '../constants';
 import type { SpaceValue, SpaceValueFormatOptions, SpaceValueOptions } from '../types';
 
@@ -11,7 +12,7 @@ export const createSpaceValue = (
     input: SpaceValueInput,
     options: SpaceValueOptions = {},
 ): SpaceValue => {
-    context.consume(input);
+    const baseValue = createBaseValue(context, input);
 
     const { quantize = SPACE_VALUE_QUANTIZE } = options;
     const { value, units } = resolveSpaceValue(context, input);
@@ -19,7 +20,7 @@ export const createSpaceValue = (
     const { get, raw, quantized } = createNumericValue(value, { quantize });
 
     return {
-        ...createBaseValue(context),
+        ...baseValue,
         get,
         raw,
         quantized,

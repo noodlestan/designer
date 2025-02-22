@@ -1,9 +1,6 @@
 import type { ValueContext } from '../../../value';
 
-export type BaseValueAbstract = {
+export type BaseValue<T> = {
     context(): ValueContext;
-};
-
-export type BaseValue<T> = BaseValueAbstract & {
     get(): T;
 };

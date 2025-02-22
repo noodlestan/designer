@@ -1,33 +1,23 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { SpaceValueInput } from '../../../../inputs';
-import { createDecisionContextMock, createValueContextMock } from '../../../../mocks';
-import { type ValueContext, createValueContext } from '../../../../value';
-import { createSpaceValue } from '../value';
+import { type ValueContext } from '../../../../value';
+import { createBaseSet } from '../../../base';
+import { SpaceValue } from '../types';
 
 import { createSpaceScale } from './createSpaceScale';
 
-describe('createSpaceScale()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = { value: 123, units: 'rem' } as SpaceValueInput;
-    const spaceValue = createSpaceValue(createValueContextMock()[0], mockInput);
+vi.mock('../../../base');
 
-    let valueContext: ValueContext;
+describe('createSpaceScale()', () => {
+    const mockInputs: SpaceValue[] = [];
+    const mockContext = {} as ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        vi.clearAllMocks();
     });
 
-    it('should have the provided context', () => {
-        const result = createSpaceScale(valueContext, [spaceValue]);
-
-        expect(result.context()).toBe(valueContext);
-    });
-
-    it('should expose the resolved value via .get()', () => {
-        const result = createSpaceScale(valueContext, [spaceValue]);
-
-        expect(result.get().items()).toHaveLength(1);
-        expect(result.get().item(0)).toEqual(spaceValue);
+    it('should call createBaseSet() with the correct arguments', () => {
+        createSpaceScale(mockContext, mockInputs);
+        expect(createBaseSet).toHaveBeenCalledWith(mockContext, mockInputs);
     });
 });

@@ -1,5 +1,8 @@
-import type { AnchoredNumberSeriesParams, ColorSRGBLightnessInput } from '../../../primitives';
-import type { DecisionInput } from '../../../primitives/record';
+import type {
+    AnchoredNumberSeriesParams,
+    ColorSRGBLightnessInput,
+    DecisionInput,
+} from '../../../primitives';
 
 export type ColorSRGBLightnessValueExplicitInput = DecisionInput & {
     model: 'color-srgb-lightness-value/explicit';

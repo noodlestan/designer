@@ -1,32 +1,23 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createDecisionContextMock, createValueContextMock } from '../../../../mocks';
-import { type ValueContext, createValueContext } from '../../../../value';
-import { createSRGBLightnessValue } from '../srgb-lightness-value';
+import { type ValueContext } from '../../../../value';
+import { createBaseSet } from '../../../base';
+import { SRGBLightnessValue } from '../../../primitives';
 
 import { createSRGBLightnessScale } from './createSRGBLightnessScale';
 
-describe('createSRGBLightnessScale()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = 0.01;
-    const lightnessValue = createSRGBLightnessValue(createValueContextMock()[0], mockInput);
+vi.mock('../../../base');
 
-    let valueContext: ValueContext;
+describe('createSRGBLightnessScale()', () => {
+    const mockInputs: SRGBLightnessValue[] = [];
+    const mockContext = {} as ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        vi.clearAllMocks();
     });
 
-    it('should have the provided context', () => {
-        const result = createSRGBLightnessScale(valueContext, [lightnessValue]);
-
-        expect(result.context()).toBe(valueContext);
-    });
-
-    it('should expose the resolved value via .get()', () => {
-        const result = createSRGBLightnessScale(valueContext, [lightnessValue]);
-
-        expect(result.get().items()).toHaveLength(1);
-        expect(result.get().item(0)).toEqual(lightnessValue);
+    it('should call createBaseSet() with the correct arguments', () => {
+        createSRGBLightnessScale(mockContext, mockInputs);
+        expect(createBaseSet).toHaveBeenCalledWith(mockContext, mockInputs);
     });
 });

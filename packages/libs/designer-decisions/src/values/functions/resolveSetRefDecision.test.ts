@@ -3,7 +3,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { DecisionRef } from '../../inputs';
 import { createStaticDecisionMock, createValueContextMock } from '../../mocks';
 import { ValueInputError } from '../../value';
-import { type BaseSet, createItemSet } from '../primitives/set';
+import { BaseSet } from '../base';
+import { createItemSet } from '../primitives';
 
 import { resolveSetRefDecision } from './resolveSetRefDecision';
 

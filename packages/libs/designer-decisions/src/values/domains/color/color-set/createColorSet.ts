@@ -1,12 +1,7 @@
 import type { ValueContext } from '../../../../value';
-import { createBaseValue, createItemSet } from '../../../primitives';
-import type { ColorSet, ColorValue } from '../../../primitives/color/types';
+import { createBaseSet } from '../../../base';
+import type { ColorSet, ColorValue } from '../../../primitives';
 
 export const createColorSet = (context: ValueContext, input: ColorValue[]): ColorSet => {
-    const items = createItemSet(input);
-
-    return {
-        ...createBaseValue(context),
-        get: () => items,
-    };
+    return createBaseSet(context, input);
 };

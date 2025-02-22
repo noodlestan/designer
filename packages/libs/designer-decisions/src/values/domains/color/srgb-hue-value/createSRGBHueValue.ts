@@ -1,11 +1,11 @@
 import type { ColorSRGBHueInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
+import { createBaseValue } from '../../../base';
 import {
     type ColorChannelValueOptions,
     type SRGBHueValue,
     COLOR_CHANNEL_SRGB_HUE_BASE as base,
     clampChannelValue,
-    createBaseValue,
     COLOR_CHANNEL_SRGB_HUE_NAME as name,
     COLOR_CHANNEL_SRGB_HUE_QUANTIZE as quant,
 } from '../../../primitives';
@@ -19,7 +19,7 @@ export const createSRGBHueValue = (
     input: ColorSRGBHueInput,
     options: ColorChannelValueOptions = {},
 ): SRGBHueValue => {
-    context.consume(input);
+    const baseValue = createBaseValue(context, input);
 
     const { quantize = quant } = options;
     const value = resolveSRGBHueValue(context, input);
@@ -28,7 +28,7 @@ export const createSRGBHueValue = (
     const { get, raw, quantized } = createNumericValue(value, { base, quantize, normalize });
 
     return {
-        ...createBaseValue(context),
+        ...baseValue,
         get,
         raw,
         quantized,

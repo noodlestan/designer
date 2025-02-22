@@ -1,11 +1,11 @@
 import type { ColorSRGBLightnessInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
+import { createBaseValue } from '../../../base';
 import {
     type ColorChannelValueOptions,
     type SRGBLightnessValue,
     COLOR_CHANNEL_SRGB_LIGHTNESS_BASE as base,
     clampChannelValue,
-    createBaseValue,
     createNumericValue,
     COLOR_CHANNEL_SRGB_LIGHTNESS_NAME as name,
     COLOR_CHANNEL_SRGB_LIGHTNESS_QUANTIZE as quant,
@@ -19,7 +19,7 @@ export const createSRGBLightnessValue = (
     input: ColorSRGBLightnessInput,
     options: ColorChannelValueOptions = {},
 ): SRGBLightnessValue => {
-    context.consume(input);
+    const baseValue = createBaseValue(context, input);
 
     const { quantize = quant } = options;
     const value = resolveSRGBLightnessValue(context, input);
@@ -28,7 +28,7 @@ export const createSRGBLightnessValue = (
     const { get, raw, quantized } = createNumericValue(value, { base, quantize, normalize });
 
     return {
-        ...createBaseValue(context),
+        ...baseValue,
         get,
         raw,
         quantized,

@@ -1,5 +1,6 @@
 import type { SpaceWithUnits } from '../../../inputs';
-import type { BaseNumericValue, BaseSet, NumberValueOptions } from '../../primitives';
+import type { BaseSet } from '../../base';
+import type { BaseNumericValue, NumberValueOptions } from '../../primitives';
 
 export type SpaceValueOptions = NumberValueOptions;
 

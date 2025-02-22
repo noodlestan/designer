@@ -78,7 +78,7 @@ describe('resolveTypefaceValue()', () => {
             ranges: [{ tag: 'ital', min: 0, max: 1, defaultValue: 0 }],
         } as TypefaceValueAttributesInput;
 
-        it('should expose the resolved value via .get()', () => {
+        it('should return the complete typeface', () => {
             const result = resolveTypefaceValue(mockContext, input);
 
             expect(result.toString()).toEqual('Bar');

@@ -1,32 +1,23 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createDecisionContextMock, createValueContextMock } from '../../../../mocks';
-import { type ValueContext, createValueContext } from '../../../../value';
-import { createOklabLightnessValue } from '../oklab-lightness-value';
+import { type ValueContext } from '../../../../value';
+import { createBaseSet } from '../../../base';
+import { OklabLightnessValue } from '../../../primitives';
 
 import { createOklabLightnessScale } from './createOklabLightnessScale';
 
-describe('createOklabLightnessScale()', () => {
-    const [decisionContextMock] = createDecisionContextMock();
-    const mockInput = 0.01;
-    const lightnessValue = createOklabLightnessValue(createValueContextMock()[0], mockInput);
+vi.mock('../../../base');
 
-    let valueContext: ValueContext;
+describe('createOklabLightnessScale()', () => {
+    const mockInputs: OklabLightnessValue[] = [];
+    const mockContext = {} as ValueContext;
 
     beforeEach(() => {
-        valueContext = createValueContext(decisionContextMock);
+        vi.clearAllMocks();
     });
 
-    it('should have the provided context', () => {
-        const result = createOklabLightnessScale(valueContext, [lightnessValue]);
-
-        expect(result.context()).toBe(valueContext);
-    });
-
-    it('should expose the resolved value via .get()', () => {
-        const result = createOklabLightnessScale(valueContext, [lightnessValue]);
-
-        expect(result.get().items()).toHaveLength(1);
-        expect(result.get().item(0)).toEqual(lightnessValue);
+    it('should call createBaseSet() with the correct arguments', () => {
+        createOklabLightnessScale(mockContext, mockInputs);
+        expect(createBaseSet).toHaveBeenCalledWith(mockContext, mockInputs);
     });
 });

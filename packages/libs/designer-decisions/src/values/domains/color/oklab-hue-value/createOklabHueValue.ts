@@ -1,10 +1,10 @@
 import type { ColorOklabHueInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
+import { createBaseValue } from '../../../base';
 import type { ColorChannelValueOptions, OklabHueValue } from '../../../primitives';
 import {
     COLOR_CHANNEL_OKLAB_HUE_BASE as base,
     clampChannelValue,
-    createBaseValue,
     createNumericValue,
     COLOR_CHANNEL_OKLAB_HUE_NAME as name,
     COLOR_CHANNEL_OKLAB_HUE_QUANTIZE as quant,
@@ -18,7 +18,7 @@ export const createOklabHueValue = (
     input: ColorOklabHueInput,
     options: ColorChannelValueOptions = {},
 ): OklabHueValue => {
-    context.consume(input);
+    const baseValue = createBaseValue(context, input);
 
     const { quantize = quant } = options;
     const value = resolveOklabHueValue(context, input);
@@ -27,7 +27,7 @@ export const createOklabHueValue = (
     const { get, raw, quantized } = createNumericValue(value, { base, quantize, normalize });
 
     return {
-        ...createBaseValue(context),
+        ...baseValue,
         get,
         raw,
         quantized,

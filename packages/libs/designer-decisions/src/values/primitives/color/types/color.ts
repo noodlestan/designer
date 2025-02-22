@@ -1,9 +1,9 @@
 import type { Color as ChromaColor } from 'chroma-js';
 
 import type { ColorFormat, ColorObjectLiteral, NormalNumber } from '../../../../inputs';
-import type { BaseValue } from '../../base';
+import type { BaseSet } from '../../../base';
+import type { BaseValue } from '../../../base/value';
 import type { NumberValueOptions } from '../../number/types';
-import type { BaseSet } from '../../set';
 
 export type AlphaValue = BaseValue<NormalNumber>;
 
