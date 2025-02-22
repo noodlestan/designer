@@ -20,7 +20,7 @@ export type ColorChannelBaseValue<
     C extends ColorComplementaryChannels,
     T extends number = number,
 > = BaseNumericValue<T> & {
-    name: () => ColorChannelName;
+    channelName: () => ColorChannelName;
     toColor: (channels: C) => ColorValue;
 };
 
