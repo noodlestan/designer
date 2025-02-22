@@ -1,5 +1,8 @@
-import type { AnchoredNumberSeriesParams, ColorSRGBSaturationInput } from '../../../primitives';
-import type { DecisionInput } from '../../../primitives/record';
+import type {
+    AnchoredNumberSeriesParams,
+    ColorSRGBSaturationInput,
+    DecisionInput,
+} from '../../../primitives';
 
 export type ColorSRGBSaturationValueExplicitInput = DecisionInput & {
     model: 'color-srgb-saturation-value/explicit';

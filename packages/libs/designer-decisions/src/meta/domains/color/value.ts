@@ -1,4 +1,4 @@
-import { createColorValueExplicitModel } from '../../../models';
+import { MODEL_TYPE_EXPLICIT, createColorValueExplicitModel } from '../../../models';
 import { castFactory } from '../../functions';
 import type { DecisionType } from '../../types';
 
@@ -11,7 +11,7 @@ export const ColorValueDecisionTypes: DecisionType[] = [
         description: 'A decision to define a color value.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a color value explicitly.',
                 factory: castFactory(createColorValueExplicitModel),

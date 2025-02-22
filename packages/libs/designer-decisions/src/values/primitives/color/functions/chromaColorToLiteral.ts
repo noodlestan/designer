@@ -3,6 +3,9 @@ import type { Color as ChromaColor } from 'chroma-js';
 import type { ColorFormat, ColorObjectLiteral } from '../../../../inputs';
 import { quantized } from '../../number';
 import {
+    COLOR_FORMAT_HSL,
+    COLOR_FORMAT_OKLAB,
+    COLOR_FORMAT_OKLCH,
     COLOR_CHANNEL_OKLAB_CHROMA_BASE as OKLAB_CHROMA_BASE,
     COLOR_CHANNEL_OKLAB_HUE_BASE as OKLAB_HUE_BASE,
     COLOR_CHANNEL_OKLAB_LIGHTNESS_BASE as OKLAB_LIGHTNESS_BASE,
@@ -16,7 +19,7 @@ export function chromaColorToLiteral<T extends ColorObjectLiteral = ColorObjectL
     format: ColorFormat,
     quantize: number = 0.01,
 ): T {
-    if (format === 'oklch') {
+    if (format === COLOR_FORMAT_OKLCH) {
         const [l, c, h] = color.oklch();
 
         return {
@@ -24,7 +27,7 @@ export function chromaColorToLiteral<T extends ColorObjectLiteral = ColorObjectL
             c: quantized(c || 0, quantize, OKLAB_CHROMA_BASE),
             h: quantized(h || 0, quantize, OKLAB_HUE_BASE),
         } as T;
-    } else if (format === 'oklab') {
+    } else if (format === COLOR_FORMAT_OKLAB) {
         const [l, a, b] = color.oklab();
 
         return {
@@ -32,7 +35,7 @@ export function chromaColorToLiteral<T extends ColorObjectLiteral = ColorObjectL
             a: quantized(a || 0, quantize, OKLAB_CHROMA_BASE),
             b: quantized(b || 0, quantize, OKLAB_CHROMA_BASE),
         } as T;
-    } else if (format === 'hsl') {
+    } else if (format === COLOR_FORMAT_HSL) {
         const [h, s, l] = color.hsl();
 
         return {

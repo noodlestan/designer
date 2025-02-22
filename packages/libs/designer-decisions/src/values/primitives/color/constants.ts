@@ -23,3 +23,8 @@ export const COLOR_CHANNEL_SRGB_LIGHTNESS_QUANTIZE = 0.1;
 export const COLOR_CHANNEL_SRGB_SATURATION_NAME: ColorChannelName = 'srgb-saturation';
 export const COLOR_CHANNEL_SRGB_SATURATION_BASE = 2;
 export const COLOR_CHANNEL_SRGB_SATURATION_QUANTIZE = 0.1;
+
+export const COLOR_FORMAT_OKLCH = 'oklch';
+export const COLOR_FORMAT_OKLAB = 'oklab';
+export const COLOR_FORMAT_HSL = 'hsl';
+export const COLOR_FORMAT_RGB = 'rgb';

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { ColorOkLCHLiteral, ColorSetAnchoredInput } from '../../../inputs';
 import { createValueContextMock } from '../../../mocks';
+import { COLOR_FORMAT_OKLCH } from '../../../values';
 
 import { createColorSetAnchoredModel } from './createColorSetAnchoredModel';
 
@@ -17,14 +18,14 @@ describe('createColorSetAnchoredModel()', () => {
             before: {
                 steps: 2,
                 modifier: {
-                    space: 'oklch',
+                    space: COLOR_FORMAT_OKLCH,
                     l: { mode: 'linear', by: -0.1 },
                 },
             },
             after: {
                 steps: 3,
                 modifier: {
-                    space: 'oklch',
+                    space: COLOR_FORMAT_OKLCH,
                     l: { mode: 'linear', by: 0.2 },
                 },
             },
@@ -40,9 +41,15 @@ describe('createColorSetAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockContext, params);
 
-            expect(result.get().first()?.toObject<ColorOkLCHLiteral>('oklch').l).toBeCloseTo(0.3);
-            expect(result.get().item(2)?.toObject<ColorOkLCHLiteral>('oklch').l).toEqual(anchorL);
-            expect(result.get().last()?.toObject<ColorOkLCHLiteral>('oklch').l).toBeCloseTo(1);
+            expect(
+                result.get().first()?.toObject<ColorOkLCHLiteral>(COLOR_FORMAT_OKLCH).l,
+            ).toBeCloseTo(0.3);
+            expect(result.get().item(2)?.toObject<ColorOkLCHLiteral>(COLOR_FORMAT_OKLCH).l).toEqual(
+                anchorL,
+            );
+            expect(
+                result.get().last()?.toObject<ColorOkLCHLiteral>(COLOR_FORMAT_OKLCH).l,
+            ).toBeCloseTo(1);
         });
     });
 });

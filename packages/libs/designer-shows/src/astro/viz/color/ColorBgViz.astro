@@ -1,4 +1,5 @@
 ---
+import { COLOR_FORMAT_OKLCH } from '@noodlestan/designer-decisions';
 import { ShowError } from '../../atoms';
 import { resolveVizContent } from '../../helpers';
 import type { ColorVizProps } from '../../types';
@@ -7,7 +8,7 @@ type Props = ColorVizProps;
 
 const { v: color, size = 'auto', options, muteErrors } = Astro.props;
 
-const hsl = color?.toString('oklch');
+const hsl = color?.toString(COLOR_FORMAT_OKLCH);
 
 const { contrast, mode = 'typeface' } = options || {};
 

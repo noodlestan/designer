@@ -1,17 +1,18 @@
-import { createTypefaceValueExplicitModel } from '../../../models';
+import { DECISION_TYPEFACE_VALUE } from '../../../constants';
+import { MODEL_TYPE_EXPLICIT, createTypefaceValueExplicitModel } from '../../../models';
 import { castFactory } from '../../functions';
 import type { DecisionType } from '../../types';
 
 export const TypeDecisionTypes: DecisionType[] = [
     {
-        type: 'typeface-value',
+        type: DECISION_TYPEFACE_VALUE,
         name: 'Typeface Value',
         category: 'value',
         domain: 'typography',
         description: 'A decision to define a typeface.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a typeface value explicitly.',
                 factory: castFactory(createTypefaceValueExplicitModel),

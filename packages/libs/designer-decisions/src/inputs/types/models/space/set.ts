@@ -1,5 +1,4 @@
-import type { AnchoredNumberSeriesParams, SpaceValueInput } from '../../primitives';
-import type { DecisionInput } from '../../primitives/record';
+import type { AnchoredNumberSeriesParams, DecisionInput, SpaceValueInput } from '../../primitives';
 
 export type SpaceScaleExplicitInput = DecisionInput & {
     model: 'space-scale/explicit';

@@ -1,5 +1,5 @@
 import type { Degrees, NormalNumber } from '../../../../inputs';
-import type { BaseSet } from '../../set';
+import type { BaseSet } from '../../../base';
 
 import type { ColorChannelBaseValue } from './channel';
 

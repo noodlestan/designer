@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import type { ColorFormat, ColorSRGBHSLiteral } from '../../../inputs';
+import type { ColorSRGBHSLiteral } from '../../../inputs';
 
+import { COLOR_FORMAT_HSL } from './constants';
 import { createColor } from './createColor';
 
 describe('createColor()', () => {
@@ -18,7 +19,7 @@ describe('createColor()', () => {
         });
 
         it('should return the object in the requested format', () => {
-            const result = color.toObject<ColorSRGBHSLiteral>('hsl' as ColorFormat);
+            const result = color.toObject<ColorSRGBHSLiteral>(COLOR_FORMAT_HSL);
 
             expect(result.h).toBeCloseTo(300);
             expect(result.s).toBeCloseTo(0.6);
@@ -26,7 +27,7 @@ describe('createColor()', () => {
         });
 
         it('should return a string in the requested format', () => {
-            const result = color.toString('hsl' as ColorFormat);
+            const result = color.toString(COLOR_FORMAT_HSL);
 
             expect(result).toBe('hsl(300deg 60% 40%)');
         });

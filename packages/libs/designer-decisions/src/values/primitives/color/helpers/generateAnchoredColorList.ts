@@ -1,11 +1,12 @@
 import type { AnchoredColorListParams, ColorFormat, ColorObjectLiteral } from '../../../../inputs';
+import { COLOR_FORMAT_OKLCH } from '../constants';
 import { generateColorList } from '../functions';
 import type { ColorValue } from '../types';
 
 export const generateAnchoredColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(
     anchor: ColorValue,
     params: AnchoredColorListParams,
-    format: ColorFormat = 'oklch',
+    format: ColorFormat = COLOR_FORMAT_OKLCH,
 ): T[] => {
     const { steps: beforeSteps = 0, modifier: beforeMod } = params.before || {};
     const before = generateColorList(anchor, beforeSteps + 1, beforeMod, format);

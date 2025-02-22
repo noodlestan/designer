@@ -3,6 +3,9 @@ import type { Color as ChromaColor } from 'chroma-js';
 import type { ColorFormat } from '../../../../inputs';
 import { quantized } from '../../number';
 import {
+    COLOR_FORMAT_HSL,
+    COLOR_FORMAT_OKLAB,
+    COLOR_FORMAT_OKLCH,
     COLOR_CHANNEL_OKLAB_CHROMA_BASE as OKLAB_CHROMA_BASE,
     COLOR_CHANNEL_OKLAB_HUE_BASE as OKLAB_HUE_BASE,
     COLOR_CHANNEL_OKLAB_LIGHTNESS_BASE as OKLAB_LIGHTNESS_BASE,
@@ -16,7 +19,7 @@ export function chromaColorToString(
     format: ColorFormat,
     quantize: number = 0.01,
 ): string {
-    if (format === 'oklch') {
+    if (format === COLOR_FORMAT_OKLCH) {
         const [l, c, h] = color.oklch();
 
         const lightness = quantized((l || 0) * 100, quantize * 100, OKLAB_LIGHTNESS_BASE);
@@ -24,7 +27,7 @@ export function chromaColorToString(
         const hue = quantized(h || 0, quantize, OKLAB_HUE_BASE);
 
         return `oklch(${lightness}% ${chroma} ${hue}deg)`;
-    } else if (format === 'oklab') {
+    } else if (format === COLOR_FORMAT_OKLAB) {
         const [l, a, b] = color.oklab();
 
         const lightness = quantized((l || 0) * 100, quantize * 100, OKLAB_LIGHTNESS_BASE);
@@ -32,7 +35,7 @@ export function chromaColorToString(
         const channelB = quantized(b || 0, quantize, OKLAB_CHROMA_BASE);
 
         return `oklab(${lightness}% ${channelA} ${channelB})`;
-    } else if (format === 'hsl') {
+    } else if (format === COLOR_FORMAT_HSL) {
         const [h, s, l] = color.hsl();
 
         const hue = quantized(h || 0, quantize, SRGB_HUE_BASE);
