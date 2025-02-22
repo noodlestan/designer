@@ -1,8 +1,8 @@
 import chroma from 'chroma-js';
 import { describe, expect, it, vi } from 'vitest';
 
-import { ColorValue } from '..';
 import type { ValueContext } from '../../../../value';
+import { ColorValue } from '../types';
 
 import { generateBoundedColorList } from './generateBoundedColorList';
 

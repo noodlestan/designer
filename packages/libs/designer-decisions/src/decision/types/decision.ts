@@ -7,12 +7,6 @@ import type { DecisionContext } from './context';
 
 export type DecisionUnknown = Decision<BaseValue<unknown>>;
 
-export type DecisionLookup = {
-    ref: DecisionRef;
-    context: DecisionContext;
-    decision: DecisionUnknown | undefined;
-};
-
 export type Decision<V extends BaseValue<unknown>> = {
     type: () => string;
     uuid: () => string | undefined;
@@ -24,6 +18,11 @@ export type Decision<V extends BaseValue<unknown>> = {
     params: () => object; // WIP match contexts
     produce: (context?: LookupContexts | ParentValueContext) => V;
     // token: () => Token<T> | undefined;
+};
+export type DecisionLookup = {
+    ref: DecisionRef;
+    context: DecisionContext;
+    decision: DecisionUnknown | undefined;
 };
 
 export type DecisionFactory = <V = unknown>(

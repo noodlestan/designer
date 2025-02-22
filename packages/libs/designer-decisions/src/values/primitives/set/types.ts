@@ -1,4 +1,4 @@
-import type { BaseValue } from '..';
+import type { BaseValue } from '../base';
 
 export type SetItems<T> = {
     items(): T[];

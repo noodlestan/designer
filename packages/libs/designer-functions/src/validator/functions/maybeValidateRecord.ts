@@ -1,6 +1,6 @@
 import type { DecisionInput, LoadedRecord, ValidatedRecord } from '@noodlestan/designer-decisions';
 
-import type { DecisionValidator } from '..';
+import type { DecisionValidator } from '../types';
 
 export function maybeValidateRecord(
     validator: DecisionValidator | undefined,

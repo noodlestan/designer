@@ -1,4 +1,3 @@
 // @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './context';
-export * from './decision';
-export * from './errors';
+export * from './isTypefaceValueDecision';
+export * from './types';

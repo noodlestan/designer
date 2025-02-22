@@ -1,4 +1,8 @@
+import { DECISION_SPACE_SCALE, DECISION_SPACE_VALUE } from '../../../constants';
 import {
+    MODEL_TYPE_ANCHORED,
+    MODEL_TYPE_BOUNDED,
+    MODEL_TYPE_EXPLICIT,
     createSpaceScaleAnchoredModel,
     createSpaceScaleBoundedModel,
     createSpaceScaleExplicitModel,
@@ -9,14 +13,14 @@ import type { DecisionType } from '../../types';
 
 export const SpaceDecisionTypes: DecisionType[] = [
     {
-        type: 'space-value',
+        type: DECISION_SPACE_VALUE,
         name: 'Space Value',
         category: 'value',
         domain: 'space',
         description: 'A decision to define a space value.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a space value explicitly.',
                 factory: castFactory(createSpaceValueExplicitModel),
@@ -24,27 +28,27 @@ export const SpaceDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: 'space-scale',
+        type: DECISION_SPACE_SCALE,
         name: 'Space Scale',
         category: 'scale',
         domain: 'space',
         description: 'A decision to define a space scale.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a space scale with arbitrary space values.',
                 factory: castFactory(createSpaceScaleExplicitModel),
             },
             {
-                model: 'bounded',
+                model: MODEL_TYPE_BOUNDED,
                 name: 'Bounded',
                 description:
                     'Defines a space scale interpolating linearly between two space values.',
                 factory: castFactory(createSpaceScaleBoundedModel),
             },
             {
-                model: 'anchored',
+                model: MODEL_TYPE_ANCHORED,
                 name: 'Anchored',
                 description:
                     'Defines a space scale from an anchor value applying modifiers to generate items before and/or after the anchor .',

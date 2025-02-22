@@ -3,5 +3,5 @@ export * from './createDecisionContext';
 export * from './createStaticDecision';
 export * from './errors';
 export * from './getDecisionModelFactory';
-export * from './type';
+export * from './domains';
 export * from './types';

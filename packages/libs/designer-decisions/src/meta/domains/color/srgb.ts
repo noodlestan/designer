@@ -1,4 +1,15 @@
 import {
+    DECISION_COLOR_SRGB_HUE_SET,
+    DECISION_COLOR_SRGB_HUE_VALUE,
+    DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
+    DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
+    DECISION_COLOR_SRGB_SATURATION_SCALE,
+    DECISION_COLOR_SRGB_SATURATION_VALUE,
+} from '../../../constants';
+import {
+    MODEL_TYPE_ANCHORED,
+    MODEL_TYPE_BOUNDED,
+    MODEL_TYPE_EXPLICIT,
     createColorSRGBHueSetAnchoredModel,
     createColorSRGBHueSetBoundedModel,
     createColorSRGBHueSetExplicitModel,
@@ -17,14 +28,14 @@ import type { DecisionType } from '../../types';
 
 export const ColorSRGBDecisionTypes: DecisionType[] = [
     {
-        type: 'color-srgb-hue-value',
+        type: DECISION_COLOR_SRGB_HUE_VALUE,
         name: 'sRGB Hue Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the hue of a sRGB color.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines the hue of a sRGB color as degrees on the sRGB color wheel.',
                 factory: castFactory(createColorSRGBHueValueExplicitModel),
@@ -32,27 +43,27 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: 'color-srgb-hue-set',
+        type: DECISION_COLOR_SRGB_HUE_SET,
         name: 'sRGB Hue Set',
         category: 'set',
         domain: 'color',
         description: 'A decision to define the hue set for sRGB colors.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a sRGB hue set with arbitrary degrees.',
                 factory: castFactory(createColorSRGBHueSetExplicitModel),
             },
             {
-                model: 'bounded',
+                model: MODEL_TYPE_BOUNDED,
                 name: 'Bounded',
                 description:
                     'Defines a sRGB hue set interpolating linearly between two hue values.',
                 factory: castFactory(createColorSRGBHueSetBoundedModel),
             },
             {
-                model: 'anchored',
+                model: MODEL_TYPE_ANCHORED,
                 name: 'Anchored',
                 description:
                     'Defines a sRGB hue set from an anchor value applying modifiers to generate items before and/or after the anchor .',
@@ -61,14 +72,14 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: 'color-srgb-saturation-value',
+        type: DECISION_COLOR_SRGB_SATURATION_VALUE,
         name: 'sRGB Saturation Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the saturation of a sRGB color.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines the saturation of a sRGB color as a percentage.',
                 factory: castFactory(createColorSRGBSaturationValueExplicitModel),
@@ -76,27 +87,27 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: 'color-srgb-saturation-scale',
+        type: DECISION_COLOR_SRGB_SATURATION_SCALE,
         name: 'sRGB Saturation Scale',
         category: 'scale',
         domain: 'color',
         description: 'A decision to define a saturation scale for sRGB colors.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a sRGB saturation scale with arbitrary percentage values.',
                 factory: castFactory(createColorSRGBSaturationScaleExplicitModel),
             },
             {
-                model: 'bounded',
+                model: MODEL_TYPE_BOUNDED,
                 name: 'Bounded',
                 description:
                     'Defines a sRGB saturation scale interpolating linearly between two saturation values.',
                 factory: castFactory(createColorSRGBSaturationScaleBoundedModel),
             },
             {
-                model: 'anchored',
+                model: MODEL_TYPE_ANCHORED,
                 name: 'Anchored',
                 description:
                     'Defines a sRGB saturation scale from an anchor value applying modifiers to generate items before and/or after the anchor .',
@@ -105,14 +116,14 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: 'color-srgb-lightness-value',
+        type: DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
         name: 'sRGB Lightness Value',
         category: 'value',
         domain: 'color',
         description: 'A decision to define the lightness of a sRGB color.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines the lightness of a sRGB color as a percentage.',
                 factory: castFactory(createColorSRGBLightnessValueExplicitModel),
@@ -120,27 +131,27 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: 'color-srgb-lightness-scale',
+        type: DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
         name: 'sRGB Lightness Scale',
         category: 'scale',
         domain: 'color',
         description: 'A decision to define a lightness scale for sRGB colors.',
         models: [
             {
-                model: 'explicit',
+                model: MODEL_TYPE_EXPLICIT,
                 name: 'Explicit value',
                 description: 'Defines a sRGB lightness scale with arbitrary percentage values.',
                 factory: castFactory(createColorSRGBLightnessScaleExplicitModel),
             },
             {
-                model: 'bounded',
+                model: MODEL_TYPE_BOUNDED,
                 name: 'Bounded',
                 description:
                     'Defines a sRGB lightness scale interpolating linearly between two lightness values.',
                 factory: castFactory(createColorSRGBLightnessScaleBoundedModel),
             },
             {
-                model: 'anchored',
+                model: MODEL_TYPE_ANCHORED,
                 name: 'Anchored',
                 description:
                     'Defines a sRGB lightness scale from an anchor value applying modifiers to generate items before and/or after the anchor .',
