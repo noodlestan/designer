@@ -1,0 +1,18 @@
+---
+import { type SizeValue } from '@noodlestan/designer-decisions';
+
+import { getSizeVizComponent } from '../../meta';
+import type { ShowVizProps } from '../../types';
+
+type Props = ShowVizProps & {
+    v?: SizeValue;
+};
+
+const { v: sizeValue, viz = true, size = 'auto', options } = Astro.props;
+
+const Viz = getSizeVizComponent(viz);
+
+const opt = options || {};
+---
+
+{viz && <Viz v={sizeValue} size={size} options={opt} />}

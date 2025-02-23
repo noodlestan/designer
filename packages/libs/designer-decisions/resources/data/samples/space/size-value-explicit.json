@@ -1,0 +1,12 @@
+[
+  {
+    "model": "size-value/explicit",
+    "name": "Size Value Explicit Sample",
+    "params": {
+      "value": {
+        "value": 12,
+        "units": "rem"
+      }
+    }
+  }
+]

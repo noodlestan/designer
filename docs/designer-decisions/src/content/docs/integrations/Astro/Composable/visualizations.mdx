@@ -12,13 +12,13 @@ import {
     createColorValue,
     createOklabHueValue,
     createValueContext,
-    createSpaceValue,
+    createSizeValue,
 } from '@noodlestan/designer-decisions';
 import {
     LayoutGrid,
     ShowColorChannelViz,
     ShowColorViz,
-    ShowSpaceViz,
+    ShowSizeViz,
 } from '@noodlestan/designer-shows/astro';
 
 import { integrationAPI } from '@noodlestan/designer-integration-astro';
@@ -26,7 +26,7 @@ import { integrationAPI } from '@noodlestan/designer-integration-astro';
 export const store = await integrationAPI.build();
 export const colorValue = createColorValue(store.createValueContext(), '#009955');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
-export const spaceValue = createSpaceValue(store.createValueContext(), 100);
+export const sizeValue = createSizeValue(store.createValueContext(), 100);
 
 These components render a decision's visualization directly.
 
@@ -115,28 +115,28 @@ export const colorChannelValue = createOklabHueValue(context, 123);
 
 Space related components.
 
-### ShowSpaceViz
+### ShowSizeViz
 
-#### ༶ `v`: [SpaceValue](/api/designer-decisions/Values/Types/SpaceValue)
+#### ༶ `v`: [SizeValue](/api/designer-decisions/Values/Types/SizeValue)
 
-#### ༶ `viz`: [SpaceVizName](/api/designer-shows/Types/SpaceVizName/)
+#### ༶ `viz`: [SizeVizName](/api/designer-shows/Types/SizeVizName/)
 
-Which space visualization to show.
+Which size visualization to show.
 
 #### Example
 
 ```mdx
-export const spaceValue = createSpaceValue(context, 100);
+export const sizeValue = createSizeValue(context, 100);
 
-<ShowSpaceViz size="m" v={spaceValue} viz="bar-h" />
-<ShowSpaceViz size="m" v={spaceValue} viz="square" />
-<ShowSpaceViz size="m" v={spaceValue} viz="bar-v" />
-<ShowSpaceViz size="m" v={spaceValue} viz="circle" />
+<ShowSizeViz size="m" v={sizeValue} viz="bar-h" />
+<ShowSizeViz size="m" v={sizeValue} viz="square" />
+<ShowSizeViz size="m" v={sizeValue} viz="bar-v" />
+<ShowSizeViz size="m" v={sizeValue} viz="circle" />
 ```
 
 <LayoutGrid>
-    <ShowSpaceViz size="xs" v={spaceValue} viz="bar-h" />
-    <ShowSpaceViz size="xs" v={spaceValue} viz="square" />
-    <ShowSpaceViz size="xs" v={spaceValue} viz="bar-v" />
-    <ShowSpaceViz size="xs" v={spaceValue} viz="circle" />
+    <ShowSizeViz size="xs" v={sizeValue} viz="bar-h" />
+    <ShowSizeViz size="xs" v={sizeValue} viz="square" />
+    <ShowSizeViz size="xs" v={sizeValue} viz="bar-v" />
+    <ShowSizeViz size="xs" v={sizeValue} viz="circle" />
 </LayoutGrid>

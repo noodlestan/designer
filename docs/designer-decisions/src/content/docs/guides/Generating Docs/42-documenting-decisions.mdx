@@ -22,12 +22,12 @@ This guide explains how to document design decisions and tokens in your document
 
 ```mdx
 <ShowDecision d="Brand Color Set" layout="column" size="xs" value="oklch" />
-<ShowDecision d="Sizing Space Scale" layout="column" size="xs" />
+<ShowDecision d="Sizing Scale" layout="column" size="xs" />
 ```
 
 <LayoutGrid>
     <ShowDecision d="Brand Color Set" layout="column" size="xs" value="oklch" />
-    <ShowDecision d="Sizing Space Scale" layout="column" size="xs" />
+    <ShowDecision d="Sizing Scale" layout="column" size="xs" />
 </LayoutGrid>
 
 ## Setup
@@ -220,7 +220,7 @@ Some decision types can be rendered using different visualizations.
 
 The `viz` prop is passed down to value components to determine which visualization is used.
 
-For instance, the [ShowSpaceViz](/integrations/Astro/Composable/Visualizations/#showspaceviz) component can represent a space value with a few different shapes.
+For instance, the [ShowSizeViz](/integrations/Astro/Composable/Visualizations/#showsizeviz) component can represent a size value with a few different shapes.
 
 ```mdx
 <ShowDecision d="Avatar Minimum Size" viz="circle" />

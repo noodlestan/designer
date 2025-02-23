@@ -1,0 +1,36 @@
+---
+title: SizeVizName
+slug: api/designer-shows/Types/SizeVizName
+---
+
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
+
+Available visualizations for [Size Values](/integrations/Astro/Composable/Values/#showsizevalue)
+
+```ts
+type SizeVizName = 'bar-h' | 'bar-v' | 'square' | 'circle';
+```
+
+When rendering decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
+
+```mdx
+<ShowSizeValueDecision d="Size Unit" viz="..." />
+```
+
+## Type Values
+
+### `bar-h` (default)
+
+<ShowDecision d="Size Unit" size="xs" viz="bar-h" />
+
+### `bar-v`
+
+<ShowDecision d="Textarea Maximum Height" size="s" viz="bar-v" />
+
+### `square`
+
+<ShowDecision d="Card Thumb Minimum Size" size="s" viz="square" />
+
+### `circle`
+
+<ShowDecision d="Avatar Minimum Size" size="s" viz="circle" />

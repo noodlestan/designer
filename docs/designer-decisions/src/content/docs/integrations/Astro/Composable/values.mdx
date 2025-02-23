@@ -12,19 +12,19 @@ import {
     createColorValue,
     createOklabHueValue,
     createValueContext,
-    createSpaceValue,
+    createSizeValue,
 } from '@noodlestan/designer-decisions';
 import { integrationAPI } from '@noodlestan/designer-integration-astro';
 import {
     ShowColorChannelValue,
     ShowColorValue,
-    ShowSpaceValue,
+    ShowSizeValue,
 } from '@noodlestan/designer-shows/astro';
 
 export const store = await integrationAPI.build();
 export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
 export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
-export const spaceValue = createSpaceValue(store.createValueContext(), 12);
+export const sizeValue = createSizeValue(store.createValueContext(), 12);
 
 These components render a decision's value directly.
 
@@ -91,9 +91,9 @@ export const colorChannelValue = createOklabHueValue(context, 123);
 
 Space related components.
 
-### ShowSpaceValue
+### ShowSizeValue
 
-#### ༶ `v`: [SpaceValue](/api/designer-decisions/Values/Types/SpaceValue)
+#### ༶ `v`: [SizeValue](/api/designer-decisions/Values/Types/SizeValue)
 
 #### ༶ `value`: -
 
@@ -102,9 +102,9 @@ This prop has no effect on this component.
 #### Example
 
 ```mdx
-export const spaceValue = createSpaceValue(context, 12);
+export const sizeValue = createSizeValue(context, 12);
 
-<ShowSpaceValue v={spaceValue} />
+<ShowSizeValue v={sizeValue} />
 ```
 
-<ShowSpaceValue v={spaceValue} />
+<ShowSizeValue v={sizeValue} />

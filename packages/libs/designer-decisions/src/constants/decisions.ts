@@ -13,8 +13,8 @@ export const DECISION_COLOR_SRGB_LIGHTNESS_SCALE = 'color-srgb-lightness-scale';
 export const DECISION_COLOR_SRGB_SATURATION_VALUE = 'color-srgb-saturation-value';
 export const DECISION_COLOR_SRGB_SATURATION_SCALE = 'color-srgb-saturation-scale';
 
-export const DECISION_SPACE_SCALE = 'space-scale';
-export const DECISION_SPACE_VALUE = 'space-value';
+export const DECISION_SIZE_SCALE = 'size-scale';
+export const DECISION_SIZE_VALUE = 'size-value';
 
 export const DECISION_TYPEFACE_VALUE = 'typeface-value';
 
@@ -26,5 +26,5 @@ export const SET_DECISION_TYPES = [
     DECISION_COLOR_SRGB_HUE_SET,
     DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
     DECISION_COLOR_SRGB_SATURATION_SCALE,
-    DECISION_SPACE_SCALE,
+    DECISION_SIZE_SCALE,
 ];

@@ -11,11 +11,11 @@ import { resolveSetRefDecision } from './resolveSetRefDecision';
 describe('resolveSetRefDecision()', () => {
     const [mockContext, { addErrorSpy }] = createValueContextMock();
     const mockValueName = 'mock-scale';
-    const mockSpace1 = { value: 10, units: 'px' };
-    const mockSpace2 = { value: 12, units: 'px' };
+    const mockSize1 = { value: 10, units: 'px' };
+    const mockSize2 = { value: 12, units: 'px' };
 
-    const itemSet = createItemSet([mockSpace1, mockSpace2]);
-    const [, decisionMock] = createStaticDecisionMock<BaseSet<typeof mockSpace1>>([], {
+    const itemSet = createItemSet([mockSize1, mockSize2]);
+    const [, decisionMock] = createStaticDecisionMock<BaseSet<typeof mockSize1>>([], {
         get: () => itemSet,
     });
 
@@ -28,7 +28,7 @@ describe('resolveSetRefDecision()', () => {
             const ref: DecisionRef = { $uuid: 'test-uuid', index: 1 };
             const result = resolveSetRefDecision(decisionMock, mockContext, mockValueName, ref);
 
-            expect(result).toEqual(mockSpace2);
+            expect(result).toEqual(mockSize2);
         });
     });
 
@@ -55,7 +55,7 @@ describe('resolveSetRefDecision()', () => {
             const ref: DecisionRef = { $uuid: 'test-uuid' };
             const result = resolveSetRefDecision(decisionMock, mockContext, mockValueName, ref);
 
-            expect(result).toEqual(mockSpace1);
+            expect(result).toEqual(mockSize1);
         });
     });
 });

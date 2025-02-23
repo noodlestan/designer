@@ -1,1 +1,1 @@
-export const SPACE_VALUE_QUANTIZE = 0.1;
+export const SIZE_VALUE_QUANTIZE = 0.1;

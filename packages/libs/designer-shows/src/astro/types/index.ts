@@ -1,4 +1,4 @@
-import type { ColorValue, SpaceValue, TypefaceValue } from '@noodlestan/designer-decisions';
+import type { ColorValue, SizeValue, TypefaceValue } from '@noodlestan/designer-decisions';
 import type { Store } from '@noodlestan/designer-functions';
 
 import type { LayoutDynamicProps } from '../layouts';
@@ -43,23 +43,13 @@ export type DecisionVizComponent<T extends object = object> = (props: ShowVizPro
 
 /* space */
 
-export type SpaceVizName = 'square' | 'circle' | 'bar-h' | 'bar-v';
+export type SizeVizName = 'square' | 'circle' | 'bar-h' | 'bar-v';
 
-export type SpaceVizProps = ShowVizProps & {
-    viz?: boolean | SpaceVizName;
-    v?: SpaceValue;
+export type SizeVizProps = ShowVizProps & {
+    viz?: boolean | SizeVizName;
+    v?: SizeValue;
 };
-export type SpaceVizComponent = (props: SpaceVizProps) => unknown;
-
-/* space */
-
-export type TypeVizName = 'short-text';
-
-export type TypeVizProps = ShowVizProps & {
-    viz?: boolean | TypeVizName;
-    v?: TypefaceValue; // WIP : this will have to be a TypeStyleValue
-};
-export type TypeVizComponent = (props: TypeVizProps) => unknown;
+export type SizeVizComponent = (props: SizeVizProps) => unknown;
 
 /* color */
 
@@ -79,3 +69,13 @@ export type ColorVizProps = ShowVizProps & {
     options?: ColorVizOptions;
 };
 export type ColorVizComponent = (props: ColorVizProps) => unknown;
+
+/* typography */
+
+export type TypeVizName = 'short-text';
+
+export type TypeVizProps = ShowVizProps & {
+    viz?: boolean | TypeVizName;
+    v?: TypefaceValue; // WIP : this will have to be a TypeStyleValue
+};
+export type TypeVizComponent = (props: TypeVizProps) => unknown;

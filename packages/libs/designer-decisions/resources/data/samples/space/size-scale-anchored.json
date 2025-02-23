@@ -1,0 +1,17 @@
+[
+  {
+    "model": "size-scale/anchored",
+    "name": "Size Scale Anchored Sample",
+    "params": {
+      "anchor": 30,
+      "before": {
+        "steps": 2,
+        "modifier": { "mode": "linear", "by": -10 }
+      },
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "geometric", "by": 2 }
+      }
+    }
+  }
+]

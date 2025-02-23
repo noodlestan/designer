@@ -1,4 +1,4 @@
-import type { SpaceValue } from '../../../../values';
+import type { SizeValue } from '../../../../values';
 import type { Decision } from '../../../types';
 
-export type SpaceValueDecision = Decision<SpaceValue>;
+export type SizeValueDecision = Decision<SizeValue>;

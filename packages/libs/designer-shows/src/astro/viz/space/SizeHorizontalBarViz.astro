@@ -1,0 +1,66 @@
+---
+import { ShowError } from '../../atoms';
+import type { SizeVizProps } from '../../types';
+
+type Props = SizeVizProps;
+
+const { v: sizeValue, size = 'auto', muteErrors } = Astro.props;
+
+const { value: v, units } = sizeValue?.get() || {};
+const vWithUnits = `${v}${units}`;
+const showErrors = !muteErrors && sizeValue?.context().hasErrors();
+---
+
+<div class:list={['dd-size-bar-h-viz', size]}>
+    {showErrors && <ShowError size="s" position="block" />}
+    <div class="dd-block"></div>
+</div>
+
+<style define:vars={{ __width: vWithUnits }}>
+    .dd-size-bar-h-viz {
+        position: relative;
+        width: var(--__width);
+        min-width: var(--__width);
+        max-width: var(--__width);
+        height: var(--__height);
+        min-height: var(--__height);
+        max-height: var(--__height);
+    }
+
+    .dd-size-bar-h-viz :global(.dd-show-error) {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .xs {
+        --__height: var(--dd-viz-size-xs);
+    }
+
+    .s {
+        --__height: var(--dd-viz-size-s);
+    }
+
+    .m {
+        --__height: var(--dd-viz-size-m);
+    }
+
+    .l {
+        --__height: var(--dd-viz-size-l);
+    }
+
+    .xl {
+        --__height: var(--dd-viz-size-xl);
+    }
+
+    .dd-block {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--dd-size-viz-color);
+        border: var(--dd-size-viz-border);
+        border-radius: var(--dd-size-viz-border-radius);
+    }
+</style>

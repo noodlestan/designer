@@ -1,14 +1,16 @@
-import type { SpaceWithUnits } from '../../../inputs';
-import type { BaseSet } from '../../base';
-import type { BaseNumericValue, NumberValueOptions } from '../../primitives';
+import type { SizeObjectLiteral } from '../../../inputs';
+import type { BaseSet, BaseValue } from '../../base';
+import type { NumberValueOptions, Size } from '../../primitives';
 
-export type SpaceValueOptions = NumberValueOptions;
+export type SizeValueOptions = NumberValueOptions;
 
-export type SpaceValueFormatOptions = SpaceValueOptions;
+export type SizeFormatOptions = NumberValueOptions;
 
-export type SpaceValue = BaseNumericValue & {
-    toString(options?: SpaceValueFormatOptions): string;
-    toObject(options?: SpaceValueFormatOptions): SpaceWithUnits;
+export type SizeValue = BaseValue<Size> & {
+    raw(): number;
+    quantized: (quantize?: number) => number;
+    toString(options?: SizeFormatOptions): string;
+    toObject(options?: SizeFormatOptions): SizeObjectLiteral;
 };
 
-export type SpaceScale = BaseSet<SpaceValue>;
+export type SizeScale = BaseSet<SizeValue>;

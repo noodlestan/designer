@@ -65,22 +65,22 @@ When declaring decisions in JSON files you are encouraged to organize them in sm
 
 You can reuse decision values and avoid repetition by referencing them in other decisions.
 
-The following example defines an explicit [Space Value](/models/decision-types/space-value) decision called "Space Unit" and a [Space Scale](/models/decision-types/space-scale#anchored) anchored on the value of the first one.
+The following example defines an explicit [Size Value](/models/decision-types/size-value) decision called "Size Unit" and a [Size Scale](/models/decision-types/size-scale#anchored) anchored on the value of the first one.
 
 ```json
 [
     {
-        "type": "space-value/explicit",
-        "name": "Space Unit",
+        "type": "size-value/explicit",
+        "name": "Size Unit",
         "params": {
             "value": "8"
         }
     },
     {
-        "type": "space-scale/anchored",
+        "type": "size-scale/anchored",
         "name": "Sizing Scale",
         "params": {
-            "anchor": { "$name": "Space Unit" },
+            "anchor": { "$name": "Size Unit" },
             "after": {
                 "steps": 5,
                 "modifier": { "mode": "gemetric", "by": 1.5 }
@@ -92,12 +92,12 @@ The following example defines an explicit [Space Value](/models/decision-types/s
 
 You can also reference items of a decision set set or scale by adding the index to the reference.
 
-In the following example we are creating a [Space Value](/models/decision-types/space-value) decision based on the second element of the "Sizing Scale" declared before.
+In the following example we are creating a [Size Value](/models/decision-types/size-value) decision based on the second element of the "Sizing Scale" declared before.
 
 ```json
 [
     {
-        "type": "space-value/explicit",
+        "type": "size-value/explicit",
         "name": "Default Size",
         "params": {
             "value": { "$name": "Sizing Scale", "index": 3 }

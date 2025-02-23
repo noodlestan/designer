@@ -53,10 +53,10 @@ produced.decisions().forEach(status => console.info(formatDecisionStatus(status)
 Returns one decision per line, with nested value errors.
 
 ```
-🟨 | Sizing Scale | space-scale/bounded | [0px, 0px, 0px, 0px, 0px, 0px] | 2 warnings
+🟨 | Sizing Scale | size-scale/bounded | [0px, 0px, 0px, 0px, 0px, 0px] | 2 warnings
 
- > 🟨 Ref (SpaceValue) {"$name":"Size Smallest"} not found.
- > 🟨 Ref (SpaceValue) {"$name":"Brand Black"} matched "color-value".
+ > 🟨 Ref (SizeValue) {"$name":"Size Smallest"} not found.
+ > 🟨 Ref (SizeValue) {"$name":"Brand Black"} matched "color-value".
 ```
 
 Using `formatDecisionStatus(status, ['status-colors', 'name', 'value'])`
