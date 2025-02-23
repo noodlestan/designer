@@ -1,4 +1,4 @@
-import type { SpaceScale } from '../../../../values';
+import type { SizeScale } from '../../../../values';
 import type { Decision } from '../../../types';
 
-export type SpaceScaleDecision = Decision<SpaceScale>;
+export type SizeScaleDecision = Decision<SizeScale>;

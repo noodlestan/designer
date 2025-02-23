@@ -1,9 +1,9 @@
-import type { DecisionInput, SpaceValueInput } from '../../primitives';
+import type { DecisionInput, SizeValueInput } from '../../primitives';
 
-export type SpaceValueExplicitInput = DecisionInput & {
-    model: 'space-value/explicit';
+export type SizeValueExplicitInput = DecisionInput & {
+    model: 'size-value/explicit';
     params: {
-        value: SpaceValueInput;
+        value: SizeValueInput;
         quantize?: number;
     };
 };

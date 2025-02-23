@@ -1,9 +1,12 @@
 [
   {
-    "model": "space-value/explicit",
-    "name": "Space Value Explicit Sample",
+    "model": "size-value/explicit",
+    "name": "Size Value Explicit Sample",
     "params": {
-      "value": 5
+      "value": {
+        "value": 12,
+        "units": "rem"
+      }
     }
   }
 ]

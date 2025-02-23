@@ -12,8 +12,8 @@ import {
     ShowColorChannelViz,
     ShowColorValue,
     ShowColorViz,
-    ShowSpaceValue,
-    ShowSpaceViz,
+    ShowSizeValue,
+    ShowSizeViz,
     ShowTypefaceValue,
     ShowTypefaceViz,
 } from '../values';
@@ -81,8 +81,8 @@ export const getDecisionComponentMap = (
         'color-srgb-saturation-scale': channelCs(ShowSetDecision),
         'color-set': defaultCs(ShowSetDecision, valueC(ShowColorValue), vizC(ShowColorViz)),
         'color-value': defaultCs(ShowValueDecision, valueC(ShowColorValue), vizC(ShowColorViz)),
-        'space-value': defaultCs(ShowValueDecision, valueC(ShowSpaceValue), vizC(ShowSpaceViz)),
-        'space-scale': defaultCs(ShowSetDecision, valueC(ShowSpaceValue), vizC(ShowSpaceViz)),
+        'size-value': defaultCs(ShowValueDecision, valueC(ShowSizeValue), vizC(ShowSizeViz)),
+        'size-scale': defaultCs(ShowSetDecision, valueC(ShowSizeValue), vizC(ShowSizeViz)),
         'typeface-value': defaultCs(
             ShowValueDecision,
             valueC(ShowTypefaceValue),

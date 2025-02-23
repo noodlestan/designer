@@ -1,0 +1,28 @@
+---
+import { type SizeValue } from '@noodlestan/designer-decisions';
+
+import { DecisionValueContainer, ShowError } from '../../atoms';
+import { LayoutStack } from '../../layouts';
+import type { ShowValueProps } from '../../types';
+
+type Props = ShowValueProps & {
+    v?: SizeValue;
+};
+
+const { v: sizeValue, value = true, muteErrors } = Astro.props;
+
+const { value: v, units } = sizeValue?.toObject() || {};
+const vWithUnits = `${v}${units}`;
+const showErrors = !muteErrors && sizeValue?.context().hasErrors();
+---
+
+{
+    value && sizeValue !== undefined && (
+        <LayoutStack>
+            <DecisionValueContainer>
+                {showErrors && <ShowError size="xs" />}
+                {vWithUnits}
+            </DecisionValueContainer>
+        </LayoutStack>
+    )
+}

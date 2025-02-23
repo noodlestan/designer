@@ -13,36 +13,36 @@ import {
     ShowDecisionCard,
 } from '@noodlestan/designer-shows/astro';
 
-## Space values
+## Size values
 
 <details>
-<summary>SpaceValue</summary>
+<summary>SizeValue</summary>
 
 ```mdx
-<ShowDecision d="Space Unit" viz="square" />
+<ShowDecision d="Size Unit" viz="square" />
 ```
 
 </details>
 
 <LayoutCentered>
-    <ShowDecision d="Space Unit" viz="square" />
+    <ShowDecision d="Size Unit" viz="square" />
 </LayoutCentered>
 
-## Space scales
+## Size scales
 
 <details>
-<summary>SpaceScale (default viz / xs size)</summary>
+<summary>SizeScale (default viz / xs size)</summary>
 
 ```mdx
-<ShowDecision d="Layout Space Scale" size="xs" />
+<ShowDecision d="Layout Gap Scale" size="xs" />
 ```
 
 </details>
 
-<ShowDecision d="Layout Space Scale" size="xs" />
+<ShowDecision d="Layout Gap Scale" size="xs" />
 
 <details>
-<summary>SpaceScale (vertical bar viz)</summary>
+<summary>SizeScale (vertical bar viz)</summary>
 
 ```mdx
 <ShowDecision d="Layout Rhythm Scale" viz="bar-v" />
@@ -53,18 +53,18 @@ import {
 <ShowDecision d="Layout Rhythm Scale" viz="bar-v" />
 
 <details>
-<summary>SpaceScale (square viz vs circle viz)</summary>
+<summary>SizeScale (square viz vs circle viz)</summary>
 
 ```mdx
-<ShowDecision d="Sizing Space Scale" viz="square" />
-<ShowDecision d="Sizing Space Scale" viz="circle" />
+<ShowDecision d="Sizing Scale" viz="square" />
+<ShowDecision d="Sizing Scale" viz="circle" />
 ```
 
 </details>
 
 <LayoutGrid>
-    <ShowDecision d="Sizing Space Scale" viz="square" />
-    <ShowDecision d="Sizing Space Scale" viz="circle" />
+    <ShowDecision d="Sizing Scale" viz="square" />
+    <ShowDecision d="Sizing Scale" viz="circle" />
 </LayoutGrid>
 
 ## Cards
@@ -73,23 +73,23 @@ import {
 <summary>SpaceValue (DecisionCard / model and params shown)</summary>
 
 ```mdx
-<ShowDecisionCard d="Space Unit" model params>
+<ShowDecisionCard d="Size Unit" model params>
 ```
 
 </details>
 
-<ShowDecisionCard d="Space Unit" model params />
+<ShowDecisionCard d="Size Unit" model params />
 
 <details>
-<summary>SpaceScale (DecisionCard / column layout)</summary>
+<summary>SizeScale (DecisionCard / column layout)</summary>
 
 ```mdx
-<ShowDecisionCard d="Sizing Space Scale" layout={["column","row"]}>
+<ShowDecisionCard d="Sizing Scale" layout={["column","row"]}>
 ```
 
 </details>
 
-<ShowDecisionCard d="Sizing Space Scale" layout={['column', 'row']} />
+<ShowDecisionCard d="Sizing Scale" layout={['column', 'row']} />
 
 ## See also
 

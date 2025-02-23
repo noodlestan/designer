@@ -1,0 +1,56 @@
+---
+import { ShowError } from '../../atoms';
+import type { SizeVizProps } from '../../types';
+
+type Props = SizeVizProps;
+
+const { v: sizeValue, size = 'auto', muteErrors } = Astro.props;
+
+const { value: v, units } = sizeValue?.get() || {};
+const vWithUnits = `${v}${units}`;
+const showErrors = !muteErrors && sizeValue?.context().hasErrors();
+---
+
+<div class:list={['dd-size-bar-v-viz', size]}>
+    {showErrors && <ShowError size="s" position="block" />}
+    <div class="block"></div>
+</div>
+
+<style define:vars={{ __height: vWithUnits }}>
+    .dd-size-bar-v-viz {
+        height: var(--__height);
+        min-height: var(--__height);
+        max-height: var(--__height);
+        width: var(--__width);
+        min-width: var(--__width);
+        max-width: var(--__width);
+    }
+
+    .xs {
+        --__width: var(--dd-viz-size-xs);
+    }
+
+    .s {
+        --__width: var(--dd-viz-size-s);
+    }
+
+    .m {
+        --__width: var(--dd-viz-size-m);
+    }
+
+    .l {
+        --__width: var(--dd-viz-size-l);
+    }
+
+    .xl {
+        --__width: var(--dd-viz-size-xl);
+    }
+
+    .block {
+        width: 100%;
+        height: 100%;
+        background-color: var(--dd-size-viz-color);
+        border: var(--dd-size-viz-border);
+        border-radius: var(--dd-size-viz-border-radius);
+    }
+</style>

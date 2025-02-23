@@ -1,4 +1,4 @@
 // @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './isSpaceScaleDecision';
-export * from './isSpaceValueDecision';
+export * from './isSizeScaleDecision';
+export * from './isSizeValueDecision';
 export * from './types';

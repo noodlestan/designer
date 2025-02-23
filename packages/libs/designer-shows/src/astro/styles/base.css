@@ -81,9 +81,9 @@
     --dd-viz-size-l: var(--dd-size-l);
     --dd-viz-size-xl: var(--dd-size-xl);
 
-    --dd-space-viz-color: var(--dd-color-max);
-    --dd-space-viz-border: none;
-    --dd-space-viz-border-radius: 0;
+    --dd-size-viz-color: var(--dd-color-max);
+    --dd-size-viz-border: none;
+    --dd-size-viz-border-radius: 0;
 
     --dd-color-viz-border: 1px solid var(--sl-color-gray-3);
     --dd-color-viz-border-radius: 5px;

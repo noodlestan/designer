@@ -131,10 +131,10 @@ If no errors occur, the output should look something like:
 
 ```
 ...
-Sizing Space Scale space-scale/anchored
-Card Thumb Minimum Size space-value/explicit
-Avatar Minimum Size space-value/explicit
-Avatar Sizes space-scale/anchored
+Sizing Scale size-scale/anchored
+Card Thumb Minimum Size size-value/explicit
+Avatar Minimum Size size-value/explicit
+Avatar Sizes size-scale/anchored
 🐘 67 records
 ```
 
@@ -182,8 +182,8 @@ If you run `node scripts/validate-decisions.js` again, you will see two new deci
 
 ```
 ...
-Avatar Minimum Size space-value/explicit
-Avatar Sizes space-scale/anchored
+Avatar Minimum Size size-value/explicit
+Avatar Sizes size-scale/anchored
 Warm Color color-value/explicit
 Cold Color color-value/explicit
 🐘 68 records
@@ -317,19 +317,19 @@ Without any errors, the output will now display the decision status, the name an
 
 ```
 ...
-🟩 | Textarea Maximum Height | space-value/explicit | 300 |
-🟩 | Card Thumb Minimum Size | space-value/explicit | 175 |
-🟩 | Avatar Minimum Size | space-value/explicit | 50 |
-🟩 | Avatar Sizes | space-scale/anchored | [50, 100, 150, 200] |
+🟩 | Textarea Maximum Height | size-value/explicit | 300 |
+🟩 | Card Thumb Minimum Size | size-value/explicit | 175 |
+🟩 | Avatar Minimum Size | size-value/explicit | 50 |
+🟩 | Avatar Sizes | size-scale/anchored | [50, 100, 150, 200] |
 ```
 
 If we introduce a validation issue in one of the items, as in the previous example, the output will also include details about the error.
 
 ```
 ...
-🟩 | Card Thumb Minimum Size | space-value/explicit | 175 |
-🟩 | Avatar Minimum Size | space-value/explicit | 50 |
-🟩 | Avatar Sizes | space-scale/anchored | [50, 100, 150, 200] |
+🟩 | Card Thumb Minimum Size | size-value/explicit | 175 |
+🟩 | Avatar Minimum Size | size-value/explicit | 50 |
+🟩 | Avatar Sizes | size-scale/anchored | [50, 100, 150, 200] |
 🟨 | Warm Color | color-value/explicit | #000000 | 1 errors, 1 warnings
  > 🟨 Decision "Warm Color" /params (required) must have required property 'value'
  > 🟨 Invalid input data for a ColorValue in {"$name":"Warm Color"}: undefined
@@ -374,7 +374,7 @@ loadDecisions();
 You can use it to summarize all counts in one line.
 
 ```
-🟨 Decision "Sizing Space Scale" /params/after (required) must have required property 'steps'
+🟨 Decision "Sizing Scale" /params/after (required) must have required property 'steps'
 🐘 59 records, 0 errors, 1 warnings
 ```
 

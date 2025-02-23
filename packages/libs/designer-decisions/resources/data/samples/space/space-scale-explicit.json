@@ -1,7 +1,7 @@
 [
   {
-    "model": "space-scale/explicit",
-    "name": "Space Scale Explicit Sample",
+    "model": "size-scale/explicit",
+    "name": "Size Scale Explicit Sample",
     "params": {
       "values": [5, 10, 15, 20, 30, 50]
     }

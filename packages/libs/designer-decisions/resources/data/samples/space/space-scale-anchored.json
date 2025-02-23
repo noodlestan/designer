@@ -1,7 +1,7 @@
 [
   {
-    "model": "space-scale/anchored",
-    "name": "Space Scale Anchored Sample",
+    "model": "size-scale/anchored",
+    "name": "Size Scale Anchored Sample",
     "params": {
       "anchor": 30,
       "before": {

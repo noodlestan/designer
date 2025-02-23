@@ -1,26 +1,26 @@
-import type { AnchoredNumberSeriesParams, DecisionInput, SpaceValueInput } from '../../primitives';
+import type { AnchoredNumberSeriesParams, DecisionInput, SizeValueInput } from '../../primitives';
 
-export type SpaceScaleExplicitInput = DecisionInput & {
-    model: 'space-scale/explicit';
+export type SizeScaleExplicitInput = DecisionInput & {
+    model: 'size-scale/explicit';
     params: {
-        values: SpaceValueInput[];
+        values: SizeValueInput[];
         quantize?: number;
     };
 };
 
-export type SpaceScaleBoundedInput = DecisionInput & {
-    model: 'space-scale/bounded';
+export type SizeScaleBoundedInput = DecisionInput & {
+    model: 'size-scale/bounded';
     params: {
-        from: SpaceValueInput;
-        to: SpaceValueInput;
+        from: SizeValueInput;
+        to: SizeValueInput;
         steps: number;
         quantize?: number;
     };
 };
 
-export type SpaceScaleAnchoredInput = DecisionInput & {
-    model: 'space-scale/anchored';
+export type SizeScaleAnchoredInput = DecisionInput & {
+    model: 'size-scale/anchored';
     params: {
-        anchor: SpaceValueInput;
+        anchor: SizeValueInput;
     } & AnchoredNumberSeriesParams;
 };

@@ -1,0 +1,38 @@
+---
+title: SizeValue
+slug: api/designer-decisions/Values/Types/SizeValue
+sidebar:
+    order: 0
+---
+
+Extends `BaseValue<Size>`
+
+```ts
+export type SizeRaw = string | number;
+
+export type SizeAbsoluteUnits = 'px' | 'rem';
+
+export type SizeObjectLiteral = {
+    value: number;
+    units: SizeAbsoluteUnits;
+};
+export type SizeLiteral = SizeRaw | SizeObjectLiteral;
+
+export type Size = {
+    value: number;
+    units: SizeAbsoluteUnits;
+    toString: () => string;
+};
+
+export type SizeFormatOptions = {
+    quantize?: number;
+};
+
+export type SizeValue = {
+    get: () => Size;
+    raw: () => number;
+    quantized: (quantize?: number) => number;
+    toString: (options?: SizeFormatOptions) => string;
+    toObject: (options?: SizeFormatOptions) => SizeObjectLiteral;
+};
+```

@@ -2,3 +2,4 @@
 export * from './color';
 export * from './number';
 export * from './set';
+export * from './size';

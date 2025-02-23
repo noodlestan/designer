@@ -15,8 +15,8 @@ import {
     DECISION_COLOR_SRGB_SATURATION_SCALE,
     DECISION_COLOR_SRGB_SATURATION_VALUE,
     DECISION_COLOR_VALUE,
-    DECISION_SPACE_SCALE,
-    DECISION_SPACE_VALUE,
+    DECISION_SIZE_SCALE,
+    DECISION_SIZE_VALUE,
     DECISION_TYPEFACE_VALUE,
 } from '../../constants';
 import type { DecisionUnknown } from '../types';
@@ -37,7 +37,7 @@ import {
     isColorSetDecision,
     isColorValueDecision,
 } from './color';
-import { isSpaceScaleDecision, isSpaceValueDecision } from './space';
+import { isSizeScaleDecision, isSizeValueDecision } from './space';
 import { isTypefaceValueDecision } from './typography';
 
 const testCases = [
@@ -112,14 +112,14 @@ const testCases = [
         type: DECISION_COLOR_VALUE,
     },
     {
-        name: 'isSpaceScaleDecision',
-        fn: isSpaceScaleDecision,
-        type: DECISION_SPACE_SCALE,
+        name: 'isSizeScaleDecision',
+        fn: isSizeScaleDecision,
+        type: DECISION_SIZE_SCALE,
     },
     {
-        name: 'isSpaceValueDecision',
-        fn: isSpaceValueDecision,
-        type: DECISION_SPACE_VALUE,
+        name: 'isSizeValueDecision',
+        fn: isSizeValueDecision,
+        type: DECISION_SIZE_VALUE,
     },
     {
         name: 'isTypefaceValueDecision',

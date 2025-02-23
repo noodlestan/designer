@@ -1,0 +1,45 @@
+---
+import { ShowError } from '../../atoms';
+import type { SizeVizProps } from '../../types';
+
+type Props = SizeVizProps;
+
+const { v: sizeValue, muteErrors } = Astro.props;
+
+const { value: v, units } = sizeValue?.get() || {};
+const vWithUnits = `${v}${units}`;
+const showErrors = !muteErrors && sizeValue?.context().hasErrors();
+---
+
+<div class:list={['dd-size-square-viz']}>
+    {showErrors && <ShowError size="s" position="block" />}
+    <div class="dd-square"></div>
+</div>
+
+<style define:vars={{ __size: vWithUnits }}>
+    .dd-size-square-viz {
+        position: relative;
+        width: var(--__size);
+        min-width: var(--__size);
+        max-width: var(--__size);
+        height: var(--__size);
+        min-height: var(--__size);
+        max-height: var(--__size);
+    }
+
+    .dd-size-square-viz :global(.dd-show-error) {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dd-square {
+        width: 100%;
+        height: 100%;
+        background-color: var(--dd-size-viz-color);
+        border: var(--dd-size-viz-border);
+        border-radius: var(--dd-size-viz-border-radius);
+    }
+</style>
