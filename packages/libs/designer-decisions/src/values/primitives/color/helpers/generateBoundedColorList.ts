@@ -1,9 +1,9 @@
 import chroma from 'chroma-js';
 
 import type { ColorFormat, ColorObjectLiteral } from '../../../../inputs';
+import type { ColorValue } from '../../../domains';
 import { COLOR_FORMAT_OKLCH } from '../constants';
 import { chromaColorToLiteral } from '../functions';
-import type { ColorValue } from '../types';
 
 export const generateBoundedColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(
     fromValue: ColorValue,

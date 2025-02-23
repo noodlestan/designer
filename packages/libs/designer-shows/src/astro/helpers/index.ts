@@ -2,4 +2,5 @@
 export * from './createShuffledText';
 export * from './resolveColorFormats';
 export * from './resolveLayout';
+export * from './resolveTextStyleVizStyles';
 export * from './resolveVizContent';

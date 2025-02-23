@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { getDecisionModelMeta } from './getDecisionModelMeta';
 
-describe.skip('getDecisionModelMeta()', () => {
+describe('getDecisionModelMeta()', () => {
     describe('Given a valid model name', () => {
         const model = 'color-oklab-hue-value/explicit';
 

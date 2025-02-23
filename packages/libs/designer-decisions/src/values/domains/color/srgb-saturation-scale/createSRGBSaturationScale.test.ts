@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { type ValueContext } from '../../../../value';
 import { createBaseSet } from '../../../base';
-import { SRGBSaturationValue } from '../../../primitives';
+import { SRGBSaturationValue } from '../types';
 
 import { createSRGBSaturationScale } from './createSRGBSaturationScale';
 

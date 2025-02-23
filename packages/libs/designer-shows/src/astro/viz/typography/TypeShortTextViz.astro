@@ -1,31 +1,37 @@
 ---
 import { ShowError } from '../../atoms';
-import { resolveVizContent } from '../../helpers';
-import type { TypeVizProps } from '../../types';
+import { resolveTextStyleVizStyles, resolveVizContent } from '../../helpers';
+import type { TextStyleVizProps } from '../../types';
 
-type Props = TypeVizProps;
+type Props = TextStyleVizProps;
 
-const { v: typeface, muteErrors } = Astro.props;
+const { v, muteErrors } = Astro.props;
 
 const content = resolveVizContent(
     { mode: 'text', content: 'The quick brown fox jumps over the lazy dog' },
     's',
 );
 
-const showErrors = !muteErrors && typeface?.context().hasErrors();
-const family = typeface?.get().fontName;
+const styleVars = resolveTextStyleVizStyles(v);
+
+const showErrors = !muteErrors && v?.context().hasErrors();
 ---
 
 <div class:list={['dd-type-short-text-viz']}>
     {showErrors && <ShowError size="s" position="block" />}
-    <div class="dd-circle">{content}</div>
+    <div class="dd-content">{content}</div>
 </div>
 
-<style define:vars={{ __family: family }}>
+<style define:vars={styleVars}>
     .dd-type-short-text-viz {
         position: relative;
-        font-family: var(--__family);
-        font-size: var(--dd-description-size);
+        font-family: var(--__fontFamily, var(--dd-text-style-viz-font-family));
+        font-size: var(--__fontSize, var(--dd-text-style-viz-font-size));
+        font-weight: var(--__fontWeight, var(--dd-text-style-viz-font-weight));
+        letter-spacing: var(--__letterSpacing, var(--dd-text-style-viz-letter-spacing));
+        line-height: var(--__lineHeight, var(--dd-text-style-viz-line-height));
+        font-style: var(--__fontStyle, var(--dd-text-style-viz-font-style));
+        color: var(--dd-text-style-viz-color);
     }
 
     .dd-type-short-text-viz :global(.dd-show-error) {

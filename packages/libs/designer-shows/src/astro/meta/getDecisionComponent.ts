@@ -14,8 +14,8 @@ import {
     ShowColorViz,
     ShowSizeValue,
     ShowSizeViz,
+    ShowTextStyleViz,
     ShowTypefaceValue,
-    ShowTypefaceViz,
 } from '../values';
 
 import type { DecisionTypeComponents } from './types';
@@ -86,7 +86,13 @@ export const getDecisionComponentMap = (
         'typeface-value': defaultCs(
             ShowValueDecision,
             valueC(ShowTypefaceValue),
-            vizC(ShowTypefaceViz),
+            vizC(ShowTextStyleViz),
+            'column',
+        ),
+        'font-size-value': defaultCs(
+            ShowValueDecision,
+            valueC(ShowSizeValue),
+            vizC(ShowTextStyleViz),
             'column',
         ),
     };

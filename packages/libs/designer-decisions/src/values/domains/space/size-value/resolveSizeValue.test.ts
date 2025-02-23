@@ -45,7 +45,8 @@ describe('resolveSizeValue()', () => {
 
         it('should return a SizeObjectLiteral object with the value parsed as a number and "px" as the units', () => {
             const result = resolveSizeValue(mockContext, mockInput);
-            expect(result).toEqual({ value: 24, units: 'px' });
+            expect(result.value).toEqual(24);
+            expect(result.units).toEqual('px');
         });
     });
 
@@ -54,7 +55,8 @@ describe('resolveSizeValue()', () => {
 
         it('should return a SizeObjectLiteral object with the value and "px" as the units', () => {
             const result = resolveSizeValue(mockContext, mockInput);
-            expect(result).toEqual({ value: 12, units: 'px' });
+            expect(result.value).toEqual(12);
+            expect(result.units).toEqual('px');
         });
     });
 

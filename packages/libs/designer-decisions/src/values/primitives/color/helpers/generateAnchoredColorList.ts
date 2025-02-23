@@ -1,7 +1,7 @@
 import type { AnchoredColorListParams, ColorFormat, ColorObjectLiteral } from '../../../../inputs';
+import type { ColorValue } from '../../../domains';
 import { COLOR_FORMAT_OKLCH } from '../constants';
 import { generateColorList } from '../functions';
-import type { ColorValue } from '../types';
 
 export const generateAnchoredColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(
     anchor: ColorValue,

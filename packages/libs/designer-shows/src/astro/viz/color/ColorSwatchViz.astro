@@ -16,7 +16,7 @@ const showErrors = !muteErrors && color?.context().hasErrors();
     <div class="dd-swatch"></div>
 </div>
 
-<style define:vars={{ color: hsl }}>
+<style define:vars={{ __color: hsl }}>
     .dd-color-swatch-viz {
         position: relative;
         width: 100%;
@@ -61,7 +61,7 @@ const showErrors = !muteErrors && color?.context().hasErrors();
         width: 100%;
         min-height: var(--dd-viz-min-width);
         aspect-ratio: 1 / 1;
-        background-color: var(--color);
+        background-color: var(--__color);
         border: var(--dd-color-viz-border);
         border-radius: var(--dd-color-viz-border-radius);
     }

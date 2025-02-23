@@ -3,12 +3,10 @@ import { type ColorFormat, type ColorValue } from '@noodlestan/designer-decision
 
 import { DecisionValueContainer, ShowError } from '../../atoms';
 import { LayoutStack } from '../../layouts';
-import type { ShowValueProps } from '../../types';
+import type { ColorValueProps } from '../../types';
 import { resolveColorFormats } from '../../helpers';
 
-type Props = ShowValueProps & {
-    v?: ColorValue;
-};
+type Props = ColorValueProps;
 
 const { v: colorValue, value = true, muteErrors } = Astro.props;
 

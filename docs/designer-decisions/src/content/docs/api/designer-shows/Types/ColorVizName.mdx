@@ -5,14 +5,13 @@ slug: api/designer-shows/Types/ColorVizName
 
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
-Available visualizations for [Color Values](/integrations/Astro/Composable/Values/#showcolorvalue).
+Available visualizations for [ShowColorViz](/integrations/Astro/Composable/Visualizations/#showsizeviz).
 
 ```ts
 export type ColorVizName = 'swatch' | 'fg' | 'bg';
 ```
 
-When rendering color decisions you can chose a different visualization by
-setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
+When rendering color decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
 <ShowColorValueDecision d="Brand Black" viz="..." options={options} />

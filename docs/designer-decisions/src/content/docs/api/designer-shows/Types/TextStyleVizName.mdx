@@ -1,0 +1,30 @@
+---
+title: TextStyleVizName
+slug: api/designer-shows/Types/TextStyleVizName
+---
+
+import { ShowDecision } from '@noodlestan/designer-shows/astro';
+
+Available visualizations for [ShowTextStyleViz](/integrations/Astro/Composable/Visualizations/#showtypestyleviz).
+
+```ts
+export type TextStyleVizName = 'short-text';
+```
+
+When rendering typography decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
+
+```mdx
+<ShowColorValueDecision d="Text Typeface" viz="..." options={options} />
+```
+
+## Type Values
+
+### `short-text` (default)
+
+No options.
+
+```mdx
+<ShowDecision d="Text Typeface" size="m" viz="swatch" />
+```
+
+<ShowDecision d="Text Typeface" size="m" viz="swatch" />

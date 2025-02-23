@@ -4,41 +4,41 @@ import type { ColorSRGBHueInput } from '../../../../inputs';
 import { createDecisionContextMock } from '../../../../mocks';
 import { type ValueContext, createValueContext } from '../../../../value';
 import {
-    ColorChannelBaseValue,
-    ColorChannelValueOptions,
-    ColorComplementaryChannels,
-} from '../../../primitives';
-import { createColorChannelValue } from '../_private';
+    type ColorChannelBaseOptions,
+    type ColorChannelBaseValue,
+    createColorChannelBaseValue,
+} from '../../../base';
+import type { ColorComplementaryChannels } from '../../../primitives';
 
 import { createSRGBHueValue } from './createSRGBHueValue';
-import { CHANNEL_ATTRIBUTES } from './private';
+import { CHANNEL_DEFINITION } from './private';
 
-vi.mock('../_private', () => ({
-    createColorChannelValue: vi.fn(),
+vi.mock('../../../base', () => ({
+    createColorChannelBaseValue: vi.fn(),
 }));
 
-const createColorChannelValueMocked = vi.mocked(createColorChannelValue);
+const createColorChannelBaseValueMocked = vi.mocked(createColorChannelBaseValue);
 
 describe('createSRGBHueValue()', () => {
     const [mockDecisionContext] = createDecisionContextMock();
     const mockInput: ColorSRGBHueInput = 277.3;
     const mockValue = {} as ColorChannelBaseValue<ColorComplementaryChannels>;
-    const mockOptions: ColorChannelValueOptions = {};
+    const mockOptions: ColorChannelBaseOptions = {};
 
     let mockContext: ValueContext;
 
     beforeEach(() => {
         mockContext = createValueContext(mockDecisionContext);
         vi.clearAllMocks();
-        createColorChannelValueMocked.mockReturnValue(mockValue);
+        createColorChannelBaseValueMocked.mockReturnValue(mockValue);
     });
 
     describe('Given a value', () => {
-        it('should call createColorChannelValue()', () => {
+        it('should call createColorChannelBaseValue()', () => {
             createSRGBHueValue(mockContext, mockInput);
 
-            expect(createColorChannelValueMocked).toHaveBeenCalledWith(
-                CHANNEL_ATTRIBUTES,
+            expect(createColorChannelBaseValueMocked).toHaveBeenCalledWith(
+                CHANNEL_DEFINITION,
                 mockContext,
                 mockInput,
                 mockOptions,

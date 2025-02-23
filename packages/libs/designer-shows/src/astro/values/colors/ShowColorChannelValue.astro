@@ -1,21 +1,14 @@
 ---
-import type {
-    ColorChannelValue,
-    ColorChannelName,
-    ColorChannelValueCommon,
-} from '@noodlestan/designer-decisions';
+import type { ColorChannelValue, ColorChannelBaseValue } from '@noodlestan/designer-decisions';
 
 import { DecisionValueContainer, ShowError } from '../../atoms';
 import { LayoutStack } from '../../layouts';
-import type { ShowValueProps } from '../../types';
+import type { ColorChannelValueProps } from '../../types';
 
-type Props = ShowValueProps & {
-    v?: ColorChannelValue;
-};
-
+type Props = ColorChannelValueProps;
 const { v, value = true, muteErrors } = Astro.props;
 
-const channelV = v as ColorChannelValueCommon;
+const channelV = v as ColorChannelBaseValue;
 const channelValue = channelV?.get();
 const showErrors = !muteErrors && v?.context().hasErrors();
 ---

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { decisionTypeFromModel } from './decisionTypeFromModel';
 
-describe.skip('decisionTypeFromModel()', () => {
+describe('decisionTypeFromModel()', () => {
     describe('Given a valid model name', () => {
         const model = 'type/model-name';
 

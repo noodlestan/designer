@@ -5,8 +5,8 @@ import {
 } from '../../../../inputs';
 import type { DeepPartial } from '../../../../private';
 import type { ValueContext } from '../../../../value';
+import type { Typeface } from '../../../primitives';
 import { createTypeface } from '../helpers';
-import type { Typeface } from '../types';
 
 import { FALLBACK_VALUE as fallback, resolveTypefaceCapabilities } from './private';
 import { resolveTypefaceValueRef } from './resolveTypefaceValueRef';
@@ -25,7 +25,7 @@ export const resolveTypefaceValue = (
         capabilities: maybeCapabilities = [],
         ranges = [],
         styles = [],
-    } = input as TypefaceValueAttributesInput;
+    } = (input || {}) as TypefaceValueAttributesInput;
 
     const capabilities = resolveTypefaceCapabilities(context, maybeCapabilities);
 

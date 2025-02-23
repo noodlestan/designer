@@ -13,3 +13,4 @@ export * from './srgb-lightness-scale';
 export * from './srgb-lightness-value';
 export * from './srgb-saturation-scale';
 export * from './srgb-saturation-value';
+export * from './types';

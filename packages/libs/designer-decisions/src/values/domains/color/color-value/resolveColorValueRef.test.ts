@@ -10,7 +10,7 @@ import {
 } from '../../../../mocks';
 import type { ValueRefNotFoundError } from '../../../../value';
 import { resolveSetRefDecision } from '../../../functions';
-import type { ColorSet, ColorValue } from '../../../primitives';
+import type { ColorSet, ColorValue } from '../types';
 
 import { createColorValue } from './createColorValue';
 import { FALLBACK_VALUE } from './private';

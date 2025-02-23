@@ -10,18 +10,18 @@ const [, decision] = store.decision({ $name: d });
 const params = (decision && decision.inputs()[0].params) || {}; // WIP match context (and encapsulate)
 ---
 
-<div class="dd-decision-params">
+<div class="dd-attr-params">
     <h4 class="dd-header">Params:</h4>
     <ParamsPartial params={params} />
 
     <style>
-        .dd-decision-params {
+        .dd-attr-params {
             display: flex;
             align-items: start;
             gap: 5px;
         }
 
-        .dd-decision-params .dd-header {
+        .dd-attr-params .dd-header {
             min-width: fit-content;
             font-size: var(--dd-text-size);
             font-weight: var(--dd-label-weight);
@@ -29,7 +29,7 @@ const params = (decision && decision.inputs()[0].params) || {}; // WIP match con
             color: var(--dd-text-color);
         }
 
-        .dd-decision-params .dd-params {
+        .dd-attr-params .dd-params {
             display: flex;
             flex-direction: column;
             gap: 5px;

@@ -1,12 +1,12 @@
 import type { ColorSRGBSaturationInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
-import { type ColorChannelValueOptions, type SRGBSaturationValue } from '../../../primitives';
-import { createColorChannelValue } from '../_private';
+import { type ColorChannelBaseOptions, createColorChannelBaseValue } from '../../../base';
+import type { SRGBSaturationValue } from '../types';
 
-import { CHANNEL_ATTRIBUTES } from './private';
+import { CHANNEL_DEFINITION } from './private';
 
 export const createSRGBSaturationValue = (
     context: ValueContext,
     input: ColorSRGBSaturationInput,
-    options: ColorChannelValueOptions = {},
-): SRGBSaturationValue => createColorChannelValue(CHANNEL_ATTRIBUTES, context, input, options);
+    options: ColorChannelBaseOptions = {},
+): SRGBSaturationValue => createColorChannelBaseValue(CHANNEL_DEFINITION, context, input, options);

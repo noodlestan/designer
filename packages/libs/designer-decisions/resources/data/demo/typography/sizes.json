@@ -1,0 +1,12 @@
+[
+  {
+    "model": "font-size-value/explicit",
+    "name": "Body Text Size",
+    "params": {
+      "value": {
+        "value": 16,
+        "units": "px"
+      }
+    }
+  }
+]

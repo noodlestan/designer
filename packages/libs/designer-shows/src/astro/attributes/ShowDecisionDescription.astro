@@ -8,13 +8,13 @@ const { store, d } = Astro.props;
 const [, decision] = store.decision({ $name: d });
 ---
 
-<p class="dd-decision-description">
+<p class="dd-attr-description">
     {decision?.description()}
 </p>
 
 <style>
-    .dd-decision-description {
-        font-size: var(--dd-description-size);
+    .dd-attr-description {
+        font-size: var(--dd-attr-description-size);
         font-weight: var(--dd-text-weight);
         line-height: var(--dd-text-line-height);
         color: var(--dd-text-color);

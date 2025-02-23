@@ -1,0 +1,50 @@
+[
+  {
+    "model": "size-scale/anchored",
+    "name": "Sizing Scale",
+    "description": "Scale for component sizing",
+    "params": {
+      "anchor": { "$name": "Layout Gap Scale", "index": 2 },
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "geometric", "by": 1.5 }
+      }
+    }
+  },
+  {
+    "model": "size-value/explicit",
+    "name": "Textarea Maximum Height",
+    "description": "Max height for textarea components",
+    "params": {
+      "value": 300
+    }
+  },
+  {
+    "model": "size-value/explicit",
+    "name": "Card Thumb Minimum Size",
+    "description": "Minimum size of thumb area in cards",
+    "params": {
+      "value": 175
+    }
+  },
+  {
+    "model": "size-value/explicit",
+    "name": "Avatar Minimum Size",
+    "description": "Minimum size for avatar components",
+    "params": {
+      "value": 50
+    }
+  },
+  {
+    "model": "size-scale/anchored",
+    "name": "Avatar Sizes",
+    "description": "Scale for avatar sizes",
+    "params": {
+      "anchor": 50,
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "proportional", "by": 1 }
+      }
+    }
+  }
+]

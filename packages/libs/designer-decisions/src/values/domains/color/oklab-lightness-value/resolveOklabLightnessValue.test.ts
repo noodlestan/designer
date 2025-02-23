@@ -3,16 +3,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ColorOklabLightnessInput } from '../../../../inputs';
 import { createDecisionContextMock } from '../../../../mocks';
 import { type ValueContext, createValueContext } from '../../../../value';
-import { resolveColorChannelValue } from '../_private';
+import { resolveColorChannelBaseValue } from '../../../base';
 
-import { CHANNEL_ATTRIBUTES } from './private';
+import { CHANNEL_DEFINITION } from './private';
 import { resolveOklabLightnessValue } from './resolveOklabLightnessValue';
 
-vi.mock('../_private', () => ({
-    resolveColorChannelValue: vi.fn(),
+vi.mock('../../../base', () => ({
+    resolveColorChannelBaseValue: vi.fn(),
 }));
 
-const resolveColorChannelValueMocked = vi.mocked(resolveColorChannelValue);
+const resolveColorChannelBaseValueMocked = vi.mocked(resolveColorChannelBaseValue);
 
 describe('resolveOklabLightnessValue()', () => {
     const [mockDecisionContext] = createDecisionContextMock();
@@ -23,15 +23,15 @@ describe('resolveOklabLightnessValue()', () => {
     beforeEach(() => {
         mockContext = createValueContext(mockDecisionContext);
         vi.clearAllMocks();
-        resolveColorChannelValueMocked.mockReturnValue(mockInput);
+        resolveColorChannelBaseValueMocked.mockReturnValue(mockInput);
     });
 
     describe('Given a value', () => {
-        it('should call resolveColorChannelValue()', () => {
+        it('should call resolveColorChannelBaseValue()', () => {
             resolveOklabLightnessValue(mockContext, mockInput);
 
-            expect(resolveColorChannelValueMocked).toHaveBeenCalledWith(
-                CHANNEL_ATTRIBUTES,
+            expect(resolveColorChannelBaseValueMocked).toHaveBeenCalledWith(
+                CHANNEL_DEFINITION,
                 mockContext,
                 mockInput,
             );

@@ -10,7 +10,7 @@ const [, decision] = store.decision({ $name: d });
 const { isFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP match context (and encapsulate)
 ---
 
-<div class="dd-decision-usage">
+<div class="dd-attr-usage">
     <LayoutGrid columns="min-content auto" rowGap='l' colGap='xs'>
     {
         isFor.length > 0 && (
@@ -36,13 +36,13 @@ const { isFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP ma
 </div>
 
 <style>
-    .dd-decision-usage {
+    .dd-attr-usage {
         display: flex;
         flex-direction: column;
         gap: var(--dd-space-gap);
     }
 
-    .dd-decision-usage .dd-group-header {
+    .dd-attr-usage .dd-group-header {
         min-width: 4.5rem;
         font-size: 1rem;
         line-height: 1.5rem;
@@ -51,7 +51,7 @@ const { isFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP ma
         white-space: nowrap;
     }
 
-    .dd-decision-usage .dd-item {
+    .dd-attr-usage .dd-item {
         padding: 0;
         padding-inline-end: var(--dd-gap-xs);
         font-size: 1rem;

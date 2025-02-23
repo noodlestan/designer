@@ -1,10 +1,10 @@
 import { type ColorSRGBLightnessInput } from '../../../../inputs';
 import { type ValueContext } from '../../../../value';
-import { resolveColorChannelValue } from '../_private';
+import { resolveColorChannelBaseValue } from '../../../base';
 
-import { CHANNEL_ATTRIBUTES } from './private';
+import { CHANNEL_DEFINITION } from './private';
 
 export const resolveSRGBLightnessValue = (
     context: ValueContext,
     input: ColorSRGBLightnessInput,
-): number => resolveColorChannelValue(CHANNEL_ATTRIBUTES, context, input);
+): number => resolveColorChannelBaseValue(CHANNEL_DEFINITION, context, input);
