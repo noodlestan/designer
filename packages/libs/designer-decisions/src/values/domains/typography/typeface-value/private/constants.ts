@@ -1,5 +1,5 @@
 import { DECISION_TYPEFACE_VALUE } from '../../../../../constants';
-import { createTypeface } from '../../helpers';
+import { createTypeface } from '../../../../primitives';
 
 export const VALUE_NAME = DECISION_TYPEFACE_VALUE;
 export const FALLBACK_VALUE = createTypeface({

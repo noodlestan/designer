@@ -1,7 +1,9 @@
 import {
     DECISION_FONT_SIZE_VALUE,
+    DECISION_FONT_WEIGHT_VALUE,
     DECISION_TYPEFACE_VALUE,
     type FontSizeValue,
+    type FontWeightValue,
     type TypefaceValue,
 } from '@noodlestan/designer-decisions';
 
@@ -29,6 +31,11 @@ export const resolveTextStyleVizStyles = (
     if (v?.type() === DECISION_FONT_SIZE_VALUE) {
         const fontSize = v as FontSizeValue;
         style.__fontSize = fontSize.get().toString();
+    }
+
+    if (v?.type() === DECISION_FONT_WEIGHT_VALUE) {
+        const fontWeight = v as FontWeightValue;
+        style.__fontWeight = fontWeight.get().toString();
     }
 
     return style;

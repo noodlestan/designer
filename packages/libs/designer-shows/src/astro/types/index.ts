@@ -3,6 +3,7 @@ import type {
     ColorFormat,
     ColorValue,
     FontSizeValue,
+    FontWeightValue,
     SizeValue,
     TypefaceValue,
 } from '@noodlestan/designer-decisions';
@@ -100,10 +101,14 @@ export type TypefaceValueProps = ShowValueProps & {
     v?: TypefaceValue;
 };
 
+export type FontWeightValueProps = ShowValueProps & {
+    v?: FontWeightValue;
+};
+
 export type TextStyleVizName = 'short-text';
 
 export type TextStyleVizProps = ShowVizProps & {
     viz?: boolean | TextStyleVizName;
-    v?: TypefaceValue | FontSizeValue;
+    v?: TypefaceValue | FontSizeValue | FontWeightValue;
 };
 export type TextStyleVizComponent = (props: TextStyleVizProps) => unknown;
