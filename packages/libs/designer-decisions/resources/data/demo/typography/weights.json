@@ -1,0 +1,30 @@
+[
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Text Base Weight",
+    "params": {
+      "value": 300
+    }
+  },
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Text Bold Weight",
+    "params": {
+      "value": 600
+    }
+  },
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Headings Base Weight",
+    "params": {
+      "value": 600
+    }
+  },
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Headings Heavy Weight",
+    "params": {
+      "value": 900
+    }
+  }
+]

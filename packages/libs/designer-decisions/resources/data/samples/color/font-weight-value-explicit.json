@@ -1,0 +1,9 @@
+[
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Font Weight Explicit Sample",
+    "params": {
+      "value": "Extra Light"
+    }
+  }
+]

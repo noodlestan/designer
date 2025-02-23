@@ -1,0 +1,23 @@
+---
+import { DecisionValueContainer, ShowError } from '../../atoms';
+import { LayoutFlex } from '../../layouts';
+import type { FontWeightValueProps } from '../../types';
+
+type Props = FontWeightValueProps;
+
+const { v: fontSizeValue, value = true, muteErrors } = Astro.props;
+
+const { value: v, named } = fontSizeValue?.get() || {};
+const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
+---
+
+{
+    value && fontSizeValue !== undefined && (
+        <LayoutFlex>
+            <DecisionValueContainer>
+                {showErrors && <ShowError size="xs" />}
+                {v} {named?.()}
+            </DecisionValueContainer>
+        </LayoutFlex>
+    )
+}

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { TypefaceValueAttributesInput } from '../../../../inputs';
 import { createValueContextMock } from '../../../../mocks';
 import type { ValueInputError } from '../../../../value';
-import type { Typeface } from '../types';
+import type { Typeface } from '../../../primitives';
 
 import { FALLBACK_VALUE } from './private';
 import { resolveTypefaceValue } from './resolveTypefaceValue';
@@ -95,10 +95,8 @@ describe('resolveTypefaceValue()', () => {
             capabilities: ['variable', 'foo', 'bar'],
         } as TypefaceValueAttributesInput;
 
-        it('should expose the only the valid capabilities', () => {
-            const result = resolveTypefaceValue(mockContext, invalidInput);
-
-            expect(result.capabilities).toEqual(['variable']);
+        it('should add an error to the context;', () => {
+            resolveTypefaceValue(mockContext, invalidInput);
 
             expect(addErrorSpy).toHaveBeenCalledTimes(2);
             const error1 = addErrorSpy.mock.calls[0][0] as ValueInputError;
@@ -107,6 +105,12 @@ describe('resolveTypefaceValue()', () => {
             expect(error1.message()).toContain('foo');
             expect(error1.input).toEqual('foo');
             expect(error2.message()).toContain('bar');
+        });
+
+        it('should expose the only the valid capabilities', () => {
+            const result = resolveTypefaceValue(mockContext, invalidInput);
+
+            expect(result.capabilities).toEqual(['variable']);
         });
     });
 });

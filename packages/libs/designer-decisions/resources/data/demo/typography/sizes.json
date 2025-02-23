@@ -1,7 +1,7 @@
 [
   {
     "model": "font-size-value/explicit",
-    "name": "Body Text Size",
+    "name": "Text Base Size",
     "params": {
       "value": {
         "value": 16,

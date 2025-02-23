@@ -1,0 +1,9 @@
+[
+  {
+    "model": "font-size-value/explicit",
+    "name": "Font Size Explicit Sample",
+    "params": {
+      "value": 32
+    }
+  }
+]

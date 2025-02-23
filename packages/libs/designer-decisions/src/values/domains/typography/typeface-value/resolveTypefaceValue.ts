@@ -5,8 +5,7 @@ import {
 } from '../../../../inputs';
 import type { DeepPartial } from '../../../../private';
 import type { ValueContext } from '../../../../value';
-import type { Typeface } from '../../../primitives';
-import { createTypeface } from '../helpers';
+import { type Typeface, createTypeface } from '../../../primitives';
 
 import { FALLBACK_VALUE as fallback, resolveTypefaceCapabilities } from './private';
 import { resolveTypefaceValueRef } from './resolveTypefaceValueRef';
