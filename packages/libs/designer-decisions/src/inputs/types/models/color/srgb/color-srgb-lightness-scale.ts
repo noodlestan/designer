@@ -4,14 +4,6 @@ import type {
     DecisionInput,
 } from '../../../primitives';
 
-export type ColorSRGBLightnessValueExplicitInput = DecisionInput & {
-    model: 'color-srgb-lightness-value/explicit';
-    params: {
-        value: ColorSRGBLightnessInput;
-        quantize?: number;
-    };
-};
-
 export type ColorSRGBLightnessScaleExplicitInput = DecisionInput & {
     model: 'color-srgb-lightness-scale/explicit';
     params: {

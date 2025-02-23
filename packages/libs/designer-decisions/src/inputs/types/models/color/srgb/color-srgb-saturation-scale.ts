@@ -4,14 +4,6 @@ import type {
     DecisionInput,
 } from '../../../primitives';
 
-export type ColorSRGBSaturationValueExplicitInput = DecisionInput & {
-    model: 'color-srgb-saturation-value/explicit';
-    params: {
-        value: ColorSRGBSaturationInput;
-        quantize?: number;
-    };
-};
-
 export type ColorSRGBSaturationScaleExplicitInput = DecisionInput & {
     model: 'color-srgb-saturation-scale/explicit';
     params: {

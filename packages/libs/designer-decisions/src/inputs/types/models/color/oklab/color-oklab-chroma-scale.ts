@@ -4,14 +4,6 @@ import type {
     DecisionInput,
 } from '../../../primitives';
 
-export type ColorOklabChromaValueExplicitInput = DecisionInput & {
-    model: 'color-oklab-chroma-value/explicit';
-    params: {
-        value: ColorOklabChromaInput;
-        quantize?: number;
-    };
-};
-
 export type ColorOklabChromaScaleExplicitInput = DecisionInput & {
     model: 'color-oklab-chroma-scale/explicit';
     params: {
