@@ -24,7 +24,7 @@ export type Size = {
     toString: () => string;
 };
 
-export type SizeFormatOptions = {
+export type SizeValueOptions = {
     quantize?: number;
 };
 
@@ -32,7 +32,7 @@ export type SizeValue = {
     get: () => Size;
     raw: () => number;
     quantized: (quantize?: number) => number;
-    toString: (options?: SizeFormatOptions) => string;
-    toObject: (options?: SizeFormatOptions) => SizeObjectLiteral;
+    toString: (options?: SizeValueOptions) => string;
+    toObject: (options?: SizeValueOptions) => SizeObjectLiteral;
 };
 ```

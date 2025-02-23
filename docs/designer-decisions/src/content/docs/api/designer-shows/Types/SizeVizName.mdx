@@ -5,13 +5,13 @@ slug: api/designer-shows/Types/SizeVizName
 
 import { ShowDecision } from '@noodlestan/designer-shows/astro';
 
-Available visualizations for [Size Values](/integrations/Astro/Composable/Values/#showsizevalue)
+Available visualizations for [SizeSizeViz](/integrations/Astro/Composable/Visualizations/#showsizeviz)
 
 ```ts
 type SizeVizName = 'bar-h' | 'bar-v' | 'square' | 'circle';
 ```
 
-When rendering decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
+When rendering size decisions you can chose a different visualization by setting the [viz prop](/integrations/Astro/Props#-viz-true-boolean--string) to one of these.
 
 ```mdx
 <ShowSizeValueDecision d="Size Unit" viz="..." />

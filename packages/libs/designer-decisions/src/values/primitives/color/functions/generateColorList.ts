@@ -5,10 +5,10 @@ import type {
     ColorOkLCHLiteral,
     ColorSRGBHSLiteral,
 } from '../../../../inputs';
+import type { ColorValue } from '../../../domains';
 import { generateNumberSeries } from '../../number';
 import { COLOR_FORMAT_HSL, COLOR_FORMAT_OKLCH } from '../constants';
 import { createColor } from '../createColor';
-import type { ColorValue } from '../types';
 
 export const generateColorList = <T extends ColorObjectLiteral = ColorObjectLiteral>(
     anchor: ColorValue,

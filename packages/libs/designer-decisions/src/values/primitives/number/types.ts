@@ -1,4 +1,4 @@
-import type { BaseValue } from '../../base/value';
+import type { BaseValue } from '../../base/base-value';
 
 export type NumberValueOptions = {
     quantize?: number;

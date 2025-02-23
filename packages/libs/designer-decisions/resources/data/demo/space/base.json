@@ -1,0 +1,10 @@
+[
+  {
+    "model": "size-value/explicit",
+    "name": "Size Unit",
+    "description": "Base unit for size scales",
+    "params": {
+      "value": 8
+    }
+  }
+]

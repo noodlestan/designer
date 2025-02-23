@@ -3,15 +3,13 @@ import type {
     ColorChannelValue,
     ColorChannelName,
     ColorComplementaryChannels,
-    ColorChannelValueCommon,
+    ColorChannelBaseValue,
 } from '@noodlestan/designer-decisions';
 
-import type { ShowVizProps } from '../../types';
+import type { ColoChannelVizProps } from '../../types';
 import { ColorSwatchViz } from '../../viz';
 
-type Props = ShowVizProps & {
-    v?: ColorChannelValue;
-};
+type Props = ColoChannelVizProps;
 
 const { v, viz = true, size, options } = Astro.props;
 
@@ -24,7 +22,7 @@ const channelToColors: Record<ColorChannelName, ColorComplementaryChannels> = {
     'oklab-hue': { l: 0.5, c: 0.15 },
 };
 
-const channelV = v as ColorChannelValueCommon;
+const channelV = v as ColorChannelBaseValue;
 const channel = channelV.channelName();
 const channelColor = channelV?.toColor(channelToColors[channel]);
 

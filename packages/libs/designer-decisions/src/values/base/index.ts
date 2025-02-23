@@ -1,3 +1,5 @@
 // @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './set';
-export * from './value';
+export * from './base-set';
+export * from './base-value';
+export * from './color-channel-base-value';
+export * from './size-base-value';

@@ -3,11 +3,9 @@ import { type SizeValue } from '@noodlestan/designer-decisions';
 
 import { DecisionValueContainer, ShowError } from '../../atoms';
 import { LayoutStack } from '../../layouts';
-import type { ShowValueProps } from '../../types';
+import type { SizeValueProps } from '../../types';
 
-type Props = ShowValueProps & {
-    v?: SizeValue;
-};
+type Props = SizeValueProps;
 
 const { v: sizeValue, value = true, muteErrors } = Astro.props;
 

@@ -17,6 +17,7 @@ export const DECISION_SIZE_SCALE = 'size-scale';
 export const DECISION_SIZE_VALUE = 'size-value';
 
 export const DECISION_TYPEFACE_VALUE = 'typeface-value';
+export const DECISION_FONT_SIZE_VALUE = 'font-size-value';
 
 export const SET_DECISION_TYPES = [
     DECISION_COLOR_SET,

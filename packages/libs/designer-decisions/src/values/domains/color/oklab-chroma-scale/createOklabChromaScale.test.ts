@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { type ValueContext } from '../../../../value';
 import { createBaseSet } from '../../../base';
-import { OklabChromaValue } from '../../../primitives';
+import { type OklabChromaValue } from '../types';
 
 import { createOklabChromaScale } from './createOklabChromaScale';
 

@@ -1,12 +1,12 @@
 import type { ColorSRGBLightnessInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
-import { type ColorChannelValueOptions, type SRGBLightnessValue } from '../../../primitives';
-import { createColorChannelValue } from '../_private';
+import { type ColorChannelBaseOptions, createColorChannelBaseValue } from '../../../base';
+import type { SRGBLightnessValue } from '../types';
 
-import { CHANNEL_ATTRIBUTES } from './private';
+import { CHANNEL_DEFINITION } from './private';
 
 export const createSRGBLightnessValue = (
     context: ValueContext,
     input: ColorSRGBLightnessInput,
-    options: ColorChannelValueOptions = {},
-): SRGBLightnessValue => createColorChannelValue(CHANNEL_ATTRIBUTES, context, input, options);
+    options: ColorChannelBaseOptions = {},
+): SRGBLightnessValue => createColorChannelBaseValue(CHANNEL_DEFINITION, context, input, options);

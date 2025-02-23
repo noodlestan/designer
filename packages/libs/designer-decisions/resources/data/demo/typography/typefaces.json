@@ -1,0 +1,26 @@
+[
+  {
+    "model": "typeface-value/explicit",
+    "name": "Text Typeface",
+    "params": {
+      "fontName": "Georgia",
+      "capabilities": ["variable"],
+      "ranges": [
+        { "tag": "wght", "min": 100, "max": 900 },
+        { "tag": "ital", "min": 0, "max": 1 }
+      ]
+    }
+  },
+  {
+    "model": "typeface-value/explicit",
+    "name": "Headings Typeface",
+    "params": {
+      "fontName": "Helvetica",
+      "capabilities": ["variable"],
+      "ranges": [
+        { "tag": "wght", "min": 100, "max": 900 },
+        { "tag": "ital", "min": 0, "max": 1 }
+      ]
+    }
+  }
+]

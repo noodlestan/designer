@@ -1,10 +1,10 @@
 import { type ColorOklabChromaInput } from '../../../../inputs';
 import { type ValueContext } from '../../../../value';
-import { resolveColorChannelValue } from '../_private';
+import { resolveColorChannelBaseValue } from '../../../base';
 
-import { CHANNEL_ATTRIBUTES } from './private';
+import { CHANNEL_DEFINITION } from './private';
 
 export const resolveOklabChromaValue = (
     context: ValueContext,
     input: ColorOklabChromaInput,
-): number => resolveColorChannelValue(CHANNEL_ATTRIBUTES, context, input);
+): number => resolveColorChannelBaseValue(CHANNEL_DEFINITION, context, input);

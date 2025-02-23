@@ -1,12 +1,8 @@
 import type { ColorValueInput } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
 import { createBaseValue } from '../../../base';
-import {
-    COLOR_FORMAT_OKLCH,
-    type ColorValue,
-    type ColorValueOptions,
-    createColor,
-} from '../../../primitives';
+import { COLOR_FORMAT_OKLCH, createColor } from '../../../primitives';
+import type { ColorValue, ColorValueOptions } from '../types';
 
 import { resolveColorValue } from './resolveColorValue';
 

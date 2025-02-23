@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { type ValueContext } from '../../../../value';
 import { createBaseSet } from '../../../base';
-import { ColorValue } from '../../../primitives';
+import type { ColorValue } from '../types';
 
 import { createColorSet } from './createColorSet';
 

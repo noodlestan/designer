@@ -1,4 +1,11 @@
-import type { ColorValue, SizeValue, TypefaceValue } from '@noodlestan/designer-decisions';
+import type {
+    ColorChannelValue,
+    ColorFormat,
+    ColorValue,
+    FontSizeValue,
+    SizeValue,
+    TypefaceValue,
+} from '@noodlestan/designer-decisions';
 import type { Store } from '@noodlestan/designer-functions';
 
 import type { LayoutDynamicProps } from '../layouts';
@@ -43,6 +50,10 @@ export type DecisionVizComponent<T extends object = object> = (props: ShowVizPro
 
 /* space */
 
+export type SizeValueProps = ShowValueProps & {
+    v?: SizeValue;
+};
+
 export type SizeVizName = 'square' | 'circle' | 'bar-h' | 'bar-v';
 
 export type SizeVizProps = ShowVizProps & {
@@ -52,6 +63,15 @@ export type SizeVizProps = ShowVizProps & {
 export type SizeVizComponent = (props: SizeVizProps) => unknown;
 
 /* color */
+
+export type ColorValueProps = ShowValueProps & {
+    value: boolean | ColorFormat | ColorFormat[];
+    v?: ColorValue;
+};
+
+export type ColorChannelValueProps = ShowValueProps & {
+    v?: ColorChannelValue;
+};
 
 export type ColorVizName = 'swatch' | 'fg' | 'bg';
 
@@ -68,14 +88,22 @@ export type ColorVizProps = ShowVizProps & {
     v?: ColorValue;
     options?: ColorVizOptions;
 };
+export type ColoChannelVizProps = ShowVizProps & {
+    v?: ColorChannelValue;
+    options?: ColorVizOptions;
+};
 export type ColorVizComponent = (props: ColorVizProps) => unknown;
 
 /* typography */
 
-export type TypeVizName = 'short-text';
-
-export type TypeVizProps = ShowVizProps & {
-    viz?: boolean | TypeVizName;
-    v?: TypefaceValue; // WIP : this will have to be a TypeStyleValue
+export type TypefaceValueProps = ShowValueProps & {
+    v?: TypefaceValue;
 };
-export type TypeVizComponent = (props: TypeVizProps) => unknown;
+
+export type TextStyleVizName = 'short-text';
+
+export type TextStyleVizProps = ShowVizProps & {
+    viz?: boolean | TextStyleVizName;
+    v?: TypefaceValue | FontSizeValue;
+};
+export type TextStyleVizComponent = (props: TextStyleVizProps) => unknown;

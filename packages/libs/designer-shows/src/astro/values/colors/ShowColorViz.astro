@@ -1,12 +1,8 @@
 ---
-import { type ColorValue } from '@noodlestan/designer-decisions';
-
 import { getColorVizComponent } from '../../meta';
-import type { ColorVizOptions, ShowVizProps } from '../../types';
+import type { ColorVizOptions, ColorVizProps } from '../../types';
 
-type Props = ShowVizProps & {
-    v?: ColorValue;
-};
+type Props = ColorVizProps;
 
 const { v: colorValue, viz = true, size = 'auto', options } = Astro.props;
 

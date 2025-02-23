@@ -1,6 +1,6 @@
 import { type SizeObjectLiteral, type SizeValueInput, isDecisionRef } from '../../../../inputs';
 import { type ValueContext, createValueInputError } from '../../../../value';
-import { isValidSizeObjectLiteral } from '../../../primitives/size/helpers';
+import { createSize, isValidSizeObjectLiteral } from '../../../primitives';
 
 import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
 import { resolveSizeValueRef } from './resolveSizeValueRef';
@@ -19,11 +19,11 @@ export const resolveSizeValue = (
             context.addError(createValueInputError({ context, valueName, input }));
             return fallback;
         }
-        return { value, units: 'px' };
+        return createSize({ value, units: 'px' });
     }
 
     if (typeof input === 'number') {
-        return { value: input, units: 'px' };
+        return createSize({ value: input, units: 'px' });
     }
 
     if (!isValidSizeObjectLiteral(input)) {

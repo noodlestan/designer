@@ -6,7 +6,8 @@ import {
     handleRefMismatchError,
     resolveSetRefDecision,
 } from '../../../functions';
-import type { Color, ColorValue } from '../../../primitives';
+import type { Color } from '../../../primitives';
+import type { ColorValue } from '../types';
 
 import {
     REF_CHECKED_TYPES as accepted,

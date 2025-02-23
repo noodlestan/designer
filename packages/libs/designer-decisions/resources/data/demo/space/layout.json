@@ -1,0 +1,26 @@
+[
+  {
+    "model": "size-scale/anchored",
+    "name": "Layout Gap Scale",
+    "description": "Scale for padding and gaps in small layouts",
+    "params": {
+      "anchor": { "$name": "Size Unit" },
+      "after": {
+        "steps": 4,
+        "modifier": { "mode": "geometric", "by": 2 }
+      }
+    }
+  },
+  {
+    "model": "size-scale/anchored",
+    "name": "Layout Rhythm Scale",
+    "description": "Scale for vertical spacing between sections or page-wide layouts",
+    "params": {
+      "anchor": { "$name": "Layout Gap Scale", "index": 2 },
+      "after": {
+        "steps": 3,
+        "modifier": { "mode": "geometric", "by": 1.5 }
+      }
+    }
+  }
+]

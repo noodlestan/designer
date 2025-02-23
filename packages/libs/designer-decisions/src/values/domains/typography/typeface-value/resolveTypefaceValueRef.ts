@@ -2,7 +2,7 @@ import { isTypefaceValueDecision } from '../../../../decision';
 import type { DecisionRef } from '../../../../inputs';
 import type { ValueContext } from '../../../../value';
 import { handleDecisionNotFound, handleRefMismatchError } from '../../../functions';
-import type { Typeface } from '../types';
+import type { Typeface } from '../../../primitives';
 
 import {
     REF_CHECKED_TYPES as accepted,

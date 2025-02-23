@@ -7,17 +7,17 @@
     --dd-color-max: hsl(192deg 95% 95%);
     --dd-color-min: hsl(192deg 73% 3%);
 
-    --dd-space-xs: 5px;
-    --dd-space-s: 10px;
-    --dd-space-m: 15px;
-    --dd-space-l: 20px;
-    --dd-space-xl: 30px;
+    --dd-space-xs: 0.3rem;
+    --dd-space-s: 0.6rem;
+    --dd-space-m: 1rem;
+    --dd-space-l: 1.5rem;
+    --dd-space-xl: 2rem;
 
-    --dd-size-xs: 25px;
-    --dd-size-s: 50px;
-    --dd-size-m: 100px;
-    --dd-size-l: 175px;
-    --dd-size-xl: 300px;
+    --dd-size-xs: 1.5rem;
+    --dd-size-s: 3rem;
+    --dd-size-m: 6rem;
+    --dd-size-l: 12rem;
+    --dd-size-xl: 24rem;
 
     --dd-gap-xs: var(--dd-space-xs);
     --dd-gap-s: var(--dd-space-s);
@@ -45,23 +45,18 @@
 
     --dd-text-size: var(--dd-text-size-s);
     --dd-text-weight: 300;
-    --dd-text-line-height: 1.2;
+    --dd-text-line-height: 1.7;
     --dd-text-color: var(--sl-color-text);
 
-    --dd-description-size: var(--dd-text-size-m);
-
     --dd-label-weight: 600;
-
-    --dd-value-size: 0.9rem;
-    --dd-value-weight: 300;
-    --dd-value-line-height: 1.2;
-    --dd-value-color: var(--sl-color-text);
 
     --dd-error-size-xs: 1.2rem;
     --dd-error-size-s: 2rem;
     --dd-error-size-m: 3rem;
     --dd-error-bg-color: #000000cc;
     --dd-error-fg-color: #ff0000;
+
+    /* cards and attributes */
 
     --dd-card-v-space: var(--dd-space-m);
     --dd-card-h-space: var(--dd-space-l);
@@ -71,7 +66,20 @@
     --dd-card-border: 1px solid var(--sl-color-gray-5);
     --dd-card-contents-bg-color: #161415;
     --dd-card-meta-bg-color: var(--sl-color-black);
-    --dd-card-border-radius: 10px;
+    --dd-card-border-radius: 12px;
+
+    --dd-attr-description-size: var(--dd-text-size-m);
+    --dd-attr-data-max-height: 25rem;
+
+    /* values */
+
+    --dd-value-family: monospace;
+    --dd-value-size: 0.75rem;
+    --dd-value-weight: 300;
+    --dd-value-line-height: 1.2;
+    --dd-value-color: var(--sl-color-text);
+
+    /* viz */
 
     --dd-viz-min-width: var(--dd-size-xs);
 
@@ -86,24 +94,26 @@
     --dd-size-viz-border-radius: 0;
 
     --dd-color-viz-border: 1px solid var(--sl-color-gray-3);
-    --dd-color-viz-border-radius: 5px;
+    --dd-color-viz-border-radius: 6px;
+    --dd-color-viz-typeface-family: Archivo, sans-serif;
+    --dd-color-viz-typeface-size-xs: 1rem;
+    --dd-color-viz-typeface-size-s: 1.5rem;
+    --dd-color-viz-typeface-size-m: 2.3rem;
+    --dd-color-viz-typeface-size-l: 4rem;
+    --dd-color-viz-typeface-size-xl: 6rem;
+    --dd-color-viz-text-size-xs: 0.7;
+    --dd-color-viz-text-size-s: var(--dd-text-size-s);
+    --dd-color-viz-text-size-m: var(--dd-text-size-s);
+    --dd-color-viz-text-size-l: var(--dd-text-size-m);
+    --dd-color-viz-text-size-xl: var(--dd-text-size-m);
 
-    --dd-viz-typeface-family: Archivo, sans-serif;
-    --dd-viz-typeface-size-xs: 1rem;
-    --dd-viz-typeface-size-s: 1.5rem;
-    --dd-viz-typeface-size-m: 2.3rem;
-    --dd-viz-typeface-size-l: 4rem;
-    --dd-viz-typeface-size-xl: 6rem;
-
-    --dd-viz-text-family: Aleo, sans-serif;
-    --dd-text-line-height: 1.7;
-    --dd-viz-text-size-xs: 0.7;
-    --dd-viz-text-size-s: var(--dd-text-size-s);
-    --dd-viz-text-size-m: var(--dd-text-size-s);
-    --dd-viz-text-size-l: var(--dd-text-size-m);
-    --dd-viz-text-size-xl: var(--dd-text-size-m);
-
-    --dd-data-max-height: 250px;
+    --dd-text-style-viz-font-family: Archivo;
+    --dd-text-style-viz-font-size: 1.2rem;
+    --dd-text-style-viz-font-weight: 100;
+    --dd-text-style-viz-letter-spacing: 0;
+    --dd-text-style-viz-line-height: 1;
+    --dd-text-style-viz-font-style: normal;
+    --dd-text-style-viz-color: var(--dd-color-max);
 }
 
 :root[data-theme='light'] {

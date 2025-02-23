@@ -1,13 +1,14 @@
 import { DECISION_TYPEFACE_VALUE } from '../../../../../constants';
-import type { Typeface } from '../../types';
+import { createTypeface } from '../../helpers';
 
 export const VALUE_NAME = DECISION_TYPEFACE_VALUE;
-export const FALLBACK_VALUE: Typeface = {
+export const FALLBACK_VALUE = createTypeface({
     fontName: 'serif',
     capabilities: [],
     styles: [],
     ranges: [],
-};
+});
+
 export const REF_CHECKED_TYPES = [DECISION_TYPEFACE_VALUE];
 
 export const CAPABILITIES = 'variable';

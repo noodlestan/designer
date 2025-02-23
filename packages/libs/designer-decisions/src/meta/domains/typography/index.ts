@@ -1,2 +1,4 @@
-// @index(['./*.ts', '!./*.test.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './type';
+import { FontSizeDecisionTypes } from './font-size';
+import { TypefaceDecisionTypes } from './typeface';
+
+export const TypographyDecisionTypes = [...FontSizeDecisionTypes, ...TypefaceDecisionTypes];
