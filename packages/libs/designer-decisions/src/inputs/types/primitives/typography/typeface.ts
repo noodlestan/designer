@@ -4,16 +4,14 @@ import type { TypefaceRangeInput } from './range';
 import type { TypefaceSourceInput } from './source';
 import type { TypefaceStyleInput } from './style';
 
-export type TypefaceLiteral = {
+export type TypefaceObjectLiteral = {
     fontName: string;
-    capabilities: string[];
+    capabilities?: string[];
     source?: TypefaceSourceInput;
-    ranges: TypefaceRangeInput[];
-    styles: TypefaceStyleInput[];
+    ranges?: TypefaceRangeInput[];
+    styles?: TypefaceStyleInput[];
 };
 
-export type TypefaceValueAttributesInput = Partial<TypefaceLiteral> & {
-    fontName: string;
-};
+export type TypefaceLiteral = string | TypefaceObjectLiteral;
 
-export type TypefaceValueInput = DecisionRef | TypefaceValueAttributesInput;
+export type TypefaceValueInput = DecisionRef | TypefaceLiteral;

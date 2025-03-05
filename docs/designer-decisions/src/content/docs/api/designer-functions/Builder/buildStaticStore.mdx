@@ -1,0 +1,77 @@
+---
+title: buildStaticStore()
+slug: api/designer-functions/Builder/buildStaticStore
+sidebar:
+    label: buildStaticStore
+---
+
+```ts
+type buildStaticStore = (options: BuilderOptions) => () => Promise<Store>;
+```
+
+## Return value
+
+**() => Promise&lt;[Store](/api/designer-decisions/Store/Types/Store)&gt;**
+
+A builder function that resolves with a populated decision store.
+
+#### Builder implementation
+
+Given a list of paths and schemas configs:
+
+-   Loads schemas from paths and creates a schema map.
+-   Validates the schema map and creates a validator.
+-   Loads all decisions files and merges all data.
+-   Validates decision inputs.
+-   Populates and returns a decision [Store](/api/designer-decisions/Store/Types/Store).
+
+## Params
+
+#### ༶ `context`: [BuilderContext](/api/designer-functions/Builder/Types/BuilderContext)
+
+A context object that exposes the [BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions) and collects eventual errors produced building the store.
+
+It is recommended to declare the options object directly in a `dd.config.mjs` file in the root of the project and then load it via [loadConfig()](/api/designer-functions/config/loadConfig).
+
+## Usage
+
+**Recommended:**
+
+Using the `dd.config.mjs` [configuration file](/api/configuration) and [loadConfig()](/api/designer-functions/Config/loadConfig).
+
+```ts "buildStaticStore"
+import { loadConfig, createBuilderContext, buildStaticStore } from '@noodlestan/designer-functions';
+
+const config = await loadConfig();
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
+
+const store = await build();
+```
+
+**Building the options object manually:**
+
+```ts "BuilderOptions" collapse={1-7}
+import { DEMO_DATA } from '@noodlestan/designer-decisions';
+import {
+    type BuilderOptions,
+    createBuilderContext,
+    buildStaticStore,
+} from '@noodlestan/designer-functions';
+
+const options: BuilderOptions = {
+    decisions: [DEMO_DATA, './data'],
+};
+const context = createBuilderContext(options);
+const build = buildStaticStore(context);
+
+const store = await build();
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [Models / Schemas](/models/schemas/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-decisions / createStore()](/api/designer-decisions/Store/createStore)
+-   [API / designer-functions / BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions)

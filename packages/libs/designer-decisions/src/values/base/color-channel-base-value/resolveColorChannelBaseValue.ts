@@ -1,24 +1,18 @@
-import { isDecisionRef } from '../../../inputs';
-import { type ValueContext, createValueInputError } from '../../../value';
+import { type ColorChannelInput, isDecisionRef } from '../../../inputs';
+import type { ColorChannelDefinition, ColorChannelLiteral } from '../../../primitives';
+import type { DeepPartial } from '../../../private';
+import type { ValueContext } from '../../../value';
 
 import { resolveColorChannelBaseValueRef } from './resolveColorChannelBaseValueRef';
-import type { ColorChannelDefinition, ColorChannelInput } from './types';
 
 export const resolveColorChannelBaseValue = (
     channelDefinition: ColorChannelDefinition,
     context: ValueContext,
-    input: ColorChannelInput,
-): number => {
-    const { fallback, valueName } = channelDefinition;
-
+    input?: DeepPartial<ColorChannelInput>,
+): DeepPartial<ColorChannelLiteral> | undefined => {
     if (isDecisionRef(input)) {
         return resolveColorChannelBaseValueRef(channelDefinition, context, input);
     }
 
-    if (typeof input !== 'number') {
-        context.addError(createValueInputError({ context, valueName, input }));
-        return fallback;
-    }
-
-    return input;
+    return input as ColorChannelLiteral;
 };

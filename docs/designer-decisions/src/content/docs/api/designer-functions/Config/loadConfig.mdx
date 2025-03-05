@@ -41,8 +41,8 @@ If you otherwise have to work with different scenarios and chose to not use `dd.
 
 ```ts
 const config = loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const store = await build();
 ```
@@ -56,7 +56,7 @@ If you prefer not to use `dd.config.mjs` configuration file, you can expose your
 ```ts
 // src/config
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
-import { staticStoreBuilder } from '@noodlestan/designer-functions';
+import { buildStaticStore } from '@noodlestan/designer-functions';
 
 const store = {
     decisions: [DEMO_DATA, './data'],

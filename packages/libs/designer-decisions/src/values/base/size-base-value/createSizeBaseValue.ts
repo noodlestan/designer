@@ -1,38 +1,22 @@
-import { createBaseValue } from '..';
 import type { SizeValueInput } from '../../../inputs';
+import { createSize } from '../../../primitives';
+import type { DeepPartial } from '../../../private';
 import type { ValueContext } from '../../../value';
-import { createNumericValue, createSize } from '../../primitives';
+import { createBaseValue } from '../base-value';
 
 import { resolveSizeBaseValue } from './resolveSizeBaseValue';
-import type { BaseSizeValue, SizeDefinition, SizeValueOptions } from './types';
+import type { SizeBaseOptions, SizeBaseValue, SizeValueDefinition } from './types';
 
 export const createSizeBaseValue = (
-    sizeDefinition: SizeDefinition,
+    sizeDefinition: SizeValueDefinition,
     context: ValueContext,
-    input: SizeValueInput,
-    options: SizeValueOptions = {},
-): BaseSizeValue => {
-    const baseValue = createBaseValue(context, input);
-
-    const { quant } = sizeDefinition;
-    const { quantize = quant } = options;
-    const { value, units } = resolveSizeBaseValue(sizeDefinition, context, input);
-
-    const { get: getValue, raw, quantized } = createNumericValue(value, { quantize });
-
-    return {
-        ...baseValue,
-        get: () => createSize({ value: getValue(), units }),
-        raw,
-        quantized,
-        toString: ({ quantize: q }: SizeValueOptions = {}) => {
-            return String(quantized(q ?? quantize)) + units;
-        },
-        toObject: ({ quantize: q }: SizeValueOptions = {}) => {
-            return {
-                value: quantized(q ?? quantize),
-                units,
-            };
-        },
+    input?: DeepPartial<SizeValueInput>,
+    options?: SizeBaseOptions,
+): SizeBaseValue => {
+    const get = () => {
+        const literal = resolveSizeBaseValue(sizeDefinition, context, input);
+        return createSize(sizeDefinition, context.primitiveContext(literal), options);
     };
+
+    return createBaseValue(context, get);
 };

@@ -11,14 +11,14 @@ export const createColorSRGBLightnessScaleExplicitModel: DecisionModelFactory<
     ColorSRGBLightnessScaleExplicitInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { values, quantize } = context.params() || {};
 
-            const values = params.values.map(value =>
-                createSRGBLightnessValue(context.nestedContext(), value, { quantize }),
-            );
+            const options = { quantize };
+            const items =
+                values?.map(size => createSRGBLightnessValue(context, size, options)) || [];
 
-            return createSRGBLightnessScale(context, values);
+            return createSRGBLightnessScale(context, items);
         },
     };
 };

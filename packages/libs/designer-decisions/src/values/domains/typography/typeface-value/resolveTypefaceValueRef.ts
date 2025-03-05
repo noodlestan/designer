@@ -1,27 +1,27 @@
-import { isTypefaceValueDecision } from '../../../../decision';
-import type { DecisionRef } from '../../../../inputs';
+import { DECISION_TYPEFACE_VALUE } from '../../../../constants';
+import { isTypefaceValueDecision } from '../../../../decision-types';
+import type { DecisionRef, TypefaceObjectLiteral } from '../../../../inputs';
+import { TYPEFACE_FALLBACK_LITERAL } from '../../../../primitives';
 import type { ValueContext } from '../../../../value';
-import { handleDecisionNotFound, handleRefMismatchError } from '../../../functions';
-import type { Typeface } from '../../../primitives';
+import { handleDecisionNotFound, handleRefMismatchError } from '../../../../value/helpers';
 
-import {
-    REF_CHECKED_TYPES as accepted,
-    FALLBACK_VALUE as fallback,
-    VALUE_NAME as valueName,
-} from './private';
+const REF_CHECKED_TYPES = [DECISION_TYPEFACE_VALUE];
 
-export const resolveTypefaceValueRef = (context: ValueContext, ref: DecisionRef): Typeface => {
-    const [, decision] = context.resolve(ref);
+export const resolveTypefaceValueRef = (
+    context: ValueContext,
+    ref: DecisionRef,
+): TypefaceObjectLiteral => {
+    const decision = context.resolve(ref);
 
     if (!decision) {
-        handleDecisionNotFound(context, valueName, ref);
-        return fallback;
+        handleDecisionNotFound(context, DECISION_TYPEFACE_VALUE, ref);
+        return TYPEFACE_FALLBACK_LITERAL;
     }
 
     if (isTypefaceValueDecision(decision)) {
-        return decision.produce(context).get();
+        return decision.produce(context).get().literal();
     }
 
-    handleRefMismatchError(context, decision, valueName, ref, accepted);
-    return fallback;
+    handleRefMismatchError(context, decision, DECISION_TYPEFACE_VALUE, ref, REF_CHECKED_TYPES);
+    return TYPEFACE_FALLBACK_LITERAL;
 };

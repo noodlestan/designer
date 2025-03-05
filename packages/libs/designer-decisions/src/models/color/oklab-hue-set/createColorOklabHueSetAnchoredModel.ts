@@ -1,10 +1,6 @@
 import type { ColorOklabHueSetAnchoredInput } from '../../../inputs';
-import {
-    type OklabHueSet,
-    createOklabHueSet,
-    createOklabHueValue,
-    generateAnchoredSeries,
-} from '../../../values';
+import { generateAnchoredSeries } from '../../../primitives';
+import { type OklabHueSet, createOklabHueSet, createOklabHueValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<
@@ -12,18 +8,18 @@ export const createColorOklabHueSetAnchoredModel: DecisionModelFactory<
     ColorOklabHueSetAnchoredInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { anchor, before, after, quantize } = context.params() || {};
 
-            const anchorValue = createOklabHueValue(context.nestedContext(), params.anchor, {
+            const options = { quantize };
+            const { value: anchorValue } = createOklabHueValue(context, anchor, {
                 quantize,
-            });
-            const anchor = anchorValue.get();
+            }).get();
 
-            const series = generateAnchoredSeries(anchor, params);
-            const values = series.map(item =>
-                createOklabHueValue(context.nestedContext(), item, { quantize }),
-            );
+            const seriesParams = { before, after, quantize };
+            const series = generateAnchoredSeries(anchorValue, seriesParams);
+            const values = series.map(channel => createOklabHueValue(context, channel, options));
+
             return createOklabHueSet(context, values);
         },
     };

@@ -9,7 +9,6 @@ describe('createColorSRGBHueSetAnchoredModel()', () => {
     const model = createColorSRGBHueSetAnchoredModel();
 
     describe('Given a context and params', () => {
-        const [mockContext] = createValueContextMock();
         const expectedLength = 6;
         const params: ColorSRGBHueSetAnchoredInput['params'] = {
             anchor: 330,
@@ -22,30 +21,30 @@ describe('createColorSRGBHueSetAnchoredModel()', () => {
                 modifier: { mode: 'linear', by: 20 },
             },
         };
+        const [mockValueContext] = createValueContextMock({ params });
 
         it('should create a set of the expected size', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockValueContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockValueContext);
 
-            expect(result.get().first()?.get()).toEqual(329.9);
-            expect(result.get().item(2)?.get()).toEqual(params.anchor);
-            expect(result.get().last()?.get()).toEqual(360);
+            expect(result.get().first()?.get().toNumber()).toEqual(329.9);
+            expect(result.get().item(2)?.get().toNumber()).toEqual(params.anchor);
+            expect(result.get().last()?.get().toNumber()).toEqual(360);
         });
     });
 
     describe('Given a quantize param', () => {
-        const [mockContext] = createValueContextMock();
         const params: ColorSRGBHueSetAnchoredInput['params'] = {
             anchor: 333.001,
             before: {
                 steps: 2,
-                modifier: { mode: 'linear', by: -0.01 },
+                modifier: { mode: 'linear', by: -0.07 },
             },
             after: {
                 steps: 3,
@@ -53,13 +52,14 @@ describe('createColorSRGBHueSetAnchoredModel()', () => {
             },
             quantize: 2,
         };
+        const [mockValueContext] = createValueContextMock({ params });
 
         it('should populate the set with quantized values', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockValueContext);
 
-            expect(result.get().first()?.get()).toEqual(334);
-            expect(result.get().item(1)?.get()).toEqual(334);
-            expect(result.get().last()?.get()).toEqual(360);
+            expect(result.get().first()?.get().toNumber()).toEqual(332);
+            expect(result.get().item(2)?.get().toNumber()).toEqual(334);
+            expect(result.get().last()?.get().toNumber()).toEqual(360);
         });
     });
 });

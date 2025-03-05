@@ -1,9 +1,9 @@
 import type { ColorOklabLightnessScaleAnchoredInput } from '../../../inputs';
+import { generateAnchoredSeries } from '../../../primitives';
 import {
     type OklabLightnessScale,
     createOklabLightnessScale,
     createOklabLightnessValue,
-    generateAnchoredSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,19 +12,21 @@ export const createColorOklabLightnessScaleAnchoredModel: DecisionModelFactory<
     ColorOklabLightnessScaleAnchoredInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { anchor, before, after, quantize } = context.params() || {};
 
-            const anchorValue = createOklabLightnessValue(context.nestedContext(), params.anchor, {
+            const options = { quantize };
+            const { value: anchorValue } = createOklabLightnessValue(context, anchor, {
                 quantize,
-            });
-            const anchor = anchorValue.get();
+            }).get();
 
-            const series = generateAnchoredSeries(anchor, params);
-            const values = series.map(item =>
-                createOklabLightnessValue(context.nestedContext(), item, { quantize }),
+            const seriesParams = { before, after, quantize };
+            const series = generateAnchoredSeries(anchorValue, seriesParams);
+            const values = series.map(channel =>
+                createOklabLightnessValue(context, channel, options),
             );
-            return createOklabLightnessScale(context.nestedContext(), values);
+
+            return createOklabLightnessScale(context, values);
         },
     };
 };

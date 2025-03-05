@@ -1,14 +1,17 @@
+import type {
+    FontSize,
+    FontWeight,
+    LineHeight,
+    NumberFormatOptions,
+    Typeface,
+} from '../../../primitives';
 import type { BaseValue } from '../../base';
-import type { FontSize, FontWeight, NumberValueOptions, Typeface } from '../../primitives';
 
 export type TypefaceValue = BaseValue<Typeface>;
 
 export type FontSizeValue = BaseValue<FontSize>;
 
-export type FontWeightValueOptions = NumberValueOptions;
+export type FontWeightValueOptions = NumberFormatOptions;
+export type FontWeightValue = BaseValue<FontWeight>;
 
-export type FontWeightValue = BaseValue<FontWeight> & {
-    raw(): number;
-    quantized: (quantize?: number) => number;
-    toString: (options?: FontWeightValueOptions) => string;
-};
+export type LineHeightValue = BaseValue<LineHeight>;

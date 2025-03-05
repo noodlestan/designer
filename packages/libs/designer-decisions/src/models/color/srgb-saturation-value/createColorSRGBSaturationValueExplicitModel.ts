@@ -7,10 +7,9 @@ export const createColorSRGBSaturationValueExplicitModel: DecisionModelFactory<
     ColorSRGBSaturationValueExplicitInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
-
-            return createSRGBSaturationValue(context, params.value, { quantize });
+        produce: context => {
+            const { value, quantize } = context.params() || {};
+            return createSRGBSaturationValue(context, value, { quantize });
         },
     };
 };

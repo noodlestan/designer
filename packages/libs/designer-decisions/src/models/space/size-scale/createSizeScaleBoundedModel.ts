@@ -1,10 +1,6 @@
 import type { SizeScaleBoundedInput } from '../../../inputs';
-import {
-    type SizeScale,
-    createSizeScale,
-    createSizeValue,
-    generateBoundedSeries,
-} from '../../../values';
+import { generateBoundedSeries } from '../../../primitives';
+import { type SizeScale, createSizeScale, createSizeValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createSizeScaleBoundedModel: DecisionModelFactory<
@@ -12,21 +8,25 @@ export const createSizeScaleBoundedModel: DecisionModelFactory<
     SizeScaleBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createSizeValue(context.nestedContext(), params.from, { quantize });
-            const toValue = createSizeValue(context.nestedContext(), params.to, { quantize });
+            const options = { quantize };
+            const fromValue = createSizeValue(context, from, options);
+            const toValue = createSizeValue(context, to, options);
 
-            const { value: from } = fromValue.toObject();
-            const { value: to } = toValue.toObject();
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
+            );
 
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item => createSizeValue(context.nestedContext(), item, { quantize }));
+            const { unit } = fromValue.get();
+            const values = series.map(item =>
+                createSizeValue(context, { value: item, unit }, options),
+            );
 
-            return createSizeScale(context, [fromValue, ...values, toValue]);
+            return createSizeScale(context, values);
         },
     };
 };

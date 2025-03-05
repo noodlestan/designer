@@ -1,32 +1,32 @@
-import type { DecisionContext, DecisionLookup } from '../../decision';
-import type { DecisionInput, DecisionRefResolver } from '../../inputs';
+import type { DecisionLookup } from '../../decision';
+import type { DecisionContext, DecisionRefResolver } from '../../decision-context';
+import type { DecisionInput } from '../../inputs';
 import type { LookupContexts } from '../../lookup';
+import type { PrimitiveContext, PrimitiveError } from '../../primitive';
+import type { DeepPartial } from '../../private';
 
 import type { ValueError } from './errors';
 
-export type ValueContext = {
-    decisionContext: () => DecisionContext;
+export type LinkedValueContext<P extends object = object> = {
     parent: () => LinkedValueContext | undefined;
+    decisionContext: () => DecisionContext;
     lookupContexts: () => LookupContexts;
-    decisionInput: () => DecisionInput | undefined;
-    resolve: DecisionRefResolver;
-    valueInput: () => unknown | undefined;
+    input: () => DecisionInput | undefined;
+    params: () => DeepPartial<P> | undefined;
     lookups: () => DecisionLookup[];
-    nested: () => LinkedValueContext[];
     children: () => LinkedValueContext[];
+    nested: () => PrimitiveContext[];
     ownErrors: () => ValueError[];
-    allErrors: () => ValueError[];
+    allErrors: () => (ValueError | PrimitiveError)[];
     hasErrors: () => boolean;
-    consume: (input: unknown) => void;
-    addError: (error: ValueError) => void;
-    childContext: (input?: DecisionInput) => ValueContext;
-    nestedContext: () => ValueContext;
-    outputContext: () => ValueContext;
 };
 
-export type ParentValueContext = Omit<
-    ValueContext,
-    'resolve' | 'consume' | 'addError' | 'nestedContext' | 'outputContext'
->;
+export type ValueContext<P extends object = object> = LinkedValueContext<P> & {
+    childContext: (input: DecisionInput) => ValueContext;
+    primitiveContext: <T>(input?: T | undefined) => PrimitiveContext<T>;
+    resolve: DecisionRefResolver;
+    addError: (error: ValueError) => void;
+};
 
-export type LinkedValueContext = Omit<ParentValueContext, 'childContext'>;
+export type ParentValueContext<P extends object = object> = LinkedValueContext<P> &
+    Pick<ValueContext<P>, 'childContext'>;

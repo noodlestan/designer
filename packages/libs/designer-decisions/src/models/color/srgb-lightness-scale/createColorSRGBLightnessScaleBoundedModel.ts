@@ -1,9 +1,9 @@
 import type { ColorSRGBLightnessScaleBoundedInput } from '../../../inputs';
+import { generateBoundedSeries } from '../../../primitives';
 import {
     type SRGBLightnessScale,
     createSRGBLightnessScale,
     createSRGBLightnessValue,
-    generateBoundedSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,24 +12,23 @@ export const createColorSRGBLightnessScaleBoundedModel: DecisionModelFactory<
     ColorSRGBLightnessScaleBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createSRGBLightnessValue(context.nestedContext(), params.from, {
-                quantize,
-            });
-            const toValue = createSRGBLightnessValue(context.nestedContext(), params.to, {
-                quantize,
-            });
+            const options = { quantize };
+            const fromValue = createSRGBLightnessValue(context, from, options);
+            const toValue = createSRGBLightnessValue(context, to, options);
 
-            const from = fromValue.get();
-            const to = toValue.get();
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
+            );
+            const values = series.map(channel =>
+                createSRGBLightnessValue(context, channel, options),
+            );
 
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item => createSRGBLightnessValue(context.nestedContext(), item, { quantize }));
-            return createSRGBLightnessScale(context, [fromValue, ...values, toValue]);
+            return createSRGBLightnessScale(context, values);
         },
     };
 };

@@ -4,6 +4,7 @@ export type ColorSetExplicitInput = DecisionInput & {
     model: 'color-set/explicit';
     params: {
         values: ColorValueInput[];
+        quantize?: number;
     };
 };
 

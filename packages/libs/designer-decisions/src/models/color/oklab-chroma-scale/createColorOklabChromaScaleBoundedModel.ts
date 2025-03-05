@@ -1,9 +1,9 @@
 import type { ColorOklabChromaScaleBoundedInput } from '../../../inputs';
+import { generateBoundedSeries } from '../../../primitives';
 import {
     type OklabChromaScale,
     createOklabChromaScale,
     createOklabChromaValue,
-    generateBoundedSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,26 +12,21 @@ export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<
     ColorOklabChromaScaleBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createOklabChromaValue(context.nestedContext(), params.from, {
-                quantize,
-            });
-            const toValue = createOklabChromaValue(context.nestedContext(), params.to, {
-                quantize,
-            });
+            const options = { quantize };
+            const fromValue = createOklabChromaValue(context, from, options);
+            const toValue = createOklabChromaValue(context, to, options);
 
-            const from = fromValue.get();
-            const to = toValue.get();
-
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series.slice(1, series.length - 1).map(item =>
-                createOklabChromaValue(context.nestedContext(), item, {
-                    quantize,
-                }),
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
             );
-            return createOklabChromaScale(context, [fromValue, ...values, toValue]);
+            const values = series.map(channel => createOklabChromaValue(context, channel, options));
+
+            return createOklabChromaScale(context, values);
         },
     };
 };

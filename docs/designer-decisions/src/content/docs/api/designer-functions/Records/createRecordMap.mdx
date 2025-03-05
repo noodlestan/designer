@@ -1,0 +1,61 @@
+---
+title: createRecordMap()
+slug: api/designer-functions/Records/createRecordMap
+sidebar:
+    label: createRecordMap
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Constructs a [RecordMap](/api/designer-functions/Inputs/Types/RecordMap) from a collection of [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput) immediately applying all validations via the provided [DecisionValidator](/api/designer-functions/Validation/Types/DecisionValidator).
+
+```ts
+type createRecordMap = (loadedRecords: LoadedRecord[], validator?: DecisionValidator) => RecordMap;
+```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+</Aside>
+
+## Return value
+
+Returns a [RecordMap](/api/designer-functions/Inputs/Types/RecordMap)
+that can be used to query for [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord) and retrieve validation errors.
+
+## Params
+
+#### ༶ `loadedRecords`: [LoadedRecord](/api/designer-decisions/Inputs/Types/LoadedRecord)[]
+
+An array of loaded records as provided by [loadDecisionsFromSources()](/api/designer-functions/wip).
+
+#### ༶ `validator`: [DecisionValidator](/api/designer-functions/Validation/Types/DecisionValidator)
+
+An optional validator.
+
+If no validator is provided, data is assumed to be valid. This is useful
+in scenarios where the data is guaranteed to have been validated in a different process.
+
+## Usage
+
+The following snippet is taken from the [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore) implementation.
+
+```ts "createRecordMap"
+const context = createBuilderContext(options);
+const schemaMap = await loadSchemasFromSources(context);
+const validator = createDecisionValidator(context, schemaMap);
+
+const loadedRecords = await loadDecisionsFromSources(context);
+const validatedMap = createRecordMap(loadedRecords, validator);
+const store = createStore(validatedMap);
+```
+
+Refer []()
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-decisions / LoadedRecord](/api/designer-decisions/Inputs/Types/LoadedRecord) and [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord)
+-   [API / designer-functions / BuilderContext](/api/designer-functions/Builder/Types/BuilderContext)
+-   [API / designer-functions / DecisionValidator](/api/designer-functions/Validation/Types/DecisionValidator)
+-   [API / designer-decisions / createStore()](/api/designer-decisions/Store/createStore) and [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore)

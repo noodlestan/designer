@@ -1,5 +1,5 @@
+import type { DecisionSource } from '../../records';
 import { DECISION_SCHEMAS } from '../schemas';
-import type { DecisionSource } from '../types';
 
 const SAMPLE_DATA: DecisionSource = {
     name: 'Designer Decisions Sample Data',

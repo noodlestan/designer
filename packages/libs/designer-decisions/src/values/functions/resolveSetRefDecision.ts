@@ -7,8 +7,8 @@ export const resolveSetRefDecision = <
     V = unknown,
     T extends Decision<BaseSet<V>> = Decision<BaseSet<V>>,
 >(
-    decision: T,
     context: ValueContext,
+    decision: T,
     valueName: string,
     ref: DecisionRef,
 ): V | undefined => {

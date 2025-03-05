@@ -1,9 +1,6 @@
-import type { Color as ChromaColor } from 'chroma-js';
-
-import type { ColorOklabAxisLiteral, Degrees, NormalNumber } from '../../../inputs';
-import type { BaseSet, BaseValue, ColorChannelBaseValue } from '../../base';
 import type {
     Color,
+    ColorChannel,
     ColorFormatOptions,
     OklabChromaComplementaryChannels,
     OklabHueComplementaryChannels,
@@ -11,43 +8,34 @@ import type {
     SRGBHueComplementaryChannels,
     SRGBLightnessComplementaryChannels,
     SRGBSaturationComplementaryChannels,
-} from '../../primitives';
+} from '../../../primitives';
+import type { BaseSet, BaseValue } from '../../base';
 
 export type ColorValueOptions = ColorFormatOptions;
 
-export type ColorValue = BaseValue<ChromaColor> & Color;
+export type ColorValue = BaseValue<Color>;
 export type ColorSet = BaseSet<ColorValue>;
 
-export type OklabLightnessValue = ColorChannelBaseValue<
-    OklabLightnessComplementaryChannels,
-    NormalNumber
->;
+export type OklabLightnessValue = BaseValue<ColorChannel<OklabLightnessComplementaryChannels>>;
 export type OklabLightnessScale = BaseSet<OklabLightnessValue>;
 
-export type OklabChromaValue = ColorChannelBaseValue<
-    OklabChromaComplementaryChannels,
-    ColorOklabAxisLiteral
->;
+export type OklabChromaValue = BaseValue<ColorChannel<OklabChromaComplementaryChannels>>;
 export type OklabChromaScale = BaseSet<OklabChromaValue>;
 
-export type OklabHueValue = ColorChannelBaseValue<OklabHueComplementaryChannels, Degrees>;
+export type OklabHueValue = BaseValue<ColorChannel<OklabHueComplementaryChannels>>;
 export type OklabHueSet = BaseSet<OklabHueValue>;
 
-export type SRGBHueValue = ColorChannelBaseValue<SRGBHueComplementaryChannels, Degrees>;
+export type ColorOklabChannelValue = OklabLightnessValue | OklabChromaValue | OklabHueValue;
+
+export type SRGBHueValue = BaseValue<ColorChannel<SRGBHueComplementaryChannels>>;
 export type SRGBHueSet = BaseSet<SRGBHueValue>;
 
-export type SRGBSaturationValue = ColorChannelBaseValue<
-    SRGBSaturationComplementaryChannels,
-    NormalNumber
->;
+export type SRGBSaturationValue = BaseValue<ColorChannel<SRGBSaturationComplementaryChannels>>;
 export type SRGBSaturationScale = BaseSet<SRGBSaturationValue>;
 
-export type SRGBLightnessValue = ColorChannelBaseValue<
-    SRGBLightnessComplementaryChannels,
-    NormalNumber
->;
+export type SRGBLightnessValue = BaseValue<ColorChannel<SRGBLightnessComplementaryChannels>>;
 export type SRGBLightnessScale = BaseSet<SRGBLightnessValue>;
 
-export type ColorOklabChannelValue = OklabLightnessValue | OklabChromaValue | OklabHueValue;
 export type ColorSRGBChannelValue = SRGBHueValue | SRGBSaturationValue | SRGBLightnessValue;
+
 export type ColorChannelValue = ColorSRGBChannelValue | ColorOklabChannelValue;

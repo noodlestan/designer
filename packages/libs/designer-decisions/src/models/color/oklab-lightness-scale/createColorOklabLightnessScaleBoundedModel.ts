@@ -1,9 +1,9 @@
 import type { ColorOklabLightnessScaleBoundedInput } from '../../../inputs';
+import { generateBoundedSeries } from '../../../primitives';
 import {
     type OklabLightnessScale,
     createOklabLightnessScale,
     createOklabLightnessValue,
-    generateBoundedSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,26 +12,23 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
     ColorOklabLightnessScaleBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createOklabLightnessValue(context.nestedContext(), params.from, {
-                quantize,
-            });
-            const toValue = createOklabLightnessValue(context.nestedContext(), params.to, {
-                quantize,
-            });
+            const options = { quantize };
+            const fromValue = createOklabLightnessValue(context, from, options);
+            const toValue = createOklabLightnessValue(context, to, options);
 
-            const from = fromValue.get();
-            const to = toValue.get();
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
+            );
+            const values = series.map(channel =>
+                createOklabLightnessValue(context, channel, options),
+            );
 
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item =>
-                    createOklabLightnessValue(context.nestedContext(), item, { quantize }),
-                );
-            return createOklabLightnessScale(context, [fromValue, ...values, toValue]);
+            return createOklabLightnessScale(context, values);
         },
     };
 };

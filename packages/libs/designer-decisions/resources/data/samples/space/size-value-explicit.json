@@ -5,7 +5,7 @@
     "params": {
       "value": {
         "value": 12,
-        "units": "rem"
+        "unit": "rem"
       }
     }
   }

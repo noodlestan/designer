@@ -7,14 +7,13 @@ export const createColorSRGBHueSetExplicitModel: DecisionModelFactory<
     ColorSRGBHueSetExplicitInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { values, quantize } = context.params() || {};
 
-            const values = params.values.map(value =>
-                createSRGBHueValue(context.nestedContext(), value, { quantize }),
-            );
+            const options = { quantize };
+            const items = values?.map(size => createSRGBHueValue(context, size, options)) || [];
 
-            return createSRGBHueSet(context, values);
+            return createSRGBHueSet(context, items);
         },
     };
 };

@@ -1,0 +1,74 @@
+---
+title: BuilderContext
+slug: api/designer-functions/Builder/Types/BuilderContext
+sidebar:
+    order: 0
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+A context object created by [createBuilderContext()](/api/designer-functions/Builder/createBuilderContext) that exposes the [BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions) and collects eventual errors produced building the store.
+
+```ts
+export type BuilderContext = {
+    options: () => BuilderOptions;
+    hasErrors: () => boolean;
+    errors: () => BuilderError[];
+    addError: (error: BuilderError) => void;
+};
+```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+</Aside>
+
+## Methods
+
+#### ༶ `options()`
+
+**Return Value:** [BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions)
+
+This function throws an error if no options were provided to the context via [createBuilderContext()](/api/designer-functions/Builder/createBuilderContext).
+
+#### ༶ `hasErrors()`
+
+**Return Value:** `boolean` indicating if errors occurred building the store.
+
+#### ༶ `errors()`
+
+**Return Value:** [BuilderError](/api/designer-functions/Builder/Types/BuilderError)[] with any errors that occurred building the store.
+
+#### ༶ `addError(error: BuilderError)`
+
+**Parameters:**
+
+-   `error`: [BuilderError](/api/designer-functions/Builder/Types/BuilderError)
+
+## Usage
+
+Use [createBuilderContext()](/api/designer-functions/Builder/createBuilderContext) to create a BuilderContext.
+
+```ts
+const config = await loadConfig();
+const context = createBuilderContext(config.store);
+const builder = buildStaticStore(context);
+```
+
+When adding errors to the context you need to create a [BuilderError](/api/designer-functions/Builder/Types/BuilderError) first. You can do this by calling `createBuilderUnexpectedError()` with the exception.
+
+```ts
+import { createBuilderUnexpectedError } from '@noodlestan/designer-functions';
+
+try {
+    ...
+} catch (error) {
+    context.addError(createBuilderUnexpectedError({ error }));
+}
+```
+
+## See also
+
+-   [API / designer-functions / BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions)
+-   [API / designer-functions / createBuilderContext()](/api/designer-functions/Builder/createBuilderContext)
+-   [API / designer-decisions / createStore()](/api/designer-decisions/Store/createStore)

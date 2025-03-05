@@ -1,9 +1,9 @@
 import type { ColorSRGBSaturationScaleBoundedInput } from '../../../inputs';
+import { generateBoundedSeries } from '../../../primitives';
 import {
     type SRGBSaturationScale,
     createSRGBSaturationScale,
     createSRGBSaturationValue,
-    generateBoundedSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,26 +12,23 @@ export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
     ColorSRGBSaturationScaleBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createSRGBSaturationValue(context.nestedContext(), params.from, {
-                quantize,
-            });
-            const toValue = createSRGBSaturationValue(context.nestedContext(), params.to, {
-                quantize,
-            });
+            const options = { quantize };
+            const fromValue = createSRGBSaturationValue(context, from, options);
+            const toValue = createSRGBSaturationValue(context, to, options);
 
-            const from = fromValue.get();
-            const to = toValue.get();
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
+            );
+            const values = series.map(channel =>
+                createSRGBSaturationValue(context, channel, options),
+            );
 
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item =>
-                    createSRGBSaturationValue(context.nestedContext(), item, { quantize }),
-                );
-            return createSRGBSaturationScale(context, [fromValue, ...values, toValue]);
+            return createSRGBSaturationScale(context, values);
         },
     };
 };

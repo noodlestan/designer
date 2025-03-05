@@ -1,6 +1,16 @@
-import { DECISION_SIZE_SCALE, DECISION_SIZE_VALUE } from '../../../../../constants';
-import type { SizeObjectLiteral } from '../../../../../inputs';
+import { DECISION_SIZE_VALUE, PRIMITIVE_SIZE } from '../../../../../constants';
+import { SIZE_ABSOLUTE_UNITS, SIZE_FALLBACK_NUMERIC } from '../../../../../primitives';
+import type { SizeValueDefinition } from '../../../../base';
 
 export const VALUE_NAME = DECISION_SIZE_VALUE;
-export const FALLBACK_VALUE: SizeObjectLiteral = { value: 0, units: 'px' };
-export const REF_CHECKED_TYPES = [DECISION_SIZE_VALUE, DECISION_SIZE_SCALE];
+
+export const SIZE_DEFINITION: SizeValueDefinition = {
+    valueName: DECISION_SIZE_VALUE,
+    primitiveName: PRIMITIVE_SIZE,
+    validUnits: SIZE_ABSOLUTE_UNITS,
+    defaultUnit: undefined,
+    base: 1,
+    quantize: 0.01,
+    fallback: SIZE_FALLBACK_NUMERIC,
+    decisionTypes: {},
+};

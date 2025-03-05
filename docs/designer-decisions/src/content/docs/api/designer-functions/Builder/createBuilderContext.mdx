@@ -1,0 +1,49 @@
+---
+title: createBuilderContext()
+slug: api/designer-functions/Builder/createBuilderContext
+sidebar:
+    label: createBuilderContext
+---
+
+Creates a [BuilderContext](/api/designer-functions/Builder/Types/BuilderContext) with an optional configuration.
+
+```ts
+type createBuilderContext = (context: BuilderContext, validatedMap: RecordMap) => Store;
+```
+
+## Return value
+
+Returns a [BuilderContext](/api/designer-functions/Builder/Types/BuilderContext) required for [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+
+## Params
+
+#### ༶ `context`: [BuilderContext](/api/designer-functions/Builder/Types/BuilderContext)
+
+A context object that exposes the [BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions) and collects eventual errors produced building the store.
+
+It is recommended to declare the options object directly in a `dd.config.mjs` file in the root of the project and then load it via [loadConfig()](/api/designer-functions/config/loadConfig).
+
+## Params
+
+#### ༶ `validatedMap`: [RecordMap](/api/designer-decisions/Inputs/Types/RecordMap)
+
+Holds all decision input data and provides an API to retrieve decision records and validation errors.
+
+&nbsp;
+
+## Usage
+
+Create a context with configuration and provide to the `buildStaticStore()`.
+
+```ts
+const config = await loadConfig();
+const context = createBuilderContext(config.store);
+const builder = buildStaticStore(context);
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / designer-functions / buildStaticStore()](/api/designer-functions/Builder/buildStaticStore)
+-   [API / designer-functions / BuilderContext()](/api/designer-functions/Builder/Types/BuilderContext)
+-   [API / designer-decisions / createStore()](/api/designer-decisions/Store/createStore)

@@ -1,33 +1,27 @@
 import { DECISION_SIZE_SCALE, DECISION_SIZE_VALUE } from '../../../constants';
-import {
-    type Decision,
-    isSetDecision,
-    isSizeScaleDecision,
-    isSizeValueDecision,
-} from '../../../decision';
-import type { DecisionRef, SizeObjectLiteral } from '../../../inputs';
-import type { ValueContext } from '../../../value';
+import type { Decision } from '../../../decision';
+import { isSetDecision, isSizeScaleDecision, isSizeValueDecision } from '../../../decision-types';
+import type { DecisionRef, SizeAbsoluteUnits, SizeObjectLiteral } from '../../../inputs';
+import type { Size } from '../../../primitives';
+import { type ValueContext, handleDecisionNotFound, handleRefMismatchError } from '../../../value';
 import type { SizeValue } from '../../domains';
-import {
-    handleDecisionNotFound,
-    handleRefMismatchError,
-    resolveSetRefDecision,
-} from '../../functions';
-import type { Size } from '../../primitives';
+import { resolveSetRefDecision } from '../../functions';
 import type { BaseSet } from '../base-set';
+import type { BaseValue } from '../base-value';
 
-import type { BaseSizeValue, SizeDefinition } from './types';
+import type { SizeValueDefinition } from './types';
 
 export const resolveSizeBaseValueRef = (
-    sizeDefinition: SizeDefinition,
+    sizeDefinition: SizeValueDefinition,
     context: ValueContext,
     ref: DecisionRef,
 ): SizeObjectLiteral => {
-    const { fallback, valueName, decisionTypes } = sizeDefinition;
+    const { valueName, defaultUnit, fallback, decisionTypes } = sizeDefinition;
+    const fallbackSize = { value: fallback, unit: defaultUnit as SizeAbsoluteUnits };
 
-    const [, decision] = context.resolve(ref);
+    const decision = context.resolve(ref);
 
-    const accepted = [
+    const refCheckedTypes = [
         DECISION_SIZE_SCALE,
         DECISION_SIZE_VALUE,
         decisionTypes.set,
@@ -36,32 +30,28 @@ export const resolveSizeBaseValueRef = (
 
     if (!decision) {
         handleDecisionNotFound(context, valueName, ref);
-        return fallback;
+        return fallbackSize;
     }
 
     if (isSizeScaleDecision(decision)) {
-        const value = resolveSetRefDecision<SizeValue>(decision, context, valueName, ref);
-        return value?.toObject() ?? fallback;
+        const value = resolveSetRefDecision<SizeValue>(context, decision, valueName, ref);
+        return value?.get().literal() ?? fallbackSize;
     }
 
     if (isSizeValueDecision(decision)) {
-        return decision.produce(context).toObject();
+        return decision.produce(context).get().literal();
     }
 
-    if (isSetDecision(decision) && decision.type() === decisionTypes.set) {
-        const value = resolveSetRefDecision<BaseSizeValue>(
-            decision as Decision<BaseSet<BaseSizeValue>>,
-            context,
-            valueName,
-            ref,
-        );
-        return value?.get() ?? fallback;
+    if (decisionTypes.set && isSetDecision(decision) && decision.type() === decisionTypes.set) {
+        const d = decision as Decision<BaseSet<SizeValue>>;
+        const value = resolveSetRefDecision<SizeValue>(context, d, valueName, ref);
+        return value?.get().literal() ?? fallbackSize;
     }
 
-    if (decision.type() === decisionTypes.value) {
-        return decision.produce(context).get() as Size;
+    if (decisionTypes.value && decision.type() === decisionTypes.value) {
+        return (decision as Decision<BaseValue<Size>>).produce(context).get().literal();
     }
 
-    handleRefMismatchError(context, decision, valueName, ref, accepted);
-    return fallback;
+    handleRefMismatchError(context, decision, valueName, ref, refCheckedTypes);
+    return fallbackSize;
 };
