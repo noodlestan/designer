@@ -1,11 +1,13 @@
 import type { LoadedRecord } from '@noodlestan/designer-decisions';
 
+import type { BuilderContext } from '../builder';
 import { normalizeDecisionSource } from '../private';
-import type { StoreContext } from '../store';
 
 import { loadDecisionsFromSource } from './functions';
 
-export const loadDecisionsFromSources = async (context: StoreContext): Promise<LoadedRecord[]> => {
+export const loadDecisionsFromSources = async (
+    context: BuilderContext,
+): Promise<LoadedRecord[]> => {
     const { decisions: decisionSources } = context.options();
 
     const sources = decisionSources.map(normalizeDecisionSource);

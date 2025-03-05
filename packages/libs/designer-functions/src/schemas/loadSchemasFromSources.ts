@@ -1,7 +1,7 @@
 import { DECISION_SCHEMAS, type NestedSchemaSource } from '@noodlestan/designer-decisions';
 
+import type { BuilderContext } from '../builder';
 import { normalizeDecisionSource } from '../private';
-import type { StoreContext } from '../store';
 
 import { validateSchemaMap } from './functions';
 import { deduplicateSchemaSources } from './functions/deduplicateSchemaSources';
@@ -9,7 +9,7 @@ import { loadSchemasFromSource } from './functions/loadSchemasFromSource';
 import { resolveReferencedSchemaSources } from './functions/resolveReferencedSchemaSources';
 import type { SchemaData, SchemaId, SchemaMap } from './types';
 
-export const loadSchemasFromSources = async (context: StoreContext): Promise<SchemaMap> => {
+export const loadSchemasFromSources = async (context: BuilderContext): Promise<SchemaMap> => {
     const { schemas: schemaSources, decisions: decisionSources } = context.options();
 
     const sources = decisionSources.map(normalizeDecisionSource);

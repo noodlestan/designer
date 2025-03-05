@@ -1,9 +1,9 @@
-import type { StoreContext } from '../../store';
+import type { BuilderContext } from '../../builder';
 import type { SchemaMap } from '../types';
 
 import { validateSchemas } from './validateSchemas';
 
-export const validateSchemaMap = (context: StoreContext, schemas: SchemaMap): SchemaMap => {
+export const validateSchemaMap = (context: BuilderContext, schemas: SchemaMap): SchemaMap => {
     validateSchemas(context, schemas);
 
     return structuredClone(schemas);

@@ -1,6 +1,6 @@
 import type { DataSource, NestedSchemaSource, SchemaSource } from '@noodlestan/designer-decisions';
 
-import { type StoreContext, createStoreSourceError } from '../../store';
+import { type BuilderContext, createBuilderSourceError } from '../../builder';
 
 export const compareDataSourcess = (a: DataSource, b: DataSource): boolean | undefined => {
     const recA = a as Record<string, unknown>;
@@ -14,7 +14,7 @@ export const compareDataSourcess = (a: DataSource, b: DataSource): boolean | und
 };
 
 export const deduplicateSchemaSources = (
-    context: StoreContext,
+    context: BuilderContext,
     schemaSources: NestedSchemaSource[],
 ): SchemaSource[] => {
     const uniqueSchemas: SchemaSource[] = [];
@@ -29,7 +29,7 @@ export const deduplicateSchemaSources = (
         }
         const isSameId = existingSchema.urnBase === schema.urnBase;
         if (isSameId && !compareDataSourcess(existingSchema.source, schema.source)) {
-            const error = createStoreSourceError({
+            const error = createBuilderSourceError({
                 type: 'SchemaSource',
                 id: schema.urnBase,
                 source: schema.source,

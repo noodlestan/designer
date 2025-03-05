@@ -2,12 +2,12 @@ import fs from 'fs/promises';
 
 import { type SchemaSource, maybeErrorMessage } from '@noodlestan/designer-decisions';
 
+import { type BuilderContext, createBuilderSourceError } from '../../builder';
 import { isNonEmptyString } from '../../private';
-import { type StoreContext, createStoreSourceError } from '../../store';
 import type { SchemaData, SchemaMap } from '../types';
 
 export const loadSchemaFromFile = async (
-    context: StoreContext,
+    context: BuilderContext,
     source: SchemaSource,
     schemas: SchemaMap,
     filePath: string,
@@ -26,7 +26,7 @@ export const loadSchemaFromFile = async (
         fileContents = await fs.readFile(filePath, 'utf-8');
     } catch (error) {
         const message = maybeErrorMessage(error, ' {}');
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: `Could not read schema file. ${message}.`,
         });
@@ -38,7 +38,7 @@ export const loadSchemaFromFile = async (
         schemaData = JSON.parse(fileContents) as SchemaData;
     } catch (error) {
         const message = maybeErrorMessage(error, ' {}');
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: `Could not parse schema file. ${message}.`,
         });
@@ -47,7 +47,7 @@ export const loadSchemaFromFile = async (
     }
 
     if (!isNonEmptyString(schemaData.$id)) {
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: 'Schema is missing a valid "$id" property.',
         });
@@ -56,7 +56,7 @@ export const loadSchemaFromFile = async (
     }
 
     if (schemas.has(schemaData.$id)) {
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: `Duplicate Schema $id "${schemaData.$id}".`,
         });

@@ -1,13 +1,14 @@
 import { type SchemaSource, maybeErrorMessage } from '@noodlestan/designer-decisions';
 
+import { type BuilderContext, createBuilderSourceError } from '../../builder';
 import { resolveSourcePath } from '../../helpers';
-import { type StoreContext, createStoreSourceError } from '../../store';
 import type { SchemaMap } from '../types';
 
-import { loadSchemaFromFile, loadSchemasFromDirectory } from '.';
+import { loadSchemaFromFile } from './loadSchemaFromFile';
+import { loadSchemasFromDirectory } from './loadSchemasFromDirectory';
 
 export const loadSchemasFromSource = async (
-    context: StoreContext,
+    context: BuilderContext,
     schemas: SchemaMap,
     schemaSource: SchemaSource,
 ): Promise<void> => {
@@ -18,7 +19,7 @@ export const loadSchemasFromSource = async (
         path = await resolveSourcePath(schemaSource.source, moduleResolver);
     } catch (error) {
         const message = maybeErrorMessage(error, ' {}');
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             type: 'SchemaSource',
             id: schemaSource.urnBase,
             source: schemaSource.source,

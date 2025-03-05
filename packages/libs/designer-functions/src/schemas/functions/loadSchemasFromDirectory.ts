@@ -3,9 +3,13 @@ import path from 'path';
 
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 
-import { type StoreContext, createStoreSourceError, createUnexpectedError } from '../../store';
+import {
+    type BuilderContext,
+    createBuilderSourceError,
+    createBuilderUnexpectedError,
+} from '../../builder';
 async function loadFromDirectory(
-    context: StoreContext,
+    context: BuilderContext,
     dirPath: string,
     fileHandler: (filePath: string) => Promise<void>,
 ) {
@@ -24,7 +28,7 @@ async function loadFromDirectory(
 }
 
 export const loadSchemasFromDirectory = async (
-    context: StoreContext,
+    context: BuilderContext,
     source: SchemaSource,
     dirPath: string,
     fileHandler: (filePath: string) => Promise<void>,
@@ -32,7 +36,7 @@ export const loadSchemasFromDirectory = async (
     try {
         const stats = await fs.stat(dirPath);
         if (!stats.isDirectory()) {
-            const err = createStoreSourceError({
+            const err = createBuilderSourceError({
                 type: 'SchemaSource',
                 id: source.urnBase,
                 source: source.source,
@@ -43,7 +47,7 @@ export const loadSchemasFromDirectory = async (
             return;
         }
     } catch (error) {
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             type: 'SchemaSource',
             id: source.urnBase,
             source: source.source,
@@ -58,7 +62,7 @@ export const loadSchemasFromDirectory = async (
     try {
         await loadFromDirectory(context, dirPath, fileHandler);
     } catch (error) {
-        const err = createUnexpectedError({ error });
+        const err = createBuilderUnexpectedError({ error });
         context.addError(err);
     }
 };

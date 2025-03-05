@@ -1,7 +1,7 @@
 import glob from 'fast-glob';
 
+import { type BuilderOptions, createBuilderContext } from '../builder';
 import { type DeepPartial, normalizeDecisionSource } from '../private';
-import { type StoreOptions, createStoreContext } from '../store';
 
 import { resolveDecisionSourcePaths } from './functions';
 
@@ -14,9 +14,9 @@ const findDataFilesInPath = async (path: string): Promise<string[]> => {
 };
 
 export const resolveDecisionWatchPaths = async (
-    options: DeepPartial<StoreOptions>,
+    options: DeepPartial<BuilderOptions>,
 ): Promise<string[]> => {
-    const context = createStoreContext(options as StoreOptions);
+    const context = createBuilderContext(options as BuilderOptions);
 
     const { decisions } = context.options();
     const normalized = decisions.map(normalizeDecisionSource);

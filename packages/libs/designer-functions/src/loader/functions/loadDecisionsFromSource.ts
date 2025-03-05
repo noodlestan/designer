@@ -4,14 +4,14 @@ import {
     maybeErrorMessage,
 } from '@noodlestan/designer-decisions';
 
+import { type BuilderContext, createBuilderSourceError } from '../../builder';
 import { resolveSourcePath } from '../../helpers';
-import { type StoreContext, createStoreSourceError } from '../../store';
 
 import { findJsonFiles } from './findJsonFiles';
 import { loadDecisionFile } from './loadDecisionFile';
 
 export const loadDecisionsFromSource = async (
-    context: StoreContext,
+    context: BuilderContext,
     decisionSource: DecisionSource,
 ): Promise<LoadedRecord[]> => {
     const { resolver: moduleResolver } = context.options();
@@ -21,7 +21,7 @@ export const loadDecisionsFromSource = async (
         path = await resolveSourcePath(decisionSource.source, moduleResolver);
     } catch (error) {
         const message = maybeErrorMessage(error, ' {}');
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             type: 'DecisionSource',
             id: decisionSource.name,
             source: decisionSource.source,
