@@ -1,8 +1,8 @@
-import { type StoreContext, createStoreSchemaError } from '../../../store';
+import { type BuilderContext, createBuilderSchemaError } from '../../../builder';
 import type { SchemaId, SchemaMap } from '../../types';
 
 export const findMissingSchemaReferences = (
-    context: StoreContext,
+    context: BuilderContext,
     schemaMap: SchemaMap,
     referencePairs: [SchemaId, SchemaId][],
 ): void => {
@@ -19,7 +19,7 @@ export const findMissingSchemaReferences = (
     }
 
     Object.entries(schemasWithMissingRefs).forEach(([schemaId, missingRefs]) => {
-        const err = createStoreSchemaError({
+        const err = createBuilderSchemaError({
             id: schemaId,
             reason: `Missing references: [${missingRefs.join(',')}].`,
         });

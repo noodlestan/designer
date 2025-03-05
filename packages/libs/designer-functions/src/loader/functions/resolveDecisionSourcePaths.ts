@@ -1,15 +1,15 @@
 import type { DecisionSource } from '@noodlestan/designer-decisions';
 
+import type { BuilderContext } from '../../builder';
 import { resolveSourcePath } from '../../helpers';
 import { normalizeDecisionSource } from '../../private/normalizeDecisionSource';
-import type { StoreContext } from '../../store';
 
 const isFileSystemSource = ({ source }: DecisionSource) => {
     return source.type === 'package' || source.type === 'path';
 };
 
 export const resolveDecisionSourcePaths = async (
-    context: StoreContext,
+    context: BuilderContext,
     sources: DecisionSource[],
 ): Promise<string[]> => {
     const { resolver } = context.options();

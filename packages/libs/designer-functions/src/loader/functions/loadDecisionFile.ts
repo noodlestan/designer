@@ -8,10 +8,10 @@ import {
     serializeErrorData,
 } from '@noodlestan/designer-decisions';
 
-import { type StoreContext, createStoreSourceError } from '../../store';
+import { type BuilderContext, createBuilderSourceError } from '../../builder';
 
 export async function loadDecisionFile(
-    context: StoreContext,
+    context: BuilderContext,
     source: DecisionSource,
     filePath: string,
 ): Promise<LoadedRecord[]> {
@@ -29,7 +29,7 @@ export async function loadDecisionFile(
         fileContents = await fs.readFile(filePath, 'utf-8');
     } catch (error) {
         const message = maybeErrorMessage(error, ' {}');
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: `Could not read decision file.${message}.`,
         });
@@ -41,7 +41,7 @@ export async function loadDecisionFile(
         parsedData = JSON.parse(fileContents);
     } catch (error) {
         const message = maybeErrorMessage(error, ' {}');
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: `Could not parse decision file.${message}.`,
         });
@@ -50,7 +50,7 @@ export async function loadDecisionFile(
     }
 
     if (!Array.isArray(parsedData)) {
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: 'Decision file does not contain an array.',
             error: `[${typeof parsedData}] ${serializeErrorData(parsedData)}`,
