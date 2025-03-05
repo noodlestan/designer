@@ -1,7 +1,7 @@
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 import type { ErrorObject } from 'ajv';
 
-import type { StoreOptions } from '../../store';
+import type { BuilderOptions } from '../../builder';
 
 export type ResolvedConfig<T> = {
     config: T;
@@ -15,8 +15,8 @@ export type DesignerConfigError = {
 
 export type DesignerConfig = {
     store: {
-        decisions: StoreOptions['decisions'];
+        decisions: BuilderOptions['decisions'];
         schemas?: SchemaSource[];
-        moduleResolver?: StoreOptions['resolver'];
+        moduleResolver?: BuilderOptions['resolver'];
     };
 };

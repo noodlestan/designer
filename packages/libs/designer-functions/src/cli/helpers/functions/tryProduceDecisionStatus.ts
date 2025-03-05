@@ -2,7 +2,7 @@ import {
     type BaseValue,
     type DecisionContext,
     type DecisionUnknown,
-    createUnexpectedError,
+    createDecisionUnexpectedError,
 } from '@noodlestan/designer-decisions';
 
 export function tryProduceDecisionStatus(
@@ -12,7 +12,7 @@ export function tryProduceDecisionStatus(
     try {
         return decision?.produce();
     } catch (error) {
-        const err = createUnexpectedError({ context, error });
+        const err = createDecisionUnexpectedError({ context, error });
         context.addError(err);
     }
 }

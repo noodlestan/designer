@@ -5,7 +5,7 @@ type Props = ShowDecisionProps;
 
 const { store, d } = Astro.props;
 
-const [, decision] = store.decision({ $name: d });
+const decision = store.decision({ $name: d });
 ---
 
 <p class="dd-attr-description">

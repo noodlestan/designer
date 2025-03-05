@@ -22,7 +22,7 @@ ajv.addKeyword({
     errors: true,
     error: {
         message:
-            'must be a valid ModuleResolverFunction. See https://designer-decisions.noodlestan.org/api/designer-functions/Builder/staticStoreBuilder/ for details.',
+            'must be a valid ModuleResolverFunction. See https://designer-decisions.noodlestan.org/api/designer-functions/Builder/buildStaticStore/ for details.',
     },
 });
 

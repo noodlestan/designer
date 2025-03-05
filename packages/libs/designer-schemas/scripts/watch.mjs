@@ -1,3 +1,3 @@
-import { cjs } from '@noodlestan/designer-build-tools';
+import { esm } from '@noodlestan/designer-build-tools';
 
-await cjs().watch();
+await esm().watch();

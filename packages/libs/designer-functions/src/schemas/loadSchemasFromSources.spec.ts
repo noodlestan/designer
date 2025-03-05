@@ -1,7 +1,7 @@
 import { DECISION_SCHEMAS, type SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type StoreContext, type StoreOptions, createStoreContext } from '../store';
+import { type BuilderContext, type BuilderOptions, createBuilderContext } from '../builder';
 
 import { loadSchemasFromSource } from './functions/loadSchemasFromSource';
 import { loadSchemasFromSources } from './loadSchemasFromSources';
@@ -35,20 +35,23 @@ const mockSchema3: SchemaData = {
 };
 
 describe('loadSchemasFromSources()', () => {
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
     describe('Given no schema sources provided', () => {
-        const options: StoreOptions = {
+        const options: BuilderOptions = {
             decisions: ['path'],
         };
-        let context: StoreContext;
+        let context: BuilderContext;
 
         beforeEach(() => {
-            context = createStoreContext(options);
-            vi.clearAllMocks();
+            context = createBuilderContext(options);
         });
 
         it('should load the built-in schemas', async () => {
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema1', mockSchema1);
                 },
             );
@@ -67,30 +70,29 @@ describe('loadSchemasFromSources()', () => {
     });
 
     describe('Given schema sources is provided', () => {
-        const options: StoreOptions = {
+        const options: BuilderOptions = {
             schemas: [mockSource1, mockSource2],
             decisions: ['path'],
         };
-        let context: StoreContext;
+        let context: BuilderContext;
 
         beforeEach(() => {
-            context = createStoreContext(options);
-            vi.clearAllMocks();
+            context = createBuilderContext(options);
         });
 
         it('should load and aggregate schemas from multiple configs', async () => {
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema1', mockSchema1);
                 },
             );
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema2', mockSchema2);
                 },
             );
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema3', mockSchema3);
                 },
             );
@@ -121,30 +123,29 @@ describe('loadSchemasFromSources()', () => {
     });
 
     describe('Given duplicate schema sources provided', () => {
-        const options: StoreOptions = {
+        const options: BuilderOptions = {
             schemas: [mockSource1, mockSource1],
             decisions: ['path'],
         };
-        let context: StoreContext;
+        let context: BuilderContext;
 
         beforeEach(() => {
-            context = createStoreContext(options);
-            vi.clearAllMocks();
+            context = createBuilderContext(options);
         });
 
         it('should deduplicate schema sources', async () => {
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema1', mockSchema1);
                 },
             );
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema2', mockSchema2);
                 },
             );
             loadSchemasFromSourceMock.mockImplementationOnce(
-                async (context: StoreContext, schemaMap: SchemaMap) => {
+                async (context: BuilderContext, schemaMap: SchemaMap) => {
                     schemaMap.set('schema3', mockSchema2);
                 },
             );

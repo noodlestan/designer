@@ -1,4 +1,4 @@
-import { createStoreContext, loadConfig, staticStoreBuilder } from '@noodlestan/designer-functions';
+import { buildStaticStore, createBuilderContext, loadConfig } from '@noodlestan/designer-functions';
 
 import type { DesignerAstroIntegrationAPI } from './types';
 
@@ -8,8 +8,8 @@ async function createDesignerIntegrationAPI(): Promise<DesignerAstroIntegrationA
         ...config.store,
         schemas: config.store.schemas || [],
     };
-    const context = createStoreContext(options);
-    const build = staticStoreBuilder(context);
+    const context = createBuilderContext(options);
+    const build = buildStaticStore(context);
 
     return {
         config,

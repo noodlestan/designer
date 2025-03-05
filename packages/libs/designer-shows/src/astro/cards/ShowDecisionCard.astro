@@ -63,7 +63,7 @@ function resolveCardLayout(
     return 'row';
 }
 
-const [, decision] = store.decision({ $name: d });
+const decision = store.decision({ $name: d });
 
 const isSet = Boolean(decision && isSetDecision(decision));
 const defaultLayout: ShowDecisionLayout = isSet ? ['row', 'column'] : ['column'];

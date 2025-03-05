@@ -25,7 +25,7 @@ export const resolveTextStyleVizStyles = (
 
     if (v?.type() === DECISION_TYPEFACE_VALUE) {
         const typeface = v as TypefaceValue;
-        style.__fontFamily = typeface.get().fontName;
+        style.__fontFamily = typeface.get().toString();
     }
 
     if (v?.type() === DECISION_FONT_SIZE_VALUE) {

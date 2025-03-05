@@ -1,12 +1,12 @@
 import { type DesignerErrorParams } from '@noodlestan/designer-decisions';
 
-import type { StoreSourceError } from '../types';
+import type { BuilderSourceError } from '../types';
 
-import { ERROR_STORE_SOURCE } from './constants';
+import { ERROR_BUILDER_SOURCE } from './constants';
 
-type Attributes = DesignerErrorParams<StoreSourceError>;
+type Attributes = DesignerErrorParams<BuilderSourceError>;
 
-export const createStoreSourceError = (attributes: Attributes): StoreSourceError => {
+export const createBuilderSourceError = (attributes: Attributes): BuilderSourceError => {
     const { type, id, source, path, reason } = attributes || {};
 
     const message = () => {
@@ -16,7 +16,7 @@ export const createStoreSourceError = (attributes: Attributes): StoreSourceError
     };
 
     return {
-        name: ERROR_STORE_SOURCE,
+        name: ERROR_BUILDER_SOURCE,
         type,
         id,
         source,

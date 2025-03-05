@@ -14,23 +14,23 @@ This collection of schemas validates inputs for all [built-in decision types and
 
 This exported constant defines where to locate the schema collection.
 
-[SchemaSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/SchemaSource/) are a way to pass schema collections _by reference_ to decision validators and loaders such as [staticStoreBuilder()](https://designer-decisions.noodlestan.org/api/designer-functions/Builder/staticStoreBuilder/).
+[SchemaSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/SchemaSource/) are a way to pass schema collections _by reference_ to decision validators and loaders such as [buildStaticStore()](https://designer-decisions.noodlestan.org/api/designer-functions/Builder/buildStaticStore/).
 
 ```ts
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
 import {
-  createStoreContext,
+  createBuilderContext,
   formatDecisionStatus,
   formatError,
   produceDecisions,
-  staticStoreBuilder,
+  buildStaticStore,
 } from '@noodlestan/designer-functions';
 
-const options: StoreOptions = {
+const options: BuilderOptions = {
   decisions: [DEMO_DATA, './data'],
 };
-const context = createStoreContext(options);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(options);
+const build = buildStaticStore(context);
 const store = await build();
 
 if (context.hasErrors()) {
@@ -41,7 +41,7 @@ if (context.hasErrors()) {
 }
 
 const records = store.records();
-const produced = produceDecisions(store);
+const produced = produceDecisions(context, store);
 produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
 console.info('🐘', produced.summary());

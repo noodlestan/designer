@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { ERROR_STORE_OPTIONS } from './constants';
-import { createOptionsError } from './createOptionsError';
+import { ERROR_BUILDER_OPTIONS } from './constants';
+import { createBuilderOptionsError } from './createBuilderOptionsError';
 
-describe('createOptionsError()', () => {
+describe('createBuilderOptionsError()', () => {
     describe('Given error attributes', () => {
         const attributes = {
             path: '/foo',
@@ -11,14 +11,14 @@ describe('createOptionsError()', () => {
             options: { baz: 'qux' },
         };
 
-        it('should return a StoreError object with the expected name', () => {
-            const result = createOptionsError(attributes);
+        it('should return a BuilderError object with the expected name', () => {
+            const result = createBuilderOptionsError(attributes);
 
-            expect(result.name).toEqual(ERROR_STORE_OPTIONS);
+            expect(result.name).toEqual(ERROR_BUILDER_OPTIONS);
         });
 
-        it('should return a StoreError object with the expected attributes', () => {
-            const result = createOptionsError(attributes);
+        it('should return a BuilderError object with the expected attributes', () => {
+            const result = createBuilderOptionsError(attributes);
 
             expect(result.path).toEqual(attributes.path);
             expect(result.reason).toEqual(attributes.reason);
@@ -26,10 +26,10 @@ describe('createOptionsError()', () => {
             expect(result.error).toEqual(undefined);
         });
 
-        it('should return a StoreError object with the expected message', () => {
-            const result = createOptionsError(attributes);
+        it('should return a BuilderError object with the expected message', () => {
+            const result = createBuilderOptionsError(attributes);
 
-            expect(result.message()).toContain('Invalid StoreOptions');
+            expect(result.message()).toContain('Invalid BuilderOptions');
             expect(result.message()).toContain('/foo');
             expect(result.message()).toContain('because bar');
             expect(result.message()).toContain('[object]');

@@ -1,8 +1,8 @@
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { type BuilderContext, type BuilderOptions, createBuilderContext } from '../../builder';
 import { resolveSourcePath } from '../../helpers';
-import { type StoreContext, type StoreOptions, createStoreContext } from '../../store';
 import type { SchemaData, SchemaId } from '../types';
 
 import { loadSchemaFromFile } from './loadSchemaFromFile';
@@ -29,7 +29,7 @@ const schemaSource: SchemaSource = { urnBase: 'foo', source: { type: 'path', pat
 
 describe('loadSchemasFromSource()', () => {
     const mockSource1: SchemaSource = { urnBase: 'foo', source: { type: 'path', path: '/foo' } };
-    const options: StoreOptions = {
+    const options: BuilderOptions = {
         schemas: [mockSource1],
         decisions: ['path'],
     };
@@ -38,11 +38,11 @@ describe('loadSchemasFromSource()', () => {
         type: 'object',
         properties: { key: { type: 'string' } },
     };
-    let context: StoreContext;
+    let context: BuilderContext;
 
     beforeEach(() => {
-        context = createStoreContext(options);
         vi.clearAllMocks();
+        context = createBuilderContext(options);
     });
 
     it('should load schemas from a single config', async () => {

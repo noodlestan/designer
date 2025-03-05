@@ -17,6 +17,7 @@
     "noImplicitAny": true,
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
     // types
     "types": []
   }

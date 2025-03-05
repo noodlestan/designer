@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { DataSource } from '@noodlestan/designer-decisions';
+import type { DataSource } from '@noodlestan/designer-decisions';
 import { resolveSourcePath } from '@noodlestan/designer-functions';
 
 function isFile(entry: fs.Dirent, entryPAth: string) {

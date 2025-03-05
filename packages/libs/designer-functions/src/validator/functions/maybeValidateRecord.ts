@@ -1,6 +1,8 @@
-import type { DecisionInput, LoadedRecord, ValidatedRecord } from '@noodlestan/designer-decisions';
+import type { LoadedRecord, ValidatedRecord } from '@noodlestan/designer-decisions';
 
 import type { DecisionValidator } from '../types';
+
+import { normalizeRecord } from './normalizeRecord';
 
 export function maybeValidateRecord(
     validator: DecisionValidator | undefined,
@@ -8,14 +10,6 @@ export function maybeValidateRecord(
 ): ValidatedRecord {
     if (validator) {
         return validator?.validate(loadedRecord);
-    } else {
-        const { input, source, file } = loadedRecord;
-        return {
-            loaded: input,
-            source,
-            file,
-            input: input as DecisionInput,
-            errors: [],
-        };
     }
+    return normalizeRecord(loadedRecord);
 }

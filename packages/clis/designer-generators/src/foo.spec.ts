@@ -1,6 +1,6 @@
-import expect from 'expect';
+import { describe, it } from 'mocha';
 
-import { foo } from './foo';
+import { foo } from './foo.js';
 
 // NOTE! placeholder test for peace of mind
 // to make sure tests are easy to introduce if/when needed

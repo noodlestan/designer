@@ -3,10 +3,10 @@ import path from 'path';
 
 import type { DecisionSource } from '@noodlestan/designer-decisions';
 
-import { type StoreContext, createStoreSourceError } from '../../store';
+import { type BuilderContext, createBuilderSourceError } from '../../builder';
 
 export async function findJsonFiles(
-    context: StoreContext,
+    context: BuilderContext,
     source: DecisionSource,
     dirPath: string,
 ): Promise<string[]> {
@@ -32,7 +32,7 @@ export async function findJsonFiles(
         const files = await Promise.all(promises);
         return files.flat();
     } catch (error) {
-        const err = createStoreSourceError({
+        const err = createBuilderSourceError({
             ...attrs,
             reason: 'Could not read schema File.',
             error,

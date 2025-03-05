@@ -8,7 +8,7 @@
 
 📖 [Documentation](https://designer-decisions.noodlestan.org/api/designer-functions)
 
-This library provides APIs for loading and validating schemas and decisions inputs.,
+This library provides APIs for loading and validating schemas and decisions inputs.
 
 ### See also
 

@@ -1,4 +1,4 @@
-import type { DesignerConfig, ResolvedConfig } from '.';
+import type { DesignerConfig, ResolvedConfig } from './types';
 
 export async function exitOnConfigError(
     config: ResolvedConfig<DesignerConfig> | Promise<ResolvedConfig<DesignerConfig>>,

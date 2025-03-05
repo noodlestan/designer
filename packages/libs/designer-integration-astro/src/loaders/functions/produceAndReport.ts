@@ -13,7 +13,7 @@ export async function produceAndReport(
     const { logger } = context;
     const store = await build();
 
-    const produced = produceDecisions(store);
+    const produced = produceDecisions(context, store);
     produced
         .decisions()
         .filter(status => status.hasErrors)

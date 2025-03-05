@@ -7,6 +7,7 @@ describe('createDecisionInputError()', () => {
     const loaded = { model: 'type/model', name: 'Decision name' };
     const input = { model: 'type/model', name: 'Decision name', params: {} };
     const normalized = {
+        uuid: '123',
         input,
         source: { name: 'baz' } as DecisionSource,
         loaded,

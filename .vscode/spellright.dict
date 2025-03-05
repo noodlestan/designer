@@ -103,9 +103,9 @@ micromark
 ast
 frontmatter
 Heros
-storeunexpectederror
-storeoptionserror
-storesourceerror
+builderunexpectederror
+builderoptionserror
+buildersourceerror
 qux
 baz
 linecap
@@ -116,3 +116,4 @@ fontsource
 Fontface
 ital
 attr
+mts
