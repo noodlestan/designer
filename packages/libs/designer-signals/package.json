@@ -1,0 +1,35 @@
+{
+  "name": "@noodlestan/designer-signals",
+  "version": "0.0.13",
+  "description": "A library of functions to reactively load, validate, and manipulate design decisions and tokens.",
+  "author": "Noodlestan Collective",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noodlestan/designer.git"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "files": [
+    "src",
+    "LICENSE-MIT"
+  ],
+  "scripts": {
+    "dev": "tsc --watch --noEmit --project tsconfig.json",
+    "build:clean": "rm -rf dist",
+    "build": "tsc --noEmit --project tsconfig.json",
+    "lint": "prettier . -c && eslint . && tsc --noEmit",
+    "lint:fix": "prettier . -c --write && eslint . --fix",
+    "ci": "npm run build:clean && npm run build"
+  },
+  "dependencies": {
+    "@noodlestan/designer-decisions": "0.0.13",
+    "@solid-primitives/map": "^0.6.0",
+    "solid-js": "^1.9.3"
+  }
+}
