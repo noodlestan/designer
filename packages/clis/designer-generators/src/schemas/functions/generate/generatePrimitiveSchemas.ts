@@ -1,8 +1,8 @@
 import * as TJS from 'typescript-json-schema';
 
-import { SymbolInfo } from '../../types';
+import type { SymbolInfo } from '../../types';
 
-import { normalizeSchema } from './normalizeSchema';
+import { normalizeSchema } from './normalizeSchema.js';
 
 export function generatePrimitiveSchemas(
     infos: SymbolInfo[],

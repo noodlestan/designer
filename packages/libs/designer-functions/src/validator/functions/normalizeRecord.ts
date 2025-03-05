@@ -39,6 +39,7 @@ export function normalizeRecord(loadedRecord: LoadedRecord): ValidatedRecord {
     };
 
     return {
+        uuid,
         loaded,
         input: input as DecisionInput,
         source,

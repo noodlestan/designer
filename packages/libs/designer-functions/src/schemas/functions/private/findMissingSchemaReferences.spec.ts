@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { type StoreContext, createStoreContext } from '../../../store';
+import { type BuilderContext, createBuilderContext } from '../../../builder';
 import type { SchemaId } from '../../types';
 
 import { findMissingSchemaReferences } from './findMissingSchemaReferences';
@@ -34,10 +34,10 @@ const referencePairsWithMixedRefs: [SchemaId, SchemaId][] = [
 ];
 
 describe('findMissingSchemaReferences()', () => {
-    let context: StoreContext;
+    let context: BuilderContext;
 
     beforeEach(() => {
-        context = createStoreContext();
+        context = createBuilderContext();
     });
 
     it('should return an empty array when all references are present in the schema map', () => {

@@ -17,6 +17,7 @@
     // strict
     "strict": true,
     "noImplicitAny": true,
+    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
 
@@ -27,6 +28,6 @@
       "*": ["./node_modules/*"]
     }
   },
-  "include": ["docs/", "packages/", "tools"],
+  "include": ["docs/", "packages/", "sandbox/", "tools"],
   "exclude": ["**/node_modules/", "**/dist/", "**/coverage/"]
 }

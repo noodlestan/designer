@@ -7,7 +7,7 @@ type Props = DecisionTypeComponentProps;
 
 const { store, d, layout: maybeLayout, ...rest } = Astro.props;
 
-const [, decision] = store.decision({ $name: d });
+const decision = store.decision({ $name: d });
 const componentMap = decision && getDecisionComponentMap(decision);
 const { component: Comp, props: fixedProps = {} } = componentMap?.decision || {};
 

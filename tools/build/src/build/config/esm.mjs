@@ -12,4 +12,5 @@ export const esmConfig = {
     target: 'esnext',
     logLevel: 'info',
     plugins: [esbuildPluginFilePathExtensions(), copyStaticFilesPlugin('dist/esm')],
+    write: false,
 };

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type StoreContext, createStoreContext } from '../../store';
+import { type BuilderContext, createBuilderContext } from '../../builder';
 import type { SchemaData, SchemaId, SchemaMap } from '../types';
 
 import { validateSchemaMap } from './validateSchemaMap';
@@ -16,10 +16,10 @@ const mockInvalidSchemaMap = new Map<SchemaId, SchemaData>([
 ]);
 
 describe('validateSchemaMap()', () => {
-    let context: StoreContext;
+    let context: BuilderContext;
 
     beforeEach(() => {
-        context = createStoreContext();
+        context = createBuilderContext();
         vi.resetAllMocks();
     });
 

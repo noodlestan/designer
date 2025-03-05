@@ -1,6 +1,6 @@
-import * as ts from 'typescript';
+import ts from 'typescript';
 
-import { SymbolInfo } from '../../types';
+import type { SymbolInfo } from '../../types';
 
 type SymbolMapper = (symbol: ts.Symbol) => SymbolInfo | undefined;
 

@@ -1,6 +1,6 @@
 import ts from 'typescript';
 
-import { toKebabCase } from './toKebabCase';
+import { toKebabCase } from './toKebabCase.js';
 
 export function makeDecisionModelSchemaId(baseUrn: string, symbol: ts.Symbol): string {
     const declarations = symbol.getDeclarations();

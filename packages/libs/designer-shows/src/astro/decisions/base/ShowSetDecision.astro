@@ -17,7 +17,7 @@ type Props = ShowDecisionProps & Omit<ShowValueProps, 'v'> & Omit<ShowVizProps, 
 
 const { store, d, layout, value = true, viz = true, size = 'm', muteErrors, ...rest } = Astro.props;
 
-const [, decision] = store.decision({ $name: d });
+const decision = store.decision({ $name: d });
 
 const componentMap = decision && getDecisionComponentMap(decision);
 const { component: ValueComponent, props: valueProps = {} } = componentMap?.value || {};

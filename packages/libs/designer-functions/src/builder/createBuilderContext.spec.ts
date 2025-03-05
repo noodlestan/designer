@@ -1,22 +1,21 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { createStoreContext } from './createStoreContext';
+import { createBuilderContext } from './createBuilderContext';
+import type { BuilderOptions, BuilderOptionsError } from './types';
 
-import type { StoreOptions, StoreOptionsError } from '.';
-
-describe('createStoreContext()', () => {
-    const options: StoreOptions = { decisions: [], schemas: [] };
+describe('createBuilderContext()', () => {
+    const options: BuilderOptions = { decisions: [], schemas: [] };
 
     describe('Given options', () => {
         it('should create expose the options', () => {
-            const result = createStoreContext(options);
+            const result = createBuilderContext(options);
 
             expect(result.options()).toEqual(options);
         });
     });
     describe('Given no options', () => {
         it('should throw an error when calling options()', () => {
-            const result = createStoreContext();
+            const result = createBuilderContext();
 
             expect(() => result.options()).toThrowError('No options in context.');
         });
@@ -24,7 +23,7 @@ describe('createStoreContext()', () => {
 
     describe('Given a an array of inputs', () => {
         it('should create a context with no errors', () => {
-            const result = createStoreContext();
+            const result = createBuilderContext();
 
             expect(result.errors()).toEqual([]);
             expect(result.hasErrors()).toBe(false);
@@ -32,9 +31,9 @@ describe('createStoreContext()', () => {
     });
 
     describe('When addError() is called', () => {
-        const mockError = {} as StoreOptionsError;
+        const mockError = {} as BuilderOptionsError;
 
-        const context = createStoreContext();
+        const context = createBuilderContext();
 
         beforeEach(() => {
             context.addError(mockError);
@@ -47,10 +46,10 @@ describe('createStoreContext()', () => {
     });
 
     describe('When addError() is called multiple times', () => {
-        const mockError1 = {} as StoreOptionsError;
-        const mockError2 = {} as StoreOptionsError;
+        const mockError1 = {} as BuilderOptionsError;
+        const mockError2 = {} as BuilderOptionsError;
 
-        const context = createStoreContext();
+        const context = createBuilderContext();
 
         beforeEach(() => {
             context.addError(mockError1);

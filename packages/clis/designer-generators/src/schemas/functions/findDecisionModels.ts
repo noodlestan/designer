@@ -1,6 +1,6 @@
-import { SchemaGeneratorConfig } from '@noodlestan/designer-decisions';
+import type { SchemaGeneratorConfig } from '@noodlestan/designer-decisions';
 
-import { SymbolInfo } from '../types';
+import type { SymbolInfo } from '../types';
 
 import {
     createProgramForTypes,

@@ -1,12 +1,14 @@
-import type { Store } from '../../store';
+import type { Store } from '@noodlestan/designer-decisions';
+
+import type { BuilderContext } from '../../builder';
 
 import { produceDecisionStatus } from './produceDecisionStatus';
 import type { ProducedDecisionStore } from './types';
 
-export const produceDecisions = (store: Store): ProducedDecisionStore => {
+export const produceDecisions = (context: BuilderContext, store: Store): ProducedDecisionStore => {
     const decisions = store.records().map(record => produceDecisionStatus(store, record.input));
 
-    const errors = store.context().errors();
+    const errors = context.errors();
     const decisionErrorsCount = decisions.reduce(
         (acc, status) => acc + Number(status.hasDecisionErrors),
         0,

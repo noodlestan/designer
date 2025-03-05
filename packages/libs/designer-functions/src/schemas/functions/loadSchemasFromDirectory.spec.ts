@@ -5,7 +5,7 @@ import path from 'path';
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type StoreContext, createStoreContext } from '../../store';
+import { type BuilderContext, createBuilderContext } from '../../builder';
 
 import { loadSchemasFromDirectory } from './loadSchemasFromDirectory';
 
@@ -18,10 +18,10 @@ describe('loadSchemasFromDirectory()', () => {
             path: 'bar/',
         },
     };
-    let context: StoreContext;
+    let context: BuilderContext;
 
     beforeEach(() => {
-        context = createStoreContext();
+        context = createBuilderContext();
         vi.resetAllMocks();
     });
 

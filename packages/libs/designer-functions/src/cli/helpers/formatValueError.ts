@@ -1,7 +1,7 @@
-import type { ValueError } from '@noodlestan/designer-decisions';
+import type { PrimitiveError, ValueError } from '@noodlestan/designer-decisions';
 
 export const formatValueError = (
-    error: ValueError,
+    error: ValueError | PrimitiveError,
     useColor?: boolean,
     name?: string | false,
 ): string => {

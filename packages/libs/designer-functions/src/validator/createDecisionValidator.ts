@@ -2,16 +2,12 @@ import { type LoadedRecord, type ValidatedRecord } from '@noodlestan/designer-de
 import Ajv from 'ajv';
 
 import type { SchemaMap } from '../schemas';
-import { type StoreContext } from '../store';
 
 import { createDecisionInputError } from './errors';
 import { normalizeRecord, validateRecord } from './functions';
 import type { DecisionValidator } from './types';
 
-export const createDecisionValidator = (
-    context: StoreContext,
-    schemaMap: SchemaMap,
-): DecisionValidator => {
+export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator => {
     const ajv = new Ajv({ verbose: true, allowUnionTypes: true, allErrors: false });
 
     Array.from(schemaMap.values()).forEach(schema => {
@@ -25,7 +21,7 @@ export const createDecisionValidator = (
             return normalized;
         }
 
-        const { input, source, errors } = normalized;
+        const { uuid, input, source, errors } = normalized;
 
         const schemaId = `urn:designer:decision-model:${input.model.replace('/', '-')}`;
         const schema = schemaMap.get(schemaId);
@@ -37,7 +33,7 @@ export const createDecisionValidator = (
                 schema: `DecisionInput#-model`,
             });
             errors.push(error);
-            return { loaded, input, source, errors };
+            return { uuid, loaded, input, source, errors };
         }
         return validateRecord(normalized, schemaMap, schemaId, validateFn);
     };

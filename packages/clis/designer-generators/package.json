@@ -25,8 +25,8 @@
     "build:clean": "rm -rf dist",
     "build:cjs": "tsc --project tsconfig.cjs.json",
     "build": "npm run build:cjs",
-    "test": "mocha -r ts-node/register 'src/**/*.test.ts'",
-    "test:watch": "mocha -w -r ts-node/register ---watch-files 'src/**/*.ts' 'src/**/*.test.ts'",
+    "test": "mocha -r ts-node/register 'src/**/*.spec.ts'",
+    "test:watch": "mocha -w -r ts-node/register ---watch-files 'src/**/*.ts' 'src/**/*.spec.ts'",
     "lint": "prettier . -c && eslint . && tsc --noEmit",
     "lint:fix": "prettier . -c --write && eslint . --fix",
     "ci": "npm run build:clean && npm run build && npm run test"

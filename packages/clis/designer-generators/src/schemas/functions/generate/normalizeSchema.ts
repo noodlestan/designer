@@ -1,6 +1,6 @@
 import * as TJS from 'typescript-json-schema';
 
-import { SymbolInfo } from '../../types';
+import type { SymbolInfo } from '../../types';
 
 function kebabCase(str: string): string {
     return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();

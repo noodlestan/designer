@@ -13,7 +13,7 @@ export function validateRecord(
     schemaId: string,
     validateFn: ValidateFunction<unknown>,
 ): ValidatedRecord {
-    const { loaded, source, file, input } = preValidatedRecord;
+    const { uuid, loaded, source, file, input } = preValidatedRecord;
     const valid = validateFn(input);
     if (valid) {
         return preValidatedRecord;
@@ -35,12 +35,12 @@ export function validateRecord(
     Object.entries(reducedErrors).forEach(([path, errors]) => {
         const attributes = extractErrorAttributes(preValidatedRecord, path, errors);
         const error = createDecisionInputError({
-            normalized: { loaded, input, source, file },
+            normalized: { uuid, loaded, input, source, file },
             ...attributes,
         });
         deleteValue(input, path);
         inputErrors.push(error);
     });
 
-    return { loaded, input, source, file, errors: inputErrors };
+    return { uuid, loaded, input, source, file, errors: inputErrors };
 }

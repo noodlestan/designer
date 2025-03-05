@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { type StoreContext, createStoreContext } from '../../store';
+import { type BuilderContext, createBuilderContext } from '../../builder';
 
 import { validateSchemas } from './validateSchemas';
 
@@ -31,10 +31,10 @@ const schemaMapWithMissingRefs = new Map([
 ]);
 
 describe('validateSchemas()', () => {
-    let context: StoreContext;
+    let context: BuilderContext;
 
     beforeEach(() => {
-        context = createStoreContext();
+        context = createBuilderContext();
     });
 
     it('should not throw when schema map is empty', () => {
