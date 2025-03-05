@@ -1,10 +1,6 @@
 import type { ColorSRGBHueSetBoundedInput } from '../../../inputs';
-import {
-    type SRGBHueSet,
-    createSRGBHueSet,
-    createSRGBHueValue,
-    generateBoundedSeries,
-} from '../../../values';
+import { generateBoundedSeries } from '../../../primitives';
+import { type SRGBHueSet, createSRGBHueSet, createSRGBHueValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
@@ -12,22 +8,21 @@ export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
     ColorSRGBHueSetBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createSRGBHueValue(context.nestedContext(), params.from, {
-                quantize,
-            });
-            const toValue = createSRGBHueValue(context.nestedContext(), params.to, { quantize });
+            const options = { quantize };
+            const fromValue = createSRGBHueValue(context, from, options);
+            const toValue = createSRGBHueValue(context, to, options);
 
-            const from = fromValue.get();
-            const to = toValue.get();
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
+            );
+            const values = series.map(channel => createSRGBHueValue(context, channel, options));
 
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item => createSRGBHueValue(context.nestedContext(), item, { quantize }));
-            return createSRGBHueSet(context, [fromValue, ...values, toValue]);
+            return createSRGBHueSet(context, values);
         },
     };
 };

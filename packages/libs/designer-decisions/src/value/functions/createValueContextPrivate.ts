@@ -1,99 +1,79 @@
-import type { Decision, DecisionContext, DecisionLookup } from '../../decision';
+import type { Decision, DecisionLookup } from '../../decision';
+import type { DecisionContext } from '../../decision-context';
 import type { DecisionInput, DecisionRef } from '../../inputs';
 import { type LookupContexts, isLookupContext } from '../../lookup';
+import { type PrimitiveContext, createPrimitiveContext } from '../../primitive';
+import type { DeepPartial } from '../../private';
 import type { BaseValue } from '../../values';
 import type { LinkedValueContext, ValueContext, ValueError } from '../types';
 
-type State = {
-    valueInput?: unknown;
-};
-
 export const createValueContextPrivate = (
     decisionContext: DecisionContext,
+    input: DecisionInput,
     parentContext?: LookupContexts | LinkedValueContext,
-    input?: DecisionInput,
 ): ValueContext => {
-    const state: State = {};
-
     const { resolve: resolver } = decisionContext;
     const lookupContexts = isLookupContext(parentContext)
         ? parentContext
         : parentContext?.lookupContexts() || { all: [] };
     const parent = isLookupContext(parentContext) ? undefined : parentContext;
 
-    const childContexts: LinkedValueContext[] = [];
-    const nestedContexts: LinkedValueContext[] = [];
     const lookups: DecisionLookup[] = [];
+    const childContexts: LinkedValueContext[] = [];
+    const primitiveContexts: PrimitiveContext[] = [];
     const errors: ValueError[] = [];
 
     const resolve = <V extends BaseValue<unknown> = BaseValue<unknown>>(
         ref: DecisionRef,
-    ): [DecisionContext, Decision<V> | undefined] => {
-        const [decisionContext, decision] = resolver<V>(ref);
+    ): Decision<V> => {
+        const decision = resolver<V>(ref);
         lookups.push({ ref, context: decisionContext, decision });
-        return [decisionContext, decision];
+        return decision;
     };
 
     const baseContext: LinkedValueContext = {
-        decisionContext: () => decisionContext,
         parent: () => parent,
+        decisionContext: () => decisionContext,
         lookupContexts: () => lookupContexts,
-        decisionInput: () => input,
-        valueInput: () => state.valueInput,
+        input: () => input,
+        params: () => input.params || {},
         lookups: () => lookups,
-        nested: () => nestedContexts,
         children: () => childContexts,
+        nested: () => primitiveContexts,
         ownErrors: () => errors,
         allErrors: () => [
             ...errors,
-            ...nestedContexts.flatMap(nested => nested.allErrors()),
+            ...primitiveContexts.flatMap(primtive => primtive.errors()),
             ...childContexts.flatMap(child => child.allErrors()),
         ],
         hasErrors: () =>
             Boolean(errors.length) ||
-            Boolean(nestedContexts.find(nested => nested.hasErrors())) ||
+            Boolean(primitiveContexts.find(nested => nested.hasErrors())) ||
             Boolean(childContexts.find(child => child.hasErrors())),
-    };
-
-    const consume = (input: unknown) => {
-        if ('valueInput' in state) {
-            const valueStr = JSON.stringify(state.valueInput);
-            const decisionRefStr = JSON.stringify(decisionContext.ref());
-            throw new Error(
-                `Value for "${decisionRefStr}" has already consumed input (${valueStr}).`,
-            );
-        }
-        state.valueInput = input;
     };
 
     const addError = (error: ValueError) => {
         errors.push(error);
     };
 
-    const childContext = (input?: DecisionInput) => {
-        const child = createValueContextPrivate(decisionContext, baseContext, input);
+    const childContext = (input: DecisionInput) => {
+        const child = createValueContextPrivate(decisionContext, input, baseContext);
         childContexts.push(child);
         return child;
     };
 
-    const nestedContext = () => {
-        const nested = createValueContextPrivate(decisionContext, baseContext);
-        nestedContexts.push(nested);
-        return nested;
-    };
-
-    const outputContext = () => {
-        return createValueContextPrivate(decisionContext, baseContext);
+    const primitiveContext = <T>(input?: DeepPartial<T>) => {
+        const primitive = createPrimitiveContext(input, baseContext);
+        primitiveContexts.push(primitive);
+        return primitive;
     };
 
     const valueContext: ValueContext = {
         ...baseContext,
         resolve,
-        consume,
         addError,
         childContext,
-        nestedContext,
-        outputContext,
+        primitiveContext,
     };
 
     return valueContext;

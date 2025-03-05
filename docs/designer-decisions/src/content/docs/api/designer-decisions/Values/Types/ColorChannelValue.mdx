@@ -12,7 +12,7 @@ export type ColorChannelValue = {
     get: () => number;
     raw(): number;
     quantized: (quantize?: number) => number;
-    name: () => ColorChannelValue;
+    channelName: () => ColorChannelValue;
     toColor: (channels: ComplementaryChannels) => ColorValue;
 };
 ```

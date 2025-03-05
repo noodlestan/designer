@@ -1,4 +1,4 @@
-import type { DecisionId, DecisionName } from './record';
+import type { DecisionId, DecisionName } from './input';
 
 export type DecisionNameRef = {
     $name: DecisionName;

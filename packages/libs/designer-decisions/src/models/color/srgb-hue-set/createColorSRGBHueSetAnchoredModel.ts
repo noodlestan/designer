@@ -1,10 +1,6 @@
 import type { ColorSRGBHueSetAnchoredInput } from '../../../inputs';
-import {
-    type SRGBHueSet,
-    createSRGBHueSet,
-    createSRGBHueValue,
-    generateAnchoredSeries,
-} from '../../../values';
+import { generateAnchoredSeries } from '../../../primitives';
+import { type SRGBHueSet, createSRGBHueSet, createSRGBHueValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
@@ -12,18 +8,18 @@ export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
     ColorSRGBHueSetAnchoredInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { anchor, before, after, quantize } = context.params() || {};
 
-            const anchorValue = createSRGBHueValue(context.nestedContext(), params.anchor, {
+            const options = { quantize };
+            const { value: anchorValue } = createSRGBHueValue(context, anchor, {
                 quantize,
-            });
-            const anchor = anchorValue.get();
+            }).get();
 
-            const series = generateAnchoredSeries(anchor, params);
-            const values = series.map(item =>
-                createSRGBHueValue(context.nestedContext(), item, { quantize }),
-            );
+            const seriesParams = { before, after, quantize };
+            const series = generateAnchoredSeries(anchorValue, seriesParams);
+            const values = series.map(channel => createSRGBHueValue(context, channel, options));
+
             return createSRGBHueSet(context, values);
         },
     };

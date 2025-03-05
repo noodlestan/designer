@@ -1,10 +1,6 @@
 import type { SizeScaleAnchoredInput } from '../../../inputs';
-import {
-    type SizeScale,
-    createSizeScale,
-    createSizeValue,
-    generateAnchoredSeries,
-} from '../../../values';
+import { generateAnchoredSeries } from '../../../primitives';
+import { type SizeScale, createSizeScale, createSizeValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createSizeScaleAnchoredModel: DecisionModelFactory<
@@ -12,17 +8,16 @@ export const createSizeScaleAnchoredModel: DecisionModelFactory<
     SizeScaleAnchoredInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { anchor, before, after, quantize } = context.params() || {};
 
-            const anchorValue = createSizeValue(context.nestedContext(), params.anchor, {
-                quantize,
-            });
-            const { value: anchor } = anchorValue.toObject();
+            const options = { quantize };
+            const { value: anchorValue, unit } = createSizeValue(context, anchor, options).get();
 
-            const series = generateAnchoredSeries(anchor, params);
+            const seriesParams = { before, after, quantize };
+            const series = generateAnchoredSeries(anchorValue, seriesParams);
             const values = series.map(size =>
-                createSizeValue(context.nestedContext(), size, { quantize }),
+                createSizeValue(context, { value: size, unit }, { quantize }),
             );
 
             return createSizeScale(context, values);

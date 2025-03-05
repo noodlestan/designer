@@ -1,0 +1,34 @@
+import { describe, expect, it } from 'vitest';
+
+import { type FontWeightObjectLiteral } from '../../../inputs';
+import { createValueContextMock } from '../../../mocks';
+
+import { createFontWeightValueExplicitModel } from './createFontWeightValueExplicitModel';
+
+describe('createFontWeightValueExplicitModel()', () => {
+    const model = createFontWeightValueExplicitModel();
+    const input = {
+        value: 100,
+    } as FontWeightObjectLiteral;
+    const params = { value: input };
+
+    describe('Given a context and params', () => {
+        const [mockValueContext] = createValueContextMock({ params });
+
+        it('should create a value', () => {
+            const result = model.produce(mockValueContext);
+
+            expect(result.get().toString()).toEqual('100');
+        });
+    });
+
+    describe('Given a context and no params', () => {
+        const [mockValueContext] = createValueContextMock();
+
+        it('should create a fallback value', () => {
+            const result = model.produce(mockValueContext);
+
+            expect(result.get().literal()).toEqual({ value: 400, name: 'Normal' });
+        });
+    });
+});

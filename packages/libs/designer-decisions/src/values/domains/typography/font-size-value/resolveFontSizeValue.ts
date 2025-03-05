@@ -1,10 +1,12 @@
-import { type SizeObjectLiteral, type SizeValueInput } from '../../../../inputs';
-import { type ValueContext } from '../../../../value';
+import type { SizeLiteral, SizeValueInput } from '../../../../inputs';
+import type { DeepPartial } from '../../../../private';
+import type { ValueContext } from '../../../../value';
 import { resolveSizeBaseValue } from '../../../base';
 
-import { SIZE_DEFINITION } from './private';
+import { SIZE_VALUE_DEFINITION } from './private';
 
 export const resolveFontSizeValue = (
     context: ValueContext,
-    input: SizeValueInput,
-): SizeObjectLiteral => resolveSizeBaseValue(SIZE_DEFINITION, context, input);
+    input?: DeepPartial<SizeValueInput>,
+): DeepPartial<SizeLiteral> | undefined =>
+    resolveSizeBaseValue(SIZE_VALUE_DEFINITION, context, input);

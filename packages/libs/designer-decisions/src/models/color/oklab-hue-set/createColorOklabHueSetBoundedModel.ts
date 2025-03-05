@@ -1,10 +1,6 @@
 import type { ColorOklabHueSetBoundedInput } from '../../../inputs';
-import {
-    type OklabHueSet,
-    createOklabHueSet,
-    createOklabHueValue,
-    generateBoundedSeries,
-} from '../../../values';
+import { generateBoundedSeries } from '../../../primitives';
+import { type OklabHueSet, createOklabHueSet, createOklabHueValue } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
 export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
@@ -12,22 +8,21 @@ export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
     ColorOklabHueSetBoundedInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { from, to, steps, quantize } = context.params() || {};
 
-            const fromValue = createOklabHueValue(context.nestedContext(), params.from, {
-                quantize,
-            });
-            const toValue = createOklabHueValue(context.nestedContext(), params.to, { quantize });
+            const options = { quantize };
+            const fromValue = createOklabHueValue(context, from, options);
+            const toValue = createOklabHueValue(context, to, options);
 
-            const from = fromValue.get();
-            const to = toValue.get();
+            const series = generateBoundedSeries(
+                fromValue.get().toNumber(),
+                toValue.get().toNumber(),
+                steps,
+            );
+            const values = series.map(channel => createOklabHueValue(context, channel, options));
 
-            const series = generateBoundedSeries(from, to, params.steps);
-            const values = series
-                .slice(1, series.length - 1)
-                .map(item => createOklabHueValue(context.nestedContext(), item, { quantize }));
-            return createOklabHueSet(context, [fromValue, ...values, toValue]);
+            return createOklabHueSet(context, values);
         },
     };
 };

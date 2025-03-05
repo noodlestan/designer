@@ -13,6 +13,15 @@ export type FontWeightOpenTypeName =
 
 export type FontWeightCSSName = 'normal' | 'bold';
 
-export type FontWeightLiteral = FontWeightCSSName | FontWeightOpenTypeName | number;
+export type FontWeightNamed = FontWeightOpenTypeName | FontWeightCSSName;
+
+export type FontWeightRaw = FontWeightNamed | number;
+
+export type FontWeightObjectLiteral = {
+    value: number;
+    name?: FontWeightNamed;
+};
+
+export type FontWeightLiteral = FontWeightRaw | FontWeightObjectLiteral;
 
 export type FontWeightInput = DecisionRef | FontWeightLiteral;

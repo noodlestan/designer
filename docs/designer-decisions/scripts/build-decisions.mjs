@@ -1,20 +1,20 @@
 import {
-    createStoreContext,
+    createBuilderContext,
     formatDecisionStatus,
     formatError,
     loadConfig,
-    staticStoreBuilder,
+    buildStaticStore,
     produceDecisions,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const loadDecisions = async () => {
     const store = await build();
 
-    const produced = produceDecisions(store);
+    const produced = produceDecisions(context, store);
     produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info('🐘', produced.summary());
 

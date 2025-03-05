@@ -1,9 +1,9 @@
 import type { ColorSRGBSaturationScaleAnchoredInput } from '../../../inputs';
+import { generateAnchoredSeries } from '../../../primitives';
 import {
     type SRGBSaturationScale,
     createSRGBSaturationScale,
     createSRGBSaturationValue,
-    generateAnchoredSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,18 +12,20 @@ export const createColorSRGBSaturationScaleAnchoredModel: DecisionModelFactory<
     ColorSRGBSaturationScaleAnchoredInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { anchor, before, after, quantize } = context.params() || {};
 
-            const anchorValue = createSRGBSaturationValue(context.nestedContext(), params.anchor, {
+            const options = { quantize };
+            const { value: anchorValue } = createSRGBSaturationValue(context, anchor, {
                 quantize,
-            });
-            const anchor = anchorValue.get();
+            }).get();
 
-            const series = generateAnchoredSeries(anchor, params);
-            const values = series.map(item =>
-                createSRGBSaturationValue(context.nestedContext(), item, { quantize }),
+            const seriesParams = { before, after, quantize };
+            const series = generateAnchoredSeries(anchorValue, seriesParams);
+            const values = series.map(channel =>
+                createSRGBSaturationValue(context, channel, options),
             );
+
             return createSRGBSaturationScale(context, values);
         },
     };

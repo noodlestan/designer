@@ -10,17 +10,15 @@ Extends `BaseValue<Size>`
 ```ts
 export type SizeRaw = string | number;
 
-export type SizeAbsoluteUnits = 'px' | 'rem';
-
 export type SizeObjectLiteral = {
     value: number;
-    units: SizeAbsoluteUnits;
+    unit: SizeAbsoluteUnits;
 };
 export type SizeLiteral = SizeRaw | SizeObjectLiteral;
 
 export type Size = {
     value: number;
-    units: SizeAbsoluteUnits;
+    unit: SizeAbsoluteUnits;
     toString: () => string;
 };
 

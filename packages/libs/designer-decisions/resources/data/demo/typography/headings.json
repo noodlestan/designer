@@ -1,0 +1,16 @@
+[
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Headings Default Weight",
+    "params": {
+      "value": 600
+    }
+  },
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Headings Bold Weight",
+    "params": {
+      "value": 900
+    }
+  }
+]

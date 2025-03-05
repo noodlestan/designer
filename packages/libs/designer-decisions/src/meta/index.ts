@@ -1,4 +1,4 @@
-import { ColorDecisionTypes, SizeDecisionTypes, TypographyDecisionTypes } from './domains';
+import { ColorDecisionTypes, SpaceDecisionTypes, TypographyDecisionTypes } from './domains';
 import { createDecisionModelMetas, createDecisionTypeMeta } from './functions';
 
 export * from './data';
@@ -7,7 +7,7 @@ export * from './types';
 
 export const DECISION_TYPES = [
     ...ColorDecisionTypes,
-    ...SizeDecisionTypes,
+    ...SpaceDecisionTypes,
     ...TypographyDecisionTypes,
 ];
 

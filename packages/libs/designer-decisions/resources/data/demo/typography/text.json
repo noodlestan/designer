@@ -1,0 +1,26 @@
+[
+  {
+    "model": "font-size-value/explicit",
+    "name": "Text Default Size",
+    "params": {
+      "value": {
+        "value": 16,
+        "unit": "px"
+      }
+    }
+  },
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Text Default Weight",
+    "params": {
+      "value": 300
+    }
+  },
+  {
+    "model": "font-weight-value/explicit",
+    "name": "Text Bold Weight",
+    "params": {
+      "value": 600
+    }
+  }
+]

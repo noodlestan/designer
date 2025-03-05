@@ -1,0 +1,68 @@
+---
+title: createStore()
+slug: api/designer-decisions/Store/createStore
+sidebar:
+    label: createStore
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Creates a [Store](/api/designer-decisions/Store/Types/Store) from a pre-validated [RecordMap](/api/designer-decisions/Inputs/Types/RecordMap).
+
+```ts
+type createStore = (validatedMap: RecordMap) => Store;
+```
+
+<Aside type="tip" title="Advanced API">
+    Access to this API is only required in advanced use cases. In most scenarios you should be using
+    [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+</Aside>
+
+## Return value
+
+Returns a [Store](/api/designer-decisions/Store/Types/Store) that can be used to retrieve decision and resolve decision values.
+
+## Params
+
+#### ༶ `validatedMap`: [RecordMap](/api/designer-decisions/Inputs/Types/RecordMap)
+
+Holds all decision input data and provides an API to retrieve validated records and validation errors.
+
+&nbsp;
+
+## Usage
+
+The following is taken from the [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore) implementation.
+
+```ts "createStore" collapse={1-14}
+import { DEMO_DATA, createStore } from '@noodlestan/designer-decisions';
+import {
+    type BuilderOptions,
+    createBuilderContext,
+    createDecisionValidator,
+    createRecordMap
+    loadDecisionsFromSources,
+    loadSchemasFromSources,
+} from '@noodlestan/designer-functions';
+
+const options: BuilderOptions = {
+    decisions: [DEMO_DATA, './data'],
+};
+
+const context = createBuilderContext(options);
+const schemaMap = await loadSchemasFromSources(context);
+const validator = createDecisionValidator(schemaMap);
+
+const loadedRecords = await loadDecisionsFromSources(context);
+const recordMap = createRecordMap(loadedRecords, validator);
+const store = createStore(context, recordMap);
+```
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-decisions / Store](/api/designer-decisions/Store/Types/Store)
+-   [API / designer-functions / buildStaticStore()](/api/designer-functions/Builder/buildStaticStore)
+-   [API / designer-functions / BuilderContext](/api/designer-functions/Builder/Types/BuilderContext)
+-   [API / designer-functions / RecordMap](/api/designer-decisions/Inputs/Types/RecordMap)

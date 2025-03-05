@@ -6,7 +6,7 @@ export type SizeAbsoluteUnits = 'px' | 'rem';
 
 export type SizeObjectLiteral = {
     value: number;
-    units: SizeAbsoluteUnits;
+    unit?: SizeAbsoluteUnits;
 };
 export type SizeLiteral = SizeRaw | SizeObjectLiteral;
 

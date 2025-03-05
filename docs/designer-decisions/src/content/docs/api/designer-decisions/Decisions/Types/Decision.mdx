@@ -9,8 +9,9 @@ Provides an API to produce decision values and access to underlying data.
 
 ```ts
 export type Decision<V extends BaseValue<unknown>> = {
+    context: () => decisionContext;
+    uuid: () => string;
     type: () => string;
-    uuid: () => string | undefined;
     name: () => string;
     description: () => string | undefined;
     inputs: () => DecisionInput[];

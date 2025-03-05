@@ -7,14 +7,13 @@ export const createSizeScaleExplicitModel: DecisionModelFactory<
     SizeScaleExplicitInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { values, quantize } = context.params() || {};
 
-            const values = params.values.map(value =>
-                createSizeValue(context.nestedContext(), value, { quantize }),
-            );
+            const options = { quantize };
+            const items = values?.map(size => createSizeValue(context, size, options)) || [];
 
-            return createSizeScale(context, values);
+            return createSizeScale(context, items);
         },
     };
 };

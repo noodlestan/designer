@@ -1,9 +1,9 @@
 import type { ColorSRGBLightnessScaleAnchoredInput } from '../../../inputs';
+import { generateAnchoredSeries } from '../../../primitives';
 import {
     type SRGBLightnessScale,
     createSRGBLightnessScale,
     createSRGBLightnessValue,
-    generateAnchoredSeries,
 } from '../../../values';
 import type { DecisionModelFactory } from '../../types';
 
@@ -12,18 +12,20 @@ export const createColorSRGBLightnessScaleAnchoredModel: DecisionModelFactory<
     ColorSRGBLightnessScaleAnchoredInput
 > = () => {
     return {
-        produce: (context, params) => {
-            const { quantize } = params;
+        produce: context => {
+            const { anchor, before, after, quantize } = context.params() || {};
 
-            const anchorValue = createSRGBLightnessValue(context.nestedContext(), params.anchor, {
+            const options = { quantize };
+            const { value: anchorValue } = createSRGBLightnessValue(context, anchor, {
                 quantize,
-            });
-            const anchor = anchorValue.get();
+            }).get();
 
-            const series = generateAnchoredSeries(anchor, params);
-            const values = series.map(item =>
-                createSRGBLightnessValue(context.nestedContext(), item, { quantize }),
+            const seriesParams = { before, after, quantize };
+            const series = generateAnchoredSeries(anchorValue, seriesParams);
+            const values = series.map(channel =>
+                createSRGBLightnessValue(context, channel, options),
             );
+
             return createSRGBLightnessScale(context, values);
         },
     };

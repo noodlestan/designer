@@ -1,11 +1,3 @@
-import { ColorOklabDecisionTypes } from './oklab';
-import { ColorSetDecisionTypes } from './set';
-import { ColorSRGBDecisionTypes } from './srgb';
-import { ColorValueDecisionTypes } from './value';
+import { ColorValueDecisionTypes } from './color';
 
-export const ColorDecisionTypes = [
-    ...ColorOklabDecisionTypes,
-    ...ColorSetDecisionTypes,
-    ...ColorSRGBDecisionTypes,
-    ...ColorValueDecisionTypes,
-];
+export const ColorDecisionTypes = [...ColorValueDecisionTypes];

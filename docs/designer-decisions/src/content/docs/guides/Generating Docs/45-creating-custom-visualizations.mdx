@@ -81,7 +81,7 @@ import { type ColorDecision } from '@noodlestan/designer-decisions';
 import { ShowDecisionCard } from '@noodlestan/designer-shows/astro';
 
 const { d, store } = Astro.props
-const [, decision] = store.decision<ColorDecision>(d);
+const decision = store.decision<ColorDecision>(d);
 
 const color = decision.produce().toString('oklch')
 ---

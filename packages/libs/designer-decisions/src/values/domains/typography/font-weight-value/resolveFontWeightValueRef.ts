@@ -1,27 +1,40 @@
-import { isFontWeightValueDecision } from '../../../../decision';
-import type { DecisionRef } from '../../../../inputs';
-import type { ValueContext } from '../../../../value';
-import { handleDecisionNotFound, handleRefMismatchError } from '../../../functions';
-import type { FontWeight } from '../../../primitives';
-
+import { DECISION_FONT_WEIGHT_VALUE } from '../../../../constants';
+import { isFontWeightValueDecision } from '../../../../decision-types';
+import type { DecisionRef, FontWeightObjectLiteral } from '../../../../inputs';
+import { FONT_WEIGHT_FALLBACK_LITERAL } from '../../../../primitives';
 import {
-    REF_CHECKED_TYPES as accepted,
-    FALLBACK_VALUE as fallback,
-    VALUE_NAME as valueName,
-} from './private';
+    type ValueContext,
+    handleDecisionNotFound,
+    handleRefMismatchError,
+} from '../../../../value';
 
-export const resolveFontWeightValueRef = (context: ValueContext, ref: DecisionRef): FontWeight => {
-    const [, decision] = context.resolve(ref);
+const REF_CHECKED_TYPES = [DECISION_FONT_WEIGHT_VALUE];
+
+export const resolveFontWeightValueRef = (
+    context: ValueContext,
+    ref: DecisionRef,
+): FontWeightObjectLiteral => {
+    const decision = context.resolve(ref);
 
     if (!decision) {
-        handleDecisionNotFound(context, valueName, ref);
-        return fallback;
+        handleDecisionNotFound(context, DECISION_FONT_WEIGHT_VALUE, ref);
+        return FONT_WEIGHT_FALLBACK_LITERAL;
     }
+
+    // if (isFontWeightScaleDecision(decision)) {
+    //     const value = resolveSetRefDecision<FontWeightValue>(
+    //         context,
+    //         decision,
+    //         DECISION_FONT_WEIGHT_VALUE,
+    //         ref,
+    //     );
+    //     return value?.get().toObject() ?? fallback;
+    // }
 
     if (isFontWeightValueDecision(decision)) {
-        return decision.produce(context).get();
+        return decision.produce(context).get().literal();
     }
 
-    handleRefMismatchError(context, decision, valueName, ref, accepted);
-    return fallback;
+    handleRefMismatchError(context, decision, DECISION_FONT_WEIGHT_VALUE, ref, REF_CHECKED_TYPES);
+    return FONT_WEIGHT_FALLBACK_LITERAL;
 };

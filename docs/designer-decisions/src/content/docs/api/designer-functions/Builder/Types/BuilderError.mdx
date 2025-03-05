@@ -1,0 +1,38 @@
+---
+title: BuilderError
+slug: api/designer-functions/Builder/Types/BuilderError
+sidebar:
+    order: 0
+---
+
+Captures an error produced during [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+
+```ts
+export type BuilderError = {
+    name: string;
+    error?: unknown;
+    message: () => string;
+};
+```
+
+## Errors
+
+### BuilderUnexpectedError
+
+An unexpected error occurred while building the store.
+
+### BuilderOptionsError
+
+The [BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions), either provided to `createBuilderContext()` or expressed in the `dd.config.mjs` [configuration file](/api/configuration), are invalid.
+
+### BuilderSourceError
+
+One of the [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource) or [SchemaSource](/api/designer-decisions/Meta/Types/SchemaSource), provided to `createBuilderContext()` or expressed in the `dd.config.mjs` [configuration file](/api/configuration), is invalid.
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-functions / BuilderOptions](/api/designer-functions/Builder/Types/BuilderOptions)
+-   [API / designer-functions / createBuilderContext()](/api/designer-functions/Builder/createBuilderContext)
+-   [API / designer-decisions / createStore()](/api/designer-decisions/Store/createStore)

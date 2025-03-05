@@ -30,7 +30,7 @@ export const SizeDecisionTypes: DecisionType[] = [
     {
         type: DECISION_SIZE_SCALE,
         name: 'Size Scale',
-        category: 'scale',
+        category: 'set',
         domain: 'space',
         description: 'A decision to define a size scale.',
         models: [

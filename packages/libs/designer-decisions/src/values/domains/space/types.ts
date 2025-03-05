@@ -1,5 +1,7 @@
-import type { BaseSet, BaseSizeValue } from '../../base';
+import type { BaseSet, SizeBaseOptions, SizeBaseValue } from '../../base';
 
-export type SizeValue = BaseSizeValue;
+export type SizeScale = BaseSet<SizeBaseValue>;
 
-export type SizeScale = BaseSet<SizeValue>;
+export type SizeValueOptions = SizeBaseOptions;
+
+export type SizeValue = SizeBaseValue;

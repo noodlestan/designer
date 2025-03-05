@@ -9,8 +9,8 @@ export type ColorObjectInput = ColorOkInput | ColorSRGBInput;
 
 export type ColorObjectLiteral = ColorOkLiteral | ColorSRGBLiteral;
 
-export type ColorValueInput = DecisionRef | ColorRaw | ColorObjectInput;
-
 export type ColorLiteral = ColorRaw | ColorObjectLiteral;
+
+export type ColorValueInput = DecisionRef | ColorLiteral;
 
 export type ColorFormat = 'oklch' | 'oklab' | 'hsl' | 'rgb';

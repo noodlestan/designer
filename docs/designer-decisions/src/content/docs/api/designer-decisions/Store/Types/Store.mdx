@@ -1,0 +1,80 @@
+---
+title: Store
+slug: api/designer-decisions/Store/Types/Store
+sidebar:
+    order: 0
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Provides an API to retrieve decisions and resolve their values.
+
+```ts
+export type Store = {
+    inputErrors: () => DecisionInputError[];
+    records: (filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[];
+    decision: (ref: DecisionRef) => [DecisionContext, Decision<V> | undefined];
+    createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
+    createValueContext: (lookupContexts?: LookupContexts) => ValueContext;
+};
+```
+
+## Implementation
+
+You can create a `Store` via:
+
+-   [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore) (recommended)
+-   [createStore()](/api/designer-decisions/Store/createStore) (advanced)
+
+## Usage
+
+**Recommended:**
+
+Using the `dd.config.mjs` [configuration file](/api/configuration) and [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+
+```ts "buildStaticStore"
+import { loadConfig, createBuilderContext, buildStaticStore } from '@noodlestan/designer-functions';
+
+const config = await loadConfig();
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
+
+const store = await build();
+const primary = store.decision({ $name: 'Primary color' });
+const color = primary.produce().get().toString('oklch');
+```
+
+### Advanced use cases
+
+<Aside type="tip" title="Advanced API">
+    Access to these APIs is only required in advanced use cases. In most scenarios you should be
+    using [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore).
+</Aside>
+
+You can use lower lever APIs to compose your own use cases.
+
+The following snippet is taken from the [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore) implementation.
+
+```ts "createStore"
+const context = createBuilderContext(options);
+const schemaMap = await loadSchemasFromSources(context);
+const validator = createDecisionValidator(schemaMap);
+
+const loadedRecords = await loadDecisionsFromSources(context);
+const recordMap = createRecordMap(loadedRecords, validator);
+const store = createStore(recordMap);
+```
+
+Refer to [createStore()](/api/designer-decisions/Store/createStore) for more examples.
+
+## See also
+
+-   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
+-   [API / configuration](/api/configuration)
+-   [API / designer-decisions / Store](/api/designer-decisions/Store/Types/Store)
+-   [API / designer-functions / buildStaticStore()](/api/designer-functions/Builder/buildStaticStore)
+-   [API / designer-decisions / createStore()](/api/designer-decisions/Store/createStore)
+
+```
+
+```

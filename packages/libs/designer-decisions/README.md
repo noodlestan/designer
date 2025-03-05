@@ -14,27 +14,27 @@ This core library models contextual design decisions of different types (colors,
 
 These exported constants defines where to locate the sample and demo data collections.
 
-[DecisionSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/DecisionSource/) are a way to pass decision inputs _by reference_ to decision validators and stores such as [Store](https://designer-decisions.noodlestan.org/api/designer-functions/Store/Types/Store).
+[DecisionSource(s)](https://designer-decisions.noodlestan.org/api/designer-decisions/Meta/Types/DecisionSource/) are a way to pass decision inputs _by reference_ to decision validators and stores such as [Store](https://designer-decisions.noodlestan.org/api/designer-decisions/Store/Types/Store).
 
 ```ts
 import {
-  type StoreOptions,
-  createStoreContext,
+  type BuilderOptions,
+  createBuilderContext,
   formatDecisionStatus
   produceDecisions,
-  staticStoreBuilder,
+  buildStaticStore,
 } from '@noodlestan/designer-functions';
 import { DEMO_DATA } from '@noodlestan/designer-decisions';
 
-const options: StoreOptions = {
+const options: BuilderOptions = {
   decisions: [DEMO_DATA, './data'],
 };
-const context = createStoreContext(options);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(options);
+const build = buildStaticStore(context);
 const store = await build();
 
 const records = store.records();
-const produced = produceDecisions(store);
+const produced = produceDecisions(context, store);
 produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
 
 console.info('🐘', produced.summary());

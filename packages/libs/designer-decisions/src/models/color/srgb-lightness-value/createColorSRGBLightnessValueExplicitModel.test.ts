@@ -9,42 +9,42 @@ describe('createColorSRGBLightnessValueExplicitModel()', () => {
     const model = createColorSRGBLightnessValueExplicitModel();
 
     describe('Given a context and params', () => {
-        const [mockContext] = createValueContextMock();
         const params: ColorSRGBLightnessValueExplicitInput['params'] = {
             value: 0.555,
         };
+        const [mockValueContext] = createValueContextMock({ params });
 
         it('should create a value', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockValueContext);
 
-            expect(result.get()).toEqual(params.value);
+            expect(result.get().toNumber()).toEqual(params.value);
         });
     });
 
     describe('Given input out of range', () => {
-        const [mockContext] = createValueContextMock();
         const params: ColorSRGBLightnessValueExplicitInput['params'] = {
             value: 2,
         };
+        const [mockValueContext] = createValueContextMock({ params });
 
         it('should create a clamped value', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockValueContext);
 
-            expect(result.get()).toEqual(1);
+            expect(result.get().toNumber()).toEqual(1);
         });
     });
 
     describe('Given a quantize param', () => {
-        const [mockContext] = createValueContextMock();
         const params: ColorSRGBLightnessValueExplicitInput['params'] = {
             value: 0.3137,
             quantize: 2,
         };
+        const [mockValueContext] = createValueContextMock({ params });
 
         it('should create a quantized value', () => {
-            const result = model.produce(mockContext, params);
+            const result = model.produce(mockValueContext);
 
-            expect(result.get()).toEqual(0.32);
+            expect(result.get().toNumber()).toEqual(0.32);
         });
     });
 });

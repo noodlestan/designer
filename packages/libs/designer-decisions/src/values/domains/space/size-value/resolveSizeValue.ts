@@ -1,35 +1,13 @@
-import { type SizeObjectLiteral, type SizeValueInput, isDecisionRef } from '../../../../inputs';
-import { type ValueContext, createValueInputError } from '../../../../value';
-import { createSize, isValidSizeObjectLiteral } from '../../../primitives';
+import type { SizeLiteral, SizeValueInput } from '../../../../inputs';
+import type { DeepPartial } from '../../../../private';
+import type { ValueContext } from '../../../../value';
+import { resolveSizeBaseValue } from '../../../base';
 
-import { FALLBACK_VALUE as fallback, VALUE_NAME as valueName } from './private';
-import { resolveSizeValueRef } from './resolveSizeValueRef';
+import { SIZE_DEFINITION } from './private';
 
 export const resolveSizeValue = (
     context: ValueContext,
-    input: SizeValueInput,
-): SizeObjectLiteral => {
-    if (isDecisionRef(input)) {
-        return resolveSizeValueRef(context, input);
-    }
-
-    if (typeof input === 'string') {
-        const value = Number(input);
-        if (isNaN(value)) {
-            context.addError(createValueInputError({ context, valueName, input }));
-            return fallback;
-        }
-        return createSize({ value, units: 'px' });
-    }
-
-    if (typeof input === 'number') {
-        return createSize({ value: input, units: 'px' });
-    }
-
-    if (!isValidSizeObjectLiteral(input)) {
-        context.addError(createValueInputError({ context, valueName, input }));
-        return fallback;
-    }
-
-    return input;
+    input?: DeepPartial<SizeValueInput>,
+): DeepPartial<SizeLiteral> | undefined => {
+    return resolveSizeBaseValue(SIZE_DEFINITION, context, input);
 };

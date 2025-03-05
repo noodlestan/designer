@@ -78,19 +78,19 @@ Add a script to load decisions and print eventual validation errors.
 
 </FileTree>
 
-We will use the [loadConfig()](/api/designer-functions/Config/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [staticStoreBuilder()](/api/designer-functions/Builder/staticStoreBuilder) to load and validate the decision data.
+We will use the [loadConfig()](/api/designer-functions/Config/loadConfig) helper to load and validate the `dd.config.mjs` configuration first, and then the _all-in-one_ [buildStaticStore()](/api/designer-functions/Builder/buildStaticStore) to load and validate the decision data.
 
-```js "staticStoreBuilder"
+```js "buildStaticStore"
 // scripts/validate-decisions.js
 import path from 'path';
-import { createStoreContext, staticStoreBuilder, loadConfig } from '@noodlestan/designer-functions';
+import { createBuilderContext, buildStaticStore, loadConfig } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 ```
 
-The `build()` functions returns a [pre-validated decision store](/api/designer-functions/Store/Types/Store) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
+The `build()` functions returns a [pre-validated decision store](/api/designer-decisions/Store/Types/Store) asynchronously. The store exposes all input records along with any errors that may have occurred while loading schemas and data sources, or when validating input data.
 
 Add the following code to execute the builder and list each records' `name` and `model`.
 
@@ -99,15 +99,15 @@ We will also format any eventual errors to better assist us if something goes wr
 ```diff lang="js" collapse={8-12} "formatError" "store.records()" "context.errors()"
 // scripts/validate-decisions.js
 import {
-    createStoreContext,
+    createBuilderContext,
 +  formatError,
     loadConfig,
-    staticStoreBuilder,
+    buildStaticStore,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const loadDecisions = async () => {
     const store = await build();
@@ -216,16 +216,16 @@ To inspect the validation errors we can format messages using the `formatDecisio
 ```diff lang="js" collapse={9-13} "formatDecisionInputError"
 // scripts/validate-decisions.js
 import {
-    createStoreContext,
+    createBuilderContext,
     formatError,
 +    formatDecisionInputError,
     loadConfig,
-    staticStoreBuilder,
+    buildStaticStore,
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const loadDecisions = async () => {
     const store = await build();
@@ -286,23 +286,23 @@ Remove the `store.inputErrors().forEach(...)` line, as it will become redundant,
 ```diff lang="js" collapse={10-16,25-28}
 // scripts/validate-decisions.js
 import {
-    createStoreContext,
+    createBuilderContext,
 +    formatDecisionStatus,
     formatError,
     loadConfig,
-    staticStoreBuilder,
+    buildStaticStore,
 +    produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const loadDecisions = async () => {
     const store = await build();
 
     const records = store.records();
-+    const produced = produceDecisions(store);
++    const produced = produceDecisions(context, store);
 +    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info(`🐘 ${records.length} records`);
 -    store.inputErrors().forEach(error => console.error(formatDecisionInputError(error)));
@@ -343,17 +343,17 @@ The `produced` object reports counts for decision records, and different types o
 ```diff lang="js" collapse={1-20,25-28}
 // scripts/validate-decisions.js
 import {
-    createStoreContext,
+    createBuilderContext,
     formatDecisionStatus,
     formatError,
     loadConfig,
-    staticStoreBuilder,
+    buildStaticStore,
     produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const loadDecisions = async () => {
     const store = await build();
@@ -383,17 +383,17 @@ If you are running this as part of your build process you will probably want to 
 ```diff lang="js" collapse={1-21}
 // scripts/validate-decisions.js
 import {
-    createStoreContext,
+    createBuilderContext,
     formatDecisionStatus,
     formatError,
     loadConfig,
-    staticStoreBuilder,
+    buildStaticStore,
     produceDecisions
 } from '@noodlestan/designer-functions';
 
 const config = await loadConfig();
-const context = createStoreContext(config.store);
-const build = staticStoreBuilder(context);
+const context = createBuilderContext(config.store);
+const build = buildStaticStore(context);
 
 const loadDecisions = async () => {
     const store = await build();
