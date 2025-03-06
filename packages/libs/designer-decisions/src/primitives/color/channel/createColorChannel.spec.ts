@@ -24,7 +24,6 @@ describe('createColorChannel()', () => {
     describe('Given a context with an input', () => {
         it('should call normalizeColorChannelInputMocked() with the expected arguments', () => {
             createColorChannel(channelDef, mockPrimitiveContext);
-
             expect(normalizeColorChannelInputMocked).toHaveBeenCalledWith(
                 channelDef,
                 mockPrimitiveContext,
@@ -33,7 +32,6 @@ describe('createColorChannel()', () => {
 
         it('should expose the resolved attributes', () => {
             const result = createColorChannel(channelDef, mockPrimitiveContext);
-
             expect(result.value).toEqual(literalChannel.value);
         });
     });
@@ -42,7 +40,6 @@ describe('createColorChannel()', () => {
         it('should return a ColorChannelObjectLiteral', () => {
             const channel = createColorChannel(channelDef, mockPrimitiveContext);
             const result = channel.literal();
-
             expect(result).toEqual(literalChannel);
         });
     });
@@ -51,7 +48,6 @@ describe('createColorChannel()', () => {
         it('should return the value as a string', () => {
             const channel = createColorChannel(channelDef, mockPrimitiveContext);
             const result = channel.toString();
-
             expect(result).toEqual(String(literalChannel.value));
         });
     });
@@ -67,16 +63,13 @@ describe('createColorChannel()', () => {
         it('should create an output context', () => {
             const channel = createColorChannel(channelDef, mockPrimitiveContext);
             channel.toColor({ l: 0.5, c: 0.1 });
-
             expect(outputContextSpy).toHaveBeenCalledWith(colorLiteral);
         });
 
         it('should return the value as an object', () => {
             const channel = createColorChannel(channelDef, mockPrimitiveContext);
             const result = channel.toColor({ l: 0.5, c: 0.1 });
-
             const lch = result.toObject<ColorOkLCHLiteral>({ format: 'oklch' });
-
             expect(lch.l).toEqual(0.5);
             expect(lch.c).toEqual(0.1);
             expect(lch.h).toEqual(233);

@@ -9,7 +9,8 @@ export const createColorOklabHueValueExplicitModel: DecisionModelFactory<
     return {
         produce: context => {
             const { value, quantize } = context.params() || {};
-            return createOklabHueValue(context, value, { quantize });
+            const options = { quantize };
+            return createOklabHueValue(context.valueContext(value), options);
         },
     };
 };

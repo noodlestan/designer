@@ -28,11 +28,10 @@ describe('resolveSizeBaseValueRef()', () => {
 
     describe('When the decision cannot be resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
-        const [mockValueContext, { addErrorSpy }] = createValueContextMock();
+        const [mockValueContext, { addErrorSpy }] = createValueContextMock(mockRef);
 
         it('should return the fallback value', () => {
             const result = resolveSizeBaseValueRef(sizeDef, mockValueContext, mockRef);
-
             expect(result).toEqual(fallbackSize);
         });
 
@@ -50,13 +49,12 @@ describe('resolveSizeBaseValueRef()', () => {
 
     describe('When it resolves to a SizeScale and the item is resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'size-scale/foo' } as DecisionInput;
         const sizeObjectLiteral: SizeObjectLiteral = { value: 3.33, unit: 'px' };
-        const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => sizeObjectLiteral,
-        });
-        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockInput);
-        const sizeValue = createSizeValue(mockValueContext, sizeObjectLiteral);
+        const [, mockDecision] = createDecisionMock([mockInput]);
+        const sizeValue = createSizeValue(createValueContextMock(sizeObjectLiteral)[0]);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -69,7 +67,7 @@ describe('resolveSizeBaseValueRef()', () => {
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockValueContext,
                 mockDecision,
-                'foo-size-value',
+                sizeDef.valueName,
                 mockRef,
             );
         });
@@ -82,10 +80,13 @@ describe('resolveSizeBaseValueRef()', () => {
 
     describe('When it resolves to a SizeScale decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'size-scale/foo' } as DecisionInput;
-        const [mockValueContext] = createValueContextMock(mockInput);
+        const [, mockDecision] = createDecisionMock([mockInput]);
 
         beforeEach(() => {
+            resolveSpy.mockReturnValue(mockDecision);
             resolveSetRefDecisionMocked.mockReturnValue(undefined);
         });
 
@@ -97,12 +98,13 @@ describe('resolveSizeBaseValueRef()', () => {
 
     describe('When it resolves to a SizeValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'size-value/foo' } as DecisionInput;
         const sizeObjectLiteral: SizeObjectLiteral = { value: 3.333, unit: 'px' };
         const [, mockDecision] = createDecisionMock([mockInput], {
             get: () => createSize(sizeDef, createPrimitiveContextMock(sizeObjectLiteral)[0]),
         });
-        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockInput);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -116,9 +118,10 @@ describe('resolveSizeBaseValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createDecisionMock([mockInput]);
-        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock(mockInput);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);

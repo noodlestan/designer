@@ -5,11 +5,8 @@ import type { ValueContext } from '../types';
 import { createValueInputError } from './createValueInputError';
 
 describe('createValueInputError()', () => {
-    const mockDecisionContext = {
-        ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
-    };
     const mockValueContext = {
-        decisionContext: vi.fn(() => mockDecisionContext),
+        ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
     } as unknown as ValueContext;
 
     const valueName = 'ValueName';
@@ -17,7 +14,7 @@ describe('createValueInputError()', () => {
 
     const context = mockValueContext;
 
-    describe('Given context, name, data, and no error', () => {
+    describe('Given context, value name, input, and no error', () => {
         it('should return a ValueRefIndexError object with the expected attributes', () => {
             const result = createValueInputError({ context, valueName, input });
 
@@ -34,7 +31,7 @@ describe('createValueInputError()', () => {
         });
     });
 
-    describe('Given context, name, data, and an Error', () => {
+    describe('Given context, value name, input, and an Error', () => {
         const error = new Error('Sample error');
 
         it('should return a ValueRefIndexError object with the error', () => {
@@ -50,7 +47,7 @@ describe('createValueInputError()', () => {
         });
     });
 
-    describe('Given context, name, data, and a non-Error object', () => {
+    describe('Given context, value name, input, and a non-Error object', () => {
         const error = { code: 123, message: 'Sample error object' };
 
         it('should return a ValueRefIndexError object with the error', () => {

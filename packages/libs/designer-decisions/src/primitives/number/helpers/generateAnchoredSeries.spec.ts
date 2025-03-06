@@ -20,7 +20,6 @@ describe('generateAnchoredSeries()', () => {
 
         it('should return an array with the extended series', () => {
             const result = generateAnchoredSeries(anchor, params);
-
             expect(result).toEqual([2, 3, 4, 5, 15, 25]);
         });
     });
@@ -34,7 +33,6 @@ describe('generateAnchoredSeries()', () => {
 
         it('should return an array with clamped values', () => {
             const result = generateAnchoredSeries(anchor, params, clamp);
-
             expect(result).toEqual([4, 4, 4, 5, 15, 15]);
         });
     });
@@ -47,7 +45,6 @@ describe('generateAnchoredSeries()', () => {
 
         it('should return an array with values not rounded', () => {
             const result = generateAnchoredSeries(anchor, params);
-
             expect(result).toEqual([5.011, 5.111, 6.441]);
         });
     });
@@ -61,7 +58,6 @@ describe('generateAnchoredSeries()', () => {
 
         it('should return a series with values rounded to the nearest 2', () => {
             const result = generateAnchoredSeries(anchor, params, undefined, quantize);
-
             expect(result).toEqual([14, 18, 24, 34, 76, 180]);
         });
     });
@@ -75,7 +71,6 @@ describe('generateAnchoredSeries()', () => {
 
         it('should return a series with values rounded to the nearest 0.2', () => {
             const result = generateAnchoredSeries(anchor, params, undefined, quantize);
-
             expect(result).toEqual([1.4, 2.2, 3.4, 5.2, 6.8, 9]);
         });
     });

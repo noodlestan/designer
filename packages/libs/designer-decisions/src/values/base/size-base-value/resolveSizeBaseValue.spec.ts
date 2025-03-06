@@ -12,7 +12,6 @@ const resolveSizeBaseValueRefMock = vi.mocked(resolveSizeBaseValueRef);
 
 describe('resolveSizeBaseValue()', () => {
     const sizeDef = mockSizeDefinition;
-    const [mockValueContext] = createValueContextMock();
 
     beforeEach(() => {
         vi.clearAllMocks();
@@ -20,6 +19,8 @@ describe('resolveSizeBaseValue()', () => {
 
     describe('When input is a DecisionRef', () => {
         const mockInput = { $uuid: 'mock-uuid' };
+        const [mockValueContext] = createValueContextMock(mockInput);
+
         const resolvedValue: SizeObjectLiteral = { value: 42, unit: 'px' };
 
         beforeEach(() => {
@@ -27,7 +28,7 @@ describe('resolveSizeBaseValue()', () => {
         });
 
         it('should call resolveSizeValueRef with the expected arguments', () => {
-            resolveSizeBaseValue(sizeDef, mockValueContext, mockInput);
+            resolveSizeBaseValue(sizeDef, mockValueContext);
 
             expect(resolveSizeBaseValueRefMock).toHaveBeenCalledOnce();
             expect(resolveSizeBaseValueRefMock).toHaveBeenCalledWith(
@@ -38,12 +39,14 @@ describe('resolveSizeBaseValue()', () => {
         });
 
         it('should return the value resolved by resolveSizeValueRef', () => {
-            const result = resolveSizeBaseValue(sizeDef, mockValueContext, mockInput);
+            const result = resolveSizeBaseValue(sizeDef, mockValueContext);
             expect(result).toEqual(resolvedValue);
         });
     });
 
     describe('When input is empty', () => {
+        const [mockValueContext] = createValueContextMock();
+
         it('should return undefined', () => {
             const result = resolveSizeBaseValue(sizeDef, mockValueContext);
             expect(result).toEqual(undefined);
@@ -52,9 +55,10 @@ describe('resolveSizeBaseValue()', () => {
 
     describe('When input is something else', () => {
         const mockInput: SizeObjectLiteral = { value: 10, unit: 'px' };
+        const [mockValueContext] = createValueContextMock(mockInput);
 
         it('should return the provided input', () => {
-            const result = resolveSizeBaseValue(sizeDef, mockValueContext, mockInput);
+            const result = resolveSizeBaseValue(sizeDef, mockValueContext);
             expect(result).toEqual(mockInput);
         });
     });

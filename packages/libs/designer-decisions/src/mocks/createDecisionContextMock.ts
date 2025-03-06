@@ -23,6 +23,8 @@ export function createDecisionContextMock(inputs: DecisionInput[] = []): [Decisi
     } as DecisionContext;
     mockValueContext.resolve = resolveSpy;
     mockValueContext.addError = addErrorSpy;
+    mockValueContext.hasErrors = () => false;
+    mockValueContext.errors = () => [];
 
     return [mockValueContext, { resolveSpy, addErrorSpy }];
 }

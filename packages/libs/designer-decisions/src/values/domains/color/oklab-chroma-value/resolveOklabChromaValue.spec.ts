@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { ColorOklabChromaInput } from '../../../../inputs';
 import { createValueContextMock } from '../../../../mocks';
-import type { ValueContext } from '../../../../value';
+import type { ColorChannelLiteral } from '../../../../primitives';
 import { resolveColorChannelBaseValue } from '../../../base';
 
 import { CHANNEL_DEFINITION } from './private';
@@ -16,29 +16,28 @@ const resolveColorChannelBaseValueMocked = vi.mocked(resolveColorChannelBaseValu
 
 describe('resolveOklabChromaValue()', () => {
     const mockInput: ColorOklabChromaInput = 0.2773;
-    let mockValueContext: ValueContext;
+    const [mockValueContext] = createValueContextMock(mockInput);
+
+    const resolvedValue = { value: 0.112 } as ColorChannelLiteral;
 
     beforeEach(() => {
         vi.clearAllMocks();
-        [mockValueContext] = createValueContextMock();
-        resolveColorChannelBaseValueMocked.mockReturnValue(mockInput);
+        resolveColorChannelBaseValueMocked.mockReturnValue(resolvedValue);
     });
 
     describe('Given a value', () => {
         it('should call resolveColorChannelBaseValue()', () => {
-            resolveOklabChromaValue(mockValueContext, mockInput);
+            resolveOklabChromaValue(mockValueContext);
 
             expect(resolveColorChannelBaseValueMocked).toHaveBeenCalledWith(
                 CHANNEL_DEFINITION,
                 mockValueContext,
-                mockInput,
             );
         });
 
         it('should return the resolved value', () => {
-            const result = resolveOklabChromaValue(mockValueContext, mockInput);
-
-            expect(result).toBe(mockInput);
+            const result = resolveOklabChromaValue(mockValueContext);
+            expect(result).toBe(resolvedValue);
         });
     });
 });

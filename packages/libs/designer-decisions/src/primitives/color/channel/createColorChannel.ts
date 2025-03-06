@@ -20,7 +20,7 @@ export function createColorChannel<
     context: PrimitiveContext<ColorChannelLiteral>,
     options?: ColorChannelBaseOptions,
 ): ColorChannel {
-    const { base, quantize: defaultQ, fallback, channelKey } = channelDefinition;
+    const { channelName, channelKey, base, quantize: defaultQ, fallback } = channelDefinition;
     const { quantize = defaultQ } = options || {};
 
     const { value } = normalizeColorChannelInput(channelDefinition, context);
@@ -59,6 +59,7 @@ export function createColorChannel<
     return {
         ...literal(),
         literal,
+        channelName,
         quantize: getQuantized,
         toNumber,
         toColor,

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorValueExplicitInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 import { COLOR_FORMAT_RGB } from '../../../primitives';
 
 import { createColorValueExplicitModel } from './createColorValueExplicitModel';
@@ -13,10 +13,10 @@ describe('createColorValueExplicitModel()', () => {
         const params: ColorValueExplicitInput['params'] = {
             value: '#123456',
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toString({ format: COLOR_FORMAT_RGB })).toEqual('#123456');
         });

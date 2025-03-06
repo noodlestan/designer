@@ -16,8 +16,8 @@ export const createColorSRGBLightnessScaleBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createSRGBLightnessValue(context, from, options);
-            const toValue = createSRGBLightnessValue(context, to, options);
+            const fromValue = createSRGBLightnessValue(context.valueContext(from), options);
+            const toValue = createSRGBLightnessValue(context.valueContext(to), options);
 
             const series = generateBoundedSeries(
                 fromValue.get().toNumber(),
@@ -25,10 +25,10 @@ export const createColorSRGBLightnessScaleBoundedModel: DecisionModelFactory<
                 steps,
             );
             const values = series.map(channel =>
-                createSRGBLightnessValue(context, channel, options),
+                createSRGBLightnessValue(context.valueContext(channel), options),
             );
 
-            return createSRGBLightnessScale(context, values);
+            return createSRGBLightnessScale(context.valueContext(values));
         },
     };
 };

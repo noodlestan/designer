@@ -12,7 +12,7 @@ const createBaseSetMocked = vi.mocked(createBaseSet);
 
 describe('createOklabChromaScale()', () => {
     const mockInputs: OklabChromaValue[] = [];
-    const [mockValueContext] = createValueContextMock();
+    const [mockValueContext] = createValueContextMock(mockInputs);
 
     const mockBaseSet = {} as BaseSet<unknown>;
 
@@ -21,13 +21,13 @@ describe('createOklabChromaScale()', () => {
         createBaseSetMocked.mockReturnValue(mockBaseSet);
     });
 
-    it('should call createBaseSet() with the correct arguments', () => {
-        createOklabChromaScale(mockValueContext, mockInputs);
-        expect(createBaseSetMocked).toHaveBeenCalledWith(mockValueContext, mockInputs);
+    it('should call createBaseSet() with the value context', () => {
+        createOklabChromaScale(mockValueContext);
+        expect(createBaseSetMocked).toHaveBeenCalledWith(mockValueContext);
     });
 
     it('should return the BaseSet', () => {
-        const result = createOklabChromaScale(mockValueContext, mockInputs);
+        const result = createOklabChromaScale(mockValueContext);
         expect(result).toBe(mockBaseSet);
     });
 });

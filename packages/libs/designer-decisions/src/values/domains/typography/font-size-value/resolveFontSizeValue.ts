@@ -6,7 +6,5 @@ import { resolveSizeBaseValue } from '../../../base';
 import { SIZE_VALUE_DEFINITION } from './private';
 
 export const resolveFontSizeValue = (
-    context: ValueContext,
-    input?: DeepPartial<SizeValueInput>,
-): DeepPartial<SizeLiteral> | undefined =>
-    resolveSizeBaseValue(SIZE_VALUE_DEFINITION, context, input);
+    context: ValueContext<SizeValueInput>,
+): DeepPartial<SizeLiteral> | undefined => resolveSizeBaseValue(SIZE_VALUE_DEFINITION, context);

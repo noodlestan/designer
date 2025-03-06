@@ -12,17 +12,19 @@ export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createSRGBHueValue(context, from, options);
-            const toValue = createSRGBHueValue(context, to, options);
+            const fromValue = createSRGBHueValue(context.valueContext(from), options);
+            const toValue = createSRGBHueValue(context.valueContext(to), options);
 
             const series = generateBoundedSeries(
                 fromValue.get().toNumber(),
                 toValue.get().toNumber(),
                 steps,
             );
-            const values = series.map(channel => createSRGBHueValue(context, channel, options));
+            const values = series.map(channel =>
+                createSRGBHueValue(context.valueContext(channel), options),
+            );
 
-            return createSRGBHueSet(context, values);
+            return createSRGBHueSet(context.valueContext(values));
         },
     };
 };

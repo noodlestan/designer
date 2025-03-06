@@ -12,7 +12,7 @@ const createBaseSetMocked = vi.mocked(createBaseSet);
 
 describe('createSRGBSaturationScale()', () => {
     const mockInputs: SRGBSaturationValue[] = [];
-    const [mockValueContext] = createValueContextMock();
+    const [mockValueContext] = createValueContextMock(mockInputs);
 
     const mockBaseSet = {} as BaseSet<unknown>;
 
@@ -21,13 +21,13 @@ describe('createSRGBSaturationScale()', () => {
         createBaseSetMocked.mockReturnValue(mockBaseSet);
     });
 
-    it('should call createBaseSet() with the correct arguments', () => {
-        createSRGBSaturationScale(mockValueContext, mockInputs);
-        expect(createBaseSetMocked).toHaveBeenCalledWith(mockValueContext, mockInputs);
+    it('should call createBaseSet() with the value context', () => {
+        createSRGBSaturationScale(mockValueContext);
+        expect(createBaseSetMocked).toHaveBeenCalledWith(mockValueContext);
     });
 
     it('should return the BaseSet', () => {
-        const result = createSRGBSaturationScale(mockValueContext, mockInputs);
+        const result = createSRGBSaturationScale(mockValueContext);
         expect(result).toBe(mockBaseSet);
     });
 });

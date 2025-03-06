@@ -13,29 +13,28 @@ const resolveSizeBaseValueMocked = vi.mocked(resolveSizeBaseValue);
 
 describe('resolveFontSizeValue()', () => {
     const mockInput = { value: 123.371, units: 'rem' } as SizeValueInput;
-    const [mockValueContext] = createValueContextMock();
-    const sizeLiteralMock = { value: 33 } as SizeLiteral;
+    const [mockValueContext] = createValueContextMock(mockInput);
+
+    const resolvedValue = { value: 33 } as SizeLiteral;
 
     beforeEach(() => {
         vi.clearAllMocks();
-        resolveSizeBaseValueMocked.mockReturnValue(sizeLiteralMock);
+        resolveSizeBaseValueMocked.mockReturnValue(resolvedValue);
     });
 
     describe('Given a context and an input', () => {
         it('should have called resolveSizeBaseValue()', () => {
-            resolveFontSizeValue(mockValueContext, mockInput);
+            resolveFontSizeValue(mockValueContext);
 
             expect(resolveSizeBaseValueMocked).toHaveBeenCalledWith(
                 SIZE_VALUE_DEFINITION,
                 mockValueContext,
-                mockInput,
             );
         });
 
         it('should return the resolved sizeLiteralMock', () => {
-            const result = resolveFontSizeValue(mockValueContext, mockInput);
-
-            expect(result).toBe(sizeLiteralMock);
+            const result = resolveFontSizeValue(mockValueContext);
+            expect(result).toBe(resolvedValue);
         });
     });
 });

@@ -1,10 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import {
-    type TypefaceObjectLiteral,
-    type TypefaceValueInput,
-    createStaticInput,
-} from '../../../../inputs';
+import { type TypefaceObjectLiteral, type TypefaceValueInput } from '../../../../inputs';
 import { createPrimitiveContextMock, createValueContextMock } from '../../../../mocks';
 import { type Typeface, createTypeface } from '../../../../primitives';
 
@@ -23,25 +19,24 @@ describe('createTypefaceValue()', () => {
     });
 
     describe('Given a size definition, a context, and an input', () => {
-        const params = { $name: 'Foo' } as TypefaceValueInput;
-        const mockInput = createStaticInput({ params });
+        const mockInput = { $name: 'Foo' } as TypefaceValueInput;
         const [mockValueContext] = createValueContextMock(mockInput);
 
         it('should return a BaseValue with the provided context', () => {
-            const result = createTypefaceValue(mockValueContext, params);
+            const result = createTypefaceValue(mockValueContext);
 
             expect(result.context()).toEqual(mockValueContext);
         });
     });
 
     describe('When get() is called', () => {
-        const params = { fontName: 'Georgia' } as TypefaceValueInput;
-        const mockInput = createStaticInput({ params });
+        const mockInput = { fontName: 'Georgia' } as TypefaceValueInput;
+        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+
         const mockLiteral = {
             fontName: 'Foo',
         } as TypefaceObjectLiteral;
         const mockTypeface = { name: 'foo' } as unknown as Typeface;
-        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
         const [mockPrimitiveContext] = createPrimitiveContextMock();
 
         beforeEach(() => {
@@ -51,28 +46,28 @@ describe('createTypefaceValue()', () => {
         });
 
         it('should call resolveTypefaceValue() with the expected arguments', () => {
-            const result = createTypefaceValue(mockValueContext, params);
+            const result = createTypefaceValue(mockValueContext);
             result.get();
 
-            expect(resolveTypefaceValueMocked).toHaveBeenCalledWith(mockValueContext, params);
+            expect(resolveTypefaceValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
         it('should call primitiveContext() with the resolved input', () => {
-            const result = createTypefaceValue(mockValueContext, params);
+            const result = createTypefaceValue(mockValueContext);
             result.get();
 
             expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColor() with the expected arguments', () => {
-            const result = createTypefaceValue(mockValueContext, params);
+            const result = createTypefaceValue(mockValueContext);
             result.get();
 
             expect(createTypefaceMocked).toHaveBeenCalledWith(mockPrimitiveContext);
         });
 
         it('should return the created Size primitive', () => {
-            const result = createTypefaceValue(mockValueContext, params);
+            const result = createTypefaceValue(mockValueContext);
 
             expect(result.get()).toBe(mockTypeface);
         });

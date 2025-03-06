@@ -14,11 +14,14 @@ export function createPrimitiveContextMock(input?: unknown): [PrimitiveContext, 
     const resolveSpy = vi.fn();
     const addErrorSpy = vi.fn();
     const outputContextSpy = vi.fn();
-    const mockDecisionContext = {} as DecisionContext;
-    mockDecisionContext.ref = vi.fn().mockReturnValue({ $uuid: 'decision-uuid' });
+    const refSpy = vi.fn().mockReturnValue({ $uuid: 'decision-uuid' });
+
+    const mockModelContext = {} as DecisionContext;
+    mockModelContext.ref = refSpy;
 
     const mockValueContext = {} as ValueContext;
-    mockValueContext.decisionContext = vi.fn().mockReturnValue(mockDecisionContext);
+    mockValueContext.modelContext = vi.fn().mockReturnValue(mockModelContext);
+    mockValueContext.ref = refSpy;
 
     const mockPrimitiveContext = {} as PrimitiveContext;
     mockPrimitiveContext.valueContext = vi.fn().mockReturnValue(mockValueContext);

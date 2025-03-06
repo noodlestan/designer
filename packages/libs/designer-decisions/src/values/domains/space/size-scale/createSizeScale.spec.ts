@@ -12,7 +12,7 @@ const createBaseSetMocked = vi.mocked(createBaseSet);
 
 describe('createSizeScale()', () => {
     const mockInputs: SizeValue[] = [];
-    const [mockValueContext] = createValueContextMock();
+    const [mockValueContext] = createValueContextMock(mockInputs);
 
     const mockBaseSet = {} as BaseSet<unknown>;
 
@@ -21,13 +21,13 @@ describe('createSizeScale()', () => {
         createBaseSetMocked.mockReturnValue(mockBaseSet);
     });
 
-    it('should call createBaseSet() with the correct arguments', () => {
-        createSizeScale(mockValueContext, mockInputs);
-        expect(createBaseSetMocked).toHaveBeenCalledWith(mockValueContext, mockInputs);
+    it('should call createBaseSet() with the value context', () => {
+        createSizeScale(mockValueContext);
+        expect(createBaseSetMocked).toHaveBeenCalledWith(mockValueContext);
     });
 
     it('should return the BaseSet', () => {
-        const result = createSizeScale(mockValueContext, mockInputs);
+        const result = createSizeScale(mockValueContext);
         expect(result).toBe(mockBaseSet);
     });
 });

@@ -1,6 +1,7 @@
+import expect from 'expect.js';
 import { describe, it } from 'mocha';
 
-import { foo } from './foo.js';
+import { foo } from './foo';
 
 // NOTE! placeholder test for peace of mind
 // to make sure tests are easy to introduce if/when needed
@@ -9,7 +10,7 @@ import { foo } from './foo.js';
 describe('foo()', () => {
     describe('given input', () => {
         it('returns expected output', () => {
-            expect(foo('bar') === 3);
+            expect(foo('bar')).to.be(3);
         });
     });
 });

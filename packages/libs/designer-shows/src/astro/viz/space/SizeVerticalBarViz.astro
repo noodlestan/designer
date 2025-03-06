@@ -6,8 +6,8 @@ type Props = SizeVizProps;
 
 const { v: sizeValue, size = 'auto', muteErrors } = Astro.props;
 
-const { value: v, units } = sizeValue?.get() || {};
-const vWithUnits = `${v}${units}`;
+const { value: v, unit } = sizeValue?.get().literal() || {};
+const vWithUnit = `${v}${unit}`;
 const showErrors = !muteErrors && sizeValue?.context().hasErrors();
 ---
 
@@ -16,7 +16,7 @@ const showErrors = !muteErrors && sizeValue?.context().hasErrors();
     <div class="block"></div>
 </div>
 
-<style define:vars={{ __height: vWithUnits }}>
+<style define:vars={{ __height: vWithUnit }}>
     .dd-size-bar-v-viz {
         height: var(--__height);
         min-height: var(--__height);

@@ -9,6 +9,8 @@ import type { ValueRefNotFoundError } from '../../../../value';
 import { resolveTypefaceValueRef } from './resolveTypefaceValueRef';
 
 describe('resolveTypefaceValueRef()', () => {
+    const fallbackTypeface = TYPEFACE_FALLBACK_LITERAL;
+
     beforeEach(() => {
         vi.clearAllMocks();
     });
@@ -19,7 +21,7 @@ describe('resolveTypefaceValueRef()', () => {
 
         it('should return the fallback value', () => {
             const result = resolveTypefaceValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(TYPEFACE_FALLBACK_LITERAL);
+            expect(result).toEqual(fallbackTypeface);
         });
 
         it('should add an error to the context', () => {
@@ -36,12 +38,13 @@ describe('resolveTypefaceValueRef()', () => {
 
     describe('When it resolves to a TypefaceValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'typeface-value/foo' } as DecisionInput;
         const typeFaceLiteral = { fontName: 'Georgia' };
         const [, mockDecision] = createDecisionMock([mockInput], {
             get: () => ({ literal: () => typeFaceLiteral }),
         });
-        const [mockValueContext, { resolveSpy }] = createValueContextMock();
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -55,9 +58,10 @@ describe('resolveTypefaceValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createDecisionMock([mockInput]);
-        const [mockValueContext, { resolveSpy, addErrorSpy }] = createValueContextMock();
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -73,7 +77,8 @@ describe('resolveTypefaceValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('matched "unexpected-type", expected typeface-value');
+            expect(error.message()).toContain('matched "unexpected-type"');
+            expect(error.message()).toContain('expected typeface-value');
         });
     });
 });

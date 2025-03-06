@@ -14,7 +14,7 @@ const createSizeBaseValueMocked = vi.mocked(createSizeBaseValue);
 
 describe('createSizeValue()', () => {
     const mockInput = { value: 123.371, units: 'rem' } as SizeValueInput;
-    const [mockValueContext] = createValueContextMock();
+    const [mockValueContext] = createValueContextMock(mockInput);
     const sizeBaseValueMock = { type: () => 'foo' } as SizeBaseValue;
     const mockOptions = {} as NumberFormatOptions;
 
@@ -25,19 +25,17 @@ describe('createSizeValue()', () => {
 
     describe('Given a context, an input, and options', () => {
         it('should have called createSizeValue()', () => {
-            createSizeValue(mockValueContext, mockInput, mockOptions);
+            createSizeValue(mockValueContext, mockOptions);
 
             expect(createSizeBaseValueMocked).toHaveBeenCalledWith(
                 SIZE_DEFINITION,
                 mockValueContext,
-                mockInput,
                 mockOptions,
             );
         });
 
         it('should return the created SizeBaseValue', () => {
-            const result = createSizeValue(mockValueContext, mockInput);
-
+            const result = createSizeValue(mockValueContext);
             expect(result).toBe(sizeBaseValueMock);
         });
     });

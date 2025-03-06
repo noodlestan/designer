@@ -24,9 +24,9 @@ import {
 import { integrationAPI } from '@noodlestan/designer-integration-astro';
 
 export const store = await integrationAPI.build();
-export const colorValue = createColorValue(store.createValueContext(), '#009955');
-export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
-export const sizeValue = createSizeValue(store.createValueContext(), 100);
+export const colorValue = createColorValue(store.createValueContext('#009955'));
+export const colorChannelValue = createOklabHueValue(store.createValueContext(123));
+export const sizeValue = createSizeValue(store.createValueContext(100));
 
 These components render a decision's visualization directly.
 
@@ -76,7 +76,7 @@ Options for color visualizations.
 #### Example
 
 ```mdx
-export const colorValue = createColorValue(context, '#009955');
+export const colorValue = createColorValue(store.createValueContext('#009955'));
 
 <ShowColorViz v={colorValue} viz="fg" />
 <ShowColorViz v={colorValue} viz="bg" />
@@ -126,7 +126,7 @@ Which size visualization to show.
 #### Example
 
 ```mdx
-export const sizeValue = createSizeValue(context, 100);
+export const sizeValue = createSizeValue(store.createValueContext(100));
 
 <ShowSizeViz size="m" v={sizeValue} viz="bar-h" />
 <ShowSizeViz size="m" v={sizeValue} viz="square" />

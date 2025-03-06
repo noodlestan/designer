@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorOklabChromaScaleBoundedInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorOklabLightnessScaleBoundedModel } from './createColorOklabLightnessScaleBoundedModel';
 
@@ -15,17 +15,17 @@ describe('createColorOklabLightnessScaleBoundedModel()', () => {
             to: 1.5,
             steps: expectedLength - 2,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a scale of the expected size', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(expectedLength);
         });
 
         it('should populate the scale with values based on clamped params', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(params.from);
             expect(result.get().item(1)?.get().toNumber()).toEqual(0.75);
@@ -40,10 +40,10 @@ describe('createColorOklabLightnessScaleBoundedModel()', () => {
             steps: 1,
             quantize: 0.2,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should populate the set with quantized values', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(0.536);
             expect(result.get().item(1)?.get().toNumber()).toEqual(0.768);

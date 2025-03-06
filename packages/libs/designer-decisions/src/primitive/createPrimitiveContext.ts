@@ -1,14 +1,14 @@
-import type { PrimitiveContext, PrimitiveInputError } from '../primitive';
+import type { PrimitiveContext, PrimitiveError } from '../primitive';
 import type { DeepPartial } from '../private';
 import type { LinkedValueContext } from '../value';
 
-export const createPrimitiveContext = <T>(
-    input?: DeepPartial<T>,
+export const createPrimitiveContext = <P>(
+    input?: DeepPartial<P>,
     valueContext?: LinkedValueContext,
-): PrimitiveContext<T> => {
-    const errors: PrimitiveInputError[] = [];
+): PrimitiveContext<P> => {
+    const errors: PrimitiveError[] = [];
 
-    const addError = (error: PrimitiveInputError) => {
+    const addError = (error: PrimitiveError) => {
         errors.push(error);
     };
 

@@ -15,5 +15,8 @@ export type Store = {
         records?: ValidatedRecord[],
         contexts?: LookupContexts,
     ) => DecisionContext;
-    createValueContext: (lookupContexts?: LookupContexts) => ValueContext;
+    createValueContext: <I = unknown>(
+        input?: I,
+        lookupContexts?: LookupContexts,
+    ) => ValueContext<I>;
 };

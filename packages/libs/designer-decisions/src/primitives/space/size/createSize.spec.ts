@@ -31,7 +31,6 @@ describe('createSize()', () => {
 
         it('should expose the resolved attributes', () => {
             const result = createSize(sizeDef, mockPrimitiveContext);
-
             expect(result.value).toEqual(sizeLiteral.value);
             expect(result.unit).toEqual(sizeLiteral.unit);
         });
@@ -41,7 +40,6 @@ describe('createSize()', () => {
         it('should return a SizeObjectLiteral', () => {
             const size = createSize(sizeDef, mockPrimitiveContext);
             const result = size.literal();
-
             expect(result).toEqual(sizeLiteral);
         });
     });
@@ -60,7 +58,6 @@ describe('createSize()', () => {
         it('should return the raw value', () => {
             const size = createSize(sizeDef, mockPrimitiveContext);
             const result = size.quantize(0);
-
             expect(result).toEqual(sizeLiteral);
         });
     });

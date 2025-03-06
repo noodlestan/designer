@@ -9,9 +9,10 @@ import { type ValueContext } from '../../../../value';
 import { resolveFontWeightValueRef } from './resolveFontWeightValueRef';
 
 export const resolveFontWeightValue = (
-    context: ValueContext,
-    input?: DeepPartial<FontWeightInput>,
+    context: ValueContext<FontWeightInput>,
 ): DeepPartial<FontWeightObjectLiteral> | undefined => {
+    const input = context.input();
+
     if (isDecisionRef(input)) {
         return resolveFontWeightValueRef(context, input);
     }

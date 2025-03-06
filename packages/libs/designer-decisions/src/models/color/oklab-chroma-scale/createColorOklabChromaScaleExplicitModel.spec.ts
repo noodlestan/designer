@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorOklabChromaScaleExplicitInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorOklabChromaScaleExplicitModel } from './createColorOklabChromaScaleExplicitModel';
 
@@ -12,17 +12,17 @@ describe('createColorOklabChromaScaleExplicitModel()', () => {
         const params: ColorOklabChromaScaleExplicitInput['params'] = {
             values: [0.1119, 0.5, 0.9],
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a scale of the expected size', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(params.values.length);
         });
 
         it('should populate the scale with values based on clamped params', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(0.112);
             expect(result.get().item(1)?.get().toNumber()).toEqual(params.values[1]);
@@ -35,10 +35,10 @@ describe('createColorOklabChromaScaleExplicitModel()', () => {
             values: [0.1117, 0.3357, 1.132],
             quantize: 0.2,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should populate the scale with quantized values', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(0.112);
             expect(result.get().item(1)?.get().toNumber()).toEqual(0.336);

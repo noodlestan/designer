@@ -9,7 +9,7 @@ export const createFontWeightValueExplicitModel: DecisionModelFactory<
     return {
         produce: context => {
             const { value } = context.params() || {};
-            return createFontWeightValue(context, value);
+            return createFontWeightValue(context.valueContext(value));
         },
     };
 };

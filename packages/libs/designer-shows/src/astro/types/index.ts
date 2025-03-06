@@ -5,9 +5,9 @@ import type {
     FontSizeValue,
     FontWeightValue,
     SizeValue,
+    Store,
     TypefaceValue,
 } from '@noodlestan/designer-decisions';
-import type { Store } from '@noodlestan/designer-functions';
 
 import type { LayoutDynamicProps } from '../layouts';
 

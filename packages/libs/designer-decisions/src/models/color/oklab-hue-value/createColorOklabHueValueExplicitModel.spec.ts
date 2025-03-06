@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorOklabHueValueExplicitInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorOklabHueValueExplicitModel } from './createColorOklabHueValueExplicitModel';
 
@@ -12,10 +12,10 @@ describe('createColorOklabHueValueExplicitModel()', () => {
         const params: ColorOklabHueValueExplicitInput['params'] = {
             value: 333.111,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(333.1);
         });
@@ -25,10 +25,10 @@ describe('createColorOklabHueValueExplicitModel()', () => {
         const params: ColorOklabHueValueExplicitInput['params'] = {
             value: 390,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a clamped value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(360);
         });
@@ -39,10 +39,10 @@ describe('createColorOklabHueValueExplicitModel()', () => {
             value: 333.1,
             quantize: 5,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a quantized value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(335);
         });

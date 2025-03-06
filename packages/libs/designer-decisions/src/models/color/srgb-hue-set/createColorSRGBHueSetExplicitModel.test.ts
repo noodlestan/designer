@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorSRGBHueSetExplicitInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorSRGBHueSetExplicitModel } from './createColorSRGBHueSetExplicitModel';
 
@@ -12,17 +12,17 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
         const params: ColorSRGBHueSetExplicitInput['params'] = {
             values: [330.111, 350, 370],
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a scale of the expected size', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(params.values.length);
         });
 
         it('should populate the scale with values based on clamped params', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(330.1);
             expect(result.get().item(1)?.get().toNumber()).toEqual(params.values[1]);
@@ -35,10 +35,10 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
             values: [333.311, 344, 371],
             quantize: 5,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should populate the scale with quantized values', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(335);
             expect(result.get().item(1)?.get().toNumber()).toEqual(345);

@@ -11,14 +11,14 @@ vi.mock('./resolveTypefaceValueRef');
 const resolveTypefaceValueRefMock = vi.mocked(resolveTypefaceValueRef);
 
 describe('resolveTypefaceValue()', () => {
-    const [mockValueContext] = createValueContextMock();
-
     beforeEach(() => {
         vi.clearAllMocks();
     });
 
     describe('When input is a DecisionRef', () => {
         const mockInput = { $uuid: 'mock-uuid' };
+        const [mockValueContext] = createValueContextMock(mockInput);
+
         const resolvedValue: TypefaceObjectLiteral = {
             fontName: 'Georgia',
             capabilities: [],
@@ -31,20 +31,22 @@ describe('resolveTypefaceValue()', () => {
         });
 
         it('should call resolveTypefaceValueRef with the expected arguments', () => {
-            resolveTypefaceValue(mockValueContext, mockInput);
+            resolveTypefaceValue(mockValueContext);
 
             expect(resolveTypefaceValueRefMock).toHaveBeenCalledOnce();
             expect(resolveTypefaceValueRefMock).toHaveBeenCalledWith(mockValueContext, mockInput);
         });
 
         it('should return the value resolved by resolveTypefaceValueRef', () => {
-            const result = resolveTypefaceValue(mockValueContext, mockInput);
+            const result = resolveTypefaceValue(mockValueContext);
 
             expect(result).toEqual(resolvedValue);
         });
     });
 
     describe('When input is empty', () => {
+        const [mockValueContext] = createValueContextMock();
+
         it('should return undefined', () => {
             const result = resolveTypefaceValue(mockValueContext);
             expect(result).toEqual(undefined);
@@ -53,9 +55,10 @@ describe('resolveTypefaceValue()', () => {
 
     describe('When input is something else', () => {
         const mockInput: TypefaceObjectLiteral = { fontName: 'Foo' };
+        const [mockValueContext] = createValueContextMock(mockInput);
 
         it('should return the provided input', () => {
-            const result = resolveTypefaceValue(mockValueContext, mockInput);
+            const result = resolveTypefaceValue(mockValueContext);
             expect(result).toEqual(mockInput);
         });
     });

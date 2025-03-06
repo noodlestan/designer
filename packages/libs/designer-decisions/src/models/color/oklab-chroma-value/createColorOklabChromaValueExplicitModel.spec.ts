@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorOklabChromaInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorOklabChromaValueExplicitModel } from './createColorOklabChromaValueExplicitModel';
 
@@ -11,20 +11,20 @@ describe('createColorOklabChromaValueExplicitModel()', () => {
     const params = { value: input };
 
     describe('Given a context and params', () => {
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(0.136);
         });
     });
 
     describe('Given a quantize param', () => {
-        const [mockValueContext] = createValueContextMock({ params: { ...params, quantize: 5 } });
+        const [mockModelContext] = createModelContextMock({ params: { ...params, quantize: 5 } });
 
         it('should create a quantized value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(0.15);
         });

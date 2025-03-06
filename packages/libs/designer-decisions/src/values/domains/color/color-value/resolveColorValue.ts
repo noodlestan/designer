@@ -5,9 +5,10 @@ import { type ValueContext } from '../../../../value';
 import { resolveColorValueRef } from './resolveColorValueRef';
 
 export const resolveColorValue = (
-    context: ValueContext,
-    input?: DeepPartial<ColorValueInput>,
+    context: ValueContext<ColorValueInput>,
 ): DeepPartial<ColorLiteral> | undefined => {
+    const input = context.input();
+
     if (isDecisionRef(input)) {
         return resolveColorValueRef(context, input);
     }

@@ -1,24 +1,24 @@
-import type { Decision, DecisionLookup } from '../../decision';
-import type { DecisionContext } from '../../decision-context';
-import type { DecisionInput, DecisionRef } from '../../inputs';
+import type { Decision } from '../../decision';
+import type { DecisionRef } from '../../inputs';
 import { type LookupContexts, isLookupContext } from '../../lookup';
+import type { LinkedModelContext } from '../../model';
 import { type PrimitiveContext, createPrimitiveContext } from '../../primitive';
 import type { DeepPartial } from '../../private';
 import type { BaseValue } from '../../values';
-import type { LinkedValueContext, ValueContext, ValueError } from '../types';
+import type { LinkedValueContext, ValueContext, ValueError, ValueRefLookup } from '../types';
 
-export const createValueContextPrivate = (
-    decisionContext: DecisionContext,
-    input: DecisionInput,
+export const createValueContextPrivate = <I = unknown>(
+    modelContext: LinkedModelContext,
+    input?: I,
     parentContext?: LookupContexts | LinkedValueContext,
-): ValueContext => {
-    const { resolve: resolver } = decisionContext;
+): ValueContext<I> => {
+    const { resolve: resolver } = modelContext;
     const lookupContexts = isLookupContext(parentContext)
         ? parentContext
         : parentContext?.lookupContexts() || { all: [] };
     const parent = isLookupContext(parentContext) ? undefined : parentContext;
 
-    const lookups: DecisionLookup[] = [];
+    const lookups: ValueRefLookup[] = [];
     const childContexts: LinkedValueContext[] = [];
     const primitiveContexts: PrimitiveContext[] = [];
     const errors: ValueError[] = [];
@@ -27,28 +27,30 @@ export const createValueContextPrivate = (
         ref: DecisionRef,
     ): Decision<V> => {
         const decision = resolver<V>(ref);
-        lookups.push({ ref, context: decisionContext, decision });
+        lookups.push({ ref, context: modelContext, decision });
         return decision;
     };
 
-    const baseContext: LinkedValueContext = {
+    const baseContext: LinkedValueContext<I> = {
         parent: () => parent,
-        decisionContext: () => decisionContext,
+        ref: () => modelContext.ref(),
+        modelContext: () => modelContext,
+        decisionInput: () => modelContext.decisionInput(),
         lookupContexts: () => lookupContexts,
         input: () => input,
-        params: () => input.params || {},
         lookups: () => lookups,
-        children: () => childContexts,
-        nested: () => primitiveContexts,
-        ownErrors: () => errors,
-        allErrors: () => [
+        childContexts: () => childContexts,
+        primitiveContexts: () => primitiveContexts,
+        errors: () => [
+            ...modelContext.ownErrors(),
             ...errors,
             ...primitiveContexts.flatMap(primtive => primtive.errors()),
-            ...childContexts.flatMap(child => child.allErrors()),
+            ...childContexts.flatMap(child => child.errors()),
         ],
         hasErrors: () =>
+            modelContext.hasOwnErrors() ||
             Boolean(errors.length) ||
-            Boolean(primitiveContexts.find(nested => nested.hasErrors())) ||
+            Boolean(primitiveContexts.find(primitiveContext => primitiveContext.hasErrors())) ||
             Boolean(childContexts.find(child => child.hasErrors())),
     };
 
@@ -56,23 +58,28 @@ export const createValueContextPrivate = (
         errors.push(error);
     };
 
-    const childContext = (input: DecisionInput) => {
-        const child = createValueContextPrivate(decisionContext, input, baseContext);
+    const childContext = <I>(input?: I | undefined): ValueContext<I> => {
+        const child = createValueContextPrivate(modelContext, input, baseContext);
         childContexts.push(child);
         return child;
     };
 
-    const primitiveContext = <T>(input?: DeepPartial<T>) => {
+    const outputContext = <I>(input?: I | undefined): ValueContext<I> => {
+        return createValueContextPrivate(modelContext, input, baseContext);
+    };
+
+    const primitiveContext = <P>(input?: DeepPartial<P>) => {
         const primitive = createPrimitiveContext(input, baseContext);
         primitiveContexts.push(primitive);
         return primitive;
     };
 
-    const valueContext: ValueContext = {
+    const valueContext: ValueContext<I> = {
         ...baseContext,
         resolve,
         addError,
         childContext,
+        outputContext,
         primitiveContext,
     };
 

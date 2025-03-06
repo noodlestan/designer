@@ -13,6 +13,8 @@ import type { ValueRefNotFoundError } from '../../../../value';
 import { resolveFontWeightValueRef } from './resolveFontWeightValueRef';
 
 describe('resolveFontWeightValueRef()', () => {
+    const fallbackFontWeight = FONT_WEIGHT_FALLBACK_LITERAL;
+
     beforeEach(() => {
         vi.clearAllMocks();
     });
@@ -23,7 +25,7 @@ describe('resolveFontWeightValueRef()', () => {
 
         it('should return the fallback value', () => {
             const result = resolveFontWeightValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(FONT_WEIGHT_FALLBACK_LITERAL);
+            expect(result).toEqual(fallbackFontWeight);
         });
 
         it('should add an error to the context', () => {
@@ -40,12 +42,13 @@ describe('resolveFontWeightValueRef()', () => {
 
     describe('When it resolves to a FontWeightValue decision', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'font-weight-value/foo' } as DecisionInput;
         const fontWeightLiteral: FontWeightObjectLiteral = { value: 900 };
         const [, mockDecision] = createDecisionMock([mockInput], {
             get: () => createFontWeight(createPrimitiveContextMock(fontWeightLiteral)[0]),
         });
-        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockInput);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -59,9 +62,10 @@ describe('resolveFontWeightValueRef()', () => {
 
     describe('When the decision does not match the expected type', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
+        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock(mockRef);
+
         const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createDecisionMock([mockInput]);
-        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock(mockInput);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -78,7 +82,7 @@ describe('resolveFontWeightValueRef()', () => {
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
             expect(error.message()).toContain('matched "unexpected-type"');
-            expect(error.message()).toContain('font-weight-value');
+            expect(error.message()).toContain('expected font-weight-value');
         });
     });
 });

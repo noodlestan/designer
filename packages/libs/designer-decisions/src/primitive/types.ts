@@ -12,16 +12,16 @@ export type PrimitiveInputError = PrimitiveError & {
     error?: unknown;
 };
 
-export type Primitive<P> = P & {
-    literal: () => P;
+export type Primitive<T> = T & {
+    literal: () => T;
     toString: () => string;
 };
 
-export type PrimitiveContext<T = unknown> = {
+export type PrimitiveContext<P = unknown> = {
     valueContext: () => LinkedValueContext | undefined;
-    outputContext: <T = unknown>(input?: DeepPartial<T>) => PrimitiveContext<T>;
-    input: () => DeepPartial<T> | undefined;
-    errors: () => PrimitiveInputError[];
+    outputContext: <O = unknown>(input?: DeepPartial<O>) => PrimitiveContext<O>;
+    input: () => DeepPartial<P> | undefined;
+    errors: () => PrimitiveError[];
     hasErrors: () => boolean;
-    addError: (error: PrimitiveInputError) => void;
+    addError: (error: PrimitiveError) => void;
 };

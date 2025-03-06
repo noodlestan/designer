@@ -40,11 +40,15 @@
     "typescript-json-schema": "0.65.1"
   },
   "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/expect.js": "^0.3.32",
     "@types/mocha": "10.0.10",
     "@types/node": "22.10.2",
+    "chai": "^5.2.0",
     "expect": "29.7.0",
-    "mocha": "11.0.1",
-    "ts-node": "10.9.2",
+    "expect.js": "^0.3.1",
+    "mocha": "^11.0.1",
+    "ts-node": "^10.9.2",
     "typescript": "5.6.3"
   }
 }

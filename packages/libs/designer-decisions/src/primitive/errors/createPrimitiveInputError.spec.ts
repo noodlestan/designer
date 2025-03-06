@@ -6,11 +6,13 @@ import type { PrimitiveContext } from '../types';
 import { createPrimitiveInputError } from './createPrimitiveInputError';
 
 describe('createPrimitiveInputError()', () => {
+    const mockRef = { $uuid: 'test-uuid' };
     const mockDecisionContext = {
-        ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
+        ref: vi.fn(() => mockRef),
     };
     const mockValueContext = {
         decisionContext: vi.fn(() => mockDecisionContext),
+        ref: vi.fn(() => mockRef),
     } as unknown as ValueContext;
 
     const mockPrimitiveContext = {
@@ -22,7 +24,7 @@ describe('createPrimitiveInputError()', () => {
 
     const context = mockPrimitiveContext;
 
-    describe('Given context, name, data, and no error', () => {
+    describe('Given context, primitive name, input, and no error', () => {
         it('should return a ValueRefIndexError object with the expected attributes', () => {
             const result = createPrimitiveInputError({ context, primitiveName, input });
 
@@ -39,7 +41,7 @@ describe('createPrimitiveInputError()', () => {
         });
     });
 
-    describe('Given context, name, data, and an Error', () => {
+    describe('Given context, primitive name, input, and an Error', () => {
         const error = new Error('Sample error');
 
         it('should return a ValueRefIndexError object with the error', () => {
@@ -55,7 +57,7 @@ describe('createPrimitiveInputError()', () => {
         });
     });
 
-    describe('Given context, name, data, and a non-Error object', () => {
+    describe('Given context, primitive name, input, and a non-Error object', () => {
         const error = { code: 123, message: 'Sample error object' };
 
         it('should return a ValueRefIndexError object with the error', () => {

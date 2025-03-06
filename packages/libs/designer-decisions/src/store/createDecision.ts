@@ -1,7 +1,8 @@
 import type { Decision } from '../decision';
 import type { DecisionContext } from '../decision-context';
 import type { LookupContexts } from '../lookup';
-import { type ParentValueContext, createValueContext, createValueInputError } from '../value';
+import { createModelUnexpectedError } from '../model';
+import { type ParentValueContext, createModelContext } from '../value';
 import { type BaseValue, createBaseValue } from '../values';
 
 import { getDecisionModelFactory } from './getDecisionModelFactory';
@@ -13,22 +14,21 @@ export const createDecision = <T = unknown>(
 
     const produce = (context?: LookupContexts | ParentValueContext): BaseValue<T> => {
         const input = inputZero(); // WIP match context
-        const valueContext = createValueContext(decisionContext, input, context);
+        const modelContext = createModelContext(decisionContext, input, context);
         try {
             const modelFactory = getDecisionModelFactory<T>(input?.model);
             const model = modelFactory();
-            return model.produce(valueContext) as BaseValue<T>;
+            return model.produce(modelContext) as BaseValue<T>;
         } catch (error) {
-            valueContext.addError(
-                createValueInputError({
-                    context: valueContext,
-                    valueName: 'unknown',
+            modelContext.addError(
+                createModelUnexpectedError({
+                    context: modelContext,
                     input,
                     error,
                 }),
             );
             const empty = undefined as T;
-            return createBaseValue(valueContext, () => empty);
+            return createBaseValue(modelContext.valueContext(), () => empty);
         }
     };
 

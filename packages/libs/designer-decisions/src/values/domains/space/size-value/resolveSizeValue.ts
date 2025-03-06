@@ -6,8 +6,7 @@ import { resolveSizeBaseValue } from '../../../base';
 import { SIZE_DEFINITION } from './private';
 
 export const resolveSizeValue = (
-    context: ValueContext,
-    input?: DeepPartial<SizeValueInput>,
+    context: ValueContext<SizeValueInput>,
 ): DeepPartial<SizeLiteral> | undefined => {
-    return resolveSizeBaseValue(SIZE_DEFINITION, context, input);
+    return resolveSizeBaseValue(SIZE_DEFINITION, context);
 };

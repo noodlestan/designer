@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { SizeScaleAnchoredInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createSizeScaleAnchoredModel } from './createSizeScaleAnchoredModel';
 
@@ -21,17 +21,17 @@ describe('createSizeScaleAnchoredModel()', () => {
                 modifier: { mode: 'linear', by: 20 },
             },
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a set of the expected size', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toString()).toEqual('49.92');
             expect(result.get().item(2)?.get().toString()).toEqual('50');
@@ -55,10 +55,10 @@ describe('createSizeScaleAnchoredModel()', () => {
             },
             quantize: 0.05,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should populate the set with quantized values', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toString()).toEqual('49.9rem');
             expect(result.get().item(2)?.get().toString()).toEqual('50rem');

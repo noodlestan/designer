@@ -64,7 +64,7 @@ export const formatDecisionStatus = (
         );
     }
     if (showDetails && status.value?.context().hasErrors()) {
-        const errors = status.value?.context().allErrors() || [];
+        const errors = status.value?.context().errors() || [];
         details.push(...errors.map(err => ' > ' + formatValueError(err, color, false)));
     }
     if (showDetails && status.hasErrors) {

@@ -41,6 +41,7 @@ export type ColorChannelLiteral = ColorChannelRaw | ColorChannelObjectLiteral;
 
 export type ColorChannel<C extends ColorComplementaryChannels = ColorComplementaryChannels> =
     Primitive<ColorChannelObjectLiteral> & {
+        channelName: ColorChannelName;
         quantize: (quantize?: number) => ColorChannelObjectLiteral;
         toNumber: (options?: ColorChannelOptions) => number;
         toColor(channels: C, options?: ColorChannelOptions): Color;

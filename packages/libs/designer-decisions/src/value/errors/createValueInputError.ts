@@ -8,7 +8,7 @@ export const createValueInputError = (attributes: Attributes): ValueInputError =
 
     const message = () => {
         const dataStr = serializeErrorData(input);
-        const refStr = JSON.stringify(context.decisionContext().ref());
+        const refStr = JSON.stringify(context.ref());
         const errStr = serializeMaybeError(error, ' Reason: {}');
         return `Invalid input data for a ${valueName} in ${refStr}. Value: ${dataStr}${errStr}`;
     };

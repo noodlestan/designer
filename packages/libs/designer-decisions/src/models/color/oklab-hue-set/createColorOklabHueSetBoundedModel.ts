@@ -12,17 +12,19 @@ export const createColorOklabHueSetBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createOklabHueValue(context, from, options);
-            const toValue = createOklabHueValue(context, to, options);
+            const fromValue = createOklabHueValue(context.valueContext(from), options);
+            const toValue = createOklabHueValue(context.valueContext(to), options);
 
             const series = generateBoundedSeries(
                 fromValue.get().toNumber(),
                 toValue.get().toNumber(),
                 steps,
             );
-            const values = series.map(channel => createOklabHueValue(context, channel, options));
+            const values = series.map(channel =>
+                createOklabHueValue(context.valueContext(channel), options),
+            );
 
-            return createOklabHueSet(context, values);
+            return createOklabHueSet(context.valueContext(values));
         },
     };
 };

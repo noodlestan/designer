@@ -16,9 +16,11 @@ export const createColorSRGBSaturationScaleExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size => createSRGBSaturationValue(context, size, options)) || [];
+                values?.map(size =>
+                    createSRGBSaturationValue(context.valueContext(size), options),
+                ) || [];
 
-            return createSRGBSaturationScale(context, items);
+            return createSRGBSaturationScale(context.valueContext(items));
         },
     };
 };

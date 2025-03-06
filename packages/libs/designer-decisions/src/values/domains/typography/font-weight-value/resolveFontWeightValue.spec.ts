@@ -11,14 +11,14 @@ vi.mock('./resolveFontWeightValueRef');
 const resolveFontWeightValueRefMock = vi.mocked(resolveFontWeightValueRef);
 
 describe('resolveFontWeightValue()', () => {
-    const [mockValueContext] = createValueContextMock();
-
     beforeEach(() => {
         vi.clearAllMocks();
     });
 
     describe('When input is a DecisionRef', () => {
         const mockInput = { $uuid: 'mock-uuid' };
+        const [mockValueContext] = createValueContextMock(mockInput);
+
         const resolvedValue: FontWeightObjectLiteral = { value: 900 };
 
         beforeEach(() => {
@@ -26,19 +26,21 @@ describe('resolveFontWeightValue()', () => {
         });
 
         it('should call resolveFontWeightValueRef with the expected arguments', () => {
-            resolveFontWeightValue(mockValueContext, mockInput);
+            resolveFontWeightValue(mockValueContext);
 
             expect(resolveFontWeightValueRefMock).toHaveBeenCalledOnce();
             expect(resolveFontWeightValueRefMock).toHaveBeenCalledWith(mockValueContext, mockInput);
         });
 
         it('should return the value resolved by resolveFontWeightValueRef', () => {
-            const result = resolveFontWeightValue(mockValueContext, mockInput);
+            const result = resolveFontWeightValue(mockValueContext);
             expect(result).toEqual(resolvedValue);
         });
     });
 
     describe('When input is empty', () => {
+        const [mockValueContext] = createValueContextMock();
+
         it('should return undefined', () => {
             const result = resolveFontWeightValue(mockValueContext);
             expect(result).toEqual(undefined);
@@ -47,9 +49,10 @@ describe('resolveFontWeightValue()', () => {
 
     describe('When input is something else', () => {
         const mockInput = 900;
+        const [mockValueContext] = createValueContextMock(mockInput);
 
         it('should return the provided input', () => {
-            const result = resolveFontWeightValue(mockValueContext, mockInput);
+            const result = resolveFontWeightValue(mockValueContext);
             expect(result).toEqual(mockInput);
         });
     });

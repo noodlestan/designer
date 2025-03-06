@@ -51,8 +51,8 @@ describe('resolveColorValueRef()', () => {
         const [, mockDecision] = createDecisionMock([mockInput], {
             get: () => colorObjectLiteral,
         });
-        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockInput);
-        const colorValue = createColorValue(mockValueContext, colorObjectLiteral);
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(colorObjectLiteral);
+        const colorValue = createColorValue(mockValueContext);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -78,8 +78,7 @@ describe('resolveColorValueRef()', () => {
 
     describe('When it resolves to a ColorSet decision and the item is not resolved', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
-        const mockInput = { model: 'color-set/foo' } as DecisionInput;
-        const [mockValueContext] = createValueContextMock(mockInput);
+        const [mockValueContext] = createValueContextMock();
 
         beforeEach(() => {
             resolveSetRefDecisionMocked.mockReturnValue(undefined);
@@ -98,7 +97,7 @@ describe('resolveColorValueRef()', () => {
         const [, mockDecision] = createDecisionMock([mockInput], {
             get: () => createColor(createPrimitiveContextMock(colorObjectLiteral)[0]),
         });
-        const [mockValueContext, { resolveSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { resolveSpy }] = createValueContextMock(colorObjectLiteral);
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);
@@ -114,7 +113,7 @@ describe('resolveColorValueRef()', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
         const mockInput = { model: 'unexpected-type/foo' } as DecisionInput;
         const [, mockDecision] = createDecisionMock([mockInput]);
-        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { addErrorSpy, resolveSpy }] = createValueContextMock();
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);

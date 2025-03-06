@@ -6,12 +6,9 @@ import type { ValueContext } from '../types';
 import { createValueRefNotFoundError } from './createValueRefNotFoundError';
 
 describe('createValueRefNotFoundError()', () => {
-    describe('Given context, name, and ref', () => {
-        const mockDecisionContext = {
-            ref: vi.fn(() => ({ $uuid: 'decision-uuid' })),
-        };
+    describe('Given context, value name, and ref', () => {
         const mockValueContext = {
-            decisionContext: vi.fn(() => mockDecisionContext),
+            ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as ValueContext;
 
         const mockRef: DecisionRef = { $uuid: 'ref-uuid' };
