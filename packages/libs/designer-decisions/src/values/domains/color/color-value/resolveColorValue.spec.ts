@@ -46,8 +46,20 @@ describe('resolveColorValue()', () => {
         });
     });
 
+    describe('When input is an object', () => {
+        const mockInput: ColorObjectLiteral = { l: 0.55, c: 0.24, h: 333 };
+
+        const [mockValueContext] = createValueContextMock(mockInput);
+
+        it('should return undefined', () => {
+            const result = resolveColorValue(mockValueContext);
+            expect(result).toEqual(mockInput);
+        });
+    });
+
     describe('When input is something else', () => {
-        const mockInput: ColorObjectLiteral = { h: 123.371, s: 0.4, l: 0.5 };
+        const mockInput = 123;
+
         const [mockValueContext] = createValueContextMock(mockInput);
 
         it('should return the provided input', () => {

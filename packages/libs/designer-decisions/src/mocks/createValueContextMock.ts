@@ -22,7 +22,7 @@ export function createValueContextMock<I>(input?: I): [ValueContext<I>, Mocks] {
     const mockValueContext = {} as ValueContext;
     mockValueContext.input = vi.fn().mockReturnValue(input);
     mockValueContext.ref = vi.fn().mockReturnValue({ $name: 'foo bar' });
-    mockValueContext.childContext = vi.fn().mockImplementation(createValueContextMock);
+    mockValueContext.childContext = vi.fn().mockImplementation(i => createValueContextMock(i)[0]);
     mockValueContext.primitiveContext = primitiveContextSpy;
     mockValueContext.lookupContexts = vi.fn().mockReturnValue({ all: [] });
     mockValueContext.resolve = resolveSpy;
