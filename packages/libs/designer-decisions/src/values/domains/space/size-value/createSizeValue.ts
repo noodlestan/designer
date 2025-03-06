@@ -1,5 +1,4 @@
 import type { SizeValueInput } from '../../../../inputs';
-import type { DeepPartial } from '../../../../private';
 import type { ValueContext } from '../../../../value';
 import { createSizeBaseValue } from '../../../base';
 import type { SizeValue, SizeValueOptions } from '../types';
@@ -7,9 +6,8 @@ import type { SizeValue, SizeValueOptions } from '../types';
 import { SIZE_DEFINITION } from './private';
 
 export const createSizeValue = (
-    context: ValueContext,
-    input?: DeepPartial<SizeValueInput>,
+    context: ValueContext<SizeValueInput>,
     options?: SizeValueOptions,
 ): SizeValue => {
-    return createSizeBaseValue(SIZE_DEFINITION, context, input, options);
+    return createSizeBaseValue(SIZE_DEFINITION, context, options);
 };

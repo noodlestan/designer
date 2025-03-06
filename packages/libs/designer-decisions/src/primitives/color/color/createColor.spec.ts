@@ -23,13 +23,11 @@ describe('createColor()', () => {
     describe('Given a context with an input', () => {
         it('should call normalizeColorInputMocked() with the expected arguments', () => {
             createColor(mockPrimitiveContext);
-
             expect(normalizeColorInputMocked).toHaveBeenCalledWith(mockPrimitiveContext);
         });
 
         it('should expose the resolved attributes', () => {
             const result = createColor(mockPrimitiveContext);
-
             expect(result.chroma).toEqual(chromaLiteral.chroma);
         });
     });
@@ -38,7 +36,6 @@ describe('createColor()', () => {
         it('should return a ChromaColorLiteral', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.literal();
-
             expect(result).toEqual(chromaLiteral);
         });
     });
@@ -47,7 +44,6 @@ describe('createColor()', () => {
         it('should return a ChromaColorLiteral', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.raw();
-
             expect(result).toEqual(chromaLiteral.chroma);
         });
     });
@@ -56,7 +52,6 @@ describe('createColor()', () => {
         it('should return the value as a ColorObjectLiteral', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.toObject();
-
             expect(result).toEqual({ l: 0.4495, c: 0.1432, h: 288.48 });
         });
     });
@@ -65,7 +60,6 @@ describe('createColor()', () => {
         it('should return the value as a ColorObjectLiteral', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.toObject({ format: 'hsl' });
-
             expect(result).toEqual(hslLiteral);
         });
     });
@@ -74,7 +68,6 @@ describe('createColor()', () => {
         it('should return the value as a ColorObjectLiteral', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.toObject({ quantize: 0.5 });
-
             expect(result).toEqual({ l: 0.45, c: 0.145, h: 288.5 });
         });
     });
@@ -83,7 +76,6 @@ describe('createColor()', () => {
         it('should return the value as a string', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.toString();
-
             expect(result).toEqual('oklch(44.95% 0.1432 288.48deg)');
         });
     });
@@ -92,7 +84,6 @@ describe('createColor()', () => {
         it('should return the value as a string', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.toString({ format: 'hsl' });
-
             expect(result).toEqual('hsl(252deg 41% 44%)');
         });
     });
@@ -101,7 +92,6 @@ describe('createColor()', () => {
         it('should return the value as a string', () => {
             const color = createColor(mockPrimitiveContext);
             const result = color.toString({ quantize: 0.5 });
-
             expect(result).toEqual('oklch(45% 0.145 288.5deg)');
         });
     });

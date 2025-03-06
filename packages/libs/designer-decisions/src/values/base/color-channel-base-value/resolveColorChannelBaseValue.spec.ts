@@ -12,7 +12,6 @@ const resolveColorChannelBaseValueRefMock = vi.mocked(resolveColorChannelBaseVal
 
 describe('resolveColorChannelBaseValue()', () => {
     const channelDef = mockChannelDefinition;
-    const [mockValueContext] = createValueContextMock();
 
     beforeEach(() => {
         vi.clearAllMocks();
@@ -20,6 +19,8 @@ describe('resolveColorChannelBaseValue()', () => {
 
     describe('When input is a DecisionRef', () => {
         const mockInput = { $uuid: 'mock-uuid' };
+        const [mockValueContext] = createValueContextMock(mockInput);
+
         const resolvedValue: ColorChannelObjectLiteral = { value: 0.3 };
 
         beforeEach(() => {
@@ -27,7 +28,7 @@ describe('resolveColorChannelBaseValue()', () => {
         });
 
         it('should call resolveColorChannelBaseValueRef with the expected arguments', () => {
-            resolveColorChannelBaseValue(channelDef, mockValueContext, mockInput);
+            resolveColorChannelBaseValue(channelDef, mockValueContext);
 
             expect(resolveColorChannelBaseValueRefMock).toHaveBeenCalledOnce();
             expect(resolveColorChannelBaseValueRefMock).toHaveBeenCalledWith(
@@ -38,26 +39,27 @@ describe('resolveColorChannelBaseValue()', () => {
         });
 
         it('should return the value resolved by resolveColorChannelBaseValueRef', () => {
-            const result = resolveColorChannelBaseValue(channelDef, mockValueContext, mockInput);
+            const result = resolveColorChannelBaseValue(channelDef, mockValueContext);
             expect(result).toEqual(resolvedValue);
         });
     });
 
-    describe('When input is a normal number', () => {
-        const mockInput = 0.3;
+    describe('When input is empty', () => {
+        const [mockValueContext] = createValueContextMock();
 
-        it('should return the input value', () => {
-            const result = resolveColorChannelBaseValue(channelDef, mockValueContext, mockInput);
-            expect(result).toEqual(0.3);
+        it('should return undefined', () => {
+            const result = resolveColorChannelBaseValue(channelDef, mockValueContext);
+            expect(result).toBeUndefined();
         });
     });
 
-    describe('When input is undefined', () => {
-        const mockInput = 999;
+    describe('When input is something else', () => {
+        const mockInput = 0.3;
+        const [mockValueContext] = createValueContextMock(mockInput);
 
-        it('should return undefined', () => {
-            const result = resolveColorChannelBaseValue(channelDef, mockValueContext, mockInput);
-            expect(result).toEqual(999);
+        it('should return the provided input', () => {
+            const result = resolveColorChannelBaseValue(channelDef, mockValueContext);
+            expect(result).toEqual(mockInput);
         });
     });
 });

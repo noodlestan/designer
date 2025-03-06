@@ -7,8 +7,8 @@ type Props = SizeValueProps;
 
 const { v: sizeValue, value = true, muteErrors } = Astro.props;
 
-const { value: v, units } = sizeValue?.toObject() || {};
-const vWithUnits = `${v}${units}`;
+const { value: v, unit } = sizeValue?.get().literal() || {};
+const vWithUnit = `${v}${unit}`;
 const showErrors = !muteErrors && sizeValue?.context().hasErrors();
 ---
 
@@ -17,7 +17,7 @@ const showErrors = !muteErrors && sizeValue?.context().hasErrors();
         <LayoutStack>
             <DecisionValueContainer>
                 {showErrors && <ShowError size="xs" />}
-                {vWithUnits}
+                {vWithUnit}
             </DecisionValueContainer>
         </LayoutStack>
     )

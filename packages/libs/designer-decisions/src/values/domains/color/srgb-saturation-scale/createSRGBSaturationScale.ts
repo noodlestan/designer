@@ -3,8 +3,7 @@ import { createBaseSet } from '../../../base';
 import type { SRGBSaturationScale, SRGBSaturationValue } from '../types';
 
 export const createSRGBSaturationScale = (
-    context: ValueContext,
-    input: SRGBSaturationValue[],
+    context: ValueContext<SRGBSaturationValue[]>,
 ): SRGBSaturationScale => {
-    return createBaseSet(context, input);
+    return createBaseSet(context);
 };

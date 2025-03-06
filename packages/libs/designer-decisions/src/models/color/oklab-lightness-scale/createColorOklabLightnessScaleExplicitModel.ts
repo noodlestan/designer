@@ -16,9 +16,11 @@ export const createColorOklabLightnessScaleExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size => createOklabLightnessValue(context, size, options)) || [];
+                values?.map(size =>
+                    createOklabLightnessValue(context.valueContext(size), options),
+                ) || [];
 
-            return createOklabLightnessScale(context, items);
+            return createOklabLightnessScale(context.valueContext(items));
         },
     };
 };

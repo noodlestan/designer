@@ -32,7 +32,6 @@ describe('resolveSetRefDecision()', () => {
                 mockValueName,
                 ref,
             );
-
             expect(result).toEqual(mockSize2);
         });
     });
@@ -46,12 +45,10 @@ describe('resolveSetRefDecision()', () => {
                 mockValueName,
                 ref,
             );
-
             expect(result).toBeUndefined();
         });
         it('should return undefined and add an error if the reference is out of bounds', () => {
             const ref: DecisionRef = { $uuid: 'test-uuid', index: 5 };
-
             resolveSetRefDecision(mockValueContext, decisionMock, mockValueName, ref);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
@@ -69,7 +66,6 @@ describe('resolveSetRefDecision()', () => {
                 mockValueName,
                 ref,
             );
-
             expect(result).toEqual(mockSize1);
         });
     });

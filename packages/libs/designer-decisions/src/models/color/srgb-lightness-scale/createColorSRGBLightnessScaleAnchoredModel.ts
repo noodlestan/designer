@@ -16,17 +16,18 @@ export const createColorSRGBLightnessScaleAnchoredModel: DecisionModelFactory<
             const { anchor, before, after, quantize } = context.params() || {};
 
             const options = { quantize };
-            const { value: anchorValue } = createSRGBLightnessValue(context, anchor, {
-                quantize,
-            }).get();
+            const { value: anchorValue } = createSRGBLightnessValue(
+                context.valueContext(anchor),
+                options,
+            ).get();
 
             const seriesParams = { before, after, quantize };
             const series = generateAnchoredSeries(anchorValue, seriesParams);
             const values = series.map(channel =>
-                createSRGBLightnessValue(context, channel, options),
+                createSRGBLightnessValue(context.valueContext(channel), options),
             );
 
-            return createSRGBLightnessScale(context, values);
+            return createSRGBLightnessScale(context.valueContext(values));
         },
     };
 };

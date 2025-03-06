@@ -7,8 +7,7 @@ import { resolveColorChannelBaseValue } from '../../../base';
 import { CHANNEL_DEFINITION } from './private';
 
 export const resolveSRGBSaturationValue = (
-    context: ValueContext,
-    input?: DeepPartial<ColorSRGBSaturationInput>,
+    context: ValueContext<ColorSRGBSaturationInput>,
 ): DeepPartial<ColorChannelLiteral> | undefined => {
-    return resolveColorChannelBaseValue(CHANNEL_DEFINITION, context, input);
+    return resolveColorChannelBaseValue(CHANNEL_DEFINITION, context);
 };

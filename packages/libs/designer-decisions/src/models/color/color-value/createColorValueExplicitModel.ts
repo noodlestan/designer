@@ -9,7 +9,7 @@ export const createColorValueExplicitModel: DecisionModelFactory<
     return {
         produce: context => {
             const { value } = context.params() || {};
-            return createColorValue(context, value);
+            return createColorValue(context.valueContext(value));
         },
     };
 };

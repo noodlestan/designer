@@ -4,7 +4,7 @@ export const countErrors = (status: ProducedDecisionStatus): string => {
     const { context, value } = status;
 
     const decisionErrors = context.errors();
-    const valueWarnings = value?.context().allErrors() || [];
+    const valueWarnings = value?.context().errors() || [];
 
     const allErrors = [
         decisionErrors.length ? `${decisionErrors.length} errors` : '',

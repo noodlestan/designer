@@ -1,18 +1,15 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { DecisionUnknown } from '../../decision-types';
+import type { DecisionUnknown } from '../../decision';
 import type { DecisionRef } from '../../inputs';
 import type { ValueContext } from '../types';
 
 import { createValueRefMismatchError } from './createValueRefMismatchError';
 
 describe('createValueRefMismatchError()', () => {
-    describe('Given context, name, ref, decision, and accepted types', () => {
-        const mockDecisionContext = {
-            ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
-        };
+    describe('Given context, value name, ref, decision, and accepted types', () => {
         const mockValueContext = {
-            decisionContext: vi.fn(() => mockDecisionContext),
+            ref: vi.fn(() => ({ $uuid: 'test-uuid' })),
         } as unknown as ValueContext;
         const mockDecision = {
             type: vi.fn(() => 'TestType'),

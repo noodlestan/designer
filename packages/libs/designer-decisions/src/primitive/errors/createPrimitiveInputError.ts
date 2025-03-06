@@ -8,7 +8,7 @@ export const createPrimitiveInputError = (attributes: Attributes): PrimitiveInpu
 
     const message = () => {
         const dataStr = serializeErrorData(input);
-        const refStr = JSON.stringify(context.valueContext()?.decisionContext().ref());
+        const refStr = JSON.stringify(context.valueContext()?.ref());
         const errStr = serializeMaybeError(error, ' Reason: {}');
         return `Invalid input data for a ${primitiveName} in ${refStr}. Value: ${dataStr}${errStr}`;
     };

@@ -9,7 +9,8 @@ export const createSizeValueExplicitModel: DecisionModelFactory<
     return {
         produce: context => {
             const { value, quantize } = context.params() || {};
-            return createSizeValue(context, value, { quantize });
+            const options = { quantize };
+            return createSizeValue(context.valueContext(value), options);
         },
     };
 };

@@ -13,9 +13,9 @@ Provides an API to retrieve decisions and resolve their values.
 export type Store = {
     inputErrors: () => DecisionInputError[];
     records: (filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[];
-    decision: (ref: DecisionRef) => [DecisionContext, Decision<V> | undefined];
+    decision: (ref: DecisionRef) => Decision<V> | undefined;
     createDecisionContext: (contexts?: LookupContexts) => DecisionContext;
-    createValueContext: (lookupContexts?: LookupContexts) => ValueContext;
+    createValueContext: (input?: unknown, lookupContexts?: LookupContexts) => ValueContext;
 };
 ```
 

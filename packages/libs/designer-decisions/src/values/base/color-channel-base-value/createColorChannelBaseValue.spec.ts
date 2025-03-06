@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type ColorChannelInput, createStaticInput } from '../../../inputs';
+import { type ColorChannelInput } from '../../../inputs';
 import {
     createPrimitiveContextMock,
     createValueContextMock,
@@ -30,24 +30,23 @@ describe('createColorChannelBaseValue()', () => {
     });
 
     describe('Given a size definition, a context, and an input', () => {
-        const params = { $name: 'Foo' } as ColorChannelInput;
-        const mockInput = createStaticInput({ params });
+        const mockInput = { $name: 'Foo' } as ColorChannelInput;
         const [mockValueContext] = createValueContextMock(mockInput);
 
         it('should return a BaseValue with the provided context', () => {
-            const result = createColorChannelBaseValue(channelDef, mockValueContext, params);
+            const result = createColorChannelBaseValue(channelDef, mockValueContext);
 
             expect(result.context()).toEqual(mockValueContext);
         });
     });
 
     describe('When get() is called', () => {
-        const params = 123.371 as ColorChannelInput;
-        const mockInput = createStaticInput({ params });
-        const mockLiteral = { value: 44 } as ColorChannelLiteral;
-        const mockColorChannel = { value: 33 } as ColorChannel;
+        const mockInput = 123.371 as ColorChannelInput;
         const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+
+        const mockLiteral = { value: 44 } as ColorChannelLiteral;
         const [mockPrimitiveContext] = createPrimitiveContextMock();
+        const mockColorChannel = { value: 33 } as ColorChannel;
         const mockOptions = {} as ColorChannelBaseOptions;
 
         beforeEach(() => {
@@ -57,40 +56,24 @@ describe('createColorChannelBaseValue()', () => {
         });
 
         it('should call resolveColorChannelBaseValue() with the expected arguments', () => {
-            const result = createColorChannelBaseValue(
-                channelDef,
-                mockValueContext,
-                params,
-                mockOptions,
-            );
+            const result = createColorChannelBaseValue(channelDef, mockValueContext, mockOptions);
             result.get();
 
             expect(resolveColorChannelBaseValueMocked).toHaveBeenCalledWith(
                 channelDef,
                 mockValueContext,
-                params,
             );
         });
 
         it('should call primitiveContext() with the resolved input', () => {
-            const result = createColorChannelBaseValue(
-                channelDef,
-                mockValueContext,
-                params,
-                mockOptions,
-            );
+            const result = createColorChannelBaseValue(channelDef, mockValueContext, mockOptions);
             result.get();
 
             expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColorChannel() with the expected arguments', () => {
-            const result = createColorChannelBaseValue(
-                channelDef,
-                mockValueContext,
-                params,
-                mockOptions,
-            );
+            const result = createColorChannelBaseValue(channelDef, mockValueContext, mockOptions);
             result.get();
 
             expect(createColorChannelMocked).toHaveBeenCalledWith(
@@ -101,12 +84,7 @@ describe('createColorChannelBaseValue()', () => {
         });
 
         it('should return the created ColorChannel primitive', () => {
-            const result = createColorChannelBaseValue(
-                channelDef,
-                mockValueContext,
-                params,
-                mockOptions,
-            );
+            const result = createColorChannelBaseValue(channelDef, mockValueContext, mockOptions);
 
             expect(result.get()).toBe(mockColorChannel);
         });

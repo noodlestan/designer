@@ -3,8 +3,7 @@ import { createBaseSet } from '../../../base';
 import type { SRGBLightnessScale, SRGBLightnessValue } from '../types';
 
 export const createSRGBLightnessScale = (
-    context: ValueContext,
-    input: SRGBLightnessValue[],
+    context: ValueContext<SRGBLightnessValue[]>,
 ): SRGBLightnessScale => {
-    return createBaseSet(context, input);
+    return createBaseSet(context);
 };

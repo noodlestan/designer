@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorOklabChromaScaleAnchoredInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorOklabChromaScaleAnchoredModel } from './createColorOklabChromaScaleAnchoredModel';
 
@@ -21,17 +21,17 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
                 modifier: { mode: 'linear', by: 0.2 },
             },
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a set of the expected size', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(0.19);
             expect(result.get().item(2)?.get().toNumber()).toEqual(params.anchor);
@@ -52,10 +52,10 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
             },
             quantize: 1,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should populate the set with quantized values', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().first()?.get().toNumber()).toEqual(0.19);
             expect(result.get().item(2)?.get().toNumber()).toEqual(0.2);

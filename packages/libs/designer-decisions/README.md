@@ -71,9 +71,11 @@ This library is packaged for use both in bundlers such as Vite and Astro, as wel
 ### Scripts
 
 - **$** `npm run dev` - uses `esbuild` to watch and `tsc` to emit declarations on rebuild.
-- **$** `npm run build` - uses `tsc` to build `dist/cjs`.
+- **$** `npm run build` - uses `tsc` to build `dist/cjs` and `dist/esm`.
 - **$** `npm run test` / `npm run test:watch` - uses `vitest`.
 - **$** `npm run lint` / `npm run lint:fix` - uses [@noodlestan/eslint-config](https://www.npmjs.com/package/@noodlestan/eslint-config).
+
+**Note:** The `dist/esm` build guarantees that `verbatimModuleSyntax` is respected everywhere.
 
 ## MIT License
 

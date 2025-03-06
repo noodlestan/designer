@@ -22,9 +22,9 @@ import {
 } from '@noodlestan/designer-shows/astro';
 
 export const store = await integrationAPI.build();
-export const colorValue = createColorValue(store.createValueContext(), '#ff0000');
-export const colorChannelValue = createOklabHueValue(store.createValueContext(), 123);
-export const sizeValue = createSizeValue(store.createValueContext(), 12);
+export const colorValue = createColorValue(store.createValueContext('#ff0000'));
+export const colorChannelValue = createOklabHueValue(store.createValueContext(123));
+export const sizeValue = createSizeValue(store.createValueContext(12));
 
 These components render a decision's value directly.
 
@@ -62,7 +62,7 @@ Color related components.
 #### Example
 
 ```mdx
-export const colorValue = createColorValue(context, '#ff0000');
+export const colorValue = createColorValue(store.createValueContext('#ff0000'));
 
 <ShowColorValue v={colorValue} value={['rgb', 'hsl', 'oklch']} />
 ```
@@ -80,7 +80,7 @@ This prop has no effect on this component.
 #### Example
 
 ```mdx
-export const colorChannelValue = createOklabHueValue(context, 123);
+export const colorChannelValue = createOklabHueValue(store.createValueContext(123));
 
 <ShowColorChannelValue v={colorChannelValue} />
 ```
@@ -102,7 +102,7 @@ This prop has no effect on this component.
 #### Example
 
 ```mdx
-export const sizeValue = createSizeValue(context, 12);
+export const sizeValue = createSizeValue(store.createValueContext(12));
 
 <ShowSizeValue v={sizeValue} />
 ```

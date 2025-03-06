@@ -1,9 +1,9 @@
 import type { Decision } from '../decision';
 import { createDecisionContext } from '../decision-context';
-import type { DecisionInput, DecisionRef } from '../inputs';
+import { type DecisionRef, createStaticInput } from '../inputs';
 import type { LookupContexts } from '../lookup';
 import type { RecordMap, ValidatedRecord } from '../records';
-import { createValueContext } from '../value';
+import { createModelContext, createValueContext } from '../value';
 import type { BaseValue } from '../values';
 
 import { createResolver } from './private';
@@ -22,10 +22,11 @@ export const createStore = (validatedMap: RecordMap): Store => {
         return createDecisionContext({ $name: '<unknown>' }, resolver.resolve, records); // WIP
     };
 
-    const _createValueContext = (lookupContexts?: LookupContexts) => {
+    const _createValueContext = <I = unknown>(input?: I, lookupContexts?: LookupContexts) => {
         const decisionContext = _createDecisionContext();
-        const input: DecisionInput = { model: '', name: '', params: {} };
-        return createValueContext(decisionContext, input, lookupContexts);
+        const decisionInput = createStaticInput({ params: input });
+        const modelContext = createModelContext(decisionContext, decisionInput, lookupContexts);
+        return createValueContext(modelContext, input, lookupContexts);
     };
 
     return {

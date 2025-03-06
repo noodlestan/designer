@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { type SizeObjectLiteral } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createFontSizeValueExplicitModel } from './createFontSizeValueExplicitModel';
 
@@ -14,20 +14,20 @@ describe('createFontSizeValueExplicitModel()', () => {
     const params = { value: input };
 
     describe('Given a context and params', () => {
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().literal()).toEqual(input);
         });
     });
 
     describe('Given a context and no params', () => {
-        const [mockValueContext] = createValueContextMock();
+        const [mockModelContext] = createModelContextMock();
 
         it('should create a fallback value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toString()).toEqual('16px');
         });

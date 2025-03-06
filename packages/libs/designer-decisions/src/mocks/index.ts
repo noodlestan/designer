@@ -3,6 +3,7 @@ export * from './createDecisionContextMock';
 export * from './createDecisionMock';
 export * from './createDecisionMockImplementation';
 export * from './createDecisionModelMock';
+export * from './createModelContextMock';
 export * from './createPrimitiveContextMock';
 export * from './createRecordMapMock';
 export * from './createValueContextMock';

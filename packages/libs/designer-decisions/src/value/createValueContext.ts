@@ -1,20 +1,20 @@
-import type { DecisionContext } from '../decision-context';
-import type { DecisionInput } from '../inputs';
-import { type LookupContexts, isLookupContext } from '../lookup';
+import { type LookupContexts, resolveLookupContext } from '../lookup';
+import type { LinkedModelContext } from '../model';
+import { isObject } from '../private';
 
-import { createValueContextPrivate, resolveLookupContext } from './functions';
+import { createValueContextPrivate } from './functions';
 import type { ParentValueContext, ValueContext } from './types';
 
-export const createValueContext = (
-    decisionContext: DecisionContext,
-    input: DecisionInput,
+export const createValueContext = <I>(
+    modelContext: LinkedModelContext,
+    input?: I | undefined,
     context?: LookupContexts | ParentValueContext,
-): ValueContext => {
+): ValueContext<I> => {
     const lookupContexts = resolveLookupContext(context);
-    const parent = isLookupContext(context) ? undefined : context;
+    const parent = isObject(context) && 'childContext' in context ? context : undefined;
     if (parent) {
         return parent.childContext(input);
     }
 
-    return createValueContextPrivate(decisionContext, input, lookupContexts);
+    return createValueContextPrivate(modelContext, input, lookupContexts);
 };

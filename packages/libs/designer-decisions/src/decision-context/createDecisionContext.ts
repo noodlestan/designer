@@ -26,8 +26,8 @@ export const createDecisionContext = (
         decisionType: () => decisionTypeFromModel(records[0]?.input.model || ''),
         ref: () => ref,
         inputs: getInputs,
-        errors: getErrors,
         hasErrors,
+        errors: getErrors,
         addError,
     };
 };

@@ -12,13 +12,15 @@ export const createColorSetBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createColorValue(context, from, options);
-            const toValue = createColorValue(context, to, options);
+            const fromValue = createColorValue(context.valueContext(from), options);
+            const toValue = createColorValue(context.valueContext(to), options);
 
             const list = generateBoundedColorList(fromValue.get(), toValue.get(), steps);
-            const values = list.map(color => createColorValue(context, color, options));
+            const values = list.map(color =>
+                createColorValue(context.valueContext(color), options),
+            );
 
-            return createColorSet(context, values);
+            return createColorSet(context.valueContext(values));
         },
     };
 };

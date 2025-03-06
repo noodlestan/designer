@@ -12,15 +12,18 @@ export const createSizeScaleAnchoredModel: DecisionModelFactory<
             const { anchor, before, after, quantize } = context.params() || {};
 
             const options = { quantize };
-            const { value: anchorValue, unit } = createSizeValue(context, anchor, options).get();
+            const { value: anchorValue, unit } = createSizeValue(
+                context.valueContext(anchor),
+                options,
+            ).get();
 
             const seriesParams = { before, after, quantize };
             const series = generateAnchoredSeries(anchorValue, seriesParams);
             const values = series.map(size =>
-                createSizeValue(context, { value: size, unit }, { quantize }),
+                createSizeValue(context.valueContext({ value: size, unit }), options),
             );
 
-            return createSizeScale(context, values);
+            return createSizeScale(context.valueContext(values));
         },
     };
 };

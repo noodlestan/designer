@@ -7,9 +7,10 @@ import type { SizeValueDefinition } from './types';
 
 export const resolveSizeBaseValue = (
     sizeDefinition: SizeValueDefinition,
-    context: ValueContext,
-    input?: DeepPartial<SizeValueInput>,
+    context: ValueContext<SizeValueInput>,
 ): DeepPartial<SizeLiteral> | undefined => {
+    const input = context.input();
+
     if (isDecisionRef(input)) {
         return resolveSizeBaseValueRef(sizeDefinition, context, input);
     }

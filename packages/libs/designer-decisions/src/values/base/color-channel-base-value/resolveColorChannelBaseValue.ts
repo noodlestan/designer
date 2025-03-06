@@ -7,9 +7,10 @@ import { resolveColorChannelBaseValueRef } from './resolveColorChannelBaseValueR
 
 export const resolveColorChannelBaseValue = (
     channelDefinition: ColorChannelDefinition,
-    context: ValueContext,
-    input?: DeepPartial<ColorChannelInput>,
+    context: ValueContext<ColorChannelInput>,
 ): DeepPartial<ColorChannelLiteral> | undefined => {
+    const input = context.input();
+
     if (isDecisionRef(input)) {
         return resolveColorChannelBaseValueRef(channelDefinition, context, input);
     }

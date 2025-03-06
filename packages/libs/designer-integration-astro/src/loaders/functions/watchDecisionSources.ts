@@ -30,7 +30,7 @@ type LoaderState = {
  *   remark plugin which injects the `import 'astro:content'`
  */
 export async function watchDecisionSources(loaderCtx: LoaderContext): Promise<void> {
-    const { config, build } = integrationAPI;
+    const { config, context, build } = integrationAPI;
 
     const state: LoaderState = {
         count: 0,
@@ -47,7 +47,7 @@ export async function watchDecisionSources(loaderCtx: LoaderContext): Promise<vo
 
     watcher?.on('change', updated => {
         if (updated.endsWith('.json') && !updated.includes('.astro')) {
-            produceAndReport(loaderCtx, build);
+            produceAndReport(loaderCtx, context, build);
             contentStore.set({ id: '1', data: { count: state.count++ } });
             logger.info('Updated:' + updated);
         }

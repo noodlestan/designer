@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorOkLCHLiteral, ColorSetAnchoredInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 import { COLOR_FORMAT_OKLCH } from '../../../primitives';
 
 import { createColorSetAnchoredModel } from './createColorSetAnchoredModel';
@@ -29,17 +29,17 @@ describe('createColorSetAnchoredModel()', () => {
                 },
             },
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a set of the expected size', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
             expect(result.get().items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(
                 result

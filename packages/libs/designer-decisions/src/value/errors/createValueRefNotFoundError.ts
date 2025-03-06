@@ -7,7 +7,7 @@ export function createValueRefNotFoundError(attributes: Attributes): ValueRefNot
 
     const message = () => {
         const refStr = JSON.stringify(ref);
-        const decisionRefStr = JSON.stringify(context.decisionContext().ref());
+        const decisionRefStr = JSON.stringify(context.ref());
         const referenced = `referenced in "${decisionRefStr}"`;
         return `Ref (${valueName}) ${refStr} not found, ${referenced}.`;
     };

@@ -9,7 +9,7 @@ type Props = ColorChannelValueProps;
 const { v, value = true, muteErrors } = Astro.props;
 
 const channelV = v as ColorChannelBaseValue;
-const channelValue = channelV?.get();
+const channelValue = channelV?.get().toNumber();
 const showErrors = !muteErrors && v?.context().hasErrors();
 ---
 

@@ -6,8 +6,8 @@ type Props = SizeVizProps;
 
 const { v: sizeValue, muteErrors } = Astro.props;
 
-const { value: v, units } = sizeValue?.get() || {};
-const vWithUnits = `${v}${units}`;
+const { value: v, unit } = sizeValue?.get().literal() || {};
+const vWithUnit = `${v}${unit}`;
 const showErrors = !muteErrors && sizeValue?.context().hasErrors();
 ---
 
@@ -16,7 +16,7 @@ const showErrors = !muteErrors && sizeValue?.context().hasErrors();
     <div class="dd-square"></div>
 </div>
 
-<style define:vars={{ __size: vWithUnits }}>
+<style define:vars={{ __size: vWithUnit }}>
     .dd-size-square-viz {
         position: relative;
         width: var(--__size);

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { ColorSRGBLightnessValueExplicitInput } from '../../../inputs';
-import { createValueContextMock } from '../../../mocks';
+import { createModelContextMock } from '../../../mocks';
 
 import { createColorSRGBLightnessValueExplicitModel } from './createColorSRGBLightnessValueExplicitModel';
 
@@ -12,10 +12,10 @@ describe('createColorSRGBLightnessValueExplicitModel()', () => {
         const params: ColorSRGBLightnessValueExplicitInput['params'] = {
             value: 0.555,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(params.value);
         });
@@ -25,10 +25,10 @@ describe('createColorSRGBLightnessValueExplicitModel()', () => {
         const params: ColorSRGBLightnessValueExplicitInput['params'] = {
             value: 2,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a clamped value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(1);
         });
@@ -39,10 +39,10 @@ describe('createColorSRGBLightnessValueExplicitModel()', () => {
             value: 0.3137,
             quantize: 2,
         };
-        const [mockValueContext] = createValueContextMock({ params });
+        const [mockModelContext] = createModelContextMock({ params });
 
         it('should create a quantized value', () => {
-            const result = model.produce(mockValueContext);
+            const result = model.produce(mockModelContext);
 
             expect(result.get().toNumber()).toEqual(0.32);
         });

@@ -1,5 +1,6 @@
+import type { Store } from '@noodlestan/designer-decisions';
 import {
-    type Store,
+    type BuilderContext,
     formatDecisionStatus,
     formatError,
     produceDecisions,
@@ -7,10 +8,11 @@ import {
 import type { LoaderContext } from 'astro/loaders';
 
 export async function produceAndReport(
-    context: LoaderContext,
+    astroContext: LoaderContext,
+    context: BuilderContext,
     build: () => Promise<Store>,
 ): Promise<Store> {
-    const { logger } = context;
+    const { logger } = astroContext;
     const store = await build();
 
     const produced = produceDecisions(context, store);
@@ -19,10 +21,7 @@ export async function produceAndReport(
         .filter(status => status.hasErrors)
         .forEach(status => logger.info(formatDecisionStatus(status)));
 
-    store
-        .context()
-        .errors()
-        ?.forEach(error => logger.error(formatError(error)));
+    context.errors()?.forEach(error => logger.error(formatError(error)));
 
     logger.info('🐘 ' + produced.summary());
 

@@ -13,6 +13,7 @@ async function createDesignerIntegrationAPI(): Promise<DesignerAstroIntegrationA
 
     return {
         config,
+        context,
         build,
     };
 }

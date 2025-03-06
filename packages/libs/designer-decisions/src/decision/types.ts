@@ -19,12 +19,6 @@ export type Decision<V extends BaseValue<unknown>> = {
     // token: () => Token<T> | undefined;
 };
 
-export type DecisionLookup = {
-    ref: DecisionRef;
-    context: DecisionContext;
-    decision: DecisionUnknown | undefined;
-};
-
 export type DecisionFactory = <V = unknown>(
     input: unknown,
     resolver: <V extends BaseValue<unknown>>(ref: DecisionRef) => Decision<V>,

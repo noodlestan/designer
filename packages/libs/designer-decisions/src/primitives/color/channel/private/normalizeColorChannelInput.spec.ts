@@ -15,7 +15,6 @@ describe('normalizeColorChannelInput()', () => {
 
         it('should return the input as is', () => {
             const result = normalizeColorChannelInput(channelDef, mockPrimitiveContext);
-
             expect(result).toEqual(mockInput);
         });
     });
@@ -26,7 +25,6 @@ describe('normalizeColorChannelInput()', () => {
 
         it('should return the fallback value', () => {
             const result = normalizeColorChannelInput(channelDef, mockPrimitiveContext);
-
             expect(result).toEqual(channelFallback);
         });
 
@@ -49,7 +47,6 @@ describe('normalizeColorChannelInput()', () => {
 
         it('should return a literal object', () => {
             const result = normalizeColorChannelInput(channelDef, mockPrimitiveContext);
-
             expect(result).toEqual({ value: mockInput });
         });
     });
@@ -72,7 +69,6 @@ describe('normalizeColorChannelInput()', () => {
             invalidInput => {
                 const [mockPrimitiveContext] = createPrimitiveContextMock(invalidInput);
                 const result = normalizeColorChannelInput(channelDef, mockPrimitiveContext);
-
                 expect(result).toEqual(channelFallback);
             },
         );
@@ -82,7 +78,6 @@ describe('normalizeColorChannelInput()', () => {
                 const [mockPrimitiveContext, { addErrorSpy }] =
                     createPrimitiveContextMock(invalidInput);
                 normalizeColorChannelInput(channelDef, mockPrimitiveContext);
-
                 expect(addErrorSpy).toHaveBeenCalledOnce();
 
                 const expectedReason =

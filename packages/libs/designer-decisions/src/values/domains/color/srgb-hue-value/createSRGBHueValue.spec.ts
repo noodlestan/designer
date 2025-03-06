@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ColorSRGBHueInput } from '../../../../inputs';
 import { createValueContextMock } from '../../../../mocks';
 import type { ColorComplementaryChannels } from '../../../../primitives';
-import type { ValueContext } from '../../../../value';
 import {
     type ColorChannelBaseOptions,
     type ColorChannelBaseValue,
@@ -19,33 +18,30 @@ const createColorChannelBaseValueMocked = vi.mocked(createColorChannelBaseValue)
 
 describe('createSRGBHueValue()', () => {
     const mockInput: ColorSRGBHueInput = 0.2773;
-    const mockValue = {} as ColorChannelBaseValue<ColorComplementaryChannels>;
+    const [mockValueContext] = createValueContextMock(mockInput);
     const mockOptions: ColorChannelBaseOptions = {};
 
-    let mockValueContext: ValueContext;
+    const mockChannelBaseValue = {} as ColorChannelBaseValue<ColorComplementaryChannels>;
 
     beforeEach(() => {
         vi.clearAllMocks();
-        [mockValueContext] = createValueContextMock();
-        createColorChannelBaseValueMocked.mockReturnValue(mockValue);
+        createColorChannelBaseValueMocked.mockReturnValue(mockChannelBaseValue);
     });
 
     describe('Given a value', () => {
         it('should call createColorChannelBaseValue()', () => {
-            createSRGBHueValue(mockValueContext, mockInput);
+            createSRGBHueValue(mockValueContext);
 
             expect(createColorChannelBaseValueMocked).toHaveBeenCalledWith(
                 CHANNEL_DEFINITION,
                 mockValueContext,
-                mockInput,
                 mockOptions,
             );
         });
 
         it('should return the resolved value', () => {
-            const result = createSRGBHueValue(mockValueContext, mockInput);
-
-            expect(result).toBe(mockValue);
+            const result = createSRGBHueValue(mockValueContext);
+            expect(result).toBe(mockChannelBaseValue);
         });
     });
 });

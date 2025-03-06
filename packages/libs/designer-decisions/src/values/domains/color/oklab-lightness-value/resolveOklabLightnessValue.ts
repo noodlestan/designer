@@ -7,8 +7,7 @@ import { resolveColorChannelBaseValue } from '../../../base';
 import { CHANNEL_DEFINITION } from './private';
 
 export const resolveOklabLightnessValue = (
-    context: ValueContext,
-    input?: DeepPartial<ColorOklabLightnessInput>,
+    context: ValueContext<ColorOklabLightnessInput>,
 ): DeepPartial<ColorChannelLiteral> | undefined => {
-    return resolveColorChannelBaseValue(CHANNEL_DEFINITION, context, input);
+    return resolveColorChannelBaseValue(CHANNEL_DEFINITION, context);
 };

@@ -3,8 +3,7 @@ import { createBaseSet } from '../../../base';
 import type { OklabChromaScale, OklabChromaValue } from '../types';
 
 export const createOklabChromaScale = (
-    context: ValueContext,
-    input: OklabChromaValue[],
+    context: ValueContext<OklabChromaValue[]>,
 ): OklabChromaScale => {
-    return createBaseSet(context, input);
+    return createBaseSet(context);
 };

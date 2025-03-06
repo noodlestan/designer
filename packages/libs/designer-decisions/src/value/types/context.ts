@@ -1,32 +1,41 @@
-import type { DecisionLookup } from '../../decision';
-import type { DecisionContext, DecisionRefResolver } from '../../decision-context';
-import type { DecisionInput } from '../../inputs';
+import type { DecisionUnknown } from '../../decision';
+import type { DecisionError, DecisionRefResolver } from '../../decision-context';
+import type { DecisionInput, DecisionRef } from '../../inputs';
 import type { LookupContexts } from '../../lookup';
+import type { LinkedModelContext, ModelError } from '../../model';
 import type { PrimitiveContext, PrimitiveError } from '../../primitive';
 import type { DeepPartial } from '../../private';
+import type { DecisionInputError } from '../../records';
 
 import type { ValueError } from './errors';
 
-export type LinkedValueContext<P extends object = object> = {
+export type ValueRefLookup = {
+    ref: DecisionRef;
+    context: LinkedModelContext;
+    decision: DecisionUnknown | undefined;
+};
+
+export type LinkedValueContext<I = unknown> = {
     parent: () => LinkedValueContext | undefined;
-    decisionContext: () => DecisionContext;
+    ref: () => DecisionRef;
+    modelContext: () => LinkedModelContext;
     lookupContexts: () => LookupContexts;
-    input: () => DecisionInput | undefined;
-    params: () => DeepPartial<P> | undefined;
-    lookups: () => DecisionLookup[];
-    children: () => LinkedValueContext[];
-    nested: () => PrimitiveContext[];
-    ownErrors: () => ValueError[];
-    allErrors: () => (ValueError | PrimitiveError)[];
+    decisionInput: () => DecisionInput | undefined;
+    input: () => DeepPartial<I> | undefined;
+    lookups: () => ValueRefLookup[];
+    childContexts: () => LinkedValueContext[];
+    primitiveContexts: () => PrimitiveContext[];
+    errors: () => (DecisionError | DecisionInputError | ModelError | ValueError | PrimitiveError)[];
     hasErrors: () => boolean;
 };
 
-export type ValueContext<P extends object = object> = LinkedValueContext<P> & {
-    childContext: (input: DecisionInput) => ValueContext;
-    primitiveContext: <T>(input?: T | undefined) => PrimitiveContext<T>;
+export type ValueContext<I = unknown> = LinkedValueContext<I> & {
     resolve: DecisionRefResolver;
+    childContext: <I>(input?: I | undefined) => ValueContext<I>;
+    outputContext: <I>(input?: I | undefined) => ValueContext<I>;
+    primitiveContext: <T>(input?: T | undefined) => PrimitiveContext<T>;
     addError: (error: ValueError) => void;
 };
 
-export type ParentValueContext<P extends object = object> = LinkedValueContext<P> &
-    Pick<ValueContext<P>, 'childContext'>;
+export type ParentValueContext<I = unknown> = LinkedValueContext<I> &
+    Pick<ValueContext<I>, 'childContext'>;

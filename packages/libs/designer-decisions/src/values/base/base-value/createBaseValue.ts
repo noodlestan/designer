@@ -14,7 +14,7 @@ export const createBaseValue = <T>(context: ValueContext, get: () => T): BaseVal
     };
 
     return {
-        type: () => context.decisionContext().decisionType(),
+        type: () => context.modelContext().decisionType(),
         context: () => {
             getPrimitive();
             return context;

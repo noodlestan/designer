@@ -7,6 +7,7 @@ export * from './errors';
 export * from './inputs';
 export * from './lookup';
 export * from './meta';
+export * from './model';
 export * from './models';
 export * from './primitive';
 export * from './primitives';

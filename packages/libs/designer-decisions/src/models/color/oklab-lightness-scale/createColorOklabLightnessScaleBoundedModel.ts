@@ -16,8 +16,8 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createOklabLightnessValue(context, from, options);
-            const toValue = createOklabLightnessValue(context, to, options);
+            const fromValue = createOklabLightnessValue(context.valueContext(from), options);
+            const toValue = createOklabLightnessValue(context.valueContext(to), options);
 
             const series = generateBoundedSeries(
                 fromValue.get().toNumber(),
@@ -25,10 +25,10 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
                 steps,
             );
             const values = series.map(channel =>
-                createOklabLightnessValue(context, channel, options),
+                createOklabLightnessValue(context.valueContext(channel), options),
             );
 
-            return createOklabLightnessScale(context, values);
+            return createOklabLightnessScale(context.valueContext(values));
         },
     };
 };
