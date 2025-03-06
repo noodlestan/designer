@@ -3,12 +3,14 @@
     "model": "typeface-value/explicit",
     "name": "Typeface Value Explicit Sample",
     "params": {
-      "fontName": "Archivo",
-      "capabilities": ["variable"],
-      "ranges": [
-        { "tag": "wght", "min": 100, "max": 900 },
-        { "tag": "ital", "min": 0, "max": 1 }
-      ]
+      "value": {
+        "fontName": "Archivo",
+        "capabilities": ["variable"],
+        "ranges": [
+          { "tag": "wght", "min": 100, "max": 900 },
+          { "tag": "ital", "min": 0, "max": 1 }
+        ]
+      }
     }
   }
 ]
