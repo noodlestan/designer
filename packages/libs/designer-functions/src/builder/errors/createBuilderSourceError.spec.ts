@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { BuilderSourceError } from '../types';
 
-import { ERROR_BUILDER_SOURCE } from './constants';
+import { ERROR_BUILDER_SOURCE, ERROR_LAYER_BUILDER } from './constants';
 import { createBuilderSourceError } from './createBuilderSourceError';
 
 describe('createBuilderSourceError()', () => {
@@ -23,13 +23,13 @@ describe('createBuilderSourceError()', () => {
 
         it('should return a BuilderError object with the expected name', () => {
             const result = createBuilderSourceError(attributes);
-
+            expect(result.layer).toBe(ERROR_LAYER_BUILDER);
+            expect(result.name).toBe(ERROR_BUILDER_SOURCE);
             expect(result.name).toEqual(ERROR_BUILDER_SOURCE);
         });
 
         it('should return a BuilderError object with the expected attributes', () => {
             const result = createBuilderSourceError(attributes);
-
             expect(result.type).toEqual(attributes.type);
             expect(result.id).toEqual(attributes.id);
             expect(result.path).toEqual(attributes.path);
@@ -40,7 +40,6 @@ describe('createBuilderSourceError()', () => {
 
         it('should return a BuilderError object with the expected message', () => {
             const result = createBuilderSourceError(attributes);
-
             expect(result.message()).toContain('Invalid SchemaSource');
             expect(result.message()).toContain('/foo');
             expect(result.message()).toContain('because bar');

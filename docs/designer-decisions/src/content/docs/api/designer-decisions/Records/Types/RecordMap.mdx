@@ -12,7 +12,7 @@ Holds all decision input data and provides an API to retrieve decision records a
 ```ts
 export type RecordMap = {
     hasErrors: () => boolean;
-    inputErrors: () => DecisionInputError[];
+    inputErrors: () => RecordError[];
     records: (filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[];
     findByRef: (ref: DecisionRef) => ValidatedRecord[];
 };
@@ -35,11 +35,11 @@ You can create a `RecordMap` with [createRecordMap()](/api/designer-functions/Re
 
 #### ༶ `inputErrors()`
 
-**Return Value:** [DecisionInputError](/api/designer-decisions/Inputs/Types/DecisionInputError)[] with all validation errors.
+**Return Value:** [RecordError](/api/designer-decisions/Records/Types/RecordError)[] with all validation errors.
 
 #### ༶ `records(filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[])`
 
-Return Value: [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord)[]
+Return Value: [ValidatedRecord](/api/designer-decisions/Records/Types/ValidatedRecord)[]
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ Return Value: [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRe
 
 #### ༶ `findByRef: (ref: DecisionRef) => ValidatedRecord[]`
 
-**Return Value:** [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord)[] with all records matched.
+**Return Value:** [ValidatedRecord](/api/designer-decisions/Records/Types/ValidatedRecord)[] with all records matched.
 
 **Parameters:**
 
@@ -57,5 +57,5 @@ Return Value: [ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRe
 
 -   [Guides / Loading and Validating](/guides/loading-and-validating-design-decisions/)
 -   [API / configuration](/api/configuration)
--   [API / designer-decisions / ValidatedRecord](/api/designer-decisions/Inputs/Types/ValidatedRecord) and [DecisionInputError](/api/designer-decisions/Inputs/Types/DecisionInputError)[]
+-   [API / designer-decisions / ValidatedRecord](/api/designer-decisions/Records/Types/ValidatedRecord) and [RecordError](/api/designer-decisions/Inputs/Types/RecordError)[]
 -   [API / designer-functions / createRecordMap()](/api/designer-functions/Records/createRecordMap).

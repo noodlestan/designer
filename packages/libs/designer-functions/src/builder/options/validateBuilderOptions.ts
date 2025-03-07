@@ -14,8 +14,8 @@ export const validateBuilderOptions = (
     }
     if (!isObject(options)) {
         const error = createBuilderOptionsError({
-            path: 'options',
-            reason: 'Options is not an object.',
+            path: '/options',
+            reason: 'must be an object',
             options,
         });
         addError(error);
@@ -24,8 +24,8 @@ export const validateBuilderOptions = (
     const { decisions: maybeDecisionsSources, schemas: maybeSchemas } = options;
     if (!Array.isArray(maybeDecisionsSources)) {
         const error = createBuilderOptionsError({
-            path: 'options.decisions',
-            reason: 'Not an array.',
+            path: '/options/decisions',
+            reason: 'must be an array',
             options,
         });
         addError(error);
@@ -33,8 +33,8 @@ export const validateBuilderOptions = (
     }
     if (!maybeDecisionsSources.length) {
         const error = createBuilderOptionsError({
-            path: 'options.decisions',
-            reason: 'Must have at least one decision source.',
+            path: '/options/decisions',
+            reason: 'must have at least one decision source',
             options,
         });
         addError(error);
@@ -42,8 +42,8 @@ export const validateBuilderOptions = (
     }
     if (maybeSchemas !== undefined && !Array.isArray(maybeSchemas)) {
         const error = createBuilderOptionsError({
-            path: 'options.schemas',
-            reason: 'Not an array.',
+            path: '/options/schemas',
+            reason: 'must be an array',
             options,
         });
         addError(error);

@@ -12,7 +12,7 @@ import type { TextStyleVizProps } from '../types';
 type TextStyleVizStyles = {
     __fontFamily: string;
     __fontSize: string;
-    __fontWeight: string;
+    __fontWeight: number;
     __lineHeight: string;
     __letterSpacing: string;
     __fontStyle: string;
@@ -35,7 +35,7 @@ export const resolveTextStyleVizStyles = (
 
     if (v?.type() === DECISION_FONT_WEIGHT_VALUE) {
         const fontWeight = v as FontWeightValue;
-        style.__fontWeight = fontWeight.get().toString();
+        style.__fontWeight = fontWeight.get().toNumber();
     }
 
     return style;

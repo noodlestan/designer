@@ -11,7 +11,7 @@ export * from './model';
 export * from './models';
 export * from './primitive';
 export * from './primitives';
-export * from './records';
+export * from './record';
 export * from './store';
 export * from './types';
 export * from './value';

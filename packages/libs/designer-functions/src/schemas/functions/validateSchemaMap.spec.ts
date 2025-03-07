@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type BuilderContext, createBuilderContext } from '../../builder';
+import { type BuilderContext, ERROR_BUILDER_SCHEMA, createBuilderContext } from '../../builder';
 import type { SchemaData, SchemaId, SchemaMap } from '../types';
 
 import { validateSchemaMap } from './validateSchemaMap';
@@ -40,6 +40,7 @@ describe('validateSchemaMap()', () => {
 
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SCHEMA);
         expect(context.errors()[0].message()).toContain(
             'Invalid schema "schema2". Missing references: [schema3]',
         );

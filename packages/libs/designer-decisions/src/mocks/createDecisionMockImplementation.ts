@@ -2,6 +2,7 @@ import type { DecisionUnknown } from '../decision';
 import type { DecisionInput } from '../inputs';
 import type { LookupContexts } from '../lookup';
 import type { ModelContext } from '../model';
+import type { ValidatedRecord } from '../record';
 import { type ParentValueContext, createValueContext } from '../value';
 
 import { createDecisionContextMock } from './createDecisionContextMock';
@@ -32,7 +33,7 @@ export const createDecisionMockImplementation = (
             type: () => type,
             name: () => inputs[0]?.name,
             description: () => inputs[0]?.description,
-            inputs: () => inputs,
+            records: () => inputs.map(input => ({ input }) as ValidatedRecord),
             model: () => inputs[0]?.model,
             params: () => inputs[0]?.params,
             produce,

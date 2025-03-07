@@ -37,7 +37,7 @@ The following values are accepted:
 
 Additionally, the following two items - when provided in whatever order - determine how status and errors are displayed:
 
--   `status-colors` - print 🟩, 🟨, or 🟥 (when absent, prints `-`, `!` or `X` instead)
+-   `status-colors` - print 🟩 or 🟥 (when absent, prints `-`, `!` or `X` instead)
 -   `error-details` - when present, eventual errors are shown in full after each decision
 
 ## Usage
@@ -55,10 +55,10 @@ produced.decisions().forEach(status => console.info(formatDecisionStatus(status)
 Returns one decision per line, with nested value errors.
 
 ```
-🟨 | Sizing Scale | size-scale/bounded | [0px, 0px, 0px, 0px, 0px, 0px] | 2 warnings
+🟥 | Sizing Scale | size-scale/bounded | [0px, 0px, 0px, 0px, 0px, 0px] | 2 errors
 
- > 🟨 Ref (SizeValue) {"$name":"Size Smallest"} not found.
- > 🟨 Ref (SizeValue) {"$name":"Brand Black"} matched "color-value".
+ > 🟥 Ref (SizeValue) {"$name":"Size Smallest"} not found.
+ > 🟥 Ref (SizeValue) {"$name":"Brand Black"} matched "color-value".
 ```
 
 Using `formatDecisionStatus(status, ['status-colors', 'name', 'value'])`

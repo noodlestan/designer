@@ -1,12 +1,9 @@
 import { vi } from 'vitest';
 
 import type { DecisionInput } from '../inputs';
-import type { DecisionInputError, RecordMap } from '../records';
+import type { RecordError, RecordMap } from '../record';
 
-export function createRecordMapMock(
-    inputs?: DecisionInput[],
-    errors?: DecisionInputError[],
-): RecordMap {
+export function createRecordMapMock(inputs?: DecisionInput[], errors?: RecordError[]): RecordMap {
     const records =
         inputs?.map(input => ({
             input,

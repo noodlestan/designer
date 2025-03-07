@@ -20,12 +20,12 @@ export const loadDecisionsFromSource = async (
     try {
         path = await resolveSourcePath(decisionSource.source, moduleResolver);
     } catch (error) {
-        const message = maybeErrorMessage(error, ' {}');
+        const message = maybeErrorMessage(error, ' {}.');
         const err = createBuilderSourceError({
             type: 'DecisionSource',
             id: decisionSource.name,
             source: decisionSource.source,
-            reason: `Could not resolve path.. ${message}.`,
+            reason: `Could not resolve path. ${message}`,
             error,
         });
         context.addError(err);

@@ -8,6 +8,11 @@ export const handlePrimitiveInputError = (
     input: unknown,
     err: unknown = ERROR_VALUE_INPUT_TYPE_MISMATCH,
 ): void => {
-    const error = createPrimitiveInputError({ context, primitiveName: name, input, error: err });
+    const error = createPrimitiveInputError({
+        context,
+        primitiveName: name,
+        input,
+        error: err,
+    });
     context.addError(error);
 };

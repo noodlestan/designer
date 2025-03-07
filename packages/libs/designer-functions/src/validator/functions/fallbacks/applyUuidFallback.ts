@@ -1,28 +1,26 @@
-import type { DecisionInputError, LoadedRecord } from '@noodlestan/designer-decisions';
+import type { LoadedRecord } from '@noodlestan/designer-decisions';
 
 import { isNonEmptyString, md5Sync } from '../../../private';
-import { createDecisionNormalizeError } from '../../errors';
+
+import type { RecordValidationErrorAttributes } from './types';
 
 export function applyUuidFallback(
     loaded: LoadedRecord,
-    errors: DecisionInputError[],
+    errors: RecordValidationErrorAttributes[],
     maybeUuid: unknown | undefined,
-    fallback: { name: string; model: string },
 ): string {
     const errorAttributes = {
-        loaded,
         path: '/uuid',
         schema: 'DecisionInput#-uuid',
         value: maybeUuid,
-        ...fallback,
     };
 
     if (maybeUuid !== undefined) {
         if (!isNonEmptyString(maybeUuid)) {
-            const error = createDecisionNormalizeError({
+            const error = {
                 ...errorAttributes,
-                reason: 'Must be a non-empty string.',
-            });
+                reason: 'must be a non-empty string',
+            };
             errors.push(error);
         }
     }

@@ -2,7 +2,7 @@ import type { Decision } from '../decision';
 import { createDecisionContext } from '../decision-context';
 import { type DecisionRef, createStaticInput } from '../inputs';
 import type { LookupContexts } from '../lookup';
-import type { RecordMap, ValidatedRecord } from '../records';
+import type { RecordMap, ValidatedRecord } from '../record';
 import { createModelContext, createValueContext } from '../value';
 import type { BaseValue } from '../values';
 

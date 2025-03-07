@@ -8,7 +8,12 @@ import {
     createValueContextMock,
 } from '../../../../mocks';
 import { FONT_WEIGHT_FALLBACK_LITERAL, createFontWeight } from '../../../../primitives';
-import type { ValueRefNotFoundError } from '../../../../value';
+import {
+    ERROR_VALUE_REF_MISMATCH,
+    ERROR_VALUE_REF_NOT_FOUND,
+    type ValueRefMismatchError,
+    type ValueRefNotFoundError,
+} from '../../../../value';
 
 import { resolveFontWeightValueRef } from './resolveFontWeightValueRef';
 
@@ -33,7 +38,7 @@ describe('resolveFontWeightValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('not found');
+            expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
             expect(error.valueName).toBe(DECISION_FONT_WEIGHT_VALUE);
@@ -80,9 +85,13 @@ describe('resolveFontWeightValueRef()', () => {
             resolveFontWeightValueRef(mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
+            const error = addErrorSpy.mock.calls[0][0] as ValueRefMismatchError;
+            expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
+            expect(error.context).toBe(mockValueContext);
+            expect(error.ref).toBe(mockRef);
+            expect(error.valueName).toBe(DECISION_FONT_WEIGHT_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
-            expect(error.message()).toContain('expected font-weight-value');
+            expect(error.accepted).toContain('font-weight-value');
         });
     });
 });

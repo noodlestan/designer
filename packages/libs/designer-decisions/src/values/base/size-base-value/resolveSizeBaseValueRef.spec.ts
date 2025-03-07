@@ -8,7 +8,12 @@ import {
     mockSizeDefinition,
 } from '../../../mocks';
 import { createSize } from '../../../primitives';
-import type { ValueRefNotFoundError } from '../../../value';
+import {
+    ERROR_VALUE_REF_MISMATCH,
+    ERROR_VALUE_REF_NOT_FOUND,
+    type ValueRefMismatchError,
+    type ValueRefNotFoundError,
+} from '../../../value';
 import { createSizeValue } from '../../domains';
 import { resolveSetRefDecision } from '../../functions';
 
@@ -40,7 +45,7 @@ describe('resolveSizeBaseValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('not found');
+            expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
             expect(error.valueName).toBe('foo-size-value');
@@ -136,11 +141,16 @@ describe('resolveSizeBaseValueRef()', () => {
             resolveSizeBaseValueRef(sizeDef, mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
+            const error = addErrorSpy.mock.calls[0][0] as ValueRefMismatchError;
+            expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
+            expect(error.context).toBe(mockValueContext);
+            expect(error.ref).toBe(mockRef);
+            expect(error.valueName).toBe('foo-size-value');
             expect(error.message()).toContain('matched "unexpected-type"');
-            expect(error.message()).toContain('size-scale, size-value');
-            expect(error.message()).toContain(sizeDef.decisionTypes.set);
-            expect(error.message()).toContain(sizeDef.decisionTypes.value);
+            expect(error.accepted).toContain('size-scale');
+            expect(error.accepted).toContain('size-value');
+            expect(error.accepted).toContain(sizeDef.decisionTypes.set);
+            expect(error.accepted).toContain(sizeDef.decisionTypes.value);
         });
     });
 });

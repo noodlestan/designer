@@ -7,7 +7,7 @@ type Props = ShowDecisionProps;
 const { store, d } = Astro.props;
 
 const decision = store.decision({ $name: d });
-const params = (decision && decision.inputs()[0].params) || {}; // WIP match context (and encapsulate)
+const params = (decision && decision.records()[0].input.params) || {}; // WIP match context (and encapsulate)
 ---
 
 <div class="dd-attr-params">

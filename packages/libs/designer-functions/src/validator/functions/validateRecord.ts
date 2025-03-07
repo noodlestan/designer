@@ -1,16 +1,16 @@
-import type { DecisionInputError, ValidatedRecord } from '@noodlestan/designer-decisions';
+import {
+    type RecordError,
+    type ValidatedRecord,
+    createRecordValidationError,
+} from '@noodlestan/designer-decisions';
 import type { ErrorObject, ValidateFunction } from 'ajv';
-
-import type { SchemaMap } from '../../schemas';
-import { createDecisionInputError } from '../errors';
 
 import { deleteValue } from './deleteValue';
 import { extractErrorAttributes } from './extractErrorAttributes';
 
 export function validateRecord(
     preValidatedRecord: ValidatedRecord,
-    schemaMap: SchemaMap,
-    schemaId: string,
+
     validateFn: ValidateFunction<unknown>,
 ): ValidatedRecord {
     const { uuid, loaded, source, file, input } = preValidatedRecord;
@@ -31,10 +31,10 @@ export function validateRecord(
         {} as Record<string, ErrorObject[]>,
     );
 
-    const inputErrors: DecisionInputError[] = [];
+    const inputErrors: RecordError[] = [];
     Object.entries(reducedErrors).forEach(([path, errors]) => {
         const attributes = extractErrorAttributes(preValidatedRecord, path, errors);
-        const error = createDecisionInputError({
+        const error = createRecordValidationError({
             normalized: { uuid, loaded, input, source, file },
             ...attributes,
         });

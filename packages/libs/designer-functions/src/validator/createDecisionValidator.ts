@@ -1,9 +1,12 @@
-import { type LoadedRecord, type ValidatedRecord } from '@noodlestan/designer-decisions';
+import {
+    type LoadedRecord,
+    type ValidatedRecord,
+    createRecordValidationError,
+} from '@noodlestan/designer-decisions';
 import Ajv from 'ajv';
 
 import type { SchemaMap } from '../schemas';
 
-import { createDecisionInputError } from './errors';
 import { normalizeRecord, validateRecord } from './functions';
 import type { DecisionValidator } from './types';
 
@@ -27,7 +30,7 @@ export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator
         const schema = schemaMap.get(schemaId);
         const validateFn = ajv.getSchema(schemaId);
         if (!schema || !validateFn) {
-            const error = createDecisionInputError({
+            const error = createRecordValidationError({
                 normalized,
                 reason: `Schema not loaded: "${schemaId}".`,
                 schema: `DecisionInput#-model`,
@@ -35,7 +38,7 @@ export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator
             errors.push(error);
             return { uuid, loaded, input, source, errors };
         }
-        return validateRecord(normalized, schemaMap, schemaId, validateFn);
+        return validateRecord(normalized, validateFn);
     };
 
     const api: DecisionValidator = {

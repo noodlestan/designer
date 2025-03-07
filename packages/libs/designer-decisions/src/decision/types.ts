@@ -1,6 +1,7 @@
 import type { DecisionContext } from '../decision-context';
-import type { DecisionInput, DecisionRef } from '../inputs';
+import type { DecisionRef } from '../inputs';
 import type { LookupContexts } from '../lookup';
+import type { ValidatedRecord } from '../record';
 import type { ParentValueContext } from '../value';
 import type { BaseValue } from '../values';
 
@@ -12,7 +13,7 @@ export type Decision<V extends BaseValue<unknown>> = {
     uuid: () => string | undefined;
     name: () => string;
     description: () => string | undefined;
-    inputs: () => DecisionInput[];
+    records: () => ValidatedRecord[];
     model: () => string; // WIP match contexts
     params: () => object; // WIP match contexts
     produce: (context?: LookupContexts | ParentValueContext) => V;

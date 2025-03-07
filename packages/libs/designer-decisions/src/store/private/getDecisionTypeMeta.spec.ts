@@ -20,7 +20,7 @@ describe('getDecisionTypeMeta()', () => {
 
         it('should throw an "Unknown decision type" error', () => {
             expect(() => getDecisionTypeMeta(invalidType)).toThrowError(
-                `Unknown decision type "${invalidType}".`,
+                `Unknown Decision Type "${invalidType}".`,
             );
         });
     });

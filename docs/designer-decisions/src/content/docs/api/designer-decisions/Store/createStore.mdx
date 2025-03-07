@@ -7,7 +7,7 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-Creates a [Store](/api/designer-decisions/Store/Types/Store) from a pre-validated [RecordMap](/api/designer-decisions/Inputs/Types/RecordMap).
+Creates a [Store](/api/designer-decisions/Store/Types/Store) from a pre-validated [RecordMap](/api/designer-decisions/Records/Types/RecordMap).
 
 ```ts
 type createStore = (validatedMap: RecordMap) => Store;
@@ -24,7 +24,7 @@ Returns a [Store](/api/designer-decisions/Store/Types/Store) that can be used to
 
 ## Params
 
-#### ༶ `validatedMap`: [RecordMap](/api/designer-decisions/Inputs/Types/RecordMap)
+#### ༶ `validatedMap`: [RecordMap](/api/designer-decisions/Records/Types/RecordMap)
 
 Holds all decision input data and provides an API to retrieve validated records and validation errors.
 
@@ -65,4 +65,4 @@ const store = createStore(context, recordMap);
 -   [API / designer-decisions / Store](/api/designer-decisions/Store/Types/Store)
 -   [API / designer-functions / buildStaticStore()](/api/designer-functions/Builder/buildStaticStore)
 -   [API / designer-functions / BuilderContext](/api/designer-functions/Builder/Types/BuilderContext)
--   [API / designer-functions / RecordMap](/api/designer-decisions/Inputs/Types/RecordMap)
+-   [API / designer-functions / RecordMap](/api/designer-decisions/Records/Types/RecordMap)

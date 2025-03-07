@@ -2,7 +2,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { DecisionInput, DecisionRef } from '../../../inputs';
 import { createDecisionMock, createValueContextMock, mockChannelDefinition } from '../../../mocks';
-import type { ValueRefNotFoundError } from '../../../value';
+import {
+    ERROR_VALUE_REF_MISMATCH,
+    ERROR_VALUE_REF_NOT_FOUND,
+    type ValueRefMismatchError,
+    type ValueRefNotFoundError,
+} from '../../../value';
 import { createColorValue, createOklabHueValue } from '../../domains';
 import { resolveSetRefDecision } from '../../functions';
 
@@ -34,7 +39,7 @@ describe('resolveColorChannelBaseValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('not found');
+            expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
             expect(error.valueName).toBe(channelDef.valueName);
@@ -199,11 +204,12 @@ describe('resolveColorChannelBaseValueRef()', () => {
             resolveColorChannelBaseValueRef(channelDef, mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('matched "unexpected-type"');
-            expect(error.message()).toContain('expected color-set, color-value');
-            expect(error.message()).toContain(channelDef.decisionTypes.set);
-            expect(error.message()).toContain(channelDef.decisionTypes.value);
+            const error = addErrorSpy.mock.calls[0][0] as ValueRefMismatchError;
+            expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
+            expect(error.accepted).toContain('color-set');
+            expect(error.accepted).toContain('color-value');
+            expect(error.accepted).toContain(channelDef.decisionTypes.set);
+            expect(error.accepted).toContain(channelDef.decisionTypes.value);
         });
     });
 });

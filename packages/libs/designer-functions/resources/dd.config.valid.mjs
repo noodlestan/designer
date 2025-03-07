@@ -1,4 +1,4 @@
-import { defineConfig } from '@noodlestan/designer-functions';
+import { defineConfig, formatError } from '@noodlestan/designer-functions';
 
 const { options, errors } = await defineConfig({
     store: {
@@ -9,4 +9,4 @@ const { options, errors } = await defineConfig({
 });
 
 console.info(options);
-errors.forEach(error => console.error('🟥', error));
+errors.forEach(error => console.error('🟥', formatError(error)));

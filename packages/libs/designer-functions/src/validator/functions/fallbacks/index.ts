@@ -3,3 +3,4 @@ export * from './applyModelFallback';
 export * from './applyNameFallback';
 export * from './applyParamsFallback';
 export * from './applyUuidFallback';
+export * from './types';

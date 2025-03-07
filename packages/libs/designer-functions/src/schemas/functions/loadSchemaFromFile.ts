@@ -25,10 +25,10 @@ export const loadSchemaFromFile = async (
     try {
         fileContents = await fs.readFile(filePath, 'utf-8');
     } catch (error) {
-        const message = maybeErrorMessage(error, ' {}');
+        const message = maybeErrorMessage(error, ' {}.');
         const err = createBuilderSourceError({
             ...attrs,
-            reason: `Could not read schema file. ${message}.`,
+            reason: `Could not read schema file.${message}`,
         });
         context.addError(err);
         return;
@@ -37,10 +37,10 @@ export const loadSchemaFromFile = async (
     try {
         schemaData = JSON.parse(fileContents) as SchemaData;
     } catch (error) {
-        const message = maybeErrorMessage(error, ' {}');
+        const message = maybeErrorMessage(error, ' {}.');
         const err = createBuilderSourceError({
             ...attrs,
-            reason: `Could not parse schema file. ${message}.`,
+            reason: `Could not parse schema file.${message}`,
         });
         context.addError(err);
         return;

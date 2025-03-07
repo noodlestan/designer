@@ -1,7 +1,7 @@
 import type { Decision } from '../../decision';
 import { createDecisionContext, createDecisionNotFoundError } from '../../decision-context';
 import type { DecisionRef } from '../../inputs';
-import type { RecordMap } from '../../records';
+import type { RecordMap } from '../../record';
 import type { BaseValue } from '../../values';
 import { createDecision } from '../createDecision';
 import type { StaticResolver } from '../types';

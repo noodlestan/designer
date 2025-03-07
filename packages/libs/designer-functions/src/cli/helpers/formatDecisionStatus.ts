@@ -1,5 +1,4 @@
-import { formatDecisionError } from './formatDecisionError';
-import { formatValueError } from './formatValueError';
+import { formatError } from './formatError';
 import { countErrors, formatStatus, formatValue } from './functions';
 import type { ProducedDecisionStatus } from './types';
 
@@ -57,15 +56,13 @@ export const formatDecisionStatus = (
     if (showDetails && status.hasErrors) {
         details.push('', '');
     }
-    if (showDetails && status.context.hasErrors()) {
+    if (showDetails && !status.value && status.context.hasErrors()) {
         const errors = status.context.errors();
-        details.push(
-            ...errors.map(err => ' > ' + formatDecisionError(err, color, showSource, false)),
-        );
+        details.push(...errors.map(err => ' > ❓ ' + formatError(err, color, false, showSource)));
     }
     if (showDetails && status.value?.context().hasErrors()) {
         const errors = status.value?.context().errors() || [];
-        details.push(...errors.map(err => ' > ' + formatValueError(err, color, false)));
+        details.push(...errors.map(err => ' > ' + formatError(err, color, false, showSource)));
     }
     if (showDetails && status.hasErrors) {
         details.push('');

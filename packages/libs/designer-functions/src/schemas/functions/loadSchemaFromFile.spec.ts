@@ -3,7 +3,12 @@ import fs from 'fs/promises';
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type BuilderContext, type BuilderOptions, createBuilderContext } from '../../builder';
+import {
+    type BuilderContext,
+    type BuilderOptions,
+    ERROR_BUILDER_SOURCE,
+    createBuilderContext,
+} from '../../builder';
 import type { SchemaMap } from '../types';
 
 import { loadSchemaFromFile } from './loadSchemaFromFile';
@@ -60,6 +65,7 @@ describe('loadSchemaFromFile()', () => {
 
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SOURCE);
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Could not read');
         expect(context.errors()[0].message()).toContain(filePath);
@@ -73,6 +79,7 @@ describe('loadSchemaFromFile()', () => {
 
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SOURCE);
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Could not parse');
         expect(context.errors()[0].message()).toContain('Unexpected token');
@@ -85,6 +92,7 @@ describe('loadSchemaFromFile()', () => {
 
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SOURCE);
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Schema is missing a valid');
     });
@@ -100,6 +108,7 @@ describe('loadSchemaFromFile()', () => {
 
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SOURCE);
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Duplicate Schema $id "duplicateId"');
     });
@@ -112,6 +121,7 @@ describe('loadSchemaFromFile()', () => {
         await loadSchemaFromFile(context, source, new Map(), filePath);
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SOURCE);
         expect(context.errors()[0].message()).toContain('Could not read schema file.');
         expect(context.errors()[0].message()).toContain('Foo error');
     });

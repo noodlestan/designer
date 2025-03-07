@@ -1,5 +1,5 @@
 import type { DecisionRef } from '../inputs';
-import type { ValidatedRecord } from '../records';
+import type { ValidatedRecord } from '../record';
 
 import { decisionTypeFromModel } from './functions';
 import type { DecisionContext, DecisionError, DecisionRefResolver } from './types';
@@ -16,7 +16,6 @@ export const createDecisionContext = (
     };
 
     const inputErrors = () => records.flatMap(({ errors }) => errors);
-    const getInputs = () => records.map(({ input: record }) => record);
     const getErrors = () => [...errors, ...inputErrors()];
     const hasErrors = () => Boolean(getErrors().length);
 
@@ -25,7 +24,7 @@ export const createDecisionContext = (
         resolve: resolver,
         decisionType: () => decisionTypeFromModel(records[0]?.input.model || ''),
         ref: () => ref,
-        inputs: getInputs,
+        records: () => records,
         hasErrors,
         errors: getErrors,
         addError,

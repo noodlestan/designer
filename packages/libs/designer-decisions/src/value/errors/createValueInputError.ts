@@ -1,20 +1,34 @@
-import { serializeErrorData, serializeMaybeError } from '../../errors';
+import { type DesignerErrorParams, serializeErrorData } from '../../errors';
+import { formatErrorStr, formatRefAndSource } from '../../private';
 import type { ValueInputError } from '../types';
 
-type Attributes = Omit<ValueInputError, 'message'>;
+import { ERROR_LAYER_VALUE, ERROR_VALUE_INPUT } from './constants';
+
+type Attributes = DesignerErrorParams<ValueInputError>;
 
 export const createValueInputError = (attributes: Attributes): ValueInputError => {
-    const { context, valueName, input, error } = attributes;
+    const { context, valueName, input, error: maybeError } = attributes;
 
-    const message = () => {
+    const ref = context.ref();
+    const recordZero = context.decisionContext().records()[0];
+    const { source = { name: '<unknown>' }, file: filename } = recordZero || {};
+
+    const message = (showRef = true, showSource = true) => {
+        const atStr = formatRefAndSource(ref, source?.name, filename, showRef, showSource);
         const dataStr = serializeErrorData(input);
-        const refStr = JSON.stringify(context.ref());
-        const errStr = serializeMaybeError(error, ' Reason: {}');
-        return `Invalid input data for a ${valueName} in ${refStr}. Value: ${dataStr}${errStr}`;
+        const errStr = formatErrorStr(maybeError as Error);
+        return `Invalid Value Input for ${valueName}.${errStr} Value: ${dataStr}${atStr}`;
+    };
+
+    const docs = () => {
+        return `/api/designer-decisions/Value/Types/ValueError#${ERROR_VALUE_INPUT.toLowerCase()}`;
     };
 
     return {
-        ...attributes,
+        layer: ERROR_LAYER_VALUE,
+        name: ERROR_VALUE_INPUT,
         message,
+        docs,
+        ...attributes,
     };
 };

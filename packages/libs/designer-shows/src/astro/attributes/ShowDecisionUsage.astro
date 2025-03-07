@@ -7,7 +7,7 @@ type Props = ShowDecisionProps;
 const { store, d } = Astro.props;
 
 const decision = store.decision({ $name: d });
-const { isFor = [], notFor = [] } = decision?.inputs()[0].usage || {}; // WIP match context (and encapsulate)
+const { isFor = [], notFor = [] } = decision?.records()[0].input.usage || {}; // WIP match context (and encapsulate)
 ---
 
 <div class="dd-attr-usage">

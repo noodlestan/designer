@@ -1,30 +1,24 @@
-import type { DecisionInputError, LoadedRecord } from '@noodlestan/designer-decisions';
-
 import { isNonEmptyString } from '../../../private';
-import { createDecisionNormalizeError } from '../../errors';
+
+import type { RecordValidationErrorAttributes } from './types';
 
 export const FALLBACK_MODEL = 'unknown/unknown';
 
 export function applyModelFallback(
-    loaded: LoadedRecord,
-    errors: DecisionInputError[],
+    errors: RecordValidationErrorAttributes[],
     maybeModel: unknown | undefined,
-    fallback: { name: string },
 ): string {
     const errorAttributes = {
-        loaded,
         path: '/model',
         schema: 'DecisionInput#-model',
         value: maybeModel,
-        model: FALLBACK_MODEL,
-        ...fallback,
     };
 
     if (!isNonEmptyString(maybeModel)) {
-        const error = createDecisionNormalizeError({
+        const error = {
             ...errorAttributes,
-            reason: 'Must be a non-empty string.',
-        });
+            reason: 'must be a non-empty string',
+        };
         errors.push(error);
         return FALLBACK_MODEL;
     }

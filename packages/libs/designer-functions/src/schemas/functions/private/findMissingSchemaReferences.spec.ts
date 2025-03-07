@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { type BuilderContext, createBuilderContext } from '../../../builder';
+import { type BuilderContext, ERROR_BUILDER_SCHEMA, createBuilderContext } from '../../../builder';
 import type { SchemaId } from '../../types';
 
 import { findMissingSchemaReferences } from './findMissingSchemaReferences';
@@ -56,6 +56,7 @@ describe('findMissingSchemaReferences()', () => {
             referencePairsWithMissingRefs,
         );
         expect(context.errors().length).toEqual(2);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SCHEMA);
         expect(context.errors()[0].message()).toEqual(
             'Invalid schema "schema1". Missing references: [missingSchema1].',
         );

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ERROR_BUILDER_SCHEMA } from './constants';
+import { ERROR_BUILDER_SCHEMA, ERROR_LAYER_BUILDER } from './constants';
 import { createBuilderSchemaError } from './createBuilderSchemaError';
 
 describe('createBuilderSchemaError()', () => {
@@ -12,8 +12,8 @@ describe('createBuilderSchemaError()', () => {
 
         it('should return a BuilderError object with the expected name', () => {
             const result = createBuilderSchemaError(attributes);
-
-            expect(result.name).toEqual(ERROR_BUILDER_SCHEMA);
+            expect(result.layer).toBe(ERROR_LAYER_BUILDER);
+            expect(result.name).toBe(ERROR_BUILDER_SCHEMA);
         });
 
         it('should return a BuilderError object with the expected attributes', () => {

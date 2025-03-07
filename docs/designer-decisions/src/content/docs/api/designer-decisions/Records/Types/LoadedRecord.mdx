@@ -1,0 +1,19 @@
+---
+title: LoadedRecord
+slug: api/designer-decisions/Records/Types/LoadedRecord
+sidebar:
+    order: 0
+---
+
+Describes a record loaded from a [DecisionSource](/api/designer-decisions/Meta/Types/DecisionSource).
+
+```ts
+export type LoadedRecord = {
+    input: DeepPartial<DecisionInput>;
+    source: DecisionSource;
+    file?: string;
+    uuid?: string;
+};
+```
+
+The `input` is eventually invalid and may not match the [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput) shape.

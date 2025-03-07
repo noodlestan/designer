@@ -1,3 +1,4 @@
+import type { DesignerError } from '../errors';
 import type { DecisionInput, DecisionRef } from '../inputs';
 import type { DeepPartial } from '../private';
 
@@ -31,11 +32,16 @@ export type LoadedRecord = {
     uuid?: string;
 };
 
-export type DecisionInputError = {
+type _RecordError = DesignerError & {
+    layer: 'Record';
     source: DecisionSource;
     input: DeepPartial<DecisionInput>;
     filename?: string;
     ref: DecisionRef;
+};
+
+export type RecordValidationError = _RecordError & {
+    name: 'RecordValidationError';
     reason: string;
     model: string;
     path?: string;
@@ -44,16 +50,18 @@ export type DecisionInputError = {
     message: () => string;
 };
 
+export type RecordError = RecordValidationError;
+
 export type ValidatedRecord = LoadedRecord & {
     uuid: string;
     loaded: LoadedRecord['input'];
     input: DecisionInput;
-    errors: DecisionInputError[];
+    errors: RecordError[];
 };
 
 export type RecordMap = {
     hasErrors: () => boolean;
-    inputErrors: () => DecisionInputError[];
+    inputErrors: () => RecordError[];
     records: (filter?: (item: ValidatedRecord) => boolean) => ValidatedRecord[];
     findByRef: (ref: DecisionRef) => ValidatedRecord[];
 };

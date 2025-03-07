@@ -1,9 +1,6 @@
-import type { DecisionInputError, LoadedRecord } from '@noodlestan/designer-decisions';
-
 import { isNonEmptyString } from '../../../private';
-import { createDecisionNormalizeError } from '../../errors';
 
-import { FALLBACK_MODEL } from './applyModelFallback';
+import type { RecordValidationErrorAttributes } from './types';
 
 function randomName(): string {
     const id = (Math.random() + 1).toString(36).substring(2, 7);
@@ -11,27 +8,21 @@ function randomName(): string {
 }
 
 export function applyNameFallback(
-    loaded: LoadedRecord,
-    errors: DecisionInputError[],
+    errors: RecordValidationErrorAttributes[],
     maybeName: unknown | undefined,
-    fallback: { model?: string },
 ): string {
     const errorAttributes = {
-        loaded,
         path: '/name',
         schema: 'DecisionInput#-name',
         value: maybeName,
-        model: fallback.model || FALLBACK_MODEL,
     };
 
     if (!isNonEmptyString(maybeName)) {
         const name = randomName();
-        const error = createDecisionNormalizeError({
+        errors.push({
             ...errorAttributes,
-            name,
-            reason: 'Must be a non-empty string.',
+            reason: 'must be a non-empty string',
         });
-        errors.push(error);
         return name;
     }
 

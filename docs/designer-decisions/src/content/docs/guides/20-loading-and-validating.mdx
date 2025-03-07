@@ -100,7 +100,7 @@ We will also format any eventual errors to better assist us if something goes wr
 // scripts/validate-decisions.js
 import {
     createBuilderContext,
-+  formatError,
++    formatError,
     loadConfig,
     buildStaticStore,
 } from '@noodlestan/designer-functions';
@@ -211,14 +211,14 @@ Decision data is automatically validated against [JSON schemas](/models/schemas)
 
 For instance, if the `params` are incomplete or don't match the expected data types for the decision `model`, the decision will be marked with validation errors. In these cases, the decision will likely produce unexpected values so it's good to know that there are issues in our data.
 
-To inspect the validation errors we can format messages using the `formatDecisionInputError()` utility function.
+To inspect the validation errors we can format messages using the `formatError()` utility function.
 
-```diff lang="js" collapse={9-13} "formatDecisionInputError"
+```diff lang="js" collapse={9-13} "formatError"
 // scripts/validate-decisions.js
 import {
     createBuilderContext,
     formatError,
-+    formatDecisionInputError,
++    formatError,
     loadConfig,
     buildStaticStore,
 } from '@noodlestan/designer-functions';
@@ -233,7 +233,7 @@ const loadDecisions = async () => {
     const records = store.records();
     records.forEach(({ name, model }) => console.info(name, model));
     console.info(`🐘 ${records.length} records`);
-+   store.inputErrors().forEach(error => console.error(formatDecisionInputError(error)));
++   store.inputErrors().forEach(error => console.error(formatError(error)));
     context.errors().forEach(error => console.error(formatError(error)));
 };
 
@@ -305,7 +305,7 @@ const loadDecisions = async () => {
 +    const produced = produceDecisions(context, store);
 +    produced.decisions().forEach(status => console.info(formatDecisionStatus(status)));
     console.info(`🐘 ${records.length} records`);
--    store.inputErrors().forEach(error => console.error(formatDecisionInputError(error)));
+-    store.inputErrors().forEach(error => console.error(formatError(error)));
     context.errors().forEach(error => console.error(formatError(error)));
 
 };
@@ -330,9 +330,9 @@ If we introduce a validation issue in one of the items, as in the previous examp
 🟩 | Card Thumb Minimum Size | size-value/explicit | 175 |
 🟩 | Avatar Minimum Size | size-value/explicit | 50 |
 🟩 | Avatar Sizes | size-scale/anchored | [50, 100, 150, 200] |
-🟨 | Warm Color | color-value/explicit | #000000 | 1 errors, 1 warnings
- > 🟨 Decision "Warm Color" /params (required) must have required property 'value'
- > 🟨 Invalid input data for a ColorValue in {"$name":"Warm Color"}: undefined
+🟥 | Warm Color | color-value/explicit | #000000 | 2 errors
+ > 🟥 Decision "Warm Color" /params (required) must have required property 'value'
+ > 🟥 Invalid input data for a ColorValue in {"$name":"Warm Color"}: undefined
 
 ```
 
@@ -374,8 +374,8 @@ loadDecisions();
 You can use it to summarize all counts in one line.
 
 ```
-🟨 Decision "Sizing Scale" /params/after (required) must have required property 'steps'
-🐘 59 records, 0 errors, 1 warnings
+🟥 Decision "Sizing Scale" /params/after (required) must have required property 'steps'
+🐘 59 records, 1 error
 ```
 
 If you are running this as part of your build process you will probably want to exit the script with an error code.

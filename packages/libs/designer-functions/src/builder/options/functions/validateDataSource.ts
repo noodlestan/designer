@@ -14,7 +14,7 @@ export const validateDataSource = (
     if (!isObject(source)) {
         const error = createBuilderOptionsError({
             path,
-            reason: 'Data source is not an object.',
+            reason: 'must be a DataSource object',
             options: source,
         });
         addError(error);
@@ -24,7 +24,7 @@ export const validateDataSource = (
     if (!isNonEmptyString(source.type)) {
         const error = createBuilderOptionsError({
             path: `${path}.type`,
-            reason: 'Must be a non-empty string.',
+            reason: 'must be a non-empty string',
             options: source.type,
         });
         addError(error);
@@ -34,7 +34,7 @@ export const validateDataSource = (
     if (!isNonEmptyString(source.path)) {
         const error = createBuilderOptionsError({
             path: `${path}.path`,
-            reason: 'Must be a non-empty string.',
+            reason: 'must be a non-empty string',
             options: source.path,
         });
         addError(error);
@@ -49,7 +49,7 @@ export const validateDataSource = (
         if (!isNonEmptyString(source.package)) {
             const error = createBuilderOptionsError({
                 path: `${path}.package`,
-                reason: 'Must be a non-empty string.',
+                reason: 'must be a non-empty string',
                 options: source.package,
             });
             addError(error);

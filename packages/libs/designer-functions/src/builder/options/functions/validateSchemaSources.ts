@@ -19,7 +19,7 @@ export const validateSchemaSources = (
         if (!isObject(schema)) {
             const error = createBuilderOptionsError({
                 path,
-                reason: 'Must be an object.',
+                reason: 'must be an object',
                 options: schema,
             });
             addError(error);
@@ -29,7 +29,7 @@ export const validateSchemaSources = (
         if (!isNonEmptyString(urnBase)) {
             const error = createBuilderOptionsError({
                 path: `${path}.urnBase`,
-                reason: 'Must be a non-empty string.',
+                reason: 'must be a non-empty string',
                 options: urnBase,
             });
             addError(error);

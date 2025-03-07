@@ -1,16 +1,19 @@
+import type { DesignerError } from '../errors';
 import type { DeepPartial } from '../private';
 import type { LinkedValueContext } from '../value';
 
-export type PrimitiveError = {
+export type _PrimitiveError = DesignerError & {
+    layer: 'Primitive';
     context: PrimitiveContext;
     primitiveName: string;
-    message: () => string;
 };
 
-export type PrimitiveInputError = PrimitiveError & {
+export type PrimitiveInputError = _PrimitiveError & {
+    name: 'PrimitiveInputError';
     input: unknown;
-    error?: unknown;
 };
+
+export type PrimitiveError = PrimitiveInputError;
 
 export type Primitive<T> = T & {
     literal: () => T;
