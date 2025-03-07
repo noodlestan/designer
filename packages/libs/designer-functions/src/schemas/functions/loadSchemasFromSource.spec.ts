@@ -1,7 +1,13 @@
 import type { SchemaSource } from '@noodlestan/designer-decisions';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type BuilderContext, type BuilderOptions, createBuilderContext } from '../../builder';
+import {
+    type BuilderContext,
+    type BuilderOptions,
+    ERROR_BUILDER_SOURCE,
+    ERROR_BUILDER_SOURCE,
+    createBuilderContext,
+} from '../../builder';
 import { resolveSourcePath } from '../../helpers';
 import type { SchemaData, SchemaId } from '../types';
 
@@ -89,6 +95,7 @@ describe('loadSchemasFromSource()', () => {
 
         expect(context.hasErrors()).toBe(true);
         expect(context.errors().length).toBe(1);
+        expect(context.errors()[0].name).toEqual(ERROR_BUILDER_SOURCE);
         expect(context.errors()[0].message()).toContain('Invalid SchemaSource "foo"');
         expect(context.errors()[0].message()).toContain('Could not resolve path');
         expect(context.errors()[0].message()).toContain('Module resolution failed.');

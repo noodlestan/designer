@@ -1,29 +1,24 @@
-import type { DecisionInputError, LoadedRecord } from '@noodlestan/designer-decisions';
-
 import { isObject } from '../../../private';
-import { createDecisionNormalizeError } from '../../errors';
+
+import type { RecordValidationErrorAttributes } from './types';
 
 const FALLBACK_PARAMS = {};
 
 export function applyParamsFallback(
-    loaded: LoadedRecord,
-    errors: DecisionInputError[],
+    errors: RecordValidationErrorAttributes[],
     maybeParams: unknown | undefined,
-    fallback: { name: string; model: string },
 ): object {
     const errorAttributes = {
-        loaded,
         path: '/params',
         schema: 'DecisionInput#-params',
         value: maybeParams,
-        ...fallback,
     };
 
     if (!isObject(maybeParams) || !Object.keys(maybeParams).length) {
-        const error = createDecisionNormalizeError({
+        const error = {
             ...errorAttributes,
             reason: 'Must be a non-empty object.',
-        });
+        };
         errors.push(error);
         return FALLBACK_PARAMS;
     }

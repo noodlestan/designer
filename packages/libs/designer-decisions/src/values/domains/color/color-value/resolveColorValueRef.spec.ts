@@ -8,7 +8,12 @@ import {
     createValueContextMock,
 } from '../../../../mocks';
 import { COLOR_FALLBACK_LITERAL, createColor } from '../../../../primitives';
-import type { ValueRefNotFoundError } from '../../../../value';
+import {
+    ERROR_VALUE_REF_MISMATCH,
+    ERROR_VALUE_REF_NOT_FOUND,
+    type ValueRefMismatchError,
+    type ValueRefNotFoundError,
+} from '../../../../value';
 import { resolveSetRefDecision } from '../../../functions';
 
 import { createColorValue } from './createColorValue';
@@ -37,7 +42,7 @@ describe('resolveColorValueRef()', () => {
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
-            expect(error.message()).toContain('not found');
+            expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
             expect(error.valueName).toBe(DECISION_COLOR_VALUE);
@@ -128,9 +133,14 @@ describe('resolveColorValueRef()', () => {
             resolveColorValueRef(mockValueContext, mockRef);
 
             expect(addErrorSpy).toHaveBeenCalledOnce();
-            const error = addErrorSpy.mock.calls[0][0] as ValueRefNotFoundError;
+            const error = addErrorSpy.mock.calls[0][0] as ValueRefMismatchError;
+            expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
+            expect(error.context).toBe(mockValueContext);
+            expect(error.ref).toBe(mockRef);
+            expect(error.valueName).toBe(DECISION_COLOR_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
-            expect(error.message()).toContain('color-set, color-value');
+            expect(error.accepted).toContain('color-set');
+            expect(error.accepted).toContain('color-value');
         });
     });
 });

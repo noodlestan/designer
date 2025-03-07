@@ -35,6 +35,7 @@ export const createValueContextPrivate = <I = unknown>(
         parent: () => parent,
         ref: () => modelContext.ref(),
         modelContext: () => modelContext,
+        decisionContext: () => modelContext.decisionContext(),
         decisionInput: () => modelContext.decisionInput(),
         lookupContexts: () => lookupContexts,
         input: () => input,

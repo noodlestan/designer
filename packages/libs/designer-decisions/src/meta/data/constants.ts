@@ -1,4 +1,4 @@
-import type { DecisionSource } from '../../records';
+import type { DecisionSource } from '../../record';
 import { DECISION_SCHEMAS } from '../schemas';
 
 const SAMPLE_DATA: DecisionSource = {

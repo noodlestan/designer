@@ -1,5 +1,5 @@
 import type { DecisionModelFactory } from '../models';
-import type { SchemaDataSource } from '../records';
+import type { SchemaDataSource } from '../record';
 
 export type DecisionType = {
     type: string;

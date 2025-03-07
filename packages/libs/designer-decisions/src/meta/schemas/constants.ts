@@ -1,4 +1,4 @@
-import type { SchemaSource } from '../../records';
+import type { SchemaSource } from '../../record';
 import type { SchemaGeneratorConfig } from '../types';
 
 const PATH_PRIMITIVES = './inputs/types/primitives';

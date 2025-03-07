@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { DecisionInput, DecisionRef } from '../inputs';
-import type { DecisionSource } from '../records';
+import type { DecisionSource } from '../record';
 
 import { createDecisionContext } from './createDecisionContext';
 import type { DecisionContext, DecisionError, DecisionRefResolver } from './types';
@@ -21,16 +21,14 @@ describe('createDecisionContext()', () => {
     describe('Given a an array of inputs', () => {
         it('should create a context with the expected decisionType, ref, resolver, and inputs', () => {
             const result = createDecisionContext(mockRef, mockResolver, mockRecords);
-
             expect(result.decisionType()).toBe('foo');
             expect(result.ref()).toBe(mockRef);
             expect(result.resolve).toBe(mockResolver);
-            expect(result.inputs()).toEqual(mockInputs);
+            expect(result.records()).toEqual(mockRecords);
         });
 
         it('should create a context with no errors', () => {
             const result = createDecisionContext(mockRef, mockResolver, mockRecords);
-
             expect(result.errors()).toEqual([]);
             expect(result.hasErrors()).toBe(false);
         });

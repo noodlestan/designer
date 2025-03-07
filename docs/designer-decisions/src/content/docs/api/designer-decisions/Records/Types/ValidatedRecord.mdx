@@ -1,0 +1,25 @@
+---
+title: ValidatedRecord
+slug: api/designer-decisions/Records/Types/ValidatedRecord
+sidebar:
+    order: 0
+---
+
+Describes a validated `DecisionInput` with eventual [RecordError](/api/designer-decisions/Records/Types/RecordError).
+
+```ts
+export type ValidatedRecord = LoadedRecord & {
+    uuid: string;
+    loaded: LoadedRecord['input'];
+    input: DecisionInput;
+    errors: RecordError[];
+};
+```
+
+Extends [LoadedRecord](/api/designer-decisions/Records/Types/LoadedRecord).
+
+Adds a unique `uuid` (one is generated is if not provided in the `input` object).
+
+In case of validation errors, overrides the `input` attribute with normalized data to make sure it matches the shape [DecisionInput](/api/designer-decisions/Inputs/Types/DecisionInput) shape.
+
+The original input, eventually invalid, is available as `loaded`.

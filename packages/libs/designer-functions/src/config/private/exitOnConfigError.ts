@@ -1,3 +1,5 @@
+import { formatError } from '../../cli';
+
 import type { DesignerConfig, ResolvedConfig } from './types';
 
 export async function exitOnConfigError(
@@ -13,7 +15,7 @@ export async function exitOnConfigError(
             Object.entries(value).forEach(([sub, value]) => console.info(`${key}.${sub}`, value));
         });
 
-        errors.forEach(error => console.error(`- ${error.message()}`));
+        errors.forEach(error => console.error(formatError(error)));
         process.exit(1);
     }
 

@@ -1,0 +1,34 @@
+---
+title: RecordError
+slug: api/designer-decisions/Records/Types/RecordError
+sidebar:
+    order: 0
+---
+
+Describes an error on an [ValidatedRecord](/api/designer-decisions/Records/Types/ValidatedRecord).
+
+```ts
+export type RecordError = {
+    source: DecisionSource;
+    input: DeepPartial<DecisionInput>;
+    filename?: string;
+    ref: DecisionRef;
+    message: () => string;
+};
+```
+
+## Errors
+
+### RecordValidationError
+
+An unexpected error occurred while building the store.
+
+```ts
+export type RecordValidationError = RecordError & {
+    reason: string;
+    model: string;
+    path?: string;
+    schema?: string;
+    value?: unknown;
+};
+```

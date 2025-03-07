@@ -1,20 +1,34 @@
-import { serializeErrorData, serializeMaybeError } from '../../errors';
+import { type DesignerErrorParams, serializeErrorData } from '../../errors';
+import { formatErrorStr, formatRefAndSource } from '../../private';
 import type { PrimitiveInputError } from '../types';
 
-type Attributes = Omit<PrimitiveInputError, 'message'>;
+import { ERROR_LAYER_PRIMTIVE, ERROR_PRIMITIVE_INPUT } from './constants';
+
+type Attributes = DesignerErrorParams<PrimitiveInputError>;
 
 export const createPrimitiveInputError = (attributes: Attributes): PrimitiveInputError => {
-    const { context, primitiveName, input, error } = attributes;
+    const { context, primitiveName, input, error: maybeError } = attributes;
 
-    const message = () => {
+    const ref = context.valueContext()?.ref();
+    const recordZero = context.valueContext()?.decisionContext().records()[0];
+    const { source, file: filename } = recordZero || {};
+
+    const message = (showRef = true, showSource = true) => {
+        const atStr = formatRefAndSource(ref, source?.name, filename, showRef, showSource);
         const dataStr = serializeErrorData(input);
-        const refStr = JSON.stringify(context.valueContext()?.ref());
-        const errStr = serializeMaybeError(error, ' Reason: {}');
-        return `Invalid input data for a ${primitiveName} in ${refStr}. Value: ${dataStr}${errStr}`;
+        const errStr = formatErrorStr(maybeError as Error);
+        return `Invalid Primitive Input for ${primitiveName}.${errStr} Value: ${dataStr}${atStr}`;
+    };
+
+    const docs = () => {
+        return `/api/designer-decisions/Primitive/Types/PrimitiveError#${ERROR_PRIMITIVE_INPUT.toLowerCase()}`;
     };
 
     return {
-        ...attributes,
+        layer: ERROR_LAYER_PRIMTIVE,
+        name: ERROR_PRIMITIVE_INPUT,
         message,
+        docs,
+        ...attributes,
     };
 };

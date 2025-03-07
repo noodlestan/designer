@@ -28,7 +28,7 @@ export async function loadDecisionFile(
     try {
         fileContents = await fs.readFile(filePath, 'utf-8');
     } catch (error) {
-        const message = maybeErrorMessage(error, ' {}');
+        const message = maybeErrorMessage(error, ' {}.');
         const err = createBuilderSourceError({
             ...attrs,
             reason: `Could not read decision file.${message}.`,

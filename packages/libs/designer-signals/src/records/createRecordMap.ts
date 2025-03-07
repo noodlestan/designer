@@ -1,8 +1,8 @@
 import type {
     DecisionInput,
-    DecisionInputError,
     DecisionRef,
     LoadedRecord,
+    RecordError,
     ValidatedRecord,
 } from '@noodlestan/designer-decisions';
 // import { ReactiveMap } from '@solid-primitives/map';
@@ -22,7 +22,7 @@ export const createReactiveMap = (loadedRecords: LoadedRecord[]): ReactiveMap =>
         return Object.values(getRecords()).some(item => Boolean(item.errors.length));
     };
 
-    const inputErrors = (): DecisionInputError[] => {
+    const inputErrors = (): RecordError[] => {
         return Object.values(getRecords()).flatMap(({ errors }) => errors);
     };
 

@@ -1,7 +1,7 @@
 import type {
-    DecisionInputError,
     DecisionRef,
     LoadedRecord,
+    RecordError,
     RecordMap,
     ValidatedRecord,
 } from '@noodlestan/designer-decisions';
@@ -21,7 +21,7 @@ export const createRecordMap = (
         return data.some(item => item.errors !== null);
     };
 
-    const inputErrors = (): DecisionInputError[] => {
+    const inputErrors = (): RecordError[] => {
         return data.flatMap(({ errors }) => errors);
     };
 

@@ -1,6 +1,6 @@
 import type { DecisionContext, DecisionRefResolver } from '../decision-context';
 import type { LookupContexts } from '../lookup';
-import type { RecordMap, ValidatedRecord } from '../records';
+import type { RecordMap, ValidatedRecord } from '../record';
 import type { ValueContext } from '../value';
 
 export type StaticResolver = {

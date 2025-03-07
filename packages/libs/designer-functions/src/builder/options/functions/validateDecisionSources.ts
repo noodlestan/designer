@@ -21,7 +21,7 @@ export const validateDecisionSources = (
             if (!isNonEmptyString(decision)) {
                 const error = createBuilderOptionsError({
                     path,
-                    reason: 'Must be a non-empty string or a DecisionSource object.',
+                    reason: 'must be a non-empty string or a DecisionSource object',
                     options: decision,
                 });
                 addError(error);
@@ -32,7 +32,7 @@ export const validateDecisionSources = (
         if (!isObject(decision)) {
             const error = createBuilderOptionsError({
                 path,
-                reason: 'Must be a non-empty string or a DecisionSource object.',
+                reason: 'must be a non-empty string or a DecisionSource object',
                 options: decision,
             });
             addError(error);
@@ -42,7 +42,7 @@ export const validateDecisionSources = (
         if (!isNonEmptyString(name)) {
             const error = createBuilderOptionsError({
                 path: `${path}.name`,
-                reason: 'Must be a non-empty string.',
+                reason: 'must be a non-empty string',
                 options: name,
             });
             addError(error);

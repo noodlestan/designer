@@ -17,12 +17,12 @@ export const produceDecisions = (context: BuilderContext, store: Store): Produce
         (acc, status) => acc + Number(status.hasValueErrors),
         0,
     );
+    const errorsCount = Math.max(valueErrorsCount, decisionErrorsCount);
 
     const counts: () => [string, number][] = () => [
         ['records', decisions.length],
         ['store errors', errors.length],
-        ['decision errors', decisionErrorsCount],
-        ['value errors', valueErrorsCount],
+        ['decision errors', errorsCount],
     ];
 
     const errorCount = () => {

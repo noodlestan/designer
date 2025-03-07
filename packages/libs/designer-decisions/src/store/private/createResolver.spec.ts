@@ -4,7 +4,7 @@ import { createDecisionContext, createDecisionNotFoundError } from '../../decisi
 import type { DecisionNotFoundError } from '../../decision-context';
 import type { DecisionInput } from '../../inputs';
 import { createDecisionContextMock, createDecisionMock, createRecordMapMock } from '../../mocks';
-import type { RecordMap } from '../../records';
+import type { RecordMap } from '../../record';
 import { createDecision } from '../createDecision';
 
 import { createResolver } from './createResolver';

@@ -36,7 +36,7 @@ describe('createDecision()', () => {
             expect(decision.type()).toBe('decision-type');
             expect(decision.name()).toBe('Test Decision');
             expect(decision.description()).toBe('A test decision');
-            expect(decision.inputs()).toEqual(mockInputs);
+            expect(decision.records().map(r => r.input)).toEqual(mockInputs);
             expect(decision.model()).toBe('decision-type/model');
             expect(decision.params()).toEqual({ key: 'value' });
         });

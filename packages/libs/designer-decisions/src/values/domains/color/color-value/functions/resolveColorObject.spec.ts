@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ERROR_VALUE_INPUT } from '../../../../..';
 import { DECISION_COLOR_VALUE as valueName } from '../../../../../constants';
 import { type ColorObjectInput } from '../../../../../inputs';
 import { createValueContextMock } from '../../../../../mocks';
@@ -166,7 +167,7 @@ describe('resolveColorObject()', () => {
             resolveColorObject(mockContext, input);
             expect(mockContext.addError).toHaveBeenCalledOnce();
             const error = addErrorSpy.mock.calls[0][0];
-            expect(error.message()).toContain('Invalid input data');
+            expect(error.name).toEqual(ERROR_VALUE_INPUT);
             expect(error.context).toEqual(mockContext);
             expect(error.valueName).toEqual(valueName);
             expect(error.input).toEqual(input);

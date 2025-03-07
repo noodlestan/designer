@@ -10,7 +10,7 @@ import { getDecisionModelFactory } from './getDecisionModelFactory';
 export const createDecision = <T = unknown>(
     decisionContext: DecisionContext,
 ): Decision<BaseValue<T>> => {
-    const inputZero = () => decisionContext.inputs()[0];
+    const inputZero = () => decisionContext.records()[0].input;
 
     const produce = (context?: LookupContexts | ParentValueContext): BaseValue<T> => {
         const input = inputZero(); // WIP match context
@@ -38,7 +38,7 @@ export const createDecision = <T = unknown>(
         type: () => decisionContext.decisionType(),
         name: () => inputZero()?.name || '<not-found>',
         description: () => inputZero()?.description,
-        inputs: () => decisionContext.inputs(),
+        records: () => decisionContext.records(),
         model: () => inputZero()?.model, // WIP match context
         params: () => inputZero()?.params, // WIP match context
         produce,

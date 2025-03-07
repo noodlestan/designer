@@ -11,7 +11,7 @@ Provides an API to retrieve decisions and resolve their values.
 
 ```ts
 export type Store = {
-    inputErrors: () => DecisionInputError[];
+    inputErrors: () => RecordError[];
     records: (filter?: (record: ValidatedRecord) => boolean) => ValidatedRecord[];
     decision: (ref: DecisionRef) => Decision<V> | undefined;
     createDecisionContext: (contexts?: LookupContexts) => DecisionContext;

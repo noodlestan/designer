@@ -11,16 +11,20 @@ export type BuilderOptions = {
     resolver?: (moduleName: string) => Promise<string>;
 };
 
-export type BuilderUnexpectedError = DesignerError & { name: 'BuilderUnexpectedError' };
+type _BuilderError = DesignerError & {
+    layer: 'Builder';
+};
 
-export type BuilderOptionsError = DesignerError & {
+export type BuilderUnexpectedError = _BuilderError & { name: 'BuilderUnexpectedError' };
+
+export type BuilderOptionsError = _BuilderError & {
     name: 'BuilderOptionsError';
     path: string;
     reason: string;
     options: unknown;
 };
 
-export type BuilderSourceError = DesignerError & {
+export type BuilderSourceError = _BuilderError & {
     name: 'BuilderSourceError';
     type: string;
     id: string;
@@ -29,7 +33,7 @@ export type BuilderSourceError = DesignerError & {
     reason: string;
 };
 
-export type BuilderSchemaError = DesignerError & {
+export type BuilderSchemaError = _BuilderError & {
     name: 'BuilderSchemaError';
     id: string;
     reason: string;

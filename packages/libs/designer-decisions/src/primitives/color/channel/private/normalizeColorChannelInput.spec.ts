@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPrimitiveContextMock, mockChannelDefinition } from '../../../../mocks';
-import { type PrimitiveInputError } from '../../../../primitive';
+import { ERROR_PRIMITIVE_INPUT, type PrimitiveInputError } from '../../../../primitive';
 
 import { normalizeColorChannelInput } from './normalizeColorChannelInput';
 
@@ -34,10 +34,11 @@ describe('normalizeColorChannelInput()', () => {
             expect(addErrorSpy).toHaveBeenCalled();
 
             const error = addErrorSpy.mock.calls[0][0] as PrimitiveInputError;
-            expect(error.message()).toContain('Invalid input data for a ColorChannel');
-            expect(error.message()).toContain('{"$uuid":"decision-uuid"}');
-            expect(error.message()).toContain('"value": "0.3"');
-            expect(error.message()).toContain('Reason: "Invalid ColorChannelObjectLiteral');
+            expect(error.name).toEqual(ERROR_PRIMITIVE_INPUT);
+            expect(error.primitiveName).toEqual('ColorChannel');
+            expect(error.input).toEqual(mockInput);
+            expect(error.context).toEqual(mockPrimitiveContext);
+            expect(error.message()).toContain('Invalid ColorChannelObjectLiteral');
         });
     });
 
@@ -82,11 +83,13 @@ describe('normalizeColorChannelInput()', () => {
 
                 const expectedReason =
                     typeof invalidInput === 'object' && invalidInput !== null
-                        ? 'Reason: "Invalid ColorChannelObjectLiteral'
-                        : 'Reason: "Invalid ColorChannelLiteral';
+                        ? 'Invalid ColorChannelObjectLiteral'
+                        : 'Invalid ColorChannelLiteral';
                 const error = addErrorSpy.mock.calls[0][0] as PrimitiveInputError;
-                expect(error.message()).toContain('Invalid input data for a ColorChannel');
-                expect(error.message()).toContain('{"$uuid":"decision-uuid"}');
+                expect(error.name).toEqual(ERROR_PRIMITIVE_INPUT);
+                expect(error.primitiveName).toEqual('ColorChannel');
+                expect(error.input).toEqual(invalidInput);
+                expect(error.context).toEqual(mockPrimitiveContext);
                 expect(error.message()).toContain(expectedReason);
             },
         );

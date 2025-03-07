@@ -1,1 +1,3 @@
-export const ERROR_PRIMITIVE_INPUT_TYPE_MISMATCH = 'Type mismatch';
+export const ERROR_LAYER_PRIMTIVE = 'Primitive';
+
+export const ERROR_PRIMITIVE_INPUT = 'PrimitiveInputError';

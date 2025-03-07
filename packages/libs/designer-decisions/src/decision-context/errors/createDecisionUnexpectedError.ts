@@ -1,27 +1,48 @@
-import { maybeErrorMessage, serializeMaybeError } from '../../errors';
-import type { DecisionUnexpectedError } from '../types';
+import { type DesignerErrorParams } from '../../errors';
+import { formatErrorStr, formatRefAndSource } from '../../private';
+import { UnknownDecisionModelError } from '../../store/errors/UnknownDecisionModelError';
+import { UnknownDecisionTypeError } from '../../store/errors/UnknownDecisionTypeError';
+import { ERROR_DECISION_UNEXPECTED, ERROR_LAYER_DECISION } from '../constants';
+import type {
+    DecisionUnexpectedError,
+    DecisionUnknownModelError,
+    DecisionUnknownTypeError,
+} from '../types';
 
-import { UnknownDecisionModelError } from './UnknownDecisionModelError';
-import { UnknownDecisionTypeError } from './UnknownDecisionTypeError';
+type Attributes = DesignerErrorParams<DecisionUnexpectedError>;
 
-type Attributes = Omit<DecisionUnexpectedError, 'message'>;
+export const createDecisionUnexpectedError = (
+    attributes: Attributes,
+): DecisionUnexpectedError | DecisionUnknownTypeError | DecisionUnknownModelError => {
+    const { context, error: maybeError } = attributes;
 
-export const createDecisionUnexpectedError = (attributes: Attributes): DecisionUnexpectedError => {
-    const { context, error } = attributes;
+    const recordZero = context.records()[0];
+    const { source = { name: '<unknown>' }, file: filename } = recordZero || {};
 
-    const isWellKnown = error instanceof UnknownDecisionTypeError || UnknownDecisionModelError;
+    const ref = context.ref();
 
-    const message = () => {
-        const ref = context.ref();
-        const refStr = JSON.stringify(ref);
-        const errStr = !isWellKnown
-            ? serializeMaybeError(error, ' {}.')
-            : maybeErrorMessage(error, ' {}');
-        return `Unexpected error in ${refStr}.${errStr}`;
+    const isWellKnown =
+        maybeError instanceof UnknownDecisionTypeError ||
+        maybeError instanceof UnknownDecisionModelError;
+    const error = isWellKnown ? undefined : maybeError;
+
+    const message = (showRef = true, showSource = true) => {
+        const prefix = isWellKnown ? maybeError.message : 'Unexpected Decision Error.';
+        const atStr = formatRefAndSource(ref, source.name, filename, showRef, showSource);
+        const errStr = !isWellKnown ? formatErrorStr(maybeError as Error) : '';
+        return `${prefix}${errStr}${atStr}`;
+    };
+
+    const docs = () => {
+        return `/api/designer-decisions/Decision/Types/DecisionError#${ERROR_DECISION_UNEXPECTED.toLowerCase()}`;
     };
 
     return {
-        ...attributes,
+        layer: ERROR_LAYER_DECISION,
+        name: ERROR_DECISION_UNEXPECTED,
         message,
+        docs,
+        error,
+        context,
     };
 };

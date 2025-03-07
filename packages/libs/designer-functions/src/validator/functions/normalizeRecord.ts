@@ -1,13 +1,14 @@
-import type {
-    DecisionInput,
-    DecisionInputError,
-    LoadedRecord,
-    ValidatedRecord,
+import {
+    type DecisionInput,
+    type LoadedRecord,
+    type ValidatedRecord,
+    createRecordValidationError,
 } from '@noodlestan/designer-decisions';
 
 import { type DeepPartial, isObject } from '../../private';
 
 import {
+    type RecordValidationErrorAttributes,
     applyModelFallback,
     applyNameFallback,
     applyParamsFallback,
@@ -17,14 +18,14 @@ import {
 export function normalizeRecord(loadedRecord: LoadedRecord): ValidatedRecord {
     const { input: loaded, source, file } = loadedRecord;
 
-    const errors: DecisionInputError[] = [];
+    const errorAttributes: RecordValidationErrorAttributes[] = [];
 
     const partial = isObject(loaded) ? loaded : ({} as DeepPartial<DecisionInput>);
 
-    const name = applyNameFallback(loadedRecord, errors, partial.name, { model: partial.model });
-    const model = applyModelFallback(loadedRecord, errors, partial.model, { name });
-    const uuid = applyUuidFallback(loadedRecord, errors, partial.uuid, { name, model });
-    const params = applyParamsFallback(loadedRecord, errors, partial.params, { name, model });
+    const name = applyNameFallback(errorAttributes, partial.name);
+    const model = applyModelFallback(errorAttributes, partial.model);
+    const uuid = applyUuidFallback(loadedRecord, errorAttributes, partial.uuid);
+    const params = applyParamsFallback(errorAttributes, partial.params);
 
     const { description, usage, contexts } = partial;
 
@@ -37,6 +38,13 @@ export function normalizeRecord(loadedRecord: LoadedRecord): ValidatedRecord {
         usage,
         contexts,
     };
+
+    const errors = errorAttributes.map(error => {
+        return createRecordValidationError({
+            normalized: { uuid, loaded, input, source, file },
+            ...error,
+        });
+    });
 
     return {
         uuid,

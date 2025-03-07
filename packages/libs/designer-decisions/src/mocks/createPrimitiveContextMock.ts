@@ -1,8 +1,9 @@
 import { type Mock, vi } from 'vitest';
 
-import type { DecisionContext } from '../decision-context';
+import { type DecisionContext } from '../decision-context';
 import type { PrimitiveContext } from '../primitive';
-import type { ValueContext } from '../value';
+
+import { createValueContextMock } from './createValueContextMock';
 
 type Mocks = {
     resolveSpy: Mock;
@@ -19,9 +20,7 @@ export function createPrimitiveContextMock(input?: unknown): [PrimitiveContext, 
     const mockModelContext = {} as DecisionContext;
     mockModelContext.ref = refSpy;
 
-    const mockValueContext = {} as ValueContext;
-    mockValueContext.modelContext = vi.fn().mockReturnValue(mockModelContext);
-    mockValueContext.ref = refSpy;
+    const [mockValueContext] = createValueContextMock();
 
     const mockPrimitiveContext = {} as PrimitiveContext;
     mockPrimitiveContext.valueContext = vi.fn().mockReturnValue(mockValueContext);

@@ -1,5 +1,5 @@
-import { UnknownDecisionModelError } from '../../decision-context';
 import { DECISION_TYPES, type DecisionType, type DecisionTypeModel } from '../../meta';
+import { UnknownDecisionModelError } from '../errors';
 
 type DecisionTypeAndModelByModel = Record<string, [DecisionType, DecisionTypeModel]>;
 

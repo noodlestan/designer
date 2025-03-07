@@ -4,8 +4,7 @@
     "name": "Text Default Size",
     "params": {
       "value": {
-        "value": 16,
-        "unit": "px"
+        "value": 16
       }
     }
   },

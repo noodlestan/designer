@@ -32,7 +32,7 @@ const recordsByModel = (meta: DecisionModelMeta) => {
 const decisionDataByModel = (m: DecisionModelMeta) => {
     const rec = recordsByModel(m)
     const decision = store.decision({ $name: rec.input.name });
-    const json = JSON.stringify(decision?.inputs()[0], null, 2);
+    const json = JSON.stringify(decision?.records()[0].input, null, 2);
     return json;
 }
 

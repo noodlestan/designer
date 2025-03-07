@@ -18,6 +18,7 @@ export const produceDecisionStatus = (
 
     const hasDecisionErrors = Boolean(context.hasErrors());
     const hasValueErrors = Boolean(value?.context().hasErrors());
+
     const hasErrors = Boolean(hasDecisionErrors || hasValueErrors);
 
     return {

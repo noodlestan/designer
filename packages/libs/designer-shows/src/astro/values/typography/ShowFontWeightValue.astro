@@ -7,7 +7,7 @@ type Props = FontWeightValueProps;
 
 const { v: fontSizeValue, value = true, muteErrors } = Astro.props;
 
-const { value: v, named } = fontSizeValue?.get() || {};
+const { toNumber, toString } = fontSizeValue?.get() || {};
 const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
 ---
 
@@ -16,7 +16,7 @@ const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
         <LayoutFlex>
             <DecisionValueContainer>
                 {showErrors && <ShowError size="xs" />}
-                {v} {named?.()}
+                {toNumber?.()}&nbsp;{toString?.()}
             </DecisionValueContainer>
         </LayoutFlex>
     )

@@ -24,7 +24,11 @@ export function extractErrorAttributes(
 
     const schema = errors.find(error => error.parentSchema?.$id)?.parentSchema?.$id;
     const value = extractValue(preValidatedRecord.input, path);
-    const reason = value === undefined ? 'Missing' : 'Type mismatch';
+
+    const isRequired = errors.find(error => error.keyword === 'required');
+    const reason = isRequired
+        ? `is missing property "${isRequired.params.missingProperty}"`
+        : 'does not match expected type';
 
     return {
         reason,
