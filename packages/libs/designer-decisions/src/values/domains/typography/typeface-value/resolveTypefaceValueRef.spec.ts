@@ -48,7 +48,7 @@ describe('resolveTypefaceValueRef()', () => {
         const mockInput = { model: 'typeface-value/foo' } as DecisionInput;
         const typeFaceLiteral = { fontName: 'Georgia' };
         const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => ({ literal: () => typeFaceLiteral }),
+            literal: () => typeFaceLiteral,
         });
 
         beforeEach(() => {

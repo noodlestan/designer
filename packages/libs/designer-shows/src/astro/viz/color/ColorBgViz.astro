@@ -8,7 +8,7 @@ type Props = ColorVizProps;
 
 const { v: color, size = 'auto', options, muteErrors } = Astro.props;
 
-const hsl = color?.get().toString({ format: COLOR_FORMAT_OKLCH });
+const hsl = color?.toString({ format: COLOR_FORMAT_OKLCH });
 
 const { contrast, mode = 'typeface' } = options || {};
 

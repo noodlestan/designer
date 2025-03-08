@@ -29,11 +29,11 @@ export const resolveColorValueRef = (
 
     if (isColorSetDecision(decision)) {
         const value = resolveSetRefDecision<ColorValue>(context, decision, valueName, ref);
-        return value?.get().toObject() ?? COLOR_FALLBACK_LITERAL;
+        return value?.toObject() ?? COLOR_FALLBACK_LITERAL;
     }
 
     if (isColorValueDecision(decision)) {
-        return decision.produce(context).get().toObject();
+        return decision.produce(context).toObject();
     }
 
     handleRefMismatchError(context, decision, valueName, ref, REF_CHECKED_TYPES);

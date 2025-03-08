@@ -27,15 +27,15 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(expectedLength);
+            expect(result.items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(0.19);
-            expect(result.get().item(2)?.get().toNumber()).toEqual(params.anchor);
-            expect(result.get().last()?.get().toNumber()).toEqual(0.5);
+            expect(result.first()?.toNumber()).toEqual(0.19);
+            expect(result.item(2)?.toNumber()).toEqual(params.anchor);
+            expect(result.last()?.toNumber()).toEqual(0.5);
         });
     });
 
@@ -57,9 +57,9 @@ describe('createColorOklabChromaScaleAnchoredModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(0.19);
-            expect(result.get().item(2)?.get().toNumber()).toEqual(0.2);
-            expect(result.get().last()?.get().toNumber()).toEqual(0.5);
+            expect(result.first()?.toNumber()).toEqual(0.19);
+            expect(result.item(2)?.toNumber()).toEqual(0.2);
+            expect(result.last()?.toNumber()).toEqual(0.5);
         });
     });
 });

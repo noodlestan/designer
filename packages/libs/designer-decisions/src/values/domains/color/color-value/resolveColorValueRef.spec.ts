@@ -53,9 +53,7 @@ describe('resolveColorValueRef()', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
         const mockInput = { model: 'color-set/foo' } as DecisionInput;
         const colorObjectLiteral: ColorOkLCHLiteral = { l: 0.48, c: 0.1, h: 330 };
-        const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => colorObjectLiteral,
-        });
+        const [, mockDecision] = createDecisionMock([mockInput]);
         const [mockValueContext, { resolveSpy }] = createValueContextMock(colorObjectLiteral);
         const colorValue = createColorValue(mockValueContext);
 
@@ -99,9 +97,10 @@ describe('resolveColorValueRef()', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
         const mockInput = { model: 'color-value/foo' } as DecisionInput;
         const colorObjectLiteral: ColorOkLCHLiteral = { l: 0.48, c: 0.1, h: 330 };
-        const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => createColor(createPrimitiveContextMock(colorObjectLiteral)[0]),
-        });
+        const [, mockDecision] = createDecisionMock(
+            [mockInput],
+            createColor(createPrimitiveContextMock(colorObjectLiteral)[0]),
+        );
         const [mockValueContext, { resolveSpy }] = createValueContextMock(colorObjectLiteral);
 
         beforeEach(() => {

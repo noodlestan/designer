@@ -12,7 +12,7 @@ export const createColorSetAnchoredModel: DecisionModelFactory<
             const { anchor, before, after, quantize } = context.params() || {};
 
             const options = { quantize };
-            const anchorColor = createColorValue(context.forValue(anchor), options).get();
+            const anchorColor = createColorValue(context.forValue(anchor), options);
 
             const list = generateAnchoredColorList(anchorColor, { before, after, quantize });
             const values = list.map(size => createColorValue(context.forValue(size), options));

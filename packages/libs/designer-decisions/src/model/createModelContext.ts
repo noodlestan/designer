@@ -4,7 +4,7 @@ import { type LookupContexts, resolveLookupContext } from '../lookup';
 import { createValueContext } from '../value';
 import type { ParentValueContext, ValueContext } from '../value';
 
-import type { LinkedModelContext, ModelContext, ModelError } from './types';
+import type { LinkedModelContext, ModelContext } from './types';
 
 export const createModelContext = (
     decisionContext: DecisionContext,
@@ -13,7 +13,6 @@ export const createModelContext = (
 ): ModelContext => {
     const lookupContexts = resolveLookupContext(context);
     const valueContexts: ValueContext[] = [];
-    const errors: ModelError[] = [];
 
     const baseContext: LinkedModelContext = {
         resolve: decisionContext.resolve,
@@ -25,19 +24,13 @@ export const createModelContext = (
         params: () => input.params,
         hasErrors: () =>
             decisionContext.hasErrors() ||
-            Boolean(errors.length) ||
             Boolean(valueContexts.find(valueContext => valueContext.hasErrors())),
         errors: () => [
             ...decisionContext.errors(),
-            ...errors,
             ...valueContexts.flatMap(valueContext => valueContext.errors()),
         ],
-        ownErrors: () => [...decisionContext.errors(), ...errors],
-        hasOwnErrors: () => decisionContext.hasErrors() || Boolean(errors.length),
-    };
-
-    const addError = (error: ModelError) => {
-        errors.push(error);
+        ownErrors: () => [...decisionContext.errors()],
+        hasOwnErrors: () => decisionContext.hasErrors(),
     };
 
     const forValue = <I>(input?: I | undefined): ValueContext<I> => {
@@ -49,7 +42,6 @@ export const createModelContext = (
     const modelContext: ModelContext = {
         ...baseContext,
         forValue,
-        addError,
     };
 
     return modelContext;

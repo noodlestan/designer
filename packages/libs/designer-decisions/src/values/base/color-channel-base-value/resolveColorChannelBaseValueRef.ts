@@ -35,12 +35,12 @@ export const resolveColorChannelBaseValueRef = (
 
     if (isColorSetDecision(decision)) {
         const color = resolveSetRefDecision<ColorValue>(context, decision, valueName, ref);
-        const channelValue = color?.get().toObject({ format: colorFormat })[channelKey];
+        const channelValue = color?.toObject({ format: colorFormat })[channelKey];
         return channelValue !== undefined ? { value: channelValue } : fallbackChannek;
     }
 
     if (isColorValueDecision(decision)) {
-        const color = decision.produce(context).get();
+        const color = decision.produce(context);
         const channelValue = color.toObject({ format: colorFormat })[channelKey];
         return { value: channelValue };
     }
@@ -52,11 +52,11 @@ export const resolveColorChannelBaseValueRef = (
             valueName,
             ref,
         );
-        return channel?.get().literal() || fallbackChannek;
+        return channel?.literal() || fallbackChannek;
     }
 
     if (decision.type() === decisionTypes.value) {
-        return (decision as Decision<ColorChannelBaseValue>).produce(context).get().literal();
+        return (decision as Decision<ColorChannelBaseValue>).produce(context).literal();
     }
 
     handleRefMismatchError(context, decision, valueName, ref, refCheckedTypes);

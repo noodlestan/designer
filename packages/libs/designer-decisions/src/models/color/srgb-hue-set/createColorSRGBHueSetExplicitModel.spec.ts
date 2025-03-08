@@ -18,15 +18,15 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(params.values.length);
+            expect(result.items()).toHaveLength(params.values.length);
         });
 
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(330.1);
-            expect(result.get().item(1)?.get().toNumber()).toEqual(params.values[1]);
-            expect(result.get().last()?.get().toNumber()).toEqual(360);
+            expect(result.first()?.toNumber()).toEqual(330.1);
+            expect(result.item(1)?.toNumber()).toEqual(params.values[1]);
+            expect(result.last()?.toNumber()).toEqual(360);
         });
     });
 
@@ -40,9 +40,9 @@ describe('createColorSRGBHueSetExplicitModel()', () => {
         it('should populate the scale with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(335);
-            expect(result.get().item(1)?.get().toNumber()).toEqual(345);
-            expect(result.get().last()?.get().toNumber()).toEqual(360);
+            expect(result.first()?.toNumber()).toEqual(335);
+            expect(result.item(1)?.toNumber()).toEqual(345);
+            expect(result.last()?.toNumber()).toEqual(360);
         });
     });
 });

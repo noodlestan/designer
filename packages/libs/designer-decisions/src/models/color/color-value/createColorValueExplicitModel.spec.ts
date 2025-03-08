@@ -18,7 +18,7 @@ describe('createColorValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString({ format: COLOR_FORMAT_RGB })).toEqual('#123456');
+            expect(result.toString({ format: COLOR_FORMAT_RGB })).toEqual('#123456');
         });
     });
 });

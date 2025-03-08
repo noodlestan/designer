@@ -35,32 +35,20 @@ describe('createColorSetAnchoredModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(expectedLength);
+            expect(result.items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
             const result = model.produce(mockModelContext);
 
             expect(
-                result
-                    .get()
-                    .first()
-                    ?.get()
-                    .toObject<ColorOkLCHLiteral>({ format: COLOR_FORMAT_OKLCH }).l,
+                result.first()?.toObject<ColorOkLCHLiteral>({ format: COLOR_FORMAT_OKLCH }).l,
             ).toBeCloseTo(0.3);
             expect(
-                result
-                    .get()
-                    .item(2)
-                    ?.get()
-                    .toObject<ColorOkLCHLiteral>({ format: COLOR_FORMAT_OKLCH }).l,
+                result.item(2)?.toObject<ColorOkLCHLiteral>({ format: COLOR_FORMAT_OKLCH }).l,
             ).toEqual(anchorL);
             expect(
-                result
-                    .get()
-                    .last()
-                    ?.get()
-                    .toObject<ColorOkLCHLiteral>({ format: COLOR_FORMAT_OKLCH }).l,
+                result.last()?.toObject<ColorOkLCHLiteral>({ format: COLOR_FORMAT_OKLCH }).l,
             ).toBeCloseTo(1);
         });
     });

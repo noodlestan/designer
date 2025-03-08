@@ -25,17 +25,17 @@ export const resolveTextStyleVizStyles = (
 
     if (v?.type() === DECISION_TYPEFACE_VALUE) {
         const typeface = v as TypefaceValue;
-        style.__fontFamily = typeface.get().toString();
+        style.__fontFamily = typeface.toString();
     }
 
     if (v?.type() === DECISION_FONT_SIZE_VALUE) {
         const fontSize = v as FontSizeValue;
-        style.__fontSize = fontSize.get().toString();
+        style.__fontSize = fontSize.toString();
     }
 
     if (v?.type() === DECISION_FONT_WEIGHT_VALUE) {
         const fontWeight = v as FontWeightValue;
-        style.__fontWeight = fontWeight.get().toNumber();
+        style.__fontWeight = fontWeight.toNumber();
     }
 
     return style;

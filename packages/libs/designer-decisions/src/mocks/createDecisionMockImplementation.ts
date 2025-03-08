@@ -10,7 +10,7 @@ import { decisionTypeFromModel } from './functions';
 
 export const createDecisionMockImplementation = (
     inputs: DecisionInput[],
-    mockMethods: Record<string, () => unknown> = {},
+    mockMethods: Record<string, unknown> = {},
 ) => {
     const type = decisionTypeFromModel(inputs[0] ? inputs[0].model : 'unknown/unknown');
 
@@ -22,8 +22,8 @@ export const createDecisionMockImplementation = (
             return {
                 type: () => type,
                 context: () => valueContext,
-                get: mockMethods.get,
-                ...mockMethods,
+                get: mockMethods.get as () => unknown,
+                ...(mockMethods as Record<string, () => unknown>),
             };
         };
 

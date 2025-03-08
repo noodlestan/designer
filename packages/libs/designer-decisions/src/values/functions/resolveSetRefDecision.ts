@@ -13,7 +13,7 @@ export const resolveSetRefDecision = <
     ref: DecisionRef,
 ): V | undefined => {
     const scale = decision.produce(context);
-    const v = scale.get().item(ref.index || 0);
+    const v = scale.item(ref.index || 0);
     if (!v) {
         const error = createValueRefIndexError({ context, valueName, ref });
         context.addError(error);

@@ -19,11 +19,7 @@ export const createColorOklabLightnessScaleBoundedModel: DecisionModelFactory<
             const fromValue = createOklabLightnessValue(context.forValue(from), options);
             const toValue = createOklabLightnessValue(context.forValue(to), options);
 
-            const series = generateBoundedSeries(
-                fromValue.get().toNumber(),
-                toValue.get().toNumber(),
-                steps,
-            );
+            const series = generateBoundedSeries(fromValue.toNumber(), toValue.toNumber(), steps);
             const values = series.map(channel =>
                 createOklabLightnessValue(context.forValue(channel), options),
             );

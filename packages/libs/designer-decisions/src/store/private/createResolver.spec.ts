@@ -5,6 +5,7 @@ import type { DecisionNotFoundError } from '../../decision-context';
 import type { DecisionInput } from '../../inputs';
 import { createDecisionContextMock, createDecisionMock, createRecordMapMock } from '../../mocks';
 import type { RecordMap } from '../../record';
+import type { BaseValue } from '../../values';
 import { createDecision } from '../createDecision';
 
 import { createResolver } from './createResolver';
@@ -26,9 +27,7 @@ describe('createResolver()', () => {
         const inputs = [{ uuid: '1', model: 'model/type', name: 'Decision1', params: {} }];
         const inputStore: RecordMap = createRecordMapMock(inputs);
         const resolver = createResolver(inputStore);
-        const mockValue = 'mockProducedValue';
-        const mockDecision = createDecisionMock(inputs, { get: () => mockValue })[1];
-        const [mockDecisionContext] = createDecisionContextMock();
+        const [mockDecisionContext, mockDecision] = createDecisionMock<BaseValue<object>>(inputs);
 
         beforeEach(() => {
             createDecisionContextMocked.mockReturnValue(mockDecisionContext);
@@ -64,8 +63,7 @@ describe('createResolver()', () => {
         const mockRef = { $name: 'NonexistentDecision' };
         const inputStore: RecordMap = createRecordMapMock();
         const resolver = createResolver(inputStore);
-        const mockValue = 'mockProducedValue';
-        const mockDecision = createDecisionMock([], { get: () => mockValue })[1];
+        const [, mockDecision] = createDecisionMock<BaseValue<object>>([]);
         const mockError = {} as DecisionNotFoundError;
 
         const [mockDecisionContext, { addErrorSpy }] = createDecisionContextMock();

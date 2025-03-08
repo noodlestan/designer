@@ -19,23 +19,12 @@ describe('createFontWeightValue()', () => {
     });
 
     describe('Given a size definition, a context, and an input', () => {
-        const mockInput = { $name: 'Foo' } as FontWeightInput;
-        const [mockValueContext] = createValueContextMock(mockInput);
-
-        it('should return a BaseValue with the provided context', () => {
-            const result = createFontWeightValue(mockValueContext);
-
-            expect(result.context()).toEqual(mockValueContext);
-        });
-    });
-
-    describe('When get() is called', () => {
         const mockInput = { name: 'Black' } as FontWeightInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { value: 100 } as FontWeightObjectLiteral;
         const [mockPrimitiveContext] = createPrimitiveContextMock();
-        const mockFontWeight = { name: 'foo' } as unknown as FontWeight;
+        const mockFontWeight = { value: 100 } as FontWeight;
 
         beforeEach(() => {
             resolveFontWeightValueMocked.mockReturnValue(mockLiteral);
@@ -43,31 +32,36 @@ describe('createFontWeightValue()', () => {
             createFontWeightMocked.mockReturnValue(mockFontWeight);
         });
 
-        it('should call resolveFontWeightValue() with the expected arguments', () => {
+        it('should return a BaseValue with the provided context', () => {
             const result = createFontWeightValue(mockValueContext);
-            result.get();
+            expect(result.context()).toEqual(mockValueContext);
+        });
 
+        it('should return a Value with the primitive attributes', () => {
+            const result = createFontWeightValue(mockValueContext);
+            expect(result.value).toEqual(mockFontWeight.value);
+        });
+
+        it('should call resolveFontWeightValue() with the expected arguments', () => {
+            createFontWeightValue(mockValueContext);
             expect(resolveFontWeightValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
         it('should call primitiveContext() with the resolved input', () => {
-            const result = createFontWeightValue(mockValueContext);
-            result.get();
-
+            createFontWeightValue(mockValueContext);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColor() with the expected arguments', () => {
-            const result = createFontWeightValue(mockValueContext);
-            result.get();
-
+            createFontWeightValue(mockValueContext);
             expect(createFontWeightMocked).toHaveBeenCalledWith(mockPrimitiveContext);
         });
 
-        it('should return the created FontWeight primitive', () => {
-            const result = createFontWeightValue(mockValueContext);
-
-            expect(result.get()).toBe(mockFontWeight);
+        describe('when get() is called', () => {
+            it('should return the created FontWeight primitive', () => {
+                const result = createFontWeightValue(mockValueContext);
+                expect(result.get()).toBe(mockFontWeight);
+            });
         });
     });
 });

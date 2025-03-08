@@ -22,7 +22,7 @@ const channelToColors: Record<ColorChannelName, ColorComplementaryChannels> = {
 };
 
 const channelV = v as ColorChannelBaseValue;
-const channel = channelV.get().channelName;
+const channel = channelV.channelName;
 const colorChannel = channelV?.toColorValue(channelToColors[channel]);
 
 const opt = options || {};

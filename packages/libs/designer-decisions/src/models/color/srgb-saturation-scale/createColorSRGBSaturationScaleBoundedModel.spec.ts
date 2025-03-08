@@ -21,15 +21,15 @@ describe('createColorSRGBSaturationScaleBoundedModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(expectedLength);
+            expect(result.items()).toHaveLength(expectedLength);
         });
 
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(params.from);
-            expect(result.get().item(1)?.get().toNumber()).toEqual(0.75);
-            expect(result.get().last()?.get().toNumber()).toEqual(1);
+            expect(result.first()?.toNumber()).toEqual(params.from);
+            expect(result.item(1)?.toNumber()).toEqual(0.75);
+            expect(result.last()?.toNumber()).toEqual(1);
         });
     });
 
@@ -45,9 +45,9 @@ describe('createColorSRGBSaturationScaleBoundedModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(0.536);
-            expect(result.get().item(1)?.get().toNumber()).toEqual(0.768);
-            expect(result.get().last()?.get().toNumber()).toEqual(1);
+            expect(result.first()?.toNumber()).toEqual(0.536);
+            expect(result.item(1)?.toNumber()).toEqual(0.768);
+            expect(result.last()?.toNumber()).toEqual(1);
         });
     });
 });

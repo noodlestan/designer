@@ -1,4 +1,4 @@
-import { createRecordMap, createStaticRecord, createStore } from '@noodlestan/designer-signals';
+import { createReactiveMap, createStaticRecord, createStore } from '@noodlestan/designer-signals';
 import { For, type JSX, batch } from 'solid-js';
 
 import styles from './App.module.css';
@@ -45,7 +45,7 @@ const newRecord = {
 };
 
 const loadedRecords = inputs.map(input => createStaticRecord(input));
-const map = createRecordMap(loadedRecords);
+const map = createReactiveMap(loadedRecords);
 const store = createStore(map);
 
 function App(): JSX.Element {
@@ -101,7 +101,7 @@ function App(): JSX.Element {
             </ul>
             <h2>Decision Not Found</h2>
             <ShowDecision store={store} d={d0()} />
-            {/* <div>{typeof notFoundValue().get()}</div> */}
+            {/* <div>{typeof notFoundValue()}</div> */}
         </div>
     );
 }

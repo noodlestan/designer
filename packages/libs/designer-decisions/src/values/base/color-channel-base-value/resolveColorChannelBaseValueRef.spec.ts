@@ -102,7 +102,7 @@ describe('resolveColorChannelBaseValueRef()', () => {
         const mockInput = { model: 'color-value/foo' } as DecisionInput;
         const colorLiteral = { l: 0.1, c: 0.01, h: 333 };
         const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => ({ toObject: () => colorLiteral }),
+            toObject: () => colorLiteral,
         });
 
         beforeEach(() => {
@@ -171,7 +171,7 @@ describe('resolveColorChannelBaseValueRef()', () => {
         const mockInput = { model: 'color-oklab-hue-value/foo' } as DecisionInput;
         const channelLiteral = { value: 123 };
         const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => ({ literal: () => channelLiteral }),
+            literal: () => channelLiteral,
         });
 
         beforeEach(() => {

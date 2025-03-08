@@ -19,7 +19,7 @@ export const createColorOklabLightnessScaleAnchoredModel: DecisionModelFactory<
             const { value: anchorValue } = createOklabLightnessValue(
                 context.forValue(anchor),
                 options,
-            ).get();
+            );
 
             const seriesParams = { before, after, quantize };
             const series = generateAnchoredSeries(anchorValue, seriesParams);

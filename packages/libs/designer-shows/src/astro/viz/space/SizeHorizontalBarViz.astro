@@ -6,7 +6,7 @@ type Props = SizeVizProps;
 
 const { v: sizeValue, size = 'auto', muteErrors } = Astro.props;
 
-const { value: v, unit } = sizeValue?.get().literal() || {};
+const { value: v, unit } = sizeValue?.literal() || {};
 const vWithUnit = `${v}${unit}`;
 const showErrors = !muteErrors && sizeValue?.context().hasErrors();
 ---

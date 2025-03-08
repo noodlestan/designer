@@ -28,11 +28,11 @@ export const resolveFontWeightValueRef = (
     //         DECISION_FONT_WEIGHT_VALUE,
     //         ref,
     //     );
-    //     return value?.get().toObject() ?? fallback;
+    //     return value?.toObject() ?? fallback;
     // }
 
     if (isFontWeightValueDecision(decision)) {
-        return decision.produce(context).get().literal();
+        return decision.produce(context).literal();
     }
 
     handleRefMismatchError(context, decision, DECISION_FONT_WEIGHT_VALUE, ref, REF_CHECKED_TYPES);

@@ -15,13 +15,9 @@ export const createSizeScaleBoundedModel: DecisionModelFactory<
             const fromValue = createSizeValue(context.forValue(from), options);
             const toValue = createSizeValue(context.forValue(to), options);
 
-            const series = generateBoundedSeries(
-                fromValue.get().toNumber(),
-                toValue.get().toNumber(),
-                steps,
-            );
+            const series = generateBoundedSeries(fromValue.toNumber(), toValue.toNumber(), steps);
 
-            const { unit } = fromValue.get();
+            const { unit } = fromValue;
             const values = series.map(item =>
                 createSizeValue(context.forValue({ value: item, unit }), options),
             );

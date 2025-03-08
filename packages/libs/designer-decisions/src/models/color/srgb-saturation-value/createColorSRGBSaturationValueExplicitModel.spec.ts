@@ -17,7 +17,7 @@ describe('createColorSRGBSaturationValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(params.value);
+            expect(result.toNumber()).toEqual(params.value);
         });
     });
 
@@ -30,7 +30,7 @@ describe('createColorSRGBSaturationValueExplicitModel()', () => {
         it('should create a clamped value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(1);
+            expect(result.toNumber()).toEqual(1);
         });
     });
 
@@ -44,7 +44,7 @@ describe('createColorSRGBSaturationValueExplicitModel()', () => {
         it('should create a quantized value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(0.32);
+            expect(result.toNumber()).toEqual(0.32);
         });
     });
 });

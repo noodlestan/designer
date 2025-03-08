@@ -25,17 +25,6 @@ describe('createSizeBaseValue()', () => {
     });
 
     describe('Given a size definition, a context, and an input', () => {
-        const mockInput = { $name: 'Foo' } as SizeValueInput;
-        const [mockValueContext] = createValueContextMock(mockInput);
-
-        it('should return a BaseValue with the provided context', () => {
-            const result = createSizeBaseValue(sizeDef, mockValueContext);
-
-            expect(result.context()).toEqual(mockValueContext);
-        });
-    });
-
-    describe('When get() is called', () => {
         const mockInput = { value: 123.371, units: 'rem' } as SizeValueInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
@@ -50,24 +39,28 @@ describe('createSizeBaseValue()', () => {
             createSizeMocked.mockReturnValue(mockSize);
         });
 
-        it('should call resolveSizeBaseValue() with the expected arguments', () => {
-            const result = createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
-            result.get();
+        it('should return a BaseValue with the provided context', () => {
+            const result = createSizeBaseValue(sizeDef, mockValueContext);
+            expect(result.context()).toEqual(mockValueContext);
+        });
 
+        it('should return a  Value with the primitive attributes', () => {
+            const result = createSizeBaseValue(sizeDef, mockValueContext);
+            expect(result.value).toEqual(mockSize.value);
+        });
+
+        it('should call resolveSizeBaseValue() with the expected arguments', () => {
+            createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
             expect(resolveSizeBaseValueMocked).toHaveBeenCalledWith(sizeDef, mockValueContext);
         });
 
         it('should call primitiveContext() with the resolved input', () => {
-            const result = createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
-            result.get();
-
+            createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createSize() with the expected arguments', () => {
-            const result = createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
-            result.get();
-
+            createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
             expect(createSizeMocked).toHaveBeenCalledWith(
                 sizeDef,
                 mockPrimitiveContext,
@@ -75,10 +68,11 @@ describe('createSizeBaseValue()', () => {
             );
         });
 
-        it('should return the created Size primitive', () => {
-            const result = createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
-
-            expect(result.get()).toBe(mockSize);
+        describe('when get() is called', () => {
+            it('should return the created Size primitive', () => {
+                const result = createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
+                expect(result.get()).toBe(mockSize);
+            });
         });
     });
 });

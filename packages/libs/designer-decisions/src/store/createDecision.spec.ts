@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { DecisionInput } from '../inputs';
 import { createDecisionContextMock, createDecisionModelMock } from '../mocks';
-import type { ModelContext, ModelError } from '../model';
+import type { ModelContext } from '../model';
 
 import { createDecision } from './createDecision';
 import { getDecisionModelFactory } from './getDecisionModelFactory';
@@ -10,6 +10,10 @@ import { getDecisionModelFactory } from './getDecisionModelFactory';
 vi.mock('./getDecisionModelFactory');
 
 const getDecisionModelFactoryMocked = vi.mocked(getDecisionModelFactory);
+
+type MockValueType = {
+    foo: 'Bar';
+};
 
 describe('createDecision()', () => {
     beforeEach(() => {
@@ -30,7 +34,7 @@ describe('createDecision()', () => {
     describe('Given a decision context and inputs', () => {
         it('should return a valid Decision object with the expected state', () => {
             const [mockDecisionContext] = createDecisionContextMock(mockInputs);
-            const decision = createDecision<string>(mockDecisionContext);
+            const decision = createDecision<MockValueType>(mockDecisionContext);
 
             expect(decision.uuid()).toBe('test-uuid');
             expect(decision.type()).toBe('decision-type');
@@ -43,7 +47,7 @@ describe('createDecision()', () => {
     });
 
     describe('When produce() is invoked', () => {
-        const mockValue = 'mockProducedValue';
+        const mockValue = { foo: 'mockProducedValue' };
         const [mockModel, { produceSpy }] = createDecisionModelMock('decision-type', mockValue);
         const [mockDecisionContext] = createDecisionContextMock(mockInputs);
 
@@ -52,7 +56,7 @@ describe('createDecision()', () => {
         });
 
         it('should call getDecisionModelFactory() with the decision model', () => {
-            const result = createDecision<string>(mockDecisionContext);
+            const result = createDecision<MockValueType>(mockDecisionContext);
             result.produce();
 
             expect(getDecisionModelFactoryMocked).toHaveBeenCalledExactlyOnceWith(
@@ -61,7 +65,7 @@ describe('createDecision()', () => {
         });
 
         it('should call the model produce() method with a model context', () => {
-            const result = createDecision<string>(mockDecisionContext);
+            const result = createDecision<MockValueType>(mockDecisionContext);
             result.produce();
 
             expect(produceSpy).toHaveBeenCalledOnce();
@@ -72,16 +76,17 @@ describe('createDecision()', () => {
         });
 
         it('should return the value produced by the model', () => {
-            const result = createDecision<string>(mockDecisionContext);
+            const result = createDecision<MockValueType>(mockDecisionContext);
             const producedValue = result.produce();
 
             expect(producedValue.get()).toBe(mockValue);
+            expect(producedValue.foo).toBe('mockProducedValue');
             expect(producedValue.type()).toBe('decision-type');
         });
     });
 
     describe('When produce() is invoked with a Lookup context', () => {
-        const mockValue = 'mockProducedValue';
+        const mockValue = { foo: 'mockProducedValue' };
         const [mockModel, { produceSpy }] = createDecisionModelMock('decision-type', mockValue);
         const [mockDecisionContext] = createDecisionContextMock(mockInputs);
         const mockLookupContexts = { all: ['foo'] };
@@ -91,7 +96,7 @@ describe('createDecision()', () => {
         });
 
         it('should call the model produce() method with a model context', () => {
-            const result = createDecision<string>(mockDecisionContext);
+            const result = createDecision<MockValueType>(mockDecisionContext);
             result.produce(mockLookupContexts);
 
             expect(produceSpy).toHaveBeenCalledOnce();
@@ -110,21 +115,9 @@ describe('createDecision()', () => {
         });
 
         it('should return an empty value', () => {
-            const result = createDecision<string>(mockDecisionContext);
-            const producedValue = result.produce();
+            const result = createDecision<MockValueType>(mockDecisionContext);
 
-            expect(producedValue.get()).toBe(undefined);
-            expect(producedValue.type()).toBe('decision-type');
-        });
-
-        it('should return a value with errors', () => {
-            const result = createDecision<string>(mockDecisionContext);
-            const producedValue = result.produce();
-
-            expect(producedValue.context().hasErrors()).toBe(true);
-
-            const error = producedValue.context().errors()[0] as ModelError;
-            expect(error.message()).toContain('The error "foo/bar"');
+            expect(() => result.produce()).toThrow('The error "foo/bar"');
         });
     });
 });

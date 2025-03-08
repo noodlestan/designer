@@ -40,21 +40,21 @@ export const resolveSizeBaseValueRef = (
 
     if (isSizeScaleDecision(decision)) {
         const value = resolveSetRefDecision<SizeValue>(context, decision, valueName, ref);
-        return value?.get().literal() ?? fallbackSize;
+        return value?.literal() ?? fallbackSize;
     }
 
     if (isSizeValueDecision(decision)) {
-        return decision.produce(context).get().literal();
+        return decision.produce(context).literal();
     }
 
     if (decisionTypes.set && isSetDecision(decision) && decision.type() === decisionTypes.set) {
         const d = decision as Decision<BaseSet<SizeValue>>;
         const value = resolveSetRefDecision<SizeValue>(context, d, valueName, ref);
-        return value?.get().literal() ?? fallbackSize;
+        return value?.literal() ?? fallbackSize;
     }
 
     if (decisionTypes.value && decision.type() === decisionTypes.value) {
-        return (decision as Decision<BaseValue<Size>>).produce(context).get().literal();
+        return (decision as Decision<BaseValue<Size>>).produce(context).literal();
     }
 
     handleRefMismatchError(context, decision, valueName, ref, refCheckedTypes);

@@ -12,11 +12,12 @@ type Mocks = {
 
 export function createDecisionModelMock(
     decisionType: string,
-    mockValue: string,
+    mockValue: { foo: string },
     mockValueContext?: ValueContext,
 ): [DecisionModel<string, object>, Mocks] {
-    const produceSpy = vi.fn().mockImplementation((): BaseValue<string> => {
+    const produceSpy = vi.fn().mockImplementation((): BaseValue<object> => {
         return {
+            ...mockValue,
             type: () => decisionType,
             context: () => mockValueContext || createValueContextMock()[0],
             get: () => mockValue,

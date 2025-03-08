@@ -37,7 +37,7 @@ export const ShowDecision: Component<Props> = props => {
             <p>name: {props.d.name()}</p>
             <p>errors? {decisionContext().hasErrors() ? '!' : ''}</p>
             <p>type: {value().type()}</p>
-            <p>fontName: {(value() as TypefaceValue).get()?.literal().fontName}</p>
+            <p>fontName: {(value() as TypefaceValue).literal().fontName}</p>
             <p>errors?: {errors()}</p>
         </>
     );

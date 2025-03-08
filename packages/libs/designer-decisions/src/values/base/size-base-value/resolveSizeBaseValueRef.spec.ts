@@ -107,9 +107,10 @@ describe('resolveSizeBaseValueRef()', () => {
 
         const mockInput = { model: 'size-value/foo' } as DecisionInput;
         const sizeObjectLiteral: SizeObjectLiteral = { value: 3.333, unit: 'px' };
-        const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => createSize(sizeDef, createPrimitiveContextMock(sizeObjectLiteral)[0]),
-        });
+        const [, mockDecision] = createDecisionMock(
+            [mockInput],
+            createSize(sizeDef, createPrimitiveContextMock(sizeObjectLiteral)[0]),
+        );
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);

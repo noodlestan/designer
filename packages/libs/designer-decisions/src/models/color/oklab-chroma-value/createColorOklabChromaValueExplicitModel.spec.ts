@@ -16,7 +16,7 @@ describe('createColorOklabChromaValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(0.136);
+            expect(result.toNumber()).toEqual(0.136);
         });
     });
 
@@ -26,7 +26,7 @@ describe('createColorOklabChromaValueExplicitModel()', () => {
         it('should create a quantized value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(0.15);
+            expect(result.toNumber()).toEqual(0.15);
         });
     });
 });
