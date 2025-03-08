@@ -10,7 +10,7 @@ export const createColorOklabLightnessValueExplicitModel: DecisionModelFactory<
         produce: context => {
             const { value, quantize } = context.params() || {};
             const options = { quantize };
-            return createOklabLightnessValue(context.valueContext(value), options);
+            return createOklabLightnessValue(context.forValue(value), options);
         },
     };
 };

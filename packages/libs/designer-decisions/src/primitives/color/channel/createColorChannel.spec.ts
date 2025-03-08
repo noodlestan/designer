@@ -14,7 +14,7 @@ describe('createColorChannel()', () => {
     const channelDef = mockChannelDefinition;
     const literalChannel = { value: 233 };
     const mockInput = 13;
-    const [mockPrimitiveContext, { outputContextSpy }] = createPrimitiveContextMock(mockInput);
+    const [mockPrimitiveContext, { forOutputSpy }] = createPrimitiveContextMock(mockInput);
 
     beforeEach(() => {
         vi.clearAllMocks();
@@ -54,16 +54,16 @@ describe('createColorChannel()', () => {
 
     describe('When toColor() is called', () => {
         const colorLiteral = { l: 0.5, c: 0.1, h: 233 };
-        const [outputContext] = createPrimitiveContextMock(colorLiteral);
+        const [forOutput] = createPrimitiveContextMock(colorLiteral);
 
         beforeEach(() => {
-            outputContextSpy.mockReturnValue(outputContext);
+            forOutputSpy.mockReturnValue(forOutput);
         });
 
         it('should create an output context', () => {
             const channel = createColorChannel(channelDef, mockPrimitiveContext);
             channel.toColor({ l: 0.5, c: 0.1 });
-            expect(outputContextSpy).toHaveBeenCalledWith(colorLiteral);
+            expect(forOutputSpy).toHaveBeenCalledWith(colorLiteral);
         });
 
         it('should return the value as an object', () => {

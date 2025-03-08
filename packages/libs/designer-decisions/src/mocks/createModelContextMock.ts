@@ -20,7 +20,7 @@ export function createModelContextMock(input?: DeepPartial<DecisionInput>): [Mod
     const mockModelContext = {} as ModelContext;
     mockModelContext.decisionInput = vi.fn().mockReturnValue(input);
     mockModelContext.params = vi.fn().mockReturnValue(input?.params);
-    mockModelContext.valueContext = valueContextSpy;
+    mockModelContext.forValue = valueContextSpy;
     mockModelContext.hasOwnErrors = () => false;
     mockModelContext.ownErrors = () => [];
 

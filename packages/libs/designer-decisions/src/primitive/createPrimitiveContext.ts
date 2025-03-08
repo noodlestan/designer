@@ -17,7 +17,7 @@ export const createPrimitiveContext = <P>(
 
     return {
         valueContext: () => valueContext,
-        outputContext: input => createPrimitiveContext(input, valueContext),
+        forOutput: input => createPrimitiveContext(input, valueContext),
         input: () => input,
         errors: getErrors,
         hasErrors,

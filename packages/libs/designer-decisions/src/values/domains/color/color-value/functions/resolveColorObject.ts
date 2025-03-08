@@ -21,21 +21,21 @@ const resolveChannel = (resolved: DeepPartial<ColorChannelLiteral> | undefined):
 
 export function resolveColorObject(context: ValueContext, input: ColorObjectInput): Color {
     if ('s' in input) {
-        const h = resolveChannel(resolveSRGBHueValue(context.childContext(input.h)));
-        const s = resolveChannel(resolveSRGBSaturationValue(context.childContext(input.s)));
-        const l = resolveChannel(resolveSRGBLightnessValue(context.childContext(input.l)));
-        return createColor(context.primitiveContext({ h, s, l }));
+        const h = resolveChannel(resolveSRGBHueValue(context.forChildValue(input.h)));
+        const s = resolveChannel(resolveSRGBSaturationValue(context.forChildValue(input.s)));
+        const l = resolveChannel(resolveSRGBLightnessValue(context.forChildValue(input.l)));
+        return createColor(context.forPrimitive({ h, s, l }));
     } else if ('a' in input) {
-        const l = resolveChannel(resolveOklabLightnessValue(context.childContext(input.l)));
+        const l = resolveChannel(resolveOklabLightnessValue(context.forChildValue(input.l)));
         const a = resolveChannel(input.a);
         const b = resolveChannel(input.b);
-        return createColor(context.primitiveContext({ l, a, b }));
+        return createColor(context.forPrimitive({ l, a, b }));
     } else if ('c' in input) {
-        const l = resolveChannel(resolveOklabLightnessValue(context.childContext(input.l)));
-        const c = resolveChannel(resolveOklabChromaValue(context.childContext(input.c)));
-        const h = resolveChannel(resolveOklabHueValue(context.childContext(input.h)));
-        return createColor(context.primitiveContext({ l, c, h }));
+        const l = resolveChannel(resolveOklabLightnessValue(context.forChildValue(input.l)));
+        const c = resolveChannel(resolveOklabChromaValue(context.forChildValue(input.c)));
+        const h = resolveChannel(resolveOklabHueValue(context.forChildValue(input.h)));
+        return createColor(context.forPrimitive({ l, c, h }));
     }
     context.addError(createValueInputError({ context, valueName, input }));
-    return createColor(context.primitiveContext(COLOR_FALLBACK_LITERAL));
+    return createColor(context.forPrimitive(COLOR_FALLBACK_LITERAL));
 }

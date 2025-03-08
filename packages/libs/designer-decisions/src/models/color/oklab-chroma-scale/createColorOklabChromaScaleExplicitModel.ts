@@ -16,10 +16,9 @@ export const createColorOklabChromaScaleExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size => createOklabChromaValue(context.valueContext(size), options)) ||
-                [];
+                values?.map(size => createOklabChromaValue(context.forValue(size), options)) || [];
 
-            return createOklabChromaScale(context.valueContext(items));
+            return createOklabChromaScale(context.forValue(items));
         },
     };
 };

@@ -12,8 +12,8 @@ export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createSRGBHueValue(context.valueContext(from), options);
-            const toValue = createSRGBHueValue(context.valueContext(to), options);
+            const fromValue = createSRGBHueValue(context.forValue(from), options);
+            const toValue = createSRGBHueValue(context.forValue(to), options);
 
             const series = generateBoundedSeries(
                 fromValue.get().toNumber(),
@@ -21,10 +21,10 @@ export const createColorSRGBHueSetBoundedModel: DecisionModelFactory<
                 steps,
             );
             const values = series.map(channel =>
-                createSRGBHueValue(context.valueContext(channel), options),
+                createSRGBHueValue(context.forValue(channel), options),
             );
 
-            return createSRGBHueSet(context.valueContext(values));
+            return createSRGBHueSet(context.forValue(values));
         },
     };
 };

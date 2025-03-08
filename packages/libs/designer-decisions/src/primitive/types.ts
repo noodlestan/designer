@@ -22,7 +22,7 @@ export type Primitive<T> = T & {
 
 export type PrimitiveContext<P = unknown> = {
     valueContext: () => LinkedValueContext | undefined;
-    outputContext: <O = unknown>(input?: DeepPartial<O>) => PrimitiveContext<O>;
+    forOutput: <O = unknown>(input?: DeepPartial<O>) => PrimitiveContext<O>;
     input: () => DeepPartial<P> | undefined;
     errors: () => PrimitiveError[];
     hasErrors: () => boolean;

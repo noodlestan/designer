@@ -9,13 +9,13 @@ import { createPrimitiveContextMock } from './createPrimitiveContextMock';
 type Mocks = {
     resolveSpy: Mock;
     addErrorSpy: Mock;
-    primitiveContextSpy: Mock;
+    forPrimitiveSpy: Mock;
 };
 
 export function createValueContextMock<I>(input?: I): [ValueContext<I>, Mocks] {
     const resolveSpy = vi.fn();
     const addErrorSpy = vi.fn();
-    const primitiveContextSpy = vi.fn();
+    const forPrimitiveSpy = vi.fn();
 
     const [mockDecisionContext] = createDecisionContextMock();
     mockDecisionContext.ref = vi.fn().mockReturnValue({ $uuid: 'decision-uuid' });
@@ -28,13 +28,13 @@ export function createValueContextMock<I>(input?: I): [ValueContext<I>, Mocks] {
     mockValueContext.ref = vi.fn().mockReturnValue({ $name: 'foo bar' });
     mockValueContext.modelContext = vi.fn().mockReturnValue(mockModelContext);
     mockValueContext.decisionContext = vi.fn().mockReturnValue(mockDecisionContext);
-    mockValueContext.childContext = vi.fn().mockImplementation(i => createValueContextMock(i)[0]);
-    mockValueContext.primitiveContext = primitiveContextSpy;
+    mockValueContext.forChildValue = vi.fn().mockImplementation(i => createValueContextMock(i)[0]);
+    mockValueContext.forPrimitive = forPrimitiveSpy;
     mockValueContext.lookupContexts = vi.fn().mockReturnValue({ all: [] });
     mockValueContext.resolve = resolveSpy;
     mockValueContext.addError = addErrorSpy;
 
-    primitiveContextSpy.mockImplementation(input => createPrimitiveContextMock(input)[0]);
+    forPrimitiveSpy.mockImplementation(input => createPrimitiveContextMock(input)[0]);
 
-    return [mockValueContext, { resolveSpy, primitiveContextSpy, addErrorSpy }];
+    return [mockValueContext, { resolveSpy, forPrimitiveSpy, addErrorSpy }];
 }

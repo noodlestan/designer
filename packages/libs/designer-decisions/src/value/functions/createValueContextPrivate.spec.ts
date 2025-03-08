@@ -145,54 +145,54 @@ describe('createValueContextPrivate()', () => {
         });
     });
 
-    describe('When childContext() is called with an input', () => {
+    describe('When forChildValue() is called with an input', () => {
         const [mockModelContext] = createModelContextMock();
 
         const mockChildInput = 'foo';
 
         it('should add the child context to the list', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const child = result.childContext(mockChildInput);
+            const child = result.forChildValue(mockChildInput);
             expect(result.childContexts()).toHaveLength(1);
             expect(result.childContexts()[0]).toBe(child);
         });
 
         it('should return the child context with the provided input and parent', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const child = result.childContext(mockChildInput);
+            const child = result.forChildValue(mockChildInput);
             expect(child.input()).toEqual(mockChildInput);
             expect(child.modelContext()).toEqual(mockModelContext);
         });
     });
 
-    describe('When primitiveContext() is called with an input', () => {
+    describe('When forPrimitive() is called with an input', () => {
         const [mockModelContext] = createModelContextMock();
         const mockPrimitiveInput = 'foo';
 
         it('should add the primitive context to the list', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const primitiveContext = result.primitiveContext(mockPrimitiveInput);
+            const primitiveContext = result.forPrimitive(mockPrimitiveInput);
             expect(result.primitiveContexts()).toHaveLength(1);
             expect(result.primitiveContexts()[0]).toBe(primitiveContext);
         });
 
         it('should return the primitive context with the provided input and parent', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const primitiveContext = result.primitiveContext(mockPrimitiveInput);
+            const primitiveContext = result.forPrimitive(mockPrimitiveInput);
             expect(primitiveContext.input()).toEqual(mockPrimitiveInput);
             expect(primitiveContext.valueContext()?.modelContext()).toEqual(mockModelContext);
         });
     });
 
-    describe('When outputContext() is called with an input', () => {
+    describe('When forOutputValue() is called with an input', () => {
         const [mockModelContext] = createModelContextMock();
         const mockOutputInput = 'foo';
 
         it('should return the output context with the provided input and parent', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const outputContext = result.outputContext(mockOutputInput);
-            expect(outputContext.input()).toEqual(mockOutputInput);
-            expect(outputContext.parent()?.modelContext()).toEqual(mockModelContext);
+            const forOutput = result.forOutputValue(mockOutputInput);
+            expect(forOutput.input()).toEqual(mockOutputInput);
+            expect(forOutput.parent()?.modelContext()).toEqual(mockModelContext);
         });
     });
 
@@ -205,14 +205,14 @@ describe('createValueContextPrivate()', () => {
 
         it('should return true for hasErrors()', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const child = result.childContext(mockChildInput);
+            const child = result.forChildValue(mockChildInput);
             child.addError(mockError);
             expect(result.hasErrors()).toBe(true);
         });
 
         it('should expose the error in errors()', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const child = result.childContext(mockChildInput);
+            const child = result.forChildValue(mockChildInput);
             child.addError(mockError);
             expect(result.errors()).toContain(mockError);
         });
@@ -227,14 +227,14 @@ describe('createValueContextPrivate()', () => {
 
         it('should return true for hasErrors()', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const primitive = result.primitiveContext(mockPrimitiveInpui);
+            const primitive = result.forPrimitive(mockPrimitiveInpui);
             primitive.addError(mockError);
             expect(result.hasErrors()).toBe(true);
         });
 
         it('should not expose the error in errors()', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const primitive = result.primitiveContext(mockPrimitiveInpui);
+            const primitive = result.forPrimitive(mockPrimitiveInpui);
             primitive.addError(mockError);
             expect(result.errors()).toContain(mockError);
         });
@@ -249,14 +249,14 @@ describe('createValueContextPrivate()', () => {
 
         it('should return true for hasErrors()', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const output = result.outputContext(mockOutputInput);
+            const output = result.forOutputValue(mockOutputInput);
             output.addError(mockError);
             expect(result.hasErrors()).toBe(false);
         });
 
         it('should not expose the error in errors()', () => {
             const result = createValueContextPrivate(mockModelContext);
-            const output = result.outputContext(mockOutputInput);
+            const output = result.forOutputValue(mockOutputInput);
             output.addError(mockError);
             expect(result.errors()).not.toContain(mockError);
         });

@@ -42,7 +42,7 @@ describe('createColorChannelBaseValue()', () => {
 
     describe('When get() is called', () => {
         const mockInput = 123.371 as ColorChannelInput;
-        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { value: 44 } as ColorChannelLiteral;
         const [mockPrimitiveContext] = createPrimitiveContextMock();
@@ -51,7 +51,7 @@ describe('createColorChannelBaseValue()', () => {
 
         beforeEach(() => {
             resolveColorChannelBaseValueMocked.mockReturnValue(mockLiteral);
-            primitiveContextSpy.mockReturnValue(mockPrimitiveContext);
+            forPrimitiveSpy.mockReturnValue(mockPrimitiveContext);
             createColorChannelMocked.mockReturnValue(mockColorChannel);
         });
 
@@ -69,7 +69,7 @@ describe('createColorChannelBaseValue()', () => {
             const result = createColorChannelBaseValue(channelDef, mockValueContext, mockOptions);
             result.get();
 
-            expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
+            expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColorChannel() with the expected arguments', () => {

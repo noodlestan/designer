@@ -17,17 +17,17 @@ export const createColorOklabChromaScaleAnchoredModel: DecisionModelFactory<
 
             const options = { quantize };
             const { value: anchorValue } = createOklabChromaValue(
-                context.valueContext(anchor),
+                context.forValue(anchor),
                 options,
             ).get();
 
             const seriesParams = { before, after, quantize };
             const series = generateAnchoredSeries(anchorValue, seriesParams);
             const values = series.map(channel =>
-                createOklabChromaValue(context.valueContext(channel), options),
+                createOklabChromaValue(context.forValue(channel), options),
             );
 
-            return createOklabChromaScale(context.valueContext(values));
+            return createOklabChromaScale(context.forValue(values));
         },
     };
 };

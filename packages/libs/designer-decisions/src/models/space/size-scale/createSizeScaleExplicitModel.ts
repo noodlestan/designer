@@ -12,9 +12,9 @@ export const createSizeScaleExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size => createSizeValue(context.valueContext(size), options)) || [];
+                values?.map(size => createSizeValue(context.forValue(size), options)) || [];
 
-            return createSizeScale(context.valueContext(items));
+            return createSizeScale(context.forValue(items));
         },
     };
 };

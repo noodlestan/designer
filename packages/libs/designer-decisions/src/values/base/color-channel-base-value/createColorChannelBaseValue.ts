@@ -18,7 +18,7 @@ export const createColorChannelBaseValue = <C extends ColorComplementaryChannels
 ): ColorChannelBaseValue<C> => {
     const get = () => {
         const literal = resolveColorChannelBaseValue(channelDefinition, context);
-        return createColorChannel(channelDefinition, context.primitiveContext(literal), options);
+        return createColorChannel(channelDefinition, context.forPrimitive(literal), options);
     };
 
     const baseValue = createBaseValue(context, get);
@@ -27,7 +27,7 @@ export const createColorChannelBaseValue = <C extends ColorComplementaryChannels
         ...baseValue,
         toColorValue: (channels: C) => {
             const literal = get().toColor(channels).toObject();
-            return createColorValue(context.childContext(literal));
+            return createColorValue(context.forChildValue(literal));
         },
     };
 };

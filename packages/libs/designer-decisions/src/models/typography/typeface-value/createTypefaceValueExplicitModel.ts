@@ -9,7 +9,7 @@ export const createTypefaceValueExplicitModel: DecisionModelFactory<
     return {
         produce: context => {
             const { value } = context.params() || {};
-            return createTypefaceValue(context.valueContext(value));
+            return createTypefaceValue(context.forValue(value));
         },
     };
 };

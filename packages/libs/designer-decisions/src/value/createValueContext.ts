@@ -11,9 +11,9 @@ export const createValueContext = <I>(
     context?: LookupContexts | ParentValueContext,
 ): ValueContext<I> => {
     const lookupContexts = resolveLookupContext(context);
-    const parent = isObject(context) && 'childContext' in context ? context : undefined;
+    const parent = isObject(context) && 'forChildValue' in context ? context : undefined;
     if (parent) {
-        return parent.childContext(input);
+        return parent.forChildValue(input);
     }
 
     return createValueContextPrivate(modelContext, input, lookupContexts);

@@ -28,7 +28,7 @@ export const createDecision = <T = unknown>(
                 }),
             );
             const empty = undefined as T;
-            return createBaseValue(modelContext.valueContext(), () => empty);
+            return createBaseValue(modelContext.forValue(), () => empty);
         }
     };
 

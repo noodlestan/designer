@@ -10,7 +10,7 @@ export const createFontSizeValueExplicitModel: DecisionModelFactory<
         produce: context => {
             const { value, quantize } = context.params() || {};
             const options = { quantize };
-            return createFontSizeValue(context.valueContext(value), options);
+            return createFontSizeValue(context.forValue(value), options);
         },
     };
 };

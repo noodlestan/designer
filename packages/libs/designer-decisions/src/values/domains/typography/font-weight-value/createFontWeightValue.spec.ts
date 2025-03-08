@@ -31,7 +31,7 @@ describe('createFontWeightValue()', () => {
 
     describe('When get() is called', () => {
         const mockInput = { name: 'Black' } as FontWeightInput;
-        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { value: 100 } as FontWeightObjectLiteral;
         const [mockPrimitiveContext] = createPrimitiveContextMock();
@@ -39,7 +39,7 @@ describe('createFontWeightValue()', () => {
 
         beforeEach(() => {
             resolveFontWeightValueMocked.mockReturnValue(mockLiteral);
-            primitiveContextSpy.mockReturnValue(mockPrimitiveContext);
+            forPrimitiveSpy.mockReturnValue(mockPrimitiveContext);
             createFontWeightMocked.mockReturnValue(mockFontWeight);
         });
 
@@ -54,7 +54,7 @@ describe('createFontWeightValue()', () => {
             const result = createFontWeightValue(mockValueContext);
             result.get();
 
-            expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
+            expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColor() with the expected arguments', () => {
