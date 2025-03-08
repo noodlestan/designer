@@ -12,9 +12,9 @@ export const createColorSRGBHueSetExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size => createSRGBHueValue(context.valueContext(size), options)) || [];
+                values?.map(size => createSRGBHueValue(context.forValue(size), options)) || [];
 
-            return createSRGBHueSet(context.valueContext(items));
+            return createSRGBHueSet(context.forValue(items));
         },
     };
 };

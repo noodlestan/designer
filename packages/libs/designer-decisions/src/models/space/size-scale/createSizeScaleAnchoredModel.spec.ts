@@ -33,9 +33,9 @@ describe('createSizeScaleAnchoredModel()', () => {
         it('should populate the set', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('49.92');
-            expect(result.get().item(2)?.get().toString()).toEqual('50');
-            expect(result.get().last()?.get().toString()).toEqual('110');
+            expect(result.get().first()?.get().toString()).toEqual('49.92px');
+            expect(result.get().item(2)?.get().toString()).toEqual('50px');
+            expect(result.get().last()?.get().toString()).toEqual('110px');
         });
     });
 

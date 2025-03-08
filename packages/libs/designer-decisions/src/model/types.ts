@@ -34,6 +34,6 @@ export type LinkedModelContext<P extends object = object> = {
 };
 
 export type ModelContext<P extends object = object> = LinkedModelContext<P> & {
-    valueContext: <I>(input?: I | undefined) => ValueContext<I>;
+    forValue: <I>(input?: I | undefined) => ValueContext<I>;
     addError: (error: ModelError) => void;
 };

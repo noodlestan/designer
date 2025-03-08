@@ -13,17 +13,17 @@ export const createColorSRGBHueSetAnchoredModel: DecisionModelFactory<
 
             const options = { quantize };
             const { value: anchorValue } = createSRGBHueValue(
-                context.valueContext(anchor),
+                context.forValue(anchor),
                 options,
             ).get();
 
             const seriesParams = { before, after, quantize };
             const series = generateAnchoredSeries(anchorValue, seriesParams);
             const values = series.map(channel =>
-                createSRGBHueValue(context.valueContext(channel), options),
+                createSRGBHueValue(context.forValue(channel), options),
             );
 
-            return createSRGBHueSet(context.valueContext(values));
+            return createSRGBHueSet(context.forValue(values));
         },
     };
 };

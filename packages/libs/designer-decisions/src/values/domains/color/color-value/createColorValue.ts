@@ -12,7 +12,7 @@ export const createColorValue = (
 ): ColorValue => {
     const get = () => {
         const literal = resolveColorValue(context);
-        return createColor(context.primitiveContext(literal), options);
+        return createColor(context.forPrimitive(literal), options);
     };
 
     return createBaseValue(context, get);

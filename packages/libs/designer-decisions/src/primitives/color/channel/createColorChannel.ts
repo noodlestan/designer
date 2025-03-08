@@ -43,7 +43,7 @@ export function createColorChannel<
             ...channels,
             [channelKey]: value,
         } as ColorObjectLiteral;
-        return createColor(context.outputContext<ColorObjectLiteral>(colorLiteral));
+        return createColor(context.forOutput<ColorObjectLiteral>(colorLiteral));
     };
 
     const toNumber = ({ quantize: q }: ColorChannelOptions = {}) => {

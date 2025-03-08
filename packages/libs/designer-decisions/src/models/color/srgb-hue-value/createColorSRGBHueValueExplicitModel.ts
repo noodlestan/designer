@@ -10,7 +10,7 @@ export const createColorSRGBHueValueExplicitModel: DecisionModelFactory<
         produce: context => {
             const { value, quantize } = context.params() || {};
             const options = { quantize };
-            return createSRGBHueValue(context.valueContext(value), options);
+            return createSRGBHueValue(context.forValue(value), options);
         },
     };
 };

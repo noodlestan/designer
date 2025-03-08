@@ -65,11 +65,11 @@ export type LinkedValueContext<I = unknown> = {
 
 export type ValueContext<I = unknown> = LinkedValueContext<I> & {
     resolve: DecisionRefResolver;
-    childContext: <I>(input?: I | undefined) => ValueContext<I>;
-    outputContext: <I>(input?: I | undefined) => ValueContext<I>;
-    primitiveContext: <T>(input?: T | undefined) => PrimitiveContext<T>;
+    forChildValue: <I>(input?: I | undefined) => ValueContext<I>;
+    forOutputValue: <I>(input?: I | undefined) => ValueContext<I>;
+    forPrimitive: <T>(input?: T | undefined) => PrimitiveContext<T>;
     addError: (error: ValueError) => void;
 };
 
 export type ParentValueContext<I = unknown> = LinkedValueContext<I> &
-    Pick<ValueContext<I>, 'childContext'>;
+    Pick<ValueContext<I>, 'forChildValue'>;

@@ -31,7 +31,7 @@ describe('createTypefaceValue()', () => {
 
     describe('When get() is called', () => {
         const mockInput = { fontName: 'Georgia' } as TypefaceValueInput;
-        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = {
             fontName: 'Foo',
@@ -41,7 +41,7 @@ describe('createTypefaceValue()', () => {
 
         beforeEach(() => {
             resolveTypefaceValueMocked.mockReturnValue(mockLiteral);
-            primitiveContextSpy.mockReturnValue(mockPrimitiveContext);
+            forPrimitiveSpy.mockReturnValue(mockPrimitiveContext);
             createTypefaceMocked.mockReturnValue(mockTypeface);
         });
 
@@ -56,7 +56,7 @@ describe('createTypefaceValue()', () => {
             const result = createTypefaceValue(mockValueContext);
             result.get();
 
-            expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
+            expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColor() with the expected arguments', () => {

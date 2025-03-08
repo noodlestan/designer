@@ -10,7 +10,7 @@ export const createColorSRGBSaturationValueExplicitModel: DecisionModelFactory<
         produce: context => {
             const { value, quantize } = context.params() || {};
             const options = { quantize };
-            return createSRGBSaturationValue(context.valueContext(value), options);
+            return createSRGBSaturationValue(context.forValue(value), options);
         },
     };
 };

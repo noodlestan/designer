@@ -12,9 +12,9 @@ export const createColorSetExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const colors =
-                values?.map(color => createColorValue(context.valueContext(color), options)) || [];
+                values?.map(color => createColorValue(context.forValue(color), options)) || [];
 
-            return createColorSet(context.valueContext(colors));
+            return createColorSet(context.forValue(colors));
         },
     };
 };

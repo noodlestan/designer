@@ -13,7 +13,7 @@ export const createSizeBaseValue = (
 ): SizeBaseValue => {
     const get = () => {
         const literal = resolveSizeBaseValue(sizeDefinition, context);
-        return createSize(sizeDefinition, context.primitiveContext(literal), options);
+        return createSize(sizeDefinition, context.forPrimitive(literal), options);
     };
 
     return createBaseValue(context, get);

@@ -40,7 +40,7 @@ export const createModelContext = (
         errors.push(error);
     };
 
-    const valueContext = <I>(input?: I | undefined): ValueContext<I> => {
+    const forValue = <I>(input?: I | undefined): ValueContext<I> => {
         const child = createValueContext(baseContext, input, context);
         valueContexts.push(child);
         return child;
@@ -48,7 +48,7 @@ export const createModelContext = (
 
     const modelContext: ModelContext = {
         ...baseContext,
-        valueContext,
+        forValue,
         addError,
     };
 

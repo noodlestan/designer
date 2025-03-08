@@ -16,11 +16,10 @@ export const createColorSRGBLightnessScaleExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size =>
-                    createSRGBLightnessValue(context.valueContext(size), options),
-                ) || [];
+                values?.map(size => createSRGBLightnessValue(context.forValue(size), options)) ||
+                [];
 
-            return createSRGBLightnessScale(context.valueContext(items));
+            return createSRGBLightnessScale(context.forValue(items));
         },
     };
 };

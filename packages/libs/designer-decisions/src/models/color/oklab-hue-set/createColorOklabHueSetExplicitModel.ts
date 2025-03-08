@@ -12,9 +12,9 @@ export const createColorOklabHueSetExplicitModel: DecisionModelFactory<
 
             const options = { quantize };
             const items =
-                values?.map(size => createOklabHueValue(context.valueContext(size), options)) || [];
+                values?.map(size => createOklabHueValue(context.forValue(size), options)) || [];
 
-            return createOklabHueSet(context.valueContext(items));
+            return createOklabHueSet(context.forValue(items));
         },
     };
 };

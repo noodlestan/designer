@@ -37,7 +37,7 @@ describe('createSizeBaseValue()', () => {
 
     describe('When get() is called', () => {
         const mockInput = { value: 123.371, units: 'rem' } as SizeValueInput;
-        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { value: 44 } as SizeLiteral;
         const [mockPrimitiveContext] = createPrimitiveContextMock();
@@ -46,7 +46,7 @@ describe('createSizeBaseValue()', () => {
 
         beforeEach(() => {
             resolveSizeBaseValueMocked.mockReturnValue(mockLiteral);
-            primitiveContextSpy.mockReturnValue(mockPrimitiveContext);
+            forPrimitiveSpy.mockReturnValue(mockPrimitiveContext);
             createSizeMocked.mockReturnValue(mockSize);
         });
 
@@ -61,7 +61,7 @@ describe('createSizeBaseValue()', () => {
             const result = createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
             result.get();
 
-            expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
+            expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createSize() with the expected arguments', () => {

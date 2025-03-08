@@ -16,8 +16,8 @@ export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
             const { from, to, steps, quantize } = context.params() || {};
 
             const options = { quantize };
-            const fromValue = createSRGBSaturationValue(context.valueContext(from), options);
-            const toValue = createSRGBSaturationValue(context.valueContext(to), options);
+            const fromValue = createSRGBSaturationValue(context.forValue(from), options);
+            const toValue = createSRGBSaturationValue(context.forValue(to), options);
 
             const series = generateBoundedSeries(
                 fromValue.get().toNumber(),
@@ -25,10 +25,10 @@ export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
                 steps,
             );
             const values = series.map(channel =>
-                createSRGBSaturationValue(context.valueContext(channel), options),
+                createSRGBSaturationValue(context.forValue(channel), options),
             );
 
-            return createSRGBSaturationScale(context.valueContext(values));
+            return createSRGBSaturationScale(context.forValue(values));
         },
     };
 };

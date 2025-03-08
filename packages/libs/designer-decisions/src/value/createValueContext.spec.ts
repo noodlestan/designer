@@ -95,7 +95,7 @@ describe('resolveLookupContext()', () => {
 
         const [mockParentContext] = createValueContextMock();
         mockParentContext.lookupContexts = () => ({ all: ['Context V'] });
-        mockParentContext.childContext = childContextSpy;
+        mockParentContext.forChildValue = childContextSpy;
 
         beforeEach(() => {
             createValueContextPrivateMocked.mockReturnValue(mockValueContext);
@@ -108,7 +108,7 @@ describe('resolveLookupContext()', () => {
 
         it('should call parent context childContext() with the input', () => {
             createValueContext(mockModelContext, mockInput, mockParentContext);
-            expect(mockParentContext.childContext).toHaveBeenCalledWith(mockInput);
+            expect(mockParentContext.forChildValue).toHaveBeenCalledWith(mockInput);
         });
 
         it('should not call createValueContextPrivate()', () => {

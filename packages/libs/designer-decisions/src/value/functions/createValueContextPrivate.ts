@@ -59,17 +59,17 @@ export const createValueContextPrivate = <I = unknown>(
         errors.push(error);
     };
 
-    const childContext = <I>(input?: I | undefined): ValueContext<I> => {
+    const forChildValue = <I>(input?: I | undefined): ValueContext<I> => {
         const child = createValueContextPrivate(modelContext, input, baseContext);
         childContexts.push(child);
         return child;
     };
 
-    const outputContext = <I>(input?: I | undefined): ValueContext<I> => {
+    const forOutputValue = <I>(input?: I | undefined): ValueContext<I> => {
         return createValueContextPrivate(modelContext, input, baseContext);
     };
 
-    const primitiveContext = <P>(input?: DeepPartial<P>) => {
+    const forPrimitive = <P>(input?: DeepPartial<P>) => {
         const primitive = createPrimitiveContext(input, baseContext);
         primitiveContexts.push(primitive);
         return primitive;
@@ -79,9 +79,9 @@ export const createValueContextPrivate = <I = unknown>(
         ...baseContext,
         resolve,
         addError,
-        childContext,
-        outputContext,
-        primitiveContext,
+        forChildValue,
+        forOutputValue,
+        forPrimitive,
     };
 
     return valueContext;

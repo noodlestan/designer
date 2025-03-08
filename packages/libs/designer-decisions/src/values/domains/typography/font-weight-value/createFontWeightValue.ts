@@ -12,7 +12,7 @@ export const createFontWeightValue = (
 ): FontWeightValue => {
     const get = () => {
         const literal = resolveFontWeightValue(context);
-        return createFontWeight(context.primitiveContext(literal));
+        return createFontWeight(context.forPrimitive(literal));
     };
 
     return createBaseValue(context, get);

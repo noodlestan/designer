@@ -27,9 +27,9 @@ describe('createSizeScaleBoundedModel()', () => {
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('10');
-            expect(result.get().item(1)?.get().toString()).toEqual('11.13');
-            expect(result.get().last()?.get().toString()).toEqual('12.25');
+            expect(result.get().first()?.get().toString()).toEqual('10px');
+            expect(result.get().item(1)?.get().toString()).toEqual('11.13px');
+            expect(result.get().last()?.get().toString()).toEqual('12.25px');
         });
     });
 
@@ -37,7 +37,7 @@ describe('createSizeScaleBoundedModel()', () => {
         const params: SizeScaleBoundedInput['params'] = {
             from: {
                 value: 10,
-                unit: 'px',
+                unit: 'rem',
             },
             to: 12.25,
             steps: 1,
@@ -48,9 +48,9 @@ describe('createSizeScaleBoundedModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('10px');
-            expect(result.get().item(1)?.get().toString()).toEqual('12px');
-            expect(result.get().last()?.get().toString()).toEqual('12px');
+            expect(result.get().first()?.get().toString()).toEqual('10rem');
+            expect(result.get().item(1)?.get().toString()).toEqual('12rem');
+            expect(result.get().last()?.get().toString()).toEqual('12rem');
         });
     });
 });

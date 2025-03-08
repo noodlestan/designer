@@ -32,7 +32,7 @@ describe('createColorValue()', () => {
 
     describe('When get() is called', () => {
         const mockInput = '#123abc' as ColorValueInput;
-        const [mockValueContext, { primitiveContextSpy }] = createValueContextMock(mockInput);
+        const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { h: 123.371, s: 0.4, l: 0.5 } as ColorLiteral;
         const [mockPrimitiveContext] = createPrimitiveContextMock();
@@ -41,7 +41,7 @@ describe('createColorValue()', () => {
 
         beforeEach(() => {
             resolveColorValueMocked.mockReturnValue(mockLiteral);
-            primitiveContextSpy.mockReturnValue(mockPrimitiveContext);
+            forPrimitiveSpy.mockReturnValue(mockPrimitiveContext);
             createColorMocked.mockReturnValue(mockColor);
         });
 
@@ -56,7 +56,7 @@ describe('createColorValue()', () => {
             const result = createColorValue(mockValueContext, mockOptions);
             result.get();
 
-            expect(primitiveContextSpy).toHaveBeenCalledWith(mockLiteral);
+            expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
 
         it('should call createColor() with the expected arguments', () => {
