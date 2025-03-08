@@ -20,11 +20,11 @@ describe('createTypefaceValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString()).toEqual(input.fontName);
-            expect(result.get().capabilities).toEqual(input.capabilities);
-            expect(result.get().source).toEqual(input.source);
-            expect(result.get().ranges).toEqual([]);
-            expect(result.get().styles).toEqual([]);
+            expect(result.toString()).toEqual(input.fontName);
+            expect(result.capabilities).toEqual(input.capabilities);
+            expect(result.source).toEqual(input.source);
+            expect(result.ranges).toEqual([]);
+            expect(result.styles).toEqual([]);
         });
     });
 
@@ -34,7 +34,7 @@ describe('createTypefaceValueExplicitModel()', () => {
         it('should create a fallback value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString()).toEqual('serif');
+            expect(result.toString()).toEqual('serif');
         });
     });
 });

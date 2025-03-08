@@ -15,7 +15,7 @@ export const createColorSetBoundedModel: DecisionModelFactory<
             const fromValue = createColorValue(context.forValue(from), options);
             const toValue = createColorValue(context.forValue(to), options);
 
-            const list = generateBoundedColorList(fromValue.get(), toValue.get(), steps);
+            const list = generateBoundedColorList(fromValue, toValue, steps);
             const values = list.map(color => createColorValue(context.forValue(color), options));
 
             return createColorSet(context.forValue(values));

@@ -18,7 +18,7 @@ describe('createFontWeightValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString()).toEqual('100');
+            expect(result.toString()).toEqual('100');
         });
     });
 
@@ -28,7 +28,7 @@ describe('createFontWeightValueExplicitModel()', () => {
         it('should create a fallback value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().literal()).toEqual({ value: 400, name: 'Normal' });
+            expect(result.literal()).toEqual({ value: 400, name: 'Normal' });
         });
     });
 });

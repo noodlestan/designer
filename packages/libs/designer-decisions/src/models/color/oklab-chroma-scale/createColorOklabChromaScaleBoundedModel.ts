@@ -19,11 +19,7 @@ export const createColorOklabChromaScaleBoundedModel: DecisionModelFactory<
             const fromValue = createOklabChromaValue(context.forValue(from), options);
             const toValue = createOklabChromaValue(context.forValue(to), options);
 
-            const series = generateBoundedSeries(
-                fromValue.get().toNumber(),
-                toValue.get().toNumber(),
-                steps,
-            );
+            const series = generateBoundedSeries(fromValue.toNumber(), toValue.toNumber(), steps);
             const values = series.map(channel =>
                 createOklabChromaValue(context.forValue(channel), options),
             );

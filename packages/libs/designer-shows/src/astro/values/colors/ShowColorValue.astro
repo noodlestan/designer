@@ -18,7 +18,7 @@ const showErrors = !muteErrors && colorValue?.context().hasErrors();
             {formats?.map(format => (
                 <DecisionValueContainer>
                     {showErrors && <ShowError size="xs" />}
-                    {colorValue.get().toString({ format })}
+                    {colorValue.toString({ format })}
                 </DecisionValueContainer>
             ))}
         </LayoutStack>

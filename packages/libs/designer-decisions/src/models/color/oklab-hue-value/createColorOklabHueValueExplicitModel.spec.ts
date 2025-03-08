@@ -17,7 +17,7 @@ describe('createColorOklabHueValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(333.1);
+            expect(result.toNumber()).toEqual(333.1);
         });
     });
 
@@ -30,7 +30,7 @@ describe('createColorOklabHueValueExplicitModel()', () => {
         it('should create a clamped value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(360);
+            expect(result.toNumber()).toEqual(360);
         });
     });
 
@@ -44,7 +44,7 @@ describe('createColorOklabHueValueExplicitModel()', () => {
         it('should create a quantized value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toNumber()).toEqual(335);
+            expect(result.toNumber()).toEqual(335);
         });
     });
 });

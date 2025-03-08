@@ -7,7 +7,7 @@ type Props = FontWeightValueProps;
 
 const { v: fontSizeValue, value = true, muteErrors } = Astro.props;
 
-const { toNumber, toString } = fontSizeValue?.get() || {};
+const { toNumber, toString } = fontSizeValue || {};
 const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
 ---
 

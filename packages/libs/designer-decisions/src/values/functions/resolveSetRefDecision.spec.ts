@@ -16,6 +16,7 @@ describe('resolveSetRefDecision()', () => {
 
     const itemSet = createItemSet([mockSize1, mockSize2]);
     const [, decisionMock] = createDecisionMock<BaseSet<typeof mockSize1>>([], {
+        item: itemSet.item,
         get: () => itemSet,
     });
 

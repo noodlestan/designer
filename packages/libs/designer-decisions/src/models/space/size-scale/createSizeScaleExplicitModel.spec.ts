@@ -18,15 +18,15 @@ describe('createSizeScaleExplicitModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(params.values.length);
+            expect(result.items()).toHaveLength(params.values.length);
         });
 
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('32.11');
-            expect(result.get().item(1)?.get().toString()).toEqual('64');
-            expect(result.get().last()?.get().toString()).toEqual('128');
+            expect(result.first()?.toString()).toEqual('32.11');
+            expect(result.item(1)?.toString()).toEqual('64');
+            expect(result.last()?.toString()).toEqual('128');
         });
     });
 
@@ -40,9 +40,9 @@ describe('createSizeScaleExplicitModel()', () => {
         it('should populate the scale with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('32rem');
-            expect(result.get().item(1)?.get().toString()).toEqual('64');
-            expect(result.get().last()?.get().toString()).toEqual('128');
+            expect(result.first()?.toString()).toEqual('32rem');
+            expect(result.item(1)?.toString()).toEqual('64');
+            expect(result.last()?.toString()).toEqual('128');
         });
     });
 });

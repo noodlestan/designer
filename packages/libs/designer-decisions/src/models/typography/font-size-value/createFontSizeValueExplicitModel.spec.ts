@@ -19,7 +19,7 @@ describe('createFontSizeValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().literal()).toEqual(input);
+            expect(result.literal()).toEqual(input);
         });
     });
 
@@ -29,7 +29,7 @@ describe('createFontSizeValueExplicitModel()', () => {
         it('should create a fallback value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString()).toEqual('16px');
+            expect(result.toString()).toEqual('16px');
         });
     });
 });

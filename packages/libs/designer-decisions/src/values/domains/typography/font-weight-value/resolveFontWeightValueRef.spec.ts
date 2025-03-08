@@ -51,9 +51,10 @@ describe('resolveFontWeightValueRef()', () => {
 
         const mockInput = { model: 'font-weight-value/foo' } as DecisionInput;
         const fontWeightLiteral: FontWeightObjectLiteral = { value: 900 };
-        const [, mockDecision] = createDecisionMock([mockInput], {
-            get: () => createFontWeight(createPrimitiveContextMock(fontWeightLiteral)[0]),
-        });
+        const [, mockDecision] = createDecisionMock(
+            [mockInput],
+            createFontWeight(createPrimitiveContextMock(fontWeightLiteral)[0]),
+        );
 
         beforeEach(() => {
             resolveSpy.mockReturnValue(mockDecision);

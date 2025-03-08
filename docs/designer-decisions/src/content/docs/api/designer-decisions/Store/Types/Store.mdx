@@ -41,7 +41,7 @@ const build = buildStaticStore(context);
 
 const store = await build();
 const primary = store.decision({ $name: 'Primary color' });
-const color = primary.produce().get().toString('oklch');
+const color = primary.produce().toString('oklch');
 ```
 
 ### Advanced use cases

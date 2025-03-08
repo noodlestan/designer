@@ -21,15 +21,15 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(expectedLength);
+            expect(result.items()).toHaveLength(expectedLength);
         });
 
         it('should populate the scale with values based on clamped params', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(0.11);
-            expect(result.get().item(4)?.get().toNumber()).toEqual(0.37);
-            expect(result.get().last()?.get().toNumber()).toEqual(0.5);
+            expect(result.first()?.toNumber()).toEqual(0.11);
+            expect(result.item(4)?.toNumber()).toEqual(0.37);
+            expect(result.last()?.toNumber()).toEqual(0.5);
         });
     });
 
@@ -45,9 +45,9 @@ describe('createColorOklabChromaScaleBoundedModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toNumber()).toEqual(0.134);
-            expect(result.get().item(1)?.get().toNumber()).toEqual(0.318);
-            expect(result.get().last()?.get().toNumber()).toEqual(0.5);
+            expect(result.first()?.toNumber()).toEqual(0.134);
+            expect(result.item(1)?.toNumber()).toEqual(0.318);
+            expect(result.last()?.toNumber()).toEqual(0.5);
         });
     });
 });

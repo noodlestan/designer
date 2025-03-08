@@ -19,11 +19,7 @@ export const createColorSRGBSaturationScaleBoundedModel: DecisionModelFactory<
             const fromValue = createSRGBSaturationValue(context.forValue(from), options);
             const toValue = createSRGBSaturationValue(context.forValue(to), options);
 
-            const series = generateBoundedSeries(
-                fromValue.get().toNumber(),
-                toValue.get().toNumber(),
-                steps,
-            );
+            const series = generateBoundedSeries(fromValue.toNumber(), toValue.toNumber(), steps);
             const values = series.map(channel =>
                 createSRGBSaturationValue(context.forValue(channel), options),
             );

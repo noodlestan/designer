@@ -19,7 +19,7 @@ describe('createSizeValueExplicitModel()', () => {
         it('should create a value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString()).toEqual('33.33rem');
+            expect(result.toString()).toEqual('33.33rem');
         });
     });
 
@@ -29,7 +29,7 @@ describe('createSizeValueExplicitModel()', () => {
         it('should create a quantized value', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().toString()).toEqual('35rem');
+            expect(result.toString()).toEqual('35rem');
         });
     });
 });

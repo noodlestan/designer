@@ -19,7 +19,7 @@ export const resolveTypefaceValueRef = (
     }
 
     if (isTypefaceValueDecision(decision)) {
-        return decision.produce(context).get().literal();
+        return decision.produce(context).literal();
     }
 
     handleRefMismatchError(context, decision, DECISION_TYPEFACE_VALUE, ref, REF_CHECKED_TYPES);

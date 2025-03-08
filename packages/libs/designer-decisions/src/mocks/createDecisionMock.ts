@@ -9,7 +9,7 @@ import { createModelContextMock } from './createModelContextMock';
 
 export const createDecisionMock = <T extends BaseValue<unknown> = BaseValue<unknown>>(
     inputs: DecisionInput[],
-    mockMethods: Record<string, () => unknown> = {},
+    mockMethods: Record<string, unknown> = {},
 ): [DecisionContext, Decision<T>] => {
     const factory = createDecisionMockImplementation(inputs, mockMethods);
     const decisionContext = createDecisionContextMock(inputs);

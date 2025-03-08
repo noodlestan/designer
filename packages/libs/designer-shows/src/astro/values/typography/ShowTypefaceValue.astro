@@ -7,7 +7,7 @@ type Props = TypefaceValueProps;
 
 const { v: typefaceValue, value = true, muteErrors } = Astro.props;
 
-const { fontName, capabilities, styles, ranges } = typefaceValue?.get() || {};
+const { fontName, capabilities, styles, ranges } = typefaceValue || {};
 const showErrors = !muteErrors && typefaceValue?.context().hasErrors();
 ---
 

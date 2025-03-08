@@ -24,7 +24,7 @@ const { component: ValueComponent, props: valueProps = {} } = componentMap?.valu
 const { component: VizComponent, props: vizProps = {} } = componentMap?.viz || {};
 
 const set = decision && isSetDecision(decision) ? decision.produce() : undefined;
-const items = set?.get().items();
+const items = set?.items();
 
 const isSet = decision && isSetDecision(decision);
 const base = (Array.isArray(layout) ? layout[0] : layout) || 'row';

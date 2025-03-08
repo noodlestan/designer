@@ -3,7 +3,7 @@ import type { DecisionContext, DecisionError, DecisionRefResolver } from '../dec
 import type { DesignerError } from '../errors';
 import type { DecisionInput, DecisionRef } from '../inputs';
 import type { LookupContexts } from '../lookup';
-import type { LinkedModelContext, ModelError } from '../model';
+import type { LinkedModelContext } from '../model';
 import type { PrimitiveContext, PrimitiveError } from '../primitive';
 import type { DeepPartial } from '../private';
 import type { RecordError } from '../record';
@@ -59,7 +59,7 @@ export type LinkedValueContext<I = unknown> = {
     lookups: () => ValueRefLookup[];
     childContexts: () => LinkedValueContext[];
     primitiveContexts: () => PrimitiveContext[];
-    errors: () => (DecisionError | RecordError | ModelError | ValueError | PrimitiveError)[];
+    errors: () => (DecisionError | RecordError | ValueError | PrimitiveError)[];
     hasErrors: () => boolean;
 };
 

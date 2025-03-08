@@ -27,15 +27,15 @@ describe('createSizeScaleAnchoredModel()', () => {
             const result = model.produce(mockModelContext);
 
             expect(result).toBeDefined();
-            expect(result.get().items()).toHaveLength(expectedLength);
+            expect(result.items()).toHaveLength(expectedLength);
         });
 
         it('should populate the set', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('49.92px');
-            expect(result.get().item(2)?.get().toString()).toEqual('50px');
-            expect(result.get().last()?.get().toString()).toEqual('110px');
+            expect(result.first()?.toString()).toEqual('49.92px');
+            expect(result.item(2)?.toString()).toEqual('50px');
+            expect(result.last()?.toString()).toEqual('110px');
         });
     });
 
@@ -60,9 +60,9 @@ describe('createSizeScaleAnchoredModel()', () => {
         it('should populate the set with quantized values', () => {
             const result = model.produce(mockModelContext);
 
-            expect(result.get().first()?.get().toString()).toEqual('49.9rem');
-            expect(result.get().item(2)?.get().toString()).toEqual('50rem');
-            expect(result.get().last()?.get().toString()).toEqual('110rem');
+            expect(result.first()?.toString()).toEqual('49.9rem');
+            expect(result.item(2)?.toString()).toEqual('50rem');
+            expect(result.last()?.toString()).toEqual('110rem');
         });
     });
 });
