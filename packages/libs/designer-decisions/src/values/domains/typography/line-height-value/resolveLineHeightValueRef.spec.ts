@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { DECISION_FONT_WEIGHT_VALUE } from '../../../../constants';
+import { DECISION_LINE_HEIGHT_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef, LineHeightObjectLiteral } from '../../../../inputs';
 import {
     createDecisionMock,
     createPrimitiveContextMock,
     createValueContextMock,
 } from '../../../../mocks';
-import { FONT_WEIGHT_FALLBACK_LITERAL, createLineHeight } from '../../../../primitives';
+import { LINE_HEIGHT_FALLBACK_LITERAL, createLineHeight } from '../../../../primitives';
 import {
     ERROR_VALUE_REF_MISMATCH,
     ERROR_VALUE_REF_NOT_FOUND,
@@ -18,7 +18,7 @@ import {
 import { resolveLineHeightValueRef } from './resolveLineHeightValueRef';
 
 describe('resolveLineHeightValueRef()', () => {
-    const fallbackLineHeight = FONT_WEIGHT_FALLBACK_LITERAL;
+    const fallbackLineHeight = LINE_HEIGHT_FALLBACK_LITERAL;
 
     beforeEach(() => {
         vi.clearAllMocks();
@@ -41,7 +41,7 @@ describe('resolveLineHeightValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_FONT_WEIGHT_VALUE);
+            expect(error.valueName).toBe(DECISION_LINE_HEIGHT_VALUE);
         });
     });
 
@@ -79,7 +79,7 @@ describe('resolveLineHeightValueRef()', () => {
 
         it('should return the fallback value', () => {
             const result = resolveLineHeightValueRef(mockValueContext, mockRef);
-            expect(result).toEqual(FONT_WEIGHT_FALLBACK_LITERAL);
+            expect(result).toEqual(LINE_HEIGHT_FALLBACK_LITERAL);
         });
 
         it('should add an error to the context', () => {
@@ -90,9 +90,9 @@ describe('resolveLineHeightValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_FONT_WEIGHT_VALUE);
+            expect(error.valueName).toBe(DECISION_LINE_HEIGHT_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
-            expect(error.accepted).toContain('font-weight-value');
+            expect(error.accepted).toContain('line-height-value');
         });
     });
 });
