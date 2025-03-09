@@ -13,6 +13,7 @@ import {
     ShowColorValue,
     ShowColorViz,
     ShowFontWeightValue,
+    ShowLineHeightValue,
     ShowSizeValue,
     ShowSizeViz,
     ShowTextStyleViz,
@@ -99,6 +100,12 @@ export const getDecisionComponentMap = (
         'font-weight-value': defaultCs(
             ShowValueDecision,
             valueC(ShowFontWeightValue),
+            vizC(ShowTextStyleViz),
+            'column',
+        ),
+        'line-height-value': defaultCs(
+            ShowValueDecision,
+            valueC(ShowLineHeightValue),
             vizC(ShowTextStyleViz),
             'column',
         ),

@@ -32,7 +32,7 @@ export const createDecisionValidator = (schemaMap: SchemaMap): DecisionValidator
         if (!schema || !validateFn) {
             const error = createRecordValidationError({
                 normalized,
-                reason: `Schema not loaded: "${schemaId}".`,
+                reason: `Schema not loaded: "${schemaId}"`,
                 schema: `DecisionInput#-model`,
             });
             errors.push(error);

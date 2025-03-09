@@ -19,7 +19,7 @@ describe('createColorValue()', () => {
         vi.clearAllMocks();
     });
 
-    describe('Given a size definition, a context, and an input', () => {
+    describe('Given a context and an input', () => {
         const mockInput = '#123abc' as ColorValueInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 

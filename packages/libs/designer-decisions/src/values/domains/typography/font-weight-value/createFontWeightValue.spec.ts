@@ -18,7 +18,7 @@ describe('createFontWeightValue()', () => {
         vi.clearAllMocks();
     });
 
-    describe('Given a size definition, a context, and an input', () => {
+    describe('Given a context and an input', () => {
         const mockInput = { name: 'Black' } as FontWeightInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
