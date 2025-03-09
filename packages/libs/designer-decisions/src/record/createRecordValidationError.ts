@@ -32,7 +32,7 @@ export const createRecordValidationError = (attributes: Attributes): RecordValid
 
     const message = (showRef = true, showSource = true) => {
         const atStr = formatRefAndSource(ref, source?.name, filename, showRef, showSource);
-        const reasonStr = `Value at ${path} ${reason}`;
+        const reasonStr = path ? `Value at ${path} ${reason}` : reason;
         const dataStr = serializeErrorData(value, 0);
         return `Invalid Record. ${reasonStr}. Value: ${dataStr}${atStr}`;
     };

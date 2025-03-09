@@ -29,7 +29,7 @@ describe('createColorChannelBaseValue()', () => {
         vi.clearAllMocks();
     });
 
-    describe('When get() is called', () => {
+    describe('Given a color channel definitions, a context, and an input', () => {
         const mockInput = 123.371 as ColorChannelInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 

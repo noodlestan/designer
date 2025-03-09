@@ -1,7 +1,7 @@
 import type {
     LineHeightLiteral,
     LineHeightObjectLiteral,
-    SizeAbsoluteUnits,
+    LineHeightUnits,
 } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { isObject } from '../../../../private';
@@ -21,14 +21,22 @@ export function normalizeLineHeightInput(
     }
 
     if (typeof input === 'string') {
-        const valueAndUnit = parseValueAndUnit<SizeAbsoluteUnits>(input);
+        const valueAndUnit = parseValueAndUnit<LineHeightUnits>(input);
         if (!valueAndUnit) {
             handlePrimitiveInputError(context, primitiveName, input, 'Invalid LineHeightRaw');
-            return { value: fallback, unit: defaultUnit as SizeAbsoluteUnits };
+            return { value: fallback, unit: defaultUnit as LineHeightUnits };
         }
         return validateValueAndUnit(lineHeightDefinition, context, valueAndUnit);
     }
 
+    if (typeof input === 'number') {
+        if (isNaN(input)) {
+            handlePrimitiveInputError(context, primitiveName, input, 'Invalid LineHeightRaw');
+            return { value: fallback, unit: defaultUnit as LineHeightUnits };
+        }
+        return { value: input, unit: defaultUnit as LineHeightUnits };
+    }
+
     handlePrimitiveInputError(context, primitiveName, input, 'Invalid LineHeightObjectLiteral');
-    return { value: fallback, unit: defaultUnit as SizeAbsoluteUnits };
+    return { value: fallback, unit: defaultUnit as LineHeightUnits };
 }

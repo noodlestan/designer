@@ -18,7 +18,7 @@ describe('createTypefaceValue()', () => {
         vi.clearAllMocks();
     });
 
-    describe('Given a size definition, a context, and an input', () => {
+    describe('Given a context and an input', () => {
         const mockInput = { $name: 'Foo' } as TypefaceValueInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 

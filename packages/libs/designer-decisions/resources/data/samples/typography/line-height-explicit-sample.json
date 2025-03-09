@@ -1,0 +1,9 @@
+[
+  {
+    "model": "line-height-value/explicit",
+    "name": "Line Height Explicit Sample",
+    "params": {
+      "value": 1.5
+    }
+  }
+]

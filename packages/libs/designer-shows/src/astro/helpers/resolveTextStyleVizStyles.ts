@@ -1,9 +1,11 @@
 import {
     DECISION_FONT_SIZE_VALUE,
     DECISION_FONT_WEIGHT_VALUE,
+    DECISION_LINE_HEIGHT_VALUE,
     DECISION_TYPEFACE_VALUE,
     type FontSizeValue,
     type FontWeightValue,
+    type LineHeightValue,
     type TypefaceValue,
 } from '@noodlestan/designer-decisions';
 
@@ -36,6 +38,11 @@ export const resolveTextStyleVizStyles = (
     if (v?.type() === DECISION_FONT_WEIGHT_VALUE) {
         const fontWeight = v as FontWeightValue;
         style.__fontWeight = fontWeight.toNumber();
+    }
+
+    if (v?.type() === DECISION_LINE_HEIGHT_VALUE) {
+        const lineHeight = v as LineHeightValue;
+        style.__lineHeight = lineHeight.toString();
     }
 
     return style;
