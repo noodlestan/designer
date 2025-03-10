@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { createPrimitiveContextMock, mockChannelDefinition } from '../../../../mocks';
 import { ERROR_PRIMITIVE_INPUT, type PrimitiveInputError } from '../../../../primitive';
+import type { ColorChannelLiteral } from '../types';
 
 import { normalizeColorChannelInput } from './normalizeColorChannelInput';
 
@@ -20,8 +21,10 @@ describe('normalizeColorChannelInput()', () => {
     });
 
     describe('When input is an object with an invalid value', () => {
-        const mockInput = { value: '0.3' };
-        const [mockPrimitiveContext, { addErrorSpy }] = createPrimitiveContextMock(mockInput);
+        const mockInput = { value: '0.3' } as unknown;
+        const [mockPrimitiveContext, { addErrorSpy }] = createPrimitiveContextMock(
+            mockInput as ColorChannelLiteral,
+        );
 
         it('should return the fallback value', () => {
             const result = normalizeColorChannelInput(channelDef, mockPrimitiveContext);
@@ -68,7 +71,9 @@ describe('normalizeColorChannelInput()', () => {
         it.each(invalidInputs)(
             'should return the fallback value for invalid input: %s',
             invalidInput => {
-                const [mockPrimitiveContext] = createPrimitiveContextMock(invalidInput);
+                const [mockPrimitiveContext] = createPrimitiveContextMock(
+                    invalidInput as unknown as ColorChannelLiteral,
+                );
                 const result = normalizeColorChannelInput(channelDef, mockPrimitiveContext);
                 expect(result).toEqual(channelFallback);
             },
@@ -76,8 +81,9 @@ describe('normalizeColorChannelInput()', () => {
         it.each(invalidInputs)(
             'should add an error to the context for invalid input: %s',
             invalidInput => {
-                const [mockPrimitiveContext, { addErrorSpy }] =
-                    createPrimitiveContextMock(invalidInput);
+                const [mockPrimitiveContext, { addErrorSpy }] = createPrimitiveContextMock(
+                    invalidInput as unknown as ColorChannelLiteral,
+                );
                 normalizeColorChannelInput(channelDef, mockPrimitiveContext);
                 expect(addErrorSpy).toHaveBeenCalledOnce();
 

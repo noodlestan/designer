@@ -11,7 +11,7 @@ type Mocks = {
     addErrorSpy: Mock;
 };
 
-export function createPrimitiveContextMock(input?: unknown): [PrimitiveContext, Mocks] {
+export function createPrimitiveContextMock<I>(input?: I): [PrimitiveContext<I>, Mocks] {
     const resolveSpy = vi.fn();
     const addErrorSpy = vi.fn();
     const forOutputSpy = vi.fn();

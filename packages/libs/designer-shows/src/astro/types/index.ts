@@ -2,6 +2,7 @@ import type {
     ColorChannelValue,
     ColorFormat,
     ColorValue,
+    FontFamilyValue,
     FontSizeValue,
     FontWeightValue,
     LetterSpacingValue,
@@ -103,6 +104,10 @@ export type TypefaceValueProps = ShowValueProps & {
     v?: TypefaceValue;
 };
 
+export type FontFamilyValueProps = ShowValueProps & {
+    v?: FontFamilyValue;
+};
+
 export type FontWeightValueProps = ShowValueProps & {
     v?: FontWeightValue;
 };
@@ -119,6 +124,6 @@ export type TextStyleVizName = 'short-text';
 
 export type TextStyleVizProps = ShowVizProps & {
     viz?: boolean | TextStyleVizName;
-    v?: TypefaceValue | FontSizeValue | FontWeightValue;
+    v?: TypefaceValue | FontFamilyValue | FontSizeValue | FontWeightValue | LetterSpacingValue;
 };
 export type TextStyleVizComponent = (props: TextStyleVizProps) => unknown;

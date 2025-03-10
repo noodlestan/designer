@@ -1,5 +1,12 @@
 [
   {
+    "model": "font-family-value/explicit",
+    "name": "Text Font Family",
+    "params": {
+      "value": "Merriweather, Georgia, \"Times New Roman\", Times, serif"
+    }
+  },
+  {
     "model": "font-size-value/explicit",
     "name": "Text Default Size",
     "params": {

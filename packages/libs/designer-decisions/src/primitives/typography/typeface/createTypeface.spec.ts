@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import type { TypefaceLiteral } from '../../../inputs';
 import { createPrimitiveContextMock } from '../../../mocks';
 
+import { TYPEFACE_FALLBACK_FONT_NAME } from './constants';
 import { createTypeface } from './createTypeface';
-import { TYPEFACE_FALLBACK_FONT_NAME } from './private';
 
 describe('createTypeface()', () => {
     describe('Given a string', () => {

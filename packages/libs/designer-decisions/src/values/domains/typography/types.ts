@@ -1,4 +1,5 @@
 import type {
+    FontFamily,
     FontSize,
     FontWeight,
     LetterSpacing,
@@ -9,6 +10,8 @@ import type {
 import type { BaseValue } from '../../base';
 
 export type TypefaceValue = BaseValue<Typeface>;
+
+export type FontFamilyValue = BaseValue<FontFamily>;
 
 export type FontSizeValue = BaseValue<FontSize>;
 
