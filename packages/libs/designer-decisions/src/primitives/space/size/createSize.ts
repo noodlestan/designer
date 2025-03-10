@@ -10,6 +10,7 @@ export function createSize(
     context: PrimitiveContext<SizeLiteral>,
     options?: SizeOptions,
 ): Size {
+    const { base } = sizeDefinition;
     const { quantize = sizeDefinition.quantize } = options || {};
 
     const { value, unit } = normalizeSizeInput(sizeDefinition, context);
@@ -21,7 +22,7 @@ export function createSize(
     const getQuantized = (q?: number) => {
         const { value, unit } = literal();
         return {
-            value: quantized(value, q ?? quantize),
+            value: quantized(value, q ?? quantize, base),
             unit,
         };
     };

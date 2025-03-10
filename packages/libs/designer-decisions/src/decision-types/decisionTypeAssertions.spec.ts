@@ -15,6 +15,10 @@ import {
     DECISION_COLOR_SRGB_SATURATION_SCALE,
     DECISION_COLOR_SRGB_SATURATION_VALUE,
     DECISION_COLOR_VALUE,
+    DECISION_FONT_SIZE_VALUE,
+    DECISION_FONT_WEIGHT_VALUE,
+    DECISION_LETTER_SPACING_VALUE,
+    DECISION_LINE_HEIGHT_VALUE,
     DECISION_SIZE_SCALE,
     DECISION_SIZE_VALUE,
     DECISION_TYPEFACE_VALUE,
@@ -38,7 +42,13 @@ import {
     isColorValueDecision,
 } from './color';
 import { isSizeScaleDecision, isSizeValueDecision } from './space';
-import { isTypefaceValueDecision } from './typography';
+import {
+    isFontSizeValueDecision,
+    isFontWeightValueDecision,
+    isLetterSpacingValueDecision,
+    isLineHeightValueDecision,
+    isTypefaceValueDecision,
+} from './typography';
 
 const testCases = [
     {
@@ -125,6 +135,26 @@ const testCases = [
         name: 'isTypefaceValueDecision',
         fn: isTypefaceValueDecision,
         type: DECISION_TYPEFACE_VALUE,
+    },
+    {
+        name: 'isTypefaceValueDecision',
+        fn: isFontSizeValueDecision,
+        type: DECISION_FONT_SIZE_VALUE,
+    },
+    {
+        name: 'isTypefaceValueDecision',
+        fn: isFontWeightValueDecision,
+        type: DECISION_FONT_WEIGHT_VALUE,
+    },
+    {
+        name: 'isTypefaceValueDecision',
+        fn: isLineHeightValueDecision,
+        type: DECISION_LINE_HEIGHT_VALUE,
+    },
+    {
+        name: 'isTypefaceValueDecision',
+        fn: isLetterSpacingValueDecision,
+        type: DECISION_LETTER_SPACING_VALUE,
     },
 ];
 

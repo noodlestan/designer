@@ -20,6 +20,7 @@ export const DECISION_TYPEFACE_VALUE = 'typeface-value';
 export const DECISION_FONT_SIZE_VALUE = 'font-size-value';
 export const DECISION_FONT_WEIGHT_VALUE = 'font-weight-value';
 export const DECISION_LINE_HEIGHT_VALUE = 'line-height-value';
+export const DECISION_LETTER_SPACING_VALUE = 'letter-spacing-value';
 
 export const SET_DECISION_TYPES = [
     DECISION_COLOR_SET,

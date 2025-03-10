@@ -1,7 +1,12 @@
 export function parseValueAndUnit<T extends string = string>(
     input: string,
 ): Partial<{ value: number; unit: T }> | undefined {
-    const match = input.trim().match(/^(\d*\.?\d*)\s*(\D+)?$/);
+    const trimmedInput = input.trim();
+
+    if (!trimmedInput.length) {
+        return;
+    }
+    const match = trimmedInput.match(/^(-?\d+\.?\d*)\s*(\D+)?$/);
 
     if (!match) {
         return;

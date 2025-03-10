@@ -28,7 +28,6 @@ describe('isValidSizeObjectLiteral()', () => {
             123,
             { value: 'not-a-number', unit: 'px' },
             { value: NaN, unit: 'px' },
-            { value: 10, unit: 'em' },
             { value: 10 },
             { unit: 'px' },
             {},

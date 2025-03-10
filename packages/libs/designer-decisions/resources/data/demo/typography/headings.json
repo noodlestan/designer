@@ -12,5 +12,12 @@
     "params": {
       "value": 900
     }
+  },
+  {
+    "model": "letter-spacing-value/explicit",
+    "name": "Heading Tight Letter Spacing",
+    "params": {
+      "value": "-0.01rem"
+    }
   }
 ]

@@ -4,6 +4,7 @@ import type {
     ColorValue,
     FontSizeValue,
     FontWeightValue,
+    LetterSpacingValue,
     LineHeightValue,
     SizeValue,
     Store,
@@ -108,6 +109,10 @@ export type FontWeightValueProps = ShowValueProps & {
 
 export type LineHeightValueProps = ShowValueProps & {
     v?: LineHeightValue;
+};
+
+export type LetterSpacingValueProps = ShowValueProps & {
+    v?: LetterSpacingValue;
 };
 
 export type TextStyleVizName = 'short-text';

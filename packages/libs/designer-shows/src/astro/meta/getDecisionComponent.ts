@@ -13,6 +13,7 @@ import {
     ShowColorValue,
     ShowColorViz,
     ShowFontWeightValue,
+    ShowLetterSpacingValue,
     ShowLineHeightValue,
     ShowSizeValue,
     ShowSizeViz,
@@ -106,6 +107,12 @@ export const getDecisionComponentMap = (
         'line-height-value': defaultCs(
             ShowValueDecision,
             valueC(ShowLineHeightValue),
+            vizC(ShowTextStyleViz),
+            'column',
+        ),
+        'letter-spacing-value': defaultCs(
+            ShowValueDecision,
+            valueC(ShowLetterSpacingValue),
             vizC(ShowTextStyleViz),
             'column',
         ),
