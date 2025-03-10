@@ -1,5 +1,12 @@
 [
   {
+    "model": "font-family-value/explicit",
+    "name": "Headings Font Family",
+    "params": {
+      "value": "Archivo, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    }
+  },
+  {
     "model": "font-weight-value/explicit",
     "name": "Headings Default Weight",
     "params": {

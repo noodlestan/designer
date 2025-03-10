@@ -18,26 +18,11 @@
     "name": "Headings Typeface",
     "params": {
       "value": {
-        "fontName": "Georgia",
-        "styles": [
-          { "weight": 100, "italic": false },
-          { "weight": 100, "italic": true },
-          { "weight": 200, "italic": false },
-          { "weight": 200, "italic": true },
-          { "weight": 300, "italic": false },
-          { "weight": 300, "italic": true },
-          { "weight": 400, "italic": false },
-          { "weight": 400, "italic": true },
-          { "weight": 500, "italic": false },
-          { "weight": 500, "italic": true },
-          { "weight": 600, "italic": false },
-          { "weight": 600, "italic": true },
-          { "weight": 700, "italic": false },
-          { "weight": 700, "italic": true },
-          { "weight": 800, "italic": false },
-          { "weight": 800, "italic": true },
-          { "weight": 900, "italic": false },
-          { "weight": 900, "italic": true }
+        "fontName": "Merriweather",
+        "capabilities": ["variable"],
+        "ranges": [
+          { "tag": "wght", "min": 300, "max": 900 },
+          { "tag": "ital", "min": 0, "max": 1 }
         ]
       }
     }

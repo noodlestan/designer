@@ -12,6 +12,7 @@ import {
     ShowColorChannelViz,
     ShowColorValue,
     ShowColorViz,
+    ShowFontFamilyValue,
     ShowFontWeightValue,
     ShowLetterSpacingValue,
     ShowLineHeightValue,
@@ -113,6 +114,12 @@ export const getDecisionComponentMap = (
         'letter-spacing-value': defaultCs(
             ShowValueDecision,
             valueC(ShowLetterSpacingValue),
+            vizC(ShowTextStyleViz),
+            'column',
+        ),
+        'font-family-value': defaultCs(
+            ShowValueDecision,
+            valueC(ShowFontFamilyValue),
             vizC(ShowTextStyleViz),
             'column',
         ),

@@ -1,0 +1,9 @@
+[
+  {
+    "model": "font-family-value/explicit",
+    "name": "Font Family Explicit Sample",
+    "params": {
+      "value": "Archivo, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    }
+  }
+]

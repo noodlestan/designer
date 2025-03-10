@@ -1,9 +1,11 @@
 import {
+    DECISION_FONT_FAMILY_VALUE,
     DECISION_FONT_SIZE_VALUE,
     DECISION_FONT_WEIGHT_VALUE,
     DECISION_LETTER_SPACING_VALUE,
     DECISION_LINE_HEIGHT_VALUE,
     DECISION_TYPEFACE_VALUE,
+    type FontFamilyValue,
     type FontSizeValue,
     type FontWeightValue,
     type LetterSpacingValue,
@@ -30,6 +32,11 @@ export const resolveTextStyleVizStyles = (
     if (v?.type() === DECISION_TYPEFACE_VALUE) {
         const typeface = v as TypefaceValue;
         style.__fontFamily = typeface.toString();
+    }
+
+    if (v?.type() === DECISION_FONT_FAMILY_VALUE) {
+        const FontFamily = v as FontFamilyValue;
+        style.__fontFamily = FontFamily.toString();
     }
 
     if (v?.type() === DECISION_FONT_SIZE_VALUE) {

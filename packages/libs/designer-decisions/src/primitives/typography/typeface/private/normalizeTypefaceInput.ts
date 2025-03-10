@@ -1,7 +1,7 @@
 import { PRIMITIVE_TYPEFACE } from '../../../../constants';
 import type { TypefaceLiteral, TypefaceObjectLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
-import { FALLBACK_FONT_NAME } from '../../../../primitives';
+import { TYPEFACE_FALLBACK_FONT_NAME } from '../../../../primitives';
 import { type DeepPartial, isObject } from '../../../../private';
 
 export function normalizeTypefaceInput(
@@ -18,6 +18,6 @@ export function normalizeTypefaceInput(
 
     handlePrimitiveInputError(context, PRIMITIVE_TYPEFACE, input, 'TypefaceObjectLiteral');
     return {
-        fontName: FALLBACK_FONT_NAME,
+        fontName: TYPEFACE_FALLBACK_FONT_NAME,
     };
 }
