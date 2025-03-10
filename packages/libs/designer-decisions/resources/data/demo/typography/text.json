@@ -16,6 +16,13 @@
     }
   },
   {
+    "model": "font-weight-value/explicit",
+    "name": "Text Bold Weight",
+    "params": {
+      "value": 600
+    }
+  },
+  {
     "model": "line-height-value/explicit",
     "name": "Text Default Height",
     "params": {
@@ -30,10 +37,10 @@
     }
   },
   {
-    "model": "font-weight-value/explicit",
-    "name": "Text Bold Weight",
+    "model": "letter-spacing-value/explicit",
+    "name": "Text Loose Letter Spacing",
     "params": {
-      "value": 600
+      "value": "0.01rem"
     }
   }
 ]

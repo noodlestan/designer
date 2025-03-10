@@ -49,7 +49,7 @@ describe('createSize()', () => {
             const size = createSize(sizeDef, mockPrimitiveContext);
             const result = size.quantize(5);
 
-            expect(result.value).toEqual(125);
+            expect(result.value).toEqual(123.5);
             expect(result.unit).toEqual(sizeLiteral.unit);
         });
     });

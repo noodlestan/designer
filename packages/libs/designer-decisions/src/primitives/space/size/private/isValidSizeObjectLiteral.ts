@@ -1,5 +1,5 @@
 import type { SizeObjectLiteral } from '../../../../inputs';
-import { SIZE_ABSOLUTE_UNITS } from '../constants';
+import { SIZE_UNITS } from '../constants';
 
 export const isValidSizeObjectLiteral = (input: unknown): input is SizeObjectLiteral => {
     if (typeof input !== 'object' || input === null) {
@@ -12,7 +12,7 @@ export const isValidSizeObjectLiteral = (input: unknown): input is SizeObjectLit
         return false;
     }
 
-    if (typeof unit !== 'string' || !SIZE_ABSOLUTE_UNITS.includes(unit)) {
+    if (typeof unit !== 'string' || !SIZE_UNITS.includes(unit)) {
         return false;
     }
 

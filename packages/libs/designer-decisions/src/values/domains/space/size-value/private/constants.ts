@@ -9,7 +9,7 @@ export const SIZE_DEFINITION: SizeValueDefinition = {
     primitiveName: PRIMITIVE_SIZE,
     validUnits: SIZE_ABSOLUTE_UNITS,
     defaultUnit: SIZE_FALLBACK_LITERAL.unit,
-    base: 1,
+    base: 0,
     quantize: 0.01,
     fallback: SIZE_FALLBACK_LITERAL.value,
     decisionTypes: {},

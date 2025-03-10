@@ -1,6 +1,7 @@
 import type {
     FontSize,
     FontWeight,
+    LetterSpacing,
     LineHeight,
     NumberFormatOptions,
     Typeface,
@@ -15,3 +16,5 @@ export type FontWeightValueOptions = NumberFormatOptions;
 export type FontWeightValue = BaseValue<FontWeight>;
 
 export type LineHeightValue = BaseValue<LineHeight>;
+
+export type LetterSpacingValue = BaseValue<LetterSpacing>;

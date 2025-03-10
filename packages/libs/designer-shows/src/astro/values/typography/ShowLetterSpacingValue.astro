@@ -1,0 +1,23 @@
+---
+import { DecisionValueContainer, ShowError } from '../../atoms';
+import { LayoutFlex } from '../../layouts';
+import type { LetterSpacingValueProps } from '../../types';
+
+type Props = LetterSpacingValueProps;
+
+const { v: fontSizeValue, value = true, muteErrors } = Astro.props;
+
+const { toNumber, toString } = fontSizeValue || {};
+const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
+---
+
+{
+    value && fontSizeValue !== undefined && (
+        <LayoutFlex>
+            <DecisionValueContainer>
+                {showErrors && <ShowError size="xs" />}
+                {toString?.()}
+            </DecisionValueContainer>
+        </LayoutFlex>
+    )
+}
