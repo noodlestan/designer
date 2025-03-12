@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-lightness-scale/bounded",
+    "model": "srgb-lightness-scale/bounded",
     "name": "sRGB Lightness Scale Bounded Sample",
     "params": {
       "from": 0.85,

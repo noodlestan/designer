@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { DECISION_COLOR_VALUE } from '../../../../constants';
+import { D_COLOR_VALUE } from '../../../../constants';
 import type { ColorOkLCHLiteral, DecisionInput, DecisionRef } from '../../../../inputs';
 import {
     createDecisionMock,
@@ -45,7 +45,7 @@ describe('resolveColorValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_COLOR_VALUE);
+            expect(error.valueName).toBe(D_COLOR_VALUE);
         });
     });
 
@@ -68,7 +68,7 @@ describe('resolveColorValueRef()', () => {
             expect(resolveSetRefDecisionMocked).toHaveBeenCalledWith(
                 mockValueContext,
                 mockDecision,
-                DECISION_COLOR_VALUE,
+                D_COLOR_VALUE,
                 mockRef,
             );
         });
@@ -136,7 +136,7 @@ describe('resolveColorValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_COLOR_VALUE);
+            expect(error.valueName).toBe(D_COLOR_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
             expect(error.accepted).toContain('color-set');
             expect(error.accepted).toContain('color-value');

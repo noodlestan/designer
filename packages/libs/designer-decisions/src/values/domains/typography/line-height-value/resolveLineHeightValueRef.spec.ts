@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { DECISION_LINE_HEIGHT_VALUE } from '../../../../constants';
+import { D_LINE_HEIGHT_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef, LineHeightObjectLiteral } from '../../../../inputs';
 import {
     createDecisionMock,
@@ -41,7 +41,7 @@ describe('resolveLineHeightValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_LINE_HEIGHT_VALUE);
+            expect(error.valueName).toBe(D_LINE_HEIGHT_VALUE);
         });
     });
 
@@ -90,7 +90,7 @@ describe('resolveLineHeightValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_LINE_HEIGHT_VALUE);
+            expect(error.valueName).toBe(D_LINE_HEIGHT_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
             expect(error.accepted).toContain('line-height-value');
         });

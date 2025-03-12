@@ -6,7 +6,7 @@ import {
     createValueContextMock,
 } from '../../mocks';
 
-import { ERROR_LAYER_PRIMTIVE, ERROR_PRIMITIVE_INPUT } from './constants';
+import { ERROR_LAYER_PRIMTIVE, ERROR_P_INPUT } from './constants';
 import { createPrimitiveInputError } from './createPrimitiveInputError';
 
 describe('createPrimitiveInputError()', () => {
@@ -30,7 +30,7 @@ describe('createPrimitiveInputError()', () => {
         it('should return a PrimitiveInputError object with the expected attributes', () => {
             const result = createPrimitiveInputError({ context, primitiveName, input });
             expect(result.layer).toBe(ERROR_LAYER_PRIMTIVE);
-            expect(result.name).toBe(ERROR_PRIMITIVE_INPUT);
+            expect(result.name).toBe(ERROR_P_INPUT);
             expect(result.context).toBe(mockPrimitiveContext);
             expect(result.primitiveName).toBe(primitiveName);
             expect(result.input).toBe(input);

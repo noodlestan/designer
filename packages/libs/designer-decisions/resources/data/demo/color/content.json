@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-hue-value/explicit",
+    "model": "oklab-hue-value/explicit",
     "name": "Content Primary Hue",
     "description": "Base hue for creating Foreground and Background tints",
     "params": {
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "color-oklab-chroma-value/explicit",
+    "model": "oklab-chroma-value/explicit",
     "name": "Content Primary Chroma",
     "description": "Base chroma for creating Foreground and Background tints",
     "params": {
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "color-oklab-lightness-value/explicit",
+    "model": "oklab-lightness-value/explicit",
     "name": "Foreground Maximum Lightness",
     "description": "Sets the maximum value of the foreground lightness scale",
     "params": {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "color-oklab-lightness-value/explicit",
+    "model": "oklab-lightness-value/explicit",
     "name": "Foreground Minimum Lightness",
     "description": "Sets the minimum value of the foreground lightness scale",
     "params": {
@@ -58,7 +58,7 @@
     }
   },
   {
-    "model": "color-oklab-lightness-value/explicit",
+    "model": "oklab-lightness-value/explicit",
     "name": "Background Lightness Minimum",
     "description": "Lightness scale for background elements",
     "params": {

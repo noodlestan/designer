@@ -1,4 +1,4 @@
-import { DECISION_SIZE_SCALE, DECISION_SIZE_VALUE } from '../../../constants';
+import { D_SIZE_SCALE, D_SIZE_VALUE } from '../../../constants';
 import {
     MODEL_TYPE_ANCHORED,
     MODEL_TYPE_BOUNDED,
@@ -13,7 +13,7 @@ import type { DecisionType } from '../../types';
 
 export const SizeDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_SIZE_VALUE,
+        type: D_SIZE_VALUE,
         name: 'Size Value',
         category: 'value',
         domain: 'space',
@@ -28,7 +28,7 @@ export const SizeDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_SIZE_SCALE,
+        type: D_SIZE_SCALE,
         name: 'Size Scale',
         category: 'set',
         domain: 'space',

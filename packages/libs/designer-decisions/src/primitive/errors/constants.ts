@@ -1,3 +1,3 @@
 export const ERROR_LAYER_PRIMTIVE = 'Primitive';
 
-export const ERROR_PRIMITIVE_INPUT = 'PrimitiveInputError';
+export const ERROR_P_INPUT = 'PrimitiveInputError';

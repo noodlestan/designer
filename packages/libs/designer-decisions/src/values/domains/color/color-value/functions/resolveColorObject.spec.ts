@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ERROR_VALUE_INPUT } from '../../../../..';
-import { DECISION_COLOR_VALUE as valueName } from '../../../../../constants';
+import { D_COLOR_VALUE as valueName } from '../../../../../constants';
 import { type ColorObjectInput } from '../../../../../inputs';
 import { createValueContextMock } from '../../../../../mocks';
 import { COLOR_FALLBACK_LITERAL, type Color, createColor } from '../../../../../primitives';

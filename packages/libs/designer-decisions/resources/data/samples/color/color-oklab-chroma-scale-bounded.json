@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-chroma-scale/bounded",
+    "model": "oklab-chroma-scale/bounded",
     "name": "Oklab Chroma Scale Bounded Sample",
     "params": {
       "from": 0.05,

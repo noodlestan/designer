@@ -1,11 +1,11 @@
-import { DECISION_TEXT_STYLE_VALUE } from '../../../constants';
+import { D_TEXT_STYLE_VALUE } from '../../../constants';
 import { MODEL_TYPE_EXPLICIT, createTextStyleValueExplicitModel } from '../../../models';
 import { castFactory } from '../../functions';
 import type { DecisionType } from '../../types';
 
 export const TextStyleDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_TEXT_STYLE_VALUE,
+        type: D_TEXT_STYLE_VALUE,
         name: 'Text Style Value',
         category: 'value',
         domain: 'typography',

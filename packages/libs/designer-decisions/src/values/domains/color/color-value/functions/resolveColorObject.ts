@@ -1,4 +1,4 @@
-import { DECISION_COLOR_VALUE as valueName } from '../../../../../constants';
+import { D_COLOR_VALUE as valueName } from '../../../../../constants';
 import type { ColorObjectInput } from '../../../../../inputs';
 import {
     COLOR_FALLBACK_LITERAL,

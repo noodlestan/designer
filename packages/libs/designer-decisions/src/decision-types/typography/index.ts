@@ -1,9 +1,8 @@
 // @index(['./*.ts', '!./*.spec.ts', './!(private|mocks|functions)*/index.ts'], f => `export * from '${f.path.replace(/\/index$/, '')}';`)
-export * from './isFontFamilyValueDecision';
-export * from './isFontSizeValueDecision';
-export * from './isFontWeightValueDecision';
-export * from './isLetterSpacingValueDecision';
-export * from './isLineHeightValueDecision';
-export * from './isTextStyleValueDecision';
-export * from './isTypefaceValueDecision';
-export * from './types';
+export * from './isFontFamilyValue';
+export * from './isFontSizeValue';
+export * from './isFontWeightValue';
+export * from './isLetterSpacingValue';
+export * from './isLineHeightValue';
+export * from './isTextStyleValue';
+export * from './isTypefaceValue';

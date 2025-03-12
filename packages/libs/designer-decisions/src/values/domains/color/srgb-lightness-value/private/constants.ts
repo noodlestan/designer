@@ -1,7 +1,4 @@
-import {
-    DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
-    DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
-} from '../../../../../constants';
+import { D_SRGB_LIGHTNESS_SCALE, D_SRGB_LIGHTNESS_VALUE } from '../../../../../constants';
 import type { ColorObjectLiteral } from '../../../../../inputs';
 import type { ColorChannelDefinition } from '../../../../../primitives';
 import {
@@ -13,7 +10,7 @@ import {
 } from '../../../../../primitives';
 
 export const CHANNEL_DEFINITION: ColorChannelDefinition = {
-    valueName: DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
+    valueName: D_SRGB_LIGHTNESS_VALUE,
     channelName: COLOR_CHANNEL_SRGB_LIGHTNESS_NAME,
     colorFormat: COLOR_FORMAT_HSL,
     channelKey: 'l' as keyof ColorObjectLiteral,
@@ -22,7 +19,7 @@ export const CHANNEL_DEFINITION: ColorChannelDefinition = {
     quantize: COLOR_CHANNEL_SRGB_LIGHTNESS_QUANTIZE,
     fallback: COLOR_CHANNEL_FALLBACK_NUMERIC,
     decisionTypes: {
-        set: DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
-        value: DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
+        set: D_SRGB_LIGHTNESS_SCALE,
+        value: D_SRGB_LIGHTNESS_VALUE,
     },
 };

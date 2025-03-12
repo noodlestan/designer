@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-saturation-scale/bounded",
+    "model": "srgb-saturation-scale/bounded",
     "name": "sRGB Saturation Scale Bounded Sample",
     "params": {
       "from": 0.1,

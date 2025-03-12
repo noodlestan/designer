@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-saturation-value/explicit",
+    "model": "srgb-saturation-value/explicit",
     "name": "sRGB Saturation Value Explicit Sample",
     "params": {
       "value": 0.6

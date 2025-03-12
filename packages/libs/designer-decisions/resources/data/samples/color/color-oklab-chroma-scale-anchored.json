@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-chroma-scale/anchored",
+    "model": "oklab-chroma-scale/anchored",
     "name": "Oklab Chroma Scale Anchored Sample",
     "params": {
       "anchor": 0.1,

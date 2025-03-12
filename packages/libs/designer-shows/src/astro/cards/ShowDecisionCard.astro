@@ -1,5 +1,5 @@
 ---
-import { isSetDecision } from '@noodlestan/designer-decisions';
+import { isSet } from '@noodlestan/designer-decisions';
 
 import { type DecisionTypeComponentProps, type ShowDecisionLayout } from '../types';
 import { ShowDecision } from '../decisions';
@@ -65,10 +65,10 @@ function resolveCardLayout(
 
 const decision = store.decision({ $name: d });
 
-const isSet = Boolean(decision && isSetDecision(decision));
-const defaultLayout: ShowDecisionLayout = isSet ? ['row', 'column'] : ['column'];
+const set = Boolean(decision && isSet(decision));
+const defaultLayout: ShowDecisionLayout = set ? ['row', 'column'] : ['column'];
 const [setLayout, itemLayout] = resolveLayout(layout, defaultLayout);
-const cardLayout = resolveCardLayout(layout, isSet, setLayout);
+const cardLayout = resolveCardLayout(layout, set, setLayout);
 
 const nameSlot = showName && 'header';
 

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { DECISION_TYPEFACE_VALUE } from '../../../../constants';
+import { D_TYPEFACE_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef } from '../../../../inputs';
 import { createDecisionMock, createValueContextMock } from '../../../../mocks';
 import { TYPEFACE_FALLBACK_LITERAL } from '../../../../primitives';
@@ -37,7 +37,7 @@ describe('resolveTypefaceValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_TYPEFACE_VALUE);
+            expect(error.valueName).toBe(D_TYPEFACE_VALUE);
         });
     });
 
@@ -85,7 +85,7 @@ describe('resolveTypefaceValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_TYPEFACE_VALUE);
+            expect(error.valueName).toBe(D_TYPEFACE_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
             expect(error.accepted).toContain('typeface-value');
         });

@@ -1,11 +1,11 @@
-import { DECISION_LETTER_SPACING_VALUE } from '../../../constants';
+import { D_LETTER_SPACING_VALUE } from '../../../constants';
 import { MODEL_TYPE_EXPLICIT, createLetterSpacingValueExplicitModel } from '../../../models';
 import { castFactory } from '../../functions';
 import type { DecisionType } from '../../types';
 
 export const LetterSpacingDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_LETTER_SPACING_VALUE,
+        type: D_LETTER_SPACING_VALUE,
         name: 'Letter Spacing Value',
         category: 'value',
         domain: 'typography',

@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-lightness-scale/anchored",
+    "model": "oklab-lightness-scale/anchored",
     "name": "Oklab Lightness Scale Anchored Sample",
     "params": {
       "anchor": 0.5,

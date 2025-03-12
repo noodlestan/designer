@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-saturation-scale/anchored",
+    "model": "srgb-saturation-scale/anchored",
     "name": "sRGB Saturation Scale Anchored Sample",
     "params": {
       "anchor": 0.5,

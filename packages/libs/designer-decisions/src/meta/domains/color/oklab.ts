@@ -1,10 +1,10 @@
 import {
-    DECISION_COLOR_OKLAB_CHROMA_SCALE,
-    DECISION_COLOR_OKLAB_CHROMA_VALUE,
-    DECISION_COLOR_OKLAB_HUE_SET,
-    DECISION_COLOR_OKLAB_HUE_VALUE,
-    DECISION_COLOR_OKLAB_LIGHTNESS_SCALE,
-    DECISION_COLOR_OKLAB_LIGHTNESS_VALUE,
+    D_OKLAB_CHROMA_SCALE,
+    D_OKLAB_CHROMA_VALUE,
+    D_OKLAB_HUE_SET,
+    D_OKLAB_HUE_VALUE,
+    D_OKLAB_LIGHTNESS_SCALE,
+    D_OKLAB_LIGHTNESS_VALUE,
 } from '../../../constants';
 import {
     MODEL_TYPE_ANCHORED,
@@ -28,7 +28,7 @@ import type { DecisionType } from '../../types';
 
 export const ColorOklabDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_COLOR_OKLAB_HUE_VALUE,
+        type: D_OKLAB_HUE_VALUE,
         name: 'Oklab Hue Value',
         category: 'value',
         domain: 'color',
@@ -44,7 +44,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_OKLAB_HUE_SET,
+        type: D_OKLAB_HUE_SET,
         name: 'Oklab Hue Set',
         category: 'set',
         domain: 'color',
@@ -73,7 +73,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_OKLAB_CHROMA_VALUE,
+        type: D_OKLAB_CHROMA_VALUE,
         name: 'Oklab Chroma Value',
         category: 'value',
         domain: 'color',
@@ -89,7 +89,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_OKLAB_CHROMA_SCALE,
+        type: D_OKLAB_CHROMA_SCALE,
         name: 'Oklab Chroma Scale',
         category: 'scale',
         domain: 'color',
@@ -118,7 +118,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_OKLAB_LIGHTNESS_VALUE,
+        type: D_OKLAB_LIGHTNESS_VALUE,
         name: 'Oklab Lightness Value',
         category: 'value',
         domain: 'color',
@@ -133,7 +133,7 @@ export const ColorOklabDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_OKLAB_LIGHTNESS_SCALE,
+        type: D_OKLAB_LIGHTNESS_SCALE,
         name: 'Oklab Lightness Scale',
         category: 'scale',
         domain: 'color',

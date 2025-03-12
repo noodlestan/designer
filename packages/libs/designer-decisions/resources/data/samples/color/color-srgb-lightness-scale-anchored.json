@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-lightness-scale/anchored",
+    "model": "srgb-lightness-scale/anchored",
     "name": "sRGB Lightness Scale Anchored Sample",
     "params": {
       "anchor": 0.5,

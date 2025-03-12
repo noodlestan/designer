@@ -1,4 +1,4 @@
-import { PRIMITIVE_TEXT_STYLE } from '../../../../constants';
+import { P_TEXT_STYLE } from '../../../../constants';
 import type { FontStyleName, TextStyleAttributesLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { isNonEmptyString } from '../../../../private';
@@ -17,10 +17,5 @@ export function validateFontStyle(
             return trimmedStyle;
         }
     }
-    handlePrimitiveInputError(
-        context,
-        PRIMITIVE_TEXT_STYLE,
-        maybeFontStyle,
-        'Invalid FontStyleName',
-    );
+    handlePrimitiveInputError(context, P_TEXT_STYLE, maybeFontStyle, 'Invalid FontStyleName');
 }

@@ -1,4 +1,4 @@
-import { PRIMITIVE_COLOR_CHANNEL } from '../../../../constants';
+import { P_COLOR_CHANNEL } from '../../../../constants';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { isObject } from '../../../../private';
 import type {
@@ -21,7 +21,7 @@ export function normalizeColorChannelInput(
         }
         handlePrimitiveInputError(
             context,
-            PRIMITIVE_COLOR_CHANNEL,
+            P_COLOR_CHANNEL,
             input,
             'Invalid ColorChannelObjectLiteral',
         );
@@ -32,11 +32,6 @@ export function normalizeColorChannelInput(
         return { value: input };
     }
 
-    handlePrimitiveInputError(
-        context,
-        PRIMITIVE_COLOR_CHANNEL,
-        input,
-        'Invalid ColorChannelLiteral',
-    );
+    handlePrimitiveInputError(context, P_COLOR_CHANNEL, input, 'Invalid ColorChannelLiteral');
     return { value: fallback };
 }

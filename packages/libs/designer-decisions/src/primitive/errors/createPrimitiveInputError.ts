@@ -2,7 +2,7 @@ import { type DesignerErrorParams, serializeErrorData } from '../../errors';
 import { formatErrorStr, formatRefAndSource } from '../../private';
 import type { PrimitiveInputError } from '../types';
 
-import { ERROR_LAYER_PRIMTIVE, ERROR_PRIMITIVE_INPUT } from './constants';
+import { ERROR_LAYER_PRIMTIVE, ERROR_P_INPUT } from './constants';
 
 type Attributes = DesignerErrorParams<PrimitiveInputError>;
 
@@ -21,12 +21,12 @@ export const createPrimitiveInputError = (attributes: Attributes): PrimitiveInpu
     };
 
     const docs = () => {
-        return `/api/designer-decisions/Primitive/Types/PrimitiveError#${ERROR_PRIMITIVE_INPUT.toLowerCase()}`;
+        return `/api/designer-decisions/Primitive/Types/PrimitiveError#${ERROR_P_INPUT.toLowerCase()}`;
     };
 
     return {
         layer: ERROR_LAYER_PRIMTIVE,
-        name: ERROR_PRIMITIVE_INPUT,
+        name: ERROR_P_INPUT,
         message,
         docs,
         ...attributes,

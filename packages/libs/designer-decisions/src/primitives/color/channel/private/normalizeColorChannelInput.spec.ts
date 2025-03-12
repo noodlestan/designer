@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPrimitiveContextMock, mockChannelDefinition } from '../../../../mocks';
-import { ERROR_PRIMITIVE_INPUT, type PrimitiveInputError } from '../../../../primitive';
+import { ERROR_P_INPUT, type PrimitiveInputError } from '../../../../primitive';
 import type { ColorChannelLiteral } from '../types';
 
 import { normalizeColorChannelInput } from './normalizeColorChannelInput';
@@ -37,7 +37,7 @@ describe('normalizeColorChannelInput()', () => {
             expect(addErrorSpy).toHaveBeenCalled();
 
             const error = addErrorSpy.mock.calls[0][0] as PrimitiveInputError;
-            expect(error.name).toEqual(ERROR_PRIMITIVE_INPUT);
+            expect(error.name).toEqual(ERROR_P_INPUT);
             expect(error.primitiveName).toEqual('ColorChannel');
             expect(error.input).toEqual(mockInput);
             expect(error.context).toEqual(mockPrimitiveContext);
@@ -92,7 +92,7 @@ describe('normalizeColorChannelInput()', () => {
                         ? 'Invalid ColorChannelObjectLiteral'
                         : 'Invalid ColorChannelLiteral';
                 const error = addErrorSpy.mock.calls[0][0] as PrimitiveInputError;
-                expect(error.name).toEqual(ERROR_PRIMITIVE_INPUT);
+                expect(error.name).toEqual(ERROR_P_INPUT);
                 expect(error.primitiveName).toEqual('ColorChannel');
                 expect(error.input).toEqual(invalidInput);
                 expect(error.context).toEqual(mockPrimitiveContext);

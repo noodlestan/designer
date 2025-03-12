@@ -1,5 +1,5 @@
-import { DECISION_LINE_HEIGHT_VALUE } from '../../../../constants';
-import { isLineHeightValueDecision } from '../../../../decision-types';
+import { D_LINE_HEIGHT_VALUE } from '../../../../constants';
+import { isLineHeightValue } from '../../../../decision-types';
 import type { DecisionRef, LineHeightObjectLiteral } from '../../../../inputs';
 import { LINE_HEIGHT_FALLBACK_LITERAL } from '../../../../primitives';
 import {
@@ -8,7 +8,7 @@ import {
     handleRefMismatchError,
 } from '../../../../value';
 
-const REF_CHECKED_TYPES = [DECISION_LINE_HEIGHT_VALUE];
+const REF_CHECKED_TYPES = [D_LINE_HEIGHT_VALUE];
 
 export const resolveLineHeightValueRef = (
     context: ValueContext,
@@ -17,24 +17,24 @@ export const resolveLineHeightValueRef = (
     const decision = context.resolve(ref);
 
     if (!decision) {
-        handleDecisionNotFound(context, DECISION_LINE_HEIGHT_VALUE, ref);
+        handleDecisionNotFound(context, D_LINE_HEIGHT_VALUE, ref);
         return LINE_HEIGHT_FALLBACK_LITERAL;
     }
 
-    // if (isLineHeightScaleDecision(decision)) {
+    // if (isLineHeightScale(decision)) {
     //     const value = resolveSetRefDecision<LineHeightValue>(
     //         context,
     //         decision,
-    //         DECISION_LINE_HEIGHT_VALUE,
+    //         D_LINE_HEIGHT_VALUE,
     //         ref,
     //     );
     //     return value?.toObject() ?? fallback;
     // }
 
-    if (isLineHeightValueDecision(decision)) {
+    if (isLineHeightValue(decision)) {
         return decision.produce(context).literal();
     }
 
-    handleRefMismatchError(context, decision, DECISION_LINE_HEIGHT_VALUE, ref, REF_CHECKED_TYPES);
+    handleRefMismatchError(context, decision, D_LINE_HEIGHT_VALUE, ref, REF_CHECKED_TYPES);
     return LINE_HEIGHT_FALLBACK_LITERAL;
 };

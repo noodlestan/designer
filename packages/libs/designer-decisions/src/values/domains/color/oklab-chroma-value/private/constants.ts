@@ -1,7 +1,4 @@
-import {
-    DECISION_COLOR_OKLAB_CHROMA_SCALE,
-    DECISION_COLOR_OKLAB_CHROMA_VALUE,
-} from '../../../../../constants';
+import { D_OKLAB_CHROMA_SCALE, D_OKLAB_CHROMA_VALUE } from '../../../../../constants';
 import type { ColorObjectLiteral } from '../../../../../inputs';
 import type { ColorChannelDefinition } from '../../../../../primitives';
 import {
@@ -13,7 +10,7 @@ import {
 } from '../../../../../primitives';
 
 export const CHANNEL_DEFINITION: ColorChannelDefinition = {
-    valueName: DECISION_COLOR_OKLAB_CHROMA_VALUE,
+    valueName: D_OKLAB_CHROMA_VALUE,
     channelName: COLOR_CHANNEL_OKLAB_CHROMA_NAME,
     colorFormat: COLOR_FORMAT_OKLCH,
     channelKey: 'c' as keyof ColorObjectLiteral,
@@ -22,7 +19,7 @@ export const CHANNEL_DEFINITION: ColorChannelDefinition = {
     quantize: COLOR_CHANNEL_OKLAB_CHROMA_QUANTIZE,
     fallback: COLOR_CHANNEL_FALLBACK_NUMERIC,
     decisionTypes: {
-        set: DECISION_COLOR_OKLAB_CHROMA_SCALE,
-        value: DECISION_COLOR_OKLAB_CHROMA_VALUE,
+        set: D_OKLAB_CHROMA_SCALE,
+        value: D_OKLAB_CHROMA_VALUE,
     },
 };

@@ -1,4 +1,4 @@
-import { PRIMITIVE_FONT_WEIGHT } from '../../../../constants';
+import { P_FONT_WEIGHT } from '../../../../constants';
 import type { FontWeightLiteral, FontWeightObjectLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { isObject } from '../../../../private';
@@ -20,12 +20,12 @@ export function normalizeFontWeightInput(
     const { name: maybeName, value: maybeValue } = isObject(input) ? input : object;
 
     if (typeof maybeValue === 'number' && isNaN(maybeValue)) {
-        handlePrimitiveInputError(context, PRIMITIVE_FONT_WEIGHT, input, 'Invalid FontWeightRaw');
+        handlePrimitiveInputError(context, P_FONT_WEIGHT, input, 'Invalid FontWeightRaw');
         return fallback;
     }
 
     if (typeof maybeName === 'string' && !isValidFontWeightName(maybeName)) {
-        handlePrimitiveInputError(context, PRIMITIVE_FONT_WEIGHT, input, 'Invalid FontWeightNamed');
+        handlePrimitiveInputError(context, P_FONT_WEIGHT, input, 'Invalid FontWeightNamed');
         return fallback;
     }
 
@@ -34,7 +34,7 @@ export function normalizeFontWeightInput(
         typeof maybeName === 'string' &&
         fontWeightFromName(maybeName) !== maybeValue
     ) {
-        handlePrimitiveInputError(context, PRIMITIVE_FONT_WEIGHT, input, 'Value mismatch');
+        handlePrimitiveInputError(context, P_FONT_WEIGHT, input, 'Value mismatch');
         return fallback;
     }
 
@@ -48,6 +48,6 @@ export function normalizeFontWeightInput(
         return input as FontWeightObjectLiteral;
     }
 
-    handlePrimitiveInputError(context, PRIMITIVE_FONT_WEIGHT, input, 'Invalid FontWeightLiteral');
+    handlePrimitiveInputError(context, P_FONT_WEIGHT, input, 'Invalid FontWeightLiteral');
     return fallback;
 }

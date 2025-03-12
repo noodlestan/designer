@@ -1,4 +1,4 @@
-import { DECISION_COLOR_SET, DECISION_COLOR_VALUE } from '../../../constants';
+import { D_COLOR_SET, D_COLOR_VALUE } from '../../../constants';
 import {
     MODEL_TYPE_ANCHORED,
     MODEL_TYPE_BOUNDED,
@@ -13,7 +13,7 @@ import type { DecisionType } from '../../types';
 
 export const ColorValueDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_COLOR_VALUE,
+        type: D_COLOR_VALUE,
         name: 'Color Value',
         category: 'value',
         domain: 'color',
@@ -28,7 +28,7 @@ export const ColorValueDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_SET,
+        type: D_COLOR_SET,
         name: 'Color Set',
         category: 'set',
         domain: 'color',

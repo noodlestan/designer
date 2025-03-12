@@ -1,4 +1,4 @@
-import { PRIMITIVE_TYPEFACE } from '../../../../constants';
+import { P_TYPEFACE } from '../../../../constants';
 import { type TypefaceLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 
@@ -12,12 +12,7 @@ export function validateCapabilities(
         if (isTypefaceCapability(capability as string)) {
             return true;
         }
-        handlePrimitiveInputError(
-            context,
-            PRIMITIVE_TYPEFACE,
-            capability,
-            'Unsupported capability',
-        );
+        handlePrimitiveInputError(context, P_TYPEFACE, capability, 'Unsupported capability');
         return false;
     }) as string[];
 }

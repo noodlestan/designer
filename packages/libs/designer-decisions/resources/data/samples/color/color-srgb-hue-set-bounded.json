@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-hue-set/bounded",
+    "model": "srgb-hue-set/bounded",
     "name": "sRGB Hue Set Bounded Sample",
     "params": {
       "from": 360,

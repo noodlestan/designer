@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-hue-set/bounded",
+    "model": "oklab-hue-set/bounded",
     "name": "Oklab Hue Set Bounded Sample",
     "params": {
       "from": 360,

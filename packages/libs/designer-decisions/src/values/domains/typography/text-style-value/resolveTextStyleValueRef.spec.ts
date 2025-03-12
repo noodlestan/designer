@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { DECISION_TEXT_STYLE_VALUE } from '../../../../constants';
+import { D_TEXT_STYLE_VALUE } from '../../../../constants';
 import type { DecisionInput, DecisionRef } from '../../../../inputs';
 import { createDecisionMock, createValueContextMock } from '../../../../mocks';
 import { TEXT_STYLE_ATTRIBUTES_FALLBACK } from '../../../../primitives';
@@ -37,7 +37,7 @@ describe('resolveTextStyleValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_NOT_FOUND);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_TEXT_STYLE_VALUE);
+            expect(error.valueName).toBe(D_TEXT_STYLE_VALUE);
         });
     });
 
@@ -85,7 +85,7 @@ describe('resolveTextStyleValueRef()', () => {
             expect(error.name).toEqual(ERROR_VALUE_REF_MISMATCH);
             expect(error.context).toBe(mockValueContext);
             expect(error.ref).toBe(mockRef);
-            expect(error.valueName).toBe(DECISION_TEXT_STYLE_VALUE);
+            expect(error.valueName).toBe(D_TEXT_STYLE_VALUE);
             expect(error.message()).toContain('matched "unexpected-type"');
             expect(error.accepted).toContain('text-style-value');
         });

@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-hue-value/explicit",
+    "model": "oklab-hue-value/explicit",
     "name": "Oklab Hue Value Explicit Sample",
     "params": {
       "value": 336

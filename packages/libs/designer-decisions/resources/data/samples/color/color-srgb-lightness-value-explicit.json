@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-lightness-value/explicit",
+    "model": "srgb-lightness-value/explicit",
     "name": "sRGB Lightness Value Explicit Sample",
     "params": {
       "value": 0.57

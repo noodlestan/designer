@@ -1,4 +1,4 @@
-import { PRIMITIVE_TYPEFACE } from '../../../../constants';
+import { P_TYPEFACE } from '../../../../constants';
 import type { TypefaceLiteral, TypefaceObjectLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { TYPEFACE_FALLBACK_FONT_NAME } from '../../../../primitives';
@@ -16,7 +16,7 @@ export function normalizeTypefaceInput(
         return { fontName: input };
     }
 
-    handlePrimitiveInputError(context, PRIMITIVE_TYPEFACE, input, 'TypefaceObjectLiteral');
+    handlePrimitiveInputError(context, P_TYPEFACE, input, 'TypefaceObjectLiteral');
     return {
         fontName: TYPEFACE_FALLBACK_FONT_NAME,
     };

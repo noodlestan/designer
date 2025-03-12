@@ -1,9 +1,5 @@
-import {
-    DECISION_COLOR_SET,
-    DECISION_COLOR_VALUE,
-    DECISION_COLOR_VALUE as valueName,
-} from '../../../../constants';
-import { isColorSetDecision, isColorValueDecision } from '../../../../decision-types';
+import { D_COLOR_SET, D_COLOR_VALUE, D_COLOR_VALUE as valueName } from '../../../../constants';
+import { isColorSet, isColorValue } from '../../../../decision-types';
 import type { ColorOkLCHLiteral, DecisionRef } from '../../../../inputs';
 import { COLOR_FALLBACK_LITERAL } from '../../../../primitives';
 import {
@@ -14,7 +10,7 @@ import {
 import { resolveSetRefDecision } from '../../../functions';
 import type { ColorValue } from '../types';
 
-const REF_CHECKED_TYPES = [DECISION_COLOR_SET, DECISION_COLOR_VALUE];
+const REF_CHECKED_TYPES = [D_COLOR_SET, D_COLOR_VALUE];
 
 export const resolveColorValueRef = (
     context: ValueContext,
@@ -27,12 +23,12 @@ export const resolveColorValueRef = (
         return COLOR_FALLBACK_LITERAL;
     }
 
-    if (isColorSetDecision(decision)) {
+    if (isColorSet(decision)) {
         const value = resolveSetRefDecision<ColorValue>(context, decision, valueName, ref);
         return value?.toObject() ?? COLOR_FALLBACK_LITERAL;
     }
 
-    if (isColorValueDecision(decision)) {
+    if (isColorValue(decision)) {
         return decision.produce(context).toObject();
     }
 

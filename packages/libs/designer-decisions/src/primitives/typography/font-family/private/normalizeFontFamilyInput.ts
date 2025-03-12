@@ -1,4 +1,4 @@
-import { PRIMITIVE_FONT_FAMILY } from '../../../../constants';
+import { P_FONT_FAMILY } from '../../../../constants';
 import type { FontFamilyArrayLiteral, FontFamilyLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { FONT_FAMILY_FALLBACK_LITERAL } from '../../../../primitives';
@@ -16,6 +16,6 @@ export function normalizeFontFamilyInput(
         return input as FontFamilyArrayLiteral;
     }
 
-    handlePrimitiveInputError(context, PRIMITIVE_FONT_FAMILY, input, 'FontFamilyLiteral');
+    handlePrimitiveInputError(context, P_FONT_FAMILY, input, 'FontFamilyLiteral');
     return FONT_FAMILY_FALLBACK_LITERAL;
 }

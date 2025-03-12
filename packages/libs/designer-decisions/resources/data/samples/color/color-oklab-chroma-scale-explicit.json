@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-chroma-scale/explicit",
+    "model": "oklab-chroma-scale/explicit",
     "name": "Oklab Chroma Scale Explicit Sample",
     "params": {
       "values": [0.05, 0.1, 0.15]

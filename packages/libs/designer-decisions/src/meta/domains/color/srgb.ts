@@ -1,10 +1,10 @@
 import {
-    DECISION_COLOR_SRGB_HUE_SET,
-    DECISION_COLOR_SRGB_HUE_VALUE,
-    DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
-    DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
-    DECISION_COLOR_SRGB_SATURATION_SCALE,
-    DECISION_COLOR_SRGB_SATURATION_VALUE,
+    D_SRGB_HUE_SET,
+    D_SRGB_HUE_VALUE,
+    D_SRGB_LIGHTNESS_SCALE,
+    D_SRGB_LIGHTNESS_VALUE,
+    D_SRGB_SATURATION_SCALE,
+    D_SRGB_SATURATION_VALUE,
 } from '../../../constants';
 import {
     MODEL_TYPE_ANCHORED,
@@ -28,7 +28,7 @@ import type { DecisionType } from '../../types';
 
 export const ColorSRGBDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_COLOR_SRGB_HUE_VALUE,
+        type: D_SRGB_HUE_VALUE,
         name: 'sRGB Hue Value',
         category: 'value',
         domain: 'color',
@@ -43,7 +43,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_SRGB_HUE_SET,
+        type: D_SRGB_HUE_SET,
         name: 'sRGB Hue Set',
         category: 'set',
         domain: 'color',
@@ -72,7 +72,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_SRGB_SATURATION_VALUE,
+        type: D_SRGB_SATURATION_VALUE,
         name: 'sRGB Saturation Value',
         category: 'value',
         domain: 'color',
@@ -87,7 +87,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_SRGB_SATURATION_SCALE,
+        type: D_SRGB_SATURATION_SCALE,
         name: 'sRGB Saturation Scale',
         category: 'scale',
         domain: 'color',
@@ -116,7 +116,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_SRGB_LIGHTNESS_VALUE,
+        type: D_SRGB_LIGHTNESS_VALUE,
         name: 'sRGB Lightness Value',
         category: 'value',
         domain: 'color',
@@ -131,7 +131,7 @@ export const ColorSRGBDecisionTypes: DecisionType[] = [
         ],
     },
     {
-        type: DECISION_COLOR_SRGB_LIGHTNESS_SCALE,
+        type: D_SRGB_LIGHTNESS_SCALE,
         name: 'sRGB Lightness Scale',
         category: 'scale',
         domain: 'color',

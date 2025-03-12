@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-import { PRIMITIVE_COLOR } from '../../../../constants';
+import { P_COLOR } from '../../../../constants';
 import type { ColorLiteral } from '../../../../inputs';
 import { type PrimitiveContext, handlePrimitiveInputError } from '../../../../primitive';
 import { COLOR_FALLBACK_LITERAL, COLOR_FALLBACK_NUMBER } from '../constants';
@@ -15,7 +15,7 @@ export function normalizeColorInput(context: PrimitiveContext<ColorLiteral>): Ch
         return { chroma: chromaColor };
     } catch (error) {
         const chromaColor = chroma(COLOR_FALLBACK_NUMBER);
-        handlePrimitiveInputError(context, PRIMITIVE_COLOR, input, error);
+        handlePrimitiveInputError(context, P_COLOR, input, error);
         return { chroma: chromaColor };
     }
 }

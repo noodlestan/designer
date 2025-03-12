@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-srgb-hue-set/anchored",
+    "model": "srgb-hue-set/anchored",
     "name": "sRGB Hue Set Anchored Sample",
     "params": {
       "anchor": 30,

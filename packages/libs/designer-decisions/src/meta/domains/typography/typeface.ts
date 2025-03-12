@@ -1,11 +1,11 @@
-import { DECISION_TYPEFACE_VALUE } from '../../../constants';
+import { D_TYPEFACE_VALUE } from '../../../constants';
 import { MODEL_TYPE_EXPLICIT, createTypefaceValueExplicitModel } from '../../../models';
 import { castFactory } from '../../functions';
 import type { DecisionType } from '../../types';
 
 export const TypefaceDecisionTypes: DecisionType[] = [
     {
-        type: DECISION_TYPEFACE_VALUE,
+        type: D_TYPEFACE_VALUE,
         name: 'Typeface Value',
         category: 'value',
         domain: 'typography',

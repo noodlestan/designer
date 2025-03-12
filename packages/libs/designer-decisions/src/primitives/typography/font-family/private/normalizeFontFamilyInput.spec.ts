@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { FontFamilyLiteral } from '../../../../inputs';
 import { createPrimitiveContextMock } from '../../../../mocks';
-import { ERROR_PRIMITIVE_INPUT, type PrimitiveInputError } from '../../../../primitive';
+import { ERROR_P_INPUT, type PrimitiveInputError } from '../../../../primitive';
 import { FONT_FAMILY_FALLBACK_LITERAL } from '../constants';
 
 import { normalizeFontFamilyInput } from './normalizeFontFamilyInput';
@@ -54,7 +54,7 @@ describe('normalizeFontFamilyInput()', () => {
 
                 const expectedReason = 'FontFamilyLiteral';
                 const error = addErrorSpy.mock.calls[0][0] as PrimitiveInputError;
-                expect(error.name).toEqual(ERROR_PRIMITIVE_INPUT);
+                expect(error.name).toEqual(ERROR_P_INPUT);
                 expect(error.primitiveName).toEqual('FontFamily');
                 expect(error.input).toEqual(invalidInput);
                 expect(error.context).toEqual(mockPrimitiveContext);

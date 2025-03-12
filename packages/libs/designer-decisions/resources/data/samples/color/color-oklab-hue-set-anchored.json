@@ -1,6 +1,6 @@
 [
   {
-    "model": "color-oklab-hue-set/anchored",
+    "model": "oklab-hue-set/anchored",
     "name": "Oklab Hue Set Anchored Sample",
     "params": {
       "anchor": 30,

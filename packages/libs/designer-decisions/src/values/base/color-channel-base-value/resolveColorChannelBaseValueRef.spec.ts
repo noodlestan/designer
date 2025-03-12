@@ -119,7 +119,7 @@ describe('resolveColorChannelBaseValueRef()', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
         const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
 
-        const mockInput = { model: 'color-oklab-hue-set/foo' } as DecisionInput;
+        const mockInput = { model: 'oklab-hue-set/foo' } as DecisionInput;
         const channelLiteral = { value: 123 };
         const [, mockDecision] = createDecisionMock([mockInput]);
         const colorChannelBaseValue = createOklabHueValue(createValueContextMock(123)[0]);
@@ -150,7 +150,7 @@ describe('resolveColorChannelBaseValueRef()', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid', index: 1 };
         const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
 
-        const mockInput = { model: 'color-oklab-hue-set/foo' } as DecisionInput;
+        const mockInput = { model: 'oklab-hue-set/foo' } as DecisionInput;
         const [, mockDecision] = createDecisionMock([mockInput]);
 
         beforeEach(() => {
@@ -168,7 +168,7 @@ describe('resolveColorChannelBaseValueRef()', () => {
         const mockRef: DecisionRef = { $uuid: 'mock-uuid' };
         const [mockValueContext, { resolveSpy }] = createValueContextMock(mockRef);
 
-        const mockInput = { model: 'color-oklab-hue-value/foo' } as DecisionInput;
+        const mockInput = { model: 'oklab-hue-value/foo' } as DecisionInput;
         const channelLiteral = { value: 123 };
         const [, mockDecision] = createDecisionMock([mockInput], {
             literal: () => channelLiteral,

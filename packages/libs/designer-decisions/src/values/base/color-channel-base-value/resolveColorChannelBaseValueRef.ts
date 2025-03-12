@@ -1,6 +1,6 @@
-import { DECISION_COLOR_SET, DECISION_COLOR_VALUE } from '../../../constants';
+import { D_COLOR_SET, D_COLOR_VALUE } from '../../../constants';
 import type { Decision } from '../../../decision';
-import { isColorSetDecision, isColorValueDecision, isSetDecision } from '../../../decision-types';
+import { isColorSet, isColorValue, isSet } from '../../../decision-types';
 import type { DecisionRef } from '../../../inputs';
 import type { ColorChannelDefinition, ColorChannelObjectLiteral } from '../../../primitives';
 import type { ValueContext } from '../../../value';
@@ -22,8 +22,8 @@ export const resolveColorChannelBaseValueRef = (
     const decision = context.resolve(ref);
 
     const refCheckedTypes = [
-        DECISION_COLOR_SET,
-        DECISION_COLOR_VALUE,
+        D_COLOR_SET,
+        D_COLOR_VALUE,
         decisionTypes.set,
         decisionTypes.value,
     ].filter(Boolean) as string[];
@@ -33,19 +33,19 @@ export const resolveColorChannelBaseValueRef = (
         return fallbackChannek;
     }
 
-    if (isColorSetDecision(decision)) {
+    if (isColorSet(decision)) {
         const color = resolveSetRefDecision<ColorValue>(context, decision, valueName, ref);
         const channelValue = color?.toObject({ format: colorFormat })[channelKey];
         return channelValue !== undefined ? { value: channelValue } : fallbackChannek;
     }
 
-    if (isColorValueDecision(decision)) {
+    if (isColorValue(decision)) {
         const color = decision.produce(context);
         const channelValue = color.toObject({ format: colorFormat })[channelKey];
         return { value: channelValue };
     }
 
-    if (isSetDecision(decision) && decision.type() === decisionTypes.set) {
+    if (isSet(decision) && decision.type() === decisionTypes.set) {
         const channel = resolveSetRefDecision<ColorChannelValue>(
             context,
             decision as Decision<BaseSet<ColorChannelValue>>,
