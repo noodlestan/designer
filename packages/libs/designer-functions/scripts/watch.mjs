@@ -1,3 +1,3 @@
-import { esm } from '@noodlestan/designer-build-tools';
+import { cjs, esm } from '@noodlestan/designer-build-tools';
 
-await esm().watch();
+await Promise.all([cjs().watch(), esm().watch()]);
