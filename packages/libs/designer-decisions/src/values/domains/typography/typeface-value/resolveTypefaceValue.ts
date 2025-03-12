@@ -1,11 +1,15 @@
-import { type TypefaceLiteral, type TypefaceValueInput, isDecisionRef } from '../../../../inputs';
+import {
+    type SizeInputTypefaceInput,
+    type TypefaceLiteral,
+    isDecisionRef,
+} from '../../../../inputs';
 import { type DeepPartial } from '../../../../private';
 import type { ValueContext } from '../../../../value';
 
 import { resolveTypefaceValueRef } from './resolveTypefaceValueRef';
 
 export const resolveTypefaceValue = (
-    context: ValueContext<TypefaceValueInput>,
+    context: ValueContext<SizeInputTypefaceInput>,
 ): DeepPartial<TypefaceLiteral> | undefined => {
     const input = context.input();
 

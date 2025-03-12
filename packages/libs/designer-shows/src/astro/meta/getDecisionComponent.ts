@@ -18,6 +18,7 @@ import {
     ShowLineHeightValue,
     ShowSizeValue,
     ShowSizeViz,
+    ShowTextStyleValue,
     ShowTextStyleViz,
     ShowTypefaceValue,
 } from '../values';
@@ -93,6 +94,12 @@ export const getDecisionComponentMap = (
             vizC(ShowTextStyleViz),
             'column',
         ),
+        'font-family-value': defaultCs(
+            ShowValueDecision,
+            valueC(ShowFontFamilyValue),
+            vizC(ShowTextStyleViz),
+            'column',
+        ),
         'font-size-value': defaultCs(
             ShowValueDecision,
             valueC(ShowSizeValue),
@@ -117,9 +124,9 @@ export const getDecisionComponentMap = (
             vizC(ShowTextStyleViz),
             'column',
         ),
-        'font-family-value': defaultCs(
+        'text-style-value': defaultCs(
             ShowValueDecision,
-            valueC(ShowFontFamilyValue),
+            valueC(ShowTextStyleValue),
             vizC(ShowTextStyleViz),
             'column',
         ),

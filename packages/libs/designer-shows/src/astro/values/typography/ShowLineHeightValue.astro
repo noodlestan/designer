@@ -5,14 +5,14 @@ import type { LineHeightValueProps } from '../../types';
 
 type Props = LineHeightValueProps;
 
-const { v: fontSizeValue, value = true, muteErrors } = Astro.props;
+const { v, value = true, muteErrors } = Astro.props;
 
-const { toString } = fontSizeValue || {};
-const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
+const { toString } = v || {};
+const showErrors = !muteErrors && v?.context().hasErrors();
 ---
 
 {
-    value && fontSizeValue !== undefined && (
+    value && v !== undefined && (
         <LayoutFlex>
             <DecisionValueContainer>
                 {showErrors && <ShowError size="xs" />}

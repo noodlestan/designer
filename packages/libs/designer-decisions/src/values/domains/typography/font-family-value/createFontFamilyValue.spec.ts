@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type FontFamilyArrayLiteral, type FontFamilyValueInput } from '../../../../inputs';
+import { type FontFamilyArrayLiteral, type FontFamilyInput } from '../../../../inputs';
 import { createPrimitiveContextMock, createValueContextMock } from '../../../../mocks';
 import { type FontFamily, createFontFamily } from '../../../../primitives';
 
@@ -19,7 +19,7 @@ describe('createFontFamilyValue()', () => {
     });
 
     describe('Given a context and an input', () => {
-        const mockInput = { $name: 'Foo' } as FontFamilyValueInput;
+        const mockInput = { $name: 'Foo' } as FontFamilyInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockFontFamily = { families: ['Foo, Bar, "Baz Qux"'] } as FontFamily;
@@ -33,12 +33,12 @@ describe('createFontFamilyValue()', () => {
             createFontFamilyMocked.mockReturnValue(mockFontFamily);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a FontFamilyValue with the provided context', () => {
             const result = createFontFamilyValue(mockValueContext);
             expect(result.context()).toEqual(mockValueContext);
         });
 
-        it('should return a Value with the primitive attributes', () => {
+        it('should return a FontFamilyValue with the primitive attributes', () => {
             const result = createFontFamilyValue(mockValueContext);
             expect(result.families).toEqual(mockFontFamily.families);
         });
@@ -48,7 +48,7 @@ describe('createFontFamilyValue()', () => {
             expect(resolveFontFamilyValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createFontFamilyValue(mockValueContext);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
@@ -59,7 +59,7 @@ describe('createFontFamilyValue()', () => {
         });
 
         describe('when get() is called', () => {
-            it('should return the created Size primitive', () => {
+            it('should return the created FontFamily primitive', () => {
                 const result = createFontFamilyValue(mockValueContext);
                 expect(result.get()).toBe(mockFontFamily);
             });

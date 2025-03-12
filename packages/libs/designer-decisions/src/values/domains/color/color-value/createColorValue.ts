@@ -1,4 +1,4 @@
-import type { ColorValueInput } from '../../../../inputs';
+import type { ColorInput } from '../../../../inputs';
 import { createColor } from '../../../../primitives';
 import type { ValueContext } from '../../../../value';
 import { createBaseValue } from '../../../base';
@@ -7,7 +7,7 @@ import type { ColorValue, ColorValueOptions } from '../types';
 import { resolveColorValue } from './resolveColorValue';
 
 export const createColorValue = (
-    context: ValueContext<ColorValueInput>,
+    context: ValueContext<ColorInput>,
     options: ColorValueOptions = {},
 ): ColorValue => {
     const get = () => {

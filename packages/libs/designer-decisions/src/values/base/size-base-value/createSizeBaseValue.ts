@@ -1,4 +1,4 @@
-import type { SizeValueInput } from '../../../inputs';
+import type { SizeInput } from '../../../inputs';
 import { createSize } from '../../../primitives';
 import type { ValueContext } from '../../../value';
 import { createBaseValue } from '../base-value';
@@ -8,7 +8,7 @@ import type { SizeBaseOptions, SizeBaseValue, SizeValueDefinition } from './type
 
 export const createSizeBaseValue = (
     sizeDefinition: SizeValueDefinition,
-    context: ValueContext<SizeValueInput>,
+    context: ValueContext<SizeInput>,
     options?: SizeBaseOptions,
 ): SizeBaseValue => {
     const get = () => {

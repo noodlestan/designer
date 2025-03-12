@@ -14,4 +14,4 @@ export type TypefaceObjectLiteral = {
 
 export type TypefaceLiteral = string | TypefaceObjectLiteral;
 
-export type TypefaceValueInput = DecisionRef | TypefaceLiteral;
+export type SizeInputTypefaceInput = DecisionRef | TypefaceLiteral;

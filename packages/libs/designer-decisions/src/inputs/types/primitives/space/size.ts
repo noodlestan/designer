@@ -14,4 +14,4 @@ export type SizeObjectLiteral = {
 
 export type SizeLiteral = SizeRaw | SizeObjectLiteral;
 
-export type SizeValueInput = DecisionRef | SizeLiteral;
+export type SizeInput = DecisionRef | SizeLiteral;

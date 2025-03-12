@@ -14,12 +14,8 @@ export type FontFamilyItemInput = DecisionRef | FontFamilyName;
 
 export type FontFamilyArrayLiteral = FontFamilyName[];
 
-export type FontFamilyLiteral = FontFamilyName | FontFamilyArrayLiteral;
-
 export type FontFamilyRaw = string;
 
-export type FontFamilyValueInput =
-    | DecisionRef
-    | FontFamilyRaw
-    | FontFamilyLiteral
-    | FontFamilyItemInput[];
+export type FontFamilyLiteral = FontFamilyRaw | FontFamilyName | FontFamilyArrayLiteral;
+
+export type FontFamilyInput = DecisionRef | FontFamilyLiteral | FontFamilyItemInput[];

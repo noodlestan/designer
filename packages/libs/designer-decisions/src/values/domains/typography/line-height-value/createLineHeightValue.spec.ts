@@ -32,12 +32,12 @@ describe('createLineHeightValue()', () => {
             createLineHeightMocked.mockReturnValue(mockLineHeight);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a LineHeightValue with the provided context', () => {
             const result = createLineHeightValue(mockValueContext);
             expect(result.context()).toEqual(mockValueContext);
         });
 
-        it('should return a Value with the primitive attributes', () => {
+        it('should return a LineHeightValue with the primitive attributes', () => {
             const result = createLineHeightValue(mockValueContext);
             expect(result.value).toEqual(mockLineHeight.value);
         });
@@ -47,7 +47,7 @@ describe('createLineHeightValue()', () => {
             expect(resolveLineHeightValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createLineHeightValue(mockValueContext);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });

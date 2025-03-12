@@ -1,12 +1,7 @@
 import { DECISION_SIZE_SCALE, DECISION_SIZE_VALUE } from '../../../constants';
 import type { Decision } from '../../../decision';
 import { isSetDecision, isSizeScaleDecision, isSizeValueDecision } from '../../../decision-types';
-import type {
-    DecisionRef,
-    SizeAbsoluteUnits,
-    SizeObjectLiteral,
-    SizeValueInput,
-} from '../../../inputs';
+import type { DecisionRef, SizeAbsoluteUnits, SizeInput, SizeObjectLiteral } from '../../../inputs';
 import type { Size } from '../../../primitives';
 import { type ValueContext, handleDecisionNotFound, handleRefMismatchError } from '../../../value';
 import type { SizeValue } from '../../domains';
@@ -18,7 +13,7 @@ import type { SizeValueDefinition } from './types';
 
 export const resolveSizeBaseValueRef = (
     sizeDefinition: SizeValueDefinition,
-    context: ValueContext<SizeValueInput>,
+    context: ValueContext<SizeInput>,
     ref: DecisionRef,
 ): SizeObjectLiteral => {
     const { valueName, defaultUnit, fallback, decisionTypes } = sizeDefinition;

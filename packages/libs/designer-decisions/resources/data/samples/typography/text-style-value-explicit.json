@@ -1,0 +1,13 @@
+[
+  {
+    "model": "text-style-value/explicit",
+    "name": "Text Style Explicit Sample",
+    "params": {
+      "value": {
+        "fontSize": "32px",
+        "fontWeight": "Thin",
+        "letterSpacing": "-0.05rem"
+      }
+    }
+  }
+]

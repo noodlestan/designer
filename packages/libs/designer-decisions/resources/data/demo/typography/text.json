@@ -26,7 +26,7 @@
     "model": "font-weight-value/explicit",
     "name": "Text Bold Weight",
     "params": {
-      "value": 600
+      "value": 700
     }
   },
   {
@@ -48,6 +48,15 @@
     "name": "Text Loose Letter Spacing",
     "params": {
       "value": "0.01rem"
+    }
+  },
+  {
+    "model": "text-style-value/explicit",
+    "name": "Text Body Style",
+    "params": {
+      "value": {
+        "fontSize": { "$name": "Text Default Size" }
+      }
     }
   }
 ]

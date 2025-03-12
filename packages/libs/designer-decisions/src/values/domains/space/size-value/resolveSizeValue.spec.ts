@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { SizeLiteral, SizeValueInput } from '../../../../inputs';
+import type { SizeInput, SizeLiteral } from '../../../../inputs';
 import { createValueContextMock } from '../../../../mocks';
 import { resolveSizeBaseValue } from '../../../base';
 
@@ -12,7 +12,7 @@ vi.mock('../../../base');
 const resolveSizeBaseValueMocked = vi.mocked(resolveSizeBaseValue);
 
 describe('resolveSizeValue()', () => {
-    const mockInput = { value: 123.371, units: 'rem' } as SizeValueInput;
+    const mockInput = { value: 123.371, units: 'rem' } as SizeInput;
     const [mockValueContext] = createValueContextMock(mockInput);
 
     const sizeLiteralMock = { value: 33 } as SizeLiteral;

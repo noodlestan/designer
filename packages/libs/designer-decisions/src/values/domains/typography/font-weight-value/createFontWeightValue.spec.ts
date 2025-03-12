@@ -32,12 +32,12 @@ describe('createFontWeightValue()', () => {
             createFontWeightMocked.mockReturnValue(mockFontWeight);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a FontWeightValue with the provided context', () => {
             const result = createFontWeightValue(mockValueContext);
             expect(result.context()).toEqual(mockValueContext);
         });
 
-        it('should return a Value with the primitive attributes', () => {
+        it('should return a FontWeightValue with the primitive attributes', () => {
             const result = createFontWeightValue(mockValueContext);
             expect(result.value).toEqual(mockFontWeight.value);
         });
@@ -47,7 +47,7 @@ describe('createFontWeightValue()', () => {
             expect(resolveFontWeightValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createFontWeightValue(mockValueContext);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });

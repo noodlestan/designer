@@ -5,14 +5,14 @@ import type { FontWeightValueProps } from '../../types';
 
 type Props = FontWeightValueProps;
 
-const { v: fontSizeValue, value = true, muteErrors } = Astro.props;
+const { v, value = true, muteErrors } = Astro.props;
 
-const { toNumber, toString } = fontSizeValue || {};
-const showErrors = !muteErrors && fontSizeValue?.context().hasErrors();
+const { toNumber, toString } = v || {};
+const showErrors = !muteErrors && v?.context().hasErrors();
 ---
 
 {
-    value && fontSizeValue !== undefined && (
+    value && v !== undefined && (
         <LayoutFlex>
             <DecisionValueContainer>
                 {showErrors && <ShowError size="xs" />}

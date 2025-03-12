@@ -11,7 +11,7 @@ export function createFontFamily(context: PrimitiveContext<FontFamilyLiteral>): 
         .map(familyName => validateFontFamilyName(context, familyName))
         .filter(Boolean) as FontFamilyName[];
 
-    const literal = () => ({ families });
+    const literal = () => ({ families, fontName: families[0] });
 
     return {
         ...literal(),

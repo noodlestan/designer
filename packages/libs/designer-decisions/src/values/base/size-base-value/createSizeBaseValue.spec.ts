@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type SizeLiteral, type SizeValueInput } from '../../../inputs';
+import { type SizeInput, type SizeLiteral } from '../../../inputs';
 import {
     createPrimitiveContextMock,
     createValueContextMock,
@@ -25,7 +25,7 @@ describe('createSizeBaseValue()', () => {
     });
 
     describe('Given a size definition, a context, and an input', () => {
-        const mockInput = { value: 123.371, units: 'rem' } as SizeValueInput;
+        const mockInput = { value: 123.371, units: 'rem' } as SizeInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { value: 44 } as SizeLiteral;
@@ -39,12 +39,12 @@ describe('createSizeBaseValue()', () => {
             createSizeMocked.mockReturnValue(mockSize);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a SizeBaseValue with the provided context', () => {
             const result = createSizeBaseValue(sizeDef, mockValueContext);
             expect(result.context()).toEqual(mockValueContext);
         });
 
-        it('should return a  Value with the primitive attributes', () => {
+        it('should return a SizeBaseValue with the primitive attributes', () => {
             const result = createSizeBaseValue(sizeDef, mockValueContext);
             expect(result.value).toEqual(mockSize.value);
         });
@@ -54,7 +54,7 @@ describe('createSizeBaseValue()', () => {
             expect(resolveSizeBaseValueMocked).toHaveBeenCalledWith(sizeDef, mockValueContext);
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createSizeBaseValue(sizeDef, mockValueContext, mockOptions);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
