@@ -7,4 +7,5 @@ export * from './line-height';
 export * from './range';
 export * from './source';
 export * from './style';
+export * from './text-style';
 export * from './typeface';

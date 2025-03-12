@@ -44,12 +44,12 @@ describe('createColorChannelBaseValue()', () => {
             createColorChannelMocked.mockReturnValue(mockColorChannel);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a ColorChannelBaseValue with the provided context', () => {
             const result = createColorChannelBaseValue(channelDef, mockValueContext);
             expect(result.context()).toEqual(mockValueContext);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a ColorChannelBaseValue with the provided value', () => {
             const result = createColorChannelBaseValue(channelDef, mockValueContext);
             expect(result.value).toEqual(mockColorChannel.value);
         });
@@ -62,7 +62,7 @@ describe('createColorChannelBaseValue()', () => {
             );
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createColorChannelBaseValue(channelDef, mockValueContext, mockOptions);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });

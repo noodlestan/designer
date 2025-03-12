@@ -4,4 +4,5 @@ export * from './font-size';
 export * from './font-weight';
 export * from './letter-spacing';
 export * from './line-height';
+export * from './text-style-attributes';
 export * from './typeface';

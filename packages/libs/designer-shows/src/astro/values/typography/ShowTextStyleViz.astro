@@ -4,11 +4,11 @@ import { getTextStyleVizComponent } from '../../meta/getTextStyleVizComponent';
 
 type Props = TextStyleVizProps;
 
-const { v: typefaceValue, viz = true, size = 'auto', options } = Astro.props;
+const { v, viz = true, size = 'auto', options } = Astro.props;
 
 const Viz = getTextStyleVizComponent(viz);
 
 const opt = options || {};
 ---
 
-{viz && <Viz v={typefaceValue} size={size} options={opt} />}
+{viz && <Viz v={v} size={size} options={opt} />}

@@ -1,7 +1,7 @@
 import {
+    type ColorInput,
     type ColorLiteral,
     type ColorObjectInput,
-    type ColorValueInput,
     isDecisionRef,
 } from '../../../../inputs';
 import type { DeepPartial } from '../../../../private';
@@ -11,7 +11,7 @@ import { resolveColorObject } from './functions';
 import { resolveColorValueRef } from './resolveColorValueRef';
 
 export const resolveColorValue = (
-    context: ValueContext<ColorValueInput>,
+    context: ValueContext<ColorInput>,
 ): DeepPartial<ColorLiteral> | undefined => {
     const input = context.input();
 

@@ -4,5 +4,6 @@ export * from './isFontSizeValueDecision';
 export * from './isFontWeightValueDecision';
 export * from './isLetterSpacingValueDecision';
 export * from './isLineHeightValueDecision';
+export * from './isTextStyleValueDecision';
 export * from './isTypefaceValueDecision';
 export * from './types';

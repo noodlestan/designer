@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type TypefaceObjectLiteral, type TypefaceValueInput } from '../../../../inputs';
+import { type SizeInputTypefaceInput, type TypefaceObjectLiteral } from '../../../../inputs';
 import { createPrimitiveContextMock, createValueContextMock } from '../../../../mocks';
 import { type Typeface, createTypeface } from '../../../../primitives';
 
@@ -19,7 +19,7 @@ describe('createTypefaceValue()', () => {
     });
 
     describe('Given a context and an input', () => {
-        const mockInput = { $name: 'Foo' } as TypefaceValueInput;
+        const mockInput = { $name: 'Foo' } as SizeInputTypefaceInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockTypeface = { fontName: 'foo' } as Typeface;
@@ -50,7 +50,7 @@ describe('createTypefaceValue()', () => {
             expect(resolveTypefaceValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createTypefaceValue(mockValueContext);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });

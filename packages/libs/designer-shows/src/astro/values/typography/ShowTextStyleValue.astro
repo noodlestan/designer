@@ -1,0 +1,23 @@
+---
+import { DecisionValueContainer, ShowError } from '../../atoms';
+import { LayoutFlex } from '../../layouts';
+import type { TextStyleValueProps } from '../../types';
+
+type Props = TextStyleValueProps;
+
+const { v, value = true, muteErrors } = Astro.props;
+
+const { toString } = v || {};
+const showErrors = !muteErrors && v?.context().hasErrors();
+---
+
+{
+    value && v !== undefined && (
+        <LayoutFlex>
+            <DecisionValueContainer>
+                {showErrors && <ShowError size="xs" />}
+                {toString?.()}
+            </DecisionValueContainer>
+        </LayoutFlex>
+    )
+}

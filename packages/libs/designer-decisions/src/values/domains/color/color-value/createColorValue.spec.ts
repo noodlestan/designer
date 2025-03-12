@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { type ColorLiteral, type ColorValueInput } from '../../../../inputs';
+import { type ColorInput, type ColorLiteral } from '../../../../inputs';
 import { createPrimitiveContextMock, createValueContextMock } from '../../../../mocks';
 import { type Color, createColor } from '../../../../primitives';
 import type { ColorValueOptions } from '../types';
@@ -20,7 +20,7 @@ describe('createColorValue()', () => {
     });
 
     describe('Given a context and an input', () => {
-        const mockInput = '#123abc' as ColorValueInput;
+        const mockInput = '#123abc' as ColorInput;
         const [mockValueContext, { forPrimitiveSpy }] = createValueContextMock(mockInput);
 
         const mockLiteral = { h: 123.371, s: 0.4, l: 0.5 } as ColorLiteral;
@@ -34,12 +34,12 @@ describe('createColorValue()', () => {
             createColorMocked.mockReturnValue(mockColor);
         });
 
-        it('should return a BaseValue with the provided context', () => {
+        it('should return a ColorValue with the provided context', () => {
             const result = createColorValue(mockValueContext);
             expect(result.context()).toEqual(mockValueContext);
         });
 
-        it('should return a Value with the primitive attributes', () => {
+        it('should return a ColorValue with the primitive attributes', () => {
             const result = createColorValue(mockValueContext);
             expect(result.chroma).toEqual(mockColor.chroma);
         });
@@ -49,7 +49,7 @@ describe('createColorValue()', () => {
             expect(resolveColorValueMocked).toHaveBeenCalledWith(mockValueContext);
         });
 
-        it('should call primitiveContext() with the resolved input', () => {
+        it('should call forPrimitive() with the resolved input', () => {
             createColorValue(mockValueContext, mockOptions);
             expect(forPrimitiveSpy).toHaveBeenCalledWith(mockLiteral);
         });
@@ -60,7 +60,7 @@ describe('createColorValue()', () => {
         });
 
         describe('when get() is called', () => {
-            it('should return the created Size primitive', () => {
+            it('should return the created Color primitive', () => {
                 const result = createColorValue(mockValueContext, mockOptions);
                 expect(result.get()).toBe(mockColor);
             });

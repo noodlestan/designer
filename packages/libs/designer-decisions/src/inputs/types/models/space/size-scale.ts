@@ -1,9 +1,9 @@
-import type { AnchoredNumberSeriesParams, DecisionInput, SizeValueInput } from '../../primitives';
+import type { AnchoredNumberSeriesParams, DecisionInput, SizeInput } from '../../primitives';
 
 export type SizeScaleExplicitInput = DecisionInput & {
     model: 'size-scale/explicit';
     params: {
-        values: SizeValueInput[];
+        values: SizeInput[];
         quantize?: number;
     };
 };
@@ -11,8 +11,8 @@ export type SizeScaleExplicitInput = DecisionInput & {
 export type SizeScaleBoundedInput = DecisionInput & {
     model: 'size-scale/bounded';
     params: {
-        from: SizeValueInput;
-        to: SizeValueInput;
+        from: SizeInput;
+        to: SizeInput;
         steps: number;
         quantize?: number;
     };
@@ -21,6 +21,6 @@ export type SizeScaleBoundedInput = DecisionInput & {
 export type SizeScaleAnchoredInput = DecisionInput & {
     model: 'size-scale/anchored';
     params: {
-        anchor: SizeValueInput;
+        anchor: SizeInput;
     } & AnchoredNumberSeriesParams;
 };

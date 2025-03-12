@@ -1,8 +1,8 @@
-import type { DecisionInput, TypefaceValueInput } from '../../primitives';
+import type { DecisionInput, SizeInputTypefaceInput } from '../../primitives';
 
 export type TypefaceValueExplicitInput = DecisionInput & {
     model: 'typeface-value/explicit';
     params: {
-        value: TypefaceValueInput;
+        value: SizeInputTypefaceInput;
     };
 };

@@ -1,4 +1,4 @@
-import { type SizeLiteral, type SizeValueInput, isDecisionRef } from '../../../inputs';
+import { type SizeInput, type SizeLiteral, isDecisionRef } from '../../../inputs';
 import type { DeepPartial } from '../../../private';
 import type { ValueContext } from '../../../value';
 
@@ -7,7 +7,7 @@ import type { SizeValueDefinition } from './types';
 
 export const resolveSizeBaseValue = (
     sizeDefinition: SizeValueDefinition,
-    context: ValueContext<SizeValueInput>,
+    context: ValueContext<SizeInput>,
 ): DeepPartial<SizeLiteral> | undefined => {
     const input = context.input();
 

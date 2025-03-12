@@ -9,6 +9,7 @@ import type {
     LineHeightValue,
     SizeValue,
     Store,
+    TextStyleValue,
     TypefaceValue,
 } from '@noodlestan/designer-decisions';
 
@@ -120,10 +121,20 @@ export type LetterSpacingValueProps = ShowValueProps & {
     v?: LetterSpacingValue;
 };
 
+export type TextStyleValueProps = ShowValueProps & {
+    v?: TextStyleValue;
+};
+
 export type TextStyleVizName = 'short-text';
 
 export type TextStyleVizProps = ShowVizProps & {
     viz?: boolean | TextStyleVizName;
-    v?: TypefaceValue | FontFamilyValue | FontSizeValue | FontWeightValue | LetterSpacingValue;
+    v?:
+        | TextStyleValue
+        | TypefaceValue
+        | FontFamilyValue
+        | FontSizeValue
+        | FontWeightValue
+        | LetterSpacingValue;
 };
 export type TextStyleVizComponent = (props: TextStyleVizProps) => unknown;

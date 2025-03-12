@@ -17,6 +17,10 @@ describe('createFontFamily()', () => {
             expect(fontFamily.families).toEqual(['Foo']);
         });
 
+        it('should expose the font names', () => {
+            expect(fontFamily.fontName).toEqual('Foo');
+        });
+
         it('should expose a string with the font family', () => {
             const result = fontFamily.toString();
             expect(result).toEqual('Foo');
@@ -26,6 +30,7 @@ describe('createFontFamily()', () => {
             const literal = fontFamily.literal();
             expect(literal).toEqual({
                 families: ['Foo'],
+                fontName: 'Foo',
             });
         });
     });
@@ -38,6 +43,10 @@ describe('createFontFamily()', () => {
 
         it('should expose the family names', () => {
             expect(fontFamily.families).toEqual(['Foo', 'Bar', 'baz qux']);
+        });
+
+        it('should expose the font names', () => {
+            expect(fontFamily.fontName).toEqual('Foo');
         });
 
         it('should expose a string with the font families, adding quotes to the items that need it', () => {

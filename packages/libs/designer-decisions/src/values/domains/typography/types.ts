@@ -1,3 +1,4 @@
+import type { TextStyleAttributesLiteral, TextStyleObjectInput } from '../../../inputs';
 import type {
     FontFamily,
     FontSize,
@@ -21,3 +22,16 @@ export type FontWeightValue = BaseValue<FontWeight>;
 export type LineHeightValue = BaseValue<LineHeight>;
 
 export type LetterSpacingValue = BaseValue<LetterSpacing>;
+
+export type TextStyleComposite = {
+    fontFamily?: FontFamilyValue;
+    fontSize?: FontSizeValue;
+    fontWeight?: FontWeightValue;
+    lineHeight?: LineHeightValue;
+    letterSpacing?: LetterSpacingValue;
+} & TextStyleAttributesLiteral & {
+        literal: () => TextStyleObjectInput;
+        toString: () => string;
+    };
+
+export type TextStyleValue = BaseValue<TextStyleComposite>;

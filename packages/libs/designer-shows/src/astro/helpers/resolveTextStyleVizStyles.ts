@@ -4,12 +4,14 @@ import {
     DECISION_FONT_WEIGHT_VALUE,
     DECISION_LETTER_SPACING_VALUE,
     DECISION_LINE_HEIGHT_VALUE,
+    DECISION_TEXT_STYLE_VALUE,
     DECISION_TYPEFACE_VALUE,
     type FontFamilyValue,
     type FontSizeValue,
     type FontWeightValue,
     type LetterSpacingValue,
     type LineHeightValue,
+    type TextStyleValue,
     type TypefaceValue,
 } from '@noodlestan/designer-decisions';
 
@@ -22,12 +24,24 @@ type TextStyleVizStyles = {
     __lineHeight: string;
     __letterSpacing: string;
     __fontStyle: string;
+    __textTransform: string;
 };
 
 export const resolveTextStyleVizStyles = (
     v?: TextStyleVizProps['v'],
 ): Partial<TextStyleVizStyles> => {
     const style: Partial<TextStyleVizStyles> = {};
+
+    if (v?.type() === DECISION_TEXT_STYLE_VALUE) {
+        const textStyle = v as TextStyleValue;
+        style.__fontFamily = textStyle.fontFamily?.toString();
+        style.__fontSize = textStyle.fontSize?.toString();
+        style.__fontWeight = textStyle.fontWeight?.toNumber();
+        style.__lineHeight = textStyle.lineHeight?.toString();
+        style.__letterSpacing = textStyle.letterSpacing?.toString();
+        style.__fontStyle = textStyle.fontStyle?.toString();
+        style.__textTransform = textStyle.textTransform?.toString();
+    }
 
     if (v?.type() === DECISION_TYPEFACE_VALUE) {
         const typeface = v as TypefaceValue;
