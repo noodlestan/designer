@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-signals",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "A library of functions to reactively load, validate, and manipulate design decisions and tokens.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "ci": "npm run build:clean && npm run build"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.13",
+    "@noodlestan/designer-decisions": "0.0.14",
     "@solid-primitives/map": "^0.6.0",
     "solid-js": "^1.9.3"
   }

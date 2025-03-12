@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-integration-astro",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Astro integration for Designer Decisions",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -35,10 +35,10 @@
   },
   "dependencies": {
     "@inox-tools/content-utils": "^0.9.0",
-    "@noodlestan/designer-decisions": "0.0.13",
-    "@noodlestan/designer-functions": "0.0.13",
-    "@noodlestan/designer-schemas": "0.0.13",
-    "@noodlestan/designer-shows": "0.0.13",
+    "@noodlestan/designer-decisions": "0.0.14",
+    "@noodlestan/designer-functions": "0.0.14",
+    "@noodlestan/designer-schemas": "0.0.14",
+    "@noodlestan/designer-shows": "0.0.14",
     "acorn": "^8.14.0",
     "acorn-jsx": "^5.3.2",
     "astro": "^5.2.5",
