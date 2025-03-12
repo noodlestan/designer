@@ -1,5 +1,40 @@
 # [Designer Decisions](https://github.com/noodlestan/designer/releases)
 
+## [0.0.14] - 2025-03-12
+
+### Added
+
+- Typography primitives and basic decision types and models:
+  - Create `TextStyleValue` + model `font-style-value/explicit` ([#211](https://github.com/noodlestan/designer/issues/211))
+  - Create `FontFamilyValue` + model `font-family-value/explicit` ([#212](https://github.com/noodlestan/designer/issues/212))
+  - Create `LetterSpacingValue` + model `letter-spacing-value/explicit` ([#213](https://github.com/noodlestan/designer/issues/213))
+  - Create `LineHeightValue` + model `line-height-value/explicit` ([#207](https://github.com/noodlestan/designer/issues/207))
+  - Create `FontWeightValue` + model `font-weight-value/explicit` ([#205](https://github.com/noodlestan/designer/issues/205))
+  - Create `FontSizeValue` + model `font-size-value/explicit` ([#200](https://github.com/noodlestan/designer/issues/200))
+  - Create `TypefaceValue` + model `typeface-value/explicit` ([#189](https://github.com/noodlestan/designer/issues/189))
+- Allow referencing schema sources in decision sources and make schemas optional in StoreOptions ([#186](https://github.com/noodlestan/designer/issues/186))
+- Improve `ShowUsage` layout and layout component options ([#188](https://github.com/noodlestan/designer/pull/188))
+- Handle store errors ([#165](https://github.com/noodlestan/designer/issues/165))
+- Fallback to defaullts in case of input (generic) validation errors ([#169](https://github.com/noodlestan/designer/issues/169))
+
+### Changed
+
+- Formalize`Model/Value/Primitive` and respective contexts:
+
+  - Add `ModelContext`, created in `Decision` via `createModelContext()` before invoking model.
+  - Instances of `ValueContext` are now created in the model via `context.forValue()`.
+  - Add `PrimitiveContext`, created by values via `context.forPrimitive()`.
+  - Link contexts between them: errors can be inspected equally from the model or a primitive.
+  - Wxtend all errors from `DesignerError` - has name, `message()` and `docs()`.
+  - Expose primitive attributes and methods in decision values.
+  - Get rid of `get()` everywhere.
+  - Simplify `formatError()` functions down to a single one.
+
+- Expose a `type()` getter in `BaseValue` ([#199](https://github.com/noodlestan/designer/pull/199))
+- DRY decision values with `createBaseSet()` and `createColorChannelValue()` ([#193](https://github.com/noodlestan/designer/issues/193))
+- Rename space models values and primitives to "size" ([#201](https://github.com/noodlestan/designer/issues/201))
+- Rename `name` to `channelName` in `ColorChannelBaseValue` ([#197](https://github.com/noodlestan/designer/issues/197))
+
 ## [0.0.13] - 2025-02-16
 
 ### Added

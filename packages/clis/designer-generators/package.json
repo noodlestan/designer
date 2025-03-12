@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-generators",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Generate design tokens, TS and CSS code, and schemas for input validation.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -32,9 +32,9 @@
     "ci": "npm run build:clean && npm run build && npm run test"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.13",
-    "@noodlestan/designer-functions": "0.0.13",
-    "@noodlestan/designer-schemas": "0.0.13",
+    "@noodlestan/designer-decisions": "0.0.14",
+    "@noodlestan/designer-functions": "0.0.14",
+    "@noodlestan/designer-schemas": "0.0.14",
     "rimraf": "6.0.1",
     "ts-deepmerge": "7.0.0",
     "typescript-json-schema": "0.65.1"

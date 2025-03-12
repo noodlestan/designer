@@ -1,6 +1,6 @@
 {
   "name": "@noodlestan/designer-build-tools",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Internal tools used to build Designer Decisions packages and generate code.",
   "author": "Noodlestan Collective",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "lint:fix": "prettier . -c --write && eslint . --fix"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.13",
-    "@noodlestan/designer-generators": "0.0.13"
+    "@noodlestan/designer-decisions": "0.0.14",
+    "@noodlestan/designer-generators": "0.0.14"
   },
   "devDependencies": {
     "esbuild-plugin-file-path-extensions": "^2.1.4",

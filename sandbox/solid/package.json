@@ -15,8 +15,8 @@
     "vite-plugin-solid": "^2.11.1"
   },
   "dependencies": {
-    "@noodlestan/designer-decisions": "0.0.13",
-    "@noodlestan/designer-signals": "0.0.13",
+    "@noodlestan/designer-decisions": "0.0.14",
+    "@noodlestan/designer-signals": "0.0.14",
     "solid-js": "^1.9.3"
   }
 }
