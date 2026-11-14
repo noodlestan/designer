@@ -41,7 +41,7 @@
     "@noodlestan/designer-shows": "0.0.14",
     "acorn": "^8.14.0",
     "acorn-jsx": "^5.3.2",
-    "astro": "^5.2.5",
+    "astro": "^7.4.7",
     "astro-integration-kit": "^0.18.0",
     "mdast": "^3.0.0",
     "mdast-util-mdx": "^3.0.0",
@@ -52,10 +52,10 @@
     "vfile": "^6.0.3"
   },
   "peerDependencies": {
-    "astro": "^5.2.5"
+    "astro": "^7.4.7"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",
-    "astro": "5.2.5"
+    "astro": "7.4.7"
   }
 }
